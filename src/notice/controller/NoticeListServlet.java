@@ -36,28 +36,40 @@ public class NoticeListServlet extends HttpServlet {
 		int currentPage = 1;
 		
 		if(request.getParameter("page") != null) {
-			
+			currentPage = Integer.parseInt(request.getParameter("page"));
 		}
 		
+		int limit = 10;
 		
+		NoticeService nservice = new NoticeService();
 		
+		int listCount = nservice.getListCount();
 		
+		ArrayList<Notice> list = new NoticeService().selectAll(currentPage, limit);
 		
+		int maxPage = (int)((double)listCount / limit + 0.9 );
 		
+		int startPage = (((int)((double)currentPage / limit + 0.9)) - 1) * limit + 1;
 		
+		int endPage = startPage + limit - 1;
 		
-		
-		
-		ArrayList<Notice> list = new NoticeService().selectAll();
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
 		
 		RequestDispatcher view = null;
 		if(list.size() > -1) {
 			view = request.getRequestDispatcher("views/notice/notice_list.jsp");
 			request.setAttribute("list", list);
+			request.setAttribute("currentPage", currentPage);
+			request.setAttribute("maxPage", maxPage);
+			request.setAttribute("startPage", startPage);
+			request.setAttribute("endPage", endPage);
+			request.setAttribute("listCount", listCount);
 			view.forward(request, response);
 		}else {
 			view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("message", "공지사항 목록 조회 실패");
+			request.setAttribute("message", currentPage+"페이지에 대한 목록 조회 실패");
 			view.forward(request, response);
 		}
 	}

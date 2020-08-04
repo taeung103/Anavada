@@ -2,6 +2,11 @@
     pageEncoding="UTF-8" import="java.util.ArrayList, notice.model.vo.Notice"%>
 <%
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+	int listCount = (Integer)request.getAttribute("listCount");
+	int startPage = (Integer)request.getAttribute("startPage");
+	int endPage = (Integer)request.getAttribute("endPage");
+	int maxPage = (Integer)request.getAttribute("maxPage");
+	int currentPage = (Integer)request.getAttribute("currentPage");
 %>
 <!DOCTYPE html>
 <html>
@@ -38,7 +43,7 @@
 				<div class="sort-area">
 					<h4>
 						전체
-						<%= list.size() %>개
+						<%= listCount %>개
 					</h4>
 					<a href="notice_write.jsp" class="write_btn">글쓰기</a>
 					<div>
@@ -55,7 +60,7 @@
 					</div>
 				</div>
 
-			<% if(list.size() == 0) { %>
+			<% if(listCount == 0) { %>
 				<div class="list-no">
 					<p>
 						<img src="/anavada/resources/images/btnIcn/icn_big_listNo.png"
@@ -117,11 +122,14 @@
             <dl class="list-paging pb80">
                 <dd>
                     <a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
-                    <a href="#none" class="active">1</a>
-                    <a href="#none">2</a>
-                    <a href="#none">3</a><!-- 활성화 class="active" -->
-                    <a href="#none">4</a>
-                    <a href="#none">5</a>
+                    
+                    <% for(int p = startPage; p <= endPage; p++) {
+                    	if(p==currentPage) {%>
+                    <a class="active"><%= p %></a>
+                    <% }else { %>
+                    <a href="/anavada/nlist?page=<%= p %>"><%= p %></a>
+                    <% } } %>
+                    
                     <a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
                 </dd>
             </dl>

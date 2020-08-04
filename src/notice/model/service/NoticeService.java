@@ -11,10 +11,17 @@ public class NoticeService {
 	
 	public NoticeService() {}
 	
-	public ArrayList<Notice> selectAll() {
+	public ArrayList<Notice> selectAll(int currentPage, int limit) {
 		Connection conn = getConnection();
-		ArrayList<Notice> list = ndao.selectAll(conn);
+		ArrayList<Notice> list = ndao.selectAll(conn, currentPage, limit);
 		close(conn);
 		return list;
+	}
+
+	public int getListCount() {
+		Connection conn = getConnection();
+		int listCount = ndao.getListCount(conn);
+		close(conn);
+		return listCount;
 	}
 }
