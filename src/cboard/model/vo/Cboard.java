@@ -17,7 +17,7 @@ public class Cboard implements Serializable{
 	private int likeCount;
 	private int reportCount;
 	private String cboardDisplay;
-	private int localNo;
+	private String localNo;
 	private String cfilesOriginalFilepath1;
 	private String cfilesRenameFilepath1;
 	private String cfilesOriginalFilepath2;
@@ -31,7 +31,7 @@ public class Cboard implements Serializable{
 
 	public Cboard(int cboardNo, String memberId, String cboardTitle, String cboardContent, Date date,
 			Date lastmodifiedDate, int cboardViewCount, int replyCount, int likeCount, int reportCount,
-			String cboardDisplay, int localNo, String cfilesOriginalFilepath1, String cfilesRenameFilepath1,
+			String cboardDisplay, String localNo, String cfilesOriginalFilepath1, String cfilesRenameFilepath1,
 			String cfilesOriginalFilepath2, String cfilesRenameFilepath2, String cfilesOriginalFilepath3,
 			String cfilesRenameFilepath3, String cfilesOriginalFilepath4, String cfilesRenameFilepath4) {
 		super();
@@ -145,11 +145,11 @@ public class Cboard implements Serializable{
 		this.cboardDisplay = cboardDisplay;
 	}
 
-	public int getLocalNo() {
+	public String getLocalNo() {
 		return localNo;
 	}
 
-	public void setLocalNo(int localNo) {
+	public void setLocalNo(String localNo) {
 		this.localNo = localNo;
 	}
 

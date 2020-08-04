@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page
-	import="cboard.model.vo.Cboard, java.util.ArrayList, java.sql.Date"%>
+<%@page	import="cboard.model.vo.Cboard, java.util.ArrayList, java.sql.Date"%>
+<%
+	ArrayList<Cboard> list = (ArrayList<Cboard>) request.getAttribute("list");
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,18 +86,18 @@
 
 					<table class="cmnt_list">
 						<tbody>
-							<% for (int i = 0; i < 10; i++) {  %>
+							<% for (Cboard c : list) {  %>
 							<tr>
-								<td class="number">10</td>
+								<td class="number"><%= c.getCboardNo() %></td>
 								<td class="title">
 									<h2>
-										<span>종로구</span>종로구 20대 모여라~
+										<span>종로구</span><%= c.getCboardTitle() %>
 									</h2>
 									<ul>
-										<li>작성자 : 홍길동</li>
-										<li>작성일 : 2019.02.30</li>
-										<li>조회수 : 30</li>
-										<li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></li>
+										<li>작성자 : <%= c.getMemberId() %></li>
+										<li>작성일 : <%= c.getDate() %></li>
+										<li>조회수 : <%= c.getCboardViewCount() %></li>
+										<li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%= c.getLikeCount() %></span></i></li>
 									</ul>
 								</td>
 								<td class="fileDown"><i class="glyphicon glyphicon-picture"></i></td>
