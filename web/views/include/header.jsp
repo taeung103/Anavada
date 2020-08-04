@@ -9,7 +9,7 @@
                 <li><a href="../cboard/community_list.jsp">커뮤니티</a></li>
                 <li><a href="../fboard/areaEvent_list.jsp">지역축제</a></li>
                 <li>
-                    <a href="../notice/notice_list.jsp">고객센터</a>
+                    <a href="/anavada/nlist">고객센터</a>
                     <div class="subGnb">
                         <a href="../notice/notice_list.jsp">공지사항</a>
                         <a href="../notice/faq_list.jsp">FAQ</a>
