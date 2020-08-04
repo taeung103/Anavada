@@ -31,7 +31,7 @@
             <!-- 회원정보 찾기 -->
             <form name="idpw" method="post" action="#">
                 <legend>회원정보 찾기</legend>
-                <div class="ME-wrap">
+                <div class="MBwrap">
                     <div class="MBidpw">
                         <h1>회원정보 찾기</h1>
                         <h2>회원가입시 등록하신 이메일과 휴대폰 번호를 입력해 주세요.<br/>인증된 이메일로 회원정보를 보내드립니다. </h2>

@@ -5,12 +5,12 @@
 
 
 /*MEMBER-공용*/
-.ME-wrap {
+.MBwrap {
     width:100%;
     background-color:#f4f4f4;
     padding: 60px 0 100px;
 }
-.ME-wrap > div {
+.MBwrap > div {
     position: relative;
     width: 1020px;
     margin: 0 auto;
@@ -19,26 +19,26 @@
     padding: 60px;
     background-color:#fff;
 }
-.ME-wrap > div > h1 {
+.MBwrap > div > h1 {
     font-size: 45px;
     line-height: 50px;
     padding-bottom: 10px;
     text-align: center;
 }
-.ME-wrap > div > h2 {
+.MBwrap > div > h2 {
     font-size: 15px;
     color: #333;
     padding-bottom: 20px;
     text-align: center;
 }
-.ME-wrap > div .join-taps {
+.MBwrap > div .join-taps {
     width:100%; 
     padding:0 0 50px;
     overflow:hidden;
     text-align: center;
     font-size:0;
 }
-.ME-wrap > div .join-taps li {
+.MBwrap > div .join-taps li {
     display: inline-block;
     width:200px;
     margin: 0 15px;
@@ -48,21 +48,19 @@
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-.ME-wrap > div .join-taps li.on {
+.MBwrap > div .join-taps li.on {
     color:#fff;
     border-top:#FF8A3D 1px solid;
     border-right:#FF8A3D 1px solid;
     border-bottom:#FF8A3D 1px solid;
     background-color:#FF8A3D;
 }
-.ME-wrap > div > div {
+.MBwrap > div > div {
     text-align: left;
 }
-.ME-wrap > div > div > div {
+.MBwrap > div > div > div {
     margin-bottom: 50px;
 }
-
-
 
 
 

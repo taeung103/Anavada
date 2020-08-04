@@ -31,7 +31,7 @@
             <!-- 회원가입 약관동의 -->
             <form name="join" method="post" action="#">
                 <legend>회원가입 약관동의</legend>
-                <div class="ME-wrap">
+                <div class="MBwrap">
                     <div class="MBjoin-agree">
                         <ul class="join-taps">
                             <li class="on">약관동의</li>

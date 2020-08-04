@@ -28,24 +28,20 @@
             <!--서브 비주얼/타이틀 끝-->
 
             <!-- 로그인 -->
-            <form name="login" method="post" action="#">
-            <fieldset>
-            <legend>로그인</legend>
-            <div class="ME-wrap">
+            <form name="login" method="post" action="/anavada/login">
+            <div class="MBwrap">
                 <div class="MBlogin">
                     <h1>로그인</h1>
                     <h2>'Anavada'에 오신것을 환영합니다.</h2>
                     <div>
-                        <input type="text" name="" title="아이디" class="form-control w100p" placeholder="아이디를 입력해주세요."/>
-                        <input type="join_btn" name="" title="비밀번호" class="form-control w100p" placeholder="비밀번호를 입력해주세요."/>
+                        <input type="text" name="memberId" title="아이디" class="form-control w100p" placeholder="아이디를 입력해주세요."/>
+                        <input type="password" name="memberPwd" title="비밀번호" class="form-control w100p" placeholder="비밀번호를 입력해주세요."/>
 
                         <div class="join_btn"><a href="join_agree.jsp">회원가입</a><a href="idpw_find.jsp">회원정보 찾기</a></div>
-
-                        <a href="#" class="login_btn">로그인</a>
+						<input type="submit" value="로그인" class="login_btn">
                     </div>
                 </div>
             </div>
-            </fieldset>
             </form>
             <!-- 로그인 끝 -->
 

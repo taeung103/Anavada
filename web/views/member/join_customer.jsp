@@ -31,7 +31,7 @@
             <!-- 회원가입 고객가입 -->
             <form name="join" method="post" action="#" class="form-inline">
                 <legend>회원가입</legend>
-                <div class="ME-wrap">
+                <div class="MBwrap">
                     <div class="MBjoin_input-wrap">
                         <ul class="join-taps">
                             <li>약관동의</li>
