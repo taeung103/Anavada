@@ -29,11 +29,6 @@ public class MemberDao {
 				
 				member.setMemberId(memberId);
 				member.setMemberPwd(memberPwd);
-				member.setMemberName(rset.getString("memberName"));
-				member.setMemberOriginal(rset.getString("memberOriginal"));
-				member.setMemberRename(rset.getString("memberRename"));
-				member.setJoinDate(rset.getDate("joinDate"));
-				member.setLastAccessDate(rset.getDate("lastAccessDate"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
