@@ -30,7 +30,7 @@
             <!-- 글쓰기 -->
             <div class="write-area">
                 <h2>중고거래 작성</h2>
-                <form action="" method="">
+                <form action="/anavada/jbinsert" method="post" enctype="multipart/form-data">
                     <table>
                         <colgroup>
                             <col width="20%">
@@ -40,68 +40,71 @@
                             <tr>
                                 <td>거래방법</td>
                                 <td>
-                                    <label><input type="radio" name="deal" id="" title="지역거래">지역거래</label>
-                                    <label><input type="radio" name="deal" id="" title="우편거래">우편거래</label>
+                                    <label><input type="checkbox" name="deal" id="meet" title="직거래" value="meet" > 직거래</label>
+                                    <label><input type="checkbox" name="deal" id="post" title="우편거래" value="post"> 우편거래</label>
                                 </td>
                             </tr>
                             <tr>
                                 <td>지역선택</td>
                                 <td>
-                                    <select name="" class="LocationSelect">
-                                    <option value="지역선택" selected="selected">지역선택</option>
-                                    <option value="강남구">강남구</option>
-                                    <option value="강동구">강동구</option>
-                                    <option value="강북구">강북구</option>
-                                    <option value="강서구">강서구</option>
-                                    <option value="관악구">관악구</option>
-                                    <option value="광진구">광진구</option>
-                                    <option value="구로구">구로구</option>
-                                    <option value="금천구">금천구</option>
-                                    <option value="노원구">노원구</option>
-                                    <option value="도봉구">도봉구</option>
-                                    <option value="동대문구">동대문구</option>
-                                    <option value="동작구">동작구</option>
-                                    <option value="마포구">마포구</option>
-                                    <option value="서대문구">서대문구</option>
-                                    <option value="서초구">서초구</option>
-                                    <option value="성동구">성동구</option>
-                                    <option value="성북구">성북구</option>
-                                    <option value="송파구">송파구</option>
-                                    <option value="양천구">양천구</option>
-                                    <option value="영등포구">영등포구</option>
-                                    <option value="용산구">용산구</option>
-                                    <option value="은평구">은평구</option>
-                                    <option value="종로구">종로구</option>
-                                    <option value="중구">중구</option>
-                                    <option value="구로구">중랑구</option>
+                                    <select name="location" class="LocationSelect">
+                                    <option value="0" selected="selected">지역선택</option>
+                                    <option value="1">강남구</option>
+                                    <option value="2">강동구</option>
+                                    <option value="3">강북구</option>
+                                    <option value="4">강서구</option>
+                                    <option value="5">관악구</option>
+                                    <option value="6">광진구</option>
+                                    <option value="7">구로구</option>
+                                    <option value="8">금천구</option>
+                                    <option value="9">노원구</option>
+                                    <option value="10">도봉구</option>
+                                    <option value="11">동대문구</option>
+                                    <option value="12">동작구</option>
+                                    <option value="13">마포구</option>
+                                    <option value="14">서대문구</option>
+                                    <option value="15">서초구</option>
+                                    <option value="16">성동구</option>
+                                    <option value="17">성북구</option>
+                                    <option value="18">송파구</option>
+                                    <option value="19">양천구</option>
+                                    <option value="20">영등포구</option>
+                                    <option value="21">용산구</option>
+                                    <option value="22">은평구</option>
+                                    <option value="23">종로구</option>
+                                    <option value="24">중구</option>
+                                    <option value="25">중랑구</option>
                                 </select>
                                 </td>
                             </tr>
                             <tr>
                                 <td>상품 이미지</td>
                                 <td>
-                                    <input type="file" name="" style="margin-bottom:10px;">
-                                    <input type="file" name="" style="margin-bottom:10px;">
-                                    <input type="file" name="" style="margin-bottom:10px;">
-                                    <input type="file" name="" style="margin-bottom:10px;">
-                                    <input type="file" name="" style="margin-bottom:10px;">
+                                    <input type="file" name="ofile1" style="margin-bottom:10px;" accept="image/gif,image/jpeg,image/png"/>
+                                    <input type="file" name="ofile2" style="margin-bottom:10px;"accept="image/gif,image/jpeg,image/png"/>
+                                    <input type="file" name="ofile3" style="margin-bottom:10px;"accept="image/gif,image/jpeg,image/png"/>
+                                    <input type="file" name="ofile4" style="margin-bottom:10px;"accept="image/gif,image/jpeg,image/png"/>
                                     <p>대표 이미지는 500x500 사이즈로 올려주세요.</p>
                                 
                                 </td>
                             </tr>
                             <tr>
                                 <td>제목</td>
-                                <td><input type="text" name="" title="" class="form-control w100p" placeholder="제목" /></td>
+                                <td><input type="text" name="title" class="form-control w100p" placeholder="제목" /></td>
                             </tr>
                             <tr>
                                 <td>판매희망가격</td>
-                                <td><input type="text" name="" title="" class="form-control w50p" placeholder="판매가"  style="float:left; margin-right: 20px;"/> 원</td>
+                                <td><input type="text" name="price"class="form-control w50p" placeholder="판매가"  style="float:left; margin-right: 20px;"/> 원</td>
                             </tr>
                             <tr>
                                 <td>상품설명</td>
                                 <td>
-<textarea name="" rows="" cols="" class="form-control" style="resize: none; width:100%; min-height:600px; max-height:600px;" onfocus="this.value='';">
-안녕하세요.
+<textarea name=""  class="form-control" style="resize: none; width:100%; min-height:600px; max-height:600px;" onfocus="this.value='';">
+상품 설명을 상세하게 적어주세요.
+설명되지 않은 하자나 문제 발생시 책임은 판매자에게 있습니다.
+※ 구매정보 (구매일시, 구매시 가격)
+※ 상품정보 (사이즈, 색상, 브랜드 등)
+※상품 사용감 (스크래치, 고장 수리 여부등)
 </textarea>
                                 </td>
                             </tr>
@@ -109,9 +112,10 @@
                     </table>
 
                     <div class="write-btn">
-                        <a href="#none" class="btn btn-list">목록</a>
-                        <a href="#none" class="btn btn-warning">취소</a>
-                        <a href="#" class="btn btn-success">상품등록</a>
+                    
+                        <input type= "button" class="btn btn-warning" value="등록취소" onclick="javascript:history.go(-1); return false;">
+                        <input type="submit" class="btn btn-success" value="상품등록">
+                        
                     </div>
                 </form>
             </div>
