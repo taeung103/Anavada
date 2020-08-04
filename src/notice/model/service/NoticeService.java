@@ -24,4 +24,11 @@ public class NoticeService {
 		close(conn);
 		return listCount;
 	}
+
+	public Notice selectCountTop1() {
+		Connection conn = getConnection();
+		Notice notice = ndao.selectCountTop1(conn);
+		close(conn);
+		return notice;
+	}
 }

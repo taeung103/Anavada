@@ -7,6 +7,7 @@
 	int endPage = (Integer)request.getAttribute("endPage");
 	int maxPage = (Integer)request.getAttribute("maxPage");
 	int currentPage = (Integer)request.getAttribute("currentPage");
+	Notice notice = (Notice)request.getAttribute("notice");
 %>
 <!DOCTYPE html>
 <html>
@@ -42,8 +43,7 @@
                <!--종류 리스트-->
 				<div class="sort-area">
 					<h4>
-						전체
-						<%= listCount %>개
+						전체 <%= listCount %>개
 					</h4>
 					<a href="notice_write.jsp" class="write_btn">글쓰기</a>
 					<div>
@@ -74,16 +74,16 @@
 				<table>
                     <tbody>
                         <tr onclick="location.href='notice_view.jsp';" class="active">
-                            <td class="number">10</td>
+                            <td class="number"><%= notice.getNoNo() %></td>
                             <td class="title">
-                                <h2><span>공지</span>'Anavada'의 소식을 빠르게 확인할 수 있는 공간입니다.</h2>
+                                <h2><span>공지</span><%= notice.getNoTitle() %></h2>
                                 <ul>
-                                    <li>작성자 : 관리자</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
+                                    <li>작성자 : <%= notice.getNoId() %></li>
+                                    <li>작성일 : <%= notice.getNoDate() %></li>
+                                    <li>조회수 : <%= notice.getNoCount() %></li>
                                 </ul>
                             </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
+                            <td class="fileDown"><% if(notice.getNoOriginal() != null) { %><i class="glyphicon glyphicon-floppy-saved"></i><% } %></td>
                         </tr>
                         <% for(Notice n : list) { %>
                         <tr onclick="location.href='notice_view.jsp';">
@@ -121,7 +121,11 @@
             <!-- 페이지넘버 -->
             <dl class="list-paging pb80">
                 <dd>
-                    <a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
+                	<% if(currentPage <= 1) { %>
+                    <a><i class="glyphicon glyphicon-menu-left"></i></a>
+                    <% }else { %>
+                    <a href="/anavada/nlist?page=1"><i class="glyphicon glyphicon-menu-left"></i></a>
+                    <% }%>
                     
                     <% for(int p = startPage; p <= endPage; p++) {
                     	if(p==currentPage) {%>
@@ -130,7 +134,11 @@
                     <a href="/anavada/nlist?page=<%= p %>"><%= p %></a>
                     <% } } %>
                     
-                    <a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
+                    <% if(currentPage < maxPage) { %>
+                    <a href="nlist?page=<%= maxPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+                    <% }else { %>
+                    <a><i class="glyphicon glyphicon-menu-right"></i></a>
+                    <% } %>
                 </dd>
             </dl>
             <!-- 페이지넘버 끝 -->

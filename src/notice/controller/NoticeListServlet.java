@@ -57,6 +57,8 @@ public class NoticeListServlet extends HttpServlet {
 			endPage = maxPage;
 		}
 		
+		Notice notice = nservice.selectCountTop1();
+		
 		RequestDispatcher view = null;
 		if(list.size() > -1) {
 			view = request.getRequestDispatcher("views/notice/notice_list.jsp");
@@ -66,6 +68,7 @@ public class NoticeListServlet extends HttpServlet {
 			request.setAttribute("startPage", startPage);
 			request.setAttribute("endPage", endPage);
 			request.setAttribute("listCount", listCount);
+			request.setAttribute("notice", notice);
 			view.forward(request, response);
 		}else {
 			view = request.getRequestDispatcher("views/common/error.jsp");
