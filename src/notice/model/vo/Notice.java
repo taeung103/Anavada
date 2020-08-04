@@ -14,7 +14,7 @@ public class Notice implements java.io.Serializable{
 	private String noOriginal;
 	private String noRename;
 	
-	public void Notic() {}
+	public Notice() {}
 
 	public Notice(int noNo, String noId, String noTitle, String noContent, Date noDate, int noCount, String noOriginal,
 			String noRename) {
