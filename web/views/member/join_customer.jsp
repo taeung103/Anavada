@@ -33,7 +33,7 @@
                 <legend>회원가입</legend>
                 <div class="MBwrap">
                     <div class="MBjoin_input-wrap">
-                        <ul class="join-taps">
+                        <ul class="joinDepth">
                             <li>약관동의</li>
                             <li class="on">회원정보 입력</li>
                             <li>회원가입 완료</li>

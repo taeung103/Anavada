@@ -31,7 +31,7 @@
             <!-- 회원가입 가입완료 -->
             <div class="MBwrap">
                 <div class="MBjoin_complete">
-                    <ul class="join-taps">
+                    <ul class="joinDepth">
                         <li>약관동의</li>
                         <li>회원정보 입력</li>
                         <li class="on">회원가입 완료</li>

@@ -31,14 +31,14 @@
     padding-bottom: 20px;
     text-align: center;
 }
-.MBwrap > div .join-taps {
+.MBwrap > div .joinDepth {
     width:100%; 
     padding:0 0 50px;
     overflow:hidden;
     text-align: center;
     font-size:0;
 }
-.MBwrap > div .join-taps li {
+.MBwrap > div .joinDepth li {
     display: inline-block;
     width:200px;
     margin: 0 15px;
@@ -48,7 +48,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-.MBwrap > div .join-taps li.on {
+.MBwrap > div .joinDepth li.on {
     color:#fff;
     border-top:#FF8A3D 1px solid;
     border-right:#FF8A3D 1px solid;
@@ -169,11 +169,11 @@
     margin-top: 15px;
     font-size: 14px;
 }
-.ME-wrap .ME-btn {
+.MBwrap .ME-btn {
     margin-top: 45px;
     text-align: center;
 }
-.ME-wrap .ME-btn a {
+.MBwrap .ME-btn a {
     padding:10px 100px;
     font-size: 15px;
     color: #fff;
