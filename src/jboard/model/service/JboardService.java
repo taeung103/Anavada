@@ -11,9 +11,9 @@ public class JboardService {
 	private JboardDao bdao = new JboardDao();
 	public JboardService() {}
 	
-		public int insertOriginBoard(Jboard jboard) {
+		public int insertJboard(Jboard jboard) {
 			Connection conn = getConnection();
-			int result = bdao.insertJBoard(conn, jboard);
+			int result = bdao.insertJboard(conn, jboard);
 			if(result > 0)
 				commit(conn);
 			else
