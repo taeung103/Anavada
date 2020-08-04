@@ -35,7 +35,7 @@ public class NoticeListServlet extends HttpServlet {
 		ArrayList<Notice> list = new NoticeService().selectAll();
 		
 		RequestDispatcher view = null;
-		if(list.size() > 0) {
+		if(list.size() > -1) {
 			view = request.getRequestDispatcher("views/notice/notice_list.jsp");
 			request.setAttribute("list", list);
 			view.forward(request, response);

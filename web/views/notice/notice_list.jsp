@@ -35,25 +35,38 @@
 
             <div class="list-area">
                <!--종류 리스트-->
-                <div class="sort-area">  
-                    <h4>전체 <%= list.size() %>개</h4>
-                    <a href="notice_write.jsp" class="write_btn">글쓰기</a>
-                    <div>
-                        <form action="" method="" id="">
-                            목록 분류 : <select name="" class="ListSelect">
-                                    <option value="분류 선택" selected="selected">분류 선택</option>
-                                    <option value="제목">제목</option>
-                                    <option value="내용">내용</option>
-                                    <option value="작성자">작성자</option>
-                            </select>
-                            
-                            <input type="text" placeholder="검색어를 입력해주세요.">
-                            <button class="top-search"><i class="xi-search"></i></button>
-                        </form>
-                    </div>
-                </div>
+				<div class="sort-area">
+					<h4>
+						전체
+						<%= list.size() %>개
+					</h4>
+					<a href="notice_write.jsp" class="write_btn">글쓰기</a>
+					<div>
+						<form action="" method="" id="">
+							목록 분류 : <select name="" class="ListSelect">
+								<option value="분류 선택" selected="selected">분류 선택</option>
+								<option value="searchtitle">제목</option>
+								<option value="searchcontent">내용</option>
+							</select> <input type="text" placeholder="검색어를 입력해주세요.">
+							<button class="top-search">
+								<i class="xi-search"></i>
+							</button>
+						</form>
+					</div>
+				</div>
 
-                <table>
+			<% if(list.size() == 0) { %>
+				<div class="list-no">
+					<p>
+						<img src="/anavada/resources/images/btnIcn/icn_big_listNo.png"
+							alt="" title="" />
+					</p>
+					<h1>목록이 없습니다.</h1>
+				</div>
+				
+			<% }else { %>
+
+				<table>
                     <tbody>
                         <tr onclick="location.href='notice_view.jsp';" class="active">
                             <td class="number">10</td>
@@ -67,123 +80,28 @@
                             </td>
                             <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
                         </tr>
+                        <% for(Notice n : list) { %>
                         <tr onclick="location.href='notice_view.jsp';">
-                            <td class="number">9</td>
+                            <td class="number"><%= n.getNoNo() %></td>
                             <td class="title">
-                                <h2>'Anavada'의 소식을 빠르게 확인할 수 있는 공간입니다.</h2>
+                                <h2><%= n.getNoTitle() %></h2>
                                 <ul>
-                                    <li>작성자 : 관리자</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
+                                    <li>작성자 : <%= n.getNoId() %></li>
+                                    <li>작성일 : <%= n.getNoDate() %></li>
+                                    <li>조회수 : <%= n.getNoCount() %></li>
                                 </ul>
                             </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
-                        </tr>
-                        <tr onclick="location.href='notice_view.jsp';">
-                            <td class="number">8</td>
-                            <td class="title">
-                                <h2>'Anavada'의 소식을 빠르게 확인할 수 있는 공간입니다.</h2>
-                                <ul>
-                                    <li>작성자 : 관리자</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
+                            <td class="fileDown">
+                            <% if(n.getNoOriginal() != null) { %>
+                            <i class="glyphicon glyphicon-floppy-saved"></i>
+                            <% } %>
                             </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
                         </tr>
-                        <tr onclick="location.href='notice_view.jsp';">
-                            <td class="number">7</td>
-                            <td class="title">
-                                <h2>'Anavada'의 소식을 빠르게 확인할 수 있는 공간입니다.</h2>
-                                <ul>
-                                    <li>작성자 : 관리자</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
-                        </tr>
-                        <tr onclick="location.href='notice_view.jsp';">
-                            <td class="number">6</td>
-                            <td class="title">
-                                <h2>'Anavada'의 소식을 빠르게 확인할 수 있는 공간입니다.</h2>
-                                <ul>
-                                    <li>작성자 : 관리자</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
-                        </tr>
-                        <tr onclick="location.href='notice_view.jsp';">
-                            <td class="number">5</td>
-                            <td class="title">
-                                <h2>'Anavada'의 소식을 빠르게 확인할 수 있는 공간입니다.</h2>
-                                <ul>
-                                    <li>작성자 : 관리자</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
-                        </tr>
-                        <tr onclick="location.href='notice_view.jsp';">
-                            <td class="number">4</td>
-                            <td class="title">
-                                <h2>'Anavada'의 소식을 빠르게 확인할 수 있는 공간입니다.</h2>
-                                <ul>
-                                    <li>작성자 : 관리자</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
-                        </tr>
-                        <tr onclick="location.href='notice_view.jsp';">
-                            <td class="number">3</td>
-                            <td class="title">
-                                <h2>'Anavada'의 소식을 빠르게 확인할 수 있는 공간입니다.</h2>
-                                <ul>
-                                    <li>작성자 : 관리자</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
-                        </tr>
-                        <tr onclick="location.href='notice_view.jsp';">
-                            <td class="number">2</td>
-                            <td class="title">
-                                <h2>'Anavada'의 소식을 빠르게 확인할 수 있는 공간입니다.</h2>
-                                <ul>
-                                    <li>작성자 : 관리자</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
-                        </tr>
-                        <tr onclick="location.href='notice_view.jsp';">
-                            <td class="number">1</td>
-                            <td class="title">
-                                <h2>'Anavada'의 소식을 빠르게 확인할 수 있는 공간입니다.</h2>
-                                <ul>
-                                    <li>작성자 : 관리자</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
-                        </tr>
+                        <% } %>
                     </tbody>
                 </table>
 
-
-                <div class="list-no">
-                    <p><img src="/anavada/resources/images/btnIcn/icn_big_listNo.png" alt="" title="" /></p>
-                    <h1>목록이 없습니다.</h1>
-                </div>
-
+			<% } %>
 
                 <div class="write-btn">
                     <a href="notice_write.jsp">글쓰기</a>
