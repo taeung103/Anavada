@@ -32,6 +32,22 @@ public class NoticeListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		int currentPage = 1;
+		
+		if(request.getParameter("page") != null) {
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		ArrayList<Notice> list = new NoticeService().selectAll();
 		
 		RequestDispatcher view = null;
