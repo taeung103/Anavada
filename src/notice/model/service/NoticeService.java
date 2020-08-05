@@ -31,4 +31,18 @@ public class NoticeService {
 		close(conn);
 		return notice;
 	}
+
+	public ArrayList<Notice> searchTitle(String keyword) {
+		Connection conn = getConnection();
+		ArrayList<Notice> list = ndao.searchTitle(conn, keyword);
+		close(conn);
+		return list;
+	}
+
+	public ArrayList<Notice> searchContent(int currentPage, int limit, String keyword) {
+		Connection conn = getConnection();
+		ArrayList<Notice> list = ndao.searchContent(conn, currentPage, limit, keyword);
+		close(conn);
+		return list;
+	}
 }

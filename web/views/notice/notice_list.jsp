@@ -46,12 +46,12 @@
 						전체 <%= listCount %>개
 					</h4>
 					<div>
-						<form action="" method="post" id="">
-							목록 분류 : <select name="" class="ListSelect">
-								<option value="분류 선택" selected="selected">분류 선택</option>
-								<option value="searchtitle">제목</option>
-								<option value="searchcontent">내용</option>
-							</select> <input type="text" placeholder="검색어를 입력해주세요.">
+						<form action="/anavada/nsearch" method="post" id="">
+							목록 분류 : <select name="selected" class="ListSelect">
+								<option value="none" selected disabled>분류 선택</option>
+								<option value="title">제목</option>
+								<option value="content">내용</option>
+							</select> <input type="text" name="keyword" placeholder="검색어를 입력해주세요.">
 							<button class="top-search">
 								<i class="xi-search"></i>
 							</button>
