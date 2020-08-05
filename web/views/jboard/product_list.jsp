@@ -113,15 +113,38 @@
                 </div>
 
             </div>
+            <!--  페이징 처리 -->
             <dl class="list-paging pb80">
                 <dd>
-                    <a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
-                    <a href="#none" class="active">1</a>
-                    <a href="#none">2</a>
-                    <a href="#none">3</a><!-- 활성화 class="active" -->
-                    <a href="#none">4</a>
-                    <a href="#none">5</a>
-                    <a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
+                	<% if (currentPage <= 1){ %>
+              		<i class= "glyphicon glyphicon-backward"></i>
+              		<%}else {%>
+              		<a href="/anavada/jblist?page=1"><i class= "glyphicon glyphicon-backward"></i></a>
+              		<%} %>
+              		<% if ((currentPage - 10) < startPage && (currentPage - 10) > 10){ %>
+                    <a href="/anavada/jblist?page=<%= startPage- 10%>"><i class="glyphicon glyphicon-menu-left"></i></a>
+					<% }else{ %>
+					<i class="glyphicon glyphicon-menu-left"></i>
+					<%} %>
+					<!-- 현재 페이지가 속한 페이지 그룹의 숫자 출력처리 -->
+					<% for (int p = startPage; p <= endPage; p++){
+						if (p == currentPage){%>
+                    <a href="#none" class="active"><%=p %></a>
+                    <%} else {%>
+                    <a href="/anavada/jblist?page=<%=p%>"><%=p %></a>
+                    <%}} %>
+                    <!--  다음 그룹으로 이동처리 -->
+                    <% if ((currentPage + 10) > endPage && (currentPage + 10) < maxPage){ %>
+                    <a href="/anavada/jblist?page=<%= endPage + 10 %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+                    <%}else{ %>
+                    <i class="glyphicon glyphicon-menu-right"></i>
+                    <%} %>
+                    
+                    <% if (currentPage >= maxPage){ %>
+                    <i class="glyphicon glyphicon-forward"></i>
+                    <%}else{ %>
+                    <a href="/anavada/jblist?page= <%= maxPage %>"><i class="glyphicon glyphicon-forward"></i> </a>
+                    <%} %>
                 </dd>
             </dl>
             <!-- 페이지넘버 끝 -->

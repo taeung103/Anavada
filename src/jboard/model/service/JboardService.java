@@ -33,9 +33,13 @@ public class JboardService {
 		}
 
 		public int getListCount() {
-			return 0;
+			Connection conn = getConnection();
+			int listCount = bdao.getListCount(conn);
+			close(conn);
+					
+			return listCount;
 		}
-		
+
 		
 	}
 
