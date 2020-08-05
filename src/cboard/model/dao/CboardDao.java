@@ -1,6 +1,7 @@
 package cboard.model.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,16 +14,30 @@ import static common.JDBCTemp.*;
 public class CboardDao {
 	public CboardDao() {}
 
-	public ArrayList<Cboard> selectList(Connection conn) {
+	public ArrayList<Cboard> selectList(Connection conn, int currentPage, int limit) {
 		ArrayList<Cboard> list = new ArrayList<Cboard>();
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = "select * from cboard";
+		String query = "select * "
+				+ "from (select rownum rnum, cboard_no, member_id, cboard_title, "
+				+ "cboard_content, cboard_date, cboard_lastmodified, cboard_viewcount, "
+				+ "cboard_replycount, cboard_likecount, cboard_reportcount, cboard_display, "
+				+ "local_no, cfiles_original_filepath1, cfiles_rename_filepath1, "
+				+ "cfiles_original_filepath2, cfiles_rename_filepath2, "
+				+ "cfiles_original_filepath3, cfiles_rename_filepath3, "
+				+ "cfiles_original_filepath4, cfiles_rename_filepath4 "
+				+ "from (select * from cboard order by cboard_no desc)) "
+				+ "where rnum >= ? and rnum <= ?";
+		
+		int startRow = (currentPage - 1) * limit + 1;
+		int endRow = startRow + limit - 1;
 		
 		try {
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery(query);
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rset = pstmt.executeQuery();
 			
 			while (rset.next()) {
 				Cboard cboard = new Cboard();
@@ -54,9 +69,32 @@ public class CboardDao {
 			e.printStackTrace();
 		} finally {
 			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int getListCount(Connection conn) {
+		int listCount = 0;
+		
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String query = "select count(*) from cboard";
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if (rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
 			close(stmt);
 		}
-		Collections.reverse(list);
-		return list;
+		return listCount;
 	}
 }

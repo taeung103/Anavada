@@ -32,12 +32,32 @@ public class CboardListViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int currentPage = 1;
+		if (request.getParameter("page") != null) {
+			currentPage = Integer.parseInt(request.getParameter("page"));
+		}
+		int limit = 10;
 		CboardService cservice = new CboardService();
-		ArrayList<Cboard> list = cservice.selectAll();
+		int listCount = cservice.getListCount();
+		ArrayList<Cboard> list = cservice.selectAll(currentPage, limit);
+		
+		int maxPage = (int)((double)listCount / limit + 0.9);
+		int startPage = (((int)((double)currentPage / limit + 0.9)) - 1) * limit + 1;
+		int endPage = startPage + limit - 1;
+		
+		if (maxPage < endPage) {
+			endPage = maxPage;
+		}
+		
 		RequestDispatcher view = null;
 		if (list.size() > 0) {
 			view = request.getRequestDispatcher("views/cboard/community_list.jsp");
 			request.setAttribute("list", list);
+			request.setAttribute("currentPage", currentPage);
+			request.setAttribute("maxPage", maxPage);
+			request.setAttribute("startPage", startPage);
+			request.setAttribute("endPage", endPage);
+			request.setAttribute("listCount", listCount);
 			view.forward(request, response);
 			
 		}

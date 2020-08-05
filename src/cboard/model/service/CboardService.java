@@ -10,11 +10,18 @@ public class CboardService {
 	
 	public CboardService() {}
 
-	public ArrayList<Cboard> selectAll() {
+	public ArrayList<Cboard> selectAll(int currentPage, int limit) {
 		Connection conn = getConnection();
-		ArrayList<Cboard> list = cdao.selectList(conn);
+		ArrayList<Cboard> list = cdao.selectList(conn, currentPage, limit);
 		close(conn);
 		return list;
+	}
+
+	public int getListCount() {
+		Connection conn = getConnection();
+		int listCount = cdao.getListCount(conn);
+		close(conn);
+		return listCount;
 	}
 
 }

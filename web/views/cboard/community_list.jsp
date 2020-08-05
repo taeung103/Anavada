@@ -3,7 +3,11 @@
 <%@page	import="cboard.model.vo.Cboard, java.util.ArrayList, java.sql.Date"%>
 <%
 	ArrayList<Cboard> list = (ArrayList<Cboard>) request.getAttribute("list");
-	
+	int listCount = ((Integer) request.getAttribute("listCount")).intValue();
+	int startPage = ((Integer) request.getAttribute("startPage")).intValue();;
+	int endPage = ((Integer) request.getAttribute("endPage")).intValue();;
+	int maxPage = ((Integer) request.getAttribute("maxPage")).intValue();;
+	int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();;
 %>
 <!DOCTYPE html>
 <html>
@@ -40,7 +44,7 @@
 			<div class="list-area">
 				<!--종류 리스트-->
 				<div class="sort-area">
-					<h4>전체 150개</h4>
+					<h4>전체 게시글 <%= listCount %>개</h4>
 					<a href="community_write.jsp" class="write_btn">글쓰기</a>
 					<div>
 						<form action="" method="" id="">
@@ -101,8 +105,8 @@
 									</ul>
 								</td>
 								<td class="fileDown"><i class="glyphicon glyphicon-picture"></i></td>
-							<% } %>
 							</tr>
+							<% } %>
 						</tbody>
 					</table>
 
@@ -129,12 +133,20 @@
 			<!-- 페이지넘버 -->
 			<dl class="list-paging pb80">
 				<dd>
-					<a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a> <a
-						href="#none" class="active">1</a> <a href="#none">2</a> <a
-						href="#none">3</a>
+					<% if((currentPage - 10) < startPage && (currentPage - 10) > 1) { %>
+						<i class="glyphicon glyphicon-menu-left"></i>
+					<% } else { %>
+						<a href="/anavada/clistview?page=<%= startPage - 10 %>"><i class="glyphicon glyphicon-menu-left"></i></a>
+					<% } %>
+					<% for(int p = startPage; p <= endPage; p++) { %>
+						<a href="/anavada/clistview?page=<%= p %>"><%= p %></a>
+					<% } %> 
 					<!-- 활성화 class="active" -->
-					<a href="#none">4</a> <a href="#none">5</a> <a href="#none"><i
-						class="glyphicon glyphicon-menu-right"></i></a>
+					<% if((currentPage + 10) > endPage && (currentPage + 10) < maxPage) { %>
+						<i class="glyphicon glyphicon-menu-right"></i>					
+					<% } else { %>
+						<a href="/anavada/clistview?page=<%= endPage + 1 %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+					<% } %>
 				</dd>
 			</dl>
 			<!-- 페이지넘버 끝 -->
