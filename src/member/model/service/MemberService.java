@@ -8,7 +8,6 @@ import member.model.vo.Member;
 import static common.JDBCTemp.*;
 
 public class MemberService {
-	
 	//의존성 주입(DI)
 	public MemberDao mdao = new MemberDao();
 			
@@ -19,6 +18,24 @@ public class MemberService {
 		Member member = mdao.loginCheck(conn, memberId, memberPwd);
 		close(conn);
 		return member;
+	}
+
+	public int insertMember(Member member) {
+		Connection conn = getConnection();
+		int result = mdao.insertMember(conn, member);
+		if(result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int selectCheckId(String memberId) {
+		Connection conn = getConnection();
+		int idChk = mdao.selectCheckId(conn, memberId);
+		close(conn);
+		return idChk;
 	}
 	
 }
