@@ -4,6 +4,11 @@
 <html>
 <head>
     <%@ include file="../include/head.jsp" %> 
+    <script type="text/javascript">
+   function showWriteForm() {
+      location.href = "/anavada/views/jboard/product_write.jsp";
+   }
+</script>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
@@ -34,7 +39,7 @@
                 <!--종류 리스트-->
                 <div class="sort-area">  
                     <h4>전체 150개</h4>
-                    <a href="product_write.jsp" class="write_btn">글쓰기</a>
+                    <button onclick="showWriteForm();" class="write_btn">글쓰기</button>
                     <div>
                         <form action="" method="" id="">
                             지역선택 : <select name="" class="LocationSelect">
@@ -175,11 +180,10 @@
                     <h1>목록이 없습니다.</h1>
                 </div>
                 <div class="write-btn">
-                    <a href="product_write.jsp">글쓰기</a>
+                    <button onclick="showWriteForm();" class="write_btn">글쓰기</button>
                 </div>
 
             </div>
-            <!-- 페이지넘버 -->
             <dl class="list-paging pb80">
                 <dd>
                     <a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
