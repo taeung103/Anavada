@@ -6,6 +6,11 @@
     <%@ include file="../include/head.jsp" %> 
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+if($("#post").is(":checked")){
+$("#post").val(Y);
+}else{
+$("#post").val(N);
+}
     <div id="wrap">
         <%@ include file="../include/header.jsp" %>
 
@@ -99,7 +104,7 @@
                             <tr>
                                 <td>상품설명</td>
                                 <td>
-<textarea name=""  class="form-control" style="resize: none; width:100%; min-height:600px; max-height:600px;" onfocus="this.value='';">
+<textarea name="content"  class="form-control" style="resize: none; width:100%; min-height:600px; max-height:600px;" onfocus="this.value='';">
 상품 설명을 상세하게 적어주세요.
 설명되지 않은 하자나 문제 발생시 책임은 판매자에게 있습니다.
 ※ 구매정보 (구매일시, 구매시 가격)
