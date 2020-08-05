@@ -3,14 +3,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%@ include file="../include/head.jsp" %> 
+    <%@ include file="../include/head.jsp" %>
+    
+
+<script>
+if($("#post").is(":checked")){
+	$("#post").val(Y);
+	}else{
+	$("#post").val(N);
+}
+if($("#meet").is(":checked")){
+	$("#meet").val(Y);
+	}else{
+	$("#meet").val(N);
+} 
+
+</script>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
-if($("#post").is(":checked")){
-$("#post").val(Y);
-}else{
-$("#post").val(N);
-}
     <div id="wrap">
         <%@ include file="../include/header.jsp" %>
 
