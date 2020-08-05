@@ -77,6 +77,34 @@ public class NoticeDao {
 		
 		return listCount;
 	}
+	
+	public int getListCount(Connection conn, String column ,String keyword) {
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select count(*) from notice ";
+		
+		if(column.equals("no_title"))
+			query += "where no_title like ?";
+		else query += "where no_content like ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+keyword+"%");
+			rset = pstmt.executeQuery();
+			
+			if(rset.next())
+				listCount = rset.getInt(1);
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		return listCount;
+	}
 
 	public Notice selectCountTop1(Connection conn) {
 		Notice notice = null;
@@ -164,7 +192,7 @@ public class NoticeDao {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, keyword);
+			pstmt.setString(1, "%" + keyword + "%");
 			pstmt.setInt(2, startRow);
 			pstmt.setInt(3, endRow);
 			rset = pstmt.executeQuery();
@@ -189,7 +217,8 @@ public class NoticeDao {
 			close(rset);
 			close(pstmt);
 		}
-		
 		return list;
 	}
+	
+	
 }

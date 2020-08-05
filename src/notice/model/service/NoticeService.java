@@ -24,6 +24,13 @@ public class NoticeService {
 		close(conn);
 		return listCount;
 	}
+	
+	public int getListCount(String column, String keyword) {
+		Connection conn = getConnection();
+		int listCount = ndao.getListCount(conn, column, keyword);
+		close(conn);
+		return listCount;
+	}
 
 	public Notice selectCountTop1() {
 		Connection conn = getConnection();

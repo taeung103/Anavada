@@ -46,7 +46,7 @@
 						전체 <%= listCount %>개
 					</h4>
 					<div>
-						<form action="/anavada/nsearch?page=1" method="post" id="">
+						<form action="/anavada/nsearch" method="post" id="">
 							목록 분류 : <select name="selected" class="ListSelect">
 								<option value="none" selected disabled>분류 선택</option>
 								<option value="title">제목</option>
@@ -119,18 +119,18 @@
                 	<% if(currentPage <= 1) { %>
                     <a><i class="glyphicon glyphicon-menu-left"></i></a>
                     <% }else { %>
-                    <a href="/anavada/nlist?page=1"><i class="glyphicon glyphicon-menu-left"></i></a>
+                    <a href="/anavada/nsearch?page=1"><i class="glyphicon glyphicon-menu-left"></i></a>
                     <% }%>
                     
                     <% for(int p = startPage; p <= endPage; p++) {
                     	if(p==currentPage) {%>
                     <a class="active"><%= p %></a>
                     <% }else { %>
-                    <a href="/anavada/nlist?page=<%= p %>"><%= p %></a>
+                    <a href="/anavada/nsearch?page=<%= p %>"><%= p %></a>
                     <% } } %>
                     
                     <% if(currentPage < maxPage) { %>
-                    <a href="nlist?page=<%= maxPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+                    <a href="nsearch?page=<%= maxPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
                     <% }else { %>
                     <a><i class="glyphicon glyphicon-menu-right"></i></a>
                     <% } %>

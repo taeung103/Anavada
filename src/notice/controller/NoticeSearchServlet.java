@@ -43,9 +43,19 @@ public class NoticeSearchServlet extends HttpServlet {
 		int currentPage = 1;
 		if(request.getParameter("page") != null)
 			currentPage = Integer.parseInt(request.getParameter("page"));
-		
-		int listCount = nservice.getListCount();
+
 		int limit = 10;
+		
+		int listCount = 0;
+		
+		ArrayList<Notice> list = null;
+		if(selected.equals("title")) {
+			list = nservice.searchTitle(keyword);
+			listCount = nservice.getListCount("no_title", keyword);
+		}else {
+			list = nservice.searchContent(currentPage, limit, keyword);
+			listCount = nservice.getListCount("no_content", keyword);
+		}
 		
 		int maxPage = (int)((double)listCount / limit + 0.9) ;
 		int startPage = (((int)((double)currentPage / limit + 0.9)) - 1) * limit + 1;
@@ -53,19 +63,11 @@ public class NoticeSearchServlet extends HttpServlet {
 		if(endPage > maxPage)
 			endPage = maxPage;
 		
-		ArrayList<Notice> list = null;
-		
-		if(selected.equals("title")) {
-			list = nservice.searchTitle(keyword);
-		}else {
-			list = nservice.searchContent(currentPage, limit, keyword);
-		}
-		
 		Notice notice = nservice.selectCountTop1();
 		
 		RequestDispatcher view = null;
 		if(list.size() > -1 && notice != null) {
-			view = request.getRequestDispatcher("views/notice/notice_list.jsp");
+			view = request.getRequestDispatcher("views/notice/notice_search.jsp");
 			request.setAttribute("list", list);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("maxPage", maxPage);
@@ -74,12 +76,7 @@ public class NoticeSearchServlet extends HttpServlet {
 			request.setAttribute("listCount", listCount);
 			request.setAttribute("notice", notice);
 			view.forward(request, response);
-		}//else {
-//			view = request.getRequestDispatcher("views/common/error.jsp");
-//			request.setAttribute("message", "검색 실패");
-//			view.forward(request, response);
-//		}
-		
+		}
 
 	}
 
