@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>test1</title>
+<title>anavada error page</title>
 </head>
 <body>
 <%@ include file="../include/head.jsp" %>
