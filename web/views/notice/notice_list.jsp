@@ -45,9 +45,8 @@
 					<h4>
 						전체 <%= listCount %>개
 					</h4>
-					<a href="/anavada/views/notice/notice_write.jsp" class="write_btn">글쓰기</a>
 					<div>
-						<form action="" method="" id="">
+						<form action="" method="post" id="">
 							목록 분류 : <select name="" class="ListSelect">
 								<option value="분류 선택" selected="selected">분류 선택</option>
 								<option value="searchtitle">제목</option>
@@ -107,10 +106,6 @@
                 </table>
 
 			<% } %>
-
-                <div class="write-btn">
-                    <a href="/anavada/views/notice/notice_write.jsp">글쓰기</a>
-                </div>
 
             </div>
 

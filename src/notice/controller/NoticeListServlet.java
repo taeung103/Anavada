@@ -32,7 +32,7 @@ public class NoticeListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		//페이징처리
 		int currentPage = 1;
 		
 		if(request.getParameter("page") != null) {
@@ -56,11 +56,11 @@ public class NoticeListServlet extends HttpServlet {
 		if(endPage > maxPage) {
 			endPage = maxPage;
 		}
-		
+		//
 		Notice notice = nservice.selectCountTop1();
 		
 		RequestDispatcher view = null;
-		if(list.size() > -1) {
+		if(list.size() > -1 && notice != null) {
 			view = request.getRequestDispatcher("views/notice/notice_list.jsp");
 			request.setAttribute("list", list);
 			request.setAttribute("currentPage", currentPage);
