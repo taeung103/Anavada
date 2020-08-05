@@ -12,20 +12,20 @@ public class Member implements java.io.Serializable {
 	private String memberName;
 	private String memberOriginal;
 	private String memberRename;
-	private String mamberEmail;
+	private String memberEmail;
 	private String memberPhone;
 	private java.sql.Date joinDate;
 	private java.sql.Date lastAccessDate;
 	
 	public Member(String memberId, String memberPwd, String memberName, String memberOriginal, String memberRename,
-			String mamberEmail, String memberPhone, Date joinDate, Date lastAccessDate) {
+			String memberEmail, String memberPhone, Date joinDate, Date lastAccessDate) {
 		super();
 		this.memberId = memberId;
 		this.memberPwd = memberPwd;
 		this.memberName = memberName;
 		this.memberOriginal = memberOriginal;
 		this.memberRename = memberRename;
-		this.mamberEmail = mamberEmail;
+		this.memberEmail = memberEmail;
 		this.memberPhone = memberPhone;
 		this.joinDate = joinDate;
 		this.lastAccessDate = lastAccessDate;
@@ -71,12 +71,12 @@ public class Member implements java.io.Serializable {
 		this.memberRename = memberRename;
 	}
 
-	public String getMamberEmail() {
-		return mamberEmail;
+	public String getMemberEmail() {
+		return memberEmail;
 	}
 
-	public void setMamberEmail(String mamberEmail) {
-		this.mamberEmail = mamberEmail;
+	public void setMemberEmail(String memberEmail) {
+		this.memberEmail = memberEmail;
 	}
 
 	public String getMemberPhone() {
@@ -110,10 +110,9 @@ public class Member implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "Member [memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName=" + memberName
-				+ ", memberOriginal=" + memberOriginal + ", memberRename=" + memberRename + ", mamberEmail="
-				+ mamberEmail + ", memberPhone=" + memberPhone + ", joinDate=" + joinDate + ", lastAccessDate="
+				+ ", memberOriginal=" + memberOriginal + ", memberRename=" + memberRename + ", memberEmail="
+				+ memberEmail + ", memberPhone=" + memberPhone + ", joinDate=" + joinDate + ", lastAccessDate="
 				+ lastAccessDate + "]";
 	}
-	
 	
 }

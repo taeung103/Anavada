@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="member.model.vo.Member"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,14 +36,14 @@
                         <li class="on">회원가입 완료</li>
                     </ul>
                     <div>
-                        <h1>“<span>홍길동</span>”님 회원가입을 진심으로 축하합니다.</h1>
+                        <h1>“<span><%= loginMember.getMemberName() %></span>”님 회원가입을 진심으로 축하합니다.</h1>
                         <div>
-                            회원님의 비밀번호는 암호화 코드로 저장되며, 아이디/비밀번호 분실시에는<br/>
-                            회원가입 시 입력하신 이메일 주소를 이용하여 찾을 수 있습니다.
+				            <%= loginMember.getMemberName() %>님의 비밀번호는 암호화되어 저장되며, 아이디/비밀번호 분실시에는<br/>
+				                            회원가입 시 입력하신 이메일 주소를 이용하여 찾을 수 있습니다.
                         </div>
                     </div>
                     <p class="MBjoin_input_btn">
-                        <a href="#none">홈으로</a>
+                        <a href="/anavada/">홈으로</a>
                         <a href="login.jsp">로그인</a>
                     </p>
                 </div>

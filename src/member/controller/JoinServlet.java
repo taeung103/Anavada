@@ -37,7 +37,7 @@ public class JoinServlet extends HttpServlet {
 		member.setMemberId(request.getParameter("memberId"));
 		member.setMemberPwd(request.getParameter("memberPwd"));
 		member.setMemberName(request.getParameter("memberName"));
-		member.setMamberEmail(request.getParameter("mamberEmail"));
+		member.setMemberEmail(request.getParameter("memberEmail"));
 		member.setMemberPhone(request.getParameter("memberPhone"));
 	
 		int result = new MemberService().insertMember(member);

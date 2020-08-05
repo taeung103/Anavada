@@ -52,7 +52,7 @@ public class MemberDao {
 			pstmt.setString(3, member.getMemberName());
 			pstmt.setString(4, member.getMemberOriginal());
 			pstmt.setString(5, member.getMemberRename());
-			pstmt.setString(6, member.getMamberEmail());
+			pstmt.setString(6, member.getMemberEmail());
 			pstmt.setString(7, member.getMemberPhone());
 			
 			result = pstmt.executeUpdate();
