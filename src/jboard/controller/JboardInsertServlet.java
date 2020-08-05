@@ -49,56 +49,36 @@ public class JboardInsertServlet extends HttpServlet {
 			view.forward(request, response);
 		}
 
-		// 2. 업로드할 파일의 용량 제한 : 10Mbyte 로 제한한다면
-		int maxSize = 1024 * 1024 * 5;
+		int maxSize = 1024 * 1024 * 5; //용량 5메가로 제한
 
-		// 3. 업로드되는 파일의 저장 폴더 지정하기
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/jboardfiles");
 		// 4. request 를 MultipartRequest 로 변환해야 함
 		// cos.jar 가 제공하는 클래스를 사용함
 		// 전송온 파일은 자동 지정 폴더에 저장됨
 		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8",
 				new DefaultFileRenamePolicy());
-		// new DefaultFileRenamePolicy()폴더에 같은 이름이 있으면 파일명(1) 이런식으로 변경
 
-		// 5. 데이터베이스에 기록할 값 꺼내기
-		// mrequest 로 추출해야함
 
 		Jboard jboard = new Jboard();
-
+		jboard.setJboardPost(mrequest.getParameter("post"));
+		jboard.setJboardMeet(mrequest.getParameter("meet"));
+		jboard.setLocalNo(mrequest.getParameter("location"));
 		jboard.setJboardTitle(mrequest.getParameter("title"));
-		jboard.setMemberId(mrequest.getParameter("writer"));
+		jboard.setJboardPrice(Integer.parseInt(mrequest.getParameter("price")));
 		jboard.setJboardContent(mrequest.getParameter("content"));
 
-		// 서버에 업로드된 파일명 추출하기
-		String originalFileName = mrequest.getFilesystemName("ofile1"); // noticewriterform.jsp 에 있음
-		jboard.setJboardOrignalFilePath1(originalFileName);
-		// 첨부된 파일의 파일명 바꾸기 하려면
-		// 저장 폴더에 같은 이름의 파일이 있을 경우를 대비하기 위함.
-		// "년월일시분초.확장자" 형식으로 변경해봄
-		if (originalFileName != null) {
-			// 첨부파일이 있을 때만 이름바꾸기 실행함
+		
+		String originalFileName1 = mrequest.getFilesystemName("ofile1");
+		jboard.setJboardOrignalFilePath1(originalFileName1);
+		if (originalFileName1 != null) {
 
-			// 바꿀 파일명에 대한 포맷 문자열 만들기 : 년월일시분초 형식으로
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyMMddHHmmss");
-			// 바꿀 파일명 만들기
-			// sdf.format(new java.sql.Date(System.currentTimeMillis())) => 파일명
-			// originalFileName.substring(originalFileName.lastIndexOf(".")+1); => 확장자명
-			// 업로드된 파일의 확장자를 추출해서 , 새 파일명에 붙여줌
-			String renameFileName = sdf.format(new java.sql.Date(System.currentTimeMillis()));
+			String renameFileName1 = sdf.format(new java.sql.Date(System.currentTimeMillis()));
+			renameFileName1 += "." + originalFileName1.substring(originalFileName1.lastIndexOf(".") + 1);
+			File originFile = new File(savePath + "\\" + originalFileName1);
+			File renameFile = new File(savePath + "\\" + renameFileName1);
 
-			// 업로드된 파일의 확장자를 추출해서 , 새 파일명에 붙여줌
-			renameFileName += "." + originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
-
-			// 원본 파일명 rename 처리를 위해서 File 객체 만들기
-			File originFile = new File(savePath + "\\" + originalFileName);
-			File renameFile = new File(savePath + "\\" + renameFileName);
-
-			// 이름 바꾸기 실행함
 			if (!originFile.renameTo(renameFile)) {
-				// renameTo() 메소드가 실패(false)한 경우에 직접 바꾸기함
-				// 원본 파일 내용 읽어서, 복사본에 기록하고
-				// 완료되면, 원본 파일 삭제함
 				FileInputStream fin = new FileInputStream(originFile);
 				FileOutputStream fout = new FileOutputStream(renameFile);
 				int data = -1;
@@ -109,9 +89,9 @@ public class JboardInsertServlet extends HttpServlet {
 
 				fin.close();
 				fout.close();
-				originFile.delete(); // 원본 파일 삭제함
-			} // 직접 이름 바꾸기
-			jboard.setJboardRenameFilePath1(renameFileName);
+				originFile.delete(); 
+			} 
+			jboard.setJboardRenameFilePath1(renameFileName1);
 		}
 
 		// 6.서비스 객체 생성하고 메소드로 notice 객체 전달하고
