@@ -24,4 +24,18 @@ public class CboardService {
 		return listCount;
 	}
 
+	public ArrayList<Cboard> selectLocal(int currentPage, int limit, String local) {
+		Connection conn = getConnection();
+		ArrayList<Cboard> list = cdao.selectLocal(conn, currentPage, limit, local);
+		close(conn);
+		return list;
+	}
+
+	public int getLocalListCount(String local) {
+		Connection conn = getConnection();
+		int listCount = cdao.getLocalListCount(conn, local);
+		close(conn);
+		return listCount;
+	}
+
 }

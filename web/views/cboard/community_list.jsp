@@ -4,12 +4,13 @@
 	import="cboard.model.vo.Cboard, java.util.ArrayList, java.sql.Date"%>
 <%
 	ArrayList<Cboard> list = (ArrayList<Cboard>) request.getAttribute("list");
+	String local = String.valueOf(request.getAttribute("local"));
 	int listCount = ((Integer) request.getAttribute("listCount")).intValue();
 	int startPage = ((Integer) request.getAttribute("startPage")).intValue();
 	int endPage = ((Integer) request.getAttribute("endPage")).intValue();
 	int maxPage = ((Integer) request.getAttribute("maxPage")).intValue();
 	int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
-	String toServlet = "/anavada/clselect?local=";
+	String toServlet = "/anavada/clselect?page=" + currentPage + "&local=";
 %>
 <!DOCTYPE html>
 <html>
@@ -55,7 +56,7 @@
 						<form action="/anavada//clselect" method="post" style="display: inline-block;">
 						<input type="hidden" value="">
 							지역 분류 : <select name="local" class="LocationSelect" onChange="window.location.href=this.value">
-								<option value="null" selected="selected">지역선택</option>
+								<option value="0" selected="selected">지역선택</option>
 								<option value="<%= toServlet %>1">강남구</option>
 								<option value="<%= toServlet %>2">강동구</option>
 								<option value="<%= toServlet %>3">강북구</option>
@@ -148,8 +149,54 @@
 
 			<!-- 리스트 끝 -->
 
-
+			
 			<!-- 페이지넘버 -->
+			<% if (!local.equals("0")) {%>
+			<dl class="list-paging pb80">
+				<dd>
+					<%
+						if (startPage - 1 <= 0) {
+					%>
+					<a><i class="glyphicon glyphicon-menu-left"></i></a>
+					<%
+						} else {
+					%>
+					<a href="/anavada/clistview?page=<%=startPage - 10%>&local=<%= local %>>"><i
+						class="glyphicon glyphicon-menu-left"></i></a>
+					<%
+						}
+					%>
+					<%
+						for (int p = startPage; p <= endPage; p++) {
+					%>
+					<%
+						if (currentPage == p) {
+					%>
+					<a href="/anavada/clistview?page=<%=p%>&local=<%= local %>" class="active"><%=p%></a>
+					<%
+						} else {
+					%>
+					<a href="/anavada/clistview?page=<%=p%>&local=<%= local %>"><%=p%></a>
+					<%
+						}
+					%>
+					<%
+						}
+					%>
+					<%
+						if (endPage + 1 > maxPage) {
+					%>
+					<a><i class="glyphicon glyphicon-menu-right"></i></a>
+					<%
+						} else {
+					%>
+					<a href="/anavada/clistview?page=<%=endPage + 1%>&local=<%= local %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+					<%
+						}
+					%>
+					<% } %>
+
+			<% if (local.equals("0")) {%>
 			<dl class="list-paging pb80">
 				<dd>
 					<%
@@ -192,6 +239,7 @@
 					<%
 						}
 					%>
+					<% } %>
 				</dd>
 			</dl>
 			<!-- 페이지넘버 끝 -->
