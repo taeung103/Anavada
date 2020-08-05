@@ -45,4 +45,19 @@ public class NoticeService {
 		close(conn);
 		return list;
 	}
+
+	public void addReadCount(int no) {
+		Connection conn = getConnection();
+		int result = ndao.addReadCount(conn, no);
+		if(result > 0)
+			commit(conn);
+		else rollback(conn);
+	}
+
+	public Notice selectOne(int no) {
+		Connection conn = getConnection();
+		Notice notice = ndao.selectOne(conn, no);
+		close(conn);
+		return notice;
+	}
 }

@@ -186,6 +186,57 @@ public class NoticeDao {
 		}
 		return list;
 	}
+
+	public int addReadCount(Connection conn, int no) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update notice set no_count = no_count + 1 where no_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public Notice selectOne(Connection conn, int no) {
+		Notice notice = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from notice where no_no = ?";
+		
+		try {
+			pstmt =conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				notice = new Notice();
+				
+				notice.setNoNo(rset.getInt("no_no"));
+				notice.setNoId(rset.getString("no_id"));
+				notice.setNoTitle(rset.getString("no_title"));
+				notice.setNoContent(rset.getString("no_content"));
+				notice.setNoDate(rset.getDate("no_date"));
+				notice.setNoCount(rset.getInt("no_count"));
+				notice.setNoOriginal(rset.getString("no_original"));
+				notice.setNoRename(rset.getString("no_rename"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return notice;
+	}
 	
 	
 }
