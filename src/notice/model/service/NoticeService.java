@@ -39,16 +39,9 @@ public class NoticeService {
 		return notice;
 	}
 
-	public ArrayList<Notice> searchTitle(String keyword) {
+	public ArrayList<Notice> searchTorC(int currentPage, int limit, String keyword, String column) {
 		Connection conn = getConnection();
-		ArrayList<Notice> list = ndao.searchTitle(conn, keyword);
-		close(conn);
-		return list;
-	}
-
-	public ArrayList<Notice> searchContent(int currentPage, int limit, String keyword) {
-		Connection conn = getConnection();
-		ArrayList<Notice> list = ndao.searchContent(conn, currentPage, limit, keyword);
+		ArrayList<Notice> list = ndao.searchTorC(conn, currentPage, limit, keyword, column);
 		close(conn);
 		return list;
 	}

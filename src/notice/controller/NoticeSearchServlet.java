@@ -37,41 +37,35 @@ public class NoticeSearchServlet extends HttpServlet {
 		
 		String selected = request.getParameter("selected");
 		String keyword = request.getParameter("keyword");
-		
 		NoticeService nservice = new NoticeService();
 		
 		int currentPage = 1;
 		if(request.getParameter("page") != null)
 			currentPage = Integer.parseInt(request.getParameter("page"));
-		System.out.println(currentPage);
 		int limit = 10;
 		
 		int listCount = 0;
 		
 		ArrayList<Notice> list = null;
 		if(selected.equals("title")) {
-			list = nservice.searchTitle(keyword);
-			listCount = nservice.getListCount("no_title", keyword);
+			list = nservice.searchTorC(currentPage, limit, keyword, selected);
+			listCount = nservice.getListCount("title", keyword);
 		}else {
-			list = nservice.searchContent(currentPage, limit, keyword);
-			listCount = nservice.getListCount("no_content", keyword);
+			list = nservice.searchTorC(currentPage, limit, keyword, selected);
+			listCount = nservice.getListCount("content", keyword);
 		}
 		
 		int maxPage = (int)((double)listCount / limit + 0.9) ;
-		System.out.println("maxPage"+maxPage);
 		int startPage = (((int)((double)currentPage / limit + 0.9)) - 1) * limit + 1;
-		System.out.println("startPage"+startPage);
 		int endPage = startPage + limit - 1;
-		System.out.println("endPage "+endPage);
 		if(endPage > maxPage)
 			endPage = maxPage;
-		System.out.println("endPage2 "+endPage);
 		
 		Notice notice = nservice.selectCountTop1();
 		
 		RequestDispatcher view = null;
 		if(list.size() > -1 && notice != null) {
-			view = request.getRequestDispatcher("views/notice/notice_search.jsp");
+			view = request.getRequestDispatcher("views/notice/notice_list.jsp");
 			request.setAttribute("list", list);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("maxPage", maxPage);
@@ -79,6 +73,8 @@ public class NoticeSearchServlet extends HttpServlet {
 			request.setAttribute("endPage", endPage);
 			request.setAttribute("listCount", listCount);
 			request.setAttribute("notice", notice);
+			request.setAttribute("keyword", keyword);
+			request.setAttribute("selected", selected);
 			view.forward(request, response);
 		}
 
