@@ -112,11 +112,14 @@
 
 
 				<div class="list-no">
+					<% if(endPage + 1 > maxPage) { %>
 					<p>
 						<img src="/anavada/resources/images/btnIcn/icn_big_listNo.png"
 							alt="" title="" />
 					</p>
 					<h1>목록이 없습니다.</h1>
+					<% } %>
+					
 				</div>
 
 
@@ -133,17 +136,20 @@
 			<!-- 페이지넘버 -->
 			<dl class="list-paging pb80">
 				<dd>
-					<% if((currentPage - 10) < startPage && (currentPage - 10) > 1) { %>
-						<i class="glyphicon glyphicon-menu-left"></i>
+					<% if(startPage - 1 <= 0 ) { %>
+						<a><i class="glyphicon glyphicon-menu-left"></i></a>
 					<% } else { %>
 						<a href="/anavada/clistview?page=<%= startPage - 10 %>"><i class="glyphicon glyphicon-menu-left"></i></a>
 					<% } %>
 					<% for(int p = startPage; p <= endPage; p++) { %>
+						<% if (currentPage == p) { %>
+						<a href="/anavada/clistview?page=<%= p %>" class="active"><%= p %></a>
+						<% } else { %>
 						<a href="/anavada/clistview?page=<%= p %>"><%= p %></a>
+						<% } %>
 					<% } %> 
-					<!-- 활성화 class="active" -->
-					<% if((currentPage + 10) > endPage && (currentPage + 10) < maxPage) { %>
-						<i class="glyphicon glyphicon-menu-right"></i>					
+					<% if(endPage + 1 > maxPage) { %>
+						<a><i class="glyphicon glyphicon-menu-right"></i></a>					
 					<% } else { %>
 						<a href="/anavada/clistview?page=<%= endPage + 1 %>"><i class="glyphicon glyphicon-menu-right"></i></a>
 					<% } %>
