@@ -86,11 +86,11 @@ public class JboardDao {
 						jboard.setJboardRenameFilePath3(rset.getString("JFILES_RENAME_FILEPATH3"));
 						jboard.setJboardOrignalFilePath4(rset.getString("JFILES_ORIGINAL_FILEPATH4"));
 						jboard.setJboardRenameFilePath4(rset.getString("JFILES_RENAME_FILEPATH4"));
-						jboard.setJboardCheck("jboard_check");
-						jboard.setJboardMeet("jboard_meet");
-						jboard.setJboardPost("jboard_post");
-						jboard.setMemberId("member_id");
-						jboard.setLocalNo("local_no");
+						jboard.setJboardCheck(rset.getString("jboard_check"));
+						jboard.setJboardMeet(rset.getString("jboard_meet"));
+						jboard.setJboardPost(rset.getString("jboard_post"));
+						jboard.setMemberId(rset.getString("member_id"));
+						jboard.setLocalNo(rset.getString("local_no"));
 								
 						list.add(jboard);
 					}

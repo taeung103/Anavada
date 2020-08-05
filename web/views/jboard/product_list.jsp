@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@  page import="jboard.model.vo.Jboard , java.util.ArrayList, java.sql.Date"%>
+ <%@  page 
+ 	import="jboard.model.vo.Jboard , java.util.ArrayList, java.sql.Date"%>
  <%
-   ArrayList<Jboard> list = (ArrayList<Jboard>) request.getAttribute("list");
-
+ 	ArrayList<Jboard> list = (ArrayList<Jboard>) request.getAttribute("list");
    int listCount = ((Integer) request.getAttribute("listCount")).intValue();
    int startPage = ((Integer) request.getAttribute("startPage")).intValue();
    int endPage = ((Integer) request.getAttribute("endPage")).intValue();

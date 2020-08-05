@@ -27,7 +27,7 @@ import jboard.model.vo.Jboard;
  */
 @WebServlet("/jbinsert")
 public class JboardInsertServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 22L;
 
     /**
      * Default constructor. 

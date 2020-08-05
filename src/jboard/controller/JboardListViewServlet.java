@@ -18,7 +18,7 @@ import jboard.model.vo.Jboard;
  */
 @WebServlet("/jblist")
 public class JboardListViewServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -61,7 +61,6 @@ public class JboardListViewServlet extends HttpServlet {
 						request.setAttribute("startPage", startPage);
 						request.setAttribute("endPage", endPage);
 						request.setAttribute("listCount", listCount);
-						
 						view.forward(request, response);
 						
 				}else {
