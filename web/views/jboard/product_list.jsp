@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@  page import="jboard.model.vo.Jboard , java.util.ArrayList, java.sql.Date"%>
+ <%
+   ArrayList<Jboard> list = (ArrayList<Jboard>) request.getAttribute("list");
+
+   int listCount = ((Integer) request.getAttribute("listCount")).intValue();
+   int startPage = ((Integer) request.getAttribute("startPage")).intValue();
+   int endPage = ((Integer) request.getAttribute("endPage")).intValue();
+   int maxPage = ((Integer) request.getAttribute("maxPage")).intValue();
+   int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +48,7 @@
 
                 <!--종류 리스트-->
                 <div class="sort-area">  
-                    <h4>전체 150개</h4>
+                    <h4>전체 <%=listCount%>개</h4>
                     <button onclick="showWriteForm();" class="write_btn">글쓰기</button>
                     <div>
                         <form action="" method="" id="">
@@ -84,96 +94,15 @@
                 </div>
 
                 <ul class="product">
+                <% for (Jboard j : list ){ %>
                     <li onclick="location.href='product_view.jsp'">
                         <div><img src="/anavada/resources/images/test/testImg.jpg"/></div>
-                        <h2>밤하늘의 별</h2>
-                        <h3>7,000,000<span> 원</span></h3>
-                        <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></p>
+                        <h2><%= j.getJboardTitle()%></h2>
+                        <h3><%=j.getJboardPrice() %><span> 원</span></h3>
+                        <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%=j.getJboardLike() %></span></i></p>
                     </li>
-                    <li onclick="location.href='product_view.jsp'">
-                        <div><img src="/anavada/resources/images/test/testImg.jpg"/></div>
-                        <h2>밤하늘의 별</h2>
-                        <h3>7,000,000<span> 원</span></h3>
-                        <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></p>
-                    </li>
-                    <li onclick="location.href='product_view.jsp'">
-                        <div><img src="/anavada/resources/images/test/testImg.jpg"/></div>
-                        <h2>밤하늘의 별</h2>
-                        <h3>7,000,000<span> 원</span></h3>
-                        <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></p>
-                    </li>
-                    <li onclick="location.href='product_view.jsp'">
-                        <div><img src="/anavada/resources/images/test/testImg.jpg"/></div>
-                        <h2>밤하늘의 별</h2>
-                        <h3>7,000,000<span> 원</span></h3>
-                        <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></p>
-                    </li>
-                    <li onclick="location.href='product_view.jsp'">
-                        <div><img src="/anavada/resources/images/test/testImg.jpg"/></div>
-                        <h2>밤하늘의 별</h2>
-                        <h3>7,000,000<span> 원</span></h3>
-                        <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></p>
-                    </li>
-                    <li onclick="location.href='product_view.jsp'">
-                        <div><img src="/anavada/resources/images/test/testImg.jpg"/></div>
-                        <h2>밤하늘의 별</h2>
-                        <h3>7,000,000<span> 원</span></h3>
-                        <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></p>
-                    </li>
-                    <li onclick="location.href='product_view.jsp'">
-                        <div><img src="/anavada/resources/images/test/testImg.jpg"/></div>
-                        <h2>밤하늘의 별</h2>
-                        <h3>7,000,000<span> 원</span></h3>
-                        <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></p>
-                    </li>
-                    <li onclick="location.href='product_view.jsp'">
-                        <div><img src="/anavada/resources/images/test/testImg.jpg"/></div>
-                        <h2>밤하늘의 별</h2>
-                        <h3>7,000,000<span> 원</span></h3>
-                        <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></p>
-                    </li>
-                    <li onclick="location.href='product_view.jsp'">
-                        <div><img src="/anavada/resources/images/test/testImg.jpg"/></div>
-                        <h2>밤하늘의 별</h2>
-                        <h3>7,000,000<span> 원</span></h3>
-                        <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></p>
-                    </li>
-                    <li onclick="location.href='product_view.jsp'">
-                        <div><img src="/anavada/resources/images/test/testImg.jpg"/></div>
-                        <h2>밤하늘의 별</h2>
-                        <h3>7,000,000<span> 원</span></h3>
-                        <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></p>
-                    </li>
-                    <li onclick="location.href='product_view.jsp'">
-                        <div><img src="/anavada/resources/images/test/testImg.jpg"/></div>
-                        <h2>밤하늘의 별</h2>
-                        <h3>7,000,000<span> 원</span></h3>
-                        <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></p>
-                    </li>
-                    <li onclick="location.href='product_view.jsp'">
-                        <div><img src="/anavada/resources/images/test/testImg.jpg"/></div>
-                        <h2>밤하늘의 별</h2>
-                        <h3>7,000,000<span> 원</span></h3>
-                        <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></p>
-                    </li>
-                    <li onclick="location.href='product_view.jsp'">
-                        <div><img src="/anavada/resources/images/test/testImg.jpg"/></div>
-                        <h2>밤하늘의 별</h2>
-                        <h3>7,000,000<span> 원</span></h3>
-                        <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></p>
-                    </li>
-                    <li onclick="location.href='product_view.jsp'">
-                        <div><img src="/anavada/resources/images/test/testImg.jpg"/></div>
-                        <h2>밤하늘의 별</h2>
-                        <h3>7,000,000<span> 원</span></h3>
-                        <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></p>
-                    </li>
-                    <li onclick="location.href='product_view.jsp'">
-                        <div><img src="/anavada/resources/images/test/testImg.jpg"/></div>
-                        <h2>밤하늘의 별</h2>
-                        <h3>7,000,000<span> 원</span></h3>
-                        <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></p>
-                    </li>
+                    <%} %>
+                  
                 </ul>
                 <div class="list-no">
                     <p><img src="/anavada/resources/images/btnIcn/icn_big_listNo.png" alt="" title=""></p>
