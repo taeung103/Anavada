@@ -43,7 +43,7 @@ public class NoticeSearchServlet extends HttpServlet {
 		int currentPage = 1;
 		if(request.getParameter("page") != null)
 			currentPage = Integer.parseInt(request.getParameter("page"));
-
+		System.out.println(currentPage);
 		int limit = 10;
 		
 		int listCount = 0;
@@ -58,10 +58,14 @@ public class NoticeSearchServlet extends HttpServlet {
 		}
 		
 		int maxPage = (int)((double)listCount / limit + 0.9) ;
+		System.out.println("maxPage"+maxPage);
 		int startPage = (((int)((double)currentPage / limit + 0.9)) - 1) * limit + 1;
+		System.out.println("startPage"+startPage);
 		int endPage = startPage + limit - 1;
+		System.out.println("endPage "+endPage);
 		if(endPage > maxPage)
 			endPage = maxPage;
+		System.out.println("endPage2 "+endPage);
 		
 		Notice notice = nservice.selectCountTop1();
 		

@@ -46,7 +46,7 @@
 						전체 <%= listCount %>개
 					</h4>
 					<div>
-						<form action="/anavada/nsearch" method="post" id="">
+						<form action="/anavada/nsearch?page=1" method="post" id="">
 							목록 분류 : <select name="selected" class="ListSelect">
 								<option value="none" selected disabled>분류 선택</option>
 								<option value="title">제목</option>
