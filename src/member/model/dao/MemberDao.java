@@ -43,7 +43,7 @@ public class MemberDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "insert into member values(?, ?, ?, ?, ?, ?, ?, sysdate, sysdate)";
+		String query = "insert into member values(?, ?, ?, ?, ?, ?, ?, ?, sysdate, sysdate)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -53,7 +53,8 @@ public class MemberDao {
 			pstmt.setString(4, member.getMemberOriginal());
 			pstmt.setString(5, member.getMemberRename());
 			pstmt.setString(6, member.getMemberEmail());
-			pstmt.setString(7, member.getMemberPhone());
+			pstmt.setString(7, member.getEmailAuth());
+			pstmt.setString(8, member.getMemberPhone());
 			
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {

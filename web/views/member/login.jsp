@@ -28,7 +28,7 @@
             <!--서브 비주얼/타이틀 끝-->
 
             <!-- 로그인 -->
-            <form name="login" method="post" action="/anavada/login">
+            <form name="login" method="post" action="/anavada/login.cp">
             <div class="MBwrap">
                 <div class="MBlogin">
                     <h1>로그인</h1>

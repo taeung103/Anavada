@@ -14,11 +14,12 @@ public class Member implements java.io.Serializable {
 	private String memberRename;
 	private String memberEmail;
 	private String memberPhone;
+	private String emailAuth;
 	private java.sql.Date joinDate;
 	private java.sql.Date lastAccessDate;
 	
 	public Member(String memberId, String memberPwd, String memberName, String memberOriginal, String memberRename,
-			String memberEmail, String memberPhone, Date joinDate, Date lastAccessDate) {
+			String memberEmail, String memberPhone, String emailAuth, Date joinDate, Date lastAccessDate) {
 		super();
 		this.memberId = memberId;
 		this.memberPwd = memberPwd;
@@ -27,6 +28,7 @@ public class Member implements java.io.Serializable {
 		this.memberRename = memberRename;
 		this.memberEmail = memberEmail;
 		this.memberPhone = memberPhone;
+		this.emailAuth = emailAuth;
 		this.joinDate = joinDate;
 		this.lastAccessDate = lastAccessDate;
 	}
@@ -87,6 +89,14 @@ public class Member implements java.io.Serializable {
 		this.memberPhone = memberPhone;
 	}
 
+	public String getEmailAuth() {
+		return emailAuth;
+	}
+
+	public void setEmailAuth(String emailAuth) {
+		this.emailAuth = emailAuth;
+	}
+
 	public java.sql.Date getJoinDate() {
 		return joinDate;
 	}
@@ -111,8 +121,7 @@ public class Member implements java.io.Serializable {
 	public String toString() {
 		return "Member [memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName=" + memberName
 				+ ", memberOriginal=" + memberOriginal + ", memberRename=" + memberRename + ", memberEmail="
-				+ memberEmail + ", memberPhone=" + memberPhone + ", joinDate=" + joinDate + ", lastAccessDate="
-				+ lastAccessDate + "]";
+				+ memberEmail + ", memberPhone=" + memberPhone + ", emailAuth=" + emailAuth + ", joinDate=" + joinDate
+				+ ", lastAccessDate=" + lastAccessDate + "]";
 	}
-	
 }

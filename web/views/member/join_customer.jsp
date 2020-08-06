@@ -65,8 +65,7 @@
 
 
             <!-- 회원가입 고객가입 -->
-            <form name="join" action="/anavada/join" method="post" onsubmit="return validate();" class="form-inline">
-                <legend>회원가입</legend>
+            <form name="join" action="/anavada/join.cp" method="post" onsubmit="return validate();" class="form-inline">
                 <div class="MBwrap">
                     <div class="MBjoin_input-wrap">
                         <ul class="joinDepth">
