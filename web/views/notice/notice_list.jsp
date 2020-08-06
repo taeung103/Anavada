@@ -145,6 +145,7 @@
                     	<a href="nlist?page=<%= maxPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
                     <%}else { %>
                     <a><i class="glyphicon glyphicon-menu-right"></i></a>
+                    
                  <% } }else { %>
                 	<% if(currentPage <= 1) { %>
                     <a><i class="glyphicon glyphicon-menu-left"></i></a>

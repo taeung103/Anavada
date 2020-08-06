@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, notice.model.vo.Notice"%>
+<%
+//	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+//	int currentPage = (Integer)request.getAttribute("currentPage");
+//	int totalPage = (Integer)request.getAttribute("totalPage");
+//	int startPage = (Integer)request.getAttribute("startPage");
+//	int endPage = (Integer)request.getAttribute("endPage");
+//	int totalList = (Integer)request.getAttribute("totalList");
+//	System.out.println(list.size());
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +35,7 @@
 
                 <!-- 검색영역 -->
                 <div class="sort-area">  
-                    <h4>전체 150개</h4>
+                    <h4>전체 개</h4>
                     <div>
                         <form action="" method="" id="">
                             목록 분류 : <select name="" class="ListSelect">
