@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="notice.model.vo.Notice"%>
+<%
+	Notice notice = (Notice)request.getAttribute("notice");
+	int currentPage = (Integer)request.getAttribute("currentPage");
+	String selected = null;
+	String keyword = null;
+	if(request.getAttribute("selected") != null && request.getAttribute("keyword") != null) {
+		selected = (String)request.getAttribute("selected");
+		keyword = (String)request.getAttribute("keyword");
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,57 +41,31 @@
 
             <!-- 상세 -->
             <div class="view-area">
-                <h2><span>공지</span> 'Anavada' 중고거래 홈페이지가 새롭게 오픈했습니다.</h2>
+                <h2><span>공지</span> <%= notice.getNoTitle() %></h2>
                 <ul>
-                    <li><span>작성자 : </span>관리자</li>
-                    <li><span>등록일 : </span>2019.02.30</li>
-                    <li><span>조회수 : </span>30</li>
+                    <li><span>작성자 : </span><%= notice.getNoId() %></li>
+                    <li><span>등록일 : </span><%= notice.getNoDate() %></li>
+                    <li><span>조회수 : </span><%= notice.getNoCount() %></li>
+                    <% if(notice.getNoOriginal() != null) { %>
                     <li><span>첨부파일#1 : </span><a href="#none" download>KH정보교육원.jpg</a></li>
+                    <% } %>
                 </ul>
 
                 <div class="view-ctn">
-                        너 없는 지금도 눈부신 하늘과<br/>
-                        눈부시게 웃는 사람들<br/>
-                        나의 헤어짐을 모르는 세상은<br/>
-                        슬프도록 그대로인데<br/><br/>
-
-                        시간마저 데려가지 못하게<br/>
-                        나만은 널 보내지 못했나봐<br/>
-                        가시처럼 깊게 박힌 기억은<br/>
-                        아파도 아픈 줄 모르고<br/><br/>
-
-                        그대 기억이 지난 사랑이<br/>
-                        내 안을 파고 드는 가시가 되어<br/>
-                        제발 가라고 아주 가라고<br/>
-                        애써도 나를 괴롭히는데<br/><br/>
-
-                        아픈 만큼 너를 잊게 된다면<br/>
-                        차라리 앓고 나면 그만인데<br/>
-                        가시처럼 깊게 박힌 기억은<br/>
-                        아파도 아픈 줄 모르고<br/>
-
-                        그대 기억이<br/>
-                        지난 사랑이<br/>
-                        내 안을 파고 드는 가시가 되어<br/>
-                        제발 가라고<br/>
-                        아주 가라고<br/>
-                        애써도 나를 괴롭히는데<br/><br/>
-
-                        너무 사랑했던 나를<br/>
-                        그게 두려웠던 나를<br/>
-                        미치도록 너를 그리워했던<br/>
-                        날 이제는 놓아줘<br/><br/>
-
-                        보이지 않아 내 안에 숨어<br/>
-                        잊으려 하면 할수록 더 아파와<br/>
-                        제발 가라고 아주 가라고<br/>
-                        애써도 나를 괴롭히는데
+                <%= notice.getNoContent() %>
                 </div>
 
                 <div class="view-btn">
-                    <a href="#none" class="btn btn-prev">이전글</a>
-                    <a href="notice_list.jsp" class="btn btn-list">목록</a>
-                    <a href="#none" class="btn btn-next">다음글</a>
+                    <% if(request.getParameter("selected") != null && request.getParameter("keyword") != null) { %>
+                    <a href="/anavada/ndetail?no=<%= notice.getNoNo()-1 %>" class="btn btn-prev">이전글</a>
+                    <a href="/anavada/nsearch?page=<%= currentPage %>&selected=<%= selected %>&keyword=<%= keyword %>" class="btn btn-list">목록</a>
+                    <a href="/anavada/ndetail?no=<%= notice.getNoNo()+1 %>" class="btn btn-next">다음글</a>
+                    <% }else { %>
+                    <a href="" class="btn btn-prev">이전글</a>
+                    <a href="/anavada/nlist?page=<%= currentPage %>" class="btn btn-list">목록</a>
+                    <a href="" class="btn btn-next">다음글</a>
+                    <% } %>
+                    
                 </div>
             </div>
             <!-- 상세 끝 -->
