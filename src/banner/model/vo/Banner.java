@@ -4,7 +4,7 @@ public class Banner implements java.io.Serializable{
 	public static final long SerializableUID = 6666L;
 	
 	
-	private int bannerNo;
+	private int bannerNo;  
 	private String bannerTitle;
 	private String bannerChk;
 	private String bannerOk;
