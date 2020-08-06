@@ -37,6 +37,24 @@ public class MemberService {
 		close(conn);
 		return idChk;
 	}
-	
+
+	public Member selectMember(String memberId) {
+		Connection conn = getConnection();
+		Member member = mdao.selectMember(conn, memberId);
+		close(conn);
+		return member;
+	}
+
+	public int updateMember(Member member) {
+		Connection conn = getConnection();
+		int result = mdao.updateMember(conn, member);
+		if(result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		return result;
+	}
+
 	
 }
