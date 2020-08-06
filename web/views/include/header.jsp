@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="member.model.vo.Member"%>
+<% Member loginMember = (Member)session.getAttribute("loginMember"); %>
 <div id="header">
 	<!-- 상단메뉴 -->
     <dl class="gnbWrap clearfix">
@@ -27,9 +28,16 @@
                         <button class="top-search"><i class="xi-search"></i></button>
                     </form>
                 </li>
-                <li><a class="hover_line01" href="../member/MyInfoModify.jsp">MYPAGE</a></li>
+                <% if(loginMember == null){ %>
                 <li><a class="hover_line01" href="../member/join_agree.jsp">JOIN</a></li>
                 <li><a class="hover_line01" href="../member/login.jsp">LOGIN</a></li>
+                <% } else if(loginMember.getMemberId().equals("admin")){ %>
+                <li><a class="hover_line01" href="../admin/member/memberList.jsp">관리자페이지</a></li>
+                <li><a class="hover_line01" href="/anavada/logout">LOGOUT</a></li>
+                <% } else { %>
+                <li><a class="hover_line01" href="../member/MyInfoModify.jsp">MYPAGE</a></li>
+                <li><a class="hover_line01" href="/anavada/logout">LOGOUT</a></li>
+                <% } %>
                 <li><i id="favorite" class="xi-star-o" title="즐겨찾기 등록"></i></li>
             </ul>
         </dt>
