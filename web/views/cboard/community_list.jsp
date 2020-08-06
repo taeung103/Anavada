@@ -10,7 +10,6 @@
 	int endPage = ((Integer) request.getAttribute("endPage")).intValue();
 	int maxPage = ((Integer) request.getAttribute("maxPage")).intValue();
 	int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
-	String toServlet = "/anavada/clselect?page=" + currentPage + "&local=";
 %>
 <!DOCTYPE html>
 <html>
@@ -53,35 +52,35 @@
 					</h4>
 					<a href="community_write.jsp" class="write_btn">글쓰기</a>
 					<div>
-						<form action="/anavada//clselect" method="post" style="display: inline-block;">
-						<input type="hidden" value="">
-							지역 분류 : <select name="local" class="LocationSelect" onChange="window.location.href=this.value">
+						<form action="/anavada/clistview?page=<%= currentPage %>" method="post" style="display: inline-block;">
+							지역 분류 : 
+							<select name="local" class="LocationSelect" onchange="this.form.submit()">
 								<option value="0" selected="selected">지역선택</option>
-								<option value="<%= toServlet %>1">강남구</option>
-								<option value="<%= toServlet %>2">강동구</option>
-								<option value="<%= toServlet %>3">강북구</option>
-								<option value="<%= toServlet %>4">강서구</option>
-								<option value="<%= toServlet %>5">관악구</option>
-								<option value="<%= toServlet %>6">광진구</option>
-								<option value="<%= toServlet %>7">구로구</option>
-								<option value="<%= toServlet %>8">금천구</option>
-								<option value="<%= toServlet %>9">노원구</option>
-								<option value="<%= toServlet %>10">도봉구</option>
-								<option value="<%= toServlet %>11">동대문구</option>
-								<option value="<%= toServlet %>12">동작구</option>
-								<option value="<%= toServlet %>13">마포구</option>
-								<option value="<%= toServlet %>14">서대문구</option>
-								<option value="<%= toServlet %>15">서초구</option>
-								<option value="<%= toServlet %>16">성동구</option>
-								<option value="<%= toServlet %>17">성북구</option>
-								<option value="<%= toServlet %>18">송파구</option>
-								<option value="<%= toServlet %>19">양천구</option>
-								<option value="<%= toServlet %>20">영등포구</option>
-								<option value="<%= toServlet %>21">용산구</option>
-								<option value="<%= toServlet %>22">은평구</option>
-								<option value="<%= toServlet %>23">종로구</option>
-								<option value="<%= toServlet %>24">중구</option>
-								<option value="<%= toServlet %>25">중랑구</option>
+								<option value="1" <% if (local.equals("1"))  { %>selected="selected"<% } %>>강남구</option>
+								<option value="2" <% if (local.equals("2"))  { %>selected="selected"<% } %>>강동구</option>
+								<option value="3" <% if (local.equals("3"))  { %>selected="selected"<% } %>>강북구</option>
+								<option value="4" <% if (local.equals("4"))  { %>selected="selected"<% } %>>강서구</option>
+								<option value="5" <% if (local.equals("5"))  { %>selected="selected"<% } %>>관악구</option>
+								<option value="6" <% if (local.equals("6"))  { %>selected="selected"<% } %>>광진구</option>
+								<option value="7" <% if (local.equals("7"))  { %>selected="selected"<% } %>>구로구</option>
+								<option value="8" <% if (local.equals("8"))  { %>selected="selected"<% } %>>금천구</option>
+								<option value="9" <% if (local.equals("9"))  { %>selected="selected"<% } %>>노원구</option>
+								<option value="10"<% if (local.equals("10")) { %>selected="selected"<% } %>>도봉구</option>
+								<option value="11"<% if (local.equals("11")) { %>selected="selected"<% } %>>동대문구</option>
+								<option value="12"<% if (local.equals("12")) { %>selected="selected"<% } %>>동작구</option>
+								<option value="13"<% if (local.equals("13")) { %>selected="selected"<% } %>>마포구</option>
+								<option value="14"<% if (local.equals("14")) { %>selected="selected"<% } %>>서대문구</option>
+								<option value="15"<% if (local.equals("15")) { %>selected="selected"<% } %>>서초구</option>
+								<option value="16"<% if (local.equals("16")) { %>selected="selected"<% } %>>성동구</option>
+								<option value="17"<% if (local.equals("17")) { %>selected="selected"<% } %>>성북구</option>
+								<option value="18"<% if (local.equals("18")) { %>selected="selected"<% } %>>송파구</option>
+								<option value="19"<% if (local.equals("19")) { %>selected="selected"<% } %>>양천구</option>
+								<option value="20"<% if (local.equals("20")) { %>selected="selected"<% } %>>영등포구</option>
+								<option value="21"<% if (local.equals("21")) { %>selected="selected"<% } %>>용산구</option>
+								<option value="22"<% if (local.equals("22")) { %>selected="selected"<% } %>>은평구</option>
+								<option value="23"<% if (local.equals("23")) { %>selected="selected"<% } %>>종로구</option>
+								<option value="24"<% if (local.equals("24")) { %>selected="selected"<% } %>>중구</option>
+								<option value="25"<% if (local.equals("25")) { %>selected="selected"<% } %>>중랑구</option>
 							</select>
 						</form>
 						<form action=""  style="display: inline-block;">
@@ -106,7 +105,7 @@
 							<td class="number"><%=c.getCboardNo()%></td>
 							<td class="title">
 								<h2>
-									<span>종로구</span><%=c.getCboardTitle()%>
+									<span>종로구<%= local %></span><%=c.getCboardTitle()%>
 								</h2>
 								<ul>
 									<li>작성자 : <%=c.getMemberId()%></li>
@@ -151,7 +150,6 @@
 
 			
 			<!-- 페이지넘버 -->
-			<% if (!local.equals("0")) {%>
 			<dl class="list-paging pb80">
 				<dd>
 					<%
@@ -161,7 +159,7 @@
 					<%
 						} else {
 					%>
-					<a href="/anavada/clistview?page=<%=startPage - 10%>&local=<%= local %>>"><i
+					<a href="/anavada/clistview?page=<%=startPage - 10%>>"><i
 						class="glyphicon glyphicon-menu-left"></i></a>
 					<%
 						}
@@ -172,52 +170,7 @@
 					<%
 						if (currentPage == p) {
 					%>
-					<a href="/anavada/clistview?page=<%=p%>&local=<%= local %>" class="active"><%=p%></a>
-					<%
-						} else {
-					%>
-					<a href="/anavada/clistview?page=<%=p%>&local=<%= local %>"><%=p%></a>
-					<%
-						}
-					%>
-					<%
-						}
-					%>
-					<%
-						if (endPage + 1 > maxPage) {
-					%>
-					<a><i class="glyphicon glyphicon-menu-right"></i></a>
-					<%
-						} else {
-					%>
-					<a href="/anavada/clistview?page=<%=endPage + 1%>&local=<%= local %>"><i class="glyphicon glyphicon-menu-right"></i></a>
-					<%
-						}
-					%>
-					<% } %>
-
-			<% if (local.equals("0")) {%>
-			<dl class="list-paging pb80">
-				<dd>
-					<%
-						if (startPage - 1 <= 0) {
-					%>
-					<a><i class="glyphicon glyphicon-menu-left"></i></a>
-					<%
-						} else {
-					%>
-					<a href="/anavada/clistview?page=<%=startPage - 10%>"><i
-						class="glyphicon glyphicon-menu-left"></i></a>
-					<%
-						}
-					%>
-					<%
-						for (int p = startPage; p <= endPage; p++) {
-					%>
-					<%
-						if (currentPage == p) {
-					%>
-					<a href="/anavada/clistview?page=<%=p%>" class="active"><%=p%></a>
+					<a href="/anavada/clistview?page=<%=p%>&local" class="active"></a>
 					<%
 						} else {
 					%>
@@ -239,7 +192,6 @@
 					<%
 						}
 					%>
-					<% } %>
 				</dd>
 			</dl>
 			<!-- 페이지넘버 끝 -->

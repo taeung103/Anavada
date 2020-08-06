@@ -36,10 +36,11 @@ public class CboardListViewServlet extends HttpServlet {
 		if (request.getParameter("page") != null) {
 			currentPage = Integer.parseInt(request.getParameter("page"));
 		}
+		String local = request.getParameter("local");
 		int limit = 10;
 		CboardService cservice = new CboardService();
-		int listCount = cservice.getListCount();
-		ArrayList<Cboard> list = cservice.selectAll(currentPage, limit);
+		int listCount = cservice.getListCount(local);
+		ArrayList<Cboard> list = cservice.selectAll(currentPage, limit, local);
 		
 		int maxPage = (int)((double)listCount / limit + 0.9);
 		int startPage = (((int)((double)currentPage / limit + 0.9)) - 1) * limit + 1;
@@ -48,6 +49,7 @@ public class CboardListViewServlet extends HttpServlet {
 		if (maxPage < endPage) {
 			endPage = maxPage;
 		}
+		System.out.println(request.getParameter("local"));
 		
 		RequestDispatcher view = null;
 		if (list.size() > 0) {
@@ -58,8 +60,8 @@ public class CboardListViewServlet extends HttpServlet {
 			request.setAttribute("startPage", startPage);
 			request.setAttribute("endPage", endPage);
 			request.setAttribute("listCount", listCount);
+			request.setAttribute("local", local);
 			view.forward(request, response);
-			
 		}
 	}
 
