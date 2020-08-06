@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList, notice.model.vo.Notice"%>
 <%
-//	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
-//	int currentPage = (Integer)request.getAttribute("currentPage");
-//	int totalPage = (Integer)request.getAttribute("totalPage");
-//	int startPage = (Integer)request.getAttribute("startPage");
-//	int endPage = (Integer)request.getAttribute("endPage");
-//	int totalList = (Integer)request.getAttribute("totalList");
-//	System.out.println(list.size());
+	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+	int currentPage = (Integer)request.getAttribute("currentPage");
+	int totalPage = (Integer)request.getAttribute("totalPage");
+	int startPage = (Integer)request.getAttribute("startPage");
+	int endPage = (Integer)request.getAttribute("endPage");
+	int totalList = (Integer)request.getAttribute("totalList");
+	System.out.println(currentPage+"--------");
 %>
 <!DOCTYPE html>
 <html>
@@ -34,107 +34,59 @@
 
 
                 <!-- 검색영역 -->
-                <div class="sort-area">  
-                    <h4>전체 개</h4>
-                    <div>
-                        <form action="" method="" id="">
-                            목록 분류 : <select name="" class="ListSelect">
-                                    <option value="분류 선택" selected="selected">분류 선택</option>
-                                    <option value="제목">제목</option>
-                                    <option value="내용">내용</option>
-                                    <option value="작성자">작성자</option>
-                            </select>
-                            
-                            <input type="text" placeholder="검색어를 입력해주세요.">
-                            <button class="top-search"><i class="xi-search"></i></button>
-                        </form>
-                    </div>
-                </div>
-                <!-- 검색영역 끝 -->
+				<div class="sort-area">
+					<h4>
+						전체
+						<%= totalList %>개
+					</h4>
+					<div>
+						<form action="" method="" id="">
+							목록 분류 : <select name="" class="ListSelect">
+								<option value="분류 선택" selected="selected">분류 선택</option>
+								<option value="제목">제목</option>
+								<option value="내용">내용</option>
+								<option value="작성자">작성자</option>
+							</select> <input type="text" placeholder="검색어를 입력해주세요.">
+							<button class="top-search">
+								<i class="xi-search"></i>
+							</button>
+						</form>
+					</div>
+				</div>
+				<!-- 검색영역 끝 -->
+				
+				<% if(totalList == 0) { %>
+				<div class="list-no">
+					<p>
+						<img src="/anavada/resources/images/btnIcn/icn_big_listNo.png"
+							alt="" title="" />
+					</p>
+					<h1>목록이 없습니다.</h1>
+				</div>
 
-                <table>
+				<% }else { %>
+				<table>
                     <tbody>
+                    <% for(Notice n : list) { %>
                         <tr>
                             <td class="checkBox"><input type="checkbox"></td>
-                            <td class="number">6</td>
+                            <td class="number"><%= n.getNoNo() %></td>
                             <td class="title">
-                                <h2><span>공지</span>'Anavada'의 소식을 빠르게 확인할 수 있는 공간입니다.</h2>
+                                <h2><span>공지</span><%= n.getNoTitle() %></h2>
                                 <ul>
-                                    <li>작성자 : 관리자</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
+                                    <li>작성자 : <%= n.getNoId() %></li>
+                                    <li>작성일 : <%= n.getNoDate() %></li>
+                                    <li>조회수 : <%= n.getNoCount() %></li>
                                 </ul>
                             </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
+                            <% if(n.getNoOriginal() != null) { %>
+                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td><% } %>
                         </tr>
-                        <tr>
-                            <td class="checkBox"><input type="checkbox"></td>
-                            <td class="number">5</td>
-                            <td class="title">
-                                <h2><span>공지</span>'Anavada'의 소식을 빠르게 확인할 수 있는 공간입니다.</h2>
-                                <ul>
-                                    <li>작성자 : 관리자</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
-                        </tr>
-                        <tr>
-                            <td class="checkBox"><input type="checkbox"></td>
-                            <td class="number">4</td>
-                            <td class="title">
-                                <h2><span>공지</span>'Anavada'의 소식을 빠르게 확인할 수 있는 공간입니다.</h2>
-                                <ul>
-                                    <li>작성자 : 관리자</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
-                        </tr>
-                        <tr>
-                            <td class="checkBox"><input type="checkbox"></td>
-                            <td class="number">3</td>
-                            <td class="title">
-                                <h2><span>공지</span>'Anavada'의 소식을 빠르게 확인할 수 있는 공간입니다.</h2>
-                                <ul>
-                                    <li>작성자 : 관리자</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
-                        </tr>
-                        <tr>
-                            <td class="checkBox"><input type="checkbox"></td>
-                            <td class="number">2</td>
-                            <td class="title">
-                                <h2><span>공지</span>'Anavada'의 소식을 빠르게 확인할 수 있는 공간입니다.</h2>
-                                <ul>
-                                    <li>작성자 : 관리자</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
-                        </tr>
-                        <tr>
-                            <td class="checkBox"><input type="checkbox"></td>
-                            <td class="number">1</td>
-                            <td class="title">
-                                <h2><span>공지</span>'Anavada'의 소식을 빠르게 확인할 수 있는 공간입니다.</h2>
-                                <ul>
-                                    <li>작성자 : 관리자</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
-                        </tr>
+                     <% } %>
                     </tbody>
                 </table>
-
+				<% } %>
+				
                 <p class="warning_text">
                     *삭제한 게시글은 복구가 불가능 하오니 신중하게 선택하시기 바랍니다.
                 </p>
@@ -150,13 +102,21 @@
                 <!-- 페이징 -->
                 <dl class="list-paging">
                     <dd>
+                    	<% if(currentPage <= 1) { %>
                         <a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
-                        <a href="#none" class="active">1</a>
-                        <a href="#none">2</a>
-                        <a href="#none">3</a><!-- 활성화 class="active" -->
-                        <a href="#none">4</a>
-                        <a href="#none">5</a>
-                        <a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
+                        <% }else {%><a href="/anavada/anlist?page=1"><i class="glyphicon glyphicon-menu-left"></i></a><% } %>
+                        
+                        <% for(int p=startPage; p<=endPage; p++) {%>
+                        	<% if(p == currentPage) {%>
+                        	<a href="#none" class="active"><%= p %></a>
+                        	<% }else { %>
+                        	<a href="/anavada/anlist?page=<%= p %>"><%= p %></a>
+                        	<% } %>
+                        <% } %>
+                        
+                        <% if(currentPage < totalPage) { %>
+                        <a href="/anavada/anlist?page=<%= totalPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+                        <% }else {%><a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a><% } %>
                     </dd>
                 </dl>
                 <!-- //페이징 -->

@@ -33,8 +33,8 @@ public class AdminNoticeListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int currentPage = 1;
-		if(request.getAttribute("page") != null)
-			currentPage = (Integer)request.getAttribute("page");
+		if(request.getParameter("page") != null)
+			currentPage = Integer.parseInt(request.getParameter("page"));
 		
 		int countList = 6;
 		int countPage = 10;
@@ -55,11 +55,11 @@ public class AdminNoticeListServlet extends HttpServlet {
 		if(list.size() > -1) {
 			view = request.getRequestDispatcher("views/admin/notice/adminnotice_list.jsp");
 			request.setAttribute("list", list);
-//			request.setAttribute("currentPage", currentPage);
-//			request.setAttribute("totalPage", totalPage);
-//			request.setAttribute("totalList", totalList);
-//			request.setAttribute("startPage", startPage);
-//			request.setAttribute("endPage", endPage);
+			request.setAttribute("currentPage", currentPage);
+			request.setAttribute("totalPage", totalPage);
+			request.setAttribute("totalList", totalList);
+			request.setAttribute("startPage", startPage);
+			request.setAttribute("endPage", endPage);
 			view.forward(request, response);
 		}else {
 			view = request.getRequestDispatcher("views/common/error.jsp");
