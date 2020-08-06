@@ -25,7 +25,7 @@
             <li><a href="../notice/notice_list.jsp">공지사항</a></li>
             <li><a href="../notice/faq_list.jsp">FAQ</a></li>
             <li><a href="../notice/inquiry_list.jsp">문의하기</a></li>
-            <li><a href="../notice/declare_list.jsp">신고하기</a></li>
+            <li><a href="../notice/declare_list.jsp">신고자관리</a></li>
         </ul>
         
         <h2><p>홈페이지관리</p></h2>
