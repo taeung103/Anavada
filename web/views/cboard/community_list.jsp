@@ -10,6 +10,8 @@
 	int endPage = ((Integer) request.getAttribute("endPage")).intValue();
 	int maxPage = ((Integer) request.getAttribute("maxPage")).intValue();
 	int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
+	
+	String[] localArr = { "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구" };
 %>
 <!DOCTYPE html>
 <html>
@@ -52,7 +54,7 @@
 					</h4>
 					<a href="community_write.jsp" class="write_btn">글쓰기</a>
 					<div>
-						<form action="/anavada/clistview?page=1" method="post" style="display: inline-block;">
+						<form action="/anavada/clistview" method="get" style="display: inline-block;">
 							지역 분류 : 
 							<select name="local" class="LocationSelect" onchange="this.form.submit()">
 								<option value="0" selected="selected">지역선택</option>
@@ -105,7 +107,7 @@
 							<td class="number"><%=c.getCboardNo()%></td>
 							<td class="title">
 								<h2>
-									<span>종로구<%= local %></span><%=c.getCboardTitle()%>
+									<span><%= localArr[Integer.parseInt(c.getLocalNo()) - 1] %></span><%=c.getCboardTitle()%>
 								</h2>
 								<ul>
 									<li>작성자 : <%=c.getMemberId()%></li>
@@ -153,14 +155,15 @@
 			<dl class="list-paging pb80">
 				<dd>
 					<%
-						if (startPage - 1 <= 0) {
+						if (currentPage  <= 1) {
 					%>
 					<a><i class="glyphicon glyphicon-menu-left"></i></a>
 					<%
 						} else {
 					%>
-					<a href="/anavada/clistview?page=<%=startPage - 10%>&local=<%=local%>"><i
-						class="glyphicon glyphicon-menu-left"></i></a>
+					<a href="/anavada/clistview?page=<%=currentPage - 1%>&local=<%=local == null ? "0" : "0"%>">
+						<i class="glyphicon glyphicon-menu-left"></i>
+					</a>
 					<%
 						}
 					%>
@@ -170,11 +173,11 @@
 					<%
 						if (currentPage == p) {
 					%>
-					<a href="/anavada/clistview?page=<%=p%>&local=<%=local%>" class="active"><%= p %></a>
+					<a href="/anavada/clistview?page=<%=p%>&local=<%=local == null ? "0" : "0"%>" class="active"><%= p %></a>
 					<%
 						} else {
 					%>
-					<a href="/anavada/clistview?page=<%=p%>&local=<%=local%>"><%=p%></a>
+					<a href="/anavada/clistview?page=<%=p%>&local=<%=local == null ? "0" : "0"%>"><%=p%></a>
 					<%
 						}
 					%>
@@ -182,13 +185,13 @@
 						}
 					%>
 					<%
-						if (endPage + 1 > maxPage) {
+						if (currentPage >= maxPage) {
 					%>
 					<a><i class="glyphicon glyphicon-menu-right"></i></a>
 					<%
 						} else {
 					%>
-					<a href="/anavada/clistview?page=<%=endPage + 1%><%=local%>"><i class="glyphicon glyphicon-menu-right"></i></a>
+					<a href="/anavada/clistview?page=<%=currentPage + 1%>&local=<%=local == null ? "0" : "0"%>"><i class="glyphicon glyphicon-menu-right"></i></a>
 					<%
 						}
 					%>

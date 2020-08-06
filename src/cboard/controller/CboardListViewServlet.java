@@ -49,8 +49,11 @@ public class CboardListViewServlet extends HttpServlet {
 		if (maxPage < endPage) {
 			endPage = maxPage;
 		}
-		System.out.println(request.getParameter("local"));
-		
+		System.out.println("page: " + request.getParameter("page"));
+		System.out.println("currentpage: " + currentPage);
+		System.out.println("startpage: " + startPage);
+		System.out.println("endpage: " + endPage);
+		System.out.println("maxpage: " + maxPage);
 		RequestDispatcher view = null;
 		if (list.size() > 0) {
 			view = request.getRequestDispatcher("views/cboard/community_list.jsp");
