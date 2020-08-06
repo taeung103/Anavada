@@ -12,7 +12,7 @@
                     <a href="/anavada/nlist">고객센터</a>
                     <div class="subGnb">
                         <a href="/anavada/nlist">공지사항</a>
-                        <a href="../notice/faq_list.jsp">FAQ</a>
+                        <a href="/anavada/views/notice/faq_list.jsp">FAQ</a>
                         <a href="../inquiry/inquiry_list.jsp">문의하기</a>
                         <a href="../declare/declare_list.jsp">신고하기</a>
                     </div>
