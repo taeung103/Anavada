@@ -19,6 +19,7 @@
       location.href = "/anavada/views/jboard/product_write.jsp";
    }
 </script>
+
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
@@ -53,32 +54,32 @@
                     <div>
                         <form action="" method="" id="">
                             지역선택 : <select name="" class="LocationSelect">
-                                    <option value="지역선택" selected="selected">지역선택</option>
-                                    <option value="강남구">강남구</option>
-                                    <option value="강동구">강동구</option>
-                                    <option value="강북구">강북구</option>
-                                    <option value="강서구">강서구</option>
-                                    <option value="관악구">관악구</option>
-                                    <option value="광진구">광진구</option>
-                                    <option value="구로구">구로구</option>
-                                    <option value="금천구">금천구</option>
-                                    <option value="노원구">노원구</option>
-                                    <option value="도봉구">도봉구</option>
-                                    <option value="동대문구">동대문구</option>
-                                    <option value="동작구">동작구</option>
-                                    <option value="마포구">마포구</option>
-                                    <option value="서대문구">서대문구</option>
-                                    <option value="서초구">서초구</option>
-                                    <option value="성동구">성동구</option>
-                                    <option value="성북구">성북구</option>
-                                    <option value="송파구">송파구</option>
-                                    <option value="양천구">양천구</option>
-                                    <option value="영등포구">영등포구</option>
-                                    <option value="용산구">용산구</option>
-                                    <option value="은평구">은평구</option>
-                                    <option value="종로구">종로구</option>
-                                    <option value="중구">중구</option>
-                                    <option value="구로구">중랑구</option>
+                                    <option value="0" selected="selected">전체보기</option>
+                                    <option value="1">강남구</option>
+                                    <option value="2">강동구</option>
+                                    <option value="3">강북구</option>
+                                    <option value="4">강서구</option>
+                                    <option value="5">관악구</option>
+                                    <option value="6">광진구</option>
+                                    <option value="7">구로구</option>
+                                    <option value="8">금천구</option>
+                                    <option value="9">노원구</option>
+                                    <option value="10">도봉구</option>
+                                    <option value="11">동대문구</option>
+                                    <option value="12">동작구</option>
+                                    <option value="13">마포구</option>
+                                    <option value="14">서대문구</option>
+                                    <option value="15">서초구</option>
+                                    <option value="16">성동구</option>
+                                    <option value="17">성북구</option>
+                                    <option value="18">송파구</option>
+                                    <option value="19">양천구</option>
+                                    <option value="20">영등포구</option>
+                                    <option value="21">용산구</option>
+                                    <option value="22">은평구</option>
+                                    <option value="23">종로구</option>
+                                    <option value="24">중구</option>
+                                    <option value="25">중랑구</option>
                             </select>
                             목록 분류 : <select name="" class="ListSelect">
                                     <option value="최신등록순" selected="selected">최신등록순</option>
@@ -109,7 +110,7 @@
                     <h1>목록이 없습니다.</h1>
                 </div>
                 <div class="write-btn">
-                    <button onclick="showWriteForm();" class="write_btn">글쓰기</button>
+                    <a><button onclick="showWriteForm();" class="write_btn">글쓰기</button></a>
                 </div>
 
             </div>
@@ -117,14 +118,14 @@
             <dl class="list-paging pb80">
                 <dd>
                 	<% if (currentPage <= 1){ %>
-              		<i class= "glyphicon glyphicon-backward"></i>
+              		<a><i class= "glyphicon glyphicon-backward"></i></a>
               		<%}else {%>
               		<a href="/anavada/jblist?page=1"><i class= "glyphicon glyphicon-backward"></i></a>
               		<%} %>
               		<% if ((currentPage - 10) < startPage && (currentPage - 10) > 10){ %>
                     <a href="/anavada/jblist?page=<%= startPage- 10%>"><i class="glyphicon glyphicon-menu-left"></i></a>
 					<% }else{ %>
-					<i class="glyphicon glyphicon-menu-left"></i>
+					<a><i class="glyphicon glyphicon-menu-left"></i></a>
 					<%} %>
 					<!-- 현재 페이지가 속한 페이지 그룹의 숫자 출력처리 -->
 					<% for (int p = startPage; p <= endPage; p++){
@@ -137,13 +138,13 @@
                     <% if ((currentPage + 10) > endPage && (currentPage + 10) < maxPage){ %>
                     <a href="/anavada/jblist?page=<%= endPage + 10 %>"><i class="glyphicon glyphicon-menu-right"></i></a>
                     <%}else{ %>
-                    <i class="glyphicon glyphicon-menu-right"></i>
+                    <a><i class="glyphicon glyphicon-menu-right"></i></a>
                     <%} %>
                     
                     <% if (currentPage >= maxPage){ %>
-                    <i class="glyphicon glyphicon-forward"></i>
+                    <a><i class="glyphicon glyphicon-forward"></i></a>
                     <%}else{ %>
-                    <a href="/anavada/jblist?page= <%= maxPage %>"><i class="glyphicon glyphicon-forward"></i> </a>
+                    <a href="/anavada/jblist?page=<%=maxPage%>"><i class="glyphicon glyphicon-forward"></i> </a>
                     <%} %>
                 </dd>
             </dl>

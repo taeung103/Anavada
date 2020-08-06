@@ -45,7 +45,9 @@ public class JboardListViewServlet extends HttpServlet {
 				int listCount = jbservice.getListCount();
 				
 				ArrayList<Jboard> list = jbservice.selectList(currentPage, limit);
-				
+				for (Jboard jboard : list) {
+					System.out.println(jboard);
+				}
 				int maxPage = (int)((double)listCount / limit + 0.9);
 				int startPage = (((int)((double)currentPage / limit + 0.9)) - 1) * limit + 1;
 				int endPage = startPage + limit -1;
