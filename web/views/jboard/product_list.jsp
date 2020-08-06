@@ -10,6 +10,11 @@
    int maxPage = ((Integer) request.getAttribute("maxPage")).intValue();
    int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
 %>
+<% 
+String local = request.getParameter("local"); 
+%>
+<%if(local == null) { local=String.valueOf(0);}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,9 +57,11 @@
                     <h4>전체 <%=listCount%>개</h4>
                     <button onclick="showWriteForm();" class="write_btn">글쓰기</button>
                     <div>
-                        <form action="" method="" id="">
-                            지역선택 : <select name="" class="LocationSelect">
-                                    <option value="0" selected="selected">전체보기</option>
+                        <form action="/anavada/jblist" method="post" id="">
+                        <input type="hidden" name="local" value="<%= local %>"/>
+                            지역선택 : <select name="local" class="LocationSelect"  onchange=this.form.submit()>
+                            	
+                                    <option value="0"  >전체보기</option>
                                     <option value="1">강남구</option>
                                     <option value="2">강동구</option>
                                     <option value="3">강북구</option>
@@ -90,6 +97,7 @@
                             
                             <input type="text" placeholder="검색어를 입력해주세요.">
                             <button class="top-search"><i class="xi-search"></i></button>
+                            
                         </form>
                     </div>
                 </div>
@@ -99,15 +107,15 @@
                     <li onclick="location.href='product_view.jsp'">
                         <div><img src="/anavada/resources/images/test/testImg.jpg"/></div>
                         <h2><%= j.getJboardTitle()%></h2>
-                        <h3><%=j.getJboardPrice() %><span> 원</span></h3>
+                        <h3><%=j.getJboardPrice() %><span> 원 <%=j.getLocalNo() %></span></h3>
+                       
                         <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%=j.getJboardLike() %></span></i></p>
                     </li>
                     <%} %>
                   
                 </ul>
                 <div class="list-no">
-                    <p><img src="/anavada/resources/images/btnIcn/icn_big_listNo.png" alt="" title=""></p>
-                    <h1>목록이 없습니다.</h1>
+
                 </div>
                 <div class="write-btn">
                     <a><button onclick="showWriteForm();" class="write_btn">글쓰기</button></a>
@@ -122,29 +130,25 @@
               		<%}else {%>
               		<a href="/anavada/jblist?page=1"><i class= "glyphicon glyphicon-backward"></i></a>
               		<%} %>
-              		<% if ((currentPage - 10) < startPage && (currentPage - 10) > 10){ %>
-                    <a href="/anavada/jblist?page=<%= startPage- 10%>"><i class="glyphicon glyphicon-menu-left"></i></a>
-					<% }else{ %>
-					<a><i class="glyphicon glyphicon-menu-left"></i></a>
+              		<% if (startPage -1 >=10 ){ %>
+                    <a href="/anavada/jblist?page=<%= startPage- 10%>&local=<%=local%>"><i class="glyphicon glyphicon-menu-left"></i></a>
 					<%} %>
 					<!-- 현재 페이지가 속한 페이지 그룹의 숫자 출력처리 -->
 					<% for (int p = startPage; p <= endPage; p++){
 						if (p == currentPage){%>
                     <a href="#none" class="active"><%=p %></a>
                     <%} else {%>
-                    <a href="/anavada/jblist?page=<%=p%>"><%=p %></a>
+                    <a href="/anavada/jblist?page=<%=p%>&local=<%=local%>"><%=p %></a>
                     <%}} %>
                     <!--  다음 그룹으로 이동처리 -->
-                    <% if ((currentPage + 10) > endPage && (currentPage + 10) < maxPage){ %>
-                    <a href="/anavada/jblist?page=<%= endPage + 10 %>"><i class="glyphicon glyphicon-menu-right"></i></a>
-                    <%}else{ %>
-                    <a><i class="glyphicon glyphicon-menu-right"></i></a>
+                    <% if (endPage +10 <= maxPage){ %>
+                    <a href="/anavada/jblist?page=<%= endPage + 10 %>&local=<%=local%>"><i class="glyphicon glyphicon-menu-right"></i></a>
                     <%} %>
                     
                     <% if (currentPage >= maxPage){ %>
                     <a><i class="glyphicon glyphicon-forward"></i></a>
                     <%}else{ %>
-                    <a href="/anavada/jblist?page=<%=maxPage%>"><i class="glyphicon glyphicon-forward"></i> </a>
+                    <a href="/anavada/jblist?page=<%=maxPage%>&local=<%=local%>"><i class="glyphicon glyphicon-forward"></i> </a>
                     <%} %>
                 </dd>
             </dl>

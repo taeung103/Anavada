@@ -32,22 +32,23 @@ public class JboardListViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+				
+				String local = request.getParameter("local");
 				int currentPage = 1;
 				if (request.getParameter("page") != null) {
 						currentPage = Integer.parseInt(request.getParameter("page"));
 				}
-				
+
 				int limit = 10;
-				
+				System.out.println(local);
 				JboardService jbservice = new JboardService();
 				
 				int listCount = jbservice.getListCount();
 				
-				ArrayList<Jboard> list = jbservice.selectList(currentPage, limit);
+				ArrayList<Jboard> list = jbservice.selectList(currentPage, limit, local);
 				for (Jboard jboard : list) {
-					System.out.println(jboard);
 				}
+						
 				int maxPage = (int)((double)listCount / limit + 0.9);
 				int startPage = (((int)((double)currentPage / limit + 0.9)) - 1) * limit + 1;
 				int endPage = startPage + limit -1;
@@ -63,6 +64,7 @@ public class JboardListViewServlet extends HttpServlet {
 						request.setAttribute("startPage", startPage);
 						request.setAttribute("endPage", endPage);
 						request.setAttribute("listCount", listCount);
+						request.setAttribute("local" , local);
 						view.forward(request, response);
 						
 				}else {
