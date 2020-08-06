@@ -1,6 +1,7 @@
 package member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,7 +17,7 @@ import member.model.vo.Member;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/login")
+@WebServlet("/login.cp")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -42,16 +43,14 @@ public class LoginServlet extends HttpServlet {
 		if(loginMember != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginMember", loginMember);
-			
 			response.sendRedirect("index.jsp");
 		} else {
-			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("message", "로그인 실패 또는 로그인 제한 상태입니다.");
-			view.forward(request, response);
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println("<script>alert('아이디 또는 비밀번호가 일치하지 않습니다.\\n다시 입력해주세요.'); location.href=document.referrer;</script>");
+			writer.close();
 		}
 		
-		
-		// (샘플코드임) response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

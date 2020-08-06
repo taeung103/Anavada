@@ -36,9 +36,9 @@
                         <li class="on">회원가입 완료</li>
                     </ul>
                     <div>
-                        <h1>“<span><%= loginMember.getMemberName() %></span>”님 회원가입을 진심으로 축하합니다.</h1>
+                        <h1>“<span></span>”님 회원가입을 진심으로 축하합니다.</h1>
                         <div>
-				            <%= loginMember.getMemberName() %>님의 비밀번호는 암호화되어 저장되며, 아이디/비밀번호 분실시에는<br/>
+				            님의 비밀번호는 암호화되어 저장되며, 아이디/비밀번호 분실시에는<br/>
 				                            회원가입 시 입력하신 이메일 주소를 이용하여 찾을 수 있습니다.
                         </div>
                     </div>

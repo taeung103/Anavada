@@ -15,7 +15,7 @@ import member.model.vo.Member;
 /**
  * Servlet implementation class JoinServlet
  */
-@WebServlet("/join")
+@WebServlet("/join.cp")
 public class JoinServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,6 +32,8 @@ public class JoinServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		request.setCharacterEncoding("utf-8");
+		
 		//암호화처리 회원가입
 		Member member = new Member();
 		member.setMemberId(request.getParameter("memberId"));
@@ -39,8 +41,12 @@ public class JoinServlet extends HttpServlet {
 		member.setMemberName(request.getParameter("memberName"));
 		member.setMemberEmail(request.getParameter("memberEmail"));
 		member.setMemberPhone(request.getParameter("memberPhone"));
-	
+
+		member.setMemberName(String.join(",", request.getParameterValues("memberName")));
+		
 		int result = new MemberService().insertMember(member);
+
+		System.out.println(result);
 		if(result > 0) {
 			response.sendRedirect("/anavada/views/member/join_complete.jsp");
 		} else {

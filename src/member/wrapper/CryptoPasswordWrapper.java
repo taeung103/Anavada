@@ -15,8 +15,8 @@ public class CryptoPasswordWrapper extends HttpServletRequestWrapper { // HttpSe
 	@Override
 	public String getParameter(String name) {
 		String value = null;
-		// userpwd의 값만 암호화 처리한다.
-		if(name != null && name.equals("userpwd")) {
+		// userpwd의 값만 암호화 처리
+		if(name != null && name.equals("memberPwd")) {
 			value = getSha512(super.getParameter(name));
 		}else {
 			// userpwd 가 아닌 값들은 그대로 둠
