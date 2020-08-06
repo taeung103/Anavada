@@ -10,6 +10,7 @@
    int maxPage = ((Integer) request.getAttribute("maxPage")).intValue();
    int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
 %>
+
 <% 
 String local = request.getParameter("local"); 
 %>
@@ -58,7 +59,7 @@ String local = request.getParameter("local");
                     <button onclick="showWriteForm();" class="write_btn">글쓰기</button>
                     <div>
                         <form action="/anavada/jblist" method="post" id="">
-                        <input type="hidden" name="local" value="<%= local %>"/>
+                        
                             지역선택 : <select name="local" class="LocationSelect"  onchange=this.form.submit()>
                             	
                                     <option value="0"  >전체보기</option>
