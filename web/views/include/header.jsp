@@ -6,7 +6,7 @@
     	<dt><h1><a href="/anavada/" title="Anavada">Anavada</a></h1></dt>
         <dd>
             <ul class="gnb clearfix">
-                <li><a href="../jboard/product_list.jsp">중고거래</a></li>
+                <li><a href="/anavada/jblist">중고거래</a></li>
                 <li><a href="/anavada/clistview">커뮤니티</a></li>
                 <li><a href="../fboard/areaEvent_list.jsp">지역축제</a></li>
                 <li>

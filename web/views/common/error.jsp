@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>anavada error page</title>
 </head>
 <body>
 에러다 이생퀴야

@@ -2,6 +2,7 @@ package jboard.model.service;
 
 import static common.JDBCTemp.*;
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import jboard.model.dao.JboardDao;
 import jboard.model.vo.Jboard;
@@ -21,6 +22,24 @@ public class JboardService {
 			close(conn);
 			return result;
 		}
+
+
+
+		public ArrayList<Jboard> selectList(int currentPage, int limit) {
+			Connection conn = getConnection();
+			ArrayList<Jboard> list = bdao.selectList(conn, currentPage, limit);
+			close(conn);
+			return list;
+		}
+
+		public int getListCount() {
+			Connection conn = getConnection();
+			int listCount = bdao.getListCount(conn);
+			close(conn);
+					
+			return listCount;
+		}
+
 		
 	}
 

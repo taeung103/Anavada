@@ -1,80 +1,69 @@
 package common;
 
-import java.io.*;
 import java.sql.*;
 import java.util.*;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
+import java.io.*;
+
 public class JDBCTemp {
-	
 	public static Connection getConnection() {
 		Connection conn = null;
-		Properties prop = new Properties();
 		
 		try {
-			String currentPath = JDBCTemp.class.getResource("./").getPath();
-			prop.load(new FileReader(currentPath + "jdbc.properties"));
-			
-			String driver = prop.getProperty("driver");
-			String url = prop.getProperty("url");
-			String user = prop.getProperty("user");
-			String passwd = prop.getProperty("passwd");
-						
-			Class.forName(driver);
-			conn = DriverManager.getConnection(url, user, passwd);
-			conn.setAutoCommit(false);
-			
+				Context initContext = new InitialContext();
+				DataSource ds = (DataSource)initContext.lookup("java:comp/env/jdbc/oraDB"); //context.xml 참조해서 입력
+				conn = ds.getConnection();
+				conn.setAutoCommit(false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		return conn;
 	}
-
 	public static void close(Connection conn) {
 		try {
-			if (conn != null && !conn.isClosed()) {
+			if(conn != null && !conn.isClosed())
 				conn.close();
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public static void close(Statement stmt) {
 		try {
-			if (stmt != null && !stmt.isClosed()) {
+			if(stmt != null && !stmt.isClosed())
 				stmt.close();
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public static void close(ResultSet rset) {
 		try {
-			if (rset != null && !rset.isClosed()) {
+			if(rset != null && !rset.isClosed())
 				rset.close();
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public static void commit(Connection conn) {
 		try {
-			if (conn != null && !conn.isClosed()) {
+			if(conn != null && !conn.isClosed())
 				conn.commit();
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public static void rollback(Connection conn) {
 		try {
-			if (conn != null && !conn.isClosed()) {
+			if(conn != null && !conn.isClosed())
 				conn.rollback();
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
