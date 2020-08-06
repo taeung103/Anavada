@@ -38,6 +38,11 @@ public class NoticeDetailServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("page"));
 		String selected = null;
 		String keyword = null;
+		if(request.getParameter("selected") != null && request.getParameter("keyword") != null) {
+			selected = request.getParameter("selected");
+			keyword = request.getParameter("keyword");
+		}
+		
 		
 		NoticeService nservice = new NoticeService();
 		
@@ -50,10 +55,8 @@ public class NoticeDetailServlet extends HttpServlet {
 			view = request.getRequestDispatcher("views/notice/notice_view.jsp");
 			request.setAttribute("notice", notice);
 			request.setAttribute("currentPage", currentPage);
-			if(request.getParameter("selected") != null && request.getParameter("keyword") != null) {
-				request.setAttribute("selected", selected);
-				request.setAttribute("keyword", keyword);
-			}
+			request.setAttribute("selected", selected);
+			request.setAttribute("keyword", keyword);
 			view.forward(request, response);
 		}else {
 			view = request.getRequestDispatcher("views/common/error.jsp");

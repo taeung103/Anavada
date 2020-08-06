@@ -5,9 +5,9 @@
 	int currentPage = (Integer)request.getAttribute("currentPage");
 	String selected = null;
 	String keyword = null;
-	if(request.getParameter("selected") != null && request.getParameter("keyword") != null) {
-		request.setAttribute("selected", selected);
-		request.setAttribute("keyword", keyword);
+	if(request.getAttribute("selected") != null && request.getAttribute("keyword") != null) {
+		selected = (String)request.getAttribute("selected");
+		keyword = (String)request.getAttribute("keyword");
 	}
 %>
 <!DOCTYPE html>
@@ -61,9 +61,9 @@
                     <a href="/anavada/nsearch?page=<%= currentPage %>&selected=<%= selected %>&keyword=<%= keyword %>" class="btn btn-list">목록</a>
                     <a href="/anavada/ndetail?no=<%= notice.getNoNo()+1 %>" class="btn btn-next">다음글</a>
                     <% }else { %>
-                    <a href="/anavada/" class="btn btn-prev">이전글</a>
+                    <a href="" class="btn btn-prev">이전글</a>
                     <a href="/anavada/nlist?page=<%= currentPage %>" class="btn btn-list">목록</a>
-                    <a href="/anavada/ndetail?no=<%= notice.getNoNo()+1 %>" class="btn btn-next">다음글</a>
+                    <a href="" class="btn btn-next">다음글</a>
                     <% } %>
                     
                 </div>

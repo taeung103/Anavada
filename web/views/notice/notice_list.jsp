@@ -127,33 +127,43 @@
             <!-- 페이지넘버 -->
             <dl class="list-paging pb80">
                 <dd>
+                <% if(selected == null && keyword == null) { %>
                 	<% if(currentPage <= 1) { %>
                     <a><i class="glyphicon glyphicon-menu-left"></i></a>
                     <% }else { %>
-                    	<% if(selected == null && keyword == null) { %>
                     	<a href="/anavada/nlist?page=1"><i class="glyphicon glyphicon-menu-left"></i></a>
-                    	<% }else { %>
-                    	<a href="/anavada/nsearch?page=1&selected=<%= selected %>&keyword=<%= keyword %>"><i class="glyphicon glyphicon-menu-left"></i></a>
-                    <%} }%>
+                    <% } %>
                     
                     <% for(int p = startPage; p <= endPage; p++) {
                     	if(p==currentPage) {%>
                     <a class="active"><%= p %></a>
                     <% }else { %>
-                    <% if(selected == null && keyword == null) {%>
                     <a href="/anavada/nlist?page=<%= p %>"><%= p %></a>
-                    <% }else { %>
-                    <a href="/anavada/nsearch?page=<%= p %>&selected=<%= selected %>&keyword=<%= keyword %>"><%= p %></a>
-                    <% } } } %>
+                    <% } } %>
                     
                     <% if(currentPage < maxPage) { %>
-                    	<% if(selected == null && keyword == null) { %>
                     	<a href="nlist?page=<%= maxPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
-                    	<% }else { %>
-                    	<a href="/anavada/nsearch?page=<%= maxPage %>&selected=<%= selected %>&keyword=<%= keyword %>"><i class="glyphicon glyphicon-menu-right"></i></a>
-                    <%} }else { %>
+                    <%}else { %>
                     <a><i class="glyphicon glyphicon-menu-right"></i></a>
+                 <% } }else { %>
+                	<% if(currentPage <= 1) { %>
+                    <a><i class="glyphicon glyphicon-menu-left"></i></a>
+                    <% }else { %>
+                    	<a href="/anavada/nsearch?page=1&selected=<%= selected %>&keyword=<%= keyword %>"><i class="glyphicon glyphicon-menu-left"></i></a>
                     <% } %>
+                    
+                    <% for(int p = startPage; p <= endPage; p++) {
+                    	if(p==currentPage) {%>
+                    <a class="active"><%= p %></a>
+                    <% }else { %>
+                    <a href="/anavada/nsearch?page=<%= p %>&selected=<%= selected %>&keyword=<%= keyword %>"><%= p %></a>
+                    <% } } %>
+                    
+                    <% if(currentPage < maxPage) { %>
+                    	<a href="/anavada/nsearch?page=<%= maxPage %>&selected=<%= selected %>&keyword=<%= keyword %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+                    <%} else { %>
+                    <a><i class="glyphicon glyphicon-menu-right"></i></a>
+                    <% } } %>
                 </dd>
             </dl>
             <!-- 페이지넘버 끝 -->
