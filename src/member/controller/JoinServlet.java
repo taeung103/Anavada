@@ -46,9 +46,8 @@ public class JoinServlet extends HttpServlet {
 		
 		int result = new MemberService().insertMember(member);
 
-		System.out.println(result);
 		if(result > 0) {
-			response.sendRedirect("/anavada/views/member/join_complete.jsp");
+			response.sendRedirect("views/member/join_complete.jsp");
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();

@@ -1147,7 +1147,8 @@
     display: inline-block;
     border: 1px solid #FF8A3D;
     line-height: 30px;
-    padding: 0 30px;
+    padding: 0;
+    width: 120px;
     font-size: 15px;
     border-radius: 5px;
     color: #FF8A3D;
@@ -1163,9 +1164,31 @@
 .write-btn .btn-list {
     color: #FF8A3D;
 }
-.btn-area {
-    width:1100px;
-    margin:0 auto;
-    padding:30px 0 80px 0;
-    text-align:center;
+.write-btn > input {
+    display: inline-block;
+    border: 1px solid #FF8A3D;
+    line-height: 30px;
+    padding: 0;
+    width: 120px;
+    font-size: 15px;
+    border-radius: 5px;
+    color: #FF8A3D;
+    margin: 0 15px;
+    background-color:#fff;
+    vertical-align: inherit;
+}
+.write-btn > input.btn-success {
+    color: #fff;
+    background-color:#FF8A3D;
+}
+.write-btn > input:hover {
+    color: #fff;
+    background-color: #FF8A3D;
+}
+.write-btn > input.btn-list {
+    color: #FF8A3D;
+}
+.write-btn > input.btn-list:hover {
+    color: #fff;
+    background-color: #FF8A3D;
 }

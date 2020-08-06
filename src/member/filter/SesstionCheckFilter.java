@@ -56,10 +56,6 @@ public class SesstionCheckFilter implements Filter {
 			chain.doFilter(request, response);
 		}
 		
-		// place your code here
-
-		// pass the request along the filter chain
-		chain.doFilter(request, response);
 	}
 
 	/**
