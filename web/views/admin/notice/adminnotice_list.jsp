@@ -7,12 +7,30 @@
 	int startPage = (Integer)request.getAttribute("startPage");
 	int endPage = (Integer)request.getAttribute("endPage");
 	int totalList = (Integer)request.getAttribute("totalList");
-	System.out.println(currentPage+"--------");
 %>
 <!DOCTYPE html>
 <html>
 <head>
     <%@ include file="../include/admin_head.jsp" %> 
+<script type="text/javascript" src="/anavada/resources/js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+function deleteAction(){
+	var checkRow = "";
+	$("input[name='checkDel']:checked").each(function(){
+		checkRow = checkRow + $(this).val()+",";
+	});
+	checkRow = checkRow.substring(0, checkRow.lastIndexOf(","));
+	
+	if(checkRow == ""){
+		alert("삭제할 대상을 선택하세요.");
+		return false;
+	}
+	console.log("### checkRow => {}"+checkRow);
+	
+	location.href = "/anavada/andelete?checkRow="+checkRow;
+}
+
+</script>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
@@ -69,7 +87,7 @@
                     <tbody>
                     <% for(Notice n : list) { %>
                         <tr>
-                            <td class="checkBox"><input type="checkbox"></td>
+                            <td class="checkBox"><input type="checkbox" name="checkDel" value="<%= n.getNoNo() %>"></td>
                             <td class="number"><%= n.getNoNo() %></td>
                             <td class="title">
                                 <h2><span>공지</span><%= n.getNoTitle() %></h2>
@@ -94,7 +112,7 @@
 
                 <!-- 버튼 -->
                 <div class="btn_wrap">
-                    <a href="#" class="btn-left btn_gray">선택삭제</a>
+                    <a onclick="deleteAction();" class="btn-left btn_gray">선택삭제</a>
                     <a href="notice_write.php" class="btn-right btn_white">등록</a>
                 </div>
                 <!-- //버튼 -->
