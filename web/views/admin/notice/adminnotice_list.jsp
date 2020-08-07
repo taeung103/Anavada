@@ -14,6 +14,14 @@
     <%@ include file="../include/admin_head.jsp" %> 
 <script type="text/javascript" src="/anavada/resources/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
+function checkAll(){
+	if($("input[name=checkAll]").is(":checked")){
+		$("input[name=checkDel]").prop("checked", true);
+	}else{
+		$("input[name=checkDel]").prop("checked", false);
+	}
+}
+
 function deleteAction(){
 	var checkRow = "";
 	$("input[name='checkDel']:checked").each(function(){
@@ -25,9 +33,10 @@ function deleteAction(){
 		alert("삭제할 대상을 선택하세요.");
 		return false;
 	}
-	console.log("### checkRow => {}"+checkRow);
+	console.log("### checkRow => {"+checkRow+"}");
 	
-	location.href = "/anavada/andelete?checkRow="+checkRow;
+	if(confirm("삭제 하시겠습니까?"))
+		location.href = "/anavada/andelete?checkRow="+checkRow;
 }
 
 </script>
@@ -74,13 +83,14 @@ function deleteAction(){
 				<!-- 검색영역 끝 -->
 				
 				<% if(totalList == 0) { %>
-				<div class="list-no">
+				<br><br>
+				<div class="list-no" align="center">
 					<p>
 						<img src="/anavada/resources/images/btnIcn/icn_big_listNo.png"
 							alt="" title="" />
 					</p>
 					<h1>목록이 없습니다.</h1>
-				</div>
+				</div><br><br>
 
 				<% }else { %>
 				<table>
@@ -109,7 +119,8 @@ function deleteAction(){
                     *삭제한 게시글은 복구가 불가능 하오니 신중하게 선택하시기 바랍니다.
                 </p>
                 <!-- //게시판 -->
-
+                
+					<input type="checkBox" name="checkAll" onclick="checkAll();" class="checkBox"> 전체 선택
                 <!-- 버튼 -->
                 <div class="btn_wrap">
                     <a onclick="deleteAction();" class="btn-left btn_gray">선택삭제</a>

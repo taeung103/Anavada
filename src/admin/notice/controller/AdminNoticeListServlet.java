@@ -60,10 +60,6 @@ public class AdminNoticeListServlet extends HttpServlet {
 			request.setAttribute("startPage", startPage);
 			request.setAttribute("endPage", endPage);
 			view.forward(request, response);
-		}else {
-			view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("message", "관리자용 공지사항 목록 조회 실패");
-			view.forward(request, response);
 		}
 		
 	}

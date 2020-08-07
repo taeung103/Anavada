@@ -237,6 +237,25 @@ public class NoticeDao {
 		}
 		return notice;
 	}
+
+	public int deleteNotice(Connection conn, int checkRow) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "delete from notice where no_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, checkRow);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	
 }

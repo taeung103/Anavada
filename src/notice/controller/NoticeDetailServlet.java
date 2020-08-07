@@ -58,11 +58,6 @@ public class NoticeDetailServlet extends HttpServlet {
 			request.setAttribute("selected", selected);
 			request.setAttribute("keyword", keyword);
 			view.forward(request, response);
-		}else {
-			view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("message", "공지사항 상세보기 실패");
-			view.forward(request, response);
-
 		}
 	}
 

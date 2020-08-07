@@ -1,11 +1,15 @@
 package admin.notice.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import notice.model.service.NoticeService;
 
 /**
  * Servlet implementation class AdminNoticeDeleteServlet
@@ -26,7 +30,19 @@ public class AdminNoticeDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(request.getParameter("checkRow"));
+		
+		String[] checkRow = request.getParameter("checkRow").split(",");
+		System.out.println(request.getParameter("checkRow")+", "+checkRow.length);
+		int result = 0;
+		NoticeService nservice = new NoticeService();
+		for(int i=0; i< checkRow.length; i++) {
+			System.out.print("for : "+ checkRow[i]);System.out.println();
+			result += nservice.deleteNotice(Integer.parseInt(checkRow[i]));
+		}
+		System.out.print("if : "+checkRow.length+","+result);System.out.println();
+		if(checkRow.length == result)
+			response.sendRedirect("anlist");
+		
 	}
 
 	/**
