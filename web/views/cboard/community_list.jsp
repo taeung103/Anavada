@@ -54,7 +54,7 @@
 						전체 게시글
 						<%=listCount%>개
 					</h4>
-					<a href="community_write.jsp" class="write_btn">글쓰기</a>
+					<a href="/anavada/cinsert.ss" class="write_btn">글쓰기</a>
 					<div>
 						<form action="/anavada/clistview" method="get" style="display: inline-block;">
 							지역 분류 : 
@@ -145,7 +145,7 @@
 
 
 				<div class="write-btn">
-					<a href="community_write.jsp">글쓰기</a>
+					<a href="/anavada/cinsert.ss">글쓰기</a>
 				</div>
 
 			</div>
