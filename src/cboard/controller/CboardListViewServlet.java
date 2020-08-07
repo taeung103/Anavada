@@ -43,6 +43,8 @@ public class CboardListViewServlet extends HttpServlet {
 		int limit = 10;
 		CboardService cservice = new CboardService();
 		int listCount = cservice.getListCount(local, search, keyword);
+		int allListCount = cservice.getAllListCount();
+		
 		ArrayList<Cboard> list = cservice.selectAll(currentPage, limit, local, search, keyword);
 		
 		int maxPage = (int)((double)listCount / limit + 0.9);
@@ -52,16 +54,7 @@ public class CboardListViewServlet extends HttpServlet {
 		if (maxPage < endPage) {
 			endPage = maxPage;
 		}
-		// 콘솔 테스트
-		System.out.println("page: " + request.getParameter("page"));
-		System.out.println("local: " + local);
-		System.out.println("currentpage: " + currentPage);
-		System.out.println("startpage: " + startPage);
-		System.out.println("endpage: " + endPage);
-		System.out.println("maxpage: " + maxPage);
-		System.out.println("search: " + search);
-		System.out.println("keyword: " + keyword);
-		// 콘솔테스트
+		
 		RequestDispatcher view = null;
 		if (list.size() > 0) {
 			view = request.getRequestDispatcher("views/cboard/community_list.jsp");
