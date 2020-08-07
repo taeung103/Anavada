@@ -35,12 +35,13 @@ public class JboardListViewServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		//뷰로 내보내는 값에 한글이 있다면 인코딩 처리함
 		response.setContentType("text/html; charset=UTF-8");
-				
 				String titleSearch = request.getParameter("titlesearch");
 				String listSearch = request.getParameter("listsearch");
 				
 				String local = request.getParameter("local");
-				
+				if (local == null) {
+					local ="0";
+				}
 				if (listSearch== null) {
 					listSearch = "latestposts";
 				}
@@ -51,12 +52,9 @@ public class JboardListViewServlet extends HttpServlet {
 				}
 				
 				int limit = 10;
-				System.out.println("로컬값" +local);
-				System.out.println("리스트서치 값 " +listSearch);
-				System.out.println("제목 검색 값" +titleSearch);
-				if (titleSearch== " ") {
-					titleSearch=null;
-				}
+				System.out.println(local);
+				System.out.println(listSearch);
+				System.out.println(titleSearch);
 				JboardService jbservice = new JboardService();
 				
 				int listCount = jbservice.getListCount(local, titleSearch);
@@ -82,7 +80,6 @@ public class JboardListViewServlet extends HttpServlet {
 						request.setAttribute("listCount", listCount);
 						request.setAttribute("local" , local);
 						request.setAttribute("listsearch", listSearch);
-						request.setAttribute("titlesearch", titleSearch);
 						view.forward(request, response);
 						
 				}else {

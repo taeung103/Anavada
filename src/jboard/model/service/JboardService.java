@@ -40,14 +40,6 @@ public class JboardService {
 			return listCount;
 		}
 
-		public Jboard selectJboard(int jboardNo) {
-			Connection conn = getConnection();
-			Jboard jboard = bdao.selectOne(conn, jboardNo);
-			close(conn);
-			return jboard;
-			
-		}
-
 		
 	}
 

@@ -107,7 +107,7 @@
 
                 <ul class="product">
                 <% for (Jboard j : list ){ %>
-                    <li onclick="location.href='/anavada/jbdetail?jboardno=<%= j.getJboardNo() %>'">
+                    <li onclick="location.href='product_view.jsp'">
                         <div><img src="/anavada/resources/images/test/testImg.jpg"/></div>
                         <h2><%= j.getJboardTitle()%></h2>
                         <h3><%=j.getJboardPrice() %><span> 원 <%=j.getLocalNo() %></span></h3>
