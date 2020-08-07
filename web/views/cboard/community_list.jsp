@@ -106,7 +106,7 @@
 						<%
 							for (Cboard c : list) {
 						%>
-						<tr>
+						<tr onclick="location.href='/anavada/cdetail?cnum=<%=c.getCboardNo()%>&page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>'">
 							<td class="number"><%=c.getCboardNo()%></td>
 							<td class="title">
 								<h2>

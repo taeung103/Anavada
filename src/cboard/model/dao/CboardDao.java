@@ -40,7 +40,6 @@ public class CboardDao {
 		
 		query += "order by cboard_no desc)) where rnum >= ? and rnum <= ?";
 		
-		System.out.println(query);
 		
 		int startRow = (currentPage - 1) * limit + 1;
 		int endRow = startRow + limit - 1;
@@ -51,14 +50,10 @@ public class CboardDao {
 			if (local != null && !local.equals("0")) {
 				pstmt.setString(pstmtnum++, local);
 			}
-			System.out.println(search);
-			System.out.println(pstmtnum);
-//			search == null || search.equals("title") || search.equals("content") || search.equals("writer")
 			if ((search != null && search.equals("")) || (search != null && search.equals("title"))
 					|| (search != null && search.equals("content")) || (search != null &&search.equals("writer"))) {
 				pstmt.setString(pstmtnum++, "%" + keyword + "%");
 			}
-			System.out.println(pstmtnum);
 			pstmt.setInt(pstmtnum++, startRow);
 			pstmt.setInt(pstmtnum++, endRow);
 			
@@ -117,7 +112,6 @@ public class CboardDao {
 			query += (search != null && search.equals("content") ? " where cboard_content like " + "'%" + keyword + "%' " : "");
 			query += (search != null && search.equals("writer") ? " where member_id like " + "'%" + keyword + "%' " : "");
 		}
-		System.out.println(query);
 		try {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(query);
@@ -132,6 +126,92 @@ public class CboardDao {
 			close(stmt);
 		}
 		return listCount;
+	}
+
+	public int addReadCount(Connection conn, int cboardNum) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update cboard set cboard_viewcount = cboard_viewcount + 1 where cboard_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, cboardNum);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public Cboard selectBoard(Connection conn, int cboardNum) {
+		Cboard cboard = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from cboard where cboard_no = ?";
+		System.out.println(query);
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, cboardNum);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				cboard = new Cboard();
+				cboard.setCboardNo(cboardNum);
+				cboard.setMemberId(rset.getString("member_id"));
+				cboard.setCboardTitle(rset.getString("cboard_title"));
+				cboard.setCboardContent(rset.getString("cboard_content"));
+				cboard.setDate(rset.getDate("cboard_date"));
+				cboard.setLastmodifiedDate(rset.getDate("cboard_lastmodified"));
+				cboard.setCboardViewCount(rset.getInt("cboard_viewcount"));
+				cboard.setReplyCount(rset.getInt("cboard_replycount"));
+				cboard.setLikeCount(rset.getInt("cboard_likecount"));
+				cboard.setReportCount(rset.getInt("cboard_reportcount"));
+				cboard.setCboardDisplay(rset.getString("cboard_display"));
+				cboard.setLocalNo(rset.getString("local_no"));
+				cboard.setCfilesOriginalFilepath1(rset.getString("cfiles_original_filepath1"));
+				cboard.setCfilesRenameFilepath1(rset.getString("cfiles_rename_filepath1"));
+				cboard.setCfilesOriginalFilepath2(rset.getString("cfiles_original_filepath2"));
+				cboard.setCfilesRenameFilepath2(rset.getString("cfiles_rename_filepath2"));
+				cboard.setCfilesOriginalFilepath3(rset.getString("cfiles_original_filepath3"));
+				cboard.setCfilesRenameFilepath3(rset.getString("cfiles_rename_filepath3"));
+				cboard.setCfilesOriginalFilepath4(rset.getString("cfiles_original_filepath4"));
+				cboard.setCfilesRenameFilepath4(rset.getString("cfiles_rename_filepath4"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return cboard;
+	}
+
+	public int getAllListCount(Connection conn) {
+		int allListCount = 0;
+		
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String query = "select count(*) from cboard ";
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if (rset.next()) {
+				allListCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		return allListCount;
 	}
 
 }

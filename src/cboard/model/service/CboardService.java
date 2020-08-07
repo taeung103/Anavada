@@ -24,4 +24,29 @@ public class CboardService {
 		return listCount;
 	}
 
+	public void addReadCount(int cboardNum) {
+		Connection conn = getConnection();
+		int result = cdao.addReadCount(conn,cboardNum);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+	}
+
+	public Cboard selectCBoard(int cboardNum) {
+		Connection conn = getConnection();
+		Cboard cboard = cdao.selectBoard(conn, cboardNum);
+		close(conn);
+		return cboard;
+	}
+
+	public int getAllListCount() {
+		Connection conn = getConnection();
+		int listCount = cdao.getAllListCount(conn);
+		close(conn);
+		return listCount;
+	}
+
 }

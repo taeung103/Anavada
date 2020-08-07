@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page	import="cboard.model.vo.Cboard"%>
+<%
+	Cboard cboard = (Cboard)request.getAttribute("cboard");
+	String local = String.valueOf(request.getAttribute("local"));
+	String search = String.valueOf(request.getAttribute("search"));
+	String keyword = String.valueOf(request.getAttribute("keyword"));
+	int currentPage = ((Integer) request.getAttribute("page")).intValue();
+	int allListCount = ((Integer) request.getAttribute("allListCount")).intValue();
+	String[] localArr = { "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구" };
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,58 +40,27 @@
 
             <!-- 상세 -->
             <div class="view-area cmnt_view">
-                <h2><span>종로구</span>종로구 20대 모여라~</h2>
+                <h2><span><%= localArr[Integer.parseInt(cboard.getLocalNo()) - 1] %></span><%=cboard.getCboardTitle() %></h2>
                 <ul>
-                    <li><span>작성자 : </span>홍길동</li>
-                    <li><span>등록일 : </span>2019.02.30</li>
-                    <li><span>조회수 : </span>30</li>
+                    <li><span>작성자 : </span><%= cboard.getMemberId() %></li>
+                    <li><span>등록일 : </span><%= cboard.getDate() %></li>
+                    <li><span>조회수 : </span><%= cboard.getCboardViewCount() %></li>
                     <li><span>첨부파일#1 : </span><a href="#none" download>지역소통_강서구.pdf</a></li>
-                    <li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></li>
+                    <li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%= cboard.getLikeCount() %></span></i></li>
                 </ul>
 
                 <div class="view-ctn">
-                        너 없는 지금도 눈부신 하늘과<br/>
-                        눈부시게 웃는 사람들<br/>
-                        나의 헤어짐을 모르는 세상은<br/>
-                        슬프도록 그대로인데<br/><br/>
-
-                        시간마저 데려가지 못하게<br/>
-                        나만은 널 보내지 못했나봐<br/>
-                        가시처럼 깊게 박힌 기억은<br/>
-                        아파도 아픈 줄 모르고<br/><br/>
-
-                        그대 기억이 지난 사랑이<br/>
-                        내 안을 파고 드는 가시가 되어<br/>
-                        제발 가라고 아주 가라고<br/>
-                        애써도 나를 괴롭히는데<br/><br/>
-
-                        아픈 만큼 너를 잊게 된다면<br/>
-                        차라리 앓고 나면 그만인데<br/>
-                        가시처럼 깊게 박힌 기억은<br/>
-                        아파도 아픈 줄 모르고<br/>
-
-                        그대 기억이<br/>
-                        지난 사랑이<br/>
-                        내 안을 파고 드는 가시가 되어<br/>
-                        제발 가라고<br/>
-                        아주 가라고<br/>
-                        애써도 나를 괴롭히는데<br/><br/>
-
-                        너무 사랑했던 나를<br/>
-                        그게 두려웠던 나를<br/>
-                        미치도록 너를 그리워했던<br/>
-                        날 이제는 놓아줘<br/><br/>
-
-                        보이지 않아 내 안에 숨어<br/>
-                        잊으려 하면 할수록 더 아파와<br/>
-                        제발 가라고 아주 가라고<br/>
-                        애써도 나를 괴롭히는데
+					<%= cboard.getCboardContent() %>
                 </div>
 
                 <div class="view-btn">
-                    <a href="#none" class="btn btn-prev">이전글</a>
-                    <a href="notice_list.jsp" class="btn btn-list">목록</a>
-                    <a href="#none" class="btn btn-next">다음글</a>
+                	<% if(cboard.getCboardNo() - 1 > 1) { %>
+                    	<a href="/anavada/cdetail?cnum=<%=cboard.getCboardNo()-1%>&page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>" class="btn btn-prev">이전글</a>
+                    <% } %>
+                    <a href="/anavada/clistview?page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>" class="btn btn-list">목록</a>
+                    <% if(cboard.getCboardNo() + 1 < allListCount) { %>
+                    <a href="/anavada/cdetail?cnum=<%=cboard.getCboardNo()+1%>&page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>" class="btn btn-next">다음글</a>
+                    <% } %>
                 </div>
                 
                 <div class="cmt_wrap">
