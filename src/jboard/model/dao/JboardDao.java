@@ -24,14 +24,9 @@ public class JboardDao {
 			int listCount = 0;
 			Statement stmt = null;
 			ResultSet rset = null;
-			String query = null;
+			String query  = "SELECT COUNT(*) FROM JBOARD "
+			+(local != null && !local.equals("0") ? "WHERE LOCAL_NO ="+local : "");
 			
-			if ( local == null || local.equals("0") ) {
-					query = "select count(*) from jboard";
-			}
-			else {
-					query  = "select count(*) from jboard where local_no=" + local;
-			} 
 			try {
 					stmt = conn.createStatement();
 					rset = stmt.executeQuery(query);
@@ -48,34 +43,36 @@ public class JboardDao {
 			return listCount;
 	}
 
-		public ArrayList<Jboard> selectList(Connection conn, int currentPage, int limit ,String local) {
+		public ArrayList<Jboard> selectList(Connection conn, int currentPage, int limit ,String local, String listSearch , String titleSearch) {
 			ArrayList<Jboard> list = new ArrayList <Jboard>();
 			
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
-			String query;
-			 if( local ==null || local.equals("0")){
-				 	query = "SELECT * " + 
+			String query = "SELECT * " + 
 					"FROM (SELECT ROWNUM RNUM, JBOARD_NO, JBOARD_TITLE, JBOARD_CONTENT, " + 
 					"JBOARD_PRICE, JBOARD_DATE , JBOARD_UPDATE, " + 
 					"JBOARD_COUNT, JBOARD_LIKE, JFILES_ORIGINAL_FILEPATH1, JFILES_RENAME_FILEPATH1, " + 
 					"JFILES_ORIGINAL_FILEPATH2, JFILES_RENAME_FILEPATH2 , JFILES_ORIGINAL_FILEPATH3, " +
 					"JFILES_RENAME_FILEPATH3, JFILES_ORIGINAL_FILEPATH4 , JFILES_RENAME_FILEPATH4, " +
 					"JBOARD_CHECK , JBOARD_MEET, JBOARD_POST, MEMBER_ID, LOCAL_NO "+
-					"FROM (SELECT * FROM JBOARD ORDER BY JBOARD_NO DESC)) " + 
-					"WHERE JBOARD_CHECK = 'Y'  AND RNUM >=? AND RNUM <=? ";
-			}else {
-					query = "SELECT * " + 
-						"FROM (SELECT ROWNUM RNUM, JBOARD_NO, JBOARD_TITLE, JBOARD_CONTENT, " + 
-						"JBOARD_PRICE, JBOARD_DATE , JBOARD_UPDATE, " + 
-						"JBOARD_COUNT, JBOARD_LIKE, JFILES_ORIGINAL_FILEPATH1, JFILES_RENAME_FILEPATH1, " + 
-						"JFILES_ORIGINAL_FILEPATH2, JFILES_RENAME_FILEPATH2 , JFILES_ORIGINAL_FILEPATH3, " +
-						"JFILES_RENAME_FILEPATH3, JFILES_ORIGINAL_FILEPATH4 , JFILES_RENAME_FILEPATH4, " +
-						"JBOARD_CHECK , JBOARD_MEET, JBOARD_POST, MEMBER_ID, LOCAL_NO "+
-						"FROM (SELECT * FROM JBOARD WHERE LOCAL_NO = ? ORDER BY JBOARD_NO DESC )) " + 
-						"WHERE JBOARD_CHECK = 'Y' AND RNUM >=? AND RNUM <=? ";
+					"FROM (SELECT * FROM JBOARD " +
+					(local != null && !local.equals("0")? "WHERE LOCAL_NO =? " : "");
+					
+					switch((listSearch==null)? listSearch = "latestposts" : listSearch) {
+					case("latestposts") : query+= "ORDER BY JBOARD_DATE DESC)) "; break;
+					case("highprice") :  query+= "ORDER BY JBOARD_PRICE DESC)) "; break;
+					case("lowprice") :  query+= "ORDER BY JBOARD_PRICE ASC)) "; break;
+					case("highlike") : query+= "ORDER BY JBOARD_LIKE DESC)) "; break;
+					default : query+= " ORDER BY JBOARD_NO DESC )) "; break;
+					}
+					titleSearch = null;
+					query +="WHERE JBOARD_CHECK = 'Y' ";
+					query +=(titleSearch != null ? "AND JBOARD_TITLE LIKE ?" : "");
+					query +=" AND RNUM >=? AND RNUM <=? ";
+			
+					
 				
-			}
+			
 			int startRow = (currentPage - 1) * limit + 1; 
 			int endRow = startRow + limit - 1;
 			try {
@@ -89,6 +86,7 @@ public class JboardDao {
 						pstmt.setInt(2, startRow);
 						pstmt.setInt(3, endRow);
 				 	}
+				 	
 					rset = pstmt.executeQuery();
 					
 					while(rset.next()) {
@@ -115,7 +113,7 @@ public class JboardDao {
 						jboard.setJboardPost(rset.getString("jboard_post"));
 						jboard.setMemberId(rset.getString("member_id"));
 						jboard.setLocalNo(rset.getString("local_no"));
-								
+						
 						list.add(jboard);
 					}
 			} catch (Exception e) {

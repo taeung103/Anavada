@@ -25,9 +25,9 @@ public class JboardService {
 
 
 
-		public ArrayList<Jboard> selectList(int currentPage, int limit, String local) {
+		public ArrayList<Jboard> selectList(int currentPage, int limit, String local, String listSearch, String titleSearch) {
 			Connection conn = getConnection();
-			ArrayList<Jboard> list = bdao.selectList(conn, currentPage, limit , local);
+			ArrayList<Jboard> list = bdao.selectList(conn, currentPage, limit , local, listSearch, titleSearch);
 			close(conn);
 			return list;
 		}

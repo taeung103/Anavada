@@ -33,19 +33,24 @@ public class JboardListViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				
+				String titleSearch = request.getParameter("titlesearch");
+				String listSearch = request.getParameter("listsearch");
+				
 				String local = request.getParameter("local");
 				int currentPage = 1;
+				
 				if (request.getParameter("page") != null) {
 						currentPage = Integer.parseInt(request.getParameter("page"));
 				}
-
+				
 				int limit = 10;
 				System.out.println(local);
+				System.out.println(listSearch);
 				JboardService jbservice = new JboardService();
 				
 				int listCount = jbservice.getListCount(local);
 				
-				ArrayList<Jboard> list = jbservice.selectList(currentPage, limit, local);
+				ArrayList<Jboard> list = jbservice.selectList(currentPage, limit, local, listSearch, titleSearch);
 				
 				
 						
@@ -65,6 +70,7 @@ public class JboardListViewServlet extends HttpServlet {
 						request.setAttribute("endPage", endPage);
 						request.setAttribute("listCount", listCount);
 						request.setAttribute("local" , local);
+						request.setAttribute("listsearch", listSearch);
 						view.forward(request, response);
 						
 				}else {

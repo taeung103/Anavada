@@ -9,13 +9,13 @@
    int endPage = ((Integer) request.getAttribute("endPage")).intValue();
    int maxPage = ((Integer) request.getAttribute("maxPage")).intValue();
    int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
+   	String titleSearch = request.getParameter("titlesearch");
+	String local = request.getParameter("local"); 
+    String listSearch = request.getParameter("listsearch");
+	String[] localArr = { "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구" };
 %>
 
-<% 
-String local = request.getParameter("local"); 
-%>
-<%if(local == null) { local=String.valueOf(0);}
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,12 +24,6 @@ String local = request.getParameter("local");
    function showWriteForm() {
       location.href = "/anavada/views/jboard/product_write.jsp";
    }
-</script>
-<script>
-$('#sel').on('change', function() {
-    location.href= this.value;
-});
-$('#sel').val(location.href);
 </script>
 
 
@@ -96,20 +90,18 @@ $('#sel').val(location.href);
                                     <option value="24" ${param.local eq"24"?"selected" :"" }>중구</option>
                                     <option value="25" ${param.local eq"25"?"selected" :"" }>중랑구</option>
                             </select>
-                            목록 분류 : <select name="" class="ListSelect">
-                                    <option value="최신등록순" selected="selected">최신등록순</option>
-                                    <option value="가격높은순">가격높은순</option>
-                                    <option value="가격낮은순">가격낮은순</option>
-                                    <option value="좋아요순">좋아요순</option>
+                            목록 분류 : <select name="listsearch" class="ListSelect" onchange=this.form.submit()>
+                                    <option value="latestposts" ${param.listsearch eq"latestposts"?"selected" :"" }>최신등록순</option>
+                                    <option value="highprice"${param.listsearch eq"highprice"?"selected" :"" }>가격높은순</option>
+                                    <option value="lowprice"${param.listsearch eq"lowprice"?"selected" :"" }>가격낮은순</option>
+                                    <option value="highlike" ${param.listsearch eq"highlike"?"selected" :"" }>좋아요순</option>
                             </select>
                             
-                            <input type="text" placeholder="검색어를 입력해주세요.">
+                            <input type="text" name="titlesearch" placeholder="검색어를 입력해주세요.">
                             <button class="top-search"><i class="xi-search"></i></button>
                             
                         </form>
-                        <script>
- 						document.form1.location.value="/anavada/views/jboard/productview.jsp";
-						</script>
+
                     </div>
                 </div>
 
@@ -120,7 +112,10 @@ $('#sel').val(location.href);
                         <h2><%= j.getJboardTitle()%></h2>
                         <h3><%=j.getJboardPrice() %><span> 원 <%=j.getLocalNo() %></span></h3>
                        
-                        <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%=j.getJboardLike() %></span></i></p>
+                        <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%=j.getJboardLike() %></span></i>
+                        <span><%=localArr[Integer.parseInt(j.getLocalNo())-1]%></span>
+                        
+                        </p>
                     </li>
                     <%} %>
                   
@@ -139,27 +134,27 @@ $('#sel').val(location.href);
                 	<% if (currentPage <= 1){ %>
               		<a><i class= "glyphicon glyphicon-backward"></i></a>
               		<%}else {%>
-              		<a href="/anavada/jblist?page=1"><i class= "glyphicon glyphicon-backward"></i></a>
+              		<a href="/anavada/jblist?page=1&local=<%=local%>&listsearch=<%=listSearch%>"><i class= "glyphicon glyphicon-backward"></i></a>
               		<%} %>
               		<% if (startPage -1 >=10 ){ %>
-                    <a href="/anavada/jblist?page=<%= startPage- 10%>&local=<%=local%>"><i class="glyphicon glyphicon-menu-left"></i></a>
+                    <a href="/anavada/jblist?page=<%= startPage- 10%>&local=<%=local%>&listsearch=<%=listSearch%>"><i class="glyphicon glyphicon-menu-left"></i></a>
 					<%} %>
 					<!-- 현재 페이지가 속한 페이지 그룹의 숫자 출력처리 -->
 					<% for (int p = startPage; p <= endPage; p++){
 						if (p == currentPage){%>
                     <a href="#none" class="active"><%=p %></a>
                     <%} else {%>
-                    <a href="/anavada/jblist?page=<%=p%>&local=<%=local%>"><%=p %></a>
+                    <a href="/anavada/jblist?page=<%=p%>&local=<%=local%>&listsearch=<%=listSearch%>"><%=p %></a>
                     <%}} %>
                     <!--  다음 그룹으로 이동처리 -->
                     <% if (endPage +10 <= maxPage){ %>
-                    <a href="/anavada/jblist?page=<%= endPage + 10 %>&local=<%=local%>"><i class="glyphicon glyphicon-menu-right"></i></a>
+                    <a href="/anavada/jblist?page=<%= endPage + 10 %>&local=<%=local%>&listsearch=<%=listSearch%>"><i class="glyphicon glyphicon-menu-right"></i></a>
                     <%} %>
                     
                     <% if (currentPage >= maxPage){ %>
                     <a><i class="glyphicon glyphicon-forward"></i></a>
                     <%}else{ %>
-                    <a href="/anavada/jblist?page=<%=maxPage%>&local=<%=local%>"><i class="glyphicon glyphicon-forward"></i> </a>
+                    <a href="/anavada/jblist?page=<%=maxPage%>&local=<%=local%>&listsearch=<%=listSearch%>"><i class="glyphicon glyphicon-forward"></i> </a>
                     <%} %>
                 </dd>
             </dl>
