@@ -25,6 +25,7 @@
             <div class="write-area">
                 <h2>공지사항 작성</h2>
                 <form action="/anavada/aninsert" method="post" enctype="multipart/form-data">
+<%-- 최후에 합치기      <input type="hidden" value="<%= loginMember.getUserId()%>" name = "writer"> --%>
                     <table>
                         <colgroup>
                             <col width="20%">
@@ -41,7 +42,7 @@
                             </tr>
                             <tr>
                                 <td>첨부파일</td>
-                                <td><input type="file" name="FileName"></td>
+                                <td><input type="file" name="ofile"></td>
                             </tr>
                         </tbody>
                     </table>

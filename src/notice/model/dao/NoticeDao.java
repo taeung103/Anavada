@@ -240,7 +240,6 @@ public class NoticeDao {
 
 	public int deleteNotice(Connection conn, int[] checkedNum) {
 		int result = 0;
-//		PreparedStatement pstmt = null;
 		Statement stmt = null;
 		
 		String query = null;
@@ -263,6 +262,29 @@ public class NoticeDao {
 			close(stmt);
 		}
 		
+		return result;
+	}
+
+	public int insertNotice(Connection conn, Notice notice) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "insert into notice values ((select max(no_no)+1 from notice), ?, ?, ?, sysdate, 0, ?, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "admin01");
+			pstmt.setString(2, notice.getNoTitle());
+			pstmt.setString(3, notice.getNoContent());
+			pstmt.setString(4, notice.getNoOriginal());
+			pstmt.setString(5, notice.getNoRename());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		System.out.println(query);
 		return result;
 	}
 	

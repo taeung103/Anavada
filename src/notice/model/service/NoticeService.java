@@ -70,4 +70,13 @@ public class NoticeService {
 		return result;
 	}
 
+	public int insertNotice(Notice notice) {
+		Connection conn = getConnection();
+		int result = ndao.insertNotice(conn, notice);
+		if(result > 0)
+			commit(conn);
+		else rollback(conn);
+		return result;
+	}
+
 }

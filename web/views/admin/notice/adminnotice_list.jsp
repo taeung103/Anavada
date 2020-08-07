@@ -107,8 +107,11 @@ function deleteAction(){
                                     <li>조회수 : <%= n.getNoCount() %></li>
                                 </ul>
                             </td>
+                            <td class="fileDown">
                             <% if(n.getNoOriginal() != null) { %>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td><% } %>
+                            <i class="glyphicon glyphicon-floppy-saved"></i>
+                            <% } %>
+                            </td>
                         </tr>
                      <% } %>
                     </tbody>
