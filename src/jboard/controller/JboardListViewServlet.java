@@ -16,7 +16,7 @@ import jboard.model.vo.Jboard;
 /**
  * Servlet implementation class JboardListViewServlet
  */
-@WebServlet("/jblist.ss")
+@WebServlet("/jblist")
 public class JboardListViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 2L;
        
