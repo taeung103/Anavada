@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import org.apache.tomcat.jni.Local;
 
 import jboard.model.vo.Jboard;
+import notice.model.vo.Notice;
 
 public class JboardDao {
 		public JboardDao () {}
@@ -73,11 +74,11 @@ public class JboardDao {
 			int startRow = (currentPage - 1) * limit + 1; 
 			int endRow = startRow + limit - 1;
 			try {
-				 	if(local.equals("0")){
+				 	if(local== null || local.equals("0")){
 					pstmt = conn.prepareStatement(query);
 					pstmt.setInt(1, startRow);
 					pstmt.setInt(2, endRow);
-				 	}else if (local !=null&& titleSearch ==null){
+				 	}else if (local !=null&& titleSearch ==null || local.equals("0")){
 				 		pstmt = conn.prepareStatement(query);
 						pstmt.setString(1, local);
 						pstmt.setInt(2, startRow);
@@ -132,6 +133,54 @@ public class JboardDao {
 			}
 		return list; 
 	}
+
+		public Jboard selectOne(Connection conn, int jboardNo) {
+			Jboard jboard = null;
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			
+			String query = "SELECT * FROM JBOARD WHERE JBOARD_NO = ?";
+			
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setInt(1, jboardNo);
+				
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					jboard = new Jboard();
+					
+					jboard.setJboardNo(rset.getInt("jboard_no"));
+					jboard.setJboardTitle(rset.getString("jboard_title"));
+					jboard.setJboardContent(rset.getString("jboard_content"));
+					jboard.setJboardPrice(rset.getInt("jboard_price"));
+					jboard.setJboardDate(rset.getDate("jboard_date"));
+					jboard.setJboardUpdate(rset.getDate("jboard_update"));
+					jboard.setJboardCount(rset.getInt("jboard_count"));
+					jboard.setJboardLike(rset.getInt("jboard_like"));
+					jboard.setJboardOrignalFilePath1(rset.getString("JFILES_ORIGINAL_FILEPATH1"));
+					jboard.setJboardRenameFilePath1(rset.getString("JFILES_RENAME_FILEPATH1"));
+					jboard.setJboardOrignalFilePath2(rset.getString("JFILES_ORIGINAL_FILEPATH2"));
+					jboard.setJboardRenameFilePath2(rset.getString("JFILES_RENAME_FILEPATH2"));
+					jboard.setJboardOrignalFilePath3(rset.getString("JFILES_ORIGINAL_FILEPATH3"));
+					jboard.setJboardRenameFilePath3(rset.getString("JFILES_RENAME_FILEPATH3"));
+					jboard.setJboardOrignalFilePath4(rset.getString("JFILES_ORIGINAL_FILEPATH4"));
+					jboard.setJboardRenameFilePath4(rset.getString("JFILES_RENAME_FILEPATH4"));
+					jboard.setJboardCheck(rset.getString("jboard_check"));
+					jboard.setJboardMeet(rset.getString("jboard_meet"));
+					jboard.setJboardPost(rset.getString("jboard_post"));
+					jboard.setMemberId(rset.getString("member_id"));
+					jboard.setLocalNo(rset.getString("local_no"));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(rset);
+				close(pstmt);
+			}
+			
+			return jboard;
+		}
 
 		
 }
