@@ -13,11 +13,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%@ include file="../include/head.jsp" %> 
+    <%@ include file="../../include/head.jsp" %>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
-        <%@ include file="../include/header.jsp" %>
+        <%@ include file="../../include/header.jsp" %>
 
         <!-- 컨텐츠 -->
         <div id="content">
@@ -61,9 +61,9 @@
                     <a href="/anavada/nsearch?page=<%= currentPage %>&selected=<%= selected %>&keyword=<%= keyword %>" class="btn btn-list">목록</a>
                     <a href="" class="btn btn-next">다음글</a>
                     <% }else { %>
-                    <a href="/anavada/ndetail?no=<%= notice.getNoNo()-1 %>" class="btn btn-prev">이전글</a>
-                    <a href="/anavada/nlist?page=<%= currentPage %>" class="btn btn-list">목록</a>
-                    <a href="/anavada/ndetail?no=<%= notice.getNoNo()+1 %>" class="btn btn-next">다음글</a>
+                    <a href="/anavada/andetail?no=<%= notice.getNoNo()-1 %>&page=<%= currentPage %>" class="btn btn-prev">이전글</a>
+                    <a href="/anavada/anlist?page=<%= currentPage %>" class="btn btn-list">목록</a>
+                    <a href="/anavada/andetail?no=<%= notice.getNoNo()+1 %>&page=<%= currentPage %>" class="btn btn-next">다음글</a>
                     <% } %>
                     
                 </div>
@@ -73,7 +73,7 @@
         </div>
         <!-- 컨텐츠 끝 -->
 
-        <%@ include file="../include/footer.jsp" %>
+        <%@ include file="../../include/footer.jsp" %>
     </div>
 </body>
 </html>

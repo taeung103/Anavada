@@ -96,7 +96,7 @@ function deleteAction(){
 				<table>
                     <tbody>
                     <% for(Notice n : list) { %>
-                        <tr>
+                        <tr onclick="location.href='/anavada/andetail?page=<%= currentPage %>&no=<%= n.getNoNo() %>'">
                             <td class="checkBox"><input type="checkbox" name="checkDel" value="<%= n.getNoNo() %>"></td>
                             <td class="number"><%= n.getNoNo() %></td>
                             <td class="title">
@@ -127,7 +127,7 @@ function deleteAction(){
                 <!-- 버튼 -->
                 <div class="btn_wrap">
                     <a onclick="deleteAction();" class="btn-left btn_gray">선택삭제</a>
-                    <a href="/anavada/views/admin/notice/notice_write.jsp" class="btn-right btn_white">등록</a>
+                    <a href="/anavada/views/admin/notice/adminnotice_write.jsp" class="btn-right btn_white">등록</a>
                 </div>
                 <!-- //버튼 -->
 

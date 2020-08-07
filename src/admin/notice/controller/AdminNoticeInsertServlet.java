@@ -79,9 +79,9 @@ public class AdminNoticeInsertServlet extends HttpServlet {
 			
 			notice.setNoRename(rfileName);
 		}
-		System.out.println(notice);
+		
 		int result = new NoticeService().insertNotice(notice);
-		System.out.println("insert 서블릿"+result);
+		
 		if(result > 0)
 			response.sendRedirect("anlist");
 	}

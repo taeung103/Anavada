@@ -284,7 +284,7 @@ public class NoticeDao {
 		}finally {
 			close(pstmt);
 		}
-		System.out.println(query);
+		
 		return result;
 	}
 	

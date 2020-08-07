@@ -92,10 +92,10 @@
                             <td class="fileDown"><% if(notice.getNoOriginal() != null) { %><i class="glyphicon glyphicon-floppy-saved"></i><% } %></td>
                         </tr>
                         <% for(Notice n : list) { %>
-                        <% if(selected != null && keyword != null) { %>
-                        <tr onclick="location.href='/anavada/ndetail?no=<%= n.getNoNo() %>&page=<%= currentPage %>&selected=<%= selected %>&keyword=<%= keyword %>';">
-                        <% }else { %>
-                        <tr onclick="location.href='/anavada/ndetail?no=<%= n.getNoNo() %>&page=<%= currentPage %>';">
+                        	<% if(selected != null && keyword != null) { %>
+                        	<tr onclick="location.href='/anavada/ndetail?no=<%= n.getNoNo() %>&page=<%= currentPage %>&selected=<%= selected %>&keyword=<%= keyword %>';">
+                        	<% }else { %>
+                        	<tr onclick="location.href='/anavada/ndetail?no=<%= n.getNoNo() %>&page=<%= currentPage %>';">
                         <% } %>
                             <td class="number"><%= n.getNoNo() %></td>
                             <td class="title">
