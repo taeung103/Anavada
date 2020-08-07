@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page
-	import="cboard.model.vo.Cboard, java.util.ArrayList, java.sql.Date"%>
+<%@page	import="cboard.model.vo.Cboard, java.util.ArrayList, java.sql.Date"%>
 <%
 	ArrayList<Cboard> list = (ArrayList<Cboard>) request.getAttribute("list");
 	String local = String.valueOf(request.getAttribute("local"));
@@ -54,7 +53,10 @@
 						전체 게시글
 						<%=listCount%>개
 					</h4>
-					<a href="/anavada/cinsert.ss" class="write_btn">글쓰기</a>
+					<% if(loginMember != null) {%>
+					<a href="views/cboard/community_write.jsp" class="write_btn">글쓰기</a>
+					<% } %>
+					
 					<div>
 						<form action="/anavada/clistview" method="get" style="display: inline-block;">
 							지역 분류 : 
@@ -145,7 +147,9 @@
 
 
 				<div class="write-btn">
-					<a href="/anavada/cinsert.ss">글쓰기</a>
+					<% if(loginMember != null) {%>
+					<a href="views/cboard/community_write.jsp">글쓰기</a>
+					<% } %>
 				</div>
 
 			</div>
