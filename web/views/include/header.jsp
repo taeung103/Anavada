@@ -14,7 +14,7 @@
                     <a href="/anavada/nlist">고객센터</a>
                     <div class="subGnb">
                         <a href="/anavada/nlist">공지사항</a>
-                        <a href="/anavada/views/notice/faq_list.jsp">FAQ</a>
+                        <a href="/anavada/flist">FAQ</a>
                         <a href="/anavada/views/inquiry/inquiry_list.jsp">문의하기</a>
                      <%--   <% if(loginMember != null && loginMember.getMemberId().equals("admin")){ %> --%>
                         <a href="/anavada/dbolist">권한관리</a>

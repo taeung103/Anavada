@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, faq.model.vo.Faq"%>
+<%
+	ArrayList<Faq> list = (ArrayList<Faq>)request.getAttribute("list");
+	int currentPage = (Integer)request.getAttribute("currentPage");
+	int totalList = (Integer)request.getAttribute("totalList");
+	int totalPage = (Integer)request.getAttribute("totalPage");
+	int startPage = (Integer)request.getAttribute("startPage");
+	int endPage = (Integer)request.getAttribute("endPage");
+	System.out.println("currentPage : "+currentPage+", totalList : "+totalList+", startPage : "+startPage+", endPage : "+endPage+", list.size : "+list.size());
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,8 +76,7 @@
                 </div>
                 <!--종류 리스트-->
                 <div class="sort-area" style="margin-top:30px;">  
-                    <h4>전체 150개</h4>
-                    <a href="faq_write.jsp" class="write_btn">글쓰기</a>
+                    <h4>전체 <%= list.size() %>개</h4>
                     <div>
                         <form action="" method="" id="">
                             목록 분류 : <select name="" class="ListSelect">
@@ -484,9 +492,6 @@
                     </ul>
                 </div>
                 
-                <div class="write-btn">
-                    <a href="faq_write.jsp">글쓰기</a>
-                </div>
             </div>
             <!-- 리스트 끝 -->
 

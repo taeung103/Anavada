@@ -237,6 +237,56 @@ public class NoticeDao {
 		}
 		return notice;
 	}
+
+	public int deleteNotice(Connection conn, int[] checkedNum) {
+		int result = 0;
+		Statement stmt = null;
+		
+		String query = null;
+		if(checkedNum.length == 1)
+			query = "delete from notice where no_no = " + checkedNum[0];
+		else {
+			query = "delete from notice where no_no in (";
+			for(int i=0; i<checkedNum.length-1; i++) {
+				query += checkedNum[i]+", ";
+			}
+			query += checkedNum[checkedNum.length-1]+")";
+		}
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(query);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+		}
+		
+		return result;
+	}
+
+	public int insertNotice(Connection conn, Notice notice) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "insert into notice values ((select max(no_no)+1 from notice), ?, ?, ?, sysdate, 0, ?, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "admin01");
+			pstmt.setString(2, notice.getNoTitle());
+			pstmt.setString(3, notice.getNoContent());
+			pstmt.setString(4, notice.getNoOriginal());
+			pstmt.setString(5, notice.getNoRename());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	
 }

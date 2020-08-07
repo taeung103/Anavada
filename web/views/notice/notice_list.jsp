@@ -92,11 +92,11 @@
                             <td class="fileDown"><% if(notice.getNoOriginal() != null) { %><i class="glyphicon glyphicon-floppy-saved"></i><% } %></td>
                         </tr>
                         <% for(Notice n : list) { %>
-                        <% if(selected != null && keyword != null) { %>
-                        <tr onclick="location.href='/anavada/ndetail?no=<%= n.getNoNo() %>&page=<%= currentPage %>&selected=<%= selected %>&keyword=<%= keyword %>';">
-                        <% }else { %>
-                        <tr onclick="location.href='/anavada/ndetail?no=<%= n.getNoNo() %>&page=<%= currentPage %>';">
-                        <% } %>
+                        	<% if(selected != null && keyword != null) { %>
+                        	<tr onclick="location.href='/anavada/ndetail?no=<%= n.getNoNo() %>&page=<%= currentPage %>&selected=<%= selected %>&keyword=<%= keyword %>';">
+                        	<% }else { %>
+                        	<tr onclick="location.href='/anavada/ndetail?no=<%= n.getNoNo() %>&page=<%= currentPage %>';">
+                        	<% } %>
                             <td class="number"><%= n.getNoNo() %></td>
                             <td class="title">
                                 <h2><%= n.getNoTitle() %></h2>
@@ -145,6 +145,7 @@
                     	<a href="nlist?page=<%= maxPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
                     <%}else { %>
                     <a><i class="glyphicon glyphicon-menu-right"></i></a>
+                    
                  <% } }else { %>
                 	<% if(currentPage <= 1) { %>
                     <a><i class="glyphicon glyphicon-menu-left"></i></a>

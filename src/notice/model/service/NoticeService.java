@@ -60,4 +60,23 @@ public class NoticeService {
 		close(conn);
 		return notice;
 	}
+
+	public int deleteNotice(int[] checkedNum) {
+		Connection conn = getConnection();
+		int result = ndao.deleteNotice(conn, checkedNum);
+		if(result > 0)
+			commit(conn);
+		else rollback(conn);
+		return result;
+	}
+
+	public int insertNotice(Notice notice) {
+		Connection conn = getConnection();
+		int result = ndao.insertNotice(conn, notice);
+		if(result > 0)
+			commit(conn);
+		else rollback(conn);
+		return result;
+	}
+
 }
