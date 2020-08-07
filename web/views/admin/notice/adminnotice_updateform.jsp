@@ -18,6 +18,9 @@
                 <form action="/anavada/anupnotice" method="post" enctype="multipart/form-data">
 <%-- 최후에 합치기      <input type="hidden" value="<%= loginMember.getUserId()%>" name="writer"> --%>
 				<input type="hidden" value="<%= notice.getNoNo()%>" name="no">
+				<input type="hidden" value="<%= currentPage %>" name="page">
+				<input type="hidden" value="<%= notice.getNoOriginal() %>" name="ofile">
+				<input type="hidden" value="<%= notice.getNoRename() %>" name="rfile">
                     <table>
                         <colgroup>
                             <col width="20%">
@@ -36,7 +39,7 @@
                                 <td>첨부파일</td>
                                 <td>
                                 <% if(notice.getNoOriginal() != null) { %>
-                                <%= notice.getNoOriginal() %> &nbsp; &nbsp; &nbsp; &nbsp;<input type="checkbox" value="yes" name="delfile"> 파일삭제
+                                <%= notice.getNoOriginal() %> &nbsp; &nbsp; &nbsp; &nbsp;<input type="checkbox" value="yes" name="delcheck"> 파일삭제
                                 <% } %>
                                 <input type="file" name="upfile"></td>
                             </tr>
