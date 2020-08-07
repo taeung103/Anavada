@@ -1,7 +1,6 @@
 package cboard.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,16 +13,16 @@ import cboard.model.service.CboardService;
 import cboard.model.vo.Cboard;
 
 /**
- * Servlet implementation class CboardLocalSelectServlet
+ * Servlet implementation class CboardDetailViewServlet
  */
-@WebServlet("/clselect")
-public class CboardLocalSelectServlet extends HttpServlet {
+@WebServlet("/cdetail")
+public class CboardDetailViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CboardLocalSelectServlet() {
+    public CboardDetailViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,37 +31,43 @@ public class CboardLocalSelectServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String local = request.getParameter("local");
-		
+		int cboardNum = Integer.parseInt(request.getParameter("cnum"));
 		int currentPage = 1;
 		if (request.getParameter("page") != null) {
 			currentPage = Integer.parseInt(request.getParameter("page"));
 		}
-		int limit = 10;
+		String local = request.getParameter("local");
+		String search = request.getParameter("search");
+		String keyword = request.getParameter("keyword");
+		
 		CboardService cservice = new CboardService();
-		int listCount = cservice.getLocalListCount(local);
-		ArrayList<Cboard> list = cservice.selectLocal(currentPage, limit, local);
 		
-		int maxPage = (int)((double)listCount / limit + 0.9);
-		int startPage = (((int)((double)currentPage / limit + 0.9)) - 1) * limit + 1;
-		int endPage = startPage + limit - 1;
+		int allListCount = cservice.getAllListCount();
 		
-		if (maxPage < endPage) {
-			endPage = maxPage;
-		}
+		cservice.addReadCount(cboardNum);
+		
+		Cboard cboard = cservice.selectCBoard(cboardNum);
+
+		System.out.println(cboard);
+		System.out.println(currentPage);
+		System.out.println(local);
+		System.err.println(search);
+		System.out.println(keyword);
+		
 		RequestDispatcher view = null;
-		if (list.size() > 0) {
-			view = request.getRequestDispatcher("views/cboard/community_list.jsp");
-			request.setAttribute("list", list);
-			request.setAttribute("currentPage", currentPage);
-			request.setAttribute("maxPage", maxPage);
-			request.setAttribute("startPage", startPage);
-			request.setAttribute("endPage", endPage);
-			request.setAttribute("listCount", listCount);
+		if (cboard != null) {
+			view = request.getRequestDispatcher("views/cboard/community_view.jsp");
+			request.setAttribute("cboard", cboard);
+			request.setAttribute("page", currentPage);
 			request.setAttribute("local", local);
+			request.setAttribute("search", search);
+			request.setAttribute("keyword", keyword);
+			request.setAttribute("allListCount", allListCount);
 			view.forward(request, response);
 		} else {
-			System.out.println("error");
+			view = request.getRequestDispatcher("views/common/error.jsp");
+			request.setAttribute("message", "error");
+			view.forward(request, response);
 		}
 	}
 

@@ -25,6 +25,7 @@ public final class main_jsp extends org.apache.jasper.runtime.HttpJspBase
   static {
     _jspx_dependants = new java.util.HashMap<java.lang.String,java.lang.Long>(3);
 <<<<<<< HEAD
+<<<<<<< HEAD
     _jspx_dependants.put("/views/main/../include/header.jsp", Long.valueOf(1596759287509L));
     _jspx_dependants.put("/views/main/../include/footer.jsp", Long.valueOf(1596516824045L));
     _jspx_dependants.put("/views/main/../include/head.jsp", Long.valueOf(1596516824046L));
@@ -33,6 +34,11 @@ public final class main_jsp extends org.apache.jasper.runtime.HttpJspBase
     _jspx_dependants.put("/views/main/../include/footer.jsp", Long.valueOf(1596688749388L));
     _jspx_dependants.put("/views/main/../include/head.jsp", Long.valueOf(1596760452831L));
 >>>>>>> origin/member
+=======
+    _jspx_dependants.put("/views/main/../include/header.jsp", Long.valueOf(1596767964510L));
+    _jspx_dependants.put("/views/main/../include/footer.jsp", Long.valueOf(1596761326252L));
+    _jspx_dependants.put("/views/main/../include/head.jsp", Long.valueOf(1596705633788L));
+>>>>>>> community_list
   }
 
   private static final java.util.Set<java.lang.String> _jspx_imports_packages;
@@ -173,9 +179,12 @@ public final class main_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write('\r');
       out.write('\n');
  Member loginMember = (Member)session.getAttribute("loginMember"); 
+<<<<<<< HEAD
       out.write('\r');
       out.write('\n');
  Member member = (Member)request.getAttribute("member"); 
+=======
+>>>>>>> community_list
       out.write("\r\n");
       out.write("<div id=\"header\">\r\n");
       out.write("\t<!-- 상단메뉴 -->\r\n");
@@ -184,7 +193,11 @@ public final class main_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <dd>\r\n");
       out.write("            <ul class=\"gnb clearfix\">\r\n");
       out.write("                <li><a href=\"/anavada/jblist\">중고거래</a></li>\r\n");
+<<<<<<< HEAD
       out.write("                <li><a href=\"/anavada/clistview\">커뮤니티</a></li>\r\n");
+=======
+      out.write("                <li><a href=\"/anavada/clistview?page=1&local=0\">커뮤니티</a></li>\r\n");
+>>>>>>> community_list
       out.write("                <li><a href=\"../fboard/areaEvent_list.jsp\">지역축제</a></li>\r\n");
       out.write("                <li>\r\n");
       out.write("                    <a href=\"/anavada/nlist\">고객센터</a>\r\n");
@@ -218,9 +231,13 @@ public final class main_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                ");
  } else { 
       out.write("\r\n");
+<<<<<<< HEAD
       out.write("                <li><a class=\"hover_line01\" href=\"/anavada/mypage.cp?memberId=");
       out.print( loginMember.getMemberId() );
       out.write("\">MYPAGE</a></li>\r\n");
+=======
+      out.write("                <li><a class=\"hover_line01\" href=\"../member/MyInfoModify.jsp\">MYPAGE</a></li>\r\n");
+>>>>>>> community_list
       out.write("                <li><a class=\"hover_line01\" href=\"/anavada/logout\">LOGOUT</a></li>\r\n");
       out.write("                ");
  } 

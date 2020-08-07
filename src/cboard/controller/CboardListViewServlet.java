@@ -37,10 +37,15 @@ public class CboardListViewServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("page"));
 		}
 		String local = request.getParameter("local");
+		String search = request.getParameter("search");
+		String keyword = request.getParameter("keyword");
+		
 		int limit = 10;
 		CboardService cservice = new CboardService();
-		int listCount = cservice.getListCount(local);
-		ArrayList<Cboard> list = cservice.selectAll(currentPage, limit, local);
+		int listCount = cservice.getListCount(local, search, keyword);
+		int allListCount = cservice.getAllListCount();
+		
+		ArrayList<Cboard> list = cservice.selectAll(currentPage, limit, local, search, keyword);
 		
 		int maxPage = (int)((double)listCount / limit + 0.9);
 		int startPage = (((int)((double)currentPage / limit + 0.9)) - 1) * limit + 1;
@@ -49,7 +54,6 @@ public class CboardListViewServlet extends HttpServlet {
 		if (maxPage < endPage) {
 			endPage = maxPage;
 		}
-		System.out.println(request.getParameter("local"));
 		
 		RequestDispatcher view = null;
 		if (list.size() > 0) {
@@ -61,6 +65,12 @@ public class CboardListViewServlet extends HttpServlet {
 			request.setAttribute("endPage", endPage);
 			request.setAttribute("listCount", listCount);
 			request.setAttribute("local", local);
+			request.setAttribute("search", search);
+			request.setAttribute("keyword", keyword);
+			view.forward(request, response);
+		} else {
+			view = request.getRequestDispatcher("views/common/error.jsp");
+			request.setAttribute("message", "error");
 			view.forward(request, response);
 		}
 	}

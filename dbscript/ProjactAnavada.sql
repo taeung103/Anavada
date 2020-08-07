@@ -1,7 +1,7 @@
 --**********************************************************************************************************************
--- MEMBER Å×ÀÌºí »èÁ¦
+-- MEMBER ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
 DROP TABLE MEMBER CASCADE CONSTRAINTS;
--- MEMBER Å×ÀÌºí »ý¼º
+-- MEMBER ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
 CREATE TABLE MEMBER (
     MEMBER_ID VARCHAR2(20) CONSTRAINT PKID PRIMARY KEY NOT NULL,
     MEMBER_PWD VARCHAR2(20) CONSTRAINT MPWD NOT NULL,
@@ -15,29 +15,30 @@ CREATE TABLE MEMBER (
     LAST_ACCESS_DATE DATE DEFAULT SYSDATE
 );
 
--- MEMBER ÄÃ·³¸í
-COMMENT ON COLUMN MEMBER.MEMBER_ID IS 'È¸¿ø ¾ÆÀÌµð';
-COMMENT ON COLUMN MEMBER.MEMBER_PWD IS 'È¸¿ø ÆÐ½º¿öµå';
-COMMENT ON COLUMN MEMBER.MEMBER_NAME IS 'È¸¿ø ÀÌ¸§';
-COMMENT ON COLUMN MEMBER.MEMBER_ORIGINAL IS 'Ã·ºÎÆÄÀÏ±âÁ¸¸í';
-COMMENT ON COLUMN MEMBER.MEMBER_RENAME IS 'Ã·ºÎÆÄÀÏº¯°æ¸í';
-COMMENT ON COLUMN MEMBER.MEMBER_EMAIL IS 'È¸¿ø ÀÌ¸ÞÀÏ';
-COMMENT ON COLUMN MEMBER.MEMBER_EMAIL IS 'ÀÌ¸ÞÀÏÀÎÁõ';
-COMMENT ON COLUMN MEMBER.MEMBER_PHONE IS 'È¸¿ø ÀüÈ­¹øÈ£';
-COMMENT ON COLUMN MEMBER.JOIN_DATE IS '°¡ÀÔÀÏ';
-COMMENT ON COLUMN MEMBER.LAST_ACCESS_DATE IS 'ÃÖ±ÙÁ¢¼ÓÀÏ';
+-- MEMBER ï¿½Ã·ï¿½ï¿½ï¿½
+COMMENT ON COLUMN MEMBER.MEMBER_ID IS 'È¸ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½';
+COMMENT ON COLUMN MEMBER.MEMBER_PWD IS 'È¸ï¿½ï¿½ ï¿½Ð½ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN MEMBER.MEMBER_NAME IS 'È¸ï¿½ï¿½ ï¿½Ì¸ï¿½';
+COMMENT ON COLUMN MEMBER.MEMBER_ORIGINAL IS 'Ã·ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN MEMBER.MEMBER_RENAME IS 'Ã·ï¿½ï¿½ï¿½ï¿½ï¿½Ïºï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN MEMBER.MEMBER_EMAIL IS 'È¸ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN MEMBER.MEMBER_EMAIL IS 'ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN MEMBER.MEMBER_PHONE IS 'È¸ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½È£';
+COMMENT ON COLUMN MEMBER.JOIN_DATE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN MEMBER.LAST_ACCESS_DATE IS 'ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
 
-INSERT INTO MEMBER VALUES('admin01', 'admin01', '°ü¸®ÀÚ', NULL, NULL, 'admin01@naver.com', NULL, '010-0000-0000', DEFAULT, DEFAULT);
-INSERT INTO MEMBER VALUES('user01', 'user01', 'ÀÌ¼ø½Å', NULL, NULL, 'user01@naver.com', NULL, '010-1111-1111', DEFAULT, DEFAULT);
-INSERT INTO MEMBER VALUES('user02', 'user02', '±ÇÀ²', NULL, NULL, 'user02@naver.com', NULL, '010-2222-2222', DEFAULT, DEFAULT);
-INSERT INTO MEMBER VALUES('user03', 'user03', '±è½Ã¹Î', NULL, NULL, 'user03@naver.com', NULL, '010-3333-3333', DEFAULT, DEFAULT);
-INSERT INTO MEMBER VALUES('user04', 'user04', '·ù¼º·æ', NULL, NULL, 'user04@naver.com', NULL, '010-4444-4444', DEFAULT, DEFAULT);
-INSERT INTO MEMBER VALUES('user05', 'user05', '±èÀ¯½Å', NULL, NULL, 'user05@naver.com', NULL, '010-5555-5555', DEFAULT, DEFAULT);
+INSERT INTO MEMBER VALUES('admin01', 'admin01', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', NULL, NULL, 'admin01@naver.com', NULL, '010-0000-0000', DEFAULT, DEFAULT);
+INSERT INTO MEMBER VALUES('user01', 'user01', 'ï¿½Ì¼ï¿½ï¿½ï¿½', NULL, NULL, 'user01@naver.com', NULL, '010-1111-1111', DEFAULT, DEFAULT);
+INSERT INTO MEMBER VALUES('user02', 'user02', 'ï¿½ï¿½ï¿½ï¿½', NULL, NULL, 'user02@naver.com', NULL, '010-2222-2222', DEFAULT, DEFAULT);
+INSERT INTO MEMBER VALUES('user03', 'user03', 'ï¿½ï¿½Ã¹ï¿½', NULL, NULL, 'user03@naver.com', NULL, '010-3333-3333', DEFAULT, DEFAULT);
+INSERT INTO MEMBER VALUES('user04', 'user04', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', NULL, NULL, 'user04@naver.com', NULL, '010-4444-4444', DEFAULT, DEFAULT);
+INSERT INTO MEMBER VALUES('user05', 'user05', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', NULL, NULL, 'user05@naver.com', NULL, '010-5555-5555', DEFAULT, DEFAULT);
 
 
--- SECESSION Å×ÀÌºí »èÁ¦
+-- SECESSION ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
+
 DROP TABLE SECESSION CASCADE CONSTRAINTS;
--- SECESSION Å×ÀÌºí »ý¼º
+-- SECESSION ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
 CREATE TABLE SECESSION (
     SECESSION_ID VARCHAR2(20) CONSTRAINT SMID PRIMARY KEY NOT NULL,
     SECESSION_PWD VARCHAR2(20) CONSTRAINT SMPWD NOT NULL,
@@ -48,26 +49,26 @@ CREATE TABLE SECESSION (
     SECESSION_DATE DATE DEFAULT SYSDATE
 );
 
--- SECESSION ÄÃ·³¸í
-COMMENT ON COLUMN SECESSION.SECESSION_ID IS 'Å»ÅðÈ¸¿ø ¾ÆÀÌµð';
-COMMENT ON COLUMN SECESSION.SECESSION_PWD IS 'Å»ÅðÈ¸¿ø ÆÐ½º¿öµå';
-COMMENT ON COLUMN SECESSION.SECESSION_NAME IS 'Å»ÅðÈ¸¿ø ÀÌ¸§';
-COMMENT ON COLUMN SECESSION.SECESSION_EMAIL IS 'Å»ÅðÈ¸¿ø ÀÌ¸ÞÀÏ';
-COMMENT ON COLUMN SECESSION.SECESSION_PHONE IS 'Å»ÅðÈ¸¿ø ÀüÈ­¹øÈ£';
-COMMENT ON COLUMN SECESSION.MJOIN_DATE IS '°¡ÀÔÀÏ';
-COMMENT ON COLUMN SECESSION.SECESSION_DATE IS 'Å»ÅðÀÏ';
+-- SECESSION ï¿½Ã·ï¿½ï¿½ï¿½
+COMMENT ON COLUMN SECESSION.SECESSION_ID IS 'Å»ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½';
+COMMENT ON COLUMN SECESSION.SECESSION_PWD IS 'Å»ï¿½ï¿½È¸ï¿½ï¿½ ï¿½Ð½ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN SECESSION.SECESSION_NAME IS 'Å»ï¿½ï¿½È¸ï¿½ï¿½ ï¿½Ì¸ï¿½';
+COMMENT ON COLUMN SECESSION.SECESSION_EMAIL IS 'Å»ï¿½ï¿½È¸ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN SECESSION.SECESSION_PHONE IS 'Å»ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½È£';
+COMMENT ON COLUMN SECESSION.MJOIN_DATE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN SECESSION.SECESSION_DATE IS 'Å»ï¿½ï¿½ï¿½ï¿½';
 
-INSERT INTO SECESSION VALUES('user06', 'user06', '°ûÀç¿ì', 'user06@naver.com', '010-6666-6666', DEFAULT, DEFAULT);
-INSERT INTO SECESSION VALUES('user07', 'user07', '½Å¸³', 'user07@naver.com', '010-7777-7777', DEFAULT, DEFAULT);
+INSERT INTO SECESSION VALUES('user06', 'user06', 'ï¿½ï¿½ï¿½ï¿½ï¿½', 'user06@naver.com', '010-6666-6666', DEFAULT, DEFAULT);
+INSERT INTO SECESSION VALUES('user07', 'user07', 'ï¿½Å¸ï¿½', 'user07@naver.com', '010-7777-7777', DEFAULT, DEFAULT);
 
 COMMIT;
 
 --**********************************************************************************************************************
 
 
--- Å×ÀÌºí »èÁ¦
+-- ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
 DROP TABLE BANNER  CASCADE CONSTRAINTS;
--- ¹è³Ê °ü¸® Å×ÀÌºí »ý¼º
+-- ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
 CREATE TABLE BANNER (
 	BANNER_NO	 NUMBER CONSTRAINT PK_BA PRIMARY KEY,
 	BANNER_TITLE	VARCHAR2(50)	 CONSTRAINT NN_TITLE NOT NULL,
@@ -80,18 +81,18 @@ CREATE TABLE BANNER (
     CONSTRAINT CHK_BAC CHECK (BANNER_CHK IN ('H','W'))
 );
 
-COMMENT ON COLUMN "BANNER"."BANNER_NO" IS '±Û¹øÈ£';
-COMMENT ON COLUMN "BANNER"."BANNER_TITLE" IS '¹è³ÊÁ¦¸ñ';
-COMMENT ON COLUMN "BANNER"."BANNER_CHK" IS '°Ô½Ã¹è³Ê°ü¸®';
-COMMENT ON COLUMN "BANNER"."BANNER_OK" IS '°Ô½Ã¿©ºÎÈ®ÀÎ';
-COMMENT ON COLUMN "BANNER"."BANNER_ORIGINAL" IS '¿øº»ÆÄÀÏ¸í';
-COMMENT ON COLUMN "BANNER"."BANNER_RENAME" IS '¹Ù²ïÆÄÀÏ¸í';
-COMMENT ON COLUMN "BANNER"."BANNER_SIZE" IS '»çÀÌÁî';
+COMMENT ON COLUMN "BANNER"."BANNER_NO" IS 'ï¿½Û¹ï¿½È£';
+COMMENT ON COLUMN "BANNER"."BANNER_TITLE" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN "BANNER"."BANNER_CHK" IS 'ï¿½Ô½Ã¹ï¿½Ê°ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN "BANNER"."BANNER_OK" IS 'ï¿½Ô½Ã¿ï¿½ï¿½ï¿½È®ï¿½ï¿½';
+COMMENT ON COLUMN "BANNER"."BANNER_ORIGINAL" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½';
+COMMENT ON COLUMN "BANNER"."BANNER_RENAME" IS 'ï¿½Ù²ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½';
+COMMENT ON COLUMN "BANNER"."BANNER_SIZE" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
 
 
--- Å×ÀÌºí »èÁ¦
+-- ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
 DROP TABLE DECLARE_ADMIN CASCADE CONSTRAINTS;
--- ½Å°íÀÚ °ü¸® Å×ÀÌºí »ý¼º
+-- ï¿½Å°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
 CREATE TABLE DECLARE_ADMIN (
 	DECLARE_NO NUMBER	 CONSTRAINT PK_DNO PRIMARY KEY,
 	DECLARE_ID	VARCHAR2(20)		CONSTRAINT NN_ID NOT NULL,
@@ -100,10 +101,10 @@ CREATE TABLE DECLARE_ADMIN (
     CONSTRAINT CHK_DOK CHECK (DECLARE_OK IN ('Y','N'))
 );
 
-COMMENT ON COLUMN "DECLARE_ADMIN"."DECLARE_NO" IS '¼ø¹ø';
-COMMENT ON COLUMN "DECLARE_ADMIN"."DECLARE_ID" IS '½Å°íÈ¸¿ø';
-COMMENT ON COLUMN "DECLARE_ADMIN"."DECLARE_COUNT" IS '½Å°í´çÇÑ È½¼ö';
-COMMENT ON COLUMN "DECLARE_ADMIN"."DECLARE_OK" IS 'Á¦ÇÑ¼³Á¤';
+COMMENT ON COLUMN "DECLARE_ADMIN"."DECLARE_NO" IS 'ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN "DECLARE_ADMIN"."DECLARE_ID" IS 'ï¿½Å°ï¿½È¸ï¿½ï¿½';
+COMMENT ON COLUMN "DECLARE_ADMIN"."DECLARE_COUNT" IS 'ï¿½Å°ï¿½ï¿½ï¿½ï¿½ È½ï¿½ï¿½';
+COMMENT ON COLUMN "DECLARE_ADMIN"."DECLARE_OK" IS 'ï¿½ï¿½ï¿½Ñ¼ï¿½ï¿½ï¿½';
 
 ALTER TABLE DECLARE_ADMIN ADD CONSTRAINT FK_DECLARE_ID FOREIGN KEY(DECLARE_ID) REFERENCES MEMBER(MEMBER_ID);
 
@@ -113,14 +114,14 @@ INSERT INTO DECLARE_ADMIN VALUES(3, 'user03', 4, 'N');
 
 COMMIT;
 
--- Á¦ÇÑ ¼³Á¤µÈ ¸â¹ö ¾ÆÀÌµð Á¶È¸½Ã »ç¿ëÇÒ Äõ¸®¹®
+-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 SELECT MEMBER_ID, DECLARE_OK FROM MEMBER 
 LEFT JOIN DECLARE_ADMIN ON(MEMBER_ID = DECLARE_ID)
 where declare_ok='Y';
 
--- Å×ÀÌºí »èÁ¦
+-- ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
 DROP TABLE DECLARE_BOARD CASCADE CONSTRAINTS;
--- ½Å°í °ü¸® °Ô½ÃÆÇ Å×ÀÌºí »ý¼º
+-- ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
 CREATE TABLE DECLARE_BOARD (
 	DECLARE_NO	NUMBER	 CONSTRAINT PK_NO PRIMARY KEY,
 	MEMBER_ID	 VARCHAR2(20),
@@ -134,28 +135,28 @@ CREATE TABLE DECLARE_BOARD (
 	DECLARE_ID	 VARCHAR2(20)	
 );
 
-COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_NO" IS '±Û¹øÈ£';
-COMMENT ON COLUMN "DECLARE_BOARD"."MEMBER_ID" IS 'ÀÛ¼ºÀÚ';
-COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_TITLE" IS '±ÛÁ¦¸ñ';
-COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_DATE" IS 'µî·ÏÀÏ';
-COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_TYPE" IS '½Å°íÀ¯Çü';
-COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_CONTENT" IS '³»¿ë';
-COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_ORIGINAL" IS '¿øº»ÆÄÀÏ¸í';
-COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_RENAME" IS 'º¯°æÆÄÀÏ¸í';
-COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_URL" IS 'ÇØ´ç±ÛURL';
-COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_ID" IS 'ºí·¢È¸¿øID';
+COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_NO" IS 'ï¿½Û¹ï¿½È£';
+COMMENT ON COLUMN "DECLARE_BOARD"."MEMBER_ID" IS 'ï¿½Û¼ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_TITLE" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_DATE" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_TYPE" IS 'ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_CONTENT" IS 'ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_ORIGINAL" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½';
+COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_RENAME" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½';
+COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_URL" IS 'ï¿½Ø´ï¿½ï¿½URL';
+COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_ID" IS 'ï¿½ï¿½È¸ï¿½ï¿½ID';
 
 
 INSERT INTO declare_board
-VALUES(1, NULL,'½Å°íÇÕ´Ï´Ù.', DEFAULT, 'Áß°í°Å·¡½Å°í', '´©°¡°¡Â¥¹°Ç°À¸·Î°Å·¡¸¦ÇÕ´Ï´Ù.','','','Áß°í°Å·¡URL', NULL );
+VALUES(1, NULL,'ï¿½Å°ï¿½ï¿½Õ´Ï´ï¿½.', DEFAULT, 'ï¿½ß°ï¿½Å·ï¿½ï¿½Å°ï¿½', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¥ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Î°Å·ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.','','','ï¿½ß°ï¿½Å·ï¿½URL', NULL );
 INSERT INTO declare_board
-VALUES(2, NULL,'»ç±â²Û¾ÆÀÌµð½Å°í.', DEFAULT, 'Áß°í°Å·¡½Å°í', 'Àü¿¡º»»ç±â²Û¾ÆÀÌµð¿¡¿ä.','','','Áß°í°Å·¡URL', NULL );
+VALUES(2, NULL,'ï¿½ï¿½ï¿½Û¾ï¿½ï¿½Ìµï¿½Å°ï¿½.', DEFAULT, 'ï¿½ß°ï¿½Å·ï¿½ï¿½Å°ï¿½', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û¾ï¿½ï¿½Ìµð¿¡¿ï¿½.','','','ï¿½ß°ï¿½Å·ï¿½URL', NULL );
 INSERT INTO declare_board
-VALUES(3, NULL,'ºñ¹æ¿åÇÕ´Ï´Ù.', DEFAULT, 'Ä¿¹Â´ÏÆ¼½Å°í', '¿åÇØ¿ä.','','','Áß°í°Å·¡URL', NULL );
+VALUES(3, NULL,'ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.', DEFAULT, 'Ä¿ï¿½Â´ï¿½Æ¼ï¿½Å°ï¿½', 'ï¿½ï¿½ï¿½Ø¿ï¿½.','','','ï¿½ß°ï¿½Å·ï¿½URL', NULL );
 
 
 INSERT INTO BANNER
-VALUES(1, '¿ìÁÖ', DEFAULT, DEFAULT, 'MAIIN.jpg', '', '1080x350' );
+VALUES(1, 'ï¿½ï¿½ï¿½ï¿½', DEFAULT, DEFAULT, 'MAIIN.jpg', '', '1080x350' );
 INSERT INTO BANNER
 VALUES(2, 'sky', DEFAULT, DEFAULT, 'sky.jpg', '', '1080x350' );
 INSERT INTO BANNER
@@ -165,8 +166,8 @@ COMMIT;
 
 
 
--- Áö¿ª ºÐ·ù
-DROP TABLE LOCATION CASCADE CONSTRAINTS;    --Å×ÀÌºí »èÁ¦
+-- ï¿½ï¿½ï¿½ï¿½ ï¿½Ð·ï¿½
+DROP TABLE LOCATION CASCADE CONSTRAINTS;    --ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
 
 CREATE TABLE LOCATION (
 	local_no	VARCHAR2(3)		NOT NULL,   -- PK
@@ -176,43 +177,43 @@ CREATE TABLE LOCATION (
     CONSTRAINT PK_local_no PRIMARY KEY (local_no)
 );
 
-COMMENT ON COLUMN LOCATION.local_no IS 'Áö¿ª¹øÈ£';
-COMMENT ON COLUMN LOCATION.local_name IS 'Áö¿ªÀÌ¸§(±¸)';
-COMMENT ON COLUMN LOCATION.kmap_y IS 'Áö¿ªº° Áß½É À§Ä¡ À§µµ';
-COMMENT ON COLUMN LOCATION.kmap_x IS 'Áö¿ªº° Áß½É À§Ä¡ °æµµ';
+COMMENT ON COLUMN LOCATION.local_no IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
+COMMENT ON COLUMN LOCATION.local_name IS 'ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½(ï¿½ï¿½)';
+COMMENT ON COLUMN LOCATION.kmap_y IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN LOCATION.kmap_x IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß½ï¿½ ï¿½ï¿½Ä¡ ï¿½æµµ';
 
--- Áö¿ª µ¥ÀÌÅÍ »ðÀÔ
+-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 INSERT INTO LOCATION(local_no, local_name, kmap_y, kmap_x)
-SELECT '1', '°­³²±¸', '37.4959854', '127.0664091' FROM DUAL UNION ALL
-SELECT '2', '°­µ¿±¸', '37.5492077', '127.1464824' FROM DUAL UNION ALL
-SELECT '3', '°­ºÏ±¸', '37.6469954', '127.0147158' FROM DUAL UNION ALL
-SELECT '4', '°­¼­±¸', '37.5657617', '126.8226561' FROM DUAL UNION ALL
-SELECT '5', '°ü¾Ç±¸', '37.4653993', '126.9438071' FROM DUAL UNION ALL
-SELECT '6', '±¤Áø±¸', '37.5481445', '127.0857528' FROM DUAL UNION ALL
-SELECT '7', '±¸·Î±¸', '37.4954856', '126.858121' FROM DUAL UNION ALL
-SELECT '8', '±ÝÃµ±¸', '37.4600969', '126.9001546' FROM DUAL UNION ALL
-SELECT '9', '³ë¿ø±¸', '37.655264', '127.0771201' FROM DUAL UNION ALL
-SELECT '10', 'µµºÀ±¸', '37.6658609', '127.0317674' FROM DUAL UNION ALL
-SELECT '11', 'µ¿´ë¹®±¸', '37.5838012', '127.0507003' FROM DUAL UNION ALL
-SELECT '12', 'µ¿ÀÛ±¸', '37.4965037', '126.9443073' FROM DUAL UNION ALL
-SELECT '13', '¸¶Æ÷±¸', '37.5622906', '126.9087803' FROM DUAL UNION ALL
-SELECT '14', '¼­´ë¹®±¸', '37.5820369', '126.9356665' FROM DUAL UNION ALL
-SELECT '15', '¼­ÃÊ±¸', '37.4769528', '127.0378103' FROM DUAL UNION ALL
-SELECT '16', '¼ºµ¿±¸', '37.5506753', '127.0409622' FROM DUAL UNION ALL
-SELECT '17', '¼ººÏ±¸' ,'37.606991', '127.0232185' FROM DUAL UNION ALL
-SELECT '18', '¼ÛÆÄ±¸' ,'37.5048534', '127.1144822' FROM DUAL UNION ALL
-SELECT '19', '¾çÃµ±¸', '37.5270616', '126.8561534' FROM DUAL UNION ALL
-SELECT '20', '¿µµîÆ÷±¸', '37.520641', '126.9139242' FROM DUAL UNION ALL
-SELECT '21', '¿ë»ê±¸', '37.5311008', '126.9810742' FROM DUAL UNION ALL
-SELECT '22', 'ÀºÆò±¸', '37.6176125', '126.9227004' FROM DUAL UNION ALL
-SELECT '23', 'Á¾·Î±¸', '37.5990998', '126.9861493' FROM DUAL UNION ALL
-SELECT '24', 'Áß±¸', '37.5579452', '126.9941904' FROM DUAL UNION ALL
-SELECT '25', 'Áß¶û±¸', '37.5953795', '127.0939669' FROM DUAL;
+SELECT '1', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', '37.4959854', '127.0664091' FROM DUAL UNION ALL
+SELECT '2', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', '37.5492077', '127.1464824' FROM DUAL UNION ALL
+SELECT '3', 'ï¿½ï¿½ï¿½Ï±ï¿½', '37.6469954', '127.0147158' FROM DUAL UNION ALL
+SELECT '4', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', '37.5657617', '126.8226561' FROM DUAL UNION ALL
+SELECT '5', 'ï¿½ï¿½ï¿½Ç±ï¿½', '37.4653993', '126.9438071' FROM DUAL UNION ALL
+SELECT '6', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', '37.5481445', '127.0857528' FROM DUAL UNION ALL
+SELECT '7', 'ï¿½ï¿½ï¿½Î±ï¿½', '37.4954856', '126.858121' FROM DUAL UNION ALL
+SELECT '8', 'ï¿½ï¿½Ãµï¿½ï¿½', '37.4600969', '126.9001546' FROM DUAL UNION ALL
+SELECT '9', 'ï¿½ï¿½ï¿½ï¿½ï¿½', '37.655264', '127.0771201' FROM DUAL UNION ALL
+SELECT '10', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', '37.6658609', '127.0317674' FROM DUAL UNION ALL
+SELECT '11', 'ï¿½ï¿½ï¿½ë¹®ï¿½ï¿½', '37.5838012', '127.0507003' FROM DUAL UNION ALL
+SELECT '12', 'ï¿½ï¿½ï¿½Û±ï¿½', '37.4965037', '126.9443073' FROM DUAL UNION ALL
+SELECT '13', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', '37.5622906', '126.9087803' FROM DUAL UNION ALL
+SELECT '14', 'ï¿½ï¿½ï¿½ë¹®ï¿½ï¿½', '37.5820369', '126.9356665' FROM DUAL UNION ALL
+SELECT '15', 'ï¿½ï¿½ï¿½Ê±ï¿½', '37.4769528', '127.0378103' FROM DUAL UNION ALL
+SELECT '16', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', '37.5506753', '127.0409622' FROM DUAL UNION ALL
+SELECT '17', 'ï¿½ï¿½ï¿½Ï±ï¿½' ,'37.606991', '127.0232185' FROM DUAL UNION ALL
+SELECT '18', 'ï¿½ï¿½ï¿½Ä±ï¿½' ,'37.5048534', '127.1144822' FROM DUAL UNION ALL
+SELECT '19', 'ï¿½ï¿½Ãµï¿½ï¿½', '37.5270616', '126.8561534' FROM DUAL UNION ALL
+SELECT '20', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', '37.520641', '126.9139242' FROM DUAL UNION ALL
+SELECT '21', 'ï¿½ï¿½ê±¸', '37.5311008', '126.9810742' FROM DUAL UNION ALL
+SELECT '22', 'ï¿½ï¿½ï¿½ï¿½', '37.6176125', '126.9227004' FROM DUAL UNION ALL
+SELECT '23', 'ï¿½ï¿½ï¿½Î±ï¿½', '37.5990998', '126.9861493' FROM DUAL UNION ALL
+SELECT '24', 'ï¿½ß±ï¿½', '37.5579452', '126.9941904' FROM DUAL UNION ALL
+SELECT '25', 'ï¿½ß¶ï¿½ï¿½ï¿½', '37.5953795', '127.0939669' FROM DUAL;
 
 COMMIT;
 
--- ÃàÁ¦ Á¤º¸
-DROP TABLE FESTIVAL_INFORMATION CASCADE CONSTRAINTS;    --Å×ÀÌºí »èÁ¦
+-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+DROP TABLE FESTIVAL_INFORMATION CASCADE CONSTRAINTS;    --ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
 CREATE TABLE FESTIVAL_INFORMATION (
 	festival_no	VARCHAR2(12)		NOT NULL,   -- PK
 	local_no	VARCHAR2(3)		NOT NULL,   -- FK : LOCATION(local_no)
@@ -237,30 +238,30 @@ CREATE TABLE FESTIVAL_INFORMATION (
      CONSTRAINT PK_festival_no PRIMARY KEY (festival_no)
 );
 
-COMMENT ON COLUMN FESTIVAL_INFORMATION.festival_no IS 'ÃàÁ¦¹øÈ£';
-COMMENT ON COLUMN FESTIVAL_INFORMATION.local_no IS 'Áö¿ª¹øÈ£2';
-COMMENT ON COLUMN FESTIVAL_INFORMATION.festival_title IS 'ÃàÁ¦¸í';
-COMMENT ON COLUMN FESTIVAL_INFORMATION.area_code IS 'Áö¿ª¹øÈ£1';
-COMMENT ON COLUMN FESTIVAL_INFORMATION.map_y IS 'À§µµ';
-COMMENT ON COLUMN FESTIVAL_INFORMATION.map_x IS '°æµµ';
-COMMENT ON COLUMN FESTIVAL_INFORMATION.addr1 IS 'ÁÖ¼Ò';
-COMMENT ON COLUMN FESTIVAL_INFORMATION.addr2 IS '»ó¼¼ÁÖ¼Ò';
-COMMENT ON COLUMN FESTIVAL_INFORMATION.festival_startdate IS 'ÃàÁ¦ ½ÃÀÛÀÏ';
-COMMENT ON COLUMN FESTIVAL_INFORMATION.festival_enddate IS 'ÃàÁ¦ Á¾·áÀÏ';
-COMMENT ON COLUMN FESTIVAL_INFORMATION.festival_place IS 'ÃàÁ¦ Àå¼Ò';
-COMMENT ON COLUMN FESTIVAL_INFORMATION.festival_homepage IS 'È¨ÆäÀÌÁö ÁÖ¼Ò';
-COMMENT ON COLUMN FESTIVAL_INFORMATION.sponsor IS 'ÁÖ°ü»ç Á¤º¸';
-COMMENT ON COLUMN FESTIVAL_INFORMATION.sponsor_tel IS 'ÁÖ°ü»ç ¿¬¶ôÃ³';
-COMMENT ON COLUMN FESTIVAL_INFORMATION.overview IS '°³¿ä';
-COMMENT ON COLUMN FESTIVAL_INFORMATION.image_original IS 'ÀÌ¹ÌÁö(¿øº»)';
-COMMENT ON COLUMN FESTIVAL_INFORMATION.image_thumbnail IS 'ÀÌ¹ÌÁö(½æ³×ÀÏ)';
-COMMENT ON COLUMN FESTIVAL_INFORMATION.fcreate_date IS 'ÃàÁ¦ µî·ÏÀÏ';
-COMMENT ON COLUMN FESTIVAL_INFORMATION.fmodify_date IS 'ÃàÁ¦ ¼öÁ¤ÀÏ';
-COMMENT ON COLUMN FESTIVAL_INFORMATION.festival_playtime IS 'ÃàÁ¦ ½Ã°£';
+COMMENT ON COLUMN FESTIVAL_INFORMATION.festival_no IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
+COMMENT ON COLUMN FESTIVAL_INFORMATION.local_no IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£2';
+COMMENT ON COLUMN FESTIVAL_INFORMATION.festival_title IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN FESTIVAL_INFORMATION.area_code IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£1';
+COMMENT ON COLUMN FESTIVAL_INFORMATION.map_y IS 'ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN FESTIVAL_INFORMATION.map_x IS 'ï¿½æµµ';
+COMMENT ON COLUMN FESTIVAL_INFORMATION.addr1 IS 'ï¿½Ö¼ï¿½';
+COMMENT ON COLUMN FESTIVAL_INFORMATION.addr2 IS 'ï¿½ï¿½ï¿½Ö¼ï¿½';
+COMMENT ON COLUMN FESTIVAL_INFORMATION.festival_startdate IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN FESTIVAL_INFORMATION.festival_enddate IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN FESTIVAL_INFORMATION.festival_place IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN FESTIVAL_INFORMATION.festival_homepage IS 'È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½';
+COMMENT ON COLUMN FESTIVAL_INFORMATION.sponsor IS 'ï¿½Ö°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN FESTIVAL_INFORMATION.sponsor_tel IS 'ï¿½Ö°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã³';
+COMMENT ON COLUMN FESTIVAL_INFORMATION.overview IS 'ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN FESTIVAL_INFORMATION.image_original IS 'ï¿½Ì¹ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)';
+COMMENT ON COLUMN FESTIVAL_INFORMATION.image_thumbnail IS 'ï¿½Ì¹ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½)';
+COMMENT ON COLUMN FESTIVAL_INFORMATION.fcreate_date IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN FESTIVAL_INFORMATION.fmodify_date IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN FESTIVAL_INFORMATION.festival_playtime IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½';
 
 
--- ÃàÁ¦ °Ô½ÃÆÇ
-DROP TABLE FBOARD CASCADE CONSTRAINTS;    -- Å×ÀÌºí »èÁ¦
+-- ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½
+DROP TABLE FBOARD CASCADE CONSTRAINTS;    -- ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
 
 CREATE TABLE FBOARD (
 	fboard_no	NUMBER		NOT NULL,   -- PK
@@ -269,21 +270,21 @@ CREATE TABLE FBOARD (
 	bmodify_date	DATE	DEFAULT SYSDATE	NULL,
 	bcreate_date	DATE	DEFAULT SYSDATE	NULL,
 	readcount	NUMBER	DEFAULT 0 	NULL,
-	statement_date	CHAR(1)	DEFAULT 'V'	NULL,   -- CHECK : V(view º¸ÀÌ±â) or W(window Ã¢À¸·Î ¾Ë·ÁÁÖ±â) or D(delete »èÁ¦ÇÏ±â)
+	statement_date	CHAR(1)	DEFAULT 'V'	NULL,   -- CHECK : V(view ï¿½ï¿½ï¿½Ì±ï¿½) or W(window Ã¢ï¿½ï¿½ï¿½ï¿½ ï¿½Ë·ï¿½ï¿½Ö±ï¿½) or D(delete ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½)
     CONSTRAINT PK_fboard_no PRIMARY KEY (fboard_no),
     CONSTRAINT CK_statement_date CHECK (statement_date IN('V', 'W', 'D'))
 );
 
-COMMENT ON COLUMN FBOARD.fboard_no IS '°Ô½ÃÆÇ ¹øÈ£';
-COMMENT ON COLUMN FBOARD.festival_no IS 'ÃàÁ¦¹øÈ£';
-COMMENT ON COLUMN FBOARD.MEMBER_ID IS '°ü¸®ÀÚID';
-COMMENT ON COLUMN FBOARD.bmodify_date IS '°Ô½Ã±Û ¼öÁ¤ ³¯Â¥';
-COMMENT ON COLUMN FBOARD.bcreate_date IS '°Ô½Ã±Û µî·Ï ³¯Â¥';
-COMMENT ON COLUMN FBOARD.readcount IS 'Á¶È¸¼ö';
-COMMENT ON COLUMN FBOARD.statement_date IS 'ÃàÁ¦±â°£ »óÅÂ È®ÀÎ';
+COMMENT ON COLUMN FBOARD.fboard_no IS 'ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½È£';
+COMMENT ON COLUMN FBOARD.festival_no IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
+COMMENT ON COLUMN FBOARD.MEMBER_ID IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ID';
+COMMENT ON COLUMN FBOARD.bmodify_date IS 'ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥';
+COMMENT ON COLUMN FBOARD.bcreate_date IS 'ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥';
+COMMENT ON COLUMN FBOARD.readcount IS 'ï¿½ï¿½È¸ï¿½ï¿½';
+COMMENT ON COLUMN FBOARD.statement_date IS 'ï¿½ï¿½ï¿½ï¿½ï¿½â°£ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½';
 
--- ÃàÁ¦ °Ô½ÃÆÇ ´ñ±Û
-DROP TABLE FBOARD_COMMENT CASCADE CONSTRAINTS;    -- Å×ÀÌºí »èÁ¦
+-- ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+DROP TABLE FBOARD_COMMENT CASCADE CONSTRAINTS;    -- ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
 
 CREATE TABLE FBOARD_COMMENT (
 	fcomment_no 	NUMBER		NOT NULL,   -- PK
@@ -294,29 +295,29 @@ CREATE TABLE FBOARD_COMMENT (
     CONSTRAINT PK_fcomment_no PRIMARY KEY (fcomment_no)
 );
 
-COMMENT ON COLUMN FBOARD_COMMENT.fcomment_no IS '´ñ±Û ¹øÈ£';
-COMMENT ON COLUMN FBOARD_COMMENT.fboard_no IS '°Ô½ÃÆÇ ¹øÈ£';
-COMMENT ON COLUMN FBOARD_COMMENT.MEMBER_ID IS 'ÀÛ¼ºÀÚ ¾ÆÀÌµð';
-COMMENT ON COLUMN FBOARD_COMMENT.comment_date IS 'ÀÛ¼º³¯Â¥';
-COMMENT ON COLUMN FBOARD_COMMENT.comment_content IS '´ñ±Û ³»¿ë';
+COMMENT ON COLUMN FBOARD_COMMENT.fcomment_no IS 'ï¿½ï¿½ï¿½ ï¿½ï¿½È£';
+COMMENT ON COLUMN FBOARD_COMMENT.fboard_no IS 'ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½È£';
+COMMENT ON COLUMN FBOARD_COMMENT.MEMBER_ID IS 'ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½';
+COMMENT ON COLUMN FBOARD_COMMENT.comment_date IS 'ï¿½Û¼ï¿½ï¿½ï¿½Â¥';
+COMMENT ON COLUMN FBOARD_COMMENT.comment_content IS 'ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½';
 
---FK ¼³Á¤
+--FK ï¿½ï¿½ï¿½ï¿½
 ALTER TABLE FESTIVAL_INFORMATION ADD CONSTRAINT FK_local_no FOREIGN KEY(local_no) REFERENCES LOCATION(local_no);    -- LOCATION(local_no)
-ALTER TABLE FBOARD ADD CONSTRAINT FK_festival_no FOREIGN KEY(festival_no) REFERENCES FESTIVAL_INFORMATION(festival_no) ON DELETE CASCADE;  -- FESTIVAL_INFORMATION(festival_no), ÃàÁ¦ Á¤º¸ »èÁ¦ ½Ã ÃàÁ¦ °Ô½ÃÆÇµµ »èÁ¦
+ALTER TABLE FBOARD ADD CONSTRAINT FK_festival_no FOREIGN KEY(festival_no) REFERENCES FESTIVAL_INFORMATION(festival_no) ON DELETE CASCADE;  -- FESTIVAL_INFORMATION(festival_no), ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½Çµï¿½ ï¿½ï¿½ï¿½ï¿½
 ALTER TABLE FBOARD ADD CONSTRAINT FK_MEMBER_ID FOREIGN KEY(MEMBER_ID) REFERENCES MEMBER(MEMBER_ID); -- MEMBER(MEMBER_ID) 
-ALTER TABLE FBOARD_COMMENT ADD CONSTRAINT FK_fboard_no FOREIGN KEY(fboard_no) REFERENCES FBOARD(fboard_no) ON DELETE CASCADE;   -- FBOARD(fboard_no),  ÃàÁ¦ °Ô½ÃÆÇ »èÁ¦ ½Ã ´ñ±Ûµµ »èÁ¦
+ALTER TABLE FBOARD_COMMENT ADD CONSTRAINT FK_fboard_no FOREIGN KEY(fboard_no) REFERENCES FBOARD(fboard_no) ON DELETE CASCADE;   -- FBOARD(fboard_no),  ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ûµï¿½ ï¿½ï¿½ï¿½ï¿½
 
--- ÃàÁ¦ Á¤º¸ µ¥ÀÌÅÍ ³Ö±â
+-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö±ï¿½
 INSERT INTO FESTIVAL_INFORMATION(festival_no, local_no, festival_title, festival_startdate, festival_enddate)
-SELECT '325311', '1', '¿À´ÃÁ¡½ÉÀº ¶±ººÀÌ', SYSDATE, SYSDATE FROM DUAL UNION ALL
-SELECT '768712', '2', 'ÀÌ¹ø ÁÖ¸» ³Ê¹« ºý½ê°Ú´Ù', SYSDATE, SYSDATE FROM DUAL UNION ALL
-SELECT '659873', '3', 'Áö¿ªÀº °­ºÏ±¸ÀÔ´Ï´Ù.', SYSDATE, SYSDATE FROM DUAL UNION ALL
-SELECT '213454', '4', 'ÀÌ¹øÁö¿ªÀº °­¼­±¸ ÀÔ´Ï´Ù. 37.5657617126.8226561', SYSDATE, SYSDATE FROM DUAL;
+SELECT '325311', '1', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', SYSDATE, SYSDATE FROM DUAL UNION ALL
+SELECT '768712', '2', 'ï¿½Ì¹ï¿½ ï¿½Ö¸ï¿½ ï¿½Ê¹ï¿½ ï¿½ï¿½ï¿½ï¿½Ú´ï¿½', SYSDATE, SYSDATE FROM DUAL UNION ALL
+SELECT '659873', '3', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï±ï¿½ï¿½Ô´Ï´ï¿½.', SYSDATE, SYSDATE FROM DUAL UNION ALL
+SELECT '213454', '4', 'ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô´Ï´ï¿½. 37.5657617126.8226561', SYSDATE, SYSDATE FROM DUAL;
 
 INSERT INTO FESTIVAL_INFORMATION(festival_no, local_no, festival_title, festival_startdate, festival_enddate)
-VALUES('135486', '5', '´Þ°í³ª Ä¿ÇÇ ³Ê¹« ¸ÀÀÖ´ç', sysdate, sysdate);
+VALUES('135486', '5', 'ï¿½Þ°ï¿½ Ä¿ï¿½ï¿½ ï¿½Ê¹ï¿½ ï¿½ï¿½ï¿½Ö´ï¿½', sysdate, sysdate);
 
--- °Ô½ÃÆÇ Á¤º¸ ³Ö±â
+-- ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö±ï¿½
 INSERT INTO FBOARD(fboard_no, festival_no, member_id, bcreate_date, bmodify_date)
 SELECT '325311', '325311', 'admin01', SYSDATE, SYSDATE FROM DUAL UNION ALL
 SELECT '768712', '768712', 'admin01', SYSDATE, SYSDATE FROM DUAL UNION ALL
@@ -327,7 +328,7 @@ VALUES('213454', '213454', 'admin01', sysdate, sysdate);
 
 --**********************************************************************************************************************
 
---Ä¿¹Â´ÏÆ¼
+--Ä¿ï¿½Â´ï¿½Æ¼
 DROP SEQUENCE CBOARD_SEQ;
 DROP SEQUENCE CREPLY_SEQ;
 DROP TABLE CBOARD CASCADE CONSTRAINTS;
@@ -372,26 +373,26 @@ CREATE TABLE CBOARD (
 	"CFILES_RENAME_FILEPATH4"	VARCHAR2(50)		NULL
 );
 
-COMMENT ON COLUMN "CBOARD"."CBOARD_NO" IS '±Û¹øÈ£';
-COMMENT ON COLUMN "CBOARD"."MEMBER_ID" IS 'È¸¿ø ¾ÆÀÌµð';
-COMMENT ON COLUMN "CBOARD"."CBOARD_TITLE" IS '±ÛÁ¦¸ñ';
-COMMENT ON COLUMN "CBOARD"."CBOARD_CONTENT" IS '±Û³»¿ë';
-COMMENT ON COLUMN "CBOARD"."CBOARD_DATE" IS 'ÀÛ¼ºÀÏ';
-COMMENT ON COLUMN "CBOARD"."CBOARD_LASTMODIFIED" IS '¸¶Áö¸·¼öÁ¤ÀÏ';
-COMMENT ON COLUMN "CBOARD"."CBOARD_VIEWCOUNT" IS 'Á¶È¸¼ö';
-COMMENT ON COLUMN "CBOARD"."CBOARD_REPLYCOUNT" IS '´ñ±Û¼ö';
-COMMENT ON COLUMN "CBOARD"."CBOARD_LIKECOUNT" IS 'ÁÁ¾Æ¿ä¼ö';
-COMMENT ON COLUMN "CBOARD"."CBOARD_REPORTCOUNT" IS '½Å°í¼ö';
-COMMENT ON COLUMN "CBOARD"."CBOARD_DISPLAY" IS '±ÛÇ¥½Ã¿©ºÎ';
-COMMENT ON COLUMN "CBOARD"."LOCAL_NO" IS 'Áö¿ª¹øÈ£';
-COMMENT ON COLUMN "CBOARD"."CFILES_ORIGINAL_FILEPATH1" IS '±âÁ¸ÆÄÀÏ¸í1';
-COMMENT ON COLUMN "CBOARD"."CFILES_RENAME_FILEPATH1" IS 'º¯°æÆÄÀÏ¸í1';
-COMMENT ON COLUMN "CBOARD"."CFILES_ORIGINAL_FILEPATH2" IS '±âÁ¸ÆÄÀÏ¸í2';
-COMMENT ON COLUMN "CBOARD"."CFILES_RENAME_FILEPATH2" IS 'º¯°æÆÄÀÏ¸í2';
-COMMENT ON COLUMN "CBOARD"."CFILES_ORIGINAL_FILEPATH3" IS '±âÁ¸ÆÄÀÏ¸í3';
-COMMENT ON COLUMN "CBOARD"."CFILES_RENAME_FILEPATH3" IS 'º¯°æÆÄÀÏ¸í3';
-COMMENT ON COLUMN "CBOARD"."CFILES_ORIGINAL_FILEPATH4" IS '±âÁ¸ÆÄÀÏ¸í4';
-COMMENT ON COLUMN "CBOARD"."CFILES_RENAME_FILEPATH4" IS 'º¯°æÆÄÀÏ¸í4';
+COMMENT ON COLUMN "CBOARD"."CBOARD_NO" IS 'ï¿½Û¹ï¿½È£';
+COMMENT ON COLUMN "CBOARD"."MEMBER_ID" IS 'È¸ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½';
+COMMENT ON COLUMN "CBOARD"."CBOARD_TITLE" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN "CBOARD"."CBOARD_CONTENT" IS 'ï¿½Û³ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN "CBOARD"."CBOARD_DATE" IS 'ï¿½Û¼ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN "CBOARD"."CBOARD_LASTMODIFIED" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN "CBOARD"."CBOARD_VIEWCOUNT" IS 'ï¿½ï¿½È¸ï¿½ï¿½';
+COMMENT ON COLUMN "CBOARD"."CBOARD_REPLYCOUNT" IS 'ï¿½ï¿½Û¼ï¿½';
+COMMENT ON COLUMN "CBOARD"."CBOARD_LIKECOUNT" IS 'ï¿½ï¿½ï¿½Æ¿ï¿½ï¿½';
+COMMENT ON COLUMN "CBOARD"."CBOARD_REPORTCOUNT" IS 'ï¿½Å°ï¿½ï¿½';
+COMMENT ON COLUMN "CBOARD"."CBOARD_DISPLAY" IS 'ï¿½ï¿½Ç¥ï¿½Ã¿ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN "CBOARD"."LOCAL_NO" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
+COMMENT ON COLUMN "CBOARD"."CFILES_ORIGINAL_FILEPATH1" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½1';
+COMMENT ON COLUMN "CBOARD"."CFILES_RENAME_FILEPATH1" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½1';
+COMMENT ON COLUMN "CBOARD"."CFILES_ORIGINAL_FILEPATH2" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½2';
+COMMENT ON COLUMN "CBOARD"."CFILES_RENAME_FILEPATH2" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½2';
+COMMENT ON COLUMN "CBOARD"."CFILES_ORIGINAL_FILEPATH3" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½3';
+COMMENT ON COLUMN "CBOARD"."CFILES_RENAME_FILEPATH3" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½3';
+COMMENT ON COLUMN "CBOARD"."CFILES_ORIGINAL_FILEPATH4" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½4';
+COMMENT ON COLUMN "CBOARD"."CFILES_RENAME_FILEPATH4" IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½4';
 
 CREATE TABLE CREPLY (
 	"CREPLY_NO"	NUMBER		NOT NULL,
@@ -404,14 +405,14 @@ CREATE TABLE CREPLY (
 	"CREPLY_DEPTH"	NUMBER		NULL
 );
 
-COMMENT ON COLUMN "CREPLY"."CREPLY_NO" IS '´ñ±Û¹øÈ£';
-COMMENT ON COLUMN "CREPLY"."CBOARD_NO" IS '±Û¹øÈ£';
-COMMENT ON COLUMN "CREPLY"."MEMBER_ID" IS 'È¸¿ø ¾ÆÀÌµð';
-COMMENT ON COLUMN "CREPLY"."CREPLY_DATE" IS 'ÀÛ¼ºÀÏ';
-COMMENT ON COLUMN "CREPLY"."CREPLY_CONTENT" IS '´ñ±Û³»¿ë';
-COMMENT ON COLUMN "CREPLY"."PARANT_REPLY" IS 'ºÎ¸ð´ñ±Û¹øÈ£';
-COMMENT ON COLUMN "CREPLY"."CREPLY_ORDER" IS '´ñ±Û¼ø¼­';
-COMMENT ON COLUMN "CREPLY"."CREPLY_DEPTH" IS '´ñ±Û±íÀÌ';
+COMMENT ON COLUMN "CREPLY"."CREPLY_NO" IS 'ï¿½ï¿½Û¹ï¿½È£';
+COMMENT ON COLUMN "CREPLY"."CBOARD_NO" IS 'ï¿½Û¹ï¿½È£';
+COMMENT ON COLUMN "CREPLY"."MEMBER_ID" IS 'È¸ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½';
+COMMENT ON COLUMN "CREPLY"."CREPLY_DATE" IS 'ï¿½Û¼ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN "CREPLY"."CREPLY_CONTENT" IS 'ï¿½ï¿½Û³ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN "CREPLY"."PARANT_REPLY" IS 'ï¿½Î¸ï¿½ï¿½Û¹ï¿½È£';
+COMMENT ON COLUMN "CREPLY"."CREPLY_ORDER" IS 'ï¿½ï¿½Û¼ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN "CREPLY"."CREPLY_DEPTH" IS 'ï¿½ï¿½Û±ï¿½ï¿½ï¿½';
 
 ALTER TABLE CBOARD ADD CONSTRAINT PK_CBOARD PRIMARY KEY (CBOARD_NO);
 ALTER TABLE CREPLY ADD CONSTRAINT PK_CREPLY PRIMARY KEY (CREPLY_NO);
@@ -425,71 +426,71 @@ commit;
 
 -- sample data
 INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DATE) 
-VALUES(CBOARD_SEQ.NEXTVAL, 'user01', 'Ã¹¹øÂ° °Ô½Ã±Û', 'Ã¹¹øÂ° ³»¿ë', DEFAULT);
+VALUES(CBOARD_SEQ.NEXTVAL, 'user01', 'Ã¹ï¿½ï¿½Â° ï¿½Ô½Ã±ï¿½', 'Ã¹ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½', DEFAULT);
 
 INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DATE) 
-VALUES(CBOARD_SEQ.NEXTVAL, 'user01', 'µÎ¹øÂ° °Ô½Ã±Û', 'µÎ¹øÂ° ³»¿ë', DEFAULT);
+VALUES(CBOARD_SEQ.NEXTVAL, 'user01', 'ï¿½Î¹ï¿½Â° ï¿½Ô½Ã±ï¿½', 'ï¿½Î¹ï¿½Â° ï¿½ï¿½ï¿½ï¿½', DEFAULT);
 
 INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DATE) 
-VALUES(CBOARD_SEQ.NEXTVAL, 'user01', '¼¼¹øÂ° °Ô½Ã±Û', '¼¼¹øÂ° ³»¿ë', DEFAULT);
+VALUES(CBOARD_SEQ.NEXTVAL, 'user01', 'ï¿½ï¿½ï¿½ï¿½Â° ï¿½Ô½Ã±ï¿½', 'ï¿½ï¿½ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½', DEFAULT);
 
 INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DATE) 
-VALUES(CBOARD_SEQ.NEXTVAL, 'user01', '³×¹øÂ° °Ô½Ã±Û', '³×¹øÂ° ³»¿ë', DEFAULT);
+VALUES(CBOARD_SEQ.NEXTVAL, 'user01', 'ï¿½×¹ï¿½Â° ï¿½Ô½Ã±ï¿½', 'ï¿½×¹ï¿½Â° ï¿½ï¿½ï¿½ï¿½', DEFAULT);
 
 INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DATE) 
-VALUES(CBOARD_SEQ.NEXTVAL, 'user01', '´Ù¼¸¹øÂ° °Ô½Ã±Û', '´Ù¼¸¹øÂ° ³»¿ë', DEFAULT);
+VALUES(CBOARD_SEQ.NEXTVAL, 'user01', 'ï¿½Ù¼ï¿½ï¿½ï¿½Â° ï¿½Ô½Ã±ï¿½', 'ï¿½Ù¼ï¿½ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½', DEFAULT);
 
 INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DATE) 
-VALUES(CBOARD_SEQ.NEXTVAL, 'user02', '¿©¼¸¹øÂ° °Ô½Ã±Û', '¿©¼¸¹øÂ° ³»¿ë', DEFAULT);
+VALUES(CBOARD_SEQ.NEXTVAL, 'user02', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â° ï¿½Ô½Ã±ï¿½', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½', DEFAULT);
 
 INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DATE) 
-VALUES(CBOARD_SEQ.NEXTVAL, 'user02', 'ÀÏ°ö¹øÂ° °Ô½Ã±Û', 'ÀÏ°ö¹øÂ° ³»¿ë', DEFAULT);
+VALUES(CBOARD_SEQ.NEXTVAL, 'user02', 'ï¿½Ï°ï¿½ï¿½ï¿½Â° ï¿½Ô½Ã±ï¿½', 'ï¿½Ï°ï¿½ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½', DEFAULT);
 
 INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DATE) 
-VALUES(CBOARD_SEQ.NEXTVAL, 'user02', '¿©´ü¹øÂ° °Ô½Ã±Û', '¿©´ü¹øÂ° ³»¿ë', DEFAULT);
+VALUES(CBOARD_SEQ.NEXTVAL, 'user02', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â° ï¿½Ô½Ã±ï¿½', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½', DEFAULT);
 
 INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DATE) 
-VALUES(CBOARD_SEQ.NEXTVAL, 'user02', '¾ÆÈ©¹øÂ° °Ô½Ã±Û', '¾ÆÈ©¹øÂ° ³»¿ë', DEFAULT);
+VALUES(CBOARD_SEQ.NEXTVAL, 'user02', 'ï¿½ï¿½È©ï¿½ï¿½Â° ï¿½Ô½Ã±ï¿½', 'ï¿½ï¿½È©ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½', DEFAULT);
 
 INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DATE) 
-VALUES(CBOARD_SEQ.NEXTVAL, 'user02', '¿­¹øÂ° °Ô½Ã±Û', '¿­¹øÂ° ³»¿ë', DEFAULT);
+VALUES(CBOARD_SEQ.NEXTVAL, 'user02', 'ï¿½ï¿½ï¿½ï¿½Â° ï¿½Ô½Ã±ï¿½', 'ï¿½ï¿½ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½', DEFAULT);
 
 -- sample data
 INSERT INTO CREPLY(CREPLY_NO, CBOARD_NO, MEMBER_ID, CREPLY_DATE, CREPLY_CONTENT) 
-VALUES(CREPLY_SEQ.NEXTVAL, 1, 'user01', DEFAULT, 'Ã¹¹øÂ° ³»¿ë');
+VALUES(CREPLY_SEQ.NEXTVAL, 1, 'user01', DEFAULT, 'Ã¹ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½');
 
 INSERT INTO CREPLY(CREPLY_NO, CBOARD_NO, MEMBER_ID, CREPLY_DATE, CREPLY_CONTENT) 
-VALUES(CREPLY_SEQ.NEXTVAL, 2, 'user01', DEFAULT, 'Ã¹¹øÂ° ³»¿ë');
+VALUES(CREPLY_SEQ.NEXTVAL, 2, 'user01', DEFAULT, 'Ã¹ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½');
 
 INSERT INTO CREPLY(CREPLY_NO, CBOARD_NO, MEMBER_ID, CREPLY_DATE, CREPLY_CONTENT) 
-VALUES(CREPLY_SEQ.NEXTVAL, 3, 'user01', DEFAULT, 'Ã¹¹øÂ° ³»¿ë');
+VALUES(CREPLY_SEQ.NEXTVAL, 3, 'user01', DEFAULT, 'Ã¹ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½');
 
 INSERT INTO CREPLY(CREPLY_NO, CBOARD_NO, MEMBER_ID, CREPLY_DATE, CREPLY_CONTENT) 
-VALUES(CREPLY_SEQ.NEXTVAL, 4, 'user01', DEFAULT, 'Ã¹¹øÂ° ³»¿ë');
+VALUES(CREPLY_SEQ.NEXTVAL, 4, 'user01', DEFAULT, 'Ã¹ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½');
 
 INSERT INTO CREPLY(CREPLY_NO, CBOARD_NO, MEMBER_ID, CREPLY_DATE, CREPLY_CONTENT) 
-VALUES(CREPLY_SEQ.NEXTVAL, 5, 'user01', DEFAULT, 'Ã¹¹øÂ° ³»¿ë');
+VALUES(CREPLY_SEQ.NEXTVAL, 5, 'user01', DEFAULT, 'Ã¹ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½');
 
 INSERT INTO CREPLY(CREPLY_NO, CBOARD_NO, MEMBER_ID, CREPLY_DATE, CREPLY_CONTENT) 
-VALUES(CREPLY_SEQ.NEXTVAL, 6, 'user02', DEFAULT, 'Ã¹¹øÂ° ³»¿ë');
+VALUES(CREPLY_SEQ.NEXTVAL, 6, 'user02', DEFAULT, 'Ã¹ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½');
 
 INSERT INTO CREPLY(CREPLY_NO, CBOARD_NO, MEMBER_ID, CREPLY_DATE, CREPLY_CONTENT) 
-VALUES(CREPLY_SEQ.NEXTVAL, 7, 'user02', DEFAULT, 'Ã¹¹øÂ° ³»¿ë');
+VALUES(CREPLY_SEQ.NEXTVAL, 7, 'user02', DEFAULT, 'Ã¹ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½');
 
 INSERT INTO CREPLY(CREPLY_NO, CBOARD_NO, MEMBER_ID, CREPLY_DATE, CREPLY_CONTENT) 
-VALUES(CREPLY_SEQ.NEXTVAL, 8, 'user02', DEFAULT, 'Ã¹¹øÂ° ³»¿ë');
+VALUES(CREPLY_SEQ.NEXTVAL, 8, 'user02', DEFAULT, 'Ã¹ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½');
 
 INSERT INTO CREPLY(CREPLY_NO, CBOARD_NO, MEMBER_ID, CREPLY_DATE, CREPLY_CONTENT) 
-VALUES(CREPLY_SEQ.NEXTVAL, 9, 'user02', DEFAULT, 'Ã¹¹øÂ° ³»¿ë');
+VALUES(CREPLY_SEQ.NEXTVAL, 9, 'user02', DEFAULT, 'Ã¹ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½');
 
 INSERT INTO CREPLY(CREPLY_NO, CBOARD_NO, MEMBER_ID, CREPLY_DATE, CREPLY_CONTENT) 
-VALUES(CREPLY_SEQ.NEXTVAL, 10, 'user05', DEFAULT, 'Ã¹¹øÂ° ³»¿ë');
+VALUES(CREPLY_SEQ.NEXTVAL, 10, 'user05', DEFAULT, 'Ã¹ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½');
 
 commit;
 
 --**********************************************************************************************************************
 
---Áß°í°Å·¡ÆÄÆ®
+--ï¿½ß°ï¿½Å·ï¿½ï¿½ï¿½Æ®
 DROP TABLE JBOARD_COMMENT CASCADE CONSTRAINTS;
 DROP TABLE JBOARD CASCADE CONSTRAINTS;
 
@@ -518,27 +519,27 @@ CREATE TABLE JBOARD (
 	local_no	VARCHAR2(3)		NOT NULL
 );
 
-COMMENT ON COLUMN JBOARD.JBOARD_NO IS '±Û¹øÈ£';
-COMMENT ON COLUMN JBOARD.JBOARD_TITLE IS 'Á¦¸ñ';
-COMMENT ON COLUMN JBOARD.JBOARD_CONTENT IS '»óÇ°¼³¸í';
-COMMENT ON COLUMN JBOARD.JBOARD_PRICE IS '°¡°Ý';
-COMMENT ON COLUMN JBOARD.JBOARD_DATE IS 'ÀÛ¼ºÀÏ';
-COMMENT ON COLUMN JBOARD.JBOARD_UPDATE IS '¼öÁ¤ÀÏ';
-COMMENT ON COLUMN JBOARD.JBOARD_COUNT IS 'Á¶È¸¼ö';
-COMMENT ON COLUMN JBOARD.JBOARD_LIKE IS 'ÁÁ¾Æ¿ä¼ö';
-COMMENT ON COLUMN JBOARD.JFILES_ORIGINAL_FILEPATH1 IS 'Ã·ºÎÆÄÀÏ±âÁ¸¸í1';
-COMMENT ON COLUMN JBOARD.JFILES_RENAME_FILEPATH1 IS 'Ã·ºÎÆÄÀÏº¯°æ¸í1';
-COMMENT ON COLUMN JBOARD.JFILES_ORIGINAL_FILEPATH2 IS 'Ã·ºÎÆÄÀÏ±âÁ¸¸í2';
-COMMENT ON COLUMN JBOARD.JFILES_RENAME_FILEPATH2 IS 'Ã·ºÎÆÄÀÏº¯°æ¸í2';
-COMMENT ON COLUMN JBOARD.JFILES_ORIGINAL_FILEPATH3 IS 'Ã·ºÎÆÄÀÏ±âÁ¸¸í3';
-COMMENT ON COLUMN JBOARD.JFILES_RENAME_FILEPATH3 IS 'Ã·ºÎÆÄÀÏº¯°æ¸í3';
-COMMENT ON COLUMN JBOARD.JFILES_ORIGINAL_FILEPATH4 IS 'Ã·ºÎÆÄÀÏ±âÁ¸¸í4';
-COMMENT ON COLUMN JBOARD.JFILES_RENAME_FILEPATH4 IS 'Ã·ºÎÆÄÀÏº¯°æ¸í4';
-COMMENT ON COLUMN JBOARD.JBOARD_CHECK IS '°Ô½Ã±ÛÇ¥½Ã¿©ºÎ';
-COMMENT ON COLUMN JBOARD.JBOARD_MEET IS 'Á÷°Å·¡';
-COMMENT ON COLUMN JBOARD.JBOARD_POST IS '¿ìÆí°Å·¡';
-COMMENT ON COLUMN JBOARD.MEMBER_ID IS 'È¸¿ø ¾ÆÀÌµð';
-COMMENT ON COLUMN JBOARD.local_no IS 'Áö¿ª¹øÈ£';
+COMMENT ON COLUMN JBOARD.JBOARD_NO IS 'ï¿½Û¹ï¿½È£';
+COMMENT ON COLUMN JBOARD.JBOARD_TITLE IS 'ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN JBOARD.JBOARD_CONTENT IS 'ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN JBOARD.JBOARD_PRICE IS 'ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN JBOARD.JBOARD_DATE IS 'ï¿½Û¼ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN JBOARD.JBOARD_UPDATE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN JBOARD.JBOARD_COUNT IS 'ï¿½ï¿½È¸ï¿½ï¿½';
+COMMENT ON COLUMN JBOARD.JBOARD_LIKE IS 'ï¿½ï¿½ï¿½Æ¿ï¿½ï¿½';
+COMMENT ON COLUMN JBOARD.JFILES_ORIGINAL_FILEPATH1 IS 'Ã·ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ï¿½ï¿½ï¿½ï¿½1';
+COMMENT ON COLUMN JBOARD.JFILES_RENAME_FILEPATH1 IS 'Ã·ï¿½ï¿½ï¿½ï¿½ï¿½Ïºï¿½ï¿½ï¿½ï¿½1';
+COMMENT ON COLUMN JBOARD.JFILES_ORIGINAL_FILEPATH2 IS 'Ã·ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ï¿½ï¿½ï¿½ï¿½2';
+COMMENT ON COLUMN JBOARD.JFILES_RENAME_FILEPATH2 IS 'Ã·ï¿½ï¿½ï¿½ï¿½ï¿½Ïºï¿½ï¿½ï¿½ï¿½2';
+COMMENT ON COLUMN JBOARD.JFILES_ORIGINAL_FILEPATH3 IS 'Ã·ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ï¿½ï¿½ï¿½ï¿½3';
+COMMENT ON COLUMN JBOARD.JFILES_RENAME_FILEPATH3 IS 'Ã·ï¿½ï¿½ï¿½ï¿½ï¿½Ïºï¿½ï¿½ï¿½ï¿½3';
+COMMENT ON COLUMN JBOARD.JFILES_ORIGINAL_FILEPATH4 IS 'Ã·ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ï¿½ï¿½ï¿½ï¿½4';
+COMMENT ON COLUMN JBOARD.JFILES_RENAME_FILEPATH4 IS 'Ã·ï¿½ï¿½ï¿½ï¿½ï¿½Ïºï¿½ï¿½ï¿½ï¿½4';
+COMMENT ON COLUMN JBOARD.JBOARD_CHECK IS 'ï¿½Ô½Ã±ï¿½Ç¥ï¿½Ã¿ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN JBOARD.JBOARD_MEET IS 'ï¿½ï¿½ï¿½Å·ï¿½';
+COMMENT ON COLUMN JBOARD.JBOARD_POST IS 'ï¿½ï¿½ï¿½ï¿½Å·ï¿½';
+COMMENT ON COLUMN JBOARD.MEMBER_ID IS 'È¸ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½';
+COMMENT ON COLUMN JBOARD.local_no IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
 
 ALTER TABLE JBOARD ADD CONSTRAINT PK_JBOARD PRIMARY KEY (JBOARD_NO);
@@ -569,18 +570,18 @@ REFERENCES MEMBER (MEMBER_ID) ON DELETE CASCADE ;
 
 COMMIT;
 
-COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_NO IS '´ñ±Û¹øÈ£';
-COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_ID IS '´ñ±ÛÀÛ¼ºÀÚ';
-COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_DATE IS '´ñ±ÛÀÛ¼ºÀÏ';
-COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_CONTENT IS '´ñ±Û¸ñ·Ï';
-COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_PARENT IS 'ºÎ¸ð±Û';
-COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_LASTMODIFIED IS '¸¶Áö¸·¼öÁ¤ÀÏ';
-COMMENT ON COLUMN JBOARD_COMMENT.JBOARD_NO IS '±Û¹øÈ£';
-COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_DEPTH IS '´ñ±Û±íÀÌ';
-COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_LEVEL IS '±Û·¹º§';
-COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_REF IS '±¸ºÐ¹øÈ£';
-COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_REPLY_REF IS '´ä±Û¹øÈ£';
-COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_REPLY_SEQ IS '´ä±Û¼ø¹ø';
+COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_NO IS 'ï¿½ï¿½Û¹ï¿½È£';
+COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_ID IS 'ï¿½ï¿½ï¿½ï¿½Û¼ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_DATE IS 'ï¿½ï¿½ï¿½ï¿½Û¼ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_CONTENT IS 'ï¿½ï¿½Û¸ï¿½ï¿½';
+COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_PARENT IS 'ï¿½Î¸ï¿½ï¿½';
+COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_LASTMODIFIED IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN JBOARD_COMMENT.JBOARD_NO IS 'ï¿½Û¹ï¿½È£';
+COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_DEPTH IS 'ï¿½ï¿½Û±ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_LEVEL IS 'ï¿½Û·ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_REF IS 'ï¿½ï¿½ï¿½Ð¹ï¿½È£';
+COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_REPLY_REF IS 'ï¿½ï¿½Û¹ï¿½È£';
+COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_REPLY_SEQ IS 'ï¿½ï¿½Û¼ï¿½ï¿½ï¿½';
 
 CREATE SEQUENCE 
 SEQ_JBOARD_NO
@@ -591,76 +592,76 @@ NOCACHE;
 
 COMMIT;
 INSERT INTO JBOARD VALUES
-(SEQ_JBOARD_NO.nextval,'±ÛÀÇÁ¦¸ñ1','±ÛÀÇ³»¿ë',14000,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
+(SEQ_JBOARD_NO.nextval,'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1','ï¿½ï¿½ï¿½Ç³ï¿½ï¿½ï¿½',14000,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
 NULL,NULL,NULL,NULL,NULL,NULL,NULL,DEFAULT,DEFAULT,DEFAULT,'admin01', 1);
 
 INSERT INTO JBOARD VALUES
-(SEQ_JBOARD_NO.nextval,'»óÇ°ÀÇ Á¦¸ñ2','»óÇ° ¼³¸í 2',133000,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
+(SEQ_JBOARD_NO.nextval,'ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½2','ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ 2',133000,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
 NULL,NULL,NULL,NULL,NULL,NULL,NULL,DEFAULT,DEFAULT,DEFAULT,'admin01', 1);
 
 INSERT INTO JBOARD VALUES
-(SEQ_JBOARD_NO.nextval,'»óÇ°ÀÇ Á¦¸ñ3','»óÇ° ¼³¸í 3',13000,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
+(SEQ_JBOARD_NO.nextval,'ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½3','ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ 3',13000,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
 NULL,NULL,NULL,NULL,NULL,NULL,NULL,DEFAULT,DEFAULT,DEFAULT,'admin01', 1);
 
 INSERT INTO JBOARD VALUES
-(SEQ_JBOARD_NO.nextval,'»óÇ°ÀÇ Á¦¸ñ4','»óÇ° ¼³¸í 4',1300,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
+(SEQ_JBOARD_NO.nextval,'ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½4','ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ 4',1300,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
 NULL,NULL,NULL,NULL,NULL,NULL,NULL,DEFAULT,DEFAULT,DEFAULT,'admin01', 1);
 
 INSERT INTO JBOARD VALUES
-(SEQ_JBOARD_NO.nextval,'»óÇ°ÀÇ Á¦¸ñ5','»óÇ° ¼³¸í 5',100,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
+(SEQ_JBOARD_NO.nextval,'ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½5','ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ 5',100,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
 NULL,NULL,NULL,NULL,NULL,NULL,NULL,DEFAULT,DEFAULT,DEFAULT,'admin01', 1);
 
 INSERT INTO JBOARD VALUES
-(SEQ_JBOARD_NO.nextval,'»óÇ°ÀÇ Á¦¸ñ5','»óÇ° ¼³¸í 5',133000,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
+(SEQ_JBOARD_NO.nextval,'ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½5','ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ 5',133000,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
 NULL,NULL,NULL,NULL,NULL,NULL,NULL,DEFAULT,DEFAULT,DEFAULT,'admin01', 1);
 
 INSERT INTO JBOARD VALUES
-(SEQ_JBOARD_NO.nextval,'»óÇ°ÀÇ Á¦¸ñ6','»óÇ° ¼³¸í 6',233000,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
+(SEQ_JBOARD_NO.nextval,'ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½6','ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ 6',233000,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
 NULL,NULL,NULL,NULL,NULL,NULL,NULL,DEFAULT,DEFAULT,DEFAULT,'admin01', 1);
 
 INSERT INTO JBOARD VALUES
-(SEQ_JBOARD_NO.nextval,'»óÇ°ÀÇ Á¦¸ñ7','»óÇ° ¼³¸í 7',533000,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
+(SEQ_JBOARD_NO.nextval,'ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½7','ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ 7',533000,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
 NULL,NULL,NULL,NULL,NULL,NULL,NULL,DEFAULT,DEFAULT,DEFAULT,'admin01', 1);
 
 INSERT INTO JBOARD VALUES
-(SEQ_JBOARD_NO.nextval,'»óÇ°ÀÇ Á¦¸ñ8','»óÇ° ¼³¸í 8',132000,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
+(SEQ_JBOARD_NO.nextval,'ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½8','ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ 8',132000,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
 NULL,NULL,NULL,NULL,NULL,NULL,NULL,DEFAULT,DEFAULT,DEFAULT,'admin01', 1);
 
 INSERT INTO JBOARD VALUES
-(SEQ_JBOARD_NO.nextval,'»óÇ°ÀÇ Á¦¸ñ9','»óÇ° ¼³¸í 9',33000,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
+(SEQ_JBOARD_NO.nextval,'ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½9','ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ 9',33000,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
 NULL,NULL,NULL,NULL,NULL,NULL,NULL,DEFAULT,DEFAULT,DEFAULT,'admin01', 1);
 
 INSERT INTO JBOARD VALUES
-(SEQ_JBOARD_NO.nextval,'»óÇ°ÀÇ Á¦¸ñ10','»óÇ° ¼³¸í 10',333000,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
+(SEQ_JBOARD_NO.nextval,'ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½10','ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ 10',333000,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
 NULL,NULL,NULL,NULL,NULL,NULL,NULL,DEFAULT,DEFAULT,DEFAULT,'admin01', 1);
 
 INSERT INTO JBOARD VALUES
-(SEQ_JBOARD_NO.nextval,'»óÇ°ÀÇ Á¦¸ñ11','»óÇ° ¼³¸í 11',133000,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
+(SEQ_JBOARD_NO.nextval,'ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½11','ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ 11',133000,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
 NULL,NULL,NULL,NULL,NULL,NULL,NULL,DEFAULT,DEFAULT,DEFAULT,'admin01', 1);
 
--- Áß°í°Å·¡´ñ±Û
+-- ï¿½ß°ï¿½Å·ï¿½ï¿½ï¿½ï¿½
 INSERT INTO JBOARD_COMMENT VALUES
-(1,'admin01',SYSDATE,'ÀÌ°ÍÀÌ ´ñ±Û',1,SYSDATE,1,1,1,1,1,1,1);
+(1,'admin01',SYSDATE,'ï¿½Ì°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½',1,SYSDATE,1,1,1,1,1,1,1);
 INSERT INTO JBOARD_COMMENT VALUES
-(2,'admin01',SYSDATE,'ÀÌ°ÍÀÌ ´ñ±Û',2,SYSDATE,2,1,1,1,1,1,1);
+(2,'admin01',SYSDATE,'ï¿½Ì°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½',2,SYSDATE,2,1,1,1,1,1,1);
 INSERT INTO JBOARD_COMMENT VALUES
-(3,'admin01',SYSDATE,'ÀÌ°ÍÀÌ ´ñ±Û',3,SYSDATE,3,1,1,1,1,1,1);
+(3,'admin01',SYSDATE,'ï¿½Ì°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½',3,SYSDATE,3,1,1,1,1,1,1);
 INSERT INTO JBOARD_COMMENT VALUES
-(4,'admin01',SYSDATE,'ÀÌ°ÍÀÌ ´ñ±Û',4,SYSDATE,4,1,1,1,1,1,1);
+(4,'admin01',SYSDATE,'ï¿½Ì°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½',4,SYSDATE,4,1,1,1,1,1,1);
 INSERT INTO JBOARD_COMMENT VALUES
-(5,'admin01',SYSDATE,'ÀÌ°ÍÀÌ ´ñ±Û',5,SYSDATE,5,1,1,1,1,1,1);
+(5,'admin01',SYSDATE,'ï¿½Ì°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½',5,SYSDATE,5,1,1,1,1,1,1);
 INSERT INTO JBOARD_COMMENT VALUES
-(6,'admin01',SYSDATE,'ÀÌ°ÍÀÌ ´ñ±Û',6,SYSDATE,6,1,1,1,1,1,1);
+(6,'admin01',SYSDATE,'ï¿½Ì°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½',6,SYSDATE,6,1,1,1,1,1,1);
 INSERT INTO JBOARD_COMMENT VALUES
-(7,'admin01',SYSDATE,'ÀÌ°ÍÀÌ ´ñ±Û',7,SYSDATE,7,1,1,1,1,1,1);
+(7,'admin01',SYSDATE,'ï¿½Ì°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½',7,SYSDATE,7,1,1,1,1,1,1);
 INSERT INTO JBOARD_COMMENT VALUES
-(8,'admin01',SYSDATE,'ÀÌ°ÍÀÌ ´ñ±Û',8,SYSDATE,8,1,1,1,1,1,1);
+(8,'admin01',SYSDATE,'ï¿½Ì°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½',8,SYSDATE,8,1,1,1,1,1,1);
 INSERT INTO JBOARD_COMMENT VALUES
-(9,'admin01',SYSDATE,'ÀÌ°ÍÀÌ ´ñ±Û',9,SYSDATE,9,1,1,1,1,1,1);
+(9,'admin01',SYSDATE,'ï¿½Ì°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½',9,SYSDATE,9,1,1,1,1,1,1);
 INSERT INTO JBOARD_COMMENT VALUES
-(10,'admin01',SYSDATE,'ÀÌ°ÍÀÌ ´ñ±Û',1,SYSDATE,10,1,1,1,1,1,1);
+(10,'admin01',SYSDATE,'ï¿½Ì°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½',1,SYSDATE,10,1,1,1,1,1,1);
 INSERT INTO JBOARD_COMMENT VALUES
-(11,'admin01',SYSDATE,'ÀÌ°ÍÀÌ ´ñ±Û',11,SYSDATE,11,1,1,1,1,1,1);
+(11,'admin01',SYSDATE,'ï¿½Ì°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½',11,SYSDATE,11,1,1,1,1,1,1);
 
 DROP TABLE NOTICE CASCADE CONSTRAINTS;
 DROP TABLE FAQ CASCADE CONSTRAINTS;
@@ -670,7 +671,7 @@ DROP TABLE ANSWER CASCADE CONSTRAINTS;
 
 --****************************************************************************************************
 
---°øÁö»çÇ×
+--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 CREATE TABLE NOTICE(
     NO_NO NUMBER,
     NO_ID VARCHAR2(20) NOT NULL,
@@ -684,32 +685,32 @@ CREATE TABLE NOTICE(
     CONSTRAINT PK_NNO PRIMARY KEY (NO_NO),
     CONSTRAINT FK_NID FOREIGN KEY (NO_ID) REFERENCES MEMBER ON DELETE SET NULL
 );
-COMMENT ON COLUMN NOTICE.NO_NO IS '±Û¹øÈ£';
-COMMENT ON COLUMN NOTICE.NO_ID IS '°ü¸®ÀÚ¾ÆÀÌµð';
-COMMENT ON COLUMN NOTICE.NO_TITLE IS 'Á¦¸ñ';
-COMMENT ON COLUMN NOTICE.NO_CONTENT IS '³»¿ë';
-COMMENT ON COLUMN NOTICE.NO_DATE IS 'ÀÛ¼º³¯Â¥';
-COMMENT ON COLUMN NOTICE.NO_COUNT IS 'Á¶È¸¼ö';
-COMMENT ON COLUMN NOTICE.NO_ORIGINAL IS '¿À¸®Áö³ÎÆÄÀÏ';
-COMMENT ON COLUMN NOTICE.NO_RENAME IS '¸®³×ÀÓÆÄÀÏ';
+COMMENT ON COLUMN NOTICE.NO_NO IS 'ï¿½Û¹ï¿½È£';
+COMMENT ON COLUMN NOTICE.NO_ID IS 'ï¿½ï¿½ï¿½ï¿½ï¿½Ú¾ï¿½ï¿½Ìµï¿½';
+COMMENT ON COLUMN NOTICE.NO_TITLE IS 'ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN NOTICE.NO_CONTENT IS 'ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN NOTICE.NO_DATE IS 'ï¿½Û¼ï¿½ï¿½ï¿½Â¥';
+COMMENT ON COLUMN NOTICE.NO_COUNT IS 'ï¿½ï¿½È¸ï¿½ï¿½';
+COMMENT ON COLUMN NOTICE.NO_ORIGINAL IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN NOTICE.NO_RENAME IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
 
-INSERT INTO NOTICE VALUES(1, 'admin01', '°øÁö»çÇ× ¿ÀÇÂÀÔ´Ï´Ù.', '°øÁö»çÇ×ÀÌ µåµð¾î ¿ÀÇÂÇß½À´Ï´Ù. ¸¹ÀÌ ÀÌ¿ëÇØÁÖ¼¼¿ä~', '2020/06/30', 5, null, null);
-INSERT INTO NOTICE VALUES(2, 'admin01', '°øÁö»çÇ×1', 'Áß°í°Å·¡ÇÒ ¶§ ÁÖÀÇÇØÁÖ¼¼¿ä~', '2020/07/01', 3, null, null);
-INSERT INTO NOTICE VALUES(3, 'admin01', '°øÁö»çÇ×2', 'Ä¿¹Â´ÏÆ¼¿¡ ±ÛÀ» ¿Ã¸± ¶§ ¿åÀº ±ÝÁöÀÔ´Ï´Ù~', '2020/07/03', 1, null, null);
-INSERT INTO NOTICE VALUES(4, 'admin01', '°øÁö»çÇ×3', '½Å°í¸¦ ´çÇÏ¸é ºí·¢¸®½ºÆ®¿¡ ¿Ã·ÁÁú ¼ö ÀÖ½À´Ï´Ù. ÁÖÀÇÇØÁÖ¼¼¿ä', '2020/07/03', 6, null, null);
-INSERT INTO NOTICE VALUES(5, 'admin01', '°øÁö»çÇ×4', 'ºí·¢¸®½ºÆ®¿¡ ¿Ã·ÁÁö¸é ·Î±×ÀÎ Á¦ÇÑÀÌ ÀÖÀ» ¼ö ÀÖ½À´Ï´Ù.', '2020/07/05', 10, null, null);
-INSERT INTO NOTICE VALUES(6, 'admin01', '°øÁö»çÇ×5', '°øÁö»çÇ×ÀÌ µåµð¾î ¿ÀÇÂÇß½À´Ï´Ù. ¸¹ÀÌ ÀÌ¿ëÇØÁÖ¼¼¿ä~', '2020/07/07', 5, null, null);
-INSERT INTO NOTICE VALUES(7, 'admin01', '°øÁö»çÇ×6', 'Áß°í°Å·¡ÇÒ ¶§ ÁÖÀÇÇØÁÖ¼¼¿ä~', '2020/07/10', 3, null, null);
-INSERT INTO NOTICE VALUES(8, 'admin01', '°øÁö»çÇ×7', 'Ä¿¹Â´ÏÆ¼¿¡ ±ÛÀ» ¿Ã¸± ¶§ ¿åÀº ±ÝÁöÀÔ´Ï´Ù~', '2020/07/11', 1, null, null);
-INSERT INTO NOTICE VALUES(9, 'admin01', '°øÁö»çÇ×8', '½Å°í¸¦ ´çÇÏ¸é ºí·¢¸®½ºÆ®¿¡ ¿Ã·ÁÁú ¼ö ÀÖ½À´Ï´Ù. ÁÖÀÇÇØÁÖ¼¼¿ä', '2020/07/13', 6, null, null);
-INSERT INTO NOTICE VALUES(10, 'admin01', '°øÁö»çÇ×9', 'ºí·¢¸®½ºÆ®¿¡ ¿Ã·ÁÁö¸é ·Î±×ÀÎ Á¦ÇÑÀÌ ÀÖÀ» ¼ö ÀÖ½À´Ï´Ù.', '2020/07/20', 10, null, null);
-INSERT INTO NOTICE VALUES(11, 'admin01', '°øÁö»çÇ×10', '°øÁö»çÇ×ÀÌ µåµð¾î ¿ÀÇÂÇß½À´Ï´Ù. ¸¹ÀÌ ÀÌ¿ëÇØÁÖ¼¼¿ä~', '2020/07/25', 5, null, null);
-INSERT INTO NOTICE VALUES(12, 'admin01', '°øÁö»çÇ×11', 'Áß°í°Å·¡ÇÒ ¶§ ÁÖÀÇÇØÁÖ¼¼¿ä~', '2020/07/26', 3, null, null);
-INSERT INTO NOTICE VALUES(13, 'admin01', '°øÁö»çÇ×12', 'Ä¿¹Â´ÏÆ¼¿¡ ±ÛÀ» ¿Ã¸± ¶§ ¿åÀº ±ÝÁöÀÔ´Ï´Ù~', '2020/07/24', 1, null, null);
-INSERT INTO NOTICE VALUES(14, 'admin01', '°øÁö»çÇ×13', '½Å°í¸¦ ´çÇÏ¸é ºí·¢¸®½ºÆ®¿¡ ¿Ã·ÁÁú ¼ö ÀÖ½À´Ï´Ù. ÁÖÀÇÇØÁÖ¼¼¿ä', '2020/07/27', 6, null, null);
-INSERT INTO NOTICE VALUES(15, 'admin01', '°øÁö»çÇ×14', 'ºí·¢¸®½ºÆ®¿¡ ¿Ã·ÁÁö¸é ·Î±×ÀÎ Á¦ÇÑÀÌ ÀÖÀ» ¼ö ÀÖ½À´Ï´Ù.', '2020/07/30', 10, null, null);
+INSERT INTO NOTICE VALUES(1, 'admin01', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½~', '2020/06/30', 5, null, null);
+INSERT INTO NOTICE VALUES(2, 'admin01', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1', 'ï¿½ß°ï¿½Å·ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½~', '2020/07/01', 3, null, null);
+INSERT INTO NOTICE VALUES(3, 'admin01', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2', 'Ä¿ï¿½Â´ï¿½Æ¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã¸ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½~', '2020/07/03', 1, null, null);
+INSERT INTO NOTICE VALUES(4, 'admin01', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½3', 'ï¿½Å°ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½', '2020/07/03', 6, null, null);
+INSERT INTO NOTICE VALUES(5, 'admin01', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½4', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½.', '2020/07/05', 10, null, null);
+INSERT INTO NOTICE VALUES(6, 'admin01', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½5', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½~', '2020/07/07', 5, null, null);
+INSERT INTO NOTICE VALUES(7, 'admin01', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½6', 'ï¿½ß°ï¿½Å·ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½~', '2020/07/10', 3, null, null);
+INSERT INTO NOTICE VALUES(8, 'admin01', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½7', 'Ä¿ï¿½Â´ï¿½Æ¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã¸ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½~', '2020/07/11', 1, null, null);
+INSERT INTO NOTICE VALUES(9, 'admin01', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½8', 'ï¿½Å°ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½', '2020/07/13', 6, null, null);
+INSERT INTO NOTICE VALUES(10, 'admin01', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½9', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½.', '2020/07/20', 10, null, null);
+INSERT INTO NOTICE VALUES(11, 'admin01', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½10', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½~', '2020/07/25', 5, null, null);
+INSERT INTO NOTICE VALUES(12, 'admin01', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½11', 'ï¿½ß°ï¿½Å·ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½~', '2020/07/26', 3, null, null);
+INSERT INTO NOTICE VALUES(13, 'admin01', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½12', 'Ä¿ï¿½Â´ï¿½Æ¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã¸ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½~', '2020/07/24', 1, null, null);
+INSERT INTO NOTICE VALUES(14, 'admin01', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½13', 'ï¿½Å°ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½', '2020/07/27', 6, null, null);
+INSERT INTO NOTICE VALUES(15, 'admin01', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½14', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½.', '2020/07/30', 10, null, null);
 
---ÀÚÁÖ¹¯´ÂÁú¹®
+--ï¿½ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 CREATE TABLE FAQ(
     FAQ_NO NUMBER,
     FAQ_ID VARCHAR2(20) NOT NULL,
@@ -722,44 +723,44 @@ CREATE TABLE FAQ(
     CONSTRAINT PK_FNO PRIMARY KEY (FAQ_NO),
     CONSTRAINT FK_FID FOREIGN KEY (FAQ_ID) REFERENCES MEMBER ON DELETE SET NULL
 );
-COMMENT ON COLUMN FAQ.FAQ_NO IS '±Û¹øÈ£';
-COMMENT ON COLUMN FAQ.FAQ_ID IS '°ü¸®ÀÚ ¾ÆÀÌµð';
-COMMENT ON COLUMN FAQ.FAQ_TITLE IS 'Á¦¸ñ';
-COMMENT ON COLUMN FAQ.FAQ_CONTENT IS '³»¿ë';
-COMMENT ON COLUMN FAQ.FAQ_DATE IS 'ÀÛ¼º³¯Â¥';
-COMMENT ON COLUMN FAQ.FAQ_COUNT IS 'Á¶È¸¼ö';
-COMMENT ON COLUMN FAQ.FAQ_CATEGORY IS 'È¸¿ø1, Áß°í2, Ä¿¹Â3, ÃàÁ¦4';
+COMMENT ON COLUMN FAQ.FAQ_NO IS 'ï¿½Û¹ï¿½È£';
+COMMENT ON COLUMN FAQ.FAQ_ID IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½';
+COMMENT ON COLUMN FAQ.FAQ_TITLE IS 'ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN FAQ.FAQ_CONTENT IS 'ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN FAQ.FAQ_DATE IS 'ï¿½Û¼ï¿½ï¿½ï¿½Â¥';
+COMMENT ON COLUMN FAQ.FAQ_COUNT IS 'ï¿½ï¿½È¸ï¿½ï¿½';
+COMMENT ON COLUMN FAQ.FAQ_CATEGORY IS 'È¸ï¿½ï¿½1, ï¿½ß°ï¿½2, Ä¿ï¿½ï¿½3, ï¿½ï¿½ï¿½ï¿½4';
 
-INSERT INTO FAQ VALUES(1, 'admin01', 'Áß°í°Å·¡´Â ¾î¶² ¹æ½ÄÀÎ°¡¿ä?', 'Á÷°Å·¡ ¹æ½ÄÀÔ´Ï´Ù~', '2020/06/30', 5, 2);
-INSERT INTO FAQ VALUES(2, 'admin01', '·Î±×ÀÎÀº ¾î¶»°Ô ÇÏ³ª¿ä?', '¿À¸¥ÂÊ »ó´Ü À§¿¡ ·Î±×ÀÎ ¹öÆ°À» ´­·¯ÁÖ¼¼¿ä~', '2020/07/01', 3, 1);
-INSERT INTO FAQ VALUES(3, 'admin01', '·Î±×¾Æ¿ôÀº ¾î¶»°Ô ÇÏ³ª¿ä?', '¿À¸¥ÂÊ »ó´Ü À§¿¡ ·Î±×ÀÎ ¹öÆ°À» ´­·¯ÁÖ¼¼¿ä~', '2020/07/03', 1, 1);
-INSERT INTO FAQ VALUES(4, 'admin01', 'Å»Åð´Â ¾î¶»°Ô ÇÏ³ª¿ä?', 'È¸¿øÁ¤º¸¼öÁ¤ÆäÀÌÁö¿¡¼­ Å»ÅðÇÏ±â ¹öÆ°À» ´­·¯ÁÖ¼¼¿ä', '2020/07/03', 6, 1);
-INSERT INTO FAQ VALUES(5, 'admin01', '³»Á¤º¸´Â ¾î¶»°Ô ¼öÁ¤ÇÏ³ª¿ä', 'È¸¿øÁ¤º¸¼öÁ¤ÆäÀÌÁö¿¡¼­ ¼öÁ¤ÇÏ±â ¹öÆ°À» ´­·¯ÁÖ¼¼¿ä', '2020/07/05', 10, 1);
-INSERT INTO FAQ VALUES(6, 'admin01', 'Áß°í°Å·¡~~', '¤±¤··Ò¤©¿È¿À¸ö¤©¿Ë¤©¸ö¤·¤©È¨¤··Ò¤·¤¾¤·¤¤¤±¤¾¤±¤·¤¯¤¼¤º', '2020/07/07', 5, 2);
-INSERT INTO FAQ VALUES(7, 'admin01', 'Ä¿¹Â´ÏÆ¼~~', '¤¸¤§¤¡¤§¤¡¼î¤Å;¤Ó¤¾¤·¤©¤»¤©¤··ÎÅß¤Á¤Ë¤µ¤¡¤©¤·¤¤ÄÚ·Ž', '2020/07/10', 3, 3);
-INSERT INTO FAQ VALUES(8, 'admin01', 'Ä¿¹Â´ÏÆ¼~~3', '~~~~~~~~¤·¤±¸®¤¿¤¤¤·¤©¤¤‘§³²¿Ã¤·¤¤¤±¤¾¤¤¤±¤¤¤·¤¾¤¤¤±¤¾~~~~~~~~~~~~~~~', '2020/07/11', 1, 3);
-INSERT INTO FAQ VALUES(9, 'admin01', 'Áö¿ªÃàÁ¦', '~~~~~~~~¤¾¤±¤¦¤¤¤±¤·¤¾¤¤¤±¤¾¤±~~~~~~¤¤¤±¤¾¤¤¤±¤·¤¾¤¤¤±¤·¤¾¤¤¤±~~~~~~~~~', '2020/07/13', 6, 4);
-INSERT INTO FAQ VALUES(10, 'admin01', 'Áö¿ªÃàÁ¦123', '~~~~~~~~¤±¤¦¤¤¤±¿È³ð¤¾¤±³ð³ó³ð¿È¿À~~~~~~~~~~~~~~~', '2020/07/20', 10, 4);
-INSERT INTO FAQ VALUES(11, 'admin01', 'Áß°í°Å·¡32~~', '¤±¤··Ò¤©¿È¿À¸ö¤©¿Ë¤©¸ö¤·¤©È¨¤··Ò¤·¤¾¤·¤¤¤±¤¾¤±¤·¤¯¤¼¤º', '2020/07/23', 5, 2);
-INSERT INTO FAQ VALUES(12, 'admin01', 'Ä¿¹Â´ÏÆ¼235~~', '¤¸¤§¤¡¤§¤¡¼î¤Å;¤Ó¤¾¤·¤©¤»¤©¤··ÎÅß¤Á¤Ë¤µ¤¡¤©¤·¤¤ÄÚ·Ž', '2020/07/24', 3, 3);
-INSERT INTO FAQ VALUES(13, 'admin01', 'Ä¿¹Â´ÏÆ¼~~', '~~~~~~~~¤·¤±¸®¤¿¤¤¤·¤©¤¤‘§³²¿Ã¤·¤¤¤±¤¾¤¤¤±¤¤¤·¤¾¤¤¤±¤¾~~~~~~~~~~~~~~~', '2020/07/12', 1, 3);
-INSERT INTO FAQ VALUES(14, 'admin01', 'Áö¿ªÃàÁ¦26', '~~~~~~~~¤¾¤±¤¦¤¤¤±¤·¤¾¤¤¤±¤¾¤±~~~~~~¤¤¤±¤¾¤¤¤±¤·¤¾¤¤¤±¤·¤¾¤¤¤±~~~~~~~~~', '2020/07/13', 6, 4);
-INSERT INTO FAQ VALUES(15, 'admin01', 'Áö¿ªÃàÁ¦98', '~~~~~~~~¤±¤¦¤¤¤±¿È³ð¤¾¤±³ð³ó³ð¿È¿À~~~~~~~~~~~~~~~', '2020/07/26', 10, 4);
+INSERT INTO FAQ VALUES(1, 'admin01', 'ï¿½ß°ï¿½Å·ï¿½ï¿½ï¿½ ï¿½î¶² ï¿½ï¿½ï¿½ï¿½Î°ï¿½ï¿½ï¿½?', 'ï¿½ï¿½ï¿½Å·ï¿½ ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½~', '2020/06/30', 5, 2);
+INSERT INTO FAQ VALUES(2, 'admin01', 'ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½î¶»ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½?', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½~', '2020/07/01', 3, 1);
+INSERT INTO FAQ VALUES(3, 'admin01', 'ï¿½Î±×¾Æ¿ï¿½ï¿½ï¿½ ï¿½î¶»ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½?', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½~', '2020/07/03', 1, 1);
+INSERT INTO FAQ VALUES(4, 'admin01', 'Å»ï¿½ï¿½ï¿½ ï¿½î¶»ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½?', 'È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å»ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½', '2020/07/03', 6, 1);
+INSERT INTO FAQ VALUES(5, 'admin01', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½î¶»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï³ï¿½ï¿½ï¿½', 'È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½', '2020/07/05', 10, 1);
+INSERT INTO FAQ VALUES(6, 'admin01', 'ï¿½ß°ï¿½Å·ï¿½~~', 'ï¿½ï¿½ï¿½ï¿½ï¿½Ò¤ï¿½ï¿½È¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½Ò¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', '2020/07/07', 5, 2);
+INSERT INTO FAQ VALUES(7, 'admin01', 'Ä¿ï¿½Â´ï¿½Æ¼~~', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½;ï¿½Ó¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¤ï¿½ï¿½Ë¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú·ï¿½', '2020/07/10', 3, 3);
+INSERT INTO FAQ VALUES(8, 'admin01', 'Ä¿ï¿½Â´ï¿½Æ¼~~3', '~~~~~~~~ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½~~~~~~~~~~~~~~~', '2020/07/11', 1, 3);
+INSERT INTO FAQ VALUES(9, 'admin01', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', '~~~~~~~~ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½~~~~~~ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½~~~~~~~~~', '2020/07/13', 6, 4);
+INSERT INTO FAQ VALUES(10, 'admin01', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½123', '~~~~~~~~ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È³ð¤¾¤ï¿½ï¿½ï¿½ï¿½ï¿½È¿ï¿½~~~~~~~~~~~~~~~', '2020/07/20', 10, 4);
+INSERT INTO FAQ VALUES(11, 'admin01', 'ï¿½ß°ï¿½Å·ï¿½32~~', 'ï¿½ï¿½ï¿½ï¿½ï¿½Ò¤ï¿½ï¿½È¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½Ò¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', '2020/07/23', 5, 2);
+INSERT INTO FAQ VALUES(12, 'admin01', 'Ä¿ï¿½Â´ï¿½Æ¼235~~', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½;ï¿½Ó¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¤ï¿½ï¿½Ë¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú·ï¿½', '2020/07/24', 3, 3);
+INSERT INTO FAQ VALUES(13, 'admin01', 'Ä¿ï¿½Â´ï¿½Æ¼~~', '~~~~~~~~ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½~~~~~~~~~~~~~~~', '2020/07/12', 1, 3);
+INSERT INTO FAQ VALUES(14, 'admin01', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½26', '~~~~~~~~ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½~~~~~~ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½~~~~~~~~~', '2020/07/13', 6, 4);
+INSERT INTO FAQ VALUES(15, 'admin01', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½98', '~~~~~~~~ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È³ð¤¾¤ï¿½ï¿½ï¿½ï¿½ï¿½È¿ï¿½~~~~~~~~~~~~~~~', '2020/07/26', 10, 4);
 
---À¯Çü
+--ï¿½ï¿½ï¿½ï¿½
 CREATE TABLE IQTYPE(
     IQ_TYPE VARCHAR2(20) CONSTRAINT PK_IQTYPE PRIMARY KEY
 );
-COMMENT ON COLUMN IQTYPE.IQ_TYPE IS 'À¯Çü';
+COMMENT ON COLUMN IQTYPE.IQ_TYPE IS 'ï¿½ï¿½ï¿½ï¿½';
 
-INSERT INTO IQTYPE VALUES('È¸¿øÁ¤º¸');
-INSERT INTO IQTYPE VALUES('Áß°í°Å·¡ ½Å°í');
-INSERT INTO IQTYPE VALUES('Ä¿¹Â´ÏÆ¼ ½Å°í');
-INSERT INTO IQTYPE VALUES('¿À·ù');
-INSERT INTO IQTYPE VALUES('Á¦¾ÈÇÏ±â');
-INSERT INTO IQTYPE VALUES('±âÅ¸');
+INSERT INTO IQTYPE VALUES('È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+INSERT INTO IQTYPE VALUES('ï¿½ß°ï¿½Å·ï¿½ ï¿½Å°ï¿½');
+INSERT INTO IQTYPE VALUES('Ä¿ï¿½Â´ï¿½Æ¼ ï¿½Å°ï¿½');
+INSERT INTO IQTYPE VALUES('ï¿½ï¿½ï¿½ï¿½');
+INSERT INTO IQTYPE VALUES('ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½');
+INSERT INTO IQTYPE VALUES('ï¿½ï¿½Å¸');
 
---¹®ÀÇ°Ô½Ã±Û
+--ï¿½ï¿½ï¿½Ç°Ô½Ã±ï¿½
 CREATE TABLE INQUIRY(
     IQ_NO NUMBER,
     IQ_ID VARCHAR2(20) CONSTRAINT FK_IQID REFERENCES MEMBER ON DELETE CASCADE,
@@ -776,36 +777,36 @@ CREATE TABLE INQUIRY(
     IQ_TYPE VARCHAR2(20) NOT NULL CONSTRAINT FK_IQTYPE REFERENCES IQTYPE,
     CONSTRAINT PK_IQNOID PRIMARY KEY (IQ_NO, IQ_ID)
 );
-COMMENT ON COLUMN INQUIRY.IQ_NO IS '±Û¹øÈ£';
-COMMENT ON COLUMN INQUIRY.IQ_ID IS 'È¸¿ø¾ÆÀÌµð';
-COMMENT ON COLUMN INQUIRY.IQ_TITLE IS 'Á¦¸ñ';
-COMMENT ON COLUMN INQUIRY.IQ_CONTENT IS '³»¿ë';
-COMMENT ON COLUMN INQUIRY.IQ_DATE IS 'ÀÛ¼º³¯Â¥';
-COMMENT ON COLUMN INQUIRY.IQ_ANSWER IS '´äº¯¿©ºÎ';
-COMMENT ON COLUMN INQUIRY.IQ_ORIGINAL IS '¿À¸®Áö³Î ÆÄÀÏ';
-COMMENT ON COLUMN INQUIRY.IQ_RENAME IS '¸®³×ÀÓ ÆÄÀÏ';
-COMMENT ON COLUMN INQUIRY.IQ_ORIGINAL2 IS '¿À¸®Áö³Î ÆÄÀÏ2';
-COMMENT ON COLUMN INQUIRY.IQ_RENAME2 IS '¸®³×ÀÓ ÆÄÀÏ2';
-COMMENT ON COLUMN INQUIRY.IQ_ORIGINAL3 IS '¿À¸®Áö³Î ÆÄÀÏ3';
-COMMENT ON COLUMN INQUIRY.IQ_RENAME3 IS '¸®³×ÀÓ ÆÄÀÏ3';
-COMMENT ON COLUMN INQUIRY.IQ_TYPE IS 'À¯Çü';
+COMMENT ON COLUMN INQUIRY.IQ_NO IS 'ï¿½Û¹ï¿½È£';
+COMMENT ON COLUMN INQUIRY.IQ_ID IS 'È¸ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½';
+COMMENT ON COLUMN INQUIRY.IQ_TITLE IS 'ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN INQUIRY.IQ_CONTENT IS 'ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN INQUIRY.IQ_DATE IS 'ï¿½Û¼ï¿½ï¿½ï¿½Â¥';
+COMMENT ON COLUMN INQUIRY.IQ_ANSWER IS 'ï¿½äº¯ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN INQUIRY.IQ_ORIGINAL IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN INQUIRY.IQ_RENAME IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN INQUIRY.IQ_ORIGINAL2 IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½2';
+COMMENT ON COLUMN INQUIRY.IQ_RENAME2 IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½2';
+COMMENT ON COLUMN INQUIRY.IQ_ORIGINAL3 IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½3';
+COMMENT ON COLUMN INQUIRY.IQ_RENAME3 IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½3';
+COMMENT ON COLUMN INQUIRY.IQ_TYPE IS 'ï¿½ï¿½ï¿½ï¿½';
 
--- INSERTÇÏ·Á¸é ¾ÆÀÌµðÁ¤º¸°¡ ÇÊ¿äÇÕ´Ï´Ù~~~~~
-INSERT INTO INQUIRY VALUES(1, 'user01', '¹®ÀÇÇÒ²²¿ä', '¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ', '2020/06/01', DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, 'È¸¿øÁ¤º¸');
-INSERT INTO INQUIRY VALUES(2, 'user04', 'È¸¿øÁ¤º¸', '¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ', '2020/06/02', DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, 'È¸¿øÁ¤º¸');
-INSERT INTO INQUIRY VALUES(3, 'user02', '¾È³ç~~', '¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ', '2020/06/03', 'Y', NULL, NULL, NULL, NULL, NULL, NULL, 'È¸¿øÁ¤º¸');
-INSERT INTO INQUIRY VALUES(4, 'user03', 'Å»ÅðÇÒ·¡¿ä~', '¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ', '2020/06/07', 'Y', NULL, NULL, NULL, NULL, NULL, NULL, 'È¸¿øÁ¤º¸');
-INSERT INTO INQUIRY VALUES(5, 'user01', 'È¸¿øÁ¤º¸ ¼öÁ¤ÇÏ°í½Í¾î¿ä', '¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ', '2020/06/09', DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, 'È¸¿øÁ¤º¸');
-INSERT INTO INQUIRY VALUES(6, 'user02', '¼öÁ¤ÇÒ·¡¿ä', '¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ', '2020/06/12', DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, 'È¸¿øÁ¤º¸');
-INSERT INTO INQUIRY VALUES(7, 'user03', '¼öÁ¤ÇÏ°í ½ÍÀºµ¥ ¾î¶»°Ô ÇØ¿ä', '¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ', '2020/06/14', DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, 'È¸¿øÁ¤º¸');
-INSERT INTO INQUIRY VALUES(8, 'user05', '¿À·ù¹ß°ßÇß¾î¿ä', '¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ', '2020/07/03', DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, '¿À·ù');
-INSERT INTO INQUIRY VALUES(9, 'user01', '°Ë»ö¿À·ùÀÔ´Ï´Ù/', '¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ', '2020/07/07', DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, '¿À·ù');
-INSERT INTO INQUIRY VALUES(10, 'user02', 'È¸¿ø°¡ÀÔÇÏ·Á´Âµ¥ ¾ÈµÇ³×¿ä', '¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ', '2020/07/07', 'Y', NULL, NULL, NULL, NULL, NULL, NULL, '¿À·ù');
-INSERT INTO INQUIRY VALUES(11, 'user02', '»çÁøÀº 3°³ÀÌ»ó¾ÈµÇ³ª¿ä', '¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ', '2020/07/16', DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, '¿À·ù');
-INSERT INTO INQUIRY VALUES(12, 'user03', 'Á¦¾ÈÇÒ²²¿ä', '¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ', '2020/07/17', 'Y', NULL, NULL, NULL, NULL, NULL, NULL, 'Á¦¾ÈÇÏ±â');
-INSERT INTO INQUIRY VALUES(13, 'user04', '±âÅ¸¹®ÀÇ»çÇ×ÀÔ´Ï´Ù.', '¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ', '2020/07/18', 'Y', NULL, NULL, NULL, NULL, NULL, NULL, '±âÅ¸');
+-- INSERTï¿½Ï·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½Õ´Ï´ï¿½~~~~~
+INSERT INTO INQUIRY VALUES(1, 'user01', 'ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½', 'ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½', '2020/06/01', DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, 'È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+INSERT INTO INQUIRY VALUES(2, 'user04', 'È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', 'ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½', '2020/06/02', DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, 'È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+INSERT INTO INQUIRY VALUES(3, 'user02', 'ï¿½È³ï¿½~~', 'ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½', '2020/06/03', 'Y', NULL, NULL, NULL, NULL, NULL, NULL, 'È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+INSERT INTO INQUIRY VALUES(4, 'user03', 'Å»ï¿½ï¿½ï¿½Ò·ï¿½ï¿½ï¿½~', 'ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½', '2020/06/07', 'Y', NULL, NULL, NULL, NULL, NULL, NULL, 'È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+INSERT INTO INQUIRY VALUES(5, 'user01', 'È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½Í¾ï¿½ï¿½', 'ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½', '2020/06/09', DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, 'È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+INSERT INTO INQUIRY VALUES(6, 'user02', 'ï¿½ï¿½ï¿½ï¿½ï¿½Ò·ï¿½ï¿½ï¿½', 'ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½', '2020/06/12', DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, 'È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+INSERT INTO INQUIRY VALUES(7, 'user03', 'ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½î¶»ï¿½ï¿½ ï¿½Ø¿ï¿½', 'ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½', '2020/06/14', DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, 'È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+INSERT INTO INQUIRY VALUES(8, 'user05', 'ï¿½ï¿½ï¿½ï¿½ï¿½ß°ï¿½ï¿½ß¾ï¿½ï¿½', 'ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½', '2020/07/03', DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, 'ï¿½ï¿½ï¿½ï¿½');
+INSERT INTO INQUIRY VALUES(9, 'user01', 'ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½/', 'ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½', '2020/07/07', DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, 'ï¿½ï¿½ï¿½ï¿½');
+INSERT INTO INQUIRY VALUES(10, 'user02', 'È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½Âµï¿½ ï¿½ÈµÇ³×¿ï¿½', 'ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½', '2020/07/07', 'Y', NULL, NULL, NULL, NULL, NULL, NULL, 'ï¿½ï¿½ï¿½ï¿½');
+INSERT INTO INQUIRY VALUES(11, 'user02', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 3ï¿½ï¿½ï¿½Ì»ï¿½ÈµÇ³ï¿½ï¿½ï¿½', 'ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½', '2020/07/16', DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, 'ï¿½ï¿½ï¿½ï¿½');
+INSERT INTO INQUIRY VALUES(12, 'user03', 'ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½', 'ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½', '2020/07/17', 'Y', NULL, NULL, NULL, NULL, NULL, NULL, 'ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½');
+INSERT INTO INQUIRY VALUES(13, 'user04', 'ï¿½ï¿½Å¸ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.', 'ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½', '2020/07/18', 'Y', NULL, NULL, NULL, NULL, NULL, NULL, 'ï¿½ï¿½Å¸');
 
---´äº¯°Ô½Ã±Û
+--ï¿½äº¯ï¿½Ô½Ã±ï¿½
 CREATE TABLE ANSWER(
     AN_NO NUMBER NOT NULL CONSTRAINT PK_ANNO PRIMARY KEY,
     AN_CONTENT VARCHAR2(4000) NOT NULL,
@@ -814,18 +815,18 @@ CREATE TABLE ANSWER(
     IQ_ID VARCHAR2(20) NOT NULL,
     CONSTRAINT FK_IQUNOID FOREIGN KEY (IQ_NO, IQ_ID) REFERENCES INQUIRY ON DELETE CASCADE
 );
-COMMENT ON COLUMN ANSWER.AN_NO IS '±Û¹øÈ£';
-COMMENT ON COLUMN ANSWER.AN_CONTENT IS '³»¿ë';
-COMMENT ON COLUMN ANSWER.AN_DATE IS 'ÀÛ¼º³¯Â¥';
-COMMENT ON COLUMN ANSWER.IQ_NO IS '¿ø±Û¹øÈ£';
-COMMENT ON COLUMN ANSWER.IQ_ID IS '¿ø±ÛÀÛ¼ºÀÚ';
+COMMENT ON COLUMN ANSWER.AN_NO IS 'ï¿½Û¹ï¿½È£';
+COMMENT ON COLUMN ANSWER.AN_CONTENT IS 'ï¿½ï¿½ï¿½ï¿½';
+COMMENT ON COLUMN ANSWER.AN_DATE IS 'ï¿½Û¼ï¿½ï¿½ï¿½Â¥';
+COMMENT ON COLUMN ANSWER.IQ_NO IS 'ï¿½ï¿½ï¿½Û¹ï¿½È£';
+COMMENT ON COLUMN ANSWER.IQ_ID IS 'ï¿½ï¿½ï¿½ï¿½ï¿½Û¼ï¿½ï¿½ï¿½';
 
--- INSERTÇÏ·Á¸é ¾ÆÀÌµðÁ¤º¸°¡ ÇÊ¿äÇÕ´Ï´Ù~~~~~
-INSERT INTO ANSWER VALUES(1, '¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ', '2020/06/03', '3', 'user02');
-INSERT INTO ANSWER VALUES(2, '¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ', '2020/06/07', '4', 'user03');
-INSERT INTO ANSWER VALUES(3, '¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ', '2020/06/16', '12', 'user03');
-INSERT INTO ANSWER VALUES(4, '¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ', '2020/07/01', '13', 'user04');
-INSERT INTO ANSWER VALUES(5, '¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ¹®ÀÇ', '2020/06/16', '10', 'user02');
+-- INSERTï¿½Ï·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½Õ´Ï´ï¿½~~~~~
+INSERT INTO ANSWER VALUES(1, 'ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½', '2020/06/03', '3', 'user02');
+INSERT INTO ANSWER VALUES(2, 'ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½', '2020/06/07', '4', 'user03');
+INSERT INTO ANSWER VALUES(3, 'ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½', '2020/06/16', '12', 'user03');
+INSERT INTO ANSWER VALUES(4, 'ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½', '2020/07/01', '13', 'user04');
+INSERT INTO ANSWER VALUES(5, 'ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½', '2020/06/16', '10', 'user02');
 
 COMMIT;
 

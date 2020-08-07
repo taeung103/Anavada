@@ -11,6 +11,11 @@ package org.apache.jsp.views.cboard;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+<<<<<<< HEAD
+=======
+import cboard.model.vo.Cboard;
+import member.model.vo.Member;
+>>>>>>> community_list
 
 public final class community_005fview_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent,
@@ -23,9 +28,15 @@ public final class community_005fview_jsp extends org.apache.jasper.runtime.Http
 
   static {
     _jspx_dependants = new java.util.HashMap<java.lang.String,java.lang.Long>(3);
+<<<<<<< HEAD
     _jspx_dependants.put("/views/cboard/../include/footer.jsp", Long.valueOf(1596516824045L));
     _jspx_dependants.put("/views/cboard/../include/head.jsp", Long.valueOf(1596516824046L));
     _jspx_dependants.put("/views/cboard/../include/header.jsp", Long.valueOf(1596683566365L));
+=======
+    _jspx_dependants.put("/views/cboard/../include/footer.jsp", Long.valueOf(1596761326252L));
+    _jspx_dependants.put("/views/cboard/../include/head.jsp", Long.valueOf(1596705633788L));
+    _jspx_dependants.put("/views/cboard/../include/header.jsp", Long.valueOf(1596767964510L));
+>>>>>>> community_list
   }
 
   private static final java.util.Set<java.lang.String> _jspx_imports_packages;
@@ -37,7 +48,13 @@ public final class community_005fview_jsp extends org.apache.jasper.runtime.Http
     _jspx_imports_packages.add("javax.servlet");
     _jspx_imports_packages.add("javax.servlet.http");
     _jspx_imports_packages.add("javax.servlet.jsp");
+<<<<<<< HEAD
     _jspx_imports_classes = null;
+=======
+    _jspx_imports_classes = new java.util.HashSet<>();
+    _jspx_imports_classes.add("cboard.model.vo.Cboard");
+    _jspx_imports_classes.add("member.model.vo.Member");
+>>>>>>> community_list
   }
 
   private volatile javax.el.ExpressionFactory _el_expressionfactory;
@@ -114,6 +131,20 @@ public final class community_005fview_jsp extends org.apache.jasper.runtime.Http
       _jspx_out = out;
 
       out.write("\r\n");
+<<<<<<< HEAD
+=======
+      out.write("\r\n");
+
+	Cboard cboard = (Cboard)request.getAttribute("cboard");
+	String local = String.valueOf(request.getAttribute("local"));
+	String search = String.valueOf(request.getAttribute("search"));
+	String keyword = String.valueOf(request.getAttribute("keyword"));
+	int currentPage = ((Integer) request.getAttribute("page")).intValue();
+	int allListCount = ((Integer) request.getAttribute("allListCount")).intValue();
+	String[] localArr = { "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구" };
+
+      out.write("\r\n");
+>>>>>>> community_list
       out.write("<!DOCTYPE html>\r\n");
       out.write("<html>\r\n");
       out.write("<head>\r\n");
@@ -161,6 +192,12 @@ public final class community_005fview_jsp extends org.apache.jasper.runtime.Http
       out.write("<body oncontextmenu=\"return false\" onselectstart=\"return false\" ondragstart=\"return false\">\r\n");
       out.write("    <div id=\"wrap\">\r\n");
       out.write("        ");
+<<<<<<< HEAD
+=======
+      out.write('\r');
+      out.write('\n');
+ Member loginMember = (Member)session.getAttribute("loginMember"); 
+>>>>>>> community_list
       out.write("\r\n");
       out.write("<div id=\"header\">\r\n");
       out.write("\t<!-- 상단메뉴 -->\r\n");
@@ -169,6 +206,7 @@ public final class community_005fview_jsp extends org.apache.jasper.runtime.Http
       out.write("        <dd>\r\n");
       out.write("            <ul class=\"gnb clearfix\">\r\n");
       out.write("                <li><a href=\"/anavada/jblist\">중고거래</a></li>\r\n");
+<<<<<<< HEAD
       out.write("                <li><a href=\"../cboard/community_list.jsp\">커뮤니티</a></li>\r\n");
       out.write("                <li><a href=\"../fboard/areaEvent_list.jsp\">지역축제</a></li>\r\n");
       out.write("                <li>\r\n");
@@ -177,6 +215,16 @@ public final class community_005fview_jsp extends org.apache.jasper.runtime.Http
       out.write("                        <a href=\"../notice/notice_list.jsp\">공지사항</a>\r\n");
       out.write("                        <a href=\"../notice/faq_list.jsp\">FAQ</a>\r\n");
       out.write("                        <a href=\"../inquiry/inquiry_list.jsp\">문의하기</a>\r\n");
+=======
+      out.write("                <li><a href=\"/anavada/clistview?page=1&local=0\">커뮤니티</a></li>\r\n");
+      out.write("                <li><a href=\"../fboard/areaEvent_list.jsp\">지역축제</a></li>\r\n");
+      out.write("                <li>\r\n");
+      out.write("                    <a href=\"/anavada/nlist\">고객센터</a>\r\n");
+      out.write("                    <div class=\"subGnb\">\r\n");
+      out.write("                        <a href=\"/anavada/nlist\">공지사항</a>\r\n");
+      out.write("                        <a href=\"/anavada/views/notice/faq_list.jsp\">FAQ</a>\r\n");
+      out.write("                        <a href=\"/anavada/views/inquiry/inquiry_list.jsp\">문의하기</a>\r\n");
+>>>>>>> community_list
       out.write("                        <a href=\"../declare/declare_list.jsp\">신고하기</a>\r\n");
       out.write("                    </div>\r\n");
       out.write("                </li>\r\n");
@@ -190,9 +238,30 @@ public final class community_005fview_jsp extends org.apache.jasper.runtime.Http
       out.write("                        <button class=\"top-search\"><i class=\"xi-search\"></i></button>\r\n");
       out.write("                    </form>\r\n");
       out.write("                </li>\r\n");
+<<<<<<< HEAD
       out.write("                <li><a class=\"hover_line01\" href=\"../member/MyInfoModify.jsp\">MYPAGE</a></li>\r\n");
       out.write("                <li><a class=\"hover_line01\" href=\"../member/join_agree.jsp\">JOIN</a></li>\r\n");
       out.write("                <li><a class=\"hover_line01\" href=\"../member/login.jsp\">LOGIN</a></li>\r\n");
+=======
+      out.write("                ");
+ if(loginMember == null){ 
+      out.write("\r\n");
+      out.write("                <li><a class=\"hover_line01\" href=\"../member/join_agree.jsp\">JOIN</a></li>\r\n");
+      out.write("                <li><a class=\"hover_line01\" href=\"../member/login.jsp\">LOGIN</a></li>\r\n");
+      out.write("                ");
+ } else if(loginMember.getMemberId().equals("admin")){ 
+      out.write("\r\n");
+      out.write("                <li><a class=\"hover_line01\" href=\"../admin/member/memberList.jsp\">관리자페이지</a></li>\r\n");
+      out.write("                <li><a class=\"hover_line01\" href=\"/anavada/logout\">LOGOUT</a></li>\r\n");
+      out.write("                ");
+ } else { 
+      out.write("\r\n");
+      out.write("                <li><a class=\"hover_line01\" href=\"../member/MyInfoModify.jsp\">MYPAGE</a></li>\r\n");
+      out.write("                <li><a class=\"hover_line01\" href=\"/anavada/logout\">LOGOUT</a></li>\r\n");
+      out.write("                ");
+ } 
+      out.write("\r\n");
+>>>>>>> community_list
       out.write("                <li><i id=\"favorite\" class=\"xi-star-o\" title=\"즐겨찾기 등록\"></i></li>\r\n");
       out.write("            </ul>\r\n");
       out.write("        </dt>\r\n");
@@ -222,6 +291,7 @@ public final class community_005fview_jsp extends org.apache.jasper.runtime.Http
       out.write("\r\n");
       out.write("            <!-- 상세 -->\r\n");
       out.write("            <div class=\"view-area cmnt_view\">\r\n");
+<<<<<<< HEAD
       out.write("                <h2><span>종로구</span>종로구 20대 모여라~</h2>\r\n");
       out.write("                <ul>\r\n");
       out.write("                    <li><span>작성자 : </span>홍길동</li>\r\n");
@@ -274,6 +344,79 @@ public final class community_005fview_jsp extends org.apache.jasper.runtime.Http
       out.write("                    <a href=\"#none\" class=\"btn btn-prev\">이전글</a>\r\n");
       out.write("                    <a href=\"notice_list.jsp\" class=\"btn btn-list\">목록</a>\r\n");
       out.write("                    <a href=\"#none\" class=\"btn btn-next\">다음글</a>\r\n");
+=======
+      out.write("                <h2><span>");
+      out.print( localArr[Integer.parseInt(cboard.getLocalNo()) - 1] );
+      out.write("</span>");
+      out.print(cboard.getCboardTitle() );
+      out.write("</h2>\r\n");
+      out.write("                <ul>\r\n");
+      out.write("                    <li><span>작성자 : </span>");
+      out.print( cboard.getMemberId() );
+      out.write("</li>\r\n");
+      out.write("                    <li><span>등록일 : </span>");
+      out.print( cboard.getDate() );
+      out.write("</li>\r\n");
+      out.write("                    <li><span>조회수 : </span>");
+      out.print( cboard.getCboardViewCount() );
+      out.write("</li>\r\n");
+      out.write("                    <li><span>첨부파일#1 : </span><a href=\"#none\" download>지역소통_강서구.pdf</a></li>\r\n");
+      out.write("                    <li><i class=\"good_i glyphicon glyphicon-heart-empty\">좋아요<span>");
+      out.print( cboard.getLikeCount() );
+      out.write("</span></i></li>\r\n");
+      out.write("                </ul>\r\n");
+      out.write("\r\n");
+      out.write("                <div class=\"view-ctn\">\r\n");
+      out.write("\t\t\t\t\t");
+      out.print( cboard.getCboardContent() );
+      out.write("\r\n");
+      out.write("                </div>\r\n");
+      out.write("\r\n");
+      out.write("                <div class=\"view-btn\">\r\n");
+      out.write("                \t");
+ if(cboard.getCboardNo() - 1 > 1) { 
+      out.write("\r\n");
+      out.write("                    \t<a href=\"/anavada/cdetail?cnum=");
+      out.print(cboard.getCboardNo()-1);
+      out.write("&page=");
+      out.print(currentPage);
+      out.write("&local=");
+      out.print(local);
+      out.write("&search=");
+      out.print(search);
+      out.write("&keyword=");
+      out.print(keyword);
+      out.write("\" class=\"btn btn-prev\">이전글</a>\r\n");
+      out.write("                    ");
+ } 
+      out.write("\r\n");
+      out.write("                    <a href=\"/anavada/clistview?page=");
+      out.print(currentPage);
+      out.write("&local=");
+      out.print(local);
+      out.write("&search=");
+      out.print(search);
+      out.write("&keyword=");
+      out.print(keyword);
+      out.write("\" class=\"btn btn-list\">목록</a>\r\n");
+      out.write("                    ");
+ if(cboard.getCboardNo() + 1 < allListCount) { 
+      out.write("\r\n");
+      out.write("                    <a href=\"/anavada/cdetail?cnum=");
+      out.print(cboard.getCboardNo()+1);
+      out.write("&page=");
+      out.print(currentPage);
+      out.write("&local=");
+      out.print(local);
+      out.write("&search=");
+      out.print(search);
+      out.write("&keyword=");
+      out.print(keyword);
+      out.write("\" class=\"btn btn-next\">다음글</a>\r\n");
+      out.write("                    ");
+ } 
+      out.write("\r\n");
+>>>>>>> community_list
       out.write("                </div>\r\n");
       out.write("                \r\n");
       out.write("                <div class=\"cmt_wrap\">\r\n");
@@ -345,7 +488,10 @@ public final class community_005fview_jsp extends org.apache.jasper.runtime.Http
       out.write("            <a href=\"../etc/terms.jsp\">이용약관</a>\r\n");
       out.write("            <a href=\"../etc/privacy.jsp\">개인정보처리방침</a>\r\n");
       out.write("            <a href=\"../etc/email.jsp\">이메일무단수집거부</a>\r\n");
+<<<<<<< HEAD
       out.write("            <a href=\"../admin/member/memberList.jsp\">관리자</a>\r\n");
+=======
+>>>>>>> community_list
       out.write("        </dt>\r\n");
       out.write("        <dd>\r\n");
       out.write("        \tAnavada | 서울특별시 중구 남대문로 120 대일빌딩 2F, 3F | 대표자 : 공유 | 개인정보 담당자 : 강동원 | 고객센터 : 1577-7777<br/>\r\n");
