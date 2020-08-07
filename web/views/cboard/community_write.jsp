@@ -31,7 +31,7 @@
             <!-- 글쓰기 -->
             <div class="write-area">
                 <h2>커뮤니티 작성</h2>
-                <form action="" method="">
+                <form action="/anavada/cinsert" method="post">
                     <table>
                         <colgroup>
                             <col width="20%">
@@ -42,32 +42,32 @@
                                 <td>지역 분류</td>
                                 <td>
                                     <select name="" class="LocationSelect">
-                                        <option value="지역선택" selected="selected">지역선택</option>
-                                        <option value="강남구">강남구</option>
-                                        <option value="강동구">강동구</option>
-                                        <option value="강북구">강북구</option>
-                                        <option value="강서구">강서구</option>
-                                        <option value="관악구">관악구</option>
-                                        <option value="광진구">광진구</option>
-                                        <option value="구로구">구로구</option>
-                                        <option value="금천구">금천구</option>
-                                        <option value="노원구">노원구</option>
-                                        <option value="도봉구">도봉구</option>
-                                        <option value="동대문구">동대문구</option>
-                                        <option value="동작구">동작구</option>
-                                        <option value="마포구">마포구</option>
-                                        <option value="서대문구">서대문구</option>
-                                        <option value="서초구">서초구</option>
-                                        <option value="성동구">성동구</option>
-                                        <option value="성북구">성북구</option>
-                                        <option value="송파구">송파구</option>
-                                        <option value="양천구">양천구</option>
-                                        <option value="영등포구">영등포구</option>
-                                        <option value="용산구">용산구</option>
-                                        <option value="은평구">은평구</option>
-                                        <option value="종로구">종로구</option>
-                                        <option value="중구">중구</option>
-                                        <option value="구로구">중랑구</option>
+                                        <option selected="selected">지역선택</option>
+                                        <option value="1">강남구</option>
+                                        <option value="2">강동구</option>
+                                        <option value="3">강북구</option>
+                                        <option value="4">강서구</option>
+                                        <option value="5">관악구</option>
+                                        <option value="6">광진구</option>
+                                        <option value="7">구로구</option>
+                                        <option value="8">금천구</option>
+                                        <option value="9">노원구</option>
+                                        <option value="10">도봉구</option>
+                                        <option value="11">동대문구</option>
+                                        <option value="12">동작구</option>
+                                        <option value="13">마포구</option>
+                                        <option value="14">서대문구</option>
+                                        <option value="15">서초구</option>
+                                        <option value="16">성동구</option>
+                                        <option value="17">성북구</option>
+                                        <option value="18">송파구</option>
+                                        <option value="19">양천구</option>
+                                        <option value="20">영등포구</option>
+                                        <option value="21">용산구</option>
+                                        <option value="22">은평구</option>
+                                        <option value="23">종로구</option>
+                                        <option value="24">중구</option>
+                                        <option value="25">중랑구</option>
                                     </select>
                                 </td>
                             </tr>
@@ -86,8 +86,8 @@
                         </tbody>
                     </table>
                     <div class="write-btn">
-                        <a href="community_list.jsp" class="btn btn-list">목록</a>
-                        <a href="#" class="btn btn-success">작성하기</a>
+                        <a href="/anavada/clistview?page=1&local=0" class="btn btn-list">목록</a>
+                        <button class="btn btn-success" onclick="location.href=/anavada/cinsert">작성하기</button>
                     </div>
                 </form>
             </div>
