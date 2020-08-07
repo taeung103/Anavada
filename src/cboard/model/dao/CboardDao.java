@@ -29,17 +29,19 @@ public class CboardDao {
 					+ "from (select * from cboard "
 					+ (local != null && !local.equals("0") ? "where local_no = ? " : "");
 		if (local != null && !local.equals("0")) {
-			query += (search != null && search.equals("title") ? "and cboard_title like ?" : "");
-			query += (search != null && search.equals("content") ? "and cboard_content like ?" : "");
-			query += (search != null && search.equals("writer") ? "and member_id like ?" : "");
+			query += (search != null && search.equals("title") ? "and cboard_title like ? " : "");
+			query += (search != null && search.equals("content") ? "and cboard_content like ? " : "");
+			query += (search != null && search.equals("writer") ? "and member_id like ? " : "");
 		} else {
-			query += (search != null && search.equals("title") ? "where cboard_title like ?" : "");
-			query += (search != null && search.equals("content") ? "where cboard_content like ?" : "");
-			query += (search != null && search.equals("writer") ? "where member_id like ?" : "");
+			query += (search != null && search.equals("title") ? "where cboard_title like ? " : "");
+			query += (search != null && search.equals("content") ? "where cboard_content like ? " : "");
+			query += (search != null && search.equals("writer") ? "where member_id like ? " : "");
 		}
 		
 		query += "order by cboard_no desc)) where rnum >= ? and rnum <= ?";
-
+		
+		System.out.println(query);
+		
 		int startRow = (currentPage - 1) * limit + 1;
 		int endRow = startRow + limit - 1;
 		
@@ -49,9 +51,14 @@ public class CboardDao {
 			if (local != null && !local.equals("0")) {
 				pstmt.setString(pstmtnum++, local);
 			}
-			if (search != null) {
+			System.out.println(search);
+			System.out.println(pstmtnum);
+//			search == null || search.equals("title") || search.equals("content") || search.equals("writer")
+			if ((search != null && search.equals("")) || (search != null && search.equals("title"))
+					|| (search != null && search.equals("content")) || (search != null &&search.equals("writer"))) {
 				pstmt.setString(pstmtnum++, "%" + keyword + "%");
 			}
+			System.out.println(pstmtnum);
 			pstmt.setInt(pstmtnum++, startRow);
 			pstmt.setInt(pstmtnum++, endRow);
 			
@@ -98,14 +105,19 @@ public class CboardDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		
-		String query = null;
+		String query = "select count(*) from cboard ";
 		
-		if (local == null || local.equals("0")) {
-			query ="select count(*) from cboard";
+		query += (local != null && !local.equals("0") ? "where local_no = " + local : "");
+		if (local != null && !local.equals("0")) {
+			query += (search != null && search.equals("title") ? " and cboard_title like " + "'%" + keyword + "%' " : "");
+			query += (search != null && search.equals("content") ? " and cboard_content like " + "'%" + keyword + "%' " : "");
+			query += (search != null && search.equals("writer") ? " and member_id like " + "'%" + keyword + "%' " : "");
 		} else {
-			query ="select count(*) from cboard where local_no = " + local;
+			query += (search != null && search.equals("title") ? " where cboard_title like " + "'%" + keyword + "%' " : "");
+			query += (search != null && search.equals("content") ? " where cboard_content like " + "'%" + keyword + "%' " : "");
+			query += (search != null && search.equals("writer") ? " where member_id like " + "'%" + keyword + "%' " : "");
 		}
-		
+		System.out.println(query);
 		try {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(query);

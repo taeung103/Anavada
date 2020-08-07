@@ -87,7 +87,8 @@
 								<option value="25"<% if (local.equals("25")) { %>selected="selected"<% } %>>중랑구</option>
 							</select>
 						</form>
-						<form action="/anavada/clistview?local=<%=local%>"  style="display: inline-block;">
+						<form action="/anavada/clistview"  style="display: inline-block;">
+							<input type="hidden" name="local" value="<%=local%>">
 							<select name="search" class="ListSelect">
 								<option value="title">제목</option>
 								<option value="content">내용</option>
@@ -129,7 +130,7 @@
 
 				<div class="list-no">
 					<%
-						if (endPage + 1 > maxPage) {
+						if (currentPage + 1 > maxPage) {
 					%>
 					<p>
 						<img src="/anavada/resources/images/btnIcn/icn_big_listNo.png"
@@ -152,10 +153,20 @@
 
 			<!-- 리스트 끝 -->
 
+""
 			
 			<!-- 페이지넘버 -->
 			<dl class="list-paging pb80">
 				<dd>
+					 <%
+						if (currentPage <= 1) {
+					%>
+					<a><i class="glyphicon glyphicon-backward"></i></a>
+					<%
+						} else {
+					%>
+					<a href="/anavada/clistview?local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"><i class="glyphicon glyphicon-backward"></i></a>
+					<% } %>
 					<%
 						if (startPage  <= 1) {
 					%>
@@ -197,6 +208,17 @@
 					<%
 						}
 					%>
+					<%
+						if (currentPage >= maxPage) {
+					%>
+					<a><i class="glyphicon glyphicon-forward"></i></a>
+					<%
+						} else {
+					%>
+					<a href="/anavada/clistview?page=<%=maxPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"><i class="glyphicon glyphicon-forward"></i></a>
+					<%
+						}
+					%> 
 				</dd>
 			</dl>
 			<!-- 페이지넘버 끝 -->

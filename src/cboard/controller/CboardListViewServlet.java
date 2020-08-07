@@ -32,8 +32,6 @@ public class CboardListViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		
 		int currentPage = 1;
 		if (request.getParameter("page") != null) {
 			currentPage = Integer.parseInt(request.getParameter("page"));
@@ -54,11 +52,16 @@ public class CboardListViewServlet extends HttpServlet {
 		if (maxPage < endPage) {
 			endPage = maxPage;
 		}
+		// 콘솔 테스트
 		System.out.println("page: " + request.getParameter("page"));
+		System.out.println("local: " + local);
 		System.out.println("currentpage: " + currentPage);
 		System.out.println("startpage: " + startPage);
 		System.out.println("endpage: " + endPage);
 		System.out.println("maxpage: " + maxPage);
+		System.out.println("search: " + search);
+		System.out.println("keyword: " + keyword);
+		// 콘솔테스트
 		RequestDispatcher view = null;
 		if (list.size() > 0) {
 			view = request.getRequestDispatcher("views/cboard/community_list.jsp");
