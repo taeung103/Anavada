@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="notice.model.vo.Notice"%>
+<%
+	Notice notice = (Notice)request.getAttribute("notice");
+	int currentPage = (Integer)request.getAttribute("page");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,11 +12,10 @@
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
 
-
             <!-- 글쓰기 -->
             <div class="write-area">
-                <h2>공지사항 작성</h2>
-                <form action="/anavada/aninsert" method="post" enctype="multipart/form-data">
+                <h2>공지사항 수정</h2>
+                <form action="/anavada/anupnotice" method="post" enctype="multipart/form-data">
 <%-- 최후에 합치기      <input type="hidden" value="<%= loginMember.getUserId()%>" name = "writer"> --%>
                     <table>
                         <colgroup>
@@ -22,15 +25,19 @@
                         <tbody>
                             <tr>
                                 <td>제목</td>
-                                <td><input type="text" name="title" title="" class="form-control w100p" placeholder="제목" /></td>
+                                <td><input type="text" name="title" title="" class="form-control w100p" value="<%= notice.getNoTitle() %>"></td>
                             </tr>
                             <tr>
                                 <td>내용</td>
-                                <td><textarea name="content"  class="form-control" style="resize: none; width:100%; min-height:300px; max-height:300px;"></textarea></td>
+                                <td><textarea name="content" class="form-control" style="resize: none; width:100%; min-height:300px; max-height:300px;"><%= notice.getNoContent() %></textarea></td>
                             </tr>
                             <tr>
                                 <td>첨부파일</td>
-                                <td><input type="file" name="ofile"></td>
+                                <td>
+                                <% if(notice.getNoOriginal() != null) { %>
+                                <%= notice.getNoOriginal() %> &nbsp; &nbsp; &nbsp; &nbsp;<input type="checkbox" value="yes" name="delfile"> 파일삭제
+                                <% } %>
+                                <input type="file" name="upfile"></td>
                             </tr>
                         </tbody>
                     </table>

@@ -17,13 +17,13 @@ import notice.model.vo.Notice;
  * Servlet implementation class NoticeSearchServlet
  */
 @WebServlet("/ansearch")
-public class NoticeSearchServlet extends HttpServlet {
+public class AdminNoticeSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeSearchServlet() {
+    public AdminNoticeSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
