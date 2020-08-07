@@ -36,7 +36,6 @@ INSERT INTO MEMBER VALUES('user05', 'user05', '������', NULL, NULL, 
 
 
 -- SECESSION ���̺� ����
-
 DROP TABLE SECESSION CASCADE CONSTRAINTS;
 -- SECESSION ���̺� ����
 CREATE TABLE SECESSION (
@@ -101,10 +100,19 @@ CREATE TABLE DECLARE_ADMIN (
     CONSTRAINT CHK_DOK CHECK (DECLARE_OK IN ('Y','N'))
 );
 
+<<<<<<< HEAD:dbscript/ProjactAnavada.sql
 COMMENT ON COLUMN "DECLARE_ADMIN"."DECLARE_NO" IS '����';
 COMMENT ON COLUMN "DECLARE_ADMIN"."DECLARE_ID" IS '�Ű�ȸ��';
 COMMENT ON COLUMN "DECLARE_ADMIN"."DECLARE_COUNT" IS '�Ű���� Ƚ��';
 COMMENT ON COLUMN "DECLARE_ADMIN"."DECLARE_OK" IS '���Ѽ���';
+=======
+COMMIT;
+
+COMMENT ON COLUMN "DECLARE_ADMIN"."DECLARE_NO" IS '순번';
+COMMENT ON COLUMN "DECLARE_ADMIN"."DECLARE_ID" IS '신고회원';
+COMMENT ON COLUMN "DECLARE_ADMIN"."DECLARE_COUNT" IS '신고당한 횟수';
+COMMENT ON COLUMN "DECLARE_ADMIN"."DECLARE_OK" IS '제한설정';
+>>>>>>> origin/20200806LunchAfter:dbscript/AnavadaProject_변경.sql
 
 ALTER TABLE DECLARE_ADMIN ADD CONSTRAINT FK_DECLARE_ID FOREIGN KEY(DECLARE_ID) REFERENCES MEMBER(MEMBER_ID);
 
@@ -119,6 +127,7 @@ SELECT MEMBER_ID, DECLARE_OK FROM MEMBER
 LEFT JOIN DECLARE_ADMIN ON(MEMBER_ID = DECLARE_ID)
 where declare_ok='Y';
 
+<<<<<<< HEAD:dbscript/ProjactAnavada.sql
 -- ���̺� ����
 DROP TABLE DECLARE_BOARD CASCADE CONSTRAINTS;
 -- �Ű� ���� �Խ��� ���̺� ����
@@ -153,6 +162,9 @@ INSERT INTO declare_board
 VALUES(2, NULL,'���۾��̵�Ű�.', DEFAULT, '�߰�ŷ��Ű�', '���������۾��̵𿡿�.','','','�߰�ŷ�URL', NULL );
 INSERT INTO declare_board
 VALUES(3, NULL,'�����մϴ�.', DEFAULT, 'Ŀ�´�Ƽ�Ű�', '���ؿ�.','','','�߰�ŷ�URL', NULL );
+=======
+
+>>>>>>> origin/20200806LunchAfter:dbscript/AnavadaProject_변경.sql
 
 
 INSERT INTO BANNER
@@ -663,15 +675,17 @@ INSERT INTO JBOARD_COMMENT VALUES
 INSERT INTO JBOARD_COMMENT VALUES
 (11,'admin01',SYSDATE,'�̰��� ���',11,SYSDATE,11,1,1,1,1,1,1);
 
-DROP TABLE NOTICE CASCADE CONSTRAINTS;
-DROP TABLE FAQ CASCADE CONSTRAINTS;
-DROP TABLE IQTYPE CASCADE CONSTRAINTS;
-DROP TABLE INQUIRY CASCADE CONSTRAINTS;
-DROP TABLE ANSWER CASCADE CONSTRAINTS;
+
+
+<<<<<<< HEAD:dbscript/ProjactAnavada.sql
+--��������
+=======
 
 --****************************************************************************************************
-
---��������
+--테이블 삭제
+DROP TABLE NOTICE CASCADE CONSTRAINTS;
+--공지사항
+>>>>>>> origin/20200806LunchAfter:dbscript/AnavadaProject_변경.sql
 CREATE TABLE NOTICE(
     NO_NO NUMBER,
     NO_ID VARCHAR2(20) NOT NULL,
@@ -685,6 +699,7 @@ CREATE TABLE NOTICE(
     CONSTRAINT PK_NNO PRIMARY KEY (NO_NO),
     CONSTRAINT FK_NID FOREIGN KEY (NO_ID) REFERENCES MEMBER ON DELETE SET NULL
 );
+<<<<<<< HEAD:dbscript/ProjactAnavada.sql
 COMMENT ON COLUMN NOTICE.NO_NO IS '�۹�ȣ';
 COMMENT ON COLUMN NOTICE.NO_ID IS '�����ھ��̵�';
 COMMENT ON COLUMN NOTICE.NO_TITLE IS '����';
@@ -711,6 +726,37 @@ INSERT INTO NOTICE VALUES(14, 'admin01', '��������13', '�Ű�
 INSERT INTO NOTICE VALUES(15, 'admin01', '��������14', '������Ʈ�� �÷����� �α��� ������ ���� �� �ֽ��ϴ�.', '2020/07/30', 10, null, null);
 
 --���ֹ�������
+=======
+COMMENT ON COLUMN NOTICE.NO_NO IS '글번호';
+COMMENT ON COLUMN NOTICE.NO_ID IS '관리자아이디';
+COMMENT ON COLUMN NOTICE.NO_TITLE IS '제목';
+COMMENT ON COLUMN NOTICE.NO_CONTENT IS '내용';
+COMMENT ON COLUMN NOTICE.NO_DATE IS '작성날짜';
+COMMENT ON COLUMN NOTICE.NO_COUNT IS '조회수';
+COMMENT ON COLUMN NOTICE.NO_ORIGINAL IS '오리지널파일';
+COMMENT ON COLUMN NOTICE.NO_RENAME IS '리네임파일';
+
+INSERT INTO NOTICE VALUES(1, 'admin01', '공지사항 오픈입니다.', '공지사항이 드디어 오픈했습니다. 많이 이용해주세요~', '2020/06/30', 5, null, null);
+INSERT INTO NOTICE VALUES(2, 'admin01', '공지사항1', '중고거래할 때 주의해주세요~', '2020/07/01', 3, null, null);
+INSERT INTO NOTICE VALUES(3, 'admin01', '공지사항2', '커뮤니티에 글을 올릴 때 욕은 금지입니다~', '2020/07/03', 1, null, null);
+INSERT INTO NOTICE VALUES(4, 'admin01', '공지사항3', '신고를 당하면 블랙리스트에 올려질 수 있습니다. 주의해주세요', '2020/07/03', 6, null, null);
+INSERT INTO NOTICE VALUES(5, 'admin01', '공지사항4', '블랙리스트에 올려지면 로그인 제한이 있을 수 있습니다.', '2020/07/05', 10, null, null);
+INSERT INTO NOTICE VALUES(6, 'admin01', '공지사항5', '공지사항이 드디어 오픈했습니다. 많이 이용해주세요~', '2020/07/07', 5, null, null);
+INSERT INTO NOTICE VALUES(7, 'admin01', '공지사항6', '중고거래할 때 주의해주세요~', '2020/07/10', 3, null, null);
+INSERT INTO NOTICE VALUES(8, 'admin01', '공지사항7', '커뮤니티에 글을 올릴 때 욕은 금지입니다~', '2020/07/11', 1, null, null);
+INSERT INTO NOTICE VALUES(9, 'admin01', '공지사항8', '신고를 당하면 블랙리스트에 올려질 수 있습니다. 주의해주세요', '2020/07/13', 6, null, null);
+INSERT INTO NOTICE VALUES(10, 'admin01', '공지사항9', '블랙리스트에 올려지면 로그인 제한이 있을 수 있습니다.', '2020/07/20', 10, null, null);
+INSERT INTO NOTICE VALUES(11, 'admin01', '공지사항10', '공지사항이 드디어 오픈했습니다. 많이 이용해주세요~', '2020/07/25', 5, null, null);
+INSERT INTO NOTICE VALUES(12, 'admin01', '공지사항11', '중고거래할 때 주의해주세요~', '2020/07/26', 3, null, null);
+INSERT INTO NOTICE VALUES(13, 'admin01', '공지사항12', '커뮤니티에 글을 올릴 때 욕은 금지입니다~', '2020/07/24', 1, null, null);
+INSERT INTO NOTICE VALUES(14, 'admin01', '공지사항13', '신고를 당하면 블랙리스트에 올려질 수 있습니다. 주의해주세요', '2020/07/27', 6, null, null);
+INSERT INTO NOTICE VALUES(15, 'admin01', '공지사항14', '블랙리스트에 올려지면 로그인 제한이 있을 수 있습니다.', '2020/07/30', 10, null, null);
+
+--테이블삭제
+DROP TABLE FAQ CASCADE CONSTRAINTS;
+
+--자주묻는질문
+>>>>>>> origin/20200806LunchAfter:dbscript/AnavadaProject_변경.sql
 CREATE TABLE FAQ(
     FAQ_NO NUMBER,
     FAQ_ID VARCHAR2(20) NOT NULL,
@@ -723,6 +769,7 @@ CREATE TABLE FAQ(
     CONSTRAINT PK_FNO PRIMARY KEY (FAQ_NO),
     CONSTRAINT FK_FID FOREIGN KEY (FAQ_ID) REFERENCES MEMBER ON DELETE SET NULL
 );
+<<<<<<< HEAD:dbscript/ProjactAnavada.sql
 COMMENT ON COLUMN FAQ.FAQ_NO IS '�۹�ȣ';
 COMMENT ON COLUMN FAQ.FAQ_ID IS '������ ���̵�';
 COMMENT ON COLUMN FAQ.FAQ_TITLE IS '����';
@@ -748,6 +795,35 @@ INSERT INTO FAQ VALUES(14, 'admin01', '��������26', '~~~~~~~~�
 INSERT INTO FAQ VALUES(15, 'admin01', '��������98', '~~~~~~~~���������ȳ𤾤�����ȿ�~~~~~~~~~~~~~~~', '2020/07/26', 10, 4);
 
 --����
+=======
+COMMENT ON COLUMN FAQ.FAQ_NO IS '글번호';
+COMMENT ON COLUMN FAQ.FAQ_ID IS '관리자 아이디';
+COMMENT ON COLUMN FAQ.FAQ_TITLE IS '제목';
+COMMENT ON COLUMN FAQ.FAQ_CONTENT IS '내용';
+COMMENT ON COLUMN FAQ.FAQ_DATE IS '작성날짜';
+COMMENT ON COLUMN FAQ.FAQ_COUNT IS '조회수';
+COMMENT ON COLUMN FAQ.FAQ_CATEGORY IS '회원1, 중고2, 커뮤3, 축제4';
+
+INSERT INTO FAQ VALUES(1, 'admin01', '중고거래는 어떤 방식인가요?', '직거래 방식입니다~', '2020/06/30', 5, 2);
+INSERT INTO FAQ VALUES(2, 'admin01', '로그인은 어떻게 하나요?', '오른쪽 상단 위에 로그인 버튼을 눌러주세요~', '2020/07/01', 3, 1);
+INSERT INTO FAQ VALUES(3, 'admin01', '로그아웃은 어떻게 하나요?', '오른쪽 상단 위에 로그인 버튼을 눌러주세요~', '2020/07/03', 1, 1);
+INSERT INTO FAQ VALUES(4, 'admin01', '탈퇴는 어떻게 하나요?', '회원정보수정페이지에서 탈퇴하기 버튼을 눌러주세요', '2020/07/03', 6, 1);
+INSERT INTO FAQ VALUES(5, 'admin01', '내정보는 어떻게 수정하나요', '회원정보수정페이지에서 수정하기 버튼을 눌러주세요', '2020/07/05', 10, 1);
+INSERT INTO FAQ VALUES(6, 'admin01', '중고거래~~', 'ㅁㅇ롬ㄹ옴오몸ㄹ옹ㄹ몸ㅇㄹ홈ㅇ롬ㅇㅎㅇㄴㅁㅎㅁㅇㄿㅌㅊ', '2020/07/07', 5, 2);
+INSERT INTO FAQ VALUES(7, 'admin01', '커뮤니티~~', 'ㅈㄷㄱㄷㄱ쇼ㅕ;ㅣㅎㅇㄹㅋㄹㅇ로텨ㅑㅛㅅㄱㄹㅇㄴ코톻', '2020/07/10', 3, 3);
+INSERT INTO FAQ VALUES(8, 'admin01', '커뮤니티~~3', '~~~~~~~~ㅇㅁ리ㅏㄴㅇㄹㄴ뫃남올ㅇㄴㅁㅎㄴㅁㄴㅇㅎㄴㅁㅎ~~~~~~~~~~~~~~~', '2020/07/11', 1, 3);
+INSERT INTO FAQ VALUES(9, 'admin01', '지역축제', '~~~~~~~~ㅎㅁㄶㄴㅁㅇㅎㄴㅁㅎㅁ~~~~~~ㄴㅁㅎㄴㅁㅇㅎㄴㅁㅇㅎㄴㅁ~~~~~~~~~', '2020/07/13', 6, 4);
+INSERT INTO FAQ VALUES(10, 'admin01', '지역축제123', '~~~~~~~~ㅁㄶㄴㅁ옴놈ㅎㅁ놈농놈옴오~~~~~~~~~~~~~~~', '2020/07/20', 10, 4);
+INSERT INTO FAQ VALUES(11, 'admin01', '중고거래32~~', 'ㅁㅇ롬ㄹ옴오몸ㄹ옹ㄹ몸ㅇㄹ홈ㅇ롬ㅇㅎㅇㄴㅁㅎㅁㅇㄿㅌㅊ', '2020/07/23', 5, 2);
+INSERT INTO FAQ VALUES(12, 'admin01', '커뮤니티235~~', 'ㅈㄷㄱㄷㄱ쇼ㅕ;ㅣㅎㅇㄹㅋㄹㅇ로텨ㅑㅛㅅㄱㄹㅇㄴ코톻', '2020/07/24', 3, 3);
+INSERT INTO FAQ VALUES(13, 'admin01', '커뮤니티~~', '~~~~~~~~ㅇㅁ리ㅏㄴㅇㄹㄴ뫃남올ㅇㄴㅁㅎㄴㅁㄴㅇㅎㄴㅁㅎ~~~~~~~~~~~~~~~', '2020/07/12', 1, 3);
+INSERT INTO FAQ VALUES(14, 'admin01', '지역축제26', '~~~~~~~~ㅎㅁㄶㄴㅁㅇㅎㄴㅁㅎㅁ~~~~~~ㄴㅁㅎㄴㅁㅇㅎㄴㅁㅇㅎㄴㅁ~~~~~~~~~', '2020/07/13', 6, 4);
+INSERT INTO FAQ VALUES(15, 'admin01', '지역축제98', '~~~~~~~~ㅁㄶㄴㅁ옴놈ㅎㅁ놈농놈옴오~~~~~~~~~~~~~~~', '2020/07/26', 10, 4);
+
+--테이블 삭제
+DROP TABLE IQTYPE CASCADE CONSTRAINTS;
+--유형
+>>>>>>> origin/20200806LunchAfter:dbscript/AnavadaProject_변경.sql
 CREATE TABLE IQTYPE(
     IQ_TYPE VARCHAR2(20) CONSTRAINT PK_IQTYPE PRIMARY KEY
 );
@@ -760,7 +836,14 @@ INSERT INTO IQTYPE VALUES('����');
 INSERT INTO IQTYPE VALUES('�����ϱ�');
 INSERT INTO IQTYPE VALUES('��Ÿ');
 
+<<<<<<< HEAD:dbscript/ProjactAnavada.sql
 --���ǰԽñ�
+=======
+--테이블 삭제
+DROP TABLE INQUIRY CASCADE CONSTRAINTS;
+
+--문의게시글
+>>>>>>> origin/20200806LunchAfter:dbscript/AnavadaProject_변경.sql
 CREATE TABLE INQUIRY(
     IQ_NO NUMBER,
     IQ_ID VARCHAR2(20) CONSTRAINT FK_IQID REFERENCES MEMBER ON DELETE CASCADE,
@@ -777,6 +860,7 @@ CREATE TABLE INQUIRY(
     IQ_TYPE VARCHAR2(20) NOT NULL CONSTRAINT FK_IQTYPE REFERENCES IQTYPE,
     CONSTRAINT PK_IQNOID PRIMARY KEY (IQ_NO, IQ_ID)
 );
+<<<<<<< HEAD:dbscript/ProjactAnavada.sql
 COMMENT ON COLUMN INQUIRY.IQ_NO IS '�۹�ȣ';
 COMMENT ON COLUMN INQUIRY.IQ_ID IS 'ȸ�����̵�';
 COMMENT ON COLUMN INQUIRY.IQ_TITLE IS '����';
@@ -807,6 +891,41 @@ INSERT INTO INQUIRY VALUES(12, 'user03', '�����Ҳ���', '���
 INSERT INTO INQUIRY VALUES(13, 'user04', '��Ÿ���ǻ����Դϴ�.', '���ǹ��ǹ��ǹ��ǹ��ǹ��ǹ��ǹ��ǹ��ǹ���', '2020/07/18', 'Y', NULL, NULL, NULL, NULL, NULL, NULL, '��Ÿ');
 
 --�亯�Խñ�
+=======
+COMMENT ON COLUMN INQUIRY.IQ_NO IS '글번호';
+COMMENT ON COLUMN INQUIRY.IQ_ID IS '회원아이디';
+COMMENT ON COLUMN INQUIRY.IQ_TITLE IS '제목';
+COMMENT ON COLUMN INQUIRY.IQ_CONTENT IS '내용';
+COMMENT ON COLUMN INQUIRY.IQ_DATE IS '작성날짜';
+COMMENT ON COLUMN INQUIRY.IQ_ANSWER IS '답변여부';
+COMMENT ON COLUMN INQUIRY.IQ_ORIGINAL IS '오리지널 파일';
+COMMENT ON COLUMN INQUIRY.IQ_RENAME IS '리네임 파일';
+COMMENT ON COLUMN INQUIRY.IQ_ORIGINAL2 IS '오리지널 파일2';
+COMMENT ON COLUMN INQUIRY.IQ_RENAME2 IS '리네임 파일2';
+COMMENT ON COLUMN INQUIRY.IQ_ORIGINAL3 IS '오리지널 파일3';
+COMMENT ON COLUMN INQUIRY.IQ_RENAME3 IS '리네임 파일3';
+COMMENT ON COLUMN INQUIRY.IQ_TYPE IS '유형';
+
+-- INSERT하려면 아이디정보가 필요합니다~~~~~
+INSERT INTO INQUIRY VALUES(1, 'user01', '문의할께요', '문의문의문의문의문의문의문의문의문의문의', '2020/06/01', DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, '회원정보');
+INSERT INTO INQUIRY VALUES(2, 'user04', '회원정보', '문의문의문의문의문의문의문의문의문의문의', '2020/06/02', DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, '회원정보');
+INSERT INTO INQUIRY VALUES(3, 'user02', '안녕~~', '문의문의문의문의문의문의문의문의문의문의', '2020/06/03', 'Y', NULL, NULL, NULL, NULL, NULL, NULL, '회원정보');
+INSERT INTO INQUIRY VALUES(4, 'user03', '탈퇴할래요~', '문의문의문의문의문의문의문의문의문의문의', '2020/06/07', 'Y', NULL, NULL, NULL, NULL, NULL, NULL, '회원정보');
+INSERT INTO INQUIRY VALUES(5, 'user01', '회원정보 수정하고싶어요', '문의문의문의문의문의문의문의문의문의문의', '2020/06/09', DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, '회원정보');
+INSERT INTO INQUIRY VALUES(6, 'user02', '수정할래요', '문의문의문의문의문의문의문의문의문의문의', '2020/06/12', DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, '회원정보');
+INSERT INTO INQUIRY VALUES(7, 'user03', '수정하고 싶은데 어떻게 해요', '문의문의문의문의문의문의문의문의문의문의', '2020/06/14', DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, '회원정보');
+INSERT INTO INQUIRY VALUES(8, 'user05', '오류발견했어요', '문의문의문의문의문의문의문의문의문의문의', '2020/07/03', DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, '오류');
+INSERT INTO INQUIRY VALUES(9, 'user01', '검색오류입니다/', '문의문의문의문의문의문의문의문의문의문의', '2020/07/07', DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, '오류');
+INSERT INTO INQUIRY VALUES(10, 'user02', '회원가입하려는데 안되네요', '문의문의문의문의문의문의문의문의문의문의', '2020/07/07', 'Y', NULL, NULL, NULL, NULL, NULL, NULL, '오류');
+INSERT INTO INQUIRY VALUES(11, 'user02', '사진은 3개이상안되나요', '문의문의문의문의문의문의문의문의문의문의', '2020/07/16', DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, '오류');
+INSERT INTO INQUIRY VALUES(12, 'user03', '제안할께요', '문의문의문의문의문의문의문의문의문의문의', '2020/07/17', 'Y', NULL, NULL, NULL, NULL, NULL, NULL, '제안하기');
+INSERT INTO INQUIRY VALUES(13, 'user04', '기타문의사항입니다.', '문의문의문의문의문의문의문의문의문의문의', '2020/07/18', 'Y', NULL, NULL, NULL, NULL, NULL, NULL, '기타');
+
+--테이블 삭제
+DROP TABLE ANSWER CASCADE CONSTRAINTS;
+
+--답변게시글
+>>>>>>> origin/20200806LunchAfter:dbscript/AnavadaProject_변경.sql
 CREATE TABLE ANSWER(
     AN_NO NUMBER NOT NULL CONSTRAINT PK_ANNO PRIMARY KEY,
     AN_CONTENT VARCHAR2(4000) NOT NULL,
@@ -830,7 +949,45 @@ INSERT INTO ANSWER VALUES(5, '���ǹ��ǹ��ǹ��ǹ��ǹ���
 
 COMMIT;
 
+-- 테이블 삭제
+DROP TABLE DECLARE_BOARD CASCADE CONSTRAINTS;
+-- 신고 관리 게시판 테이블 생성
+CREATE TABLE DECLARE_BOARD (
+	DECLARE_NO	NUMBER	 CONSTRAINT PK_NO PRIMARY KEY,
+	MEMBER_ID	 VARCHAR2(20),
+	DECLARE_TITLE	 VARCHAR2(50) CONSTRAINT NN_BTITLE	NOT NULL,
+	DECLARE_DATE	 DATE DEFAULT SYSDATE,
+	DECLARE_TYPE 	VARCHAR2(20),
+	DECLARE_CONTENT	VARCHAR2(4000),
+	DECLARE_ORIGINAL	VARCHAR2(50),
+	DECLARE_RENAME	 VARCHAR2(50),
+	DECLARE_URL	 VARCHAR2(100),
+	DECLARE_ID	 VARCHAR2(20),	
+    	DECLARECHE  CHAR(1)	DEFAULT 'N'
+);
+
+COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_NO" IS '글번호';
+COMMENT ON COLUMN "DECLARE_BOARD"."MEMBER_ID" IS '작성자';
+COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_TITLE" IS '글제목';
+COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_DATE" IS '등록일';
+COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_TYPE" IS '신고유형';
+COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_CONTENT" IS '내용';
+COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_ORIGINAL" IS '원본파일명';
+COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_RENAME" IS '변경파일명';
+COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_URL" IS '해당글URL';
+COMMENT ON COLUMN "DECLARE_BOARD"."DECLARE_ID" IS '블랙회원ID';
+COMMENT ON COLUMN "DECLARE_BOARD"."DECLARECHE" IS '신고처리';
+
+-- 제약조건
+ALTER TABLE DECLARE_BOARD ADD CONSTRAINT FK_DECLARE_TYPE FOREIGN KEY (DECLARE_TYPE) REFERENCES IQTYPE(IQ_TYPE);
+--데이터
+INSERT INTO declare_board
+VALUES(1, NULL,'신고합니다.', DEFAULT, '중고거래 신고', '누가가짜물품으로거래를합니다.','','','중고거래URL', NULL, DEFAULT );
+INSERT INTO declare_board
+VALUES(2, NULL,'사기꾼아이디신고.', DEFAULT, '중고거래 신고', '전에본사기꾼아이디에요.','','','중고거래URL', NULL, DEFAULT );
+INSERT INTO declare_board
+VALUES(3, NULL,'비방욕합니다.', DEFAULT, '커뮤니티 신고', '욕해요.','','','중고거래URL', NULL, DEFAULT );
 
 
 
-
+COMMIT;
