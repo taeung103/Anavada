@@ -7,6 +7,13 @@
 	int startPage = (Integer)request.getAttribute("startPage");
 	int endPage = (Integer)request.getAttribute("endPage");
 	int totalList = (Integer)request.getAttribute("totalList");
+	
+	String selected = null;
+	String keyword = null;
+	if(request.getAttribute("selected") != null && request.getAttribute("keyword") != null){
+		selected = (String)request.getAttribute("selected");
+		keyword = (String)request.getAttribute("keyword");
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -67,13 +74,12 @@ function deleteAction(){
 						<%= totalList %>개
 					</h4>
 					<div>
-						<form action="" method="" id="">
-							목록 분류 : <select name="" class="ListSelect">
-								<option value="분류 선택" selected="selected">분류 선택</option>
-								<option value="제목">제목</option>
-								<option value="내용">내용</option>
-								<option value="작성자">작성자</option>
-							</select> <input type="text" placeholder="검색어를 입력해주세요.">
+						<form action="/anavada/ansearch" method="post" id="">
+							목록 분류 : <select name="selected" class="ListSelect">
+								<option value="none" selected disabled>분류 선택</option>
+								<option value="title">제목</option>
+								<option value="content">내용</option>
+							</select> <input type="text" name="keyword" placeholder="검색어를 입력해주세요.">
 							<button class="top-search">
 								<i class="xi-search"></i>
 							</button>
@@ -95,11 +101,12 @@ function deleteAction(){
 				<% }else { %>
 				<table>
                     <tbody>
+                    <% if(selected != null && keyword != null) {%>
                     <% for(Notice n : list) { %>
-                        <tr onclick="location.href='/anavada/andetail?page=<%= currentPage %>&no=<%= n.getNoNo() %>'">
+                        <tr>
                             <td class="checkBox"><input type="checkbox" name="checkDel" value="<%= n.getNoNo() %>"></td>
-                            <td class="number"><%= n.getNoNo() %></td>
-                            <td class="title">
+                            <td class="number" onclick="location.href='/anavada/andetail?page=<%= currentPage %>&no=<%= n.getNoNo() %>&selected=<%= selected %>&keyword=<%= keyword %>'"><%= n.getNoNo() %></td>
+                            <td class="title" onclick="location.href='/anavada/andetail?page=<%= currentPage %>&no=<%= n.getNoNo() %>&selected=<%= selected %>&keyword=<%= keyword %>'">
                                 <h2><span>공지</span><%= n.getNoTitle() %></h2>
                                 <ul>
                                     <li>작성자 : <%= n.getNoId() %></li>
@@ -107,13 +114,32 @@ function deleteAction(){
                                     <li>조회수 : <%= n.getNoCount() %></li>
                                 </ul>
                             </td>
-                            <td class="fileDown">
+                            <td class="fileDown" onclick="location.href='/anavada/andetail?page=<%= currentPage %>&no=<%= n.getNoNo() %>&selected=<%= selected %>&keyword=<%= keyword %>'">
                             <% if(n.getNoOriginal() != null) { %>
-                            <i class="glyphicon glyphicon-floppy-saved"></i>
+                            <i class="glyphicon glyphicon-floppy-saved" onclick="location.href='/anavada/andetail?page=<%= currentPage %>&no=<%= n.getNoNo() %>&selected=<%= selected %>&keyword=<%= keyword %>'"></i>
                             <% } %>
                             </td>
                         </tr>
-                     <% } %>
+                     <% } }else { %>
+                     <% for(Notice n : list) { %>
+                        <tr>
+                            <td class="checkBox"><input type="checkbox" name="checkDel" value="<%= n.getNoNo() %>"></td>
+                            <td class="number" onclick="location.href='/anavada/andetail?page=<%= currentPage %>&no=<%= n.getNoNo() %>'"><%= n.getNoNo() %></td>
+                            <td class="title" onclick="location.href='/anavada/andetail?page=<%= currentPage %>&no=<%= n.getNoNo() %>'">
+                                <h2><span>공지</span><%= n.getNoTitle() %></h2>
+                                <ul>
+                                    <li>작성자 : <%= n.getNoId() %></li>
+                                    <li>작성일 : <%= n.getNoDate() %></li>
+                                    <li>조회수 : <%= n.getNoCount() %></li>
+                                </ul>
+                            </td>
+                            <td class="fileDown" onclick="location.href='/anavada/andetail?page=<%= currentPage %>&no=<%= n.getNoNo() %>'">
+                            <% if(n.getNoOriginal() != null) { %>
+                            <i class="glyphicon glyphicon-floppy-saved" onclick="location.href='/anavada/andetail?page=<%= currentPage %>&no=<%= n.getNoNo() %>'"></i>
+                            <% } %>
+                            </td>
+                        </tr>
+                     <% } }%>
                     </tbody>
                 </table>
 				<% } %>
@@ -134,7 +160,25 @@ function deleteAction(){
                 <!-- 페이징 -->
                 <dl class="list-paging">
                     <dd>
+                    <% if(selected != null && keyword != null) { %>
                     	<% if(currentPage <= 1) { %>
+                        <a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
+                        <% }else {%><a href="/anavada/ansearch?page=1&selected=<%= selected %>&keyword=<%= keyword %>"><i class="glyphicon glyphicon-menu-left"></i></a><% } %>
+                        
+                        <% for(int p=startPage; p<=endPage; p++) {%>
+                        	<% if(p == currentPage) {%>
+                        	<a href="#none" class="active"><%= p %></a>
+                        	<% }else { %>
+                        	<a href="/anavada/ansearch?page=<%= p %>&selected=<%= selected %>&keyword=<%= keyword %>"><%= p %></a>
+                        	<% } %>
+                        <% } %>
+                        
+                        <% if(currentPage < totalPage) { %>
+                        <a href="/anavada/ansearch?page=<%= totalPage %>&selected=<%= selected %>&keyword=<%= keyword %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+                        <% }else {%><a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a><% } %>
+                        
+                     <% }else { %>   
+                     	<% if(currentPage <= 1) { %>
                         <a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
                         <% }else {%><a href="/anavada/anlist?page=1"><i class="glyphicon glyphicon-menu-left"></i></a><% } %>
                         
@@ -149,6 +193,7 @@ function deleteAction(){
                         <% if(currentPage < totalPage) { %>
                         <a href="/anavada/anlist?page=<%= totalPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
                         <% }else {%><a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a><% } %>
+                     <% } %>
                     </dd>
                 </dl>
                 <!-- //페이징 -->

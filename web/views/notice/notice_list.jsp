@@ -96,7 +96,7 @@
                         	<tr onclick="location.href='/anavada/ndetail?no=<%= n.getNoNo() %>&page=<%= currentPage %>&selected=<%= selected %>&keyword=<%= keyword %>';">
                         	<% }else { %>
                         	<tr onclick="location.href='/anavada/ndetail?no=<%= n.getNoNo() %>&page=<%= currentPage %>';">
-                        <% } %>
+                        	<% } %>
                             <td class="number"><%= n.getNoNo() %></td>
                             <td class="title">
                                 <h2><%= n.getNoTitle() %></h2>

@@ -38,6 +38,8 @@ public class AdminNoticeDetailServlet extends HttpServlet {
 			RequestDispatcher view = request.getRequestDispatcher("views/admin/notice/adminnotice_view.jsp");
 			request.setAttribute("notice", notice);
 			request.setAttribute("currentPage", Integer.parseInt(request.getParameter("page")));
+			request.setAttribute("selected", request.getParameter("selected"));
+			request.setAttribute("keyword", request.getParameter("keyword"));
 			view.forward(request, response);
 		}
 		

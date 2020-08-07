@@ -58,7 +58,7 @@
                 <div class="view-btn">
                     <% if(request.getParameter("selected") != null && request.getParameter("keyword") != null) { %>
                     <a href="" class="btn btn-prev">이전글</a>
-                    <a href="/anavada/nsearch?page=<%= currentPage %>&selected=<%= selected %>&keyword=<%= keyword %>" class="btn btn-list">목록</a>
+                    <a href="/anavada/ansearch?page=<%= currentPage %>&selected=<%= selected %>&keyword=<%= keyword %>" class="btn btn-list">목록</a>
                     <a href="" class="btn btn-next">다음글</a>
                     <% }else { %>
                     <a href="/anavada/andetail?no=<%= notice.getNoNo()-1 %>&page=<%= currentPage %>" class="btn btn-prev">이전글</a>
