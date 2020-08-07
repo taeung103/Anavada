@@ -2,27 +2,23 @@ package member.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import member.model.service.MemberService;
-import member.model.vo.Member;
-
 /**
  * Servlet implementation class MemberMypageServlet
  */
-@WebServlet("/mypage.cp")
-public class MemberMypageServlet extends HttpServlet {
+@WebServlet("/pwdChange.cp")
+public class PwdChangServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberMypageServlet() {
+    public PwdChangServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,20 +27,17 @@ public class MemberMypageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String memberId = request.getParameter("memberId");
-		Member member = new MemberService().selectMember(memberId);
 		
-		RequestDispatcher view = null;
-		if(member != null) {
-			view = request.getRequestDispatcher("views/member/MyInfoModify.jsp");
-			request.setAttribute("member", member);
-			view.forward(request, response);
-		} else {
-			view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("message", "My Page 상세조회 요청 실패");
-			view.forward(request, response);
-		}
+        String AuthenticationKey = (String)request.getSession().getAttribute("AuthenticationKey");
+        String AuthenticationUser = request.getParameter("AuthenticationUser");
+        if(!AuthenticationKey.equals(AuthenticationUser))
+        {
+            System.out.println("인증번호 일치하지 않음");
+            request.setAttribute("msg", "인증번호가 일치하지 않습니다");
+            request.setAttribute("loc", "views/member/idpwd_find.jsp");
+            request.getRequestDispatcher("/anavada/login.cp").forward(request, response);
+            return;
+        }
 	}
 
 	/**

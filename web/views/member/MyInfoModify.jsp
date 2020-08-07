@@ -2,12 +2,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%@ include file="../include/head.jsp" %> 
+    <%@ include file="../include/head.jsp" %>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
         <%@ include file="../include/header.jsp" %>
-
         <!-- 컨텐츠 -->
         <div id="content">
 
@@ -62,7 +61,7 @@
 					</dd>
 				</dl>
 				<!-- 프로필 끝 -->
-                <form action="/anavada/mupdate.ss" method="post">
+                <form action="/anavada/mupdate.cp" method="post">
                 <table class="InfoModify_table">
                     <colgroup>
                         <col width="20%">
@@ -72,23 +71,23 @@
                         <tr>
                             <td>프로필 사진</td>
                             <td>
-								<input type="file" name="memberRename" value="MR" title="프로필 사진"/>
+								<input type="file" name="memberOriginal" title="프로필 사진"/>
                             </td>
                         </tr>
                         <tr>
                             <td>아이디</td>
-                            <td><input type="text" name="memberId" title="아이디" class="form-control w100p" placeholder="아이디" value="<%= member.getMemberId() %>" readonly/></td>
+                            <td><input type="text" name="memberId" id="memberId" title="아이디" class="form-control w100p" placeholder="아이디" value="<%= member.getMemberId() %>" readonly/></td>
                         </tr>
                         <tr>
                             <td>비밀번호</td>
-                            <td><input type="password" name="memberPwd" title="비밀번호" class="form-control w100p" placeholder="기존 비밀번호" required/></td>
+                            <td><input type="password" name="memberPwd" id="memberPwd" title="비밀번호" class="form-control w100p" placeholder="기존 비밀번호" required/></td>
                         </tr>
                         <tr>
                             <td>신규 비밀번호</td>
                             <td class="newPwd">
-                                <input type="password" name="memberPwd2" title="신규 비밀번호" class="form-control w100p mb5" placeholder="신규 비밀번호 입력"/><br/>
+                                <input type="password" name="memberPwd2" id="memberPw2" title="신규 비밀번호" class="form-control w100p mb5" placeholder="신규 비밀번호 입력"/><br/>
 
-                                <input type="text" name="memberPwd3" title="신규 비밀번호 재확인" class="form-control w100p" placeholder="신규 비밀번호 재입력"/>
+                                <input type="text" name="memberPwd3" id="memberPw3" title="신규 비밀번호 재확인" class="form-control w100p" placeholder="신규 비밀번호 재입력"/>
                             </td>
                         </tr>
                         <tr>
@@ -124,7 +123,11 @@
             </div>
         </div>
         <!-- 컨텐츠 끝 -->
-
+	    <script>
+		    function memberDelete(){
+		    	location.href ="/anavada/mdelete.cp?memberId=<%= member.getMemberId()%>";
+		    }
+	    </script>
     <%@ include file="../include/footer.jsp" %>
     </div>
 </body>
