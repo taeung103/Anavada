@@ -1,28 +1,32 @@
 package member.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import member.model.service.MemberService;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class JoinServlet
+ * Servlet implementation class MemberMypageServlet
  */
-@WebServlet("/join.cp")
-public class JoinServlet extends HttpServlet {
+@WebServlet("/mdelete.cp")
+public class MemberDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JoinServlet() {
+    public MemberDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,29 +35,19 @@ public class JoinServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		request.setCharacterEncoding("utf-8");
 		
-		//암호화처리 회원가입
-		Member member = new Member();
-		member.setMemberId(request.getParameter("memberId"));
-		member.setMemberPwd(request.getParameter("memberPwd"));
-		member.setMemberName(request.getParameter("memberName"));
-		member.setMemberEmail(request.getParameter("memberEmail"));
-		member.setMemberPhone(request.getParameter("memberPhone"));
-
-		member.setMemberName(String.join(",", request.getParameterValues("memberName")));
+		String memberId = request.getParameter("memberId");
+		int result = new MemberService().deleteMember(memberId);
 		
-		int result = new MemberService().insertMember(member);
-
+		System.out.println(memberId);
 		if(result > 0) {
-			response.sendRedirect("views/member/join_complete.jsp");
+			response.sendRedirect("/anavada/logout");
 		} else {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('입력하신 정보가 일치하지 않습니다.\\n다시 입력해주세요.'); location.href='/anavada/views/member/join_customer.jsp';</script>");
-			writer.close();
+			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
+			request.setAttribute("message", memberId + " 회원님의 탈퇴 요청 실패.");
+			view.forward(request, response);
 		}
+		
 	}
 
 	/**

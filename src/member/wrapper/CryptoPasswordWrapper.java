@@ -11,25 +11,25 @@ public class CryptoPasswordWrapper extends HttpServletRequestWrapper { // HttpSe
 	public CryptoPasswordWrapper(HttpServletRequest request) {
 		super(request);
 	}
-	
+
 	@Override
 	public String getParameter(String name) {
 		String value = null;
-		// userpwd의 값만 암호화 처리
-		if(name != null && name.equals("memberPwd")) {
+		// memberPwd의 값만 암호화 처리
+		if (name != null && name.equals("memberPwd")) {
 			value = getSha512(super.getParameter(name));
-		}else {
-			// userpwd 가 아닌 값들은 그대로 둠
+		} else {
+			// memberPwd 가 아닌 값들은 그대로 둠
 			value = super.getParameter(name);
 		}
-		
+
 		return value;
 	}
-	
-	//패스워드 암호화 처리하는 메소드
+
+	// 패스워드 암호화 처리하는 메소드
 	private String getSha512(String password) {
 		String cryptoPwd = null;
-		
+
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA-512");
 			// 암호화 처리를 위해 문자열을 byte[]로 바꿈
@@ -43,7 +43,7 @@ public class CryptoPasswordWrapper extends HttpServletRequestWrapper { // HttpSe
 			System.out.println("Sha512 Error!!!");
 			e.printStackTrace();
 		}
-		
+
 		return cryptoPwd;
 	}
 }

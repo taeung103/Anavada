@@ -8,5 +8,6 @@
 </head>
 <body>
 에러다 이생퀴야
+<%= request.getAttribute("message") %>
 </body>
 </html>

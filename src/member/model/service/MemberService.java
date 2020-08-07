@@ -37,6 +37,43 @@ public class MemberService {
 		close(conn);
 		return idChk;
 	}
-	
+
+	public Member selectMember(String memberId) {
+		Connection conn = getConnection();
+		Member member = mdao.selectMember(conn, memberId);
+		close(conn);
+		return member;
+	}
+
+	public int updateMember(Member member) {
+		Connection conn = getConnection();
+		int result = mdao.updateMember(conn, member);
+		if(result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int deleteMember(String memberId) {
+		Connection conn = getConnection();
+		int result = mdao.deleteMember(conn, memberId);
+		if(result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public Member memberFind(String memberEmail) {
+		Connection conn = getConnection();
+		Member member = mdao.memberFind(conn, memberEmail);
+		close(conn);
+		return member;
+	}
+
+
 	
 }

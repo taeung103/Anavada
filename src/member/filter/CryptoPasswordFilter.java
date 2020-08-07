@@ -19,12 +19,12 @@ import member.wrapper.CryptoPasswordWrapper;
 @WebFilter("*.cp")
 public class CryptoPasswordFilter implements Filter {
 
-    /**
-     * Default constructor. 
-     */
-    public CryptoPasswordFilter() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor.
+	 */
+	public CryptoPasswordFilter() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -36,22 +36,23 @@ public class CryptoPasswordFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
 		System.out.println("CryptoPasswordFilter 의 doFilter() run...");
-		
-		//필터는 request 에 저장된 데이터 값의 변경을 할 수 없음
-		//전송값에 가공 처리를 행 한다면 래퍼(Wrapper)클래스를 사용함
-		//필터쪽에서 래퍼로 가공할 값을 보내고 래퍼는 가공처리한 결과값을 다시 필터로 리턴하면 필터가 받아서 서블릿으로 넘김
-		//뷰에서 --> 필터 --> 래퍼 --> 필터 --> 서블릿
-		HttpServletRequest hrequest = (HttpServletRequest)request;
-		
-		//필터가 래퍼를 실행함
+
+		// 필터는 request 에 저장된 데이터 값의 변경을 할 수 없음
+		// 전송값에 가공 처리를 행 한다면 래퍼(Wrapper)클래스를 사용함
+		// 필터쪽에서 래퍼로 가공할 값을 보내고 래퍼는 가공처리한 결과값을 다시 필터로 리턴하면 필터가 받아서 서블릿으로 넘김
+		// 뷰에서 --> 필터 --> 래퍼 --> 필터 --> 서블릿
+		HttpServletRequest hrequest = (HttpServletRequest) request;
+
+		// 필터가 래퍼를 실행함
 		CryptoPasswordWrapper cpwrapper = new CryptoPasswordWrapper(hrequest);
-		
+
 		// wrapper 처리한 결과를 필터가 받아서 서블릿으로 넘김
-		//chain.doFilter(request, response);
+		// chain.doFilter(request, response);
 		chain.doFilter(cpwrapper, response);
-		
+
 	}
 
 	/**

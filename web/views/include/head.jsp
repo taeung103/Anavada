@@ -16,6 +16,7 @@
 <script src="/anavada/resources/js/vegas.js"></script>
 <script src="/anavada/resources/js/swiper.min.js"></script>
 <script src="/anavada/resources/js/mainNotice.js"></script>
+<script src="/anavada/resources/js/member.js"></script>
 
 <!--티스토리 불펌금지-->
 

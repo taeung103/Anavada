@@ -22,24 +22,25 @@
                         </ul>
                     </div>
                     <h2><span>MEMBERS</span></h2>
-                    <h3>회원가입 시 인증한 이메일로 회원정보를 찾으실 수 있습니다.</h3>
+                    <h3>회원정보 찾기를 통해 발급받은 인증번호를 통해<br/>인증번호 확인 후 비밀번호를 변경할 수 있습니다.</h3>
                 </div>
             </div>
             <!--서브 비주얼/타이틀 끝-->
 
 
             <!-- 회원정보 찾기 -->
-            <form name="idpw" method="post" action="/anavada/mfind">
+            <form name="idpw" method="post" action="/anavada/pwdChange.cp">
                 <legend>회원정보 찾기</legend>
                 <div class="MBwrap">
                     <div class="MBidpw">
                         <h1>회원정보 찾기</h1>
-                        <h2>회원가입시 등록하신 이메일과 휴대폰 번호를 입력해 주세요.<br/>인증된 이메일로 회원정보를 보내드립니다. </h2>
+                        <h2>회원정보 찾기를 통해 발급받은 인증번호를 통해<br/>인증번호 확인 후 비밀번호를 변경할 수 있습니다.</h2>
                         <div>
-                            <input type="email" name="memberEmail" title="이메일" class="form-control w100p" placeholder="이메일을 입력해주세요."/>
-                            <input type="tel" name="memberPhone" title="휴대폰 번호" class="form-control w100p" placeholder="'-' 포함 입력"/>
+                            <input type="text" name="memberEmail" id="memberEmail" title="인증번호" class="form-control w100p" placeholder="발급받은 인증번호를 입력하세요."/>
+                            <input type="password" name="memberPwd" title="새 비밀번호" class="form-control w100p" placeholder="'새 비밀번호 입력(4자이상 12자이내)" maxlength="12"/>
+                            <input type="password" name="memberPwd2" title="새 비밀번호" class="form-control w100p" placeholder="새 비밀번호 재확인" maxlength="12"/>
                             <a class="idpw_btn" href="/anavada/idPwdFind" class="hvr-sweep-to-right">확인</a>
-                            <input type="submit" value="확인"class="idpw_btn" >
+                            <input type="submit" value="비밀번호 변경하기"class="idpw_btn" >
                         </div>
                     </div>
                 </div>
