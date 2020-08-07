@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.apache.tomcat.jni.Local;
+
 import jboard.model.vo.Jboard;
 
 public class JboardDao {
@@ -18,13 +20,18 @@ public class JboardDao {
 		}
 
 
-		public int getListCount(Connection conn) {
+		public int getListCount(Connection conn , String local ) {
 			int listCount = 0;
 			Statement stmt = null;
 			ResultSet rset = null;
+			String query = null;
 			
-			String query = "select count(*) from jboard";
-			
+			if ( local == null || local.equals("0") ) {
+					query = "select count(*) from jboard";
+			}
+			else {
+					query  = "select count(*) from jboard where local_no=" + local;
+			} 
 			try {
 					stmt = conn.createStatement();
 					rset = stmt.executeQuery(query);

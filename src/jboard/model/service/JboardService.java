@@ -32,9 +32,9 @@ public class JboardService {
 			return list;
 		}
 
-		public int getListCount() {
+		public int getListCount(String local) {
 			Connection conn = getConnection();
-			int listCount = bdao.getListCount(conn);
+			int listCount = bdao.getListCount(conn, local);
 			close(conn);
 					
 			return listCount;

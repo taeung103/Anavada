@@ -43,11 +43,11 @@ public class JboardListViewServlet extends HttpServlet {
 				System.out.println(local);
 				JboardService jbservice = new JboardService();
 				
-				int listCount = jbservice.getListCount();
+				int listCount = jbservice.getListCount(local);
 				
 				ArrayList<Jboard> list = jbservice.selectList(currentPage, limit, local);
-				for (Jboard jboard : list) {
-				}
+				
+				
 						
 				int maxPage = (int)((double)listCount / limit + 0.9);
 				int startPage = (((int)((double)currentPage / limit + 0.9)) - 1) * limit + 1;
@@ -72,7 +72,8 @@ public class JboardListViewServlet extends HttpServlet {
 						request.setAttribute("message",  currentPage + " 페이지에 대한 목록 조회 실패!");
 						view.forward(request, response);
 				}
-			}
+			
+	}
 	
 
 	/**

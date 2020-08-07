@@ -25,6 +25,13 @@ String local = request.getParameter("local");
       location.href = "/anavada/views/jboard/product_write.jsp";
    }
 </script>
+<script>
+$('#sel').on('change', function() {
+    location.href= this.value;
+});
+$('#sel').val(location.href);
+</script>
+
 
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
@@ -58,36 +65,36 @@ String local = request.getParameter("local");
                     <h4>전체 <%=listCount%>개</h4>
                     <button onclick="showWriteForm();" class="write_btn">글쓰기</button>
                     <div>
-                        <form action="/anavada/jblist" method="post" id="">
+                        <form action="/anavada/jblist" method="post" id="sel" name="form1">
                         
-                            지역선택 : <select name="local" class="LocationSelect"  onchange=this.form.submit()>
+                            지역선택 : <select name="local" class="LocationSelect"   onchange=this.form.submit()>
                             	
-                                    <option value="0"  >전체보기</option>
-                                    <option value="1">강남구</option>
-                                    <option value="2">강동구</option>
-                                    <option value="3">강북구</option>
-                                    <option value="4">강서구</option>
-                                    <option value="5">관악구</option>
-                                    <option value="6">광진구</option>
-                                    <option value="7">구로구</option>
-                                    <option value="8">금천구</option>
-                                    <option value="9">노원구</option>
-                                    <option value="10">도봉구</option>
-                                    <option value="11">동대문구</option>
-                                    <option value="12">동작구</option>
-                                    <option value="13">마포구</option>
-                                    <option value="14">서대문구</option>
-                                    <option value="15">서초구</option>
-                                    <option value="16">성동구</option>
-                                    <option value="17">성북구</option>
-                                    <option value="18">송파구</option>
-                                    <option value="19">양천구</option>
-                                    <option value="20">영등포구</option>
-                                    <option value="21">용산구</option>
-                                    <option value="22">은평구</option>
-                                    <option value="23">종로구</option>
-                                    <option value="24">중구</option>
-                                    <option value="25">중랑구</option>
+                                    <option value="0"  ${param.local eq"0"?"selected" :"" }>전체보기</option>
+                                    <option value="1" ${param.local eq"1"?"selected" :"" }>강남구</option>
+                                    <option value="2" ${param.local eq"2"?"selected" :"" }>강동구</option>
+                                    <option value="3" ${param.local eq"3"?"selected" :"" }>강북구</option>
+                                    <option value="4" ${param.local eq"4"?"selected" :"" }>강서구</option>
+                                    <option value="5" ${param.local eq"5"?"selected" :"" }>관악구</option>
+                                    <option value="6" ${param.local eq"6"?"selected" :"" }>광진구</option>
+                                    <option value="7" ${param.local eq"7"?"selected" :"" }>구로구</option>
+                                    <option value="8" ${param.local eq"8"?"selected" :"" }>금천구</option>
+                                    <option value="9" ${param.local eq"9"?"selected" :"" }>노원구</option>
+                                    <option value="10" ${param.local eq"10"?"selected" :"" }>도봉구</option>
+                                    <option value="11" ${param.local eq"11"?"selected" :"" }>동대문구</option>
+                                    <option value="12" ${param.local eq"12"?"selected" :"" }>동작구</option>
+                                    <option value="13" ${param.local eq"13"?"selected" :"" }>마포구</option>
+                                    <option value="14" ${param.local eq"14"?"selected" :"" }>서대문구</option>
+                                    <option value="15" ${param.local eq"15"?"selected" :"" }>서초구</option>
+                                    <option value="16" ${param.local eq"16"?"selected" :"" }>성동구</option>
+                                    <option value="17" ${param.local eq"17"?"selected" :"" }>성북구</option>
+                                    <option value="18" ${param.local eq"18"?"selected" :"" }>송파구</option>
+                                    <option value="19" ${param.local eq"19"?"selected" :"" }>양천구</option>
+                                    <option value="20" ${param.local eq"20"?"selected" :"" }>영등포구</option>
+                                    <option value="21" ${param.local eq"21"?"selected" :"" }>용산구</option>
+                                    <option value="22" ${param.local eq"22"?"selected" :"" }>은평구</option>
+                                    <option value="23" ${param.local eq"23"?"selected" :"" }>종로구</option>
+                                    <option value="24" ${param.local eq"24"?"selected" :"" }>중구</option>
+                                    <option value="25" ${param.local eq"25"?"selected" :"" }>중랑구</option>
                             </select>
                             목록 분류 : <select name="" class="ListSelect">
                                     <option value="최신등록순" selected="selected">최신등록순</option>
@@ -100,6 +107,9 @@ String local = request.getParameter("local");
                             <button class="top-search"><i class="xi-search"></i></button>
                             
                         </form>
+                        <script>
+ 						document.form1.location.value="/anavada/views/jboard/productview.jsp";
+						</script>
                     </div>
                 </div>
 
