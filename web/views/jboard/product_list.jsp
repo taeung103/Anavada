@@ -10,6 +10,12 @@
    int maxPage = ((Integer) request.getAttribute("maxPage")).intValue();
    int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
 %>
+
+<% 
+String local = request.getParameter("local"); 
+%>
+<%if(local == null) { local=String.valueOf(0);}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +25,13 @@
       location.href = "/anavada/views/jboard/product_write.jsp";
    }
 </script>
+<script>
+$('#sel').on('change', function() {
+    location.href= this.value;
+});
+$('#sel').val(location.href);
+</script>
+
 
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
@@ -52,34 +65,36 @@
                     <h4>전체 <%=listCount%>개</h4>
                     <button onclick="showWriteForm();" class="write_btn">글쓰기</button>
                     <div>
-                        <form action="" method="" id="">
-                            지역선택 : <select name="" class="LocationSelect">
-                                    <option value="0" selected="selected">전체보기</option>
-                                    <option value="1">강남구</option>
-                                    <option value="2">강동구</option>
-                                    <option value="3">강북구</option>
-                                    <option value="4">강서구</option>
-                                    <option value="5">관악구</option>
-                                    <option value="6">광진구</option>
-                                    <option value="7">구로구</option>
-                                    <option value="8">금천구</option>
-                                    <option value="9">노원구</option>
-                                    <option value="10">도봉구</option>
-                                    <option value="11">동대문구</option>
-                                    <option value="12">동작구</option>
-                                    <option value="13">마포구</option>
-                                    <option value="14">서대문구</option>
-                                    <option value="15">서초구</option>
-                                    <option value="16">성동구</option>
-                                    <option value="17">성북구</option>
-                                    <option value="18">송파구</option>
-                                    <option value="19">양천구</option>
-                                    <option value="20">영등포구</option>
-                                    <option value="21">용산구</option>
-                                    <option value="22">은평구</option>
-                                    <option value="23">종로구</option>
-                                    <option value="24">중구</option>
-                                    <option value="25">중랑구</option>
+                        <form action="/anavada/jblist" method="post" id="sel" name="form1">
+                        
+                            지역선택 : <select name="local" class="LocationSelect"   onchange=this.form.submit()>
+                            	
+                                    <option value="0"  ${param.local eq"0"?"selected" :"" }>전체보기</option>
+                                    <option value="1" ${param.local eq"1"?"selected" :"" }>강남구</option>
+                                    <option value="2" ${param.local eq"2"?"selected" :"" }>강동구</option>
+                                    <option value="3" ${param.local eq"3"?"selected" :"" }>강북구</option>
+                                    <option value="4" ${param.local eq"4"?"selected" :"" }>강서구</option>
+                                    <option value="5" ${param.local eq"5"?"selected" :"" }>관악구</option>
+                                    <option value="6" ${param.local eq"6"?"selected" :"" }>광진구</option>
+                                    <option value="7" ${param.local eq"7"?"selected" :"" }>구로구</option>
+                                    <option value="8" ${param.local eq"8"?"selected" :"" }>금천구</option>
+                                    <option value="9" ${param.local eq"9"?"selected" :"" }>노원구</option>
+                                    <option value="10" ${param.local eq"10"?"selected" :"" }>도봉구</option>
+                                    <option value="11" ${param.local eq"11"?"selected" :"" }>동대문구</option>
+                                    <option value="12" ${param.local eq"12"?"selected" :"" }>동작구</option>
+                                    <option value="13" ${param.local eq"13"?"selected" :"" }>마포구</option>
+                                    <option value="14" ${param.local eq"14"?"selected" :"" }>서대문구</option>
+                                    <option value="15" ${param.local eq"15"?"selected" :"" }>서초구</option>
+                                    <option value="16" ${param.local eq"16"?"selected" :"" }>성동구</option>
+                                    <option value="17" ${param.local eq"17"?"selected" :"" }>성북구</option>
+                                    <option value="18" ${param.local eq"18"?"selected" :"" }>송파구</option>
+                                    <option value="19" ${param.local eq"19"?"selected" :"" }>양천구</option>
+                                    <option value="20" ${param.local eq"20"?"selected" :"" }>영등포구</option>
+                                    <option value="21" ${param.local eq"21"?"selected" :"" }>용산구</option>
+                                    <option value="22" ${param.local eq"22"?"selected" :"" }>은평구</option>
+                                    <option value="23" ${param.local eq"23"?"selected" :"" }>종로구</option>
+                                    <option value="24" ${param.local eq"24"?"selected" :"" }>중구</option>
+                                    <option value="25" ${param.local eq"25"?"selected" :"" }>중랑구</option>
                             </select>
                             목록 분류 : <select name="" class="ListSelect">
                                     <option value="최신등록순" selected="selected">최신등록순</option>
@@ -90,7 +105,11 @@
                             
                             <input type="text" placeholder="검색어를 입력해주세요.">
                             <button class="top-search"><i class="xi-search"></i></button>
+                            
                         </form>
+                        <script>
+ 						document.form1.location.value="/anavada/views/jboard/productview.jsp";
+						</script>
                     </div>
                 </div>
 
@@ -99,15 +118,15 @@
                     <li onclick="location.href='product_view.jsp'">
                         <div><img src="/anavada/resources/images/test/testImg.jpg"/></div>
                         <h2><%= j.getJboardTitle()%></h2>
-                        <h3><%=j.getJboardPrice() %><span> 원</span></h3>
+                        <h3><%=j.getJboardPrice() %><span> 원 <%=j.getLocalNo() %></span></h3>
+                       
                         <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%=j.getJboardLike() %></span></i></p>
                     </li>
                     <%} %>
                   
                 </ul>
                 <div class="list-no">
-                    <p><img src="/anavada/resources/images/btnIcn/icn_big_listNo.png" alt="" title=""></p>
-                    <h1>목록이 없습니다.</h1>
+
                 </div>
                 <div class="write-btn">
                     <a><button onclick="showWriteForm();" class="write_btn">글쓰기</button></a>
@@ -122,29 +141,25 @@
               		<%}else {%>
               		<a href="/anavada/jblist?page=1"><i class= "glyphicon glyphicon-backward"></i></a>
               		<%} %>
-              		<% if ((currentPage - 10) < startPage && (currentPage - 10) > 10){ %>
-                    <a href="/anavada/jblist?page=<%= startPage- 10%>"><i class="glyphicon glyphicon-menu-left"></i></a>
-					<% }else{ %>
-					<a><i class="glyphicon glyphicon-menu-left"></i></a>
+              		<% if (startPage -1 >=10 ){ %>
+                    <a href="/anavada/jblist?page=<%= startPage- 10%>&local=<%=local%>"><i class="glyphicon glyphicon-menu-left"></i></a>
 					<%} %>
 					<!-- 현재 페이지가 속한 페이지 그룹의 숫자 출력처리 -->
 					<% for (int p = startPage; p <= endPage; p++){
 						if (p == currentPage){%>
                     <a href="#none" class="active"><%=p %></a>
                     <%} else {%>
-                    <a href="/anavada/jblist?page=<%=p%>"><%=p %></a>
+                    <a href="/anavada/jblist?page=<%=p%>&local=<%=local%>"><%=p %></a>
                     <%}} %>
                     <!--  다음 그룹으로 이동처리 -->
-                    <% if ((currentPage + 10) > endPage && (currentPage + 10) < maxPage){ %>
-                    <a href="/anavada/jblist?page=<%= endPage + 10 %>"><i class="glyphicon glyphicon-menu-right"></i></a>
-                    <%}else{ %>
-                    <a><i class="glyphicon glyphicon-menu-right"></i></a>
+                    <% if (endPage +10 <= maxPage){ %>
+                    <a href="/anavada/jblist?page=<%= endPage + 10 %>&local=<%=local%>"><i class="glyphicon glyphicon-menu-right"></i></a>
                     <%} %>
                     
                     <% if (currentPage >= maxPage){ %>
                     <a><i class="glyphicon glyphicon-forward"></i></a>
                     <%}else{ %>
-                    <a href="/anavada/jblist?page=<%=maxPage%>"><i class="glyphicon glyphicon-forward"></i> </a>
+                    <a href="/anavada/jblist?page=<%=maxPage%>&local=<%=local%>"><i class="glyphicon glyphicon-forward"></i> </a>
                     <%} %>
                 </dd>
             </dl>

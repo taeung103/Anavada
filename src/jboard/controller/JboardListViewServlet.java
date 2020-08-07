@@ -32,22 +32,23 @@ public class JboardListViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+				
+				String local = request.getParameter("local");
 				int currentPage = 1;
 				if (request.getParameter("page") != null) {
 						currentPage = Integer.parseInt(request.getParameter("page"));
 				}
-				
+
 				int limit = 10;
-				
+				System.out.println(local);
 				JboardService jbservice = new JboardService();
 				
-				int listCount = jbservice.getListCount();
+				int listCount = jbservice.getListCount(local);
 				
-				ArrayList<Jboard> list = jbservice.selectList(currentPage, limit);
-				for (Jboard jboard : list) {
-					System.out.println(jboard);
-				}
+				ArrayList<Jboard> list = jbservice.selectList(currentPage, limit, local);
+				
+				
+						
 				int maxPage = (int)((double)listCount / limit + 0.9);
 				int startPage = (((int)((double)currentPage / limit + 0.9)) - 1) * limit + 1;
 				int endPage = startPage + limit -1;
@@ -63,6 +64,7 @@ public class JboardListViewServlet extends HttpServlet {
 						request.setAttribute("startPage", startPage);
 						request.setAttribute("endPage", endPage);
 						request.setAttribute("listCount", listCount);
+						request.setAttribute("local" , local);
 						view.forward(request, response);
 						
 				}else {
@@ -70,7 +72,8 @@ public class JboardListViewServlet extends HttpServlet {
 						request.setAttribute("message",  currentPage + " 페이지에 대한 목록 조회 실패!");
 						view.forward(request, response);
 				}
-			}
+			
+	}
 	
 
 	/**

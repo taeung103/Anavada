@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.apache.tomcat.jni.Local;
+
 import jboard.model.vo.Jboard;
 
 public class JboardDao {
@@ -18,13 +20,18 @@ public class JboardDao {
 		}
 
 
-		public int getListCount(Connection conn) {
+		public int getListCount(Connection conn , String local ) {
 			int listCount = 0;
 			Statement stmt = null;
 			ResultSet rset = null;
+			String query = null;
 			
-			String query = "select count(*) from jboard";
-			
+			if ( local == null || local.equals("0") ) {
+					query = "select count(*) from jboard";
+			}
+			else {
+					query  = "select count(*) from jboard where local_no=" + local;
+			} 
 			try {
 					stmt = conn.createStatement();
 					rset = stmt.executeQuery(query);
@@ -41,30 +48,47 @@ public class JboardDao {
 			return listCount;
 	}
 
-		public ArrayList<Jboard> selectList(Connection conn, int currentPage, int limit) {
+		public ArrayList<Jboard> selectList(Connection conn, int currentPage, int limit ,String local) {
 			ArrayList<Jboard> list = new ArrayList <Jboard>();
 			
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
-			
-			String query = "SELECT * " + 
+			String query;
+			 if( local ==null || local.equals("0")){
+				 	query = "SELECT * " + 
 					"FROM (SELECT ROWNUM RNUM, JBOARD_NO, JBOARD_TITLE, JBOARD_CONTENT, " + 
 					"JBOARD_PRICE, JBOARD_DATE , JBOARD_UPDATE, " + 
 					"JBOARD_COUNT, JBOARD_LIKE, JFILES_ORIGINAL_FILEPATH1, JFILES_RENAME_FILEPATH1, " + 
 					"JFILES_ORIGINAL_FILEPATH2, JFILES_RENAME_FILEPATH2 , JFILES_ORIGINAL_FILEPATH3, " +
 					"JFILES_RENAME_FILEPATH3, JFILES_ORIGINAL_FILEPATH4 , JFILES_RENAME_FILEPATH4, " +
 					"JBOARD_CHECK , JBOARD_MEET, JBOARD_POST, MEMBER_ID, LOCAL_NO "+
-					"FROM (SELECT * FROM JBOARD ORDER BY JBOARD_NO)) " + 
-					"WHERE JBOARD_CHECK = 'Y' AND RNUM >=? AND RNUM <=? ";
+					"FROM (SELECT * FROM JBOARD ORDER BY JBOARD_NO DESC)) " + 
+					"WHERE JBOARD_CHECK = 'Y'  AND RNUM >=? AND RNUM <=? ";
+			}else {
+					query = "SELECT * " + 
+						"FROM (SELECT ROWNUM RNUM, JBOARD_NO, JBOARD_TITLE, JBOARD_CONTENT, " + 
+						"JBOARD_PRICE, JBOARD_DATE , JBOARD_UPDATE, " + 
+						"JBOARD_COUNT, JBOARD_LIKE, JFILES_ORIGINAL_FILEPATH1, JFILES_RENAME_FILEPATH1, " + 
+						"JFILES_ORIGINAL_FILEPATH2, JFILES_RENAME_FILEPATH2 , JFILES_ORIGINAL_FILEPATH3, " +
+						"JFILES_RENAME_FILEPATH3, JFILES_ORIGINAL_FILEPATH4 , JFILES_RENAME_FILEPATH4, " +
+						"JBOARD_CHECK , JBOARD_MEET, JBOARD_POST, MEMBER_ID, LOCAL_NO "+
+						"FROM (SELECT * FROM JBOARD WHERE LOCAL_NO = ? ORDER BY JBOARD_NO DESC )) " + 
+						"WHERE JBOARD_CHECK = 'Y' AND RNUM >=? AND RNUM <=? ";
+				
+			}
 			int startRow = (currentPage - 1) * limit + 1; 
 			int endRow = startRow + limit - 1;
-			
 			try {
-				
+				 	if(local ==null || local.equals("0")){
 					pstmt = conn.prepareStatement(query);
 					pstmt.setInt(1, startRow);
 					pstmt.setInt(2, endRow);
-					
+				 	}else {
+				 		pstmt = conn.prepareStatement(query);
+						pstmt.setString(1, local);
+						pstmt.setInt(2, startRow);
+						pstmt.setInt(3, endRow);
+				 	}
 					rset = pstmt.executeQuery();
 					
 					while(rset.next()) {

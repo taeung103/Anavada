@@ -25,16 +25,16 @@ public class JboardService {
 
 
 
-		public ArrayList<Jboard> selectList(int currentPage, int limit) {
+		public ArrayList<Jboard> selectList(int currentPage, int limit, String local) {
 			Connection conn = getConnection();
-			ArrayList<Jboard> list = bdao.selectList(conn, currentPage, limit);
+			ArrayList<Jboard> list = bdao.selectList(conn, currentPage, limit , local);
 			close(conn);
 			return list;
 		}
 
-		public int getListCount() {
+		public int getListCount(String local) {
 			Connection conn = getConnection();
-			int listCount = bdao.getListCount(conn);
+			int listCount = bdao.getListCount(conn, local);
 			close(conn);
 					
 			return listCount;
