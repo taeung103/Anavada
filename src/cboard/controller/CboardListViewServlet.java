@@ -32,15 +32,20 @@ public class CboardListViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		
 		int currentPage = 1;
 		if (request.getParameter("page") != null) {
 			currentPage = Integer.parseInt(request.getParameter("page"));
 		}
 		String local = request.getParameter("local");
+		String search = request.getParameter("search");
+		String keyword = request.getParameter("keyword");
+		
 		int limit = 10;
 		CboardService cservice = new CboardService();
-		int listCount = cservice.getListCount(local);
-		ArrayList<Cboard> list = cservice.selectAll(currentPage, limit, local);
+		int listCount = cservice.getListCount(local, search, keyword);
+		ArrayList<Cboard> list = cservice.selectAll(currentPage, limit, local, search, keyword);
 		
 		int maxPage = (int)((double)listCount / limit + 0.9);
 		int startPage = (((int)((double)currentPage / limit + 0.9)) - 1) * limit + 1;
@@ -64,6 +69,12 @@ public class CboardListViewServlet extends HttpServlet {
 			request.setAttribute("endPage", endPage);
 			request.setAttribute("listCount", listCount);
 			request.setAttribute("local", local);
+			request.setAttribute("search", search);
+			request.setAttribute("keyword", keyword);
+			view.forward(request, response);
+		} else {
+			view = request.getRequestDispatcher("views/common/error.jsp");
+			request.setAttribute("message", "error");
 			view.forward(request, response);
 		}
 	}

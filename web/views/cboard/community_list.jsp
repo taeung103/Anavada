@@ -5,6 +5,8 @@
 <%
 	ArrayList<Cboard> list = (ArrayList<Cboard>) request.getAttribute("list");
 	String local = String.valueOf(request.getAttribute("local"));
+	String search = String.valueOf(request.getAttribute("search"));
+	String keyword = String.valueOf(request.getAttribute("keyword"));
 	int listCount = ((Integer) request.getAttribute("listCount")).intValue();
 	int startPage = ((Integer) request.getAttribute("startPage")).intValue();
 	int endPage = ((Integer) request.getAttribute("endPage")).intValue();
@@ -85,8 +87,8 @@
 								<option value="25"<% if (local.equals("25")) { %>selected="selected"<% } %>>중랑구</option>
 							</select>
 						</form>
-						<form action=""  style="display: inline-block;">
-							<select name="select" class="ListSelect">
+						<form action="/anavada/clistview?local=<%=local%>"  style="display: inline-block;">
+							<select name="search" class="ListSelect">
 								<option value="title">제목</option>
 								<option value="content">내용</option>
 								<option value="writer">작성자</option>
@@ -155,13 +157,13 @@
 			<dl class="list-paging pb80">
 				<dd>
 					<%
-						if (currentPage  <= 1) {
+						if (startPage  <= 1) {
 					%>
 					<a><i class="glyphicon glyphicon-menu-left"></i></a>
 					<%
 						} else {
 					%>
-					<a href="/anavada/clistview?page=<%=currentPage - 1%>&local=<%=local == null ? "0" : "0"%>">
+					<a href="/anavada/clistview?page=<%=startPage - 10%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>">
 						<i class="glyphicon glyphicon-menu-left"></i>
 					</a>
 					<%
@@ -173,11 +175,11 @@
 					<%
 						if (currentPage == p) {
 					%>
-					<a href="/anavada/clistview?page=<%=p%>&local=<%=local == null ? "0" : "0"%>" class="active"><%= p %></a>
+					<a href="/anavada/clistview?page=<%=p%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>" class="active"><%= p %></a>
 					<%
 						} else {
 					%>
-					<a href="/anavada/clistview?page=<%=p%>&local=<%=local == null ? "0" : "0"%>"><%=p%></a>
+					<a href="/anavada/clistview?page=<%=p%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"><%=p%></a>
 					<%
 						}
 					%>
@@ -185,13 +187,13 @@
 						}
 					%>
 					<%
-						if (currentPage >= maxPage) {
+						if (endPage >= maxPage) {
 					%>
 					<a><i class="glyphicon glyphicon-menu-right"></i></a>
 					<%
 						} else {
 					%>
-					<a href="/anavada/clistview?page=<%=currentPage + 1%>&local=<%=local == null ? "0" : "0"%>"><i class="glyphicon glyphicon-menu-right"></i></a>
+					<a href="/anavada/clistview?page=<%=endPage + 1%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"><i class="glyphicon glyphicon-menu-right"></i></a>
 					<%
 						}
 					%>
