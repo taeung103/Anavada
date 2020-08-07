@@ -33,14 +33,16 @@ public class AdminNoticeDeleteServlet extends HttpServlet {
 		
 		String[] checkRow = request.getParameter("checkRow").split(",");
 		System.out.println(request.getParameter("checkRow")+", "+checkRow.length);
-		int result = 0;
-		NoticeService nservice = new NoticeService();
-		for(int i=0; i< checkRow.length; i++) {
-			System.out.print("for : "+ checkRow[i]);System.out.println();
-			result += nservice.deleteNotice(Integer.parseInt(checkRow[i]));
-		}
-		System.out.print("if : "+checkRow.length+","+result);System.out.println();
-		if(checkRow.length == result)
+		
+		int[] checkedNum = new int[checkRow.length];
+		for(int i=0; i<checkRow.length; i++) {
+			checkedNum[i] = Integer.parseInt(checkRow[i]);
+			System.out.print(checkedNum[i]+", ");
+		}System.out.println();
+		
+		int result = new NoticeService().deleteNotice(checkedNum);
+
+		if(result > 0)
 			response.sendRedirect("anlist");
 		
 	}

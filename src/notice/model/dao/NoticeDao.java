@@ -238,20 +238,29 @@ public class NoticeDao {
 		return notice;
 	}
 
-	public int deleteNotice(Connection conn, int checkRow) {
+	public int deleteNotice(Connection conn, int[] checkedNum) {
 		int result = 0;
-		PreparedStatement pstmt = null;
+//		PreparedStatement pstmt = null;
+		Statement stmt = null;
 		
-		String query = "delete from notice where no_no = ?";
-		
+		String query = null;
+		if(checkedNum.length == 1)
+			query = "delete from notice where no_no = " + checkedNum[0];
+		else {
+			query = "delete from notice where no_no in (";
+			for(int i=0; i<checkedNum.length-1; i++) {
+				query += checkedNum[i]+", ";
+			}
+			query += checkedNum[checkedNum.length-1]+")";
+		}
 		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, checkRow);
-			result = pstmt.executeUpdate();
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(query);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			close(pstmt);
+			close(stmt);
 		}
 		
 		return result;

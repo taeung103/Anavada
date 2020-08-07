@@ -61,9 +61,9 @@ public class NoticeService {
 		return notice;
 	}
 
-	public int deleteNotice(int checkRow) {
+	public int deleteNotice(int[] checkedNum) {
 		Connection conn = getConnection();
-		int result = ndao.deleteNotice(conn, checkRow);
+		int result = ndao.deleteNotice(conn, checkedNum);
 		if(result > 0)
 			commit(conn);
 		else rollback(conn);

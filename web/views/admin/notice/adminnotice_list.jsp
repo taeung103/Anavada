@@ -124,7 +124,7 @@ function deleteAction(){
                 <!-- 버튼 -->
                 <div class="btn_wrap">
                     <a onclick="deleteAction();" class="btn-left btn_gray">선택삭제</a>
-                    <a href="notice_write.php" class="btn-right btn_white">등록</a>
+                    <a href="/anavada/views/admin/notice/notice_write.jsp" class="btn-right btn_white">등록</a>
                 </div>
                 <!-- //버튼 -->
 
