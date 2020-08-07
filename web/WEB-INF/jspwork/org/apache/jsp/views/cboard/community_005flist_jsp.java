@@ -29,6 +29,7 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
     _jspx_dependants = new java.util.HashMap<java.lang.String,java.lang.Long>(3);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     _jspx_dependants.put("/views/cboard/../include/footer.jsp", Long.valueOf(1596516824045L));
     _jspx_dependants.put("/views/cboard/../include/head.jsp", Long.valueOf(1596516824046L));
     _jspx_dependants.put("/views/cboard/../include/header.jsp", Long.valueOf(1596759287509L));
@@ -42,6 +43,11 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
     _jspx_dependants.put("/views/cboard/../include/head.jsp", Long.valueOf(1596705633788L));
     _jspx_dependants.put("/views/cboard/../include/header.jsp", Long.valueOf(1596767964510L));
 >>>>>>> community_list
+=======
+    _jspx_dependants.put("/views/cboard/../include/footer.jsp", Long.valueOf(1596761427404L));
+    _jspx_dependants.put("/views/cboard/../include/head.jsp", Long.valueOf(1596516824046L));
+    _jspx_dependants.put("/views/cboard/../include/header.jsp", Long.valueOf(1596761427404L));
+>>>>>>> origin/jboard_list
   }
 
   private static final java.util.Set<java.lang.String> _jspx_imports_packages;
@@ -139,20 +145,26 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
 	ArrayList<Cboard> list = (ArrayList<Cboard>) request.getAttribute("list");
 	String local = String.valueOf(request.getAttribute("local"));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	String search = String.valueOf(request.getAttribute("search"));
 	String keyword = String.valueOf(request.getAttribute("keyword"));
 >>>>>>> community_list
+=======
+>>>>>>> origin/jboard_list
 	int listCount = ((Integer) request.getAttribute("listCount")).intValue();
 	int startPage = ((Integer) request.getAttribute("startPage")).intValue();
 	int endPage = ((Integer) request.getAttribute("endPage")).intValue();
 	int maxPage = ((Integer) request.getAttribute("maxPage")).intValue();
 	int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	
 	String[] localArr = { "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구" };
 >>>>>>> community_list
+=======
+>>>>>>> origin/jboard_list
 
       out.write("\r\n");
       out.write("<!DOCTYPE html>\r\n");
@@ -207,11 +219,14 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
       out.write('\n');
  Member loginMember = (Member)session.getAttribute("loginMember"); 
 <<<<<<< HEAD
+<<<<<<< HEAD
       out.write('\r');
       out.write('\n');
  Member member = (Member)request.getAttribute("member"); 
 =======
 >>>>>>> community_list
+=======
+>>>>>>> origin/jboard_list
       out.write("\r\n");
       out.write("<div id=\"header\">\r\n");
       out.write("\t<!-- 상단메뉴 -->\r\n");
@@ -222,6 +237,7 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
       out.write("                <li><a href=\"/anavada/jblist\">중고거래</a></li>\r\n");
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       out.write("                <li><a href=\"../cboard/community_list.jsp\">커뮤니티</a></li>\r\n");
 =======
       out.write("                <li><a href=\"/anavada/clistview\">커뮤니티</a></li>\r\n");
@@ -229,6 +245,9 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
 =======
       out.write("                <li><a href=\"/anavada/clistview?page=1&local=0\">커뮤니티</a></li>\r\n");
 >>>>>>> community_list
+=======
+      out.write("                <li><a href=\"/anavada/clistview\">커뮤니티</a></li>\r\n");
+>>>>>>> origin/jboard_list
       out.write("                <li><a href=\"../fboard/areaEvent_list.jsp\">지역축제</a></li>\r\n");
       out.write("                <li>\r\n");
       out.write("                    <a href=\"/anavada/nlist\">고객센터</a>\r\n");
@@ -263,12 +282,16 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
  } else { 
       out.write("\r\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
       out.write("                <li><a class=\"hover_line01\" href=\"/anavada/mypage.cp?memberId=");
       out.print( loginMember.getMemberId() );
       out.write("\">MYPAGE</a></li>\r\n");
 =======
       out.write("                <li><a class=\"hover_line01\" href=\"../member/MyInfoModify.jsp\">MYPAGE</a></li>\r\n");
 >>>>>>> community_list
+=======
+      out.write("                <li><a class=\"hover_line01\" href=\"../member/MyInfoModify.jsp\">MYPAGE</a></li>\r\n");
+>>>>>>> origin/jboard_list
       out.write("                <li><a class=\"hover_line01\" href=\"/anavada/logout\">LOGOUT</a></li>\r\n");
       out.write("                ");
  } 
@@ -315,12 +338,18 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
       out.write("\t\t\t\t\t<a href=\"community_write.jsp\" class=\"write_btn\">글쓰기</a>\r\n");
       out.write("\t\t\t\t\t<div>\r\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
       out.write("\t\t\t\t\t\t<form action=\"/anavada/clistview?page=");
       out.print( currentPage );
       out.write("\" method=\"post\" style=\"display: inline-block;\">\r\n");
 =======
       out.write("\t\t\t\t\t\t<form action=\"/anavada/clistview\" method=\"get\" style=\"display: inline-block;\">\r\n");
 >>>>>>> community_list
+=======
+      out.write("\t\t\t\t\t\t<form action=\"/anavada/clistview?page=");
+      out.print( currentPage );
+      out.write("\" method=\"post\" style=\"display: inline-block;\">\r\n");
+>>>>>>> origin/jboard_list
       out.write("\t\t\t\t\t\t\t지역 분류 : \r\n");
       out.write("\t\t\t\t\t\t\t<select name=\"local\" class=\"LocationSelect\" onchange=\"this.form.submit()\">\r\n");
       out.write("\t\t\t\t\t\t\t\t<option value=\"0\" selected=\"selected\">지역선택</option>\r\n");
@@ -452,6 +481,7 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
       out.write("\t\t\t\t\t\t\t</select>\r\n");
       out.write("\t\t\t\t\t\t</form>\r\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
       out.write("\t\t\t\t\t\t<form action=\"\"  style=\"display: inline-block;\">\r\n");
       out.write("\t\t\t\t\t\t\t<select name=\"select\" class=\"ListSelect\">\r\n");
 =======
@@ -461,6 +491,10 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
       out.write("\">\r\n");
       out.write("\t\t\t\t\t\t\t<select name=\"search\" class=\"ListSelect\">\r\n");
 >>>>>>> community_list
+=======
+      out.write("\t\t\t\t\t\t<form action=\"\"  style=\"display: inline-block;\">\r\n");
+      out.write("\t\t\t\t\t\t\t<select name=\"select\" class=\"ListSelect\">\r\n");
+>>>>>>> origin/jboard_list
       out.write("\t\t\t\t\t\t\t\t<option value=\"title\">제목</option>\r\n");
       out.write("\t\t\t\t\t\t\t\t<option value=\"content\">내용</option>\r\n");
       out.write("\t\t\t\t\t\t\t\t<option value=\"writer\">작성자</option>\r\n");
@@ -480,6 +514,7 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
 						
       out.write("\r\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
       out.write("\t\t\t\t\t\t<tr>\r\n");
 =======
       out.write("\t\t\t\t\t\t<tr onclick=\"location.href='/anavada/cdetail?cnum=");
@@ -494,11 +529,15 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
       out.print(keyword);
       out.write("'\">\r\n");
 >>>>>>> community_list
+=======
+      out.write("\t\t\t\t\t\t<tr>\r\n");
+>>>>>>> origin/jboard_list
       out.write("\t\t\t\t\t\t\t<td class=\"number\">");
       out.print(c.getCboardNo());
       out.write("</td>\r\n");
       out.write("\t\t\t\t\t\t\t<td class=\"title\">\r\n");
       out.write("\t\t\t\t\t\t\t\t<h2>\r\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
       out.write("\t\t\t\t\t\t\t\t\t<span>종로구");
       out.print( local );
@@ -506,6 +545,10 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
       out.write("\t\t\t\t\t\t\t\t\t<span>");
       out.print( localArr[Integer.parseInt(c.getLocalNo()) - 1] );
 >>>>>>> community_list
+=======
+      out.write("\t\t\t\t\t\t\t\t\t<span>종로구");
+      out.print( local );
+>>>>>>> origin/jboard_list
       out.write("</span>");
       out.print(c.getCboardTitle());
       out.write("\r\n");
@@ -540,10 +583,14 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
       out.write("\t\t\t\t\t");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 						if (endPage + 1 > maxPage) {
 =======
 						if (currentPage + 1 > maxPage) {
 >>>>>>> community_list
+=======
+						if (endPage + 1 > maxPage) {
+>>>>>>> origin/jboard_list
 					
       out.write("\r\n");
       out.write("\t\t\t\t\t<p>\r\n");
@@ -570,13 +617,17 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
       out.write("\t\t\t<!-- 리스트 끝 -->\r\n");
       out.write("\r\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
       out.write("\"\"\r\n");
 >>>>>>> community_list
+=======
+>>>>>>> origin/jboard_list
       out.write("\t\t\t\r\n");
       out.write("\t\t\t<!-- 페이지넘버 -->\r\n");
       out.write("\t\t\t<dl class=\"list-paging pb80\">\r\n");
       out.write("\t\t\t\t<dd>\r\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
       out.write("\t\t\t\t\t");
 
@@ -607,6 +658,11 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
 
 						if (startPage  <= 1) {
 >>>>>>> community_list
+=======
+      out.write("\t\t\t\t\t");
+
+						if (startPage - 1 <= 0) {
+>>>>>>> origin/jboard_list
 					
       out.write("\r\n");
       out.write("\t\t\t\t\t<a><i class=\"glyphicon glyphicon-menu-left\"></i></a>\r\n");
@@ -617,6 +673,7 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
       out.write("\r\n");
       out.write("\t\t\t\t\t<a href=\"/anavada/clistview?page=");
       out.print(startPage - 10);
+<<<<<<< HEAD
 <<<<<<< HEAD
       out.write(">\"><i\r\n");
       out.write("\t\t\t\t\t\tclass=\"glyphicon glyphicon-menu-left\"></i></a>\r\n");
@@ -631,6 +688,10 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
       out.write("\t\t\t\t\t\t<i class=\"glyphicon glyphicon-menu-left\"></i>\r\n");
       out.write("\t\t\t\t\t</a>\r\n");
 >>>>>>> community_list
+=======
+      out.write(">\"><i\r\n");
+      out.write("\t\t\t\t\t\tclass=\"glyphicon glyphicon-menu-left\"></i></a>\r\n");
+>>>>>>> origin/jboard_list
       out.write("\t\t\t\t\t");
 
 						}
@@ -649,6 +710,7 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
       out.write("\t\t\t\t\t<a href=\"/anavada/clistview?page=");
       out.print(p);
 <<<<<<< HEAD
+<<<<<<< HEAD
       out.write("&local\" class=\"active\"></a>\r\n");
 =======
       out.write("&local=");
@@ -661,6 +723,9 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
       out.print( p );
       out.write("</a>\r\n");
 >>>>>>> community_list
+=======
+      out.write("&local\" class=\"active\"></a>\r\n");
+>>>>>>> origin/jboard_list
       out.write("\t\t\t\t\t");
 
 						} else {
@@ -668,6 +733,7 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
       out.write("\r\n");
       out.write("\t\t\t\t\t<a href=\"/anavada/clistview?page=");
       out.print(p);
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
       out.write("&local=");
@@ -677,6 +743,8 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
       out.write("&keyword=");
       out.print(keyword);
 >>>>>>> community_list
+=======
+>>>>>>> origin/jboard_list
       out.write('"');
       out.write('>');
       out.print(p);
@@ -694,10 +762,14 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
       out.write("\t\t\t\t\t");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 						if (endPage + 1 > maxPage) {
 =======
 						if (endPage >= maxPage) {
 >>>>>>> community_list
+=======
+						if (endPage + 1 > maxPage) {
+>>>>>>> origin/jboard_list
 					
       out.write("\r\n");
       out.write("\t\t\t\t\t<a><i class=\"glyphicon glyphicon-menu-right\"></i></a>\r\n");
@@ -709,6 +781,7 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
       out.write("\t\t\t\t\t<a href=\"/anavada/clistview?page=");
       out.print(endPage + 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
       out.write("&local=");
       out.print(local);
@@ -717,12 +790,15 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
       out.write("&keyword=");
       out.print(keyword);
 >>>>>>> community_list
+=======
+>>>>>>> origin/jboard_list
       out.write("\"><i class=\"glyphicon glyphicon-menu-right\"></i></a>\r\n");
       out.write("\t\t\t\t\t");
 
 						}
 					
       out.write("\r\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
       out.write("\t\t\t\t\t");
@@ -751,6 +827,8 @@ public final class community_005flist_jsp extends org.apache.jasper.runtime.Http
 					
       out.write(" \r\n");
 >>>>>>> community_list
+=======
+>>>>>>> origin/jboard_list
       out.write("\t\t\t\t</dd>\r\n");
       out.write("\t\t\t</dl>\r\n");
       out.write("\t\t\t<!-- 페이지넘버 끝 -->\r\n");
