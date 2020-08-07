@@ -16,7 +16,7 @@ import jboard.model.vo.Jboard;
 /**
  * Servlet implementation class JboardListViewServlet
  */
-@WebServlet("/jblist")
+@WebServlet("/jblist.ss")
 public class JboardListViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 2L;
        
@@ -32,11 +32,19 @@ public class JboardListViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				
+		request.setCharacterEncoding("utf-8");
+		//뷰로 내보내는 값에 한글이 있다면 인코딩 처리함
+		response.setContentType("text/html; charset=UTF-8");
 				String titleSearch = request.getParameter("titlesearch");
 				String listSearch = request.getParameter("listsearch");
 				
 				String local = request.getParameter("local");
+				if (local == null) {
+					local ="0";
+				}
+				if (listSearch== null) {
+					listSearch = "latestposts";
+				}
 				int currentPage = 1;
 				
 				if (request.getParameter("page") != null) {
@@ -46,9 +54,10 @@ public class JboardListViewServlet extends HttpServlet {
 				int limit = 10;
 				System.out.println(local);
 				System.out.println(listSearch);
+				System.out.println(titleSearch);
 				JboardService jbservice = new JboardService();
 				
-				int listCount = jbservice.getListCount(local);
+				int listCount = jbservice.getListCount(local, titleSearch);
 				
 				ArrayList<Jboard> list = jbservice.selectList(currentPage, limit, local, listSearch, titleSearch);
 				

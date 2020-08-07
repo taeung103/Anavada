@@ -134,27 +134,27 @@
                 	<% if (currentPage <= 1){ %>
               		<a><i class= "glyphicon glyphicon-backward"></i></a>
               		<%}else {%>
-              		<a href="/anavada/jblist?page=1&local=<%=local%>&listsearch=<%=listSearch%>"><i class= "glyphicon glyphicon-backward"></i></a>
+              		<a href="/anavada/jblist?page=1&local=<%=local%>&listsearch=<%=listSearch%>&titlesearch=<%=titleSearch%>"><i class= "glyphicon glyphicon-backward"></i></a>
               		<%} %>
               		<% if (startPage -1 >=10 ){ %>
-                    <a href="/anavada/jblist?page=<%= startPage- 10%>&local=<%=local%>&listsearch=<%=listSearch%>"><i class="glyphicon glyphicon-menu-left"></i></a>
+                    <a href="/anavada/jblist?page=<%= startPage- 10%>&local=<%=local%>&listsearch=<%=listSearch%>&titlesearch=<%=titleSearch%>"><i class="glyphicon glyphicon-menu-left"></i></a>
 					<%} %>
 					<!-- 현재 페이지가 속한 페이지 그룹의 숫자 출력처리 -->
 					<% for (int p = startPage; p <= endPage; p++){
 						if (p == currentPage){%>
                     <a href="#none" class="active"><%=p %></a>
                     <%} else {%>
-                    <a href="/anavada/jblist?page=<%=p%>&local=<%=local%>&listsearch=<%=listSearch%>"><%=p %></a>
+                    <a href="/anavada/jblist?page=<%=p%>&local=<%=local%>&listsearch=<%=listSearch%>&titlesearch=<%=titleSearch%>"><%=p %></a>
                     <%}} %>
                     <!--  다음 그룹으로 이동처리 -->
                     <% if (endPage +10 <= maxPage){ %>
-                    <a href="/anavada/jblist?page=<%= endPage + 10 %>&local=<%=local%>&listsearch=<%=listSearch%>"><i class="glyphicon glyphicon-menu-right"></i></a>
+                    <a href="/anavada/jblist?page=<%= endPage + 10 %>&local=<%=local%>&listsearch=<%=listSearch%>&titlesearch=<%=titleSearch%>"><i class="glyphicon glyphicon-menu-right"></i></a>
                     <%} %>
                     
                     <% if (currentPage >= maxPage){ %>
                     <a><i class="glyphicon glyphicon-forward"></i></a>
                     <%}else{ %>
-                    <a href="/anavada/jblist?page=<%=maxPage%>&local=<%=local%>&listsearch=<%=listSearch%>"><i class="glyphicon glyphicon-forward"></i> </a>
+                    <a href="/anavada/jblist?page=<%=maxPage%>&local=<%=local%>&listsearch=<%=listSearch%>&titlesearch=<%=titleSearch%>"><i class="glyphicon glyphicon-forward"></i> </a>
                     <%} %>
                 </dd>
             </dl>
