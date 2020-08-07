@@ -14,7 +14,7 @@ import declare.model.vo.Declare;
 public class DeclareDao {
 	public DeclareDao() {}
 	
-	public ArrayList<Declare>selectList(Connection conn) {
+	public ArrayList<Declare>selectList(Connection conn) {//신고목록전체조회
 		ArrayList<Declare> list = new ArrayList<Declare>();
 		Statement stmt = null;
 		ResultSet rset = null;
@@ -43,23 +43,25 @@ public class DeclareDao {
 		}
 		return list;
 	}
-	public Declare selectOne(Connection conn, String declareId) {
-		Declare declare = null;
+	public ArrayList<Declare>selectOne(Connection conn, String keyword) { //black id검색기능
+		ArrayList<Declare> list = new ArrayList<Declare>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		String query = "select * form declare_admin where declareId =?";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, declareId);
+			pstmt.setString(1, "%"+ keyword + "%");
 			
 			rset = pstmt.executeQuery();
-			if(rset.next()) {
-				declare = new Declare();
+			while(rset.next()) {
+				Declare declare = new Declare();
 				declare.setDeclareNo(rset.getInt("declare_no"));
-				declare.setDeclareId(declareId);
+				declare.setDeclareId(rset.getString("declare_id"));
 				declare.setDeclareCount(rset.getInt("declare_count"));
 				declare.setDeclareOk(rset.getString("declare_ok"));
+				
+				list.add(declare);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -67,22 +69,62 @@ public class DeclareDao {
 			close(rset);
 			close(pstmt);
 		}
-		return declare;
+		return list;
 	}
-
-	public int insertDeclare(Connection conn, Declare declare) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertDeclare(Connection conn, Declare declare) { //new신고자등록
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "inset into declare_admin values ( ?, ?, ?, sysdate)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, declare.getDeclareNo());
+			pstmt.setString(2, declare.getDeclareId());
+			pstmt.setInt(3, declare.getDeclareCount());
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
-
-	public int updateDeclare(Connection conn, Declare declare) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateDeclare(Connection conn, Declare declare) { //신고횟수, 제한설정 수정기능
+		int result =0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update declare_admin set declare_count = ?, declare_ok = ? ";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, declare.getDeclareCount());
+			pstmt.setString(2, declare.getDeclareOk());
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
-
-	public int deleteDeclare(Connection conn, Declare declare) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteDeclare(Connection conn, String declareId) { //신고자아이디 삭제
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "delete from declare_admin where declare_id = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, declareId);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 

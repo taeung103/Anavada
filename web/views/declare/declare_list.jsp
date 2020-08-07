@@ -1,5 +1,10 @@
+<%@page import="declare.model.vo.DBo"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+		ArrayList<DBo> list = (ArrayList<DBo>)request.getAttribute("list");
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,160 +38,46 @@
             <div class="list-area">
                <!--종류 리스트-->
                 <div class="sort-area">  
-                    <h4>전체 150개</h4>
-                    <a href="declare_write.jsp" class="write_btn">글쓰기</a>
+                    <h4>전체 <%=list.size() %> 개</h4>
+                    <a href="/anavada/views/declare/declare_write.jsp" class="write_btn">글쓰기</a>
                     <div>
                         <form action="" method="" id="">
-                            목록 분류 : <select name="" class="ListSelect">
-                                    <option value="분류 선택" selected="selected">분류 선택</option>
-                                    <option value="제목">제목</option>
-                                    <option value="내용">내용</option>
-                                    <option value="작성자">작성자</option>
+                            유형 선택 : <select name="" class="ListSelect">
+                                    <option value="분류 선택" selected="selected">유형</option>
+                                    <option value="중고거래 신고">중고거래</option>
+                                    <option value="커뮤니티 신고">커뮤니티</option>
                             </select>
                             
                             <input type="text" placeholder="검색어를 입력해주세요.">
                             <button class="top-search"><i class="xi-search"></i></button>
-                        </form>
+                        </form> 
                     </div>
                 </div>
                 
-                <form action="">
-                <table>
-                    <tbody>
-                        <tr onclick="location.href='declare_view.jsp';">
-                            <td class="number">10</td>
-                            <td class="title">
-                                <h2><span class="declare">신고</span>중고거래 사기회원이 있습니다.</h2>
-                                <ul>
-                                    <li>작성자 : 홍길동</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="declare_btn"><span><i class="glyphicon glyphicon-bell"></i>처리중</span></td>
-                        </tr>
-                        <tr onclick="location.href='declare_view.jsp';">
-                            <td class="number">9</td>
-                            <td class="title">
-                                <h2><span class="declare">신고</span>중고거래 사기회원이 있습니다.</h2>
-                                <ul>
-                                    <li>작성자 : 홍길동</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="declare_btn"><span><i class="glyphicon glyphicon-bell"></i>처리중</span></td>
-                        </tr>
-                        <tr onclick="location.href='declare_view.jsp';">
-                            <td class="number">8</td>
-                            <td class="title">
-                                <h2><span class="declare">신고</span>중고거래 사기회원이 있습니다.</h2>
-                                <ul>
-                                    <li>작성자 : 홍길동</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="declare_btn2"><span><i class="glyphicon glyphicon-bell"></i>처리완료</span></td>
-                        </tr>
-                        <tr onclick="location.href='declare_view.jsp';">
-                            <td class="number">7</td>
-                            <td class="title">
-                                <h2><span class="declare">신고</span>중고거래 사기회원이 있습니다.</h2>
-                                <ul>
-                                    <li>작성자 : 홍길동</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="declare_btn2"><span><i class="glyphicon glyphicon-bell"></i>처리완료</span></td>
-                        </tr>
-                        <tr onclick="location.href='declare_view.jsp';">
-                            <td class="number">6</td>
-                            <td class="title">
-                                <h2><span class="declare">신고</span>중고거래 사기회원이 있습니다.</h2>
-                                <ul>
-                                    <li>작성자 : 홍길동</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="declare_btn2"><span><i class="glyphicon glyphicon-bell"></i>처리완료</span></td>
-                        </tr>
-                        <tr onclick="location.href='declare_view.jsp';">
-                            <td class="number">5</td>
-                            <td class="title">
-                                <h2><span class="declare">신고</span>중고거래 사기회원이 있습니다.</h2>
-                                <ul>
-                                    <li>작성자 : 홍길동</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="declare_btn2"><span><i class="glyphicon glyphicon-bell"></i>처리완료</span></td>
-                        </tr>
-                        <tr onclick="location.href='declare_view.jsp';">
-                            <td class="number">4</td>
-                            <td class="title">
-                                <h2><span class="declare">신고</span>중고거래 사기회원이 있습니다.</h2>
-                                <ul>
-                                    <li>작성자 : 홍길동</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="declare_btn2"><span><i class="glyphicon glyphicon-bell"></i>처리완료</span></td>
-                        </tr>
-                        <tr onclick="location.href='declare_view.jsp';">
-                            <td class="number">3</td>
-                            <td class="title">
-                                <h2><span class="declare">신고</span>중고거래 사기회원이 있습니다.</h2>
-                                <ul>
-                                    <li>작성자 : 홍길동</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="declare_btn2"><span><i class="glyphicon glyphicon-bell"></i>처리완료</span></td>
-                        </tr>
-                        <tr onclick="location.href='declare_view.jsp';">
-                            <td class="number">2</td>
-                            <td class="title">
-                                <h2><span class="declare">신고</span>중고거래 사기회원이 있습니다.</h2>
-                                <ul>
-                                    <li>작성자 : 홍길동</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="declare_btn2"><span><i class="glyphicon glyphicon-bell"></i>처리완료</span></td>
-                        </tr>
-                        <tr onclick="location.href='declare_view.jsp';">
-                            <td class="number">1</td>
-                            <td class="title">
-                                <h2><span class="declare">신고</span>중고거래 사기회원이 있습니다.</h2>
-                                <ul>
-                                    <li>작성자 : 홍길동</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="declare_btn2"><span><i class="glyphicon glyphicon-bell"></i>처리완료</span></td>
-                        </tr>
-                    </tbody>
+                <form action=""> 
+                <table >
+                <tr><th>번호</th><th>제목</th><th>작성자</th><th>처리상태</th> </tr>
+                    <%for(DBo d : list) { 
+                    System.out.println(d);%>
+                 <tr>
+                 <td><%= d.getDboNo() %></td>
+                 <td><a href="/anavada/dbodetail.ad?dboNo=<%= d.getDboNo()%>"><%= d.getDboTitle() %></a></td>
+                 <td><%= d.getDboMid() %></td>
+                 		<td><% if(d.getDboChe() != "Y"){ %>
+                 		            </i>처리중</span> &nbsp;
+                 		         <% }else{// 처리완료된건%>
+                 		            </i>처리완료</span> &nbsp;
+                 		          <% }  %></td>              		          
+                 </tr>
+                 <% } %>
                 </table>
 
 
                 <div class="list-no">
-                    <p><img src="/anavada/resources/images/btnIcn/icn_big_listNo.png" alt="" title="" /></p>
-                    <h1>목록이 없습니다.</h1>
+                    <a href="/anavada/dbolist">목록</a>
                 </div>
 
-
-                <div class="write-btn">
-                    <a href="declare_list.jsp">글쓰기</a>
-                </div>
-                </form>
+              </form> 
 
             </div>
             <!-- 리스트 끝 -->

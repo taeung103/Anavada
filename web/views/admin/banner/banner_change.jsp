@@ -15,7 +15,7 @@
             <div class="admin_title">
                 <div class="admin_path">
                     <h3>배너관리</h3>
-                    <h2>| 등록</h2>
+                    <h2>등록</h2>
                 </div>
             </div>
             <!-- //상단 타이틀 -->

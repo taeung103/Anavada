@@ -15,13 +15,13 @@ public class DBo implements java.io.Serializable {
 	private String dboRename; //바뀐
 	private String dboUrl; //연결된 링크(해당신고글)
 	private String dboBId; //블랙아이디(신고당한자)
+	private String dboChe; //신고처리체크
 	
 	public DBo() {}
 
-	
 
-	public DBo(int dboNo, String dboMid, String dboTitle, Date dboDate, String dboType, String dboContent,
-			String dboOriginal, String dboRename, String dboUrl, String dboBId) {
+   	public DBo(int dboNo, String dboMid, String dboTitle, Date dboDate, String dboType, String dboContent,
+			String dboOriginal, String dboRename, String dboUrl, String dboBId, String dboChe) {
 		super();
 		this.dboNo = dboNo;
 		this.dboMid = dboMid;
@@ -33,9 +33,8 @@ public class DBo implements java.io.Serializable {
 		this.dboRename = dboRename;
 		this.dboUrl = dboUrl;
 		this.dboBId = dboBId;
+		this.dboChe = dboChe;
 	}
-
-   
 
 	public String getDboTitle() {
 		return dboTitle;
@@ -117,20 +116,27 @@ public class DBo implements java.io.Serializable {
 		this.dboBId = dboBId;
 	}
 
+		
+	public String getDboChe() {
+		return dboChe;
+	}
+
+
+	public void setDboChe(String dboChe) {
+		this.dboChe = dboChe;
+	}
+
+
 	public static long getSerializableuid() {
 		return SerializableUID;
 	}
-
 
 
 	@Override
 	public String toString() {
 		return "DBo [dboNo=" + dboNo + ", dboMid=" + dboMid + ", dboTitle=" + dboTitle + ", dboDate=" + dboDate
 				+ ", dboType=" + dboType + ", dboContent=" + dboContent + ", dboOriginal=" + dboOriginal
-				+ ", dboRename=" + dboRename + ", dboUrl=" + dboUrl + ", dboBId=" + dboBId + "]";
+				+ ", dboRename=" + dboRename + ", dboUrl=" + dboUrl + ", dboBId=" + dboBId + ", dboChe=" + dboChe + "]";
 	}
-
-	
-	
 
 }

@@ -1,11 +1,21 @@
 package declare.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+import declare.model.service.DBoService;
+import declare.model.vo.DBo;
 
 /**
  * Servlet implementation class DBoAdminUpdateServlet
@@ -26,8 +36,26 @@ public class DBoAdminUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// 관리자용 신고게시판 수정 처리용 컨트롤러
+
+		request.setCharacterEncoding("utf-8");
+		System.out.println("서블릿왓나?");
+		DBo dbo = new DBo();
+		
+		dbo.setDboChe(request.getParameter("che"));
+	System.out.println(dbo);
+						
+		int result = new DBoService().updateDBo(dbo);		
+
+		// 7.받은 결과로 성공/실패 페이지 내보내기
+		if (result > 0) {
+			response.sendRedirect("dbolist");
+			System.out.println(result);
+		} else {
+			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
+			request.setAttribute("message", dbo.getDboNo() + "번 공지사항 수정 실패!");
+			view.forward(request, response);
+		}
 	}
 
 	/**

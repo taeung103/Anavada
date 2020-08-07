@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class DBoSelOneServlet
+ * Servlet implementation class DBoSearchOneServlet
  */
-@WebServlet("/dboselone")
-public class DBoSelOneServlet extends HttpServlet {
+@WebServlet("/dbosearch")
+public class DBoSearchOneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DBoSelOneServlet() {
+    public DBoSearchOneServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

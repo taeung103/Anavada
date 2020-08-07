@@ -12,19 +12,19 @@ public class DBoService {
 	private DBoDao dbodao = new DBoDao();
 	public DBoService() {}
 	
-	public ArrayList<DBo> selectAll(){
+	public ArrayList<DBo> selectAll(){ //전체목록보기
 		Connection conn = getConnection();
-		ArrayList<DBo> list = dbodao.selectList(conn);
+		ArrayList<DBo> list = dbodao.selectAll(conn);
 		close(conn);
 		return list;
 	}
-	public DBo selectOne(String dboMid) {
+	public DBo selectOne(int dboNo) { //글상세보기
 		Connection conn = getConnection();
-		DBo dbo = dbodao.selectOne(conn, dboMid);
+		DBo dbo = dbodao.selectOne(conn, dboNo);
 		close(conn);
 		return dbo;
 	}
-	public int insertDBo(DBo dbo) {
+	public int insertDBo(DBo dbo) { //글등록
 		Connection conn = getConnection();
 		int result = dbodao.insertDBo(conn, dbo);
 		if(result > 0)
@@ -34,7 +34,7 @@ public class DBoService {
 		close(conn);
 		return result;
 	}
-	public int updateDBo(DBo dbo) {
+	public int updateDBo(DBo dbo) { //신고처리완료 수정
 		Connection conn = getConnection();
 		int result = dbodao.updateDBo(conn, dbo);
 		if(result > 0)
@@ -44,9 +44,9 @@ public class DBoService {
 		close(conn);
 		return result;
 	}
-	public int deleteDBo(DBo dbo) {
+	public int deleteDBo(int dboNo) {//글삭제
 		Connection conn = getConnection();
-		int result = dbodao.deleteDBo(conn, dbo);
+		int result = dbodao.deleteDBo(conn, dboNo);
 		if(result > 0)
 			commit(conn);
 		else
@@ -54,6 +54,25 @@ public class DBoService {
 		close(conn);
 		return result;
 	}
-	
+	public ArrayList<DBo>searchOne(String keyword){ //글검색기능
+		Connection conn = getConnection();
+		ArrayList<DBo> list = dbodao.searchOne(conn, keyword);
+		close(conn);
+		return list;
+	}
+
+	public int getListCount() {
+		Connection conn = getConnection();
+		int listCount = dbodao.getListCount(conn);
+		close(conn);
+		return listCount;
+	}
+
+	public ArrayList<DBo> selectList(int currentPage, int limit) {
+		Connection conn = getConnection();
+		ArrayList<DBo> list = dbodao.selectList(conn, currentPage, limit);
+		close(conn);
+		return list;
+	}
 
 }
