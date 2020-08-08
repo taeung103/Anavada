@@ -45,7 +45,11 @@
                     <li><span>작성자 : </span><%= cboard.getMemberId() %></li>
                     <li><span>등록일 : </span><%= cboard.getDate() %></li>
                     <li><span>조회수 : </span><%= cboard.getCboardViewCount() %></li>
-                    <li><span>첨부파일#1 : </span><a href="#none" download>지역소통_강서구.pdf</a></li>
+                    <li><span>첨부파일#1 : </span><a href="#none" download>
+                    <% if(cboard.getCfilesOriginalFilepath1() != null) { %>
+                    <%= cboard.getCfilesOriginalFilepath1() %>
+                    <% } %>
+                    </a></li>
                     <li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%= cboard.getLikeCount() %></span></i></li>
                 </ul>
 
