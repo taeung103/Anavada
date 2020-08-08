@@ -213,4 +213,29 @@ public class CboardDao {
 		return allListCount;
 	}
 
+	public int insertCboard(Connection conn, Cboard cboard) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "insert into cboard values(cboard_seq.nextval, ?, ?, ?, sysdate, null, default, default, default, default, default, ?, ?, ?, null, null, null, null, null, null)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, cboard.getMemberId());
+			pstmt.setString(2, cboard.getCboardTitle());
+			pstmt.setString(3, cboard.getCboardContent());
+			pstmt.setString(4, cboard.getLocalNo());
+			pstmt.setString(5, cboard.getCfilesOriginalFilepath1());
+			pstmt.setString(6, cboard.getCfilesRenameFilepath1());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }

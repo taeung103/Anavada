@@ -31,7 +31,8 @@
             <!-- 글쓰기 -->
             <div class="write-area">
                 <h2>커뮤니티 작성</h2>
-                <form action="/anavada/cinsert" method="post">
+                <form action="/anavada/cinsert" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="writer" value="<%= loginMember.getMemberId() %>">
                     <table>
                         <colgroup>
                             <col width="20%">
@@ -41,7 +42,7 @@
                             <tr>
                                 <td>지역 분류</td>
                                 <td>
-                                    <select name="" class="LocationSelect">
+                                    <select name="local" class="LocationSelect">
                                         <option selected="selected">지역선택</option>
                                         <option value="1">강남구</option>
                                         <option value="2">강동구</option>
@@ -73,15 +74,15 @@
                             </tr>
                             <tr>
                                 <td>제목</td>
-                                <td><input type="text" name="" title="" class="form-control w100p" placeholder="제목" /></td>
+                                <td><input type="text" name="title" class="form-control w100p" placeholder="제목" /></td>
                             </tr>
                             <tr>
                                 <td>내용</td>
-                                <td><textarea name="" rows="" cols="" class="form-control" style="resize: none; width:100%; min-height:300px; max-height:300px;"></textarea></td>
+                                <td><textarea name="content" rows="10" cols="1000" class="form-control" style="resize: none; width:100%; min-height:300px; max-height:300px;"></textarea></td>
                             </tr>
                             <tr>
                                 <td>첨부파일</td>
-                                <td><input type="file" name="FileName"></td>
+                                <td><input type="ofile" name="FileName"></td>
                             </tr>
                         </tbody>
                     </table>

@@ -49,4 +49,16 @@ public class CboardService {
 		return listCount;
 	}
 
+	public int insertCboard(Cboard cboard) {
+		Connection conn = getConnection();
+		int result = cdao.insertCboard(conn, cboard);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
 }
