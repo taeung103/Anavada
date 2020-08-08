@@ -48,12 +48,6 @@ public class CboardDetailViewServlet extends HttpServlet {
 		
 		Cboard cboard = cservice.selectCBoard(cboardNum);
 
-		System.out.println(cboard);
-		System.out.println(currentPage);
-		System.out.println(local);
-		System.err.println(search);
-		System.out.println(keyword);
-		
 		RequestDispatcher view = null;
 		if (cboard != null) {
 			view = request.getRequestDispatcher("views/cboard/community_view.jsp");

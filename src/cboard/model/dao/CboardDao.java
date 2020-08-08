@@ -152,7 +152,6 @@ public class CboardDao {
 		ResultSet rset = null;
 		
 		String query = "select * from cboard where cboard_no = ?";
-		System.out.println(query);
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -196,7 +195,7 @@ public class CboardDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		
-		String query = "select count(*) from cboard ";
+		String query = "select max(cboard_no) from cboard";
 		
 		try {
 			stmt = conn.createStatement();

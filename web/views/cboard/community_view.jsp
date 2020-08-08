@@ -54,11 +54,11 @@
                 </div>
 
                 <div class="view-btn">
-                	<% if(cboard.getCboardNo() - 1 > 1) { %>
+                	<% if(cboard.getCboardNo() > 1) { %>
                     	<a href="/anavada/cdetail?cnum=<%=cboard.getCboardNo()-1%>&page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>" class="btn btn-prev">이전글</a>
                     <% } %>
                     <a href="/anavada/clistview?page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>" class="btn btn-list">목록</a>
-                    <% if(cboard.getCboardNo() + 1 < allListCount) { %>
+                    <% if(cboard.getCboardNo() < allListCount) { %>
                     <a href="/anavada/cdetail?cnum=<%=cboard.getCboardNo()+1%>&page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>" class="btn btn-next">다음글</a>
                     <% } %>
                 </div>
