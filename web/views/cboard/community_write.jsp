@@ -82,7 +82,7 @@
                             </tr>
                             <tr>
                                 <td>첨부파일</td>
-                                <td><input type="ofile" name="FileName"></td>
+                                <td><input type="file" name="ofile"></td>
                             </tr>
                         </tbody>
                     </table>
