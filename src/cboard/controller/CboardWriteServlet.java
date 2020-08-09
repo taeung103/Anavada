@@ -60,33 +60,67 @@ public class CboardWriteServlet extends HttpServlet {
 		cboard.setCboardContent(mrequest.getParameter("content"));
 		cboard.setLocalNo(mrequest.getParameter("local"));
 		
-		String originalFileName = mrequest.getFilesystemName("ofile");
-		cboard.setCfilesOriginalFilepath1(originalFileName);
 		
-		if (originalFileName != null) {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-			
-			String renameFileName = sdf.format(new java.sql.Date(System.currentTimeMillis()));
-			
-			renameFileName += "." + originalFileName.substring(originalFileName.lastIndexOf(".")+1);
-			
-			File originFile = new File(savePath + "\\" + originalFileName);
-			File renameFile = new File(savePath + "\\" + renameFileName);
-			
-			if (!originFile.renameTo(renameFile)) {
-				FileInputStream fin = new FileInputStream(originFile);
-				FileOutputStream fout = new FileOutputStream(renameFile);
-				
-				int data = -1;
-				byte[] buffer = new byte[1024];
-				while ((data = fin.read(buffer, 0, buffer.length)) != -1) {
-					fout.write(buffer, 0, buffer.length);
-				}
-				fin.close();
-				fout.close();
-				originFile.delete();
+		for (int i = 0; i < 4; i++) {
+			System.out.println("ofile" + (i + 1));
+			String originalFileName = mrequest.getFilesystemName("ofile" + (i + 1));
+			switch (i + 1) {
+			case 1:
+				cboard.setCfilesOriginalFilepath1(originalFileName);
+				break;
+			case 2:
+				cboard.setCfilesOriginalFilepath2(originalFileName);
+				break;
+			case 3:
+				cboard.setCfilesOriginalFilepath3(originalFileName);
+				break;
+			case 4:
+				cboard.setCfilesOriginalFilepath4(originalFileName);
+				break;
+			default:
+				break;
 			}
-			cboard.setCfilesRenameFilepath1(renameFileName);
+			
+			if (originalFileName != null) {
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmSSSSSS");
+				
+				String renameFileName = sdf.format(new java.sql.Date(System.currentTimeMillis()));
+				
+				renameFileName += i + "." + originalFileName.substring(originalFileName.lastIndexOf(".")+1);
+				
+				File originFile = new File(savePath + "\\" + originalFileName);
+				File renameFile = new File(savePath + "\\" + renameFileName);
+				
+				if (!originFile.renameTo(renameFile)) {
+					FileInputStream fin = new FileInputStream(originFile);
+					FileOutputStream fout = new FileOutputStream(renameFile);
+					
+					int data = -1;
+					byte[] buffer = new byte[1024];
+					while ((data = fin.read(buffer, 0, buffer.length)) != -1) {
+						fout.write(buffer, 0, buffer.length);
+					}
+					fin.close();
+					fout.close();
+					originFile.delete();
+				}
+				switch (i + 1) {
+				case 1:
+					cboard.setCfilesRenameFilepath1(renameFileName);
+					break;
+				case 2:
+					cboard.setCfilesRenameFilepath2(renameFileName);
+					break;
+				case 3:
+					cboard.setCfilesRenameFilepath3(renameFileName);
+					break;
+				case 4:
+					cboard.setCfilesRenameFilepath4(renameFileName);
+					break;
+				default:
+					break;
+				}
+			}
 		}
 		
 		int result = new CboardService().insertCboard(cboard);

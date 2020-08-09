@@ -80,10 +80,12 @@
                                 <td>내용</td>
                                 <td><textarea name="content" rows="10" cols="1000" class="form-control" style="resize: none; width:100%; min-height:300px; max-height:300px;"></textarea></td>
                             </tr>
+                            <% for(int i = 0; i < 4; i++) { %>
                             <tr>
-                                <td>첨부파일</td>
-                                <td><input type="file" name="ofile"></td>
+                                <td>첨부파일<%=i +1 %></td>
+                                <td><input type="file" name="ofile<%=i + 1 %>" ></td>
                             </tr>
+                            <% } %>
                         </tbody>
                     </table>
                     <div class="write-btn">

@@ -217,7 +217,8 @@ public class CboardDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "insert into cboard values(cboard_seq.nextval, ?, ?, ?, sysdate, null, default, default, default, default, default, ?, ?, ?, null, null, null, null, null, null)";
+		String query = "insert into cboard values(cboard_seq.nextval, ?, ?, ?, sysdate, null, default, default, default, default, default, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		System.out.println(cboard.getLocalNo());
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -227,6 +228,12 @@ public class CboardDao {
 			pstmt.setString(4, cboard.getLocalNo());
 			pstmt.setString(5, cboard.getCfilesOriginalFilepath1());
 			pstmt.setString(6, cboard.getCfilesRenameFilepath1());
+			pstmt.setString(7, cboard.getCfilesOriginalFilepath2());
+			pstmt.setString(8, cboard.getCfilesRenameFilepath2());
+			pstmt.setString(9, cboard.getCfilesOriginalFilepath3());
+			pstmt.setString(10, cboard.getCfilesRenameFilepath3());
+			pstmt.setString(11, cboard.getCfilesOriginalFilepath4());
+			pstmt.setString(12, cboard.getCfilesRenameFilepath4());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
