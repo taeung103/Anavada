@@ -1,14 +1,16 @@
+<%@page import="cboard.model.service.CboardService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="cboard.model.vo.Cboard"%>
 <%
-	Cboard cboard = (Cboard)request.getAttribute("cboard");
+	Cboard cboard = (Cboard) request.getAttribute("cboard");
 	String local = String.valueOf(request.getAttribute("local"));
 	String search = String.valueOf(request.getAttribute("search"));
 	String keyword = String.valueOf(request.getAttribute("keyword"));
 	int currentPage = ((Integer) request.getAttribute("page")).intValue();
 	int allListCount = ((Integer) request.getAttribute("allListCount")).intValue();
-	String[] localArr = { "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구" };
+	String[] localArr = { "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구",
+			"마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구" };
 %>
 <!DOCTYPE html>
 <html>
@@ -44,52 +46,90 @@
 			<!-- 상세 -->
 			<div class="view-area cmnt_view">
 				<h2>
-					<span><%= localArr[Integer.parseInt(cboard.getLocalNo()) - 1] %></span><%=cboard.getCboardTitle() %></h2>
+					<span><%=localArr[Integer.parseInt(cboard.getLocalNo()) - 1]%></span><%=cboard.getCboardTitle()%></h2>
 				<ul>
-					<li><span>작성자 : </span><%= cboard.getMemberId() %></li>
-					<li><span>등록일 : </span><%= cboard.getDate() %></li>
-					<li><span>조회수 : </span><%= cboard.getCboardViewCount() %></li>
-					<% if(cboard.getCfilesOriginalFilepath1() != null) { %>
-					<%= cboard.getCfilesOriginalFilepath1() %>
-					<% } %>
+					<li><span>작성자 : </span><%=cboard.getMemberId()%></li>
+					<li><span>등록일 : </span><%=cboard.getDate()%></li>
+					<li><span>조회수 : </span><%=cboard.getCboardViewCount()%></li>
+					<%
+						if (cboard.getCfilesOriginalFilepath1() != null) {
+					%>
+					<%=cboard.getCfilesOriginalFilepath1()%>
+					<%
+						}
+					%>
 					</a>
 					</li>
-					<li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%= cboard.getLikeCount() %></span></i></li>
+					<li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%=cboard.getLikeCount()%></span></i></li>
 				</ul>
 				<ul>
-					<% for(int i = 0; i < 4; i++) { %>
-					<% if(i == 0 && cboard.getCfilesOriginalFilepath1()!=null) { %>
-						<li><span>첨부파일#1 : </span><a href="/anavada/cfdown?ofile=<%= cboard.getCfilesOriginalFilepath1() %>&rfile=<%= cboard.getCfilesRenameFilepath1() %>" ><%= cboard.getCfilesOriginalFilepath1() %></a></li>
-					<%} else if(i == 1 && cboard.getCfilesOriginalFilepath2()!=null) { %>
-						<li><span>첨부파일#2 : </span><a href="/anavada/cfdown?ofile=<%= cboard.getCfilesOriginalFilepath2() %>&rfile=<%= cboard.getCfilesRenameFilepath2() %>" ><%= cboard.getCfilesOriginalFilepath2() %></a></li>
-					<%} else if(i == 2 && cboard.getCfilesOriginalFilepath3()!=null) { %>
-						<li><span>첨부파일#3 : </span><a href="/anavada/cfdown?ofile=<%= cboard.getCfilesOriginalFilepath3() %>&rfile=<%= cboard.getCfilesRenameFilepath3() %>" ><%= cboard.getCfilesOriginalFilepath3() %></a></li>
-					<%} else if(i == 3 && cboard.getCfilesOriginalFilepath4()!=null) { %>
-						<li><span>첨부파일#4 : </span><a href="/anavada/cfdown?ofile=<%= cboard.getCfilesOriginalFilepath4() %>&rfile=<%= cboard.getCfilesRenameFilepath4() %>" ><%= cboard.getCfilesOriginalFilepath4() %></a></li>
-					<% } %>
+					<%
+						for (int i = 0; i < 4; i++) {
+					%>
+					<%
+						if (i == 0 && cboard.getCfilesOriginalFilepath1() != null) {
+					%>
+					<li><span>첨부파일#1 : </span><a
+						href="/anavada/cfdown?ofile=<%=cboard.getCfilesOriginalFilepath1()%>&rfile=<%=cboard.getCfilesRenameFilepath1()%>"><%=cboard.getCfilesOriginalFilepath1()%></a></li>
+					<%
+						} else if (i == 1 && cboard.getCfilesOriginalFilepath2() != null) {
+					%>
+					<li><span>첨부파일#2 : </span><a
+						href="/anavada/cfdown?ofile=<%=cboard.getCfilesOriginalFilepath2()%>&rfile=<%=cboard.getCfilesRenameFilepath2()%>"><%=cboard.getCfilesOriginalFilepath2()%></a></li>
+					<%
+						} else if (i == 2 && cboard.getCfilesOriginalFilepath3() != null) {
+					%>
+					<li><span>첨부파일#3 : </span><a
+						href="/anavada/cfdown?ofile=<%=cboard.getCfilesOriginalFilepath3()%>&rfile=<%=cboard.getCfilesRenameFilepath3()%>"><%=cboard.getCfilesOriginalFilepath3()%></a></li>
+					<%
+						} else if (i == 3 && cboard.getCfilesOriginalFilepath4() != null) {
+					%>
+					<li><span>첨부파일#4 : </span><a
+						href="/anavada/cfdown?ofile=<%=cboard.getCfilesOriginalFilepath4()%>&rfile=<%=cboard.getCfilesRenameFilepath4()%>"><%=cboard.getCfilesOriginalFilepath4()%></a></li>
+					<%
+						}
+					%>
 
-					<% } %>
+					<%
+						}
+					%>
 				</ul>
 				<div class="view-ctn">
-					<%= cboard.getCboardContent() %>
+					<%=cboard.getCboardContent()%>
 				</div>
 
 				<div class="view-btn">
-					<% if(cboard.getCboardNo() > 1) { %>
+					<%
+						if (cboard.getCboardNo() > 1) {
+					%>
 					<a
-						href="/anavada/cdetail?cnum=<%=cboard.getCboardNo()-1%>&page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"
+						href="/anavada/cdetail?cnum=<%=cboard.getCboardNo() - 1%>&page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"
 						class="btn btn-prev">이전글</a>
-					<% } %>
+					<%
+						}
+					%>
+					<%
+						if (cboard.getCboardNo() < allListCount) {
+					%>
 					<a
-						href="/anavada/clistview?page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"
-						class="btn btn-list">목록</a>
-					<% if(cboard.getCboardNo() < allListCount) { %>
-					<a
-						href="/anavada/cdetail?cnum=<%=cboard.getCboardNo()+1%>&page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"
+						href="/anavada/cdetail?cnum=<%=cboard.getCboardNo() + 1%>&page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"
 						class="btn btn-next">다음글</a>
-					<% } %>
+					<%
+						}
+					%>
 				</div>
-
+				<div class="view-btn">
+					<a href="/anavada/clistview?page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"
+						class="btn btn-list">수정</a> 
+					<% if(loginMember.getMemberId().equals(cboard.getMemberId())) { %>
+					<a href="/anavada/cdelete?cnum=<%=cboard.getCboardNo()%>&rfile1=<%=cboard.getCfilesRenameFilepath1()%>
+						&rfile2=<%=cboard.getCfilesRenameFilepath2()%>&rfile3=<%=cboard.getCfilesRenameFilepath3()%>&rfile4=<%=cboard.getCfilesRenameFilepath4()%>"
+						class="btn btn-list">삭제</a>
+					<% } %>
+						 
+					<a href="/anavada/clistview?page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"
+						class="btn btn-list">목록</a>
+				</div>
 				<div class="cmt_wrap">
 					<form action="" method="">
 						<fieldset>

@@ -61,4 +61,16 @@ public class CboardService {
 		return result;
 	}
 
+	public int deleteCboard(int cboardNum) {
+		Connection conn = getConnection();
+		int result = cdao.deleteCboard(conn, cboardNum);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
 }

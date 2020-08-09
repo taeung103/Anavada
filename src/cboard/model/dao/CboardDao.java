@@ -245,4 +245,22 @@ public class CboardDao {
 		return result;
 	}
 
+	public int deleteCboard(Connection conn, int cboardNum) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "delete from cboard where cboard_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, cboardNum);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 }
