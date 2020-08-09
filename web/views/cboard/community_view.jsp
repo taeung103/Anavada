@@ -59,13 +59,13 @@
 				<ul>
 					<% for(int i = 0; i < 4; i++) { %>
 					<% if(i == 0 && cboard.getCfilesOriginalFilepath1()!=null) { %>
-						<li><span>첨부파일#1 : </span><a href="#none" download><%= cboard.getCfilesOriginalFilepath1() %></a></li>
+						<li><span>첨부파일#1 : </span><a href="/anavada/cfdown?ofile=<%= cboard.getCfilesOriginalFilepath1() %>&rfile=<%= cboard.getCfilesRenameFilepath1() %>" ><%= cboard.getCfilesOriginalFilepath1() %></a></li>
 					<%} else if(i == 1 && cboard.getCfilesOriginalFilepath2()!=null) { %>
-						<li><span>첨부파일#2 : </span><a href="#none" download><%= cboard.getCfilesOriginalFilepath2() %></a></li>
+						<li><span>첨부파일#2 : </span><a href="/anavada/cfdown?ofile=<%= cboard.getCfilesOriginalFilepath2() %>&rfile=<%= cboard.getCfilesRenameFilepath2() %>" ><%= cboard.getCfilesOriginalFilepath2() %></a></li>
 					<%} else if(i == 2 && cboard.getCfilesOriginalFilepath3()!=null) { %>
-						<li><span>첨부파일#3 : </span><a href="#none" download></a><%= cboard.getCfilesOriginalFilepath3() %></li>
+						<li><span>첨부파일#3 : </span><a href="/anavada/cfdown?ofile=<%= cboard.getCfilesOriginalFilepath3() %>&rfile=<%= cboard.getCfilesRenameFilepath3() %>" ><%= cboard.getCfilesOriginalFilepath3() %></a></li>
 					<%} else if(i == 3 && cboard.getCfilesOriginalFilepath4()!=null) { %>
-						<li><span>첨부파일#4 : </span><a href="#none" download><%= cboard.getCfilesOriginalFilepath4() %></a></li>
+						<li><span>첨부파일#4 : </span><a href="/anavada/cfdown?ofile=<%= cboard.getCfilesOriginalFilepath4() %>&rfile=<%= cboard.getCfilesRenameFilepath4() %>" ><%= cboard.getCfilesOriginalFilepath4() %></a></li>
 					<% } %>
 
 					<% } %>
