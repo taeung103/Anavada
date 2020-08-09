@@ -38,14 +38,14 @@
                 <h2>커뮤니티 작성</h2>
                 <form action="/anavada/cupdate" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="cnum" value="<%= cboard.getCboardNo() %>">
-				<input type="hidden" name="ofile1" value="<%= cboard.getCfilesOriginalFilepath1() %>">
-				<input type="hidden" name="rfile1" value="<%= cboard.getCfilesRenameFilepath1() %>">
-				<input type="hidden" name="ofile2" value="<%= cboard.getCfilesOriginalFilepath2() %>">
-				<input type="hidden" name="rfile2" value="<%= cboard.getCfilesRenameFilepath2() %>">
-				<input type="hidden" name="ofile3" value="<%= cboard.getCfilesOriginalFilepath3() %>">
-				<input type="hidden" name="rfile3" value="<%= cboard.getCfilesRenameFilepath3() %>">
-				<input type="hidden" name="ofile4" value="<%= cboard.getCfilesOriginalFilepath4() %>">
-				<input type="hidden" name="rfile4" value="<%= cboard.getCfilesRenameFilepath4() %>">
+				<input type="hidden" name="ofile1" value="<% if(cboard.getCfilesOriginalFilepath1() != null) {%><%= cboard.getCfilesOriginalFilepath1() %><%}%>">
+				<input type="hidden" name="rfile1" value="<% if(cboard.getCfilesOriginalFilepath1() != null) {%><%= cboard.getCfilesRenameFilepath1() %><%}%>">
+				<input type="hidden" name="ofile2" value="<% if(cboard.getCfilesOriginalFilepath1() != null) {%><%= cboard.getCfilesOriginalFilepath2() %><%}%>">
+				<input type="hidden" name="rfile2" value="<% if(cboard.getCfilesOriginalFilepath1() != null) {%><%= cboard.getCfilesRenameFilepath2() %><%}%>">
+				<input type="hidden" name="ofile3" value="<% if(cboard.getCfilesOriginalFilepath1() != null) {%><%= cboard.getCfilesOriginalFilepath3() %><%}%>">
+				<input type="hidden" name="rfile3" value="<% if(cboard.getCfilesOriginalFilepath1() != null) {%><%= cboard.getCfilesRenameFilepath3() %><%}%>">
+				<input type="hidden" name="ofile4" value="<% if(cboard.getCfilesOriginalFilepath1() != null) {%><%= cboard.getCfilesOriginalFilepath4() %><%}%>">
+				<input type="hidden" name="rfile4" value="<% if(cboard.getCfilesOriginalFilepath1() != null) {%><%= cboard.getCfilesRenameFilepath4() %><%}%>">
                     <table>
                         <colgroup>
                             <col width="20%">

@@ -63,12 +63,18 @@ public class CboardUpdateServlet extends HttpServlet {
 
 		File newOriginFile = null;
 		File originFile = null;
-
+		String deleteFlag = null;
+		String originFilePath = null;
+		String renameFilePath = null;
+		String originalFileName = null;
+		String renameFileName = null;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmSSSSSS");
+		
 		for (int i = 0; i < 4; i++) {
-			String deleteFlag = mrequest.getParameter("delflag" + (i + 1));
-			String originFilePath = mrequest.getParameter("ofile" + (i + 1));
-			String renameFilePath = mrequest.getParameter("rfile" + (i + 1));
-			String originalFileName = mrequest.getFilesystemName("upfile" + (i + 1));
+			deleteFlag = mrequest.getParameter("delflag" + (i + 1));
+			originFilePath = mrequest.getParameter("ofile" + (i + 1));
+			renameFilePath = mrequest.getParameter("rfile" + (i + 1));
+			originalFileName = mrequest.getFilesystemName("upfile" + (i + 1));
 			System.out.println(originFilePath);
 			switch (i + 1) {
 			case 1:
@@ -91,7 +97,7 @@ public class CboardUpdateServlet extends HttpServlet {
 				break;
 			}
 
-			if (originFilePath != null) {
+			if (originalFileName != null) {
 				switch (i + 1) {
 				case 1:
 					cboard.setCfilesOriginalFilepath1(originalFileName);
@@ -107,15 +113,14 @@ public class CboardUpdateServlet extends HttpServlet {
 					break;
 				}
 
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmSSSSSS");
 
-				String renameFileName = sdf.format(new java.sql.Date(System.currentTimeMillis()));
+				renameFileName = sdf.format(new java.sql.Date(System.currentTimeMillis()));
 
 				renameFileName += i + "." + originFilePath.substring(originFilePath.lastIndexOf(".")+1);
 
 				File renameFile = new File(savePath + "\\" + renameFileName);
 
-				if (newOriginFile.renameTo(renameFile)) {
+				if (!newOriginFile.renameTo(renameFile)) {
 					FileInputStream fin = new FileInputStream(newOriginFile);
 					FileOutputStream fout = new FileOutputStream(renameFile);
 					int data = -1;
@@ -186,15 +191,15 @@ public class CboardUpdateServlet extends HttpServlet {
 					break;
 				}
 			}
-			int result = new CboardService().updateCboard(cboard);
-			if (result > 0) {
-				response.sendRedirect("/anavada/clistview?local=0");
-			} else {
-				view = request.getRequestDispatcher("views/common/error.jsp");
-				request.setAttribute("message", "수정실패");
-				view.forward(request, response);
-			}
 
+		}
+		int result = new CboardService().updateCboard(cboard);
+		if (result > 0) {
+			response.sendRedirect("/anavada/clistview?page=1&local=0");
+		} else {
+			view = request.getRequestDispatcher("views/common/error.jsp");
+			request.setAttribute("message", "수정실패");
+			view.forward(request, response);
 		}
 
 	}

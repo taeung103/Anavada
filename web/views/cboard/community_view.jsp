@@ -51,23 +51,15 @@
 					<li><span>작성자 : </span><%=cboard.getMemberId()%></li>
 					<li><span>등록일 : </span><%=cboard.getDate()%></li>
 					<li><span>조회수 : </span><%=cboard.getCboardViewCount()%></li>
-					<%
-						if (cboard.getCfilesOriginalFilepath1() != null) {
-					%>
-					<%=cboard.getCfilesOriginalFilepath1()%>
-					<%
-						}
-					%>
-					</a>
-					</li>
 					<li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%=cboard.getLikeCount()%></span></i></li>
 				</ul>
+				<%if((cboard.getCfilesOriginalFilepath1() != null) || (cboard.getCfilesOriginalFilepath2() != null) || (cboard.getCfilesOriginalFilepath3() != null) || (cboard.getCfilesOriginalFilepath4() != null)) { %>
 				<ul>
 					<%
 						for (int i = 0; i < 4; i++) {
 					%>
 					<%
-						if (i == 0 && cboard.getCfilesOriginalFilepath1() != null) {
+						if (i == 0 && (cboard.getCfilesOriginalFilepath1() != null)) {
 					%>
 					<li><span>첨부파일#1 : </span><a
 						href="/anavada/cfdown?ofile=<%=cboard.getCfilesOriginalFilepath1()%>&rfile=<%=cboard.getCfilesRenameFilepath1()%>"><%=cboard.getCfilesOriginalFilepath1()%></a></li>
@@ -94,6 +86,7 @@
 						}
 					%>
 				</ul>
+				<%} %>
 				<div class="view-ctn">
 					<%=cboard.getCboardContent()%>
 				</div>
