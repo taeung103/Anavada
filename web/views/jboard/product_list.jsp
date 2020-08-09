@@ -106,14 +106,14 @@
                 </div>
 
                 <ul class="product">
-                <% for (Jboard j : list ){ %>
-                    <li onclick="location.href='/anavada/jbdetail?jboardno=<%= j.getJboardNo() %>'">
+                <% for (Jboard jboard : list ){ %>
+                    <li onclick="location.href='/anavada/jbdetail?jboardno=<%= jboard.getJboardNo() %>'">
                         <div><img src="/anavada/resources/images/test/testImg.jpg"/></div>
-                        <h2><%= j.getJboardTitle()%></h2>
-                        <h3><%=j.getJboardPrice() %><span> 원 <%=j.getLocalNo() %></span></h3>
+                        <h2><%= jboard.getJboardTitle()%></h2>
+                        <h3><%=jboard.getJboardPrice() %><span> 원 <%=jboard.getLocalNo() %></span></h3>
                        
-                        <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%=j.getJboardLike() %></span></i>
-                        <span><%=localArr[Integer.parseInt(j.getLocalNo())-1]%></span>
+                        <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%=jboard.getJboardLike() %></span></i>
+                        <span><%=localArr[Integer.parseInt(jboard.getLocalNo())-1]%></span>
                         
                         </p>
                     </li>
