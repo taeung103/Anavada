@@ -195,7 +195,7 @@
                             </div>
                             <p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를 미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
                             <button onclick="commentReply()">대댓글</button>
-                            <div class="Subcmt_form" id="commentReply">
+                            <div style="display:none" class="Subcmt_form" id="commentReply">
                                 <form action="" method="">
                                     <fieldset>
                                         <div class="cmt_form">
