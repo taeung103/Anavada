@@ -60,7 +60,6 @@ public class CboardWriteServlet extends HttpServlet {
 		cboard.setCboardContent(mrequest.getParameter("content"));
 		cboard.setLocalNo(mrequest.getParameter("local"));
 		
-		
 		for (int i = 0; i < 4; i++) {
 			System.out.println("ofile" + (i + 1));
 			String originalFileName = mrequest.getFilesystemName("ofile" + (i + 1));

@@ -146,7 +146,7 @@ public class CboardDao {
 		return result;
 	}
 
-	public Cboard selectBoard(Connection conn, int cboardNum) {
+	public Cboard selectCboard(Connection conn, int cboardNum) {
 		Cboard cboard = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -218,7 +218,6 @@ public class CboardDao {
 		PreparedStatement pstmt = null;
 		
 		String query = "insert into cboard values(cboard_seq.nextval, ?, ?, ?, sysdate, null, default, default, default, default, default, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		System.out.println(cboard.getLocalNo());
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -260,6 +259,37 @@ public class CboardDao {
 		} finally {
 			close(pstmt);
 		}
+		return result;
+	}
+
+	public int updateCboard(Connection conn, Cboard cboard) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update cboard set cboard_title = ?, cboard_content = ?, cfiles_original_filepath1 = ?, cfiles_rename_filepath1 = ?, cfiles_original_filepath2 = ?, cfiles_rename_filepath2 = ?, "
+				+ " cfiles_original_filepath3 = ?, cfiles_rename_filepath3 = ?, cfiles_original_filepath4 = ?, cfiles_rename_filepath4 = ?, cboard_lastmodified = sysdate where cboard_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, cboard.getCboardTitle());
+			pstmt.setString(2, cboard.getCboardContent());
+			pstmt.setString(3, cboard.getCfilesOriginalFilepath1());
+			pstmt.setString(4, cboard.getCfilesRenameFilepath1());
+			pstmt.setString(5, cboard.getCfilesOriginalFilepath2());
+			pstmt.setString(6, cboard.getCfilesRenameFilepath2());
+			pstmt.setString(7, cboard.getCfilesOriginalFilepath3());
+			pstmt.setString(8, cboard.getCfilesRenameFilepath3());
+			pstmt.setString(9, cboard.getCfilesOriginalFilepath4());
+			pstmt.setString(10, cboard.getCfilesRenameFilepath4());
+			pstmt.setInt(11, cboard.getCboardNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
 		return result;
 	}
 

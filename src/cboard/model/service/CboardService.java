@@ -35,9 +35,9 @@ public class CboardService {
 		close(conn);
 	}
 
-	public Cboard selectCBoard(int cboardNum) {
+	public Cboard selectCboard(int cboardNum) {
 		Connection conn = getConnection();
-		Cboard cboard = cdao.selectBoard(conn, cboardNum);
+		Cboard cboard = cdao.selectCboard(conn, cboardNum);
 		close(conn);
 		return cboard;
 	}
@@ -64,6 +64,18 @@ public class CboardService {
 	public int deleteCboard(int cboardNum) {
 		Connection conn = getConnection();
 		int result = cdao.deleteCboard(conn, cboardNum);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public int updateCboard(Cboard cboard) {
+		Connection conn = getConnection();
+		int result = cdao.updateCboard(conn, cboard);
 		if (result > 0) {
 			commit(conn);
 		} else {

@@ -119,8 +119,10 @@
 					%>
 				</div>
 				<div class="view-btn">
-					<a href="/anavada/clistview?page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"
+					<% if(loginMember.getMemberId().equals(cboard.getMemberId())) { %>
+					<a href="/anavada/cupdateview.ss?cnum=<%= cboard.getCboardNo() %>&local=<%= cboard.getLocalNo() %>"
 						class="btn btn-list">수정</a> 
+					<% } %>
 					<% if(loginMember.getMemberId().equals(cboard.getMemberId())) { %>
 					<a href="/anavada/cdelete?cnum=<%=cboard.getCboardNo()%>&rfile1=<%=cboard.getCfilesRenameFilepath1()%>
 						&rfile2=<%=cboard.getCfilesRenameFilepath2()%>&rfile3=<%=cboard.getCfilesRenameFilepath3()%>&rfile4=<%=cboard.getCfilesRenameFilepath4()%>"
