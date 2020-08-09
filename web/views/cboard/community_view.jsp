@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@page	import="cboard.model.vo.Cboard"%>
+	pageEncoding="UTF-8"%>
+<%@page import="cboard.model.vo.Cboard"%>
 <%
 	Cboard cboard = (Cboard)request.getAttribute("cboard");
 	String local = String.valueOf(request.getAttribute("local"));
@@ -13,122 +13,163 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%@ include file="../include/head.jsp" %> 
+<%@ include file="../include/head.jsp"%>
 </head>
-<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
-    <div id="wrap">
-        <%@ include file="../include/header.jsp" %>
+<body oncontextmenu="return false" onselectstart="return false"
+	ondragstart="return false">
+	<div id="wrap">
+		<%@ include file="../include/header.jsp"%>
 
-        <!-- 컨텐츠 -->
-        <div id="content">
+		<!-- 컨텐츠 -->
+		<div id="content">
 
-            <!--서브 비주얼/타이틀-->
-            <div class="visual-sub-vagas community-vagas">
-                <div class="vsv-copy sub-title">
-                   <div>
-                        <ul class="navi">
-                            <li><a href="#none">홈</a></li>
-                            <li><a href="#none">고객센터</a></li>
-                            <li class="glyphicon glyphicon-menu-right"><a href="#none">커뮤니티</a></li>
-                        </ul>
-                    </div>
-                    <h2><span>커뮤니티</span></h2>
-                    <h3>우리의 이웃과 'Anavada'를 통해 소통할 수 있는 공간입니다.</h3>
-                </div>
-            </div>
-            <!--서브 비주얼/타이틀 끝-->
+			<!--서브 비주얼/타이틀-->
+			<div class="visual-sub-vagas community-vagas">
+				<div class="vsv-copy sub-title">
+					<div>
+						<ul class="navi">
+							<li><a href="#none">홈</a></li>
+							<li><a href="#none">고객센터</a></li>
+							<li class="glyphicon glyphicon-menu-right"><a href="#none">커뮤니티</a></li>
+						</ul>
+					</div>
+					<h2>
+						<span>커뮤니티</span>
+					</h2>
+					<h3>우리의 이웃과 'Anavada'를 통해 소통할 수 있는 공간입니다.</h3>
+				</div>
+			</div>
+			<!--서브 비주얼/타이틀 끝-->
 
-            <!-- 상세 -->
-            <div class="view-area cmnt_view">
-                <h2><span><%= localArr[Integer.parseInt(cboard.getLocalNo()) - 1] %></span><%=cboard.getCboardTitle() %></h2>
-                <ul>
-                    <li><span>작성자 : </span><%= cboard.getMemberId() %></li>
-                    <li><span>등록일 : </span><%= cboard.getDate() %></li>
-                    <li><span>조회수 : </span><%= cboard.getCboardViewCount() %></li>
-                    <li><span>첨부파일#1 : </span><a href="#none" download>
-                    <% if(cboard.getCfilesOriginalFilepath1() != null) { %>
-                    <%= cboard.getCfilesOriginalFilepath1() %>
-                    <% } %>
-                    </a></li>
-                    <li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%= cboard.getLikeCount() %></span></i></li>
-                </ul>
+			<!-- 상세 -->
+			<div class="view-area cmnt_view">
+				<h2>
+					<span><%= localArr[Integer.parseInt(cboard.getLocalNo()) - 1] %></span><%=cboard.getCboardTitle() %></h2>
+				<ul>
+					<li><span>작성자 : </span><%= cboard.getMemberId() %></li>
+					<li><span>등록일 : </span><%= cboard.getDate() %></li>
+					<li><span>조회수 : </span><%= cboard.getCboardViewCount() %></li>
+					<% if(cboard.getCfilesOriginalFilepath1() != null) { %>
+					<%= cboard.getCfilesOriginalFilepath1() %>
+					<% } %>
+					</a>
+					</li>
+					<li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%= cboard.getLikeCount() %></span></i></li>
+				</ul>
+				<ul>
+					<% for(int i = 0; i < 4; i++) { %>
+					<% if(i == 0 && cboard.getCfilesOriginalFilepath1()!=null) { %>
+						<li><span>첨부파일#1 : </span><a href="#none" download><%= cboard.getCfilesOriginalFilepath1() %></a></li>
+					<%} else if(i == 1 && cboard.getCfilesOriginalFilepath2()!=null) { %>
+						<li><span>첨부파일#2 : </span><a href="#none" download><%= cboard.getCfilesOriginalFilepath2() %></a></li>
+					<%} else if(i == 2 && cboard.getCfilesOriginalFilepath3()!=null) { %>
+						<li><span>첨부파일#3 : </span><a href="#none" download></a><%= cboard.getCfilesOriginalFilepath3() %></li>
+					<%} else if(i == 3 && cboard.getCfilesOriginalFilepath4()!=null) { %>
+						<li><span>첨부파일#4 : </span><a href="#none" download><%= cboard.getCfilesOriginalFilepath4() %></a></li>
+					<% } %>
 
-                <div class="view-ctn">
+					<% } %>
+				</ul>
+				<div class="view-ctn">
 					<%= cboard.getCboardContent() %>
-                </div>
+				</div>
 
-                <div class="view-btn">
-                	<% if(cboard.getCboardNo() > 1) { %>
-                    	<a href="/anavada/cdetail?cnum=<%=cboard.getCboardNo()-1%>&page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>" class="btn btn-prev">이전글</a>
-                    <% } %>
-                    <a href="/anavada/clistview?page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>" class="btn btn-list">목록</a>
-                    <% if(cboard.getCboardNo() < allListCount) { %>
-                    <a href="/anavada/cdetail?cnum=<%=cboard.getCboardNo()+1%>&page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>" class="btn btn-next">다음글</a>
-                    <% } %>
-                </div>
-                
-                <div class="cmt_wrap">
-                    <form action="" method="">
-                        <fieldset>
-                            <div class="cmt_form">
-                                <h4 class="cmt_head">댓글 77</h4>
-                                <div class="cmt_body">
-<textarea name="" style="resize: none; width:100%; min-height:100px; max-height:100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
-                                    <div class="cmt_ok"><input type="submit" value="등록"></div>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </form>
-                    <ul class="cmt_con">
-                        <li>
-                            <div>
-                                <h4>user : asdf123</h4><span>2020.08.16. 12:12:00</span>
-                            </div>
-                            <p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를 미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
-                            <button>대댓글</button>
-                            <div class="Subcmt_form">
-                                <form action="" method="">
-                                    <fieldset>
-                                        <div class="cmt_form">
-                                            <div class="cmt_body">
-<textarea name="" style="resize: none; width:100%; min-height:100px; max-height:100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
-                                            <div class="cmt_ok"><input type="submit" value="등록"></div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </form>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <h4>user : asdf123</h4><span>2020.08.16. 12:12:00</span>
-                            </div>
-                            <p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를 미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
-                            <button>대댓글</button>
-                            <div class="Subcmt_form">
-                                 <div>
-                                    <h4>user : asdf123</h4><span>2020.08.16. 12:12:00</span>
-                                </div>
-                                <p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를 미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <h4>user : asdf123</h4><span>2020.08.16. 12:12:00</span>
-                            </div>
-                            <p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를 미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
-                            <button>대댓글</button>
-                        </li>
-                    </ul>
-                    <button class="cmt_in">댓글 더보기 <i class="glyphicon glyphicon-menu-right"></i></button>
-                </div>
-            </div>
-            <!-- 상세 끝 -->
+				<div class="view-btn">
+					<% if(cboard.getCboardNo() > 1) { %>
+					<a
+						href="/anavada/cdetail?cnum=<%=cboard.getCboardNo()-1%>&page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"
+						class="btn btn-prev">이전글</a>
+					<% } %>
+					<a
+						href="/anavada/clistview?page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"
+						class="btn btn-list">목록</a>
+					<% if(cboard.getCboardNo() < allListCount) { %>
+					<a
+						href="/anavada/cdetail?cnum=<%=cboard.getCboardNo()+1%>&page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"
+						class="btn btn-next">다음글</a>
+					<% } %>
+				</div>
 
-        </div>
-        <!-- 컨텐츠 끝 -->
+				<div class="cmt_wrap">
+					<form action="" method="">
+						<fieldset>
+							<div class="cmt_form">
+								<h4 class="cmt_head">댓글 77</h4>
+								<div class="cmt_body">
+									<textarea name=""
+										style="resize: none; width: 100%; min-height: 100px; max-height: 100px;"
+										onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
+									<div class="cmt_ok">
+										<input type="submit" value="등록">
+									</div>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+					<ul class="cmt_con">
+						<li>
+							<div>
+								<h4>user : asdf123</h4>
+								<span>2020.08.16. 12:12:00</span>
+							</div>
+							<p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를
+								미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
+							<button>대댓글</button>
+							<div class="Subcmt_form">
+								<form action="" method="">
+									<fieldset>
+										<div class="cmt_form">
+											<div class="cmt_body">
+												<textarea name=""
+													style="resize: none; width: 100%; min-height: 100px; max-height: 100px;"
+													onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
+												<div class="cmt_ok">
+													<input type="submit" value="등록">
+												</div>
+											</div>
+										</div>
+									</fieldset>
+								</form>
+							</div>
+						</li>
+						<li>
+							<div>
+								<h4>user : asdf123</h4>
+								<span>2020.08.16. 12:12:00</span>
+							</div>
+							<p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를
+								미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
+							<button>대댓글</button>
+							<div class="Subcmt_form">
+								<div>
+									<h4>user : asdf123</h4>
+									<span>2020.08.16. 12:12:00</span>
+								</div>
+								<p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를
+									미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
+							</div>
+						</li>
+						<li>
+							<div>
+								<h4>user : asdf123</h4>
+								<span>2020.08.16. 12:12:00</span>
+							</div>
+							<p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를
+								미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
+							<button>대댓글</button>
+						</li>
+					</ul>
+					<button class="cmt_in">
+						댓글 더보기 <i class="glyphicon glyphicon-menu-right"></i>
+					</button>
+				</div>
+			</div>
+			<!-- 상세 끝 -->
 
-        <%@ include file="../include/footer.jsp" %>
-    </div>
+		</div>
+		<!-- 컨텐츠 끝 -->
+
+		<%@ include file="../include/footer.jsp"%>
+	</div>
 </body>
 </html>
