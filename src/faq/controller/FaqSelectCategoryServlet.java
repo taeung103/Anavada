@@ -63,8 +63,6 @@ public class FaqSelectCategoryServlet extends HttpServlet {
 		}
 		
 		sendJSON.put("list", jarr);
-		System.out.println(list.size());
-		System.out.println(sendJSON);
 		
 		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = response.getWriter();
