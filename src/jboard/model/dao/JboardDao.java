@@ -61,7 +61,14 @@ public class JboardDao {
 			System.out.println( "로컬값 :" +local + "titleSearch값 " + titleSearch);
 			String query  = "SELECT COUNT(*) FROM JBOARD "
 			+(local != null && !local.equals("0") ? "WHERE LOCAL_NO ="+local : "");
-			query+=(local != null && !local.equals("0") && titleSearch != null) ? " AND JBOARD_TITLE LIKE '%" + titleSearch + "%'" : "";
+			
+			if (titleSearch != null && local==null) {
+				query+= " WHERE JBOARD_TITLE LIKE '%" + titleSearch + "%'";
+			}else if(titleSearch != null&& local!=null &&!local.equals("0")) {
+				query+= " AND JBOARD_TITLE LIKE '%" + titleSearch + "%'";
+			}
+			
+			
 			System.out.println(query);
 			try {
 					stmt = conn.createStatement();
@@ -81,7 +88,6 @@ public class JboardDao {
 
 		public ArrayList<Jboard> selectList(Connection conn, int currentPage, int limit ,String local, String listSearch , String titleSearch) {
 			ArrayList<Jboard> list = new ArrayList <Jboard>();
-			
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
 			String query = "SELECT * " + 
@@ -93,7 +99,13 @@ public class JboardDao {
 					"JBOARD_CHECK , JBOARD_MEET, JBOARD_POST, MEMBER_ID, LOCAL_NO "+
 					"FROM (SELECT * FROM JBOARD " +
 					(local != null && !local.equals("0")? "WHERE LOCAL_NO =? " : "");
-					query +=(titleSearch != null ? "AND JBOARD_TITLE LIKE ? " : "");
+					//query +=(titleSearch != null ? "AND JBOARD_TITLE LIKE ? " : "");
+					if (titleSearch != null && local==null) {
+						query+= " WHERE JBOARD_TITLE LIKE ? ";
+					}else if(titleSearch != null&& local!=null &&!local.equals("0")) {
+						query+= " AND JBOARD_TITLE LIKE ? ";
+					}
+					
 					switch((listSearch==null)? listSearch = "latestposts" : listSearch) {
 					case("latestposts") : query+= "ORDER BY JBOARD_DATE DESC)) "; break;
 					case("highprice") :  query+= "ORDER BY JBOARD_PRICE DESC)) "; break;
@@ -109,11 +121,11 @@ public class JboardDao {
 			int startRow = (currentPage - 1) * limit + 1; 
 			int endRow = startRow + limit - 1;
 			try {
-				 	if(local== null || local.equals("0")){
+				 	if(local== null && titleSearch == null){
 					pstmt = conn.prepareStatement(query);
 					pstmt.setInt(1, startRow);
 					pstmt.setInt(2, endRow);
-				 	}else if (local !=null&& titleSearch ==null || local.equals("0")){
+				 	}else if (local !=null&& titleSearch ==null){
 				 		pstmt = conn.prepareStatement(query);
 						pstmt.setString(1, local);
 						pstmt.setInt(2, startRow);
@@ -124,10 +136,11 @@ public class JboardDao {
 				 		pstmt.setString(2, "%" + titleSearch +"%");
 				 		pstmt.setInt(3, startRow);
 						pstmt.setInt(4, endRow);
-				 	}else {
+				 	}else if(local==null && titleSearch != null){
 				 		pstmt = conn.prepareStatement(query);
-						pstmt.setInt(1, startRow);
-						pstmt.setInt(2, endRow);
+				 		pstmt.setString(1, "%" +titleSearch +"%");
+						pstmt.setInt(2, startRow);
+						pstmt.setInt(3, endRow);
 				 	}
 			
 				 	

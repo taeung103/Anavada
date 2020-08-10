@@ -60,6 +60,11 @@ public class JboardService {
 			
 		}
 
+		public int jboardUpdate(Jboard jboard) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
 		
 	}
 

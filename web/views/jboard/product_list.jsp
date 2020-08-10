@@ -105,7 +105,7 @@
                                     <option value="highlike" ${param.listsearch eq"highlike"?"selected" :"" }>좋아요순</option>
                             </select>
                             
-                            <input type="text" name="titlesearch" placeholder="검색어를 입력해주세요.">
+                            <input type="text" name="titlesearch" maxlength="16" minlength="2" placeholder="검색어를 입력해주세요.">
                             <button class="top-search"><i class="xi-search"></i></button>
                             
                         </form>

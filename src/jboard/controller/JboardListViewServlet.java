@@ -48,8 +48,8 @@ public class JboardListViewServlet extends HttpServlet {
 		if (local == null || local.equals("null") ||local.equals("0")) {
 			local = null;
 		}
-		if (titleSearch.equals("null")) {
-			titleSearch=null;
+		if (titleSearch == null || titleSearch.equals("null")||titleSearch.getBytes().length==0) {
+			titleSearch = null;
 		}
 		int currentPage = 1;
 		
