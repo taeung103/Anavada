@@ -79,4 +79,20 @@ public class NoticeService {
 		return result;
 	}
 
+	public int updateNotice(Notice notice) {
+		Connection conn = getConnection();
+		int result = ndao.updateNotice(conn, notice);
+		if(result > 0)
+			commit(conn);
+		else rollback(conn);
+		return result;
+	}
+
+	public ArrayList<String> selectRfiles(int[] checkedNum) {
+		Connection conn = getConnection();
+		ArrayList<String> list = ndao.selectRfiles(conn, checkedNum);
+		close(conn);
+		return list;
+	}
+
 }
