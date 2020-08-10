@@ -67,7 +67,7 @@
         </div>
         <!-- 컨텐츠 끝 -->
 
-        <%@ include file="../include/admin_footer.jsp" %>
+        <%@ include file="../../include/footer.jsp" %>
     </div>
 </body>
 </html>

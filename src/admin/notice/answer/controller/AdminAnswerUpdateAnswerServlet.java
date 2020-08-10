@@ -31,19 +31,17 @@ public class AdminAnswerUpdateAnswerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int page = Integer.parseInt(request.getParameter("page"));
-		int no = Integer.parseInt(request.getParameter("no"));
+		int iqNo = Integer.parseInt(request.getParameter("iqNo"));
 		int anNo = Integer.parseInt(request.getParameter("anNo"));
 		
 		Answer answer = new Answer();
 		answer.setAnNo(anNo);
 		answer.setAnContent(request.getParameter("content"));
-		answer.setIqId(request.getParameter("id"));
-		answer.setIqNo(no);
 		
 		int result = new AnswerService().updateAnswer(answer);
 		
 		if(result > 0) {
-			response.sendRedirect("aidetail?no="+no+"&page="+page);
+			response.sendRedirect("aidetail?no="+iqNo+"&page="+page);
 		}
 		
 	}

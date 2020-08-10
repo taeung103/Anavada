@@ -106,8 +106,8 @@
                         
                     
                 </div>
-                <a href="/anavada/aaupdateview?page=<%= currentPage %>&no=<%= inquiry.getIqNo() %>&anNo=<%= answer.getIqNo() %>" class="btn btn-list" style="background-color:lightgray; border-color:white; color:white;">수정</a>
-				<a href="/anavada/aadelete?page=<%= currentPage %>&no=<%= inquiry.getIqNo() %>&anNo=<%= answer.getIqNo() %>" class="btn btn-list" style="background-color:lightgray; border-color:white; color:white;">삭제</a>
+                <a href="/anavada/aaupdateview?page=<%= currentPage %>&anNo=<%= answer.getAnNo() %>" class="btn btn-list" style="background-color:lightgray; border-color:white; color:white;">수정</a>
+				<a href="/anavada/aadelete?page=<%= currentPage %>&iqNo=<%= answer.getIqNo() %>&anNo=<%= answer.getAnNo() %>" class="btn btn-list" style="background-color:lightgray; border-color:white; color:white;">삭제</a>
 				<% } %>
             </div>
             <!-- 상세 끝 -->

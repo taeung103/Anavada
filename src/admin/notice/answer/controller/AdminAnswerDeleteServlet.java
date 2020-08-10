@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import admin.notice.answer.model.service.AnswerService;
+import inquiry.model.service.InquiryService;
 
 /**
  * Servlet implementation class AdminAnswerDeleteServlet
@@ -30,12 +31,16 @@ public class AdminAnswerDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		int iqNo = Integer.parseInt(request.getParameter("iqNo"));
 		int anNo = Integer.parseInt(request.getParameter("anNo"));
 		
 		int result = new AnswerService().deleteAnswer(anNo);
 		
 		if(result > 0) {
-			response.sendRedirect("aidetail?no="+Integer.parseInt(request.getParameter("no"))+"&page="+Integer.parseInt(request.getParameter("page")));
+			
+			new InquiryService().changeIqAnswer("N", iqNo);
+			
+			response.sendRedirect("aidetail?no="+iqNo+"&page="+Integer.parseInt(request.getParameter("page")));
 		}
 	}
 

@@ -90,6 +90,12 @@
                             <i class="glyphicon glyphicon-floppy-saved" onclick="location.href='/anavada/aidetail?page=<%= currentPage %>&no=<%= i.getIqNo() %>&selected=<%= selected %>&keyword=<%= keyword %>'"></i>
                             <% } %>
                             </td>
+                            
+                            <% if(i.getIqAnswer().equals("Y")) { %>
+                            <td class="declare_btn2"><span><i class="glyphicon glyphicon-bell"></i>처리완료</span></td>
+                            <% }else { %>
+                            <td class="declare_btn"><span><i class="glyphicon glyphicon-bell"></i>처리중</span></td>
+                            <% } %>
                         </tr>
                      <% } }else { %>
                      <% for(Inquiry i : list) { %>
@@ -107,6 +113,12 @@
                             <i class="glyphicon glyphicon-floppy-saved" onclick="location.href='/anavada/aidetail?page=<%= currentPage %>&no=<%= i.getIqNo() %>'"></i>
                             <% } %>
                             </td>
+                            
+                            <% if(i.getIqAnswer().equals("Y")) { %>
+                            <td class="declare_btn2"><span><i class="glyphicon glyphicon-bell"></i>처리완료</span></td>
+                            <% }else { %>
+                            <td class="declare_btn"><span><i class="glyphicon glyphicon-bell"></i>처리중</span></td>
+                            <% } %>
                         </tr>
                      <% } }%>
                     </tbody>
@@ -115,7 +127,7 @@
 				
                 <!-- //게시판 -->
                 
-
+                
                 <!-- 페이징 -->
                 <% if(totalList > 0) { %>
                 <dl class="list-paging">
@@ -141,18 +153,18 @@
                      <% }else { %>   
                      	<% if(currentPage <= 1) { %>
                         <a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
-                        <% }else {%><a href="/anavada/ailist?page=1"><i class="glyphicon glyphicon-menu-left"></i></a><% } %>
+                        <% }else {%><a href="/anavada/ailist.ss?page=1"><i class="glyphicon glyphicon-menu-left"></i></a><% } %>
                         
                         <% for(int p=startPage; p<=endPage; p++) {%>
                         	<% if(p == currentPage) {%>
                         	<a href="#none" class="active"><%= p %></a>
                         	<% }else { %>
-                        	<a href="/anavada/ailist?page=<%= p %>"><%= p %></a>
+                        	<a href="/anavada/ailist.ss?page=<%= p %>"><%= p %></a>
                         	<% } %>
                         <% } %>
                         
                         <% if(currentPage < totalPage) { %>
-                        <a href="/anavada/ailist?page=<%= totalPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+                        <a href="/anavada/ailist.ss?page=<%= totalPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
                         <% }else {%><a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a><% } %>
                      <% } %>
                     </dd>
