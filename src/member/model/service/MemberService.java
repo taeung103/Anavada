@@ -38,6 +38,13 @@ public class MemberService {
 		return idChk;
 	}
 
+	public Member selectMyInfo(String memberId) {
+		Connection conn = getConnection();
+		Member member = mdao.selectMyInfo(conn, memberId);
+		close(conn);
+		return member;
+	}
+
 	public Member selectMember(String memberId) {
 		Connection conn = getConnection();
 		Member member = mdao.selectMember(conn, memberId);
@@ -74,6 +81,16 @@ public class MemberService {
 		return member;
 	}
 
+	public int userPwdUpdate(Member member) {
+		Connection conn = getConnection();
+		int result = mdao.userPwdUpdate(conn, member);
+		if(result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		return result;
+	}
 
 	
 }

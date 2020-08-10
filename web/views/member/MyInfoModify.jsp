@@ -3,6 +3,89 @@
 <html>
 <head>
     <%@ include file="../include/head.jsp" %>
+    <script>
+		function validate() {
+			//암호일치 확인
+			var pwdValue = document.getElementById("memberPwd").value;
+			var pwdValue2 = document.getElementById("memberPwd2").value;
+			if (pwdValue !== pwdValue2) {
+				alert("암호와 암호 확인의 값이 일치하지 않습니다.");
+				document.getElementById("memberPwd").select();
+				return false; //전송 취소함
+			}
+			return true; //전송함
+		}
+		//패스워드 변경
+		function myInfoPwd() {
+			$.ajax({
+				url : "/anavada/myInfoPwdChange",
+				type : "post",
+				data : {
+					memberPwd : $("#memberPwd").val()
+				}, // input에 입력된 값을 가져올땐 .val() 작성
+				success : function(data) {
+					if (data == "ok") { // == 같다. 표현
+						alert("이메일 인증번호가 이메일로 발송되었습니다.\n확인해주세요.");
+						$("#emailAuth").focus();
+					} else {
+
+					}
+				},
+				error : function(jqXHR, textstatus, errorthrown) { // jqXHR, textstatus, errorthrown : 에러표시 함수가 있음.
+					console.log("error : " + jqXHR + ", " + textstatus + ", "
+							+ errorthrown);
+				}
+			});
+			return false;
+		}
+		//이메일 인증코드 전송
+		function joinEmailCheck() {
+			$.ajax({
+				url : "/anavada/memail",
+				type : "post",
+				data : {
+					memberEmail : $("#memberEmail").val()
+				}, // input에 입력된 값을 가져올땐 .val() 작성
+				success : function(data) {
+					if (data == "ok") { // == 같다. 표현
+						alert("이메일 인증번호가 이메일로 발송되었습니다.\n확인해주세요.");
+						$("#emailAuth").focus();
+					} else {
+
+					}
+				},
+				error : function(jqXHR, textstatus, errorthrown) { // jqXHR, textstatus, errorthrown : 에러표시 함수가 있음.
+					console.log("error : " + jqXHR + ", " + textstatus + ", "
+							+ errorthrown);
+				}
+			});
+			return false;
+		}
+		//이메일 인증코드 확인
+		function EmailAuthOK() {
+			$.ajax({
+				url : "/anavada/memail2",
+				type : "post",
+				data : {
+					emailAuth : $("#emailAuth").val()
+				}, // input에 입력된 값을 가져올땐 .val() 작성
+				success : function(data) {
+					if (data == "ok") { // == 같다. 표현
+						alert("이메일 인증이 완료되었습니다.");
+						$("#memberPhone").focus();
+					} else {
+						alert("이메일 인증이 실패했습니다.\n다시 입력해주세요.");
+						$("#emailAuth").select();
+					}
+				},
+				error : function(jqXHR, textstatus, errorthrown) { // jqXHR, textstatus, errorthrown : 에러표시 함수가 있음.
+					console.log("error : " + jqXHR + ", " + textstatus + ", "
+							+ errorthrown);
+				}
+			});
+			return false;
+		}
+	</script>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
@@ -48,8 +131,10 @@
 				<dl class="profile">
 					<dt>
 						<div>
-							<img src="/anavada/resources/images/test/testImg.jpg"
-								width="200px" height="200px">
+							<img src="/anavada/resources/memberfile/<%= member.getFileRename() %>" id="profileImg" width="200px" height="200px">
+						</div>
+						<div>
+							<img src="/anavada/resources/images/test/testImg.jpg" width="200px" height="200px">
 						</div>
 					</dt>
 					<dd>
@@ -61,7 +146,7 @@
 					</dd>
 				</dl>
 				<!-- 프로필 끝 -->
-                <form action="/anavada/mupdate.cp" method="post">
+                <form method="post" onsubmit="return validate();" enctype="multipart/form-data">
                 <table class="InfoModify_table">
                     <colgroup>
                         <col width="20%">
@@ -70,8 +155,9 @@
                     <tbody>
                         <tr>
                             <td>프로필 사진</td>
-                            <td>
-								<input type="file" name="memberOriginal" title="프로필 사진"/>
+                            <td class="fileUpload" >
+								프로필 사진 등록 : <input type="file" name="fileOriginal" id="fileOriginal" title="프로필 사진" value="<%= member.getFileRename() %>"/>
+								<p class="mt5">기존 파일 : <%= member.getFileRename() %></p>
                             </td>
                         </tr>
                         <tr>
@@ -85,9 +171,9 @@
                         <tr>
                             <td>신규 비밀번호</td>
                             <td class="newPwd">
-                                <input type="password" name="memberPwd2" id="memberPw2" title="신규 비밀번호" class="form-control w100p mb5" placeholder="신규 비밀번호 입력"/><br/>
-
-                                <input type="text" name="memberPwd3" id="memberPw3" title="신규 비밀번호 재확인" class="form-control w100p" placeholder="신규 비밀번호 재입력"/>
+                                <input type="password" name="newPwd" id="newPwd" title="신규 비밀번호" class="form-control w70p mb5" placeholder="신규 비밀번호 입력"/><br/>
+                                <input type="text" name="newPwd2" id="newPwd2" title="신규 비밀번호 재입력" class="form-control w70p" placeholder="신규 비밀번호 재입력"/>
+                                <a href="#none" class="btnS1" onclick="return myInfoPwd();">변경하기</a><br/>
                             </td>
                         </tr>
                         <tr>
@@ -97,11 +183,13 @@
                         <tr>
                             <td>이메일</td>
                             <td class="emailArea">
-                                <input type="email" name="memberEmail" title="이메일" class="form-control w70p mb5" placeholder="이메일" value="<%= member.getMemberEmail() %>" />
-                                <a href="#none" class="btnS1">인증하기</a><br/>
+                                <input type="email" name="memberEmail" id="memberEmail" title="이메일" class="form-control w70p mb5" placeholder="@naver.com(필수)" value="<%= member.getMemberEmail() %>" />
+                                <a href="#none" class="btnS1" onclick="return joinEmailCheck();">인증번호 발송</a>
+                                <p style="margin-bottom:5px;">네이버 이메일만 인증번호 발송이 가능합니다.</p>
 
-                                <input type="text" name="emailAuth" title="인증번호" class="form-control w70p" placeholder="인증번호" />
-                                <a href="#none" class="btnS1">인증확인</a></td>
+                                <input type="text" name="emailAuth" id="emailAuth" title="인증번호" class="form-control w70p" placeholder="인증번호" value="<%= member.getEmailAuth() %>" />
+                                <a href="#none" class="btnS1" onclick="return EmailAuthOK();">인증확인</a>
+                            </td>
                         </tr>
                         <tr>
                             <td>휴대폰</td>
@@ -117,7 +205,7 @@
                 <div class="write-btn">
                     <a href="javascript:history.go(-1);">이전 페이지</a>
                     <input class="btn btn-list" type="reset" value="수정취소">
-                    <input class="btn btn-success" type="submit" value="수정하기">
+                    <input class="btn btn-success" type="submit" value="수정하기" onclick="action='/anavada/mupdate.cp'">
                 </div>
 				</form>
             </div>

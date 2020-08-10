@@ -55,7 +55,6 @@ public class SesstionCheckFilter implements Filter {
 			//요청한 서블릿으로 넘김
 			chain.doFilter(request, response);
 		}
-		
 	}
 
 	/**

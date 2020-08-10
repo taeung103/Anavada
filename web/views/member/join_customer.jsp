@@ -39,6 +39,53 @@
 			});
 			return false;
 		}
+		//이메일 인증코드 전송
+		function joinEmailCheck() {
+			$.ajax({
+				url : "/anavada/memail",
+				type : "post",
+				data : {
+					memberEmail : $("#memberEmail").val()
+				}, // input에 입력된 값을 가져올땐 .val() 작성
+				success : function(data) {
+					if (data == "ok") { // == 같다. 표현
+						alert("이메일 인증번호가 이메일로 발송되었습니다.\n확인해주세요.");
+						$("#emailAuth").focus();
+					} else {
+
+					}
+				},
+				error : function(jqXHR, textstatus, errorthrown) { // jqXHR, textstatus, errorthrown : 에러표시 함수가 있음.
+					console.log("error : " + jqXHR + ", " + textstatus + ", "
+							+ errorthrown);
+				}
+			});
+			return false;
+		}
+		//이메일 인증코드 확인
+		function joinEmailAuthOK() {
+			$.ajax({
+				url : "/anavada/memail2",
+				type : "post",
+				data : {
+					emailAuth : $("#emailAuth").val()
+				}, // input에 입력된 값을 가져올땐 .val() 작성
+				success : function(data) {
+					if (data == "ok") { // == 같다. 표현
+						alert("이메일 인증이 완료되었습니다.");
+						$("#memberPhone").focus();
+					} else {
+						alert("이메일 인증이 실패했습니다.\n다시 입력해주세요.");
+						$("#emailAuth").select();
+					}
+				},
+				error : function(jqXHR, textstatus, errorthrown) { // jqXHR, textstatus, errorthrown : 에러표시 함수가 있음.
+					console.log("error : " + jqXHR + ", " + textstatus + ", "
+							+ errorthrown);
+				}
+			});
+			return false;
+		}
 	</script>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
@@ -65,9 +112,10 @@
 
 
             <!-- 회원가입 고객가입 -->
-            <form name="join" action="/anavada/join.cp" method="post" onsubmit="return validate();" class="form-inline">
+            <form name="join" method="post" onsubmit="return validate();" class="form-inline" enctype="multipart/form-data">
+            <!--form name="join" method="post" onsubmit="return validate();" class="form-inline"-->
                 <div class="MBwrap">
-                    <div class="MBjoin_input-wrap">
+                    <div class="MBjoin_wrap">
                         <ul class="joinDepth">
                             <li>약관동의</li>
                             <li class="on">회원정보 입력</li>
@@ -78,31 +126,32 @@
                             <div>
                                 <ul>
                                     <li class="idArea">
-                                        <input type="text" name="memberId" title="아이디" id="memberId" class="form-control w40p" placeholder="아이디(필수입력)" maxlength="12" required/>
+                                        <input type="text" name="memberId" title="아이디" id="memberId" class="form-control w40p" placeholder="아이디(필수)" maxlength="12" required/>
                                         <a href="#none" class="btnS1" onclick="return joinldCheck();">중복확인</a>
                                         <p>4자이상 12자이내 입력하세요. 대소문자 구분, 영문, 숫자, 특수문자 입력 가능.</p>
                                     </li>
-                                    <li class="pwArea"><input type="password" name="memberPwd" title="비밀번호" id="memberPwd" class="form-control w40p" placeholder="비밀번호(필수입력)" maxlength="12"/><p>4자이상 12자이내 입력하세요. 대소문자 구분, 영문, 숫자, 특수문자 입력 가능.</p></li>
-                                    <li class="pwArea">
-                                        <input type="password" name="memberPwd2" title="비밀번호 재확인" class="form-control w40p" placeholder="비밀번호 재확인(필수입력)" maxlength="12" required/>
+                                    <li class="pwArea"><input type="password" name="memberPwd" title="비밀번호" id="memberPwd" class="form-control w40p" placeholder="비밀번호(필수)" maxlength="12" required/><p>4자이상 12자이내 입력하세요. 대소문자 구분, 영문, 숫자, 특수문자 입력 가능.</p></li>
+                                    <li class="pwArea2">
+                                        <input type="password" name="memberPwd2" title="비밀번호 재확인" class="form-control w40p" placeholder="비밀번호 재입력(필수)" maxlength="12" required/>
                                     </li>
-                                </ul>
-                                <div class="line15">&nbsp;</div>
-                                <ul>
-                                    <li style="margin-bottom: 10px;"><input type="text" name="memberName" title="이름" class="form-control w50p" placeholder="이름(필수입력)" required/></li>
-                                    <li><input type="email" name="memberEmail" title="이메일" class="form-control w50p" placeholder="이메일(필수입력)" required/>
-                                        <a href="#none" class="btnS1">인증하기</a>
+                                    <li class="fileUpload" style="margin-bottom: 10px;">
+										프로필 사진 등록 : <input type="file" name="fileOriginal" id="fileOriginal" title="프로필 사진"/>
+									</li>
+                                    <li style="margin-bottom: 10px;"><input type="text" name="memberName" id="memberName" title="이름" class="form-control w50p" placeholder="이름(필수)" required/></li>
+                                    <li><input type="email" name="memberEmail" id="memberEmail" title="이메일" class="form-control w50p" placeholder="@naver.com(필수)" required/>
+                                        <a href="#none" class="btnS1" onclick="return joinEmailCheck();">인증번호 발송</a>
+                                        <p>네이버 이메일을 입력해주세요. 네이버 이메일만 인증번호 발송이 가능합니다.</p>
                                     </li>
                                     <li class="certifyArea" style="margin-bottom: 10px;">
-                                        <input type="text" name="memberEmailOk" title="인증번호" class="form-control w50p" placeholder="인증번호 입력"/>
-                                        <a href="#none" class="btnS1">인증확인</a>
+                                        <input type="text" name="emailAuth" id="emailAuth" title="인증번호" class="form-control w50p" placeholder="인증번호 입력" required/>
+                                        <a href="#none" class="btnS1" onclick="return joinEmailAuthOK();">인증확인</a>
                                     </li>
-                                    <li class="telArea"><input type="tel" name="memberPhone" title="휴대폰번호" class="form-control w50p" placeholder="휴대폰 번호 '-' 포함 입력(필수입력)" required/></li>
+                                    <li class="telArea"><input type="tel" name="memberPhone" id="memberPhone" title="휴대폰번호" class="form-control w50p" placeholder="휴대폰 번호 '-' 포함 입력(필수)" required/></li>
                                 </ul>
                             </div>
                             <p class="MBjoin_input_btn">
-			                    <input type="reset" value="작성취소" onclick="location.href='/anavada/'" title="홈으로 이동">
-			                    <input type="submit" value="작성완료" title="회원가입 완료">
+			                    <input type="reset" value="작성취소" title="홈으로 이동" onclick="location.href='/anavada/'">
+			                    <input type="submit" value="작성완료" title="회원가입 완료" onclick="action='/anavada/join.cp'">
                             </p>
                         </div>
                     </div>

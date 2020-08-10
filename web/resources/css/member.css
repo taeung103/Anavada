@@ -183,9 +183,10 @@
 }
 
 /* 회원가입 - 정보입력 */
-.MBjoin_input-wrap {
+.MBjoin_wrap {
     padding: 0 60px 60px;
 }
+
 .MBjoin_input {
 }
 .MBjoin_input > ul {
@@ -216,6 +217,23 @@
 .MBjoin_input > div ul li {
     padding:4px 0;
 }
+.MBjoin_input > div ul li.pwArea2 {
+	border-bottom: 1px dotted #999;
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+}
+.MBjoin_input > div ul li.fileUpload {
+    line-height: 40px;
+    font-size:15px;
+    font-weight:500;
+}
+.MBjoin_input > div ul li.fileUpload > input[type="file"] {
+    height: auto;
+    line-height: normal;
+    border: 1px solid #999;
+    display : inline-block;
+	vertical-align: inherit;
+}
 .MBjoin_input > div ul li > p {
     color:#777;
     padding: 3px 6px;
@@ -237,6 +255,10 @@
     margin-right: 15px;
     display: inline-block;
     cursor: pointer;
+}
+.MBjoin_input > div ul li > h3 label input {
+    width: 14px;
+    height: 14px;
 }
 .MBjoin_input > div ul li > h3 label input {
     width: 14px;

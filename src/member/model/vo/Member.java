@@ -10,22 +10,22 @@ public class Member implements java.io.Serializable {
 	private String memberId;
 	private String memberPwd;
 	private String memberName;
-	private String memberOriginal;
-	private String memberRename;
+	private String fileOriginal;
+	private String fileRename;
 	private String memberEmail;
 	private String emailAuth;
 	private String memberPhone;
 	private java.sql.Date joinDate;
 	private java.sql.Date lastAccessDate;
 	
-	public Member(String memberId, String memberPwd, String memberName, String memberOriginal, String memberRename,
+	public Member(String memberId, String memberPwd, String memberName, String fileOriginal, String fileRename,
 			String memberEmail, String emailAuth, String memberPhone, Date joinDate, Date lastAccessDate) {
 		super();
 		this.memberId = memberId;
 		this.memberPwd = memberPwd;
 		this.memberName = memberName;
-		this.memberOriginal = memberOriginal;
-		this.memberRename = memberRename;
+		this.fileOriginal = fileOriginal;
+		this.fileRename = fileRename;
 		this.memberEmail = memberEmail;
 		this.emailAuth = emailAuth;
 		this.memberPhone = memberPhone;
@@ -57,20 +57,20 @@ public class Member implements java.io.Serializable {
 		this.memberName = memberName;
 	}
 
-	public String getMemberOriginal() {
-		return memberOriginal;
+	public String getFileOriginal() {
+		return fileOriginal;
 	}
 
-	public void setMemberOriginal(String memberOriginal) {
-		this.memberOriginal = memberOriginal;
+	public void setFileOriginal(String fileOriginal) {
+		this.fileOriginal = fileOriginal;
 	}
 
-	public String getMemberRename() {
-		return memberRename;
+	public String getFileRename() {
+		return fileRename;
 	}
 
-	public void setMemberRename(String memberRename) {
-		this.memberRename = memberRename;
+	public void setFileRename(String fileRename) {
+		this.fileRename = fileRename;
 	}
 
 	public String getMemberEmail() {
@@ -120,11 +120,10 @@ public class Member implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "Member [memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName=" + memberName
-				+ ", memberOriginal=" + memberOriginal + ", memberRename=" + memberRename + ", memberEmail="
-				+ memberEmail + ", emailAuth=" + emailAuth + ", memberPhone=" + memberPhone + ", joinDate=" + joinDate
+				+ ", fileOriginal=" + fileOriginal + ", fileRename=" + fileRename + ", memberEmail=" + memberEmail
+				+ ", emailAuth=" + emailAuth + ", memberPhone=" + memberPhone + ", joinDate=" + joinDate
 				+ ", lastAccessDate=" + lastAccessDate + "]";
 	}
-
 	
-
+	
 }

@@ -50,8 +50,8 @@ public class MemberDao {
 			pstmt.setString(1, member.getMemberId());
 			pstmt.setString(2, member.getMemberPwd());
 			pstmt.setString(3, member.getMemberName());
-			pstmt.setString(4, member.getMemberOriginal());
-			pstmt.setString(5, member.getMemberRename());
+			pstmt.setString(4, member.getFileOriginal());
+			pstmt.setString(5, member.getFileRename());
 			pstmt.setString(6, member.getMemberEmail());
 			pstmt.setString(7, member.getEmailAuth());
 			pstmt.setString(8, member.getMemberPhone());
@@ -87,15 +87,49 @@ public class MemberDao {
 		return idChk;
 	}
 
+	public Member selectMyInfo(Connection conn, String memberId) {
+		Member member = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from member where member_id = ?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				member = new Member();
+				member.setMemberId(memberId);
+				member.setMemberName(rset.getString("member_name"));
+				member.setFileOriginal(rset.getString("profile_original"));
+				member.setFileRename(rset.getString("profile_rename"));
+				member.setMemberEmail(rset.getString("member_email"));
+				member.setEmailAuth(rset.getString("emailAuth"));
+				member.setMemberPhone(rset.getString("member_phone"));
+				member.setJoinDate(rset.getDate("join_date"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return member;
+	}
+
+
 	public Member selectMember(Connection conn, String memberId) {
 		Member member = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String quest = "select * from member where member_id = ?";
+		String query = "select * from member where member_id = ?";
 		
 		try {
-			pstmt = conn.prepareStatement(quest);
+			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, memberId);
 			rset = pstmt.executeQuery();
 			
@@ -104,8 +138,8 @@ public class MemberDao {
 				member.setMemberId(memberId);
 				member.setMemberPwd(rset.getString("member_pwd"));
 				member.setMemberName(rset.getString("member_name"));
-				member.setMemberOriginal(rset.getString("member_original"));
-				member.setMemberRename(rset.getString("member_rename"));
+				member.setFileOriginal(rset.getString("profile_original"));
+				member.setFileRename(rset.getString("profile_rename"));
 				member.setMemberEmail(rset.getString("member_email"));
 				member.setEmailAuth(rset.getString("emailauth"));
 				member.setMemberPhone(rset.getString("member_phone"));
@@ -124,14 +158,14 @@ public class MemberDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "update member set member_pwd = ?, member_name = ?, member_original = ?, member_rename = ?, member_email = ?, emailauth = ?, member_phone = ? where member_id = ?"; 
+		String query = "update member set member_pwd = ?, member_name = ?, profile_original = ?, profile_rename = ?, member_email = ?, emailauth = ?, member_phone = ? where member_id = ?"; 
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, member.getMemberPwd());
 			pstmt.setString(2, member.getMemberName());
-			pstmt.setString(3, member.getMemberOriginal());
-			pstmt.setString(4, member.getMemberRename());
+			pstmt.setString(3, member.getFileOriginal());
+			pstmt.setString(4, member.getFileRename());
 			pstmt.setString(5, member.getMemberEmail());
 			pstmt.setString(6, member.getEmailAuth());
 			pstmt.setString(7, member.getMemberPhone());
@@ -176,15 +210,7 @@ public class MemberDao {
 			if(rset.next()) {
 				member = new Member();
 				member.setMemberEmail(memberEmail);
-				member.setMemberId(rset.getString("member_id"));
-				member.setMemberPwd(rset.getString("member_pwd"));
-				member.setMemberName(rset.getString("member_name"));
-				member.setMemberOriginal(rset.getString("member_original"));
-				member.setMemberRename(rset.getString("member_rename"));
-				member.setMemberEmail(rset.getString("member_email"));
-				member.setEmailAuth(rset.getString("emailauth"));
 				member.setMemberPhone(rset.getString("member_phone"));
-				member.setJoinDate(rset.getDate("join_date"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -193,6 +219,25 @@ public class MemberDao {
 			close(pstmt);
 		}
 		return member;
+	}
+
+	public int userPwdUpdate(Connection conn, Member member) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update member set member_pwd = ? where member_id = ?"; 
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, member.getMemberPwd());
+			pstmt.setString(2, member.getMemberId());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 }
