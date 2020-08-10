@@ -1,5 +1,49 @@
 package creply.model.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import static common.JDBCTemp.*;
+import cboard.model.vo.Cboard;
+import creply.model.vo.Creply;
+
 public class CreplyDao {
 	public CreplyDao() {}
+
+	public ArrayList<Creply> selectList(Connection conn, int cboardNo) {
+		ArrayList<Creply> rlist = new ArrayList<Creply>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "select * from creply where cboard_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, cboardNo);
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				Creply creply = new Creply();
+				
+				creply.setCreplyNo(rset.getInt("creply_no"));
+				creply.setCbaordNo(cboardNo);
+				creply.setMemberId(rset.getString("member_id"));
+				creply.setCreplyDate(rset.getDate("creply_date"));
+				creply.setCreplyContent(rset.getString("creply_content"));
+				creply.setParantReply(rset.getInt("parant_reply"));
+				creply.setCreplyOrder(rset.getInt("creply_order"));
+				creply.setCreplyDepth(rset.getInt("creply_depth"));
+				
+				rlist.add(creply);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return rlist;
+	}
 }

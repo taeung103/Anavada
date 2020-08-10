@@ -1,8 +1,11 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="cboard.model.service.CboardService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="cboard.model.vo.Cboard"%>
+<%@page import="creply.model.vo.Creply"%>
 <%
+	ArrayList<Creply> rlist = (ArrayList<Creply>) request.getAttribute("rlist");
 	Cboard cboard = (Cboard) request.getAttribute("cboard");
 	String local = String.valueOf(request.getAttribute("local"));
 	String search = String.valueOf(request.getAttribute("search"));
@@ -18,19 +21,17 @@
 <%@ include file="../include/head.jsp"%>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
-$(function (){
-	$("button").click(function () {
-		$(this).next().toggle(300);
+	$(function (){
+		$("button").click(function () {
+			$(this).next().toggle(300);
+		});
 	});
-});
 </script>
-
 </head>
 <body oncontextmenu="return false" onselectstart="return false"
 	ondragstart="return false">
 	<div id="wrap">
-		<%@ include file="../include/header.jsp"%>
-
+	<%@ include file="../include/header.jsp"%>
 		<!-- 컨텐츠 -->
 		<div id="content">
 
@@ -149,14 +150,13 @@ $(function (){
 						</fieldset>
 					</form>
 					<ul class="cmt_con">
-					<% for(int i = 0; i < 5; i++) {%>
+					<% for(Creply c : rlist) {%>
 						<li>
 							<div>
-								<h4>user : asdf123</h4>
-								<span>2020.08.16. 12:12:00</span>
+								<h4>user : <%= c.getMemberId() %></h4>
+								<span><%= c.getCreplyDate() %></span>
 							</div>
-							<p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를
-								미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
+							<p><%= c.getCreplyContent() %></p>
 							<button>대댓글</button>
 								<div class="Subcmt_form" style="display: none;">
 									<form action="" method="">

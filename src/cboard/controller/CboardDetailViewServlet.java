@@ -1,6 +1,7 @@
 package cboard.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import cboard.model.service.CboardService;
 import cboard.model.vo.Cboard;
+import creply.model.service.CreplyService;
+import creply.model.vo.Creply;
 
 /**
  * Servlet implementation class CboardDetailViewServlet
@@ -31,6 +34,8 @@ public class CboardDetailViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		
 		int cboardNum = Integer.parseInt(request.getParameter("cnum"));
 		int currentPage = 1;
 		if (request.getParameter("page") != null) {
@@ -55,9 +60,14 @@ public class CboardDetailViewServlet extends HttpServlet {
 		System.out.println(keyword);
 		System.out.println(allListCount);
 		
+		CreplyService crservice = new CreplyService();
+		ArrayList<Creply> rlist = crservice.creplyList(cboardNum);
+		
+		
 		RequestDispatcher view = null;
 		if (cboard != null) {
 			view = request.getRequestDispatcher("views/cboard/community_view.jsp");
+			request.setAttribute("rlist", rlist);
 			request.setAttribute("cboard", cboard);
 			request.setAttribute("page", currentPage);
 			request.setAttribute("local", local);
