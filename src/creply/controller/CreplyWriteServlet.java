@@ -49,6 +49,7 @@ public class CreplyWriteServlet extends HttpServlet {
 		System.out.println(writer);
 		System.out.println(content);
 		
+		
 		RequestDispatcher view = null;
 		if (result > 0) {
 			response.sendRedirect("/anavada/cdetail?cnum=" + cboardNum);

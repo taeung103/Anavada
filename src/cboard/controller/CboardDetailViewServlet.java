@@ -58,7 +58,6 @@ public class CboardDetailViewServlet extends HttpServlet {
 		ArrayList<Creply> srlist = crservice.subCreplyList(cboardNum);
 		int allReplyCount = crservice.allReplyCount(cboardNum);
 		
-		
 		RequestDispatcher view = null;
 		if (cboard != null) {
 			view = request.getRequestDispatcher("views/cboard/community_view.jsp");

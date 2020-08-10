@@ -24,7 +24,7 @@
 <script type="text/javascript">
 	$(function (){
 		$("button").click(function () {
-			$(this).next().toggle(300);
+			$(this).siblings(".Subcmt").toggle(300);
 		});
 	});
 </script>
@@ -137,6 +137,7 @@
 						class="btn btn-list">목록</a>
 				</div>
 				<div class="cmt_wrap">
+				<% if(loginMember != null) { %>
 					<form action="crwrite.ss" method="post">
 						<input type="hidden" name="writer" value="<%=loginMember.getMemberId()%>">
 						<input type="hidden" name="cnum" value="<%=cboard.getCboardNo()%>">
@@ -152,16 +153,20 @@
 							</div>
 						</fieldset>
 					</form>
+				<% } %>
 					<ul class="cmt_con">
 					<% for(Creply c : rlist) {%>
 						<li>
 							<div>
-								<h4>user : <%= c.getMemberId() %></h4>
+								<h4><%= c.getMemberId() %></h4>
 								<span><%= c.getCreplyDate() %></span>
 							</div>
 							<p><%= c.getCreplyContent() %></p>
 							<button>대댓글</button>
-								<div class="Subcmt_form" style="display: none;">
+							<button>수정</button>
+							<button>삭제</button>
+							<% if(loginMember != null) { %>
+								<div class="Subcmt" style="display: none;">
 									<form action="scwrite.ss" method="post">
 									<input type="hidden" name="writer" value="<%=loginMember.getMemberId()%>">
 									<input type="hidden" name="cnum" value="<%=cboard.getCboardNo()%>">
@@ -179,6 +184,7 @@
 										</fieldset>
 									</form>
 								</div>
+								<% } %>
 								<% for(Creply sc : srlist) { %>
 								<% if(c.getCreplyNo() == sc.getParantReply()) { %>
 								<div class="Subcmt_form" style="background-color: #E6E6E6;">
