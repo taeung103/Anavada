@@ -17,17 +17,52 @@ public class JboardDao {
 		public JboardDao () {}
 
 		public int insertJboard(Connection conn, Jboard jboard) {
-			return 0;
-		}
+			int result = 0;
+			
+			PreparedStatement pstmt = null;
+
+			String query = "insert into jboard values ("
+					+ "SEQ_JBOARD_NO.nextval ,? , ? , ? ,sysdate, sysdate, 0, 0, ?, ?, ?, ?, ?, ? , ?, ?,"
+					+ "default,?,?,?,?)";
+			try {
+					pstmt = conn.prepareStatement(query);
+					pstmt.setString(1,  jboard.getJboardTitle());
+					pstmt.setString(2, jboard.getJboardContent());
+					pstmt.setInt(3, jboard.getJboardPrice());
+					pstmt.setString(4, jboard.getJboardOrignalFilePath1());
+					pstmt.setString(5, jboard.getJboardRenameFilePath1());
+					pstmt.setString(6, jboard.getJboardOrignalFilePath2());
+					pstmt.setString(7, jboard.getJboardRenameFilePath2());
+					pstmt.setString(8, jboard.getJboardOrignalFilePath3());
+					pstmt.setString(9, jboard.getJboardRenameFilePath3());
+					pstmt.setString(10, jboard.getJboardOrignalFilePath4());
+					pstmt.setString(11, jboard.getJboardRenameFilePath4());
+					pstmt.setString(12, jboard.getJboardMeet());
+					pstmt.setString(13,  jboard.getJboardPost());
+					pstmt.setString(14, jboard.getMemberId());
+					pstmt.setString(15, jboard.getLocalNo());
+					result = pstmt.executeUpdate();
+					System.out.println(result);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			
+			return result;
+	}
+		
 
 
 		public int getListCount(Connection conn , String local ,String titleSearch ) {
 			int listCount = 0;
 			Statement stmt = null;
 			ResultSet rset = null;
+			System.out.println( "로컬값 :" +local + "titleSearch값 " + titleSearch);
 			String query  = "SELECT COUNT(*) FROM JBOARD "
 			+(local != null && !local.equals("0") ? "WHERE LOCAL_NO ="+local : "");
-			query+=(local != null && !local.equals("0") && titleSearch != null) ? "AND JBOARD_TITLE LIKE '%" + titleSearch + "%'" : "";
+			query+=(local != null && !local.equals("0") && titleSearch != null) ? " AND JBOARD_TITLE LIKE '%" + titleSearch + "%'" : "";
+			System.out.println(query);
 			try {
 					stmt = conn.createStatement();
 					rset = stmt.executeQuery(query);
@@ -46,7 +81,7 @@ public class JboardDao {
 
 		public ArrayList<Jboard> selectList(Connection conn, int currentPage, int limit ,String local, String listSearch , String titleSearch) {
 			ArrayList<Jboard> list = new ArrayList <Jboard>();
-			
+			System.out.println(local);
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
 			String query = "SELECT * " + 
@@ -182,5 +217,27 @@ public class JboardDao {
 			return jboard;
 		}
 
+		public int addReadCount(Connection conn, int jboardNo) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			
+			String query = "update jboard set jboard_count= jboard_count + 1 "
+					+ "where jboard_no = ?";
+			
+			try {
+					pstmt = conn.prepareStatement(query);
+					
+					pstmt.setInt(1, jboardNo);
+					
+					result = pstmt.executeUpdate();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}finally {
+				close(pstmt);
+			}
+			
+			
+			return result;
+		}
 		
 }

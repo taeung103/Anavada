@@ -1,6 +1,7 @@
 package jboard.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jboard.model.service.CommentService;
 import jboard.model.service.JboardService;
+import jboard.model.vo.Comment;
 import jboard.model.vo.Jboard;
 
 
@@ -33,15 +36,26 @@ public class JboardDetailViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-				int jboardno = Integer.parseInt(request.getParameter("jboardno"));
 				
+				int jboardno = Integer.parseInt(request.getParameter("jboardno"));
 				Jboard jboard = new JboardService().selectJboard(jboardno);
-			
+				JboardService jbservice = new JboardService();
+				jbservice.addReadCount(jboardno);
+				
+				
+				CommentService jbcservice = new CommentService();
+				ArrayList<Comment> list = jbcservice.CommentList(jboardno);
+				int commentListCount = jbcservice.getCommentCount(jboardno);
+				
+				
+				
+				System.out.println(commentListCount + "잘나오는지 한번 더 체크");
 				RequestDispatcher view = null;
 				if(jboard != null) {
 					view = request.getRequestDispatcher("views/jboard/product_view.jsp");
 					request.setAttribute("jboardno", jboard);
+					request.setAttribute("list", list);
+					request.setAttribute("commentlistcount", commentListCount);
 					view.forward(request, response);
 				}else {
 					view = request.getRequestDispatcher("views/common/error.jsp");

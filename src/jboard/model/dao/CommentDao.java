@@ -55,27 +55,27 @@ public class CommentDao {
 		 return result;
 	}
 	public int getCommentCount(Connection conn , int jboardNo) {
-		int listCount = 0;
-		PreparedStatement pstmt = null;
+		int commentListCount = 0;
+		Statement stmt =null;
 		ResultSet rset = null;
-		
-		String query = "select count(*) from JBOARD where JBOARD_NO = ?";
+		String query = "select count(*) from JBOARD_COMMENT where JBOARD_NO = " + jboardNo;
 		
 		try {
-				pstmt = conn.prepareStatement(query);
-				pstmt.setInt(1, jboardNo);
+				stmt = conn.createStatement();
+				rset = stmt.executeQuery(query);
 				
-				rset = pstmt.executeQuery();
+				
 				if (rset.next()) {
-					listCount = rset.getInt("jboard_no");
+					commentListCount = rset.getInt(1);
 				}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			close(rset);
-			close(pstmt);
+			close(stmt);
 		}
-		return listCount;
+		System.out.println(commentListCount+" 잘나오는지 체크");
+		return commentListCount;
 }
 	
 
@@ -89,7 +89,7 @@ public class CommentDao {
 		return 0;
 	}
 
-	public ArrayList<Comment> CommentList(Connection conn, int boardNo) {
+	public ArrayList<Comment> CommentList(Connection conn, int jboardNo) {
 		ArrayList<Comment> list = new ArrayList <Comment>();
 		
 		PreparedStatement pstmt = null;
@@ -99,7 +99,7 @@ public class CommentDao {
 		try {
 			
 				pstmt = conn.prepareStatement(query);
-				pstmt.setInt(1, boardNo);
+				pstmt.setInt(1, jboardNo);
 			
 				
 				rset = pstmt.executeQuery();

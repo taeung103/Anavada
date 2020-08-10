@@ -40,9 +40,18 @@ public class JboardListViewServlet extends HttpServlet {
 				String listSearch = request.getParameter("listsearch");
 				
 				String local = request.getParameter("local");
-				
+				String page = request.getParameter("page");
+				System.out.println(local);
 				if (listSearch== null) {
 					listSearch = "latestposts";
+				}
+				if (local == null) {
+					System.out.println("널==================");
+					local = "0";
+				}
+				if (local.equals("null")) {
+					System.out.println("널ddddd=================");
+					local = "0";
 				}
 				int currentPage = 1;
 				
@@ -54,9 +63,7 @@ public class JboardListViewServlet extends HttpServlet {
 				System.out.println("로컬값 :" +local);
 				System.out.println("리스트서치 값 :" +listSearch);
 				System.out.println("제목 검색 값 :" +titleSearch);
-				if (titleSearch== "") {
-					titleSearch=null;
-				}
+
 				JboardService jbservice = new JboardService();
 				
 				int listCount = jbservice.getListCount(local, titleSearch);
@@ -94,12 +101,5 @@ public class JboardListViewServlet extends HttpServlet {
 	}
 	
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
+	
 }

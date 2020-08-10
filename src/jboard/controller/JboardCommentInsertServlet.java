@@ -16,7 +16,7 @@ import jboard.model.vo.Comment;
 /**
  * Servlet implementation class JboardCommentInsertServlet
  */
-@WebServlet("/jbinsert.ss")
+@WebServlet("/jbcinsert.ss")
 public class JboardCommentInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

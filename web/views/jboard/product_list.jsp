@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@  page 
- 	import="jboard.model.vo.Jboard , java.util.ArrayList, java.sql.Date"%>
+ 	import="jboard.model.vo.Jboard , java.util.ArrayList, java.sql.Date"
+ 	import="java.awt.Image,  java.awt.Image , com.sun.jimi.core.Jimi , com.sun.jimi.core.JimiException , com.sun.jimi.core.JimiUtils" 
+ %>
+
  <%
  	ArrayList<Jboard> list = (ArrayList<Jboard>) request.getAttribute("list");
    int listCount = ((Integer) request.getAttribute("listCount")).intValue();
@@ -13,6 +16,9 @@
 	String local = request.getParameter("local"); 
     String listSearch = request.getParameter("listsearch");
 	String[] localArr = { "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구" };
+
+	
+	
 %>
 
 
@@ -57,7 +63,9 @@
                 <!--종류 리스트-->
                 <div class="sort-area">  
                     <h4>전체 <%=listCount%>개</h4>
+                     <% if(loginMember != null){ %>
                     <button onclick="showWriteForm();" class="write_btn">글쓰기</button>
+                    <%} %>
                     <div>
                         <form action="/anavada/jblist" method="post" id="sel" name="form1">
                         
@@ -107,8 +115,12 @@
 
                 <ul class="product">
                 <% for (Jboard jboard : list ){ %>
-                    <li onclick="location.href='/anavada/jbdetail?jboardno=<%= jboard.getJboardNo() %>'">
-                        <div><img src="/anavada/resources/images/test/testImg.jpg"/></div>
+                    <li onclick="location.href='/anavada/jbdetail?jboardno=<%= jboard.getJboardNo() %>&jbclist?jboardno=<%=jboard.getJboardNo()%>'">
+                    <% if (jboard.getJboardRenameFilePath1() !=null){%>
+                        <div><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath1()%>+'1'"/></div>
+                        <%}else{ %>
+                        <div><img src="/anavada/resources/jboardfiles/test/testImg.jpg"/></div>
+                        <%}  %>
                         <h2><%= jboard.getJboardTitle()%></h2>
                         <h3><%=jboard.getJboardPrice() %><span> 원 <%=jboard.getLocalNo() %></span></h3>
                        
@@ -124,7 +136,9 @@
 
                 </div>
                 <div class="write-btn">
+                <% if (loginMember != null){ %>
                     <a><button onclick="showWriteForm();" class="write_btn">글쓰기</button></a>
+                    <%} %>
                 </div>
 
             </div>

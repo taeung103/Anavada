@@ -8,6 +8,7 @@
 	String titleSearch = request.getParameter("titlesearch");
 	String local = request.getParameter("local"); 
 	String listSearch = request.getParameter("listsearch");
+	int commentListCount = ((Integer) request.getAttribute("commentlistcount")).intValue();
 	String[] localArr = { "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구" };
 
 %>
@@ -150,7 +151,7 @@
                     </dt>
                     <dd>
                         <dl>
-                           <dt>[ <%=localArr[Integer.parseInt(jboard.getLocalNo())-1] %> ]</dt>
+                           <dt><%=localArr[Integer.parseInt(jboard.getLocalNo())-1] %></dt>
                            <dd>
                                <button type="button" onclick="#none" class="lookup_btn">사기조회</button>
                                <button type="button" onclick="#none" class="lookup_btn">신고하기</button>
@@ -164,7 +165,7 @@
                                 <%= jboard.getJboardContent() %>
                             </p>
                             <div>
-                                <b>판매자 아이디 : <%= jboard.getMemberId()%></b><br/>
+                                <b>판매자 아이디 : <%= jboard.getMemberId()%> &nbsp; &nbsp; / &nbsp; &nbsp; 조회수 : <%=jboard.getJboardCount()%></b><br/>
                                 <b>등록일자 : </b><%= jboard.getJboardDate()%> &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;<b>최종수정일자 : </b><%=jboard.getJboardUpdate() %>
                             </div>
                         </div>
@@ -177,57 +178,43 @@
                 </div>
                 
                 <div class="cmt_wrap">
-                    <form action="" method="">
+                    <form action="/anavada/jbdetail?jboardno=<%= jboard.getJboardNo() %>&jbclist?jboardno=<%=jboard.getJboardNo()%>/jbcinsert.ss'"  method="">
                         <fieldset>
                             <div class="cmt_form">
-                                <h4 class="cmt_head">댓글 77</h4>
+                                <h4 class="cmt_head">전체 댓글 수 :<%=commentListCount %></h4>
                                 <div class="cmt_body">
 <textarea name="" style="resize: none; width:100%; min-height:100px; max-height:100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
-                                    <div class="cmt_ok"><input type="submit" value="등록"></div>
+                                    <div class="cmt_ok">
+                                    <input type="submit" value="등록"></div>
                                 </div>
                             </div>
                         </fieldset>
                     </form>
                     <ul class="cmt_con">
-                        <li>
+                    
+                    <% for (Comment comment : list ){ %>
+                    <% if (list.size()>0 && jboard.getJboardNo() == comment.getJboardNo()){ %>
+                        <li> 
                             <div>
-                                <h4>user : asdf123</h4><span>2020.08.16. 12:12:00</span>
+                                <h4><%=comment.getCommentId() %></h4><span>마지막 수정일<%=comment.getCommentLastModified() %></span>
                             </div>
-                            <p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를 미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
+                            <p><%=comment.getCommentContent() %></p>
                             <button onclick="commentReply()">대댓글</button>
                             <div style="display:none" class="Subcmt_form" id="commentReply">
-                                <form action="" method="">
+                                <form action="/anavada/jbdetail?jboardno=<%= jboard.getJboardNo() %>&jbclist?jboardno=<%=jboard.getJboardNo()%>/jbcinsert.ss'" method="">
+                               
                                     <fieldset>
                                         <div class="cmt_form">
                                             <div class="cmt_body">
 <textarea name="" style="resize: none; width:100%; min-height:100px; max-height:100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
-                                            <div class="cmt_ok"><input type="submit" value="등록"></div>
+                                            <div class="cmt_ok"><input type="submit" value="등록" onclick="" location.href='/anavada/jbdetail?jboardno=<%= comment.getJboardNo() %>'></div>
                                             </div>
                                         </div>
                                     </fieldset>
                                 </form>
                             </div>
                         </li>
-                        <li>
-                            <div>
-                                <h4>user : asdf123</h4><span>2020.08.16. 12:12:00</span>
-                            </div>
-                            <p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를 미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
-                            <button>대댓글</button>
-                            <div class="Subcmt_form">
-                                 <div>
-                                    <h4>user : asdf123</h4><span>2020.08.16. 12:12:00</span>
-                                </div>
-                                <p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를 미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <h4>user : asdf123</h4><span>2020.08.16. 12:12:00</span>
-                            </div>
-                            <p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를 미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
-                            <button>대댓글</button>
-                        </li>
+                      <%}} %>
                     </ul>
                     <button class="cmt_in">댓글 더보기 <i class="glyphicon glyphicon-menu-right"></i></button>
                 </div>

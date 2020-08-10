@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import= "jboard.model.vo.Jboard" %>
+<%
+	Jboard jboard = (Jboard)request.getAttribute("jboard");
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,14 +13,14 @@
 
 <script>
 if($("#post").is(":checked")){
-	$("#post").val(Y);
+	$("#post").val('Y');
 	}else{
-	$("#post").val(N);
+	$("#post").val('N');
 }
 if($("#meet").is(":checked")){
-	$("#meet").val(Y);
+	$("#meet").val('Y');
 	}else{
-	$("#meet").val(N);
+	$("#meet").val('N');
 } 
 
 </script>
@@ -46,6 +51,8 @@ if($("#meet").is(":checked")){
             <div class="write-area">
                 <h2>중고거래 작성</h2>
                 <form action="/anavada/jbinsert" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="memberid"  value="<%=loginMember.getMemberId()%>">
+                
                     <table>
                         <colgroup>
                             <col width="20%">
@@ -114,14 +121,16 @@ if($("#meet").is(":checked")){
                             <tr>
                                 <td>상품설명</td>
                                 <td>
-<textarea name="content"  class="form-control" style="resize: none; width:100%; min-height:600px; max-height:600px;" onfocus="this.value='';">
+										<textarea name="content" class="form-control"
+										style="resize: none; width: 100%; min-height: 600px; max-height: 600px;"
+										onfocus="this.value='';">
 상품 설명을 상세하게 적어주세요.
 설명되지 않은 하자나 문제 발생시 책임은 판매자에게 있습니다.
 ※ 구매정보 (구매일시, 구매시 가격)
 ※ 상품정보 (사이즈, 색상, 브랜드 등)
 ※상품 사용감 (스크래치, 고장 수리 여부등)
-</textarea>
-                                </td>
+									</textarea>
+								</td>
                             </tr>
                         </tbody>
                     </table>

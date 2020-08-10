@@ -29,9 +29,9 @@ public class CommentService {
 		
 
 
-		public ArrayList<Comment> CommentList(int boardNo) {
+		public ArrayList<Comment> CommentList(int jboardNo) {
 			Connection conn = getConnection();
-			ArrayList<Comment> list = cdao.CommentList(conn, boardNo);
+			ArrayList<Comment> list = cdao.CommentList(conn, jboardNo);
 			close(conn);
 			return list;
 		}

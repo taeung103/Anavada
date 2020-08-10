@@ -43,8 +43,20 @@ public class JboardService {
 		public Jboard selectJboard(int jboardNo) {
 			Connection conn = getConnection();
 			Jboard jboard = bdao.selectOne(conn, jboardNo);
+			
 			close(conn);
 			return jboard;
+			
+		}
+
+		public void addReadCount(int jboardNo) {
+			Connection conn = getConnection();
+			int result = bdao.addReadCount(conn, jboardNo);
+			if (result > 0)
+				commit(conn);
+			else
+				rollback(conn);
+			close(conn);
 			
 		}
 
