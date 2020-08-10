@@ -30,7 +30,7 @@
         
         <h2><p>홈페이지관리</p></h2>
         <ul>
-            <li><a href="../etc/banner_change.jsp">사용자배너</a></li>
+            <li><a href="/anavada/blist.ad">사용자배너</a></li>
             <li><a href="../member/adminPwd.jsp">관리자 계정변경</a></li>
             <li class="homeBtn"><a href="/anavada/">home</a></li>
             <li class="logoutBtn"><a href="#none">로그아웃</a></li>

@@ -1,11 +1,16 @@
 package banner.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import banner.model.service.BannerService;
+import banner.model.vo.Banner;
 
 /**
  * Servlet implementation class BannerAdminSelOneServlet
@@ -25,15 +30,27 @@ public class BannerAdminSelOneServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		int bannerNo = Integer.parseInt(request.getParameter("bannerNo"));
+		Banner banner = new BannerService().selectOne(bannerNo);
 
+		RequestDispatcher view = null;
+		if (banner != null) {
+			view = request.getRequestDispatcher("views/admin/banner/bannerUpdateView.jsp");
+			request.setAttribute("banner", banner);
+			view.forward(request, response);
+		} else {
+			view = request.getRequestDispatcher("views/common/error.jsp");
+			request.setAttribute("message", bannerNo + "번 글에 대한 상세보기 요청 실패했습니다.");
+			view.forward(request, response);
+		}
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

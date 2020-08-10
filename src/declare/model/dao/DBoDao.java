@@ -136,7 +136,7 @@ public class DBoDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		String query = "delete from declare_board where declare_id = ?";
+		String query = "delete from declare_board where declare_no = ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, dboNo);
