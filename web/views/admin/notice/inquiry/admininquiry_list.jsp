@@ -92,10 +92,8 @@
                             </td>
                             
                             <% if(i.getIqAnswer().equals("Y")) { %>
-                            <td class="declare_btn2"><span><i class="glyphicon glyphicon-bell"></i>처리완료</span></td>
-                            <% }else { %>
-                            <td class="declare_btn"><span><i class="glyphicon glyphicon-bell"></i>처리중</span></td>
-                            <% } %>
+                            <td class="declare_btn"><span><i class="glyphicon glyphicon-bell"></i>처리완료</span></td>
+                            <% }else { %><td></td><% } %>
                         </tr>
                      <% } }else { %>
                      <% for(Inquiry i : list) { %>
@@ -115,10 +113,8 @@
                             </td>
                             
                             <% if(i.getIqAnswer().equals("Y")) { %>
-                            <td class="declare_btn2"><span><i class="glyphicon glyphicon-bell"></i>처리완료</span></td>
-                            <% }else { %>
-                            <td class="declare_btn"><span><i class="glyphicon glyphicon-bell"></i>처리중</span></td>
-                            <% } %>
+                            <td class="declare_btn"><span><i class="glyphicon glyphicon-bell"></i>처리완료</span></td>
+                            <% }else { %><td></td><% } %>
                         </tr>
                      <% } }%>
                     </tbody>

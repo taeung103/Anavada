@@ -182,18 +182,18 @@ function deleteAction(){
                      <% }else { %>   
                      	<% if(currentPage <= 1) { %>
                         <a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
-                        <% }else {%><a href="/anavada/anlist?page=1"><i class="glyphicon glyphicon-menu-left"></i></a><% } %>
+                        <% }else {%><a href="/anavada/anlist.ss?page=1"><i class="glyphicon glyphicon-menu-left"></i></a><% } %>
                         
                         <% for(int p=startPage; p<=endPage; p++) {%>
                         	<% if(p == currentPage) {%>
                         	<a href="#none" class="active"><%= p %></a>
                         	<% }else { %>
-                        	<a href="/anavada/anlist?page=<%= p %>"><%= p %></a>
+                        	<a href="/anavada/anlist.ss?page=<%= p %>"><%= p %></a>
                         	<% } %>
                         <% } %>
                         
                         <% if(currentPage < totalPage) { %>
-                        <a href="/anavada/anlist?page=<%= totalPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+                        <a href="/anavada/anlist.ss?page=<%= totalPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
                         <% }else {%><a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a><% } %>
                      <% } %>
                     </dd>

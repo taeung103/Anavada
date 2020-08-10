@@ -9,23 +9,35 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import faq.model.vo.Faq;
+import oracle.net.aso.q;
 
 public class FaqDao {
 	public FaqDao() {}
 
-	public int getListCount(Connection conn) {
-		int result = 0;
+	public ArrayList<Faq> selectAll(Connection conn) {
+		ArrayList<Faq> list = new ArrayList<>();
 		Statement stmt = null;
 		ResultSet rset = null;
 		
-		String query = "select count(*) from faq";
+		String query = "select * from faq";
 		
 		try {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(query);
 			
-			if(rset.next())
-				result = rset.getInt(1);
+			while(rset.next()) {
+				Faq faq = new Faq();
+				
+				faq.setFaqNo(rset.getInt("faq_no"));
+				faq.setFaqId(rset.getString("faq_id"));
+				faq.setFaqTitle(rset.getString("faq_title"));
+				faq.setFaqContent(rset.getString("faq_content"));
+				faq.setFaqDate(rset.getDate("faq_date"));
+				faq.setFaqCount(rset.getInt("faq_count"));
+				faq.setFaqCategory(rset.getInt("faq_category"));
+				
+				list.add(faq);
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -34,26 +46,19 @@ public class FaqDao {
 			close(stmt);
 		}
 		
-		return result;
+		return list;
 	}
 
-	public ArrayList<Faq> selectAll(Connection conn, int currentPage, int countList) {
+	public ArrayList<Faq> selectCategory(Connection conn, int no) {
 		ArrayList<Faq> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = "select * "
-					 + "from (select rank() over(order by faq_no desc) rnum, faq_no, faq_id, faq_title, faq_content, faq_date, faq_count, faq_category "
-					 	   + "from faq) "
-					 + "where rnum >= ? and rnum <=?";
-		
-		int startRow = (currentPage - 1) * countList + 1;
-		int endRow = startRow + countList -1;
+		String query = "select * from faq where faq_category = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+			pstmt.setInt(1, no);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
@@ -78,6 +83,7 @@ public class FaqDao {
 		
 		return list;
 	}
+	
 	
 	
 }

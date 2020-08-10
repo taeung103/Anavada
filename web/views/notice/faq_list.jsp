@@ -2,12 +2,6 @@
     pageEncoding="UTF-8" import="java.util.ArrayList, faq.model.vo.Faq"%>
 <%
 	ArrayList<Faq> list = (ArrayList<Faq>)request.getAttribute("list");
-	int currentPage = (Integer)request.getAttribute("currentPage");
-	int totalList = (Integer)request.getAttribute("totalList");
-	int totalPage = (Integer)request.getAttribute("totalPage");
-	int startPage = (Integer)request.getAttribute("startPage");
-	int endPage = (Integer)request.getAttribute("endPage");
-	System.out.println("currentPage : "+currentPage+", totalList : "+totalList+", startPage : "+startPage+", endPage : "+endPage+", list.size : "+list.size());
 %>
 <!DOCTYPE html>
 <html>
@@ -41,6 +35,72 @@
             })
         });
     </script>
+<!--     <script type="text/javascript">
+    	$.ajax({
+    		url: "/anavada/fselect?category="+1,
+    		type: "get",
+    		dataType: "json",
+    		success: function(data){
+    			console.log("success : " + data);
+    			
+    			var jsonStr = JSON.stringify(data);
+    			var json = JSON.parse(jsonStr);
+    			
+    			var values = "";
+    			for(var i in json.list){
+    				values += "<ul class='question'>"
+    							+ "<li class='Qmarker'><span>Q</span></li>"
+    							+ "<li class='title'><span class='Msel'>회원정보</span>" + json.list[i].title + "</li>"
+    							+ "<li>관리자</li>"
+    							+ "<li>" + json.list[i].date + "</li>"
+    						+ "</ul>"
+    						+ "<ul class='ctn'>"
+    							+ "<li class='Amarker'><span>A</span></li>"
+    							+ "<li>"
+    								+ "<h4>답변</h4>"
+    								+ "<p>" + json.list[i].content + "</p>"
+    							+ "</li>"
+    						+ "</ul>"
+    			}
+    			$("#tab02").html($("tab02").html() + values);
+    		},
+    		error: function(jqXHR, textStatus, errorThrown){
+    			console.log("error : "+jqXHR+", "+textStatus+", "+errorThrown);
+    		}
+    	});
+    </script> -->
+    
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		$("#faqCategory>a").each(function(){
+    			$(this).click(function(){
+    				category = $(this).text();
+    				alert(category+"가 선택되었습니다");
+    				$("faqCategory>a").removeAttr("class")
+    				$(this).attr("class","active");
+    				$.ajax({
+    					url: "/anavada/fselect",
+    					type: "get",
+    					data: { "category":category },
+    					success: function(data){
+    						mydata="";
+    						for(i=0; i < data.length)
+    					},
+    					error: function(a,b,c){
+    						alert(c);
+    					}
+    				});
+    			})
+    		})
+    	})
+    
+    
+    
+    </script>
+    
+    
+    
+    
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
@@ -67,7 +127,7 @@
 
             <!-- 리스트 -->
             <div class="list-area">
-                <div class="faqTap">
+                <div class="faqTap" id="faqCategory">
                     <a href="#none" class="active" data-tab="tab01">전체</a>
                     <a href="#none" data-tab="tab02">회원정보</a>
                     <a href="#none" data-tab="tab03">중고거래</a>
@@ -91,6 +151,8 @@
                     </div>
                 </div>
                 
+                <%-- <% for(Faq f : list) { %> --%>
+<!-- ************************************************************************************************************ -->                
                 <div class="qna_list on" id="tab01">
                     <ul class="question active">
                         <li class="Qmarker"><span>Q</span></li>
@@ -171,75 +233,11 @@
                         </li>
                     </ul>
                 </div>
+<!-- ************************************************************************************************************   
                 <div class="qna_list" id="tab02">
-                    <ul class="question active">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Msel">회원정보</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn first_ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
                     <ul class="question">
                         <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Msel">회원정보</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Msel">회원정보</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Msel">회원정보</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Msel">회원정보</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Msel">회원정보</span>아이디/비밀번호는 어디서 찾나요?</li>
+                        <li class="title"><span class="Msel">회원정보</span></li>
                         <li>관리자</li>
                         <li>2020.07.31</li>
                     </ul>
@@ -251,6 +249,7 @@
                         </li>
                     </ul>
                 </div>
+************************************************************************************************************
                 <div class="qna_list" id="tab03">
                     <ul class="question active">
                         <li class="Qmarker"><span>Q</span></li>
@@ -331,6 +330,7 @@
                         </li>
                     </ul>
                 </div>
+************************************************************************************************************
                 <div class="qna_list" id="tab04">
                     <ul class="question active">
                         <li class="Qmarker"><span>Q</span></li>
@@ -411,6 +411,7 @@
                         </li>
                     </ul>
                 </div>
+************************************************************************************************************     
                 <div class="qna_list" id="tab05">
                     <ul class="question active">
                         <li class="Qmarker"><span>Q</span></li>
@@ -489,26 +490,12 @@
                             <h4>답변</h4>
                             <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
                         </li>
-                    </ul>
+                    </ul>-->
                 </div>
                 
             </div>
             <!-- 리스트 끝 -->
-
-
-            <!-- 페이지넘버 -->
-            <dl class="list-paging pb80">
-                <dd>
-                    <a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
-                    <a href="#none" class="active">1</a>
-                    <a href="#none">2</a>
-                    <a href="#none">3</a><!-- 활성화 class="active" -->
-                    <a href="#none">4</a>
-                    <a href="#none">5</a>
-                    <a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
-                </dd>
-            </dl>
-            <!-- 페이지넘버 끝 -->
+<br><br><br><br><br><br>
 
         </div>
         <!-- 컨텐츠 끝 -->

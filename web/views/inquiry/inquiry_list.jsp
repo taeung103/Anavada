@@ -80,6 +80,11 @@
                             	<td class="fileDown">
                             	<% if(i.getIqOriginal() != null || i.getIqOriginal2() != null || i.getIqOriginal3() != null) { %>
                             	<i class="glyphicon glyphicon-floppy-saved"></i><% } %></td>
+                            	
+                            <% if(i.getIqAnswer().equals("Y")) { %>
+                            	<td class="declare_btn"><span><i class="glyphicon glyphicon-bell"></i>처리완료</span></td>
+                            <% }else { %><td></td><% } %>
+                            
                         	</tr>
                         	<% } %>
                     	</tbody>
@@ -100,6 +105,11 @@
                             	<td class="fileDown">
                             	<% if(i.getIqOriginal() != null || i.getIqOriginal2() != null || i.getIqOriginal3() != null) { %>
                             	<i class="glyphicon glyphicon-floppy-saved"></i><% } %></td>
+                            	
+                            <% if(i.getIqAnswer().equals("Y")) { %>
+                            	<td class="declare_btn"><span><i class="glyphicon glyphicon-bell"></i>처리완료</span></td>
+                            <% }else { %><td></td><% } %>
+                            
                         	</tr>
                         	<% } %>
                     	</tbody>

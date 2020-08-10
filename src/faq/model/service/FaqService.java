@@ -13,19 +13,21 @@ public class FaqService {
 	
 	public FaqService() {}
 
-	public int getListCount() {
+	public ArrayList<Faq> selectAll() {
 		Connection conn = getConnection();
-		int result = fdao.getListCount(conn);
-		close(conn);
-		return result;
-	}
-
-	public ArrayList<Faq> selectAll(int currentPage, int countList) {
-		Connection conn = getConnection();
-		ArrayList<Faq> list = fdao.selectAll(conn, currentPage, countList);
+		ArrayList<Faq> list = fdao.selectAll(conn);
 		close(conn);
 		return list;
 	}
+
+	public ArrayList<Faq> selectCategory(int no) {
+		Connection conn = getConnection();
+		ArrayList<Faq> list = fdao.selectCategory(conn, no);
+		close(conn);
+		return list;
+	}
+
+	
 	
 	
 }
