@@ -6,6 +6,7 @@
 <%@page import="creply.model.vo.Creply"%>
 <%
 	ArrayList<Creply> rlist = (ArrayList<Creply>) request.getAttribute("rlist");
+	ArrayList<Creply> srlist = (ArrayList<Creply>) request.getAttribute("srlist");
 	Cboard cboard = (Cboard) request.getAttribute("cboard");
 	String local = String.valueOf(request.getAttribute("local"));
 	String search = String.valueOf(request.getAttribute("search"));
@@ -161,13 +162,15 @@
 							<p><%= c.getCreplyContent() %></p>
 							<button>대댓글</button>
 								<div class="Subcmt_form" style="display: none;">
-									<form action="" method="">
+									<form action="scwrite.ss" method="post">
+									<input type="hidden" name="writer" value="<%=loginMember.getMemberId()%>">
+									<input type="hidden" name="cnum" value="<%=cboard.getCboardNo()%>">
+									<input type="hidden" name="prnum" value="<%=c.getCreplyNo()%>">
+									
 										<fieldset>
 											<div class="cmt_form">
 												<div class="cmt_body">
-													<textarea name=""
-														style="resize: none; width: 100%; min-height: 100px; max-height: 100px;"
-														onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
+													<textarea name="content" style="resize: none; width: 100%; min-height: 100px; max-height: 100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
 													<div class="cmt_ok">
 														<input type="submit" value="등록">
 													</div>
@@ -176,14 +179,17 @@
 										</fieldset>
 									</form>
 								</div>
+								<% for(Creply sc : srlist) { %>
+								<% if(c.getCreplyNo() == sc.getParantReply()) { %>
 								<div class="Subcmt_form" style="background-color: #E6E6E6;">
 									<div>
-										<h4>user : asdf123</h4>
-										<span>2020.08.16. 12:12:00</span>
+										<h4><%= sc.getMemberId() %></h4>
+										<span><%= sc.getCreplyDate() %></span>
 									</div>
-									<p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를
-										미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
+									<p><%= sc.getCreplyContent() %></p>
 								</div>
+								<% } %>
+								<% } %>
 						</li>
 					<% } %>
 					</ul>

@@ -42,4 +42,11 @@ public class CreplyService {
 		close(conn);
 		return result;
 	}
+
+	public ArrayList<Creply> subCreplyList(int cboardNum) {
+		Connection conn = getConnection();
+		ArrayList<Creply> rlist = crdao.selectSubReplyList(conn, cboardNum);
+		close(conn);
+		return rlist;
+	}
 }

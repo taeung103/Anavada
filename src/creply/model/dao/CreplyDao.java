@@ -18,7 +18,7 @@ public class CreplyDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = "select * from creply where cboard_no = ?";
+		String query = "select * from creply where cboard_no = ? and creply_depth = 1";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -48,6 +48,40 @@ public class CreplyDao {
 		return rlist;
 	}
 
+	public ArrayList<Creply> selectSubReplyList(Connection conn, int cboardNum) {
+		ArrayList<Creply> srlist = new ArrayList<Creply>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "select * from creply where cboard_no = ? and creply_depth = 2";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, cboardNum);
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				Creply creply = new Creply();
+				
+				creply.setCreplyNo(rset.getInt("creply_no"));
+				creply.setCbaordNo(cboardNum);
+				creply.setMemberId(rset.getString("member_id"));
+				creply.setCreplyDate(rset.getDate("creply_date"));
+				creply.setCreplyContent(rset.getString("creply_content"));
+				creply.setParantReply(rset.getInt("parant_reply"));
+				creply.setCreplyOrder(rset.getInt("creply_order"));
+				creply.setCreplyDepth(rset.getInt("creply_depth"));
+				
+				srlist.add(creply);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return srlist;
+	}
 	
 	public int getAllReplyListCount(Connection conn, int cboardNum) {
 		int replyCount = 0;
@@ -77,13 +111,20 @@ public class CreplyDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "insert into creply values(CREPLY_SEQ.nextval, ?, ?, to_date(sysdate,'yyyy.mm.dd hh24:mi'), ?, null, null, 1)";
+		String query = "insert into creply values(CREPLY_SEQ.nextval, ?, ?, sysdate, ?, "
+				+ (creply.getParantReply() != 0 ? "?, " : "null, ")
+				+ "null, "
+				+ (creply.getParantReply() != 0 ? "2" : "1")
+				+ ")";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, creply.getCbaordNo());
 			pstmt.setString(2, creply.getMemberId());
 			pstmt.setString(3, creply.getCreplyContent());
+			if (creply.getParantReply() != 0) {
+				pstmt.setInt(4, creply.getParantReply());
+			}
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -93,4 +134,5 @@ public class CreplyDao {
 		
 		return result;
 	}
+
 }
