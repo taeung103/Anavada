@@ -47,9 +47,9 @@
                     </table>
 
                     <div class="write-btn">
-                    	<input type="reset" class="btn btn-list" value="작성취소">
+                    	<input type="reset" class="btn btn-list" value="수정취소">
                         <a onclick="javascipt:history.go(-1); return false;" class="btn btn-list">목록</a>
-                        <input type="submit" class="btn btn-success" value="작성하기">
+                        <input type="submit" class="btn btn-success" value="수정하기">
                     </div>
                 </form>
             </div>
@@ -59,6 +59,5 @@
         <!-- 컨텐츠 끝 -->
 
         <%@ include file="../include/admin_footer.jsp" %>
-    </div>
 </body>
 </html>

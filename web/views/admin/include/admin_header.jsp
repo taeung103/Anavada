@@ -24,7 +24,7 @@
         <ul>
             <li><a href="/anavada/anlist">공지사항</a></li>
             <li><a href="../notice/faq_list.jsp">FAQ</a></li>
-            <li><a href="../notice/inquiry_list.jsp">문의하기</a></li>
+            <li><a href="/anavada/ailist">문의하기</a></li>
             <li><a href="../notice/declare_list.jsp">신고자관리</a></li>
         </ul>
         
