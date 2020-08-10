@@ -31,7 +31,7 @@
             <!-- 글쓰기 -->
             <div class="write-area">
                 <h2>관리자용 문의글 답변 수정</h2>
-                <form action="/anavada/aaupdate" method="post" enctype="multipart/form-data">
+                <form action="/anavada/aaupdate" method="post">
                 <input type="hidden" value="<%= answer.getIqNo()%>" name="iqNo">
 				<input type="hidden" value="<%= answer.getAnNo()%>" name="anNo">
 				<input type="hidden" value="<%= currentPage %>" name="page">

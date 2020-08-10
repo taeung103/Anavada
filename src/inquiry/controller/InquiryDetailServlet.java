@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.notice.answer.model.service.AnswerService;
+import admin.notice.answer.model.vo.Answer;
 import inquiry.model.service.InquiryService;
 import inquiry.model.vo.Inquiry;
 
@@ -45,12 +47,17 @@ public class InquiryDetailServlet extends HttpServlet {
 			keyword = request.getParameter("keyword");
 		}
 		
+		Answer answer = null;
+		if(inquiry.getIqAnswer().equals("Y"))
+			answer = new AnswerService().selectOne(inquiry.getIqNo());
+		
 		if(inquiry != null) {
 			RequestDispatcher view = request.getRequestDispatcher("views/inquiry/inquiry_view.jsp");
 			request.setAttribute("inquiry", inquiry);
 			request.setAttribute("page", currentPage);
 			request.setAttribute("selected", selected);
 			request.setAttribute("keyword", keyword);
+			request.setAttribute("answer", answer);
 			view.forward(request, response);
 		}
 		

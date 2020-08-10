@@ -32,12 +32,12 @@ public class AdminAnswerUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int page = Integer.parseInt(request.getParameter("page"));
+		int iqNo = Integer.parseInt(request.getParameter("iqNo"));
 		int anNo = Integer.parseInt(request.getParameter("anNo"));
 		
-		Answer answer = new AnswerService().selectOne(anNo);
+		Answer answer = new AnswerService().selectOne(iqNo);
 		
 		if(answer != null) {
-			System.out.println("안녕");
 			RequestDispatcher view = request.getRequestDispatcher("views/admin/notice/inquiry/admininquiry_updateform.jsp");
 			request.setAttribute("page", page);
 			request.setAttribute("answer", answer);

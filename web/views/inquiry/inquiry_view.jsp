@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="inquiry.model.vo.Inquiry"%>
+    pageEncoding="UTF-8" import="inquiry.model.vo.Inquiry, admin.notice.answer.model.vo.Answer"%>
 <%
 	Inquiry inquiry = (Inquiry)request.getAttribute("inquiry");
 	int currentPage = ((Integer)request.getAttribute("page")).intValue();
@@ -9,6 +9,7 @@
 		selected = (String)request.getAttribute("selected");
 		keyword = (String)request.getAttribute("keyword");
 	}
+	Answer answer = (Answer)request.getAttribute("answer");
 %>
 <!DOCTYPE html>
 <html>
@@ -64,30 +65,28 @@
 				
 				<% if(selected == null && keyword == null) { %>
                 <div class="view-btn">
-                    <a href="/anavada/idetail?no=<%= inquiry.getIqNo()-1 %>" class="btn btn-prev">이전글</a>
-                    <a href="/anavada/ilist.ss?page=<%= currentPage %>" class="btn btn-list">목록</a>
-                    <a href="/anavada/idetail?no=<%= inquiry.getIqNo()+1 %>" class="btn btn-next">다음글</a>
+                    <a href="/anavada/ilist?page=<%= currentPage %>" class="btn btn-list">목록</a>
                 </div>
                 <% }else { %>
                 <div class="view-btn">
-                    <!-- <a href="#none" class="btn btn-prev">이전글</a> -->
                     <a href="/anavada/isearch?page=<%= currentPage %>&selected=<%= selected %>&keyword=<%= keyword %>" class="btn btn-list">목록</a>
-                    <!-- <a href="#none" class="btn btn-next">다음글</a> -->
                 </div>
                 <% } %>
                 
+                
+                <% if(answer != null) { %>
                 <div class="cmt_wrap">
-                
-                
                     <ul class="cmt_con">
                         <li>
                             <div>
-                                <h4>user : asdf123</h4><span>2020.08.16. 12:12:00</span>
-                            </div>
-                            <p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를 미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
+                                <h4 style="font-size:13pt;">● user : 관리자</h4><span><%= answer.getAnDate() %></span>
+                            </div><br>
+                            <p style="font-size:11pt;"> &nbsp; &nbsp; &nbsp;<%= answer.getAnContent() %></p>
                         </li>
                     </ul>
                 </div>
+                <% } %>
+                
             </div>
             <!-- 상세 끝 -->
 

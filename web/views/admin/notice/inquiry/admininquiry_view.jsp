@@ -101,12 +101,12 @@
                             <div>
                                 <h4 style="font-size:15pt"> ● 관리자 답변입니다.</h4><span><%= answer.getAnDate() %></span>
                             </div><br>
-                            <p style="font-size:12pt"><%= answer.getAnContent() %></p>
+                            <p style="font-size:12pt"> &nbsp; &nbsp; &nbsp;<%= answer.getAnContent() %></p>
                         </li>
                         
                     
                 </div>
-                <a href="/anavada/aaupdateview?page=<%= currentPage %>&anNo=<%= answer.getAnNo() %>" class="btn btn-list" style="background-color:lightgray; border-color:white; color:white;">수정</a>
+                <a href="/anavada/aaupdateview?page=<%= currentPage %>&iqNo=<%= answer.getIqNo() %>&anNo=<%= answer.getAnNo() %>" class="btn btn-list" style="background-color:lightgray; border-color:white; color:white;">수정</a>
 				<a href="/anavada/aadelete?page=<%= currentPage %>&iqNo=<%= answer.getIqNo() %>&anNo=<%= answer.getAnNo() %>" class="btn btn-list" style="background-color:lightgray; border-color:white; color:white;">삭제</a>
 				<% } %>
             </div>

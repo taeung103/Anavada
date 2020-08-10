@@ -65,14 +65,12 @@ public class AnswerDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "update answer set an_content = ?, an_date = sysdate, iq_no = ?, iq_id = ? where an_no = ?";
+		String query = "update answer set an_content = ?, an_date = sysdate where an_no = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, answer.getAnContent());
-			pstmt.setInt(2, answer.getIqNo());
-			pstmt.setString(3, answer.getIqId());
-			pstmt.setInt(4, answer.getAnNo());
+			pstmt.setInt(2, answer.getAnNo());
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

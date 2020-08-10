@@ -30,6 +30,9 @@ public class AdminAnswerUpdateAnswerServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		request.setCharacterEncoding("utf-8");
+		
 		int page = Integer.parseInt(request.getParameter("page"));
 		int iqNo = Integer.parseInt(request.getParameter("iqNo"));
 		int anNo = Integer.parseInt(request.getParameter("anNo"));
@@ -41,7 +44,7 @@ public class AdminAnswerUpdateAnswerServlet extends HttpServlet {
 		int result = new AnswerService().updateAnswer(answer);
 		
 		if(result > 0) {
-			response.sendRedirect("aidetail?no="+iqNo+"&page="+page);
+			response.sendRedirect("aidetail?no="+iqNo); System.out.println("안녕");
 		}
 		
 	}
