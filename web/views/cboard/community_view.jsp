@@ -16,6 +16,8 @@
 <html>
 <head>
 <%@ include file="../include/head.jsp"%>
+<script type="text/javascript"></script>
+
 </head>
 <body oncontextmenu="return false" onselectstart="return false"
 	ondragstart="return false">
@@ -112,11 +114,11 @@
 					%>
 				</div>
 				<div class="view-btn">
-					<% if(loginMember.getMemberId().equals(cboard.getMemberId())) { %>
+					<% if(loginMember != null && loginMember.getMemberId().equals(cboard.getMemberId())) { %>
 					<a href="/anavada/cupdateview.ss?cnum=<%= cboard.getCboardNo() %>&local=<%= cboard.getLocalNo() %>"
 						class="btn btn-list">수정</a> 
 					<% } %>
-					<% if(loginMember.getMemberId().equals(cboard.getMemberId())) { %>
+					<% if(loginMember != null && loginMember.getMemberId().equals(cboard.getMemberId())) { %>
 					<a href="/anavada/cdelete?cnum=<%=cboard.getCboardNo()%>&rfile1=<%=cboard.getCfilesRenameFilepath1()%>
 						&rfile2=<%=cboard.getCfilesRenameFilepath2()%>&rfile3=<%=cboard.getCfilesRenameFilepath3()%>&rfile4=<%=cboard.getCfilesRenameFilepath4()%>"
 						class="btn btn-list">삭제</a>
@@ -175,6 +177,30 @@
 							<p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를
 								미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
 							<button>대댓글</button>
+							<div class="Subcmt_form">
+								<form action="" method="">
+									<fieldset>
+										<div class="cmt_form">
+											<div class="cmt_body">
+												<textarea name=""
+													style="resize: none; width: 100%; min-height: 100px; max-height: 100px;"
+													onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
+												<div class="cmt_ok">
+													<input type="submit" value="등록">
+												</div>
+											</div>
+										</div>
+									</fieldset>
+								</form>
+							</div>
+							<div class="Subcmt_form">
+								<div>
+									<h4>user : asdf123</h4>
+									<span>2020.08.16. 12:12:00</span>
+								</div>
+								<p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를
+									미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
+							</div>
 							<div class="Subcmt_form">
 								<div>
 									<h4>user : asdf123</h4>

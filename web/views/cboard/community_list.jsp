@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@page	import="cboard.model.vo.Cboard, java.util.ArrayList, java.sql.Date"%>
 <%
-	ArrayList<Cboard> list = (ArrayList<Cboard>) request.getAttribute("list");
+	ArrayList<Cboard> list = (ArrayList<Cboard>)request.getAttribute("list");
 	String local = String.valueOf(request.getAttribute("local"));
 	String search = String.valueOf(request.getAttribute("search"));
 	String keyword = String.valueOf(request.getAttribute("keyword"));
