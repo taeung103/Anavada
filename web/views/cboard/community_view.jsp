@@ -16,7 +16,14 @@
 <html>
 <head>
 <%@ include file="../include/head.jsp"%>
-<script type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+$(function (){
+	$("button").click(function () {
+		$(this).next().toggle(300);
+	});
+});
+</script>
 
 </head>
 <body oncontextmenu="return false" onselectstart="return false"
@@ -133,9 +140,7 @@
 							<div class="cmt_form">
 								<h4 class="cmt_head">댓글 77</h4>
 								<div class="cmt_body">
-									<textarea name=""
-										style="resize: none; width: 100%; min-height: 100px; max-height: 100px;"
-										onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
+									<textarea name="" style="resize: none; width: 100%; min-height: 100px; max-height: 100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
 									<div class="cmt_ok">
 										<input type="submit" value="등록">
 									</div>
@@ -144,6 +149,7 @@
 						</fieldset>
 					</form>
 					<ul class="cmt_con">
+					<% for(int i = 0; i < 5; i++) {%>
 						<li>
 							<div>
 								<h4>user : asdf123</h4>
@@ -152,73 +158,32 @@
 							<p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를
 								미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
 							<button>대댓글</button>
-							<div class="Subcmt_form">
-								<form action="" method="">
-									<fieldset>
-										<div class="cmt_form">
-											<div class="cmt_body">
-												<textarea name=""
-													style="resize: none; width: 100%; min-height: 100px; max-height: 100px;"
-													onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
-												<div class="cmt_ok">
-													<input type="submit" value="등록">
+								<div class="Subcmt_form" style="display: none;">
+									<form action="" method="">
+										<fieldset>
+											<div class="cmt_form">
+												<div class="cmt_body">
+													<textarea name=""
+														style="resize: none; width: 100%; min-height: 100px; max-height: 100px;"
+														onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
+													<div class="cmt_ok">
+														<input type="submit" value="등록">
+													</div>
 												</div>
 											</div>
-										</div>
-									</fieldset>
-								</form>
-							</div>
-						</li>
-						<li>
-							<div>
-								<h4>user : asdf123</h4>
-								<span>2020.08.16. 12:12:00</span>
-							</div>
-							<p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를
-								미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
-							<button>대댓글</button>
-							<div class="Subcmt_form">
-								<form action="" method="">
-									<fieldset>
-										<div class="cmt_form">
-											<div class="cmt_body">
-												<textarea name=""
-													style="resize: none; width: 100%; min-height: 100px; max-height: 100px;"
-													onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
-												<div class="cmt_ok">
-													<input type="submit" value="등록">
-												</div>
-											</div>
-										</div>
-									</fieldset>
-								</form>
-							</div>
-							<div class="Subcmt_form">
-								<div>
-									<h4>user : asdf123</h4>
-									<span>2020.08.16. 12:12:00</span>
+										</fieldset>
+									</form>
 								</div>
-								<p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를
-									미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
-							</div>
-							<div class="Subcmt_form">
-								<div>
-									<h4>user : asdf123</h4>
-									<span>2020.08.16. 12:12:00</span>
+								<div class="Subcmt_form" style="background-color: #E6E6E6;">
+									<div>
+										<h4>user : asdf123</h4>
+										<span>2020.08.16. 12:12:00</span>
+									</div>
+									<p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를
+										미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
 								</div>
-								<p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를
-									미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
-							</div>
 						</li>
-						<li>
-							<div>
-								<h4>user : asdf123</h4>
-								<span>2020.08.16. 12:12:00</span>
-							</div>
-							<p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를
-								미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
-							<button>대댓글</button>
-						</li>
+					<% } %>
 					</ul>
 					<button class="cmt_in">
 						댓글 더보기 <i class="glyphicon glyphicon-menu-right"></i>
