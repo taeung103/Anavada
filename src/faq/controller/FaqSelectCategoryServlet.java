@@ -37,7 +37,15 @@ public class FaqSelectCategoryServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int no = Integer.parseInt(request.getParameter("category"));
+		String cate = request.getParameter("category");
+		int no = 0;
+		switch(cate) {
+		case "전체" :  break;
+		case "회원정보" : no = 1; break;
+		case "중고거래" : no = 2; break;
+		case "커뮤니티" : no = 3; break;
+		case "지역축제" : no = 4; break;
+		}
 		
 		ArrayList<Faq> list = new FaqService().selectCategory(no);
 		
@@ -48,13 +56,15 @@ public class FaqSelectCategoryServlet extends HttpServlet {
 			JSONObject job = new JSONObject();
 			
 			job.put("title", URLEncoder.encode(f.getFaqTitle(), "utf-8"));
-			job.put("date", f.getFaqDate());
+			job.put("date", f.getFaqDate().toString());
 			job.put("content", URLEncoder.encode(f.getFaqContent(), "utf-8"));
 			
 			jarr.add(job);
 		}
 		
 		sendJSON.put("list", jarr);
+		System.out.println(list.size());
+		System.out.println(sendJSON);
 		
 		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = response.getWriter();

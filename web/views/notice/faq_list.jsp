@@ -35,72 +35,48 @@
             })
         });
     </script>
-<!--     <script type="text/javascript">
-    	$.ajax({
-    		url: "/anavada/fselect?category="+1,
-    		type: "get",
-    		dataType: "json",
-    		success: function(data){
-    			console.log("success : " + data);
-    			
-    			var jsonStr = JSON.stringify(data);
-    			var json = JSON.parse(jsonStr);
-    			
-    			var values = "";
-    			for(var i in json.list){
-    				values += "<ul class='question'>"
-    							+ "<li class='Qmarker'><span>Q</span></li>"
-    							+ "<li class='title'><span class='Msel'>회원정보</span>" + json.list[i].title + "</li>"
-    							+ "<li>관리자</li>"
-    							+ "<li>" + json.list[i].date + "</li>"
-    						+ "</ul>"
-    						+ "<ul class='ctn'>"
-    							+ "<li class='Amarker'><span>A</span></li>"
-    							+ "<li>"
-    								+ "<h4>답변</h4>"
-    								+ "<p>" + json.list[i].content + "</p>"
-    							+ "</li>"
-    						+ "</ul>"
-    			}
-    			$("#tab02").html($("tab02").html() + values);
-    		},
-    		error: function(jqXHR, textStatus, errorThrown){
-    			console.log("error : "+jqXHR+", "+textStatus+", "+errorThrown);
-    		}
-    	});
-    </script> -->
     
     <script type="text/javascript">
     	$(document).ready(function(){
     		$("#faqCategory>a").each(function(){
     			$(this).click(function(){
     				category = $(this).text();
-    				alert(category+"가 선택되었습니다");
+    				//alert(category+"가 선택되었습니다");
     				$("faqCategory>a").removeAttr("class")
     				$(this).attr("class","active");
     				$.ajax({
     					url: "/anavada/fselect",
     					type: "get",
     					data: { "category":category },
+    					dataType: "json",
     					success: function(data){
-    						mydata="";
-    						for(i=0; i < data.length)
+    							console.log("success : " + data);
+    						//object ==> string으로 변환
+    						var jsonStr = JSON.stringify(data);
+    						//string ==> json객체로 바꿈
+    						var json = JSON.parse(jsonStr);
+    						
+    						var values = "";
+    						for(var i in json.list){
+    							values += "<ul class='question'><li class='Qmarker'><span>Q</span></li><li class='title'><span class='Msel'>회원정보</span>" + decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") 
+    							+ "</li><li>관리자</li><li>" + json.list[i].date + "</li></ul>";
+    						} //for in
+    						
+    						switch(category){
+    						case "회원정보" : $("#tab02").html(values); break;
+    						case "중고거래" : $("#tab03").html(values); break;
+    						case "커뮤니티" : $("#tab04").html(values); break;
+    						case "지역축제" : $("#tab05").html(values); break;
+    						}
     					},
     					error: function(a,b,c){
-    						alert(c);
+    						console.log(c);
     					}
     				});
     			})
     		})
     	})
-    
-    
-    
     </script>
-    
-    
-    
-    
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
@@ -151,8 +127,23 @@
                     </div>
                 </div>
                 
+                
+                <div class="qna_list on" id="tab01">
+                </div>
+                
+                <div class="qna_list on" id="tab02">
+                </div>
+                
+                <div class="qna_list on" id="tab03">
+                </div>
+                
+                <div class="qna_list on" id="tab04">
+                </div>
+                
+                
+                
                 <%-- <% for(Faq f : list) { %> --%>
-<!-- ************************************************************************************************************ -->                
+<!-- ************************************************************************************************************                 
                 <div class="qna_list on" id="tab01">
                     <ul class="question active">
                         <li class="Qmarker"><span>Q</span></li>
@@ -233,7 +224,7 @@
                         </li>
                     </ul>
                 </div>
-<!-- ************************************************************************************************************   
+ ************************************************************************************************************   
                 <div class="qna_list" id="tab02">
                     <ul class="question">
                         <li class="Qmarker"><span>Q</span></li>
