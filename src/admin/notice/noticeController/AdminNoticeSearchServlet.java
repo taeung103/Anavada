@@ -1,4 +1,4 @@
-package admin.notice.controller;
+package admin.notice.noticeController;
 
 import java.io.IOException;
 import java.util.ArrayList;

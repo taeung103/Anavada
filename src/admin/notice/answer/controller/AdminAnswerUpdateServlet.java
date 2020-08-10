@@ -1,4 +1,4 @@
-package admin.notice.controller;
+package admin.notice.answer.controller;
 
 import java.io.IOException;
 
@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import notice.model.service.NoticeService;
-import notice.model.vo.Notice;
+import admin.notice.answer.model.service.AnswerService;
+import admin.notice.answer.model.vo.Answer;
 
 /**
- * Servlet implementation class AdminNoticeDetailServlet
+ * Servlet implementation class AdminAnswerUpdateServlet
  */
-@WebServlet("/andetail")
-public class AdminNoticeDetailServlet extends HttpServlet {
+@WebServlet("/aaupdateview")
+public class AdminAnswerUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminNoticeDetailServlet() {
+    public AdminAnswerUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,18 +31,19 @@ public class AdminNoticeDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int page = Integer.parseInt(request.getParameter("page"));
+		int no = Integer.parseInt(request.getParameter("no"));
+		int anNo = Integer.parseInt(request.getParameter("anNo"));
 		
-		Notice notice = new NoticeService().selectOne(Integer.parseInt(request.getParameter("no")));
+		Answer answer = new AnswerService().selectOne(anNo);
 		
-		if(notice != null) {
-			RequestDispatcher view = request.getRequestDispatcher("views/admin/notice/adminnotice_view.jsp");
-			request.setAttribute("notice", notice);
-			request.setAttribute("currentPage", Integer.parseInt(request.getParameter("page")));
-			request.setAttribute("selected", request.getParameter("selected"));
-			request.setAttribute("keyword", request.getParameter("keyword"));
+		if(answer != null) {
+			RequestDispatcher view = request.getRequestDispatcher("views/admin/notice/inquiry/admininquiry_updateform.jsp");
+			request.setAttribute("page", page);
+			request.setAttribute("no", no);
+			request.setAttribute("answer", answer);
 			view.forward(request, response);
 		}
-		
 	}
 
 	/**

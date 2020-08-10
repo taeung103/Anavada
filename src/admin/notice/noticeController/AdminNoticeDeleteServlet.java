@@ -1,8 +1,9 @@
-package admin.notice.controller;
+package admin.notice.noticeController;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,19 +11,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import notice.model.service.NoticeService;
-import notice.model.vo.Notice;
 
 /**
- * Servlet implementation class AdminNoticeUpdateServlet
+ * Servlet implementation class AdminNoticeDeleteServlet
  */
-@WebServlet("/anupdateview")
-public class AdminNoticeUpdateServlet extends HttpServlet {
+@WebServlet("/andelete")
+public class AdminNoticeDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminNoticeUpdateServlet() {
+    public AdminNoticeDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,15 +32,25 @@ public class AdminNoticeUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Notice notice = new NoticeService().selectOne(Integer.parseInt(request.getParameter("no")));
+		String[] checkRow = request.getParameter("checkRow").split(",");
 		
-		if(notice != null) {
-			RequestDispatcher view = request.getRequestDispatcher("views/admin/notice/adminnotice_updateform.jsp");
-			request.setAttribute("notice", notice);
-			request.setAttribute("page", Integer.parseInt(request.getParameter("page")));
-			view.forward(request, response);
+		int[] checkedNum = new int[checkRow.length];
+		for(int i=0; i<checkRow.length; i++) {
+			checkedNum[i] = Integer.parseInt(checkRow[i]);
 		}
 		
+		NoticeService nservice = new NoticeService();
+		
+		ArrayList<String> list = nservice.selectRfiles(checkedNum);
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/noticefiles");
+		
+		int result = nservice.deleteNotice(checkedNum);
+		
+		if(result > 0) {
+			for(String rfile : list)
+				new File(savePath + "\\" + rfile).delete();
+			response.sendRedirect("anlist");
+		}
 	}
 
 	/**

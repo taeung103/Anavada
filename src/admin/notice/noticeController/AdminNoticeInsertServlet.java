@@ -1,4 +1,4 @@
-package admin.notice.controller;
+package admin.notice.noticeController;
 
 import java.io.File;
 import java.io.FileInputStream;
