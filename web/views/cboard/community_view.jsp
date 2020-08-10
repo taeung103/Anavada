@@ -163,8 +163,10 @@
 							</div>
 							<p><%= c.getCreplyContent() %></p>
 							<button>대댓글</button>
-							<button>수정</button>
-							<button>삭제</button>
+							<% if(loginMember != null && loginMember.getMemberId().equals(c.getMemberId())) { %>
+							<button style="float: right;">삭제</button>
+							<button style="float: right;margin-right: 10px;">수정</button>
+							<% } %>
 							<% if(loginMember != null) { %>
 								<div class="Subcmt" style="display: none;">
 									<form action="scwrite.ss" method="post">
@@ -193,6 +195,10 @@
 										<span><%= sc.getCreplyDate() %></span>
 									</div>
 									<p><%= sc.getCreplyContent() %></p>
+									<% if(loginMember != null && loginMember.getMemberId().equals(sc.getMemberId())) { %>
+									<button style="float: right;">삭제</button>
+									<button style="float: right;margin-right: 10px;">수정</button>
+									<% } %>
 								</div>
 								<% } %>
 								<% } %>
