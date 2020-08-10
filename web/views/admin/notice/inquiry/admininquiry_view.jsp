@@ -23,9 +23,25 @@
         <!-- 컨텐츠 -->
         <div id="content">
 
+			<!--서브 비주얼/타이틀-->
+            <div class="visual-sub-vagas notice-vagas">
+                <div class="vsv-copy sub-title">
+                   <div>
+                        <ul class="navi">
+                            <li><a href="#none">홈</a></li>
+                            <li><a href="#none">고객센터</a></li>
+                            <li class="glyphicon glyphicon-menu-right"><a href="#none">공지사항</a></li>
+                        </ul>
+                    </div>
+                    <h2><span>공지사항</span></h2>
+                    <h3>'Anavada'의 소식을 빠르게 확인할 수 있는 공간입니다.</h3>
+                </div>
+            </div>
+            <!--서브 비주얼/타이틀 끝-->
+
             <!-- 상세 -->
             <div class="view-area">
-                <h2><span class="inquiry">문의</span> <%= inquiry.getIqTitle() %></h2>
+                <h2><span class="inquiry">관리자용 문의 상세뷰</span> <%= inquiry.getIqTitle() %></h2>
                 <ul>
                     <li><span>작성자 : </span><%= inquiry.getIqId() %></li>
                     <li><span>등록일 : </span><%= inquiry.getIqDate() %></li>
@@ -40,6 +56,10 @@
 
                 <div class="view-ctn"><%= inquiry.getIqContent() %></div>
 				
+				<p class="warning_text" align="right" style="color:red;">
+                    *삭제한 게시글은 복구가 불가능 하오니 신중하게 선택하시기 바랍니다.
+                </p>
+                
 				<div align="right">
 				<br>
 				<a href="/anavada/aidelete?no=<%= inquiry.getIqNo() %>&rfile=<%= inquiry.getIqRename() %>&rfile2=<%= inquiry.getIqRename2() %>&rfile3=<%= inquiry.getIqRename3() %>" class="btn btn-list" style="background-color:white; border-color:white; color:red;">삭제</a>
@@ -48,7 +68,7 @@
 				
 				<% if(selected == null && keyword == null) { %>
                 <div class="view-btn">
-                    <a href="/anavada/ailist?page=<%= currentPage %>" class="btn btn-list">목록</a>
+                    <a href="/anavada/ailist.ss?page=<%= currentPage %>" class="btn btn-list">목록</a>
                 </div>
                 <% }else { %>
                 <div class="view-btn">
@@ -61,7 +81,9 @@
                 
                   <div class="cmt_wrap">
                 <% if(answer == null) { %>
-                    <form action="" method="">
+                    <form action="/anavada/aainsert.ss" method="post">
+                    <input type="hidden" name="id" value="<%= inquiry.getIqId() %>">
+                    <input type="hidden" name="no" value="<%= inquiry.getIqNo() %>">
                         <fieldset>
                             <div class="cmt_form">
                                 <h4 class="cmt_head">문의답변</h4>

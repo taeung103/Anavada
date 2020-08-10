@@ -22,7 +22,7 @@ import inquiry.model.vo.Inquiry;
 /**
  * Servlet implementation class InquiryInsertServlet
  */
-@WebServlet("/iinsert")
+@WebServlet("/iinsert.ss")
 public class InquiryInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

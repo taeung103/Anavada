@@ -20,6 +20,13 @@ public class InquiryService {
 		return totalList;
 	}
 	
+	public int getListCount(String user) {
+		Connection conn = getConnection();
+		int totalList = idao.getListCount(conn, user);
+		close(conn);
+		return totalList;
+	}
+	
 	public int getListCount(String column, String keyword) {
 		Connection conn = getConnection();
 		int totalList = idao.getListCount(conn, column, keyword);
@@ -33,7 +40,14 @@ public class InquiryService {
 		close(conn);
 		return list;
 	}
-
+	
+	public ArrayList<Inquiry> selectAllUser(int currentPage, int limit, String user) {
+		Connection conn = getConnection();
+		ArrayList<Inquiry> list = idao.selectAllUser(conn, currentPage, limit, user);
+		close(conn);
+		return list;
+	}
+	
 	public ArrayList<Inquiry> searchTCW(String column, String keyword, int currentPage, int limit) {
 		Connection conn = getConnection();
 		ArrayList<Inquiry> list = idao.searchTCW(conn, column, keyword, currentPage, limit);
@@ -89,6 +103,14 @@ public class InquiryService {
 			commit(conn);
 		else rollback(conn);
 		return result;
+	}
+
+	public void changeIqAnswer(String change, int iqNo) {
+		Connection conn = getConnection();
+		int result = idao.changeIqAnswer(conn, change, iqNo);
+		if(result > 0)
+			commit(conn);
+		else rollback(conn);
 	}
 
 

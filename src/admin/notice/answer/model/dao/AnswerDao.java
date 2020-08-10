@@ -82,5 +82,26 @@ public class AnswerDao {
 		
 		return result;
 	}
+
+	public int insertAnswer(Connection conn, Answer answer) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "insert into answer values ((select max(an_no)+1 from answer), ?, sysdate, ?, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, answer.getAnContent());
+			pstmt.setInt(2, answer.getIqNo());
+			pstmt.setString(3, answer.getIqId());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 }

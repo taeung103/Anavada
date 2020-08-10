@@ -41,7 +41,7 @@
 
             <!-- 상세 -->
             <div class="view-area">
-                <h2><span>공지</span> <%= notice.getNoTitle() %></h2>
+                <h2><span>관리자용 공지 상세뷰</span> <%= notice.getNoTitle() %></h2>
                 <ul>
                     <li><span>작성자 : </span><%= notice.getNoId() %></li>
                     <li><span>등록일 : </span><%= notice.getNoDate() %></li>
@@ -57,14 +57,12 @@
 
                 <div class="view-btn">
                     <% if(request.getParameter("selected") != null && request.getParameter("keyword") != null) { %>
-                    <a href="" class="btn btn-prev">이전글</a>
                     <a href="/anavada/anupdateview?no=<%= notice.getNoNo() %>&page=<%= currentPage %>" class="btn btn-list">수정</a>
                     <a href="/anavada/ansearch?page=<%= currentPage %>&selected=<%= selected %>&keyword=<%= keyword %>" class="btn btn-list">목록</a>
-                    <a href="" class="btn btn-next">다음글</a>
                     <% }else { %>
                     <a href="/anavada/andetail?no=<%= notice.getNoNo()-1 %>&page=<%= currentPage %>" class="btn btn-prev">이전글</a>
                     <a href="/anavada/anupdateview?no=<%= notice.getNoNo() %>&page=<%= currentPage %>" class="btn btn-list">수정</a>
-                    <a href="/anavada/anlist?page=<%= currentPage %>" class="btn btn-list">목록</a>
+                    <a href="/anavada/anlist.ss?page=<%= currentPage %>" class="btn btn-list">목록</a>
                     <a href="/anavada/andetail?no=<%= notice.getNoNo()+1 %>&page=<%= currentPage %>" class="btn btn-next">다음글</a>
                     <% } %>
                     

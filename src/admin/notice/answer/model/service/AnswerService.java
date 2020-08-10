@@ -36,6 +36,15 @@ public class AnswerService {
 		else rollback(conn);
 		return result;
 	}
+
+	public int insertAnswer(Answer answer) {
+		Connection conn = getConnection();
+		int result = adao.insertAnswer(conn, answer);
+		if(result > 0)
+			commit(conn);
+		else rollback(conn);
+		return result;
+	}
 	
 	
 }

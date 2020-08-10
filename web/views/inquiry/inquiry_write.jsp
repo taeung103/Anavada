@@ -30,7 +30,7 @@
 
             <!-- 글쓰기 -->
             <div class="write-area">
-                <form action="/anavada/iinsert" method="post" enctype="multipart/form-data">
+                <form action="/anavada/iinsert.ss" method="post" enctype="multipart/form-data">
 <%-- <input type="hidden" value="<%= loginMember.get %>"> --%>
                     <h2>문의하기 작성</h2>
 
@@ -43,7 +43,7 @@
                             <tr>
                                 <td>카테고리</td>
                                 <td>
-                                    <label><input type="radio" name="type" value="member">회원정보</label>
+                                    <label><input type="radio" name="type" value="member" required>회원정보</label>
                                     <label><input type="radio" name="type" value="error">오류</label>
                                     <label><input type="radio" name="type" value="proposal">제안하기</label>
                                     <label><input type="radio" name="type" value="etc">기타</label>
@@ -51,11 +51,11 @@
                             </tr>
                             <tr>
                                 <td>제목</td>
-                                <td><input type="text" name="title" class="form-control w100p" placeholder="제목" /></td>
+                                <td><input type="text" name="title" class="form-control w100p" placeholder="제목" required></td>
                             </tr>
                             <tr>
                                 <td>내용</td>
-                                <td><textarea name="content" class="form-control" style="resize: none; width:100%; min-height:300px; max-height:300px;"></textarea></td>
+                                <td><textarea name="content" class="form-control" style="resize: none; width:100%; min-height:300px; max-height:300px;" required></textarea></td>
                             </tr>
                             <tr>
                                 <td>첨부파일</td>

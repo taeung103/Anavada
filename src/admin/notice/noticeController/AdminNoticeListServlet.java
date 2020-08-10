@@ -15,7 +15,7 @@ import notice.model.service.NoticeService;
 /**
  * Servlet implementation class AdminNoticeListServlet
  */
-@WebServlet("/anlist")
+@WebServlet("/anlist.ss")
 public class AdminNoticeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

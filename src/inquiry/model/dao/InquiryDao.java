@@ -38,6 +38,30 @@ public class InquiryDao {
 		return totalList;
 	}
 	
+	public int getListCount(Connection conn, String user) {
+		int totalList = 0;
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String query = "select count(*) from inquiry where iq_id = "+user;
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				totalList = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return totalList;
+	}
+	
 	public int getListCount(Connection conn, String column, String keyword) {
 		int totalList = 0;
 		PreparedStatement pstmt = null;
@@ -117,6 +141,55 @@ public class InquiryDao {
 		return list;
 	}
 
+	public ArrayList<Inquiry> selectAllUser(Connection conn, int currentPage, int limit, String user) {
+		ArrayList<Inquiry> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * " 
+					 + "from (select rank() over(order by iq_no desc) rnum, iq_no, iq_id, iq_title, iq_content, iq_date, iq_answer, "
+					 				+ "iq_original, iq_rename, iq_original2, iq_rename2, iq_original3, iq_rename3, iq_type from inquiry where iq_id = ?) " 
+					 + "where rnum >= ? and rnum <= ?";
+		
+		int startRow = (currentPage - 1) * limit +1;
+		int endRow = startRow + limit -1;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, user);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Inquiry inquiry = new Inquiry();
+				
+				inquiry.setIqNo(rset.getInt("iq_no"));
+				inquiry.setIqId(rset.getString("iq_id"));
+				inquiry.setIqTitle(rset.getString("iq_title"));
+				inquiry.setIqContent(rset.getString("iq_content"));
+				inquiry.setIqDate(rset.getDate("iq_date"));
+				inquiry.setIqAnswer(rset.getString("iq_answer"));
+				inquiry.setIqOriginal(rset.getString("iq_original"));
+				inquiry.setIqRename(rset.getString("iq_rename"));
+				inquiry.setIqOriginal2(rset.getString("iq_original2"));
+				inquiry.setIqRename2(rset.getString("iq_rename2"));
+				inquiry.setIqOriginal3(rset.getString("iq_original3"));
+				inquiry.setIqRename3(rset.getString("iq_rename3"));
+				inquiry.setIqType(rset.getString("iq_type"));
+				
+				list.add(inquiry);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
 	public ArrayList<Inquiry> searchTCW(Connection conn, String column, String keyword, int currentPage, int limit) {
 		ArrayList<Inquiry> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -343,6 +416,26 @@ public class InquiryDao {
 			pstmt.setInt(10, inquiry.getIqNo());
 			result = pstmt.executeUpdate();
 			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int changeIqAnswer(Connection conn, String change, int iqNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update inquiry set iq_answer = ? where iq_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, change);
+			pstmt.setInt(2, iqNo);
+			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {

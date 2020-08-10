@@ -65,7 +65,7 @@
 				<% if(selected == null && keyword == null) { %>
                 <div class="view-btn">
                     <a href="/anavada/idetail?no=<%= inquiry.getIqNo()-1 %>" class="btn btn-prev">이전글</a>
-                    <a href="/anavada/ilist?page=<%= currentPage %>" class="btn btn-list">목록</a>
+                    <a href="/anavada/ilist.ss?page=<%= currentPage %>" class="btn btn-list">목록</a>
                     <a href="/anavada/idetail?no=<%= inquiry.getIqNo()+1 %>" class="btn btn-next">다음글</a>
                 </div>
                 <% }else { %>

@@ -22,7 +22,7 @@ import notice.model.vo.Notice;
 /**
  * Servlet implementation class AdminNoticeInsertServlet
  */
-@WebServlet("/aninsert")
+@WebServlet("/aninsert.ss")
 public class AdminNoticeInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

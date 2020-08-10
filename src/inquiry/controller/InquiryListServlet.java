@@ -38,9 +38,12 @@ public class InquiryListServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("page"));
 		}
 		
+//		String user = request.getParameter("user");
+		
 		int limit = 10;
 		
 		InquiryService iservice = new InquiryService();
+//		int totalList = iservice.getListCount(user);
 		int totalList = iservice.getListCount();
 		
 		int totalPage = (int)((double) totalList / limit + 0.9);
@@ -49,6 +52,7 @@ public class InquiryListServlet extends HttpServlet {
 		if(endPage > totalPage)
 			endPage = totalPage;
 		
+//		ArrayList<Inquiry> list = iservice.selectAllUser(currentPage, limit, user);
 		ArrayList<Inquiry> list = iservice.selectAll(currentPage, limit);
 		
 		if(list.size() > -1) {

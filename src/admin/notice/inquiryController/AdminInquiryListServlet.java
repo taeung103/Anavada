@@ -17,7 +17,7 @@ import notice.model.vo.Notice;
 /**
  * Servlet implementation class AdminInquiryListServlet
  */
-@WebServlet("/ailist")
+@WebServlet("/ailist.ss")
 public class AdminInquiryListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -62,13 +62,13 @@
                         </form>
                     </div>
                 </div>
-                
+              
                 <% if(totalList > 0) { %>
                 	<% if(selected == null && keyword == null) { %>
                 	<table>
                     	<tbody>
                     	<% for(Inquiry i : list) { %>
-                        	<tr onclick="location.href='/anavada/idetail?no=<%= i.getIqNo() %>&page=<%= currentPage %>'">
+                        	<tr onclick="location.href='/anavada/idetail.ss?no=<%= i.getIqNo() %>&page=<%= currentPage %>'">
                             	<td class="number"><%= i.getIqNo() %></td>
                             	<td class="title">
                                 	<h2><span class="inquiry">문의</span><%= i.getIqTitle() %></h2>
@@ -88,7 +88,7 @@
                 	<table>
                     	<tbody>
                     	<% for(Inquiry i : list) { %>
-                        	<tr onclick="location.href='/anavada/idetail?no=<%= i.getIqNo() %>&page=<%= currentPage %>&selected=<%= selected %>&keyword=<%= keyword %>'">
+                        	<tr onclick="location.href='/anavada/idetail.ss?no=<%= i.getIqNo() %>&page=<%= currentPage %>&selected=<%= selected %>&keyword=<%= keyword %>'">
                             	<td class="number"><%= i.getIqNo() %></td>
                             	<td class="title">
                                 	<h2><span class="inquiry">문의</span><%= i.getIqTitle() %></h2>
