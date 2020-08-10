@@ -1,5 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, inquiry.model.vo.Inquiry"%>
+<%
+	ArrayList<Inquiry> list = (ArrayList<Inquiry>)request.getAttribute("list");
+	int currentPage = (Integer)request.getAttribute("page");
+	int startPage = (Integer)request.getAttribute("startPage");
+	int endPage = (Integer)request.getAttribute("endPage");
+	int totalList = (Integer)request.getAttribute("totalList");
+	int totalPage = (Integer)request.getAttribute("totalPage");
+	String selected = null;
+	String keyword = null;
+	if(request.getAttribute("selected") != null && request.getAttribute("keyword") != null){
+		selected = (String)request.getAttribute("selected");
+		keyword = (String)request.getAttribute("keyword");
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,179 +46,129 @@
             <div class="list-area">
                <!--종류 리스트-->
                 <div class="sort-area">  
-                    <h4>전체 150개</h4>
-                    <a href="inquiry_write.jsp" class="write_btn">글쓰기</a>
+                    <h4>전체 <%= totalList %>개</h4>
+                    <a href="/anavada/views/inquiry/inquiry_write.jsp" class="write_btn">글쓰기</a>
                     <div>
-                        <form action="" method="" id="">
-                            목록 분류 : <select name="" class="ListSelect">
-                                    <option value="분류 선택" selected="selected">분류 선택</option>
-                                    <option value="제목">제목</option>
-                                    <option value="내용">내용</option>
-                                    <option value="작성자">작성자</option>
+                        <form action="/anavada/isearch" method="post" id="">
+                            목록 분류 : <select name="selected" class="ListSelect">
+                                    <option value="none" selected disabled>분류 선택</option>
+                                    <option value="title">제목</option>
+                                    <option value="content">내용</option>
+                                    <option value="writer">작성자</option>
                             </select>
                             
-                            <input type="text" placeholder="검색어를 입력해주세요.">
+                            <input type="text" placeholder="검색어를 입력해주세요." name="keyword">
                             <button class="top-search"><i class="xi-search"></i></button>
                         </form>
                     </div>
                 </div>
                 
-                <form action="">
-                <table>
-                    <tbody>
-                        <tr onclick="location.href='inquiry_view.jsp';" class="active">
-                            <td class="number">10</td>
-                            <td class="title">
-                                <h2><span class="inquiry">문의</span>'Anavada'의 장점이 무엇인가요?</h2>
-                                <ul>
-                                    <li>작성자 : 홍길동</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
-                        </tr>
-                        <tr onclick="location.href='inquiry_view.jsp';">
-                            <td class="number">9</td>
-                            <td class="title">
-                                <h2><span class="inquiry">문의</span>'Anavada'의 장점이 무엇인가요?</h2>
-                                <ul>
-                                    <li>작성자 : 홍길동</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
-                        </tr>
-                        <tr onclick="location.href='inquiry_view.jsp';">
-                            <td class="number">8</td>
-                            <td class="title">
-                                <h2><span class="inquiry">문의</span>'Anavada'의 장점이 무엇인가요?</h2>
-                                <ul>
-                                    <li>작성자 : 홍길동</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
-                        </tr>
-                        <tr onclick="location.href='inquiry_view.jsp';">
-                            <td class="number">7</td>
-                            <td class="title">
-                                <h2><span class="inquiry">문의</span>'Anavada'의 장점이 무엇인가요?</h2>
-                                <ul>
-                                    <li>작성자 : 홍길동</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
-                        </tr>
-                        <tr onclick="location.href='inquiry_view.jsp';">
-                            <td class="number">6</td>
-                            <td class="title">
-                                <h2><span class="inquiry">문의</span>'Anavada'의 장점이 무엇인가요?</h2>
-                                <ul>
-                                    <li>작성자 : 홍길동</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
-                        </tr>
-                        <tr onclick="location.href='inquiry_view.jsp';">
-                            <td class="number">5</td>
-                            <td class="title">
-                                <h2><span class="inquiry">문의</span>'Anavada'의 장점이 무엇인가요?</h2>
-                                <ul>
-                                    <li>작성자 : 홍길동</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
-                        </tr>
-                        <tr onclick="location.href='inquiry_view.jsp';">
-                            <td class="number">4</td>
-                            <td class="title">
-                                <h2><span class="inquiry">문의</span>'Anavada'의 장점이 무엇인가요?</h2>
-                                <ul>
-                                    <li>작성자 : 홍길동</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
-                        </tr>
-                        <tr onclick="location.href='inquiry_view.jsp';">
-                            <td class="number">3</td>
-                            <td class="title">
-                                <h2><span class="inquiry">문의</span>'Anavada'의 장점이 무엇인가요?</h2>5
-                                <ul>
-                                    <li>작성자 : 홍길동</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
-                        </tr>
-                        <tr onclick="location.href='inquiry_view.jsp';">
-                            <td class="number">2</td>
-                            <td class="title">
-                                <h2><span class="inquiry">문의</span>'Anavada'의 장점이 무엇인가요?</h2>
-                                <ul>
-                                    <li>작성자 : 홍길동</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
-                        </tr>
-                        <tr onclick="location.href='inquiry_view.jsp';">
-                            <td class="number">1</td>
-                            <td class="title">
-                                <h2><span class="inquiry">문의</span>'Anavada'의 장점이 무엇인가요?</h2>
-                                <ul>
-                                    <li>작성자 : 홍길동</li>
-                                    <li>작성일 : 2019.02.30</li>
-                                    <li>조회수 : 30</li>
-                                </ul>
-                            </td>
-                            <td class="fileDown"><i class="glyphicon glyphicon-floppy-saved"></i></td>
-                        </tr>
-                    </tbody>
-                </table>
-
-
+                <% if(totalList > 0) { %>
+                	<% if(selected == null && keyword == null) { %>
+                	<table>
+                    	<tbody>
+                    	<% for(Inquiry i : list) { %>
+                        	<tr onclick="location.href='/anavada/idetail?no=<%= i.getIqNo() %>&page=<%= currentPage %>'">
+                            	<td class="number"><%= i.getIqNo() %></td>
+                            	<td class="title">
+                                	<h2><span class="inquiry">문의</span><%= i.getIqTitle() %></h2>
+                                	<ul>
+                                    	<li>작성자 : <%= i.getIqId() %></li>
+                                    	<li>작성일 : <%= i.getIqDate() %></li>
+                                	</ul>
+                            	</td>
+                            	<td class="fileDown">
+                            	<% if(i.getIqOriginal() != null || i.getIqOriginal2() != null || i.getIqOriginal3() != null) { %>
+                            	<i class="glyphicon glyphicon-floppy-saved"></i><% } %></td>
+                        	</tr>
+                        	<% } %>
+                    	</tbody>
+                	</table>
+                	<% }else { %>
+                	<table>
+                    	<tbody>
+                    	<% for(Inquiry i : list) { %>
+                        	<tr onclick="location.href='/anavada/idetail?no=<%= i.getIqNo() %>&page=<%= currentPage %>&selected=<%= selected %>&keyword=<%= keyword %>'">
+                            	<td class="number"><%= i.getIqNo() %></td>
+                            	<td class="title">
+                                	<h2><span class="inquiry">문의</span><%= i.getIqTitle() %></h2>
+                                	<ul>
+                                    	<li>작성자 : <%= i.getIqId() %></li>
+                                    	<li>작성일 : <%= i.getIqDate() %></li>
+                                	</ul>
+                            	</td>
+                            	<td class="fileDown">
+                            	<% if(i.getIqOriginal() != null || i.getIqOriginal2() != null || i.getIqOriginal3() != null) { %>
+                            	<i class="glyphicon glyphicon-floppy-saved"></i><% } %></td>
+                        	</tr>
+                        	<% } %>
+                    	</tbody>
+                	</table>
+                	
+				<%} }else { %>
                 <div class="list-no">
                     <p><img src="/anavada/resources/images/btnIcn/icn_big_listNo.png" alt="" title="" /></p>
                     <h1>목록이 없습니다.</h1>
                 </div>
-
+				<% } %>
 
                 <div class="write-btn">
-                    <a href="inquiry_write.jsp">글쓰기</a>
+                    <a href="/anavada/views/inquiry/inquiry_write.jsp">글쓰기</a>
                 </div>
-                </form>
 
             </div>
             <!-- 리스트 끝 -->
 
-
+			
             <!-- 페이지넘버 -->
+            <% if(totalList > 0) { %>
             <dl class="list-paging pb80">
                 <dd>
-                    <a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
-                    <a href="#none" class="active">1</a>
-                    <a href="#none">2</a>
-                    <a href="#none">3</a><!-- 활성화 class="active" -->
-                    <a href="#none">4</a>
-                    <a href="#none">5</a>
-                    <a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
+                <% if(selected == null && keyword == null) { %>
+                	<% if(currentPage == 1) { %>
+                    	<a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
+                    <% }else { %>
+                    	<a href="/anavada/ilist?page=1"><i class="glyphicon glyphicon-menu-left"></i></a>
+                    <% } %>
+                    
+                    <% for(int p=startPage; p<=endPage; p++) { %>
+                    	<% if(p == currentPage) { %>
+                    	<a href="#none" class="active"><%= p %></a>
+                    	<% }else { %>
+                    	<a href="/anavada/ilist?page=<%= p %>"><%= p %></a>
+                    <% } } %>
+                    
+                    <% if(currentPage == totalPage) { %>
+                    	<a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
+                    <% }else { %>
+                    	<a href="/anavada/ilist?page=<%= totalPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+                    <% } %>
+                    
+                 <% }else { %>
+                 	<% if(currentPage == 1) { %>
+                    	<a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
+                    <% }else { %>
+                    	<a href="/anavada/isearch?page=1&selected=<%= selected %>&keyword=<%= keyword %>"><i class="glyphicon glyphicon-menu-left"></i></a>
+                    <% } %>
+                    
+                    <% for(int p=startPage; p<=endPage; p++) { %>
+                    	<% if(p == currentPage) { %>
+                    	<a href="#none" class="active"><%= p %></a>
+                    	<% }else { %>
+                    	<a href="/anavada/isearch?page=<%= p %>&selected=<%= selected %>&keyword=<%= keyword %>"><%= p %></a>
+                    <% } } %>
+                    
+                    <% if(currentPage == totalPage) { %>
+                    	<a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
+                    <% }else { %>
+                    	<a href="/anavada/isearch?page=<%= totalPage %>&selected=<%= selected %>&keyword=<%= keyword %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+                    <% } %>
+                 <% } %>
                 </dd>
             </dl>
+            <% } %>
             <!-- 페이지넘버 끝 -->
-
+			
         </div>
         <!-- 컨텐츠 끝 -->
 

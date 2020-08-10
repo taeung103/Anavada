@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="inquiry.model.vo.Inquiry"%>
+<%
+	Inquiry inquiry = (Inquiry)request.getAttribute("inquiry");
+	int currentPage = ((Integer)request.getAttribute("page")).intValue();
+	String selected = null;
+	String keyword = null;
+	if(request.getAttribute("selected") != null && request.getAttribute("keyword") != null) {
+		selected = (String)request.getAttribute("selected");
+		keyword = (String)request.getAttribute("keyword");
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,113 +40,53 @@
 
             <!-- 상세 -->
             <div class="view-area">
-                <h2><span class="inquiry">문의</span> 'Anavada' 중고거래 홈페이지가 새롭게 오픈했습니다.</h2>
+                <h2><span class="inquiry">문의</span> <%= inquiry.getIqTitle() %></h2>
                 <ul>
-                    <li><span>작성자 : </span>홍길동</li>
-                    <li><span>등록일 : </span>2019.02.30</li>
-                    <li><span>조회수 : </span>30</li>
-                    <li><span>첨부파일#1 : </span><a href="#none" download>문의파일.zip</a></li>
+                    <li><span>작성자 : </span><%= inquiry.getIqId() %></li>
+                    <li><span>등록일 : </span><%= inquiry.getIqDate() %></li>
+                    <% if(inquiry.getIqOriginal() != null) { %>
+                    <li><span>첨부파일 : </span><a href="/anavada/ifdown?ofile=<%= inquiry.getIqOriginal() %>&rfile=<%= inquiry.getIqRename() %>" download><%= inquiry.getIqOriginal() %></a></li>
+                    <% } if(inquiry.getIqOriginal2() != null) { %>
+                    <li><a href="/anavada/ifdown?ofile=<%= inquiry.getIqOriginal2() %>&rfile=<%= inquiry.getIqRename2() %>" download><%= inquiry.getIqOriginal2() %></a></li>
+                    <% } if(inquiry.getIqOriginal3() != null) { %>
+                    <li><a href="/anavada/ifdown?ofile=<%= inquiry.getIqOriginal3() %>&rfile=<%= inquiry.getIqRename3() %>" download><%= inquiry.getIqOriginal3() %></a></li>
+                    <% } %>
                 </ul>
 
-                <div class="view-ctn">
-                        너 없는 지금도 눈부신 하늘과<br/>
-                        눈부시게 웃는 사람들<br/>
-                        나의 헤어짐을 모르는 세상은<br/>
-                        슬프도록 그대로인데<br/><br/>
-
-                        시간마저 데려가지 못하게<br/>
-                        나만은 널 보내지 못했나봐<br/>
-                        가시처럼 깊게 박힌 기억은<br/>
-                        아파도 아픈 줄 모르고<br/><br/>
-
-                        그대 기억이 지난 사랑이<br/>
-                        내 안을 파고 드는 가시가 되어<br/>
-                        제발 가라고 아주 가라고<br/>
-                        애써도 나를 괴롭히는데<br/><br/>
-
-                        아픈 만큼 너를 잊게 된다면<br/>
-                        차라리 앓고 나면 그만인데<br/>
-                        가시처럼 깊게 박힌 기억은<br/>
-                        아파도 아픈 줄 모르고<br/>
-
-                        그대 기억이<br/>
-                        지난 사랑이<br/>
-                        내 안을 파고 드는 가시가 되어<br/>
-                        제발 가라고<br/>
-                        아주 가라고<br/>
-                        애써도 나를 괴롭히는데<br/><br/>
-
-                        너무 사랑했던 나를<br/>
-                        그게 두려웠던 나를<br/>
-                        미치도록 너를 그리워했던<br/>
-                        날 이제는 놓아줘<br/><br/>
-
-                        보이지 않아 내 안에 숨어<br/>
-                        잊으려 하면 할수록 더 아파와<br/>
-                        제발 가라고 아주 가라고<br/>
-                        애써도 나를 괴롭히는데
-                </div>
-
+                <div class="view-ctn"><%= inquiry.getIqContent() %></div>
+				
+				<div align="right">
+				<br>
+				<a href="/anavada/iupdateview?no=<%= inquiry.getIqNo() %>&page=<%= currentPage %>" class="btn btn-list" style="background-color:white; border-color:white; color:black;">수정</a>
+				<a href="/anavada/idelete?no=<%= inquiry.getIqNo() %>&rfile=<%= inquiry.getIqRename() %>&rfile2=<%= inquiry.getIqRename2() %>&rfile3=<%= inquiry.getIqRename3() %>" class="btn btn-list" style="background-color:white; border-color:white; color:red;">삭제</a>
+				</div>
+				
+				
+				<% if(selected == null && keyword == null) { %>
                 <div class="view-btn">
-                    <a href="#none" class="btn btn-prev">이전글</a>
-                    <a href="inquiry_list.jsp" class="btn btn-list">목록</a>
-                    <a href="#none" class="btn btn-next">다음글</a>
+                    <a href="/anavada/idetail?no=<%= inquiry.getIqNo()-1 %>" class="btn btn-prev">이전글</a>
+                    <a href="/anavada/ilist?page=<%= currentPage %>" class="btn btn-list">목록</a>
+                    <a href="/anavada/idetail?no=<%= inquiry.getIqNo()+1 %>" class="btn btn-next">다음글</a>
                 </div>
+                <% }else { %>
+                <div class="view-btn">
+                    <!-- <a href="#none" class="btn btn-prev">이전글</a> -->
+                    <a href="/anavada/isearch?page=<%= currentPage %>&selected=<%= selected %>&keyword=<%= keyword %>" class="btn btn-list">목록</a>
+                    <!-- <a href="#none" class="btn btn-next">다음글</a> -->
+                </div>
+                <% } %>
                 
                 <div class="cmt_wrap">
-                    <form action="" method="">
-                        <fieldset>
-                            <div class="cmt_form">
-                                <h4 class="cmt_head">댓글 77</h4>
-                                <div class="cmt_body">
-<textarea name="" style="resize: none; width:100%; min-height:100px; max-height:100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
-                                    <div class="cmt_ok"><input type="submit" value="등록"></div>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </form>
+                
+                
                     <ul class="cmt_con">
                         <li>
                             <div>
                                 <h4>user : asdf123</h4><span>2020.08.16. 12:12:00</span>
                             </div>
                             <p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를 미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
-                            <button>대댓글</button>
-                            <div class="Subcmt_form">
-                                <form action="" method="">
-                                    <fieldset>
-                                        <div class="cmt_form">
-                                            <div class="cmt_body">
-<textarea name="" style="resize: none; width:100%; min-height:100px; max-height:100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
-                                            <div class="cmt_ok"><input type="submit" value="등록"></div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </form>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <h4>user : asdf123</h4><span>2020.08.16. 12:12:00</span>
-                            </div>
-                            <p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를 미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
-                            <button>대댓글</button>
-                            <div class="Subcmt_form">
-                                 <div>
-                                    <h4>user : asdf123</h4><span>2020.08.16. 12:12:00</span>
-                                </div>
-                                <p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를 미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <h4>user : asdf123</h4><span>2020.08.16. 12:12:00</span>
-                            </div>
-                            <p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를 미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
-                            <button>대댓글</button>
                         </li>
                     </ul>
-                    <button class="cmt_in">댓글 더보기 <i class="glyphicon glyphicon-menu-right"></i></button>
                 </div>
             </div>
             <!-- 상세 끝 -->
