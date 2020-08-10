@@ -81,7 +81,7 @@ public class JboardDao {
 
 		public ArrayList<Jboard> selectList(Connection conn, int currentPage, int limit ,String local, String listSearch , String titleSearch) {
 			ArrayList<Jboard> list = new ArrayList <Jboard>();
-			System.out.println(local);
+			
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
 			String query = "SELECT * " + 
@@ -93,7 +93,7 @@ public class JboardDao {
 					"JBOARD_CHECK , JBOARD_MEET, JBOARD_POST, MEMBER_ID, LOCAL_NO "+
 					"FROM (SELECT * FROM JBOARD " +
 					(local != null && !local.equals("0")? "WHERE LOCAL_NO =? " : "");
-					query +=(titleSearch != null ? "AND JBOARD_TITLE LIKE ?" : "");
+					query +=(titleSearch != null ? "AND JBOARD_TITLE LIKE ? " : "");
 					switch((listSearch==null)? listSearch = "latestposts" : listSearch) {
 					case("latestposts") : query+= "ORDER BY JBOARD_DATE DESC)) "; break;
 					case("highprice") :  query+= "ORDER BY JBOARD_PRICE DESC)) "; break;
@@ -104,7 +104,7 @@ public class JboardDao {
 					query +=" AND RNUM >=? AND RNUM <=? ";
 			
 					
-				
+				System.out.println(query);
 			
 			int startRow = (currentPage - 1) * limit + 1; 
 			int endRow = startRow + limit - 1;

@@ -42,16 +42,14 @@ public class JboardListViewServlet extends HttpServlet {
 				String local = request.getParameter("local");
 				String page = request.getParameter("page");
 				System.out.println(local);
-				if (listSearch== null) {
-					listSearch = "latestposts";
+				if (listSearch== null|| listSearch.equals("null")) {
+					listSearch = null;
 				}
-				if (local == null) {
-					System.out.println("널==================");
-					local = "0";
+				if (local == null || local.equals("null") ||local.equals("0")) {
+					local = null;
 				}
-				if (local.equals("null")) {
-					System.out.println("널ddddd=================");
-					local = "0";
+				if (titleSearch.equals("null")) {
+					titleSearch=null;
 				}
 				int currentPage = 1;
 				
@@ -90,6 +88,7 @@ public class JboardListViewServlet extends HttpServlet {
 						request.setAttribute("local" , local);
 						request.setAttribute("listsearch", listSearch);
 						request.setAttribute("titlesearch", titleSearch);
+						request.setAttribute("page", page);
 						view.forward(request, response);
 						
 				}else {
