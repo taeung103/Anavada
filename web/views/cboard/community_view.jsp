@@ -12,6 +12,7 @@
 	String keyword = String.valueOf(request.getAttribute("keyword"));
 	int currentPage = ((Integer) request.getAttribute("page")).intValue();
 	int allListCount = ((Integer) request.getAttribute("allListCount")).intValue();
+	int allReplyCount = ((Integer) request.getAttribute("allReplyCount")).intValue();
 	String[] localArr = { "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구",
 			"마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구" };
 %>
@@ -138,7 +139,7 @@
 					<form action="" method="">
 						<fieldset>
 							<div class="cmt_form">
-								<h4 class="cmt_head">댓글 77</h4>
+								<h4 class="cmt_head">댓글 <%= allReplyCount %></h4>
 								<div class="cmt_body">
 									<textarea name="" style="resize: none; width: 100%; min-height: 100px; max-height: 100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
 									<div class="cmt_ok">

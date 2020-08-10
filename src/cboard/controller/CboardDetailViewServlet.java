@@ -52,7 +52,6 @@ public class CboardDetailViewServlet extends HttpServlet {
 		cservice.addReadCount(cboardNum);
 		
 		Cboard cboard = cservice.selectCboard(cboardNum);
-
 		System.out.println(cboard);
 		System.out.println(currentPage);
 		System.out.println(local);
@@ -62,6 +61,7 @@ public class CboardDetailViewServlet extends HttpServlet {
 		
 		CreplyService crservice = new CreplyService();
 		ArrayList<Creply> rlist = crservice.creplyList(cboardNum);
+		int allReplyCount = crservice.allReplyCount(cboardNum);
 		
 		
 		RequestDispatcher view = null;
@@ -74,6 +74,7 @@ public class CboardDetailViewServlet extends HttpServlet {
 			request.setAttribute("search", search);
 			request.setAttribute("keyword", keyword);
 			request.setAttribute("allListCount", allListCount);
+			request.setAttribute("allReplyCount", allReplyCount);
 			view.forward(request, response);
 		} else {
 			view = request.getRequestDispatcher("views/common/error.jsp");

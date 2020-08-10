@@ -21,4 +21,11 @@ public class CreplyService {
 		close(conn);
 		return rlist;
 	}
+
+	public int allReplyCount(int cboardNum) {
+		Connection conn = getConnection();
+		int replyCount = crdao.getAllReplyListCount(conn, cboardNum);
+		close(conn);
+		return replyCount;
+	}
 }
