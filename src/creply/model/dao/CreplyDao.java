@@ -72,4 +72,25 @@ public class CreplyDao {
 		}
 		return replyCount;
 	}
+
+	public int insertCreply(Connection conn, Creply creply) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "insert into creply values(CREPLY_SEQ.nextval, ?, ?, to_date(sysdate,'yyyy.mm.dd hh24:mi'), ?, null, null, 1)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, creply.getCbaordNo());
+			pstmt.setString(2, creply.getMemberId());
+			pstmt.setString(3, creply.getCreplyContent());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }

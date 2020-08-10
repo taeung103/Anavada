@@ -136,12 +136,14 @@
 						class="btn btn-list">목록</a>
 				</div>
 				<div class="cmt_wrap">
-					<form action="" method="">
+					<form action="crwrite.ss" method="post">
+						<input type="hidden" name="writer" value="<%=loginMember.getMemberId()%>">
+						<input type="hidden" name="cnum" value="<%=cboard.getCboardNo()%>">
 						<fieldset>
 							<div class="cmt_form">
 								<h4 class="cmt_head">댓글 <%= allReplyCount %></h4>
 								<div class="cmt_body">
-									<textarea name="" style="resize: none; width: 100%; min-height: 100px; max-height: 100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
+									<textarea name="content" style="resize: none; width: 100%; min-height: 100px; max-height: 100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
 									<div class="cmt_ok">
 										<input type="submit" value="등록">
 									</div>
