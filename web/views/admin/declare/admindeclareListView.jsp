@@ -139,7 +139,7 @@ function deleteAction(){
 							<a href="/anavada/dlist.ad">목록</a>
 						</div> -->
 						<!-- 버튼 -->
-						<input type="checkBox" name="checkAll" onclick="checkAll();" class="checkBox"> 전체 선택
+						<input type="checkBox" name="checkAll" onclick="checkAll();" class="checkBox"> 전체 선택<br>
                 	<div class="btn_wrap">
                    	 <a onclick="deleteAction();" class="btn-left btn_gray">선택삭제</a>
               		</div>
