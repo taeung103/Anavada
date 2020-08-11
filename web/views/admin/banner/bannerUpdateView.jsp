@@ -65,39 +65,30 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><span>게시배너체크(Y/N) : </td>
-                                        <td><% if(banner.getBannerOk().equals("Y")){ %>
-                                            <label><input type="radio" name="check" id="게시완료" value="Y" checked>게시</label>&nbsp;
-                                    	    <label><input type="radio" name="check" id="게시미완료"  value="N">미게시</label>
-                                    	    <% }else{ %>
-                                    	    <label><input type="radio" name="check" id="게시완료" value="Y">게시</label>&nbsp;
-                                    	    <label><input type="radio" name="check" id="게시미완료"  value="N" checked>미게시</label>
-                                        	<% } %>
-                                        </td>
-                                    </tr>
-                                    <!-- <tr>
                                         <td>설명</td>
-                                        <td><textarea name="" rows="" cols="" class="form-control" style="resize: none; width:100%; min-height:200px; max-height:200px;"></textarea></td>
-                                    </tr> -->
+                                        <td><textarea name="content" rows="" cols="" class="form-control" 
+                                        style="resize: none; width:100%; min-height:200px; max-height:200px;" placeholder="<%= banner.getBannerContent() %>" ></textarea></td>
+                                    </tr>
                                     <tr>
                                         <td>배너파일등록</td>
                                         <td><% if(banner.getBannerOriginal() != null){ %>
                                         		<%= banner.getBannerOriginal() %>
                                         		<input type="checkbox" name="deleteFlag" value="yes">파일삭제
+                                        		<a href="/anavada/bfdown?ofile=<%= banner.getBannerOriginal()%>&rfile=<%= banner.getBannerRename()%>"> <%= banner.getBannerOriginal() %></a>
                                         		<% } %>
                                         		<input type="file" name="upfile" >
                                         </td>
                                         
                                     </tr>
-                                    <!-- <tr>
-                                        <td>URL등록</td>
-                                        <td><input type="text" name="" title="" class="form-control w100p" placeholder="http://" /></td>
-                                    </tr> -->
-                                    <tr>
-                                        <td>배경사이즈</td>
-                                       <td><input type="text" name="size" title="" class="form-control w100p" placeholder="사이즈" /></td>
-                                    </tr>
-                                </tbody>
+									<tr>
+										<td>배경사이즈</td>
+										<td><input type="text" name="size" title="" class="form-control w100p" placeholder="<%= banner.getBannerSize() %>" /></td>
+									</tr>
+									<tr>
+										<td>URL등록</td>
+										<td><input type="text" name="url" title="" class="form-control w100p" placeholder="<%= banner.getBannerUrl() %>" /></td>
+									</tr>
+								</tbody>
                             </table>
              		     </div>
                    </fieldset>
@@ -108,8 +99,8 @@
                     <!-- <a href="#none" class="btn btn-next">다음글</a> -->
                     <input type="submit" class="btn btn-list" value="상태수정하기">
                     <%-- <a href="/anavada/dboupmove.ad?dboNo=<%= banner.getBannerNo() %>" class="btn btn-list">상태 수정하기</a> &nbsp; --%>
-                    <a href="/anavada/blist.ad"" class="btn btn-list">목록</a>
-                    <a hrdf="/anavada/bdelete.ad?bannerNo=<%= banner.getBannerNo()%>&rfile=<%= banner.getBannerRename() %>"  class="btn btn-list"> 삭제하기 </a>
+                    <a href="/anavada/blist.ad" class="btn btn-list">목록</a>
+                    <a href="/anavada/bdelete.ad?bannerNo=<%= banner.getBannerNo()%>&rfile=<%= banner.getBannerRename() %>"  class="btn btn-list"> 삭제하기 </a>
                 </div>
             </div>
             <!-- 상세 끝 -->

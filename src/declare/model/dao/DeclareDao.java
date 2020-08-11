@@ -8,13 +8,14 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import banner.model.vo.Banner;
 import declare.model.vo.DBo;
 import declare.model.vo.Declare;
 
 public class DeclareDao {
 	public DeclareDao() {}
 	
-	public ArrayList<Declare>selectList(Connection conn) {//신고목록전체조회
+	public ArrayList<Declare>selectAll(Connection conn) {//신고목록전체조회
 		ArrayList<Declare> list = new ArrayList<Declare>();
 		Statement stmt = null;
 		ResultSet rset = null;
@@ -75,12 +76,10 @@ public class DeclareDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "inset into declare_admin values ( ?, ?, ?, sysdate)";
+		String query = "insert into declare_admin values ((select max(declare_no) +1 from declare_admin), ?, 1, default)";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, declare.getDeclareNo());
-			pstmt.setString(2, declare.getDeclareId());
-			pstmt.setInt(3, declare.getDeclareCount());
+			pstmt.setString(1, declare.getDeclareId());
 			
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -109,22 +108,88 @@ public class DeclareDao {
 		
 		return result;
 	}
-	public int deleteDeclare(Connection conn, String declareId) { //신고자아이디 삭제
+	public int deleteDeclare(Connection conn, int[] checkedNum) { //신고자아이디 삭제
 		int result = 0;
-		PreparedStatement pstmt = null;
+		Statement stmt = null;
 		
-		String query = "delete from declare_admin where declare_id = ?";
+		String query = null;
+		if(checkedNum.length == 1)
+			query = "delete from declare_admin where declare_no = " + checkedNum[0];
+		else {
+			query = "delete from declare_admin where declare_no in (";
+			for(int i=0; i<checkedNum.length-1; i++) {
+				query += checkedNum[i]+", ";
+			}
+			query += checkedNum[checkedNum.length-1]+")";
+		}
 		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, declareId);
-			
-			result = pstmt.executeUpdate();
+			stmt = conn.createStatement();			
+			result = stmt.executeUpdate(query);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			close(pstmt);
+			close(stmt);
 		}
 		return result;
+	}
+
+	public int getListCount(Connection conn) {
+		int listCount = 0;
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String query = "select count(*) from declare_admin";
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()){
+				listCount = rset.getInt(1);
+			}
+			
+		} catch (Exception e) {
+				e.printStackTrace();	
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return listCount;
+		
+	}
+
+	public ArrayList<Declare> selectList(Connection conn, int currentPage, int limit) {
+		ArrayList<Declare> list = new ArrayList<Declare>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "select * from (select rank() over(order by declare_no desc) rnum, declare_no, declare_id, declare_count, declare_ok from  declare_admin)  where rnum >= ? and rnum <= ?";
+
+		int startRow = (currentPage - 1) * limit + 1;
+		int endRow = startRow + limit - 1;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Declare declare = new Declare();
+				declare.setDeclareNo(rset.getInt("declare_no"));
+				declare.setDeclareId(rset.getString("declare_id"));
+				declare.setDeclareCount(rset.getInt("declare_count"));
+				declare.setDeclareOk(rset.getString("declare_ok"));
+								
+				list.add(declare);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 
 

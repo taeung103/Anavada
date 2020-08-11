@@ -45,7 +45,7 @@ public class BannerAdminDeleteServlet extends HttpServlet {
 						String savePath = request.getSession().getServletContext().getRealPath("/resources/bannerfiles");
 						new File(savePath + "\\" + renameFileName).delete();
 					}
-					response.sendRedirect("views/admin/banner/bannerAdminListview.jsp");
+					response.sendRedirect("blist.ad");
 				} else {
 					RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
 					request.setAttribute("message", bannerNo + "번글 삭제 실패!");

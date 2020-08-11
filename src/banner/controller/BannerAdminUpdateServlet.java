@@ -74,8 +74,9 @@ public class BannerAdminUpdateServlet extends HttpServlet {
 				banner.setBannerNo(Integer.parseInt(mrequest.getParameter("no")));
 				banner.setBannerTitle(mrequest.getParameter("title"));
 				banner.setBannerChk(mrequest.getParameter("controller"));
-				banner.setBannerOk(mrequest.getParameter("check"));
+				banner.setBannerContent(mrequest.getParameter("content"));
 				banner.setBannerSize(mrequest.getParameter("size"));				
+				banner.setBannerUrl(mrequest.getParameter("url"));
 
 				// 이전 등록 파일 삭제 여부 값 추출
 				String deleteFlag = mrequest.getParameter("deleteFlag");

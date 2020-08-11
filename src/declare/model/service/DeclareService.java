@@ -5,6 +5,7 @@ import static common.JDBCTemp.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import banner.model.vo.Banner;
 import declare.model.dao.DeclareDao;
 import declare.model.vo.DBo;
 import declare.model.vo.Declare;
@@ -17,7 +18,7 @@ public class DeclareService {
 	
 	public ArrayList<Declare> selectAll(){ //신고자 전체목록
 		Connection conn = getConnection();
-		ArrayList<Declare> list = ddao.selectList(conn);
+		ArrayList<Declare> list = ddao.selectAll(conn);
 		close(conn);
 		return list;
 	}
@@ -47,14 +48,30 @@ public class DeclareService {
 		close(conn);
 		return result;
 	}
-	public int deleteDeclare(String declareId) { //신고자 삭제
+	public int deleteDeclare(int[] checkedNum) { //신고자 삭제
 		Connection conn = getConnection();
-		int result = ddao.deleteDeclare(conn, declareId);
+		int result = ddao.deleteDeclare(conn, checkedNum);
 		if(result > 0)
 			commit(conn);
 		else
 			rollback(conn);
 		close(conn);
 		return result;
+	}
+
+
+	public int getListCount() {
+		Connection conn = getConnection();
+		int listCount = ddao.getListCount(conn);
+		close(conn);
+		return listCount;
+	}
+
+
+	public ArrayList<Declare> selectList(int currentPage, int limit) {
+		Connection conn = getConnection();
+		ArrayList<Declare> list = ddao.selectList(conn, currentPage, limit);
+		close(conn);
+		return list;
 	}
 }

@@ -7,24 +7,28 @@ public class Banner implements java.io.Serializable{
 	private int bannerNo;  
 	private String bannerTitle;
 	private String bannerChk;
-	private String bannerOk;
+	private String bannerContent;
 	private String bannerOriginal;
 	private String bannerRename;
 	private String bannerSize;
+	private String bannerUrl;
 	
 	public Banner() {}
 
-	public Banner(int bannerNo, String bannerTitle, String bannerChk, String bannerOk, String bannerOriginal,
-			String bannerRename, String bannerSize) {
+	
+	public Banner(int bannerNo, String bannerTitle, String bannerChk, String bannerContent, String bannerOriginal,
+			String bannerRename, String bannerSize, String bannerUrl) {
 		super();
 		this.bannerNo = bannerNo;
 		this.bannerTitle = bannerTitle;
 		this.bannerChk = bannerChk;
-		this.bannerOk = bannerOk;
+		this.bannerContent = bannerContent;
 		this.bannerOriginal = bannerOriginal;
 		this.bannerRename = bannerRename;
 		this.bannerSize = bannerSize;
+		this.bannerUrl = bannerUrl;
 	}
+
 
 	public void setBannerNo(int bannerNo) {
 		this.bannerNo = bannerNo;
@@ -38,9 +42,11 @@ public class Banner implements java.io.Serializable{
 		this.bannerChk = bannerChk;
 	}
 
-	public void setBannerOk(String bannerOk) {
-		this.bannerOk = bannerOk;
+	
+	public void setBannerContent(String bannerContent) {
+		this.bannerContent = bannerContent;
 	}
+
 
 	public void setBannerOriginal(String bannerOriginal) {
 		this.bannerOriginal = bannerOriginal;
@@ -53,6 +59,11 @@ public class Banner implements java.io.Serializable{
 	public void setBannerSize(String bannerSize) {
 		this.bannerSize = bannerSize;
 	}
+
+	public void setBannerUrl(String bannerUrl) {
+		this.bannerUrl = bannerUrl;
+	}
+
 
 	public static long getSerializableuid() {
 		return SerializableUID;
@@ -70,8 +81,8 @@ public class Banner implements java.io.Serializable{
 		return bannerChk;
 	}
 
-	public String getBannerOk() {
-		return bannerOk;
+	public String getBannerContent() {
+		return bannerContent;
 	}
 
 	public String getBannerOriginal() {
@@ -85,15 +96,16 @@ public class Banner implements java.io.Serializable{
 	public String getBannerSize() {
 		return bannerSize;
 	}
+	
+	public String getBannerUrl() {
+		return bannerUrl;
+	}
 
 	@Override
 	public String toString() {
 		return "Banner [bannerNo=" + bannerNo + ", bannerTitle=" + bannerTitle + ", bannerChk=" + bannerChk
-				+ ", bannerOk=" + bannerOk + ", bannerOriginal=" + bannerOriginal + ", bannerRename=" + bannerRename
-				+ ", bannerSize=" + bannerSize + "]";
+				+ ", bannerContent=" + bannerContent + ", bannerOriginal=" + bannerOriginal + ", bannerRename="
+				+ bannerRename + ", bannerSize=" + bannerSize + ", bannerUrl=" + bannerUrl + "]";
 	}
-	
-	
-
 
 }

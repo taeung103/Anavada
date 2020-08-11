@@ -31,10 +31,11 @@ public class BannerDao {
 				banner.setBannerNo(rset.getInt("banner_no"));
 				banner.setBannerTitle(rset.getString("banner_title"));
 				banner.setBannerChk(rset.getString("banner_chk"));
-				banner.setBannerOk(rset.getString("banner_ok"));
+				banner.setBannerContent(rset.getString("banner_content"));
 				banner.setBannerOriginal(rset.getString("banner_original"));
 				banner.setBannerRename(rset.getString("banner_rename"));
 				banner.setBannerSize(rset.getString("banner_size"));
+				banner.setBannerUrl(rset.getString("banner_url"));
 				
 				list.add(banner);
 			}
@@ -79,8 +80,8 @@ public class BannerDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = "select * from (select rank() over(order by banner_no desc) rnum, banner_no, banner_title, banner_chk, banner_ok, banner_original, "
-				+ "banner_rename, banner_size from  banner)  where rnum >= ? and rnum <= ?";
+		String query = "select * from (select rank() over(order by banner_no desc) rnum, banner_no, banner_title, banner_chk, banner_content, banner_original, "
+				+ "banner_rename, banner_size, banner_url from  banner)  where rnum >= ? and rnum <= ?";
 
 		int startRow = (currentPage - 1) * limit + 1;
 		int endRow = startRow + limit - 1;
@@ -95,10 +96,11 @@ public class BannerDao {
 				banner.setBannerNo(rset.getInt("banner_no"));
 				banner.setBannerTitle(rset.getString("banner_title"));
 				banner.setBannerChk(rset.getString("banner_chk"));
-				banner.setBannerOk(rset.getString("banner_ok"));
+				banner.setBannerContent(rset.getString("banner_content"));
 				banner.setBannerOriginal(rset.getString("banner_original"));
 				banner.setBannerRename(rset.getString("banner_rename"));
 				banner.setBannerSize(rset.getString("banner_size"));
+				banner.setBannerUrl(rset.getString("banner_url"));
 
 				list.add(banner);
 			}
@@ -135,14 +137,16 @@ public class BannerDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "insert into banner values((select max(banner_no)+1 from banner),?,default,default,?,?,?)";
+		String query = "insert into banner values((select max(banner_no)+1 from banner),?,default,?,?,?,?,?)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, banner.getBannerTitle());
-			pstmt.setString(2, banner.getBannerOriginal());
-			pstmt.setString(3, banner.getBannerRename());
-			pstmt.setString(4, banner.getBannerSize());
+			pstmt.setString(2, banner.getBannerContent());
+			pstmt.setString(3, banner.getBannerOriginal());
+			pstmt.setString(4, banner.getBannerRename());
+			pstmt.setString(5, banner.getBannerSize());
+			pstmt.setString(6, banner.getBannerUrl());
 			
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -158,16 +162,17 @@ public class BannerDao {
 		PreparedStatement pstmt = null;
 		
 		String query = "update banner set banner_title = ?, banner_chk = ?, "
-				+ "banner_ok = ?, banner_original = ?, banner_rename = ?  where banner_no = ?";
+				+ "banner_content = ?, banner_original = ?, banner_rename = ?, banner_url=?  where banner_no = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, banner.getBannerTitle());
 			pstmt.setString(2, banner.getBannerChk());
-			pstmt.setString(3, banner.getBannerOk());
+			pstmt.setString(3, banner.getBannerContent());
 			pstmt.setString(4, banner.getBannerOriginal());
 			pstmt.setString(5, banner.getBannerRename());
-			pstmt.setInt(6, banner.getBannerNo());
+			pstmt.setString(6, banner.getBannerUrl());
+			pstmt.setInt(7, banner.getBannerNo());
 			
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -197,10 +202,11 @@ public class BannerDao {
 				banner.setBannerNo(bannerNo);
 				banner.setBannerTitle(rset.getString("banner_title"));
 				banner.setBannerChk(rset.getString("banner_chk"));
-				banner.setBannerOk(rset.getString("banner_ok"));
+				banner.setBannerContent(rset.getString("banner_content"));
 				banner.setBannerOriginal(rset.getString("banner_original"));
 				banner.setBannerRename(rset.getString("banner_rename"));
 				banner.setBannerSize(rset.getString("banner_size"));
+				banner.setBannerUrl(rset.getString("banner_url"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

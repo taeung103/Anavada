@@ -53,20 +53,20 @@
                 
                 <form action=""> 
                 <table >
-                <tr><th>번호</th><th>제목</th><th>게시여부확인</th><th>배너보이기/숨기기</th><th>첨부파일</th><th>사이즈</th></tr>
+                <tr><th>번호</th><th>제목</th><th>배너보이기/숨기기</th><th>첨부파일</th><th>사이즈</th><th>배너URL</th></tr>
                     <%for(Banner b : list) { 
                     System.out.println(b);%>
                  <tr>
-                 <td><%= b.getBannerNo() %></td>
+                 <td><a href="/anavada/bselone.ad?bannerNo=<%= b.getBannerNo()%>"><%= b.getBannerNo() %></a></td>
                  <td><a href="/anavada/bselone.ad?bannerNo=<%= b.getBannerNo()%>"><%= b.getBannerTitle() %></a></td>
-                 <td><%= b.getBannerOk() %></td>
                  		<td><% if(b.getBannerChk().equals("H")){ %>
-                 		            </i>숨기기</span> &nbsp;
+                 		            </i>숨기기</span> 
                  		         <% }else{// 배너가 보이게 하려면%>
-                 		            </i>보이기</span> &nbsp;
+                 		            </i>보이기</span> 
                  		          <% }  %></td> 
-                 <td><%= b.getBannerOriginal() %></td>
-				 <td><%= b.getBannerSize() %></td>         		          
+                 <td><a href="/anavada/bselone.ad?bannerNo=<%= b.getBannerNo()%>"><%= b.getBannerOriginal() %></a></td>
+				 <td><a href="/anavada/bselone.ad?bannerNo=<%= b.getBannerNo()%>"><%= b.getBannerSize() %></a></td>    
+				 <td><a href="/anavada/bselone.ad?bannerNo=<%= b.getBannerNo()%>"><%= b.getBannerUrl() %></a></td>      		          
                  </tr>
                  <% } %>
                 </table>
