@@ -9,7 +9,7 @@
             <ul class="gnb clearfix">
                 <li><a href="/anavada/jblist">중고거래</a></li>
                 <li><a href="/anavada/clistview?page=1&local=0">커뮤니티</a></li>
-                <li><a href="/anavada/views/fboard/areaEvent_list.jsp">지역축제</a></li>
+                <li><a href="/anavada/fbklist">지역축제</a></li>
                 <li>
                     <a href="/anavada/nlist">고객센터</a>
                     <div class="subGnb">
