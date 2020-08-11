@@ -267,7 +267,7 @@ public class CboardDao {
 		PreparedStatement pstmt = null;
 		
 		String query = "update cboard set cboard_title = ?, cboard_content = ?, cfiles_original_filepath1 = ?, cfiles_rename_filepath1 = ?, cfiles_original_filepath2 = ?, cfiles_rename_filepath2 = ?, "
-				+ " cfiles_original_filepath3 = ?, cfiles_rename_filepath3 = ?, cfiles_original_filepath4 = ?, cfiles_rename_filepath4 = ?, cboard_lastmodified = sysdate where cboard_no = ?";
+				+ " cfiles_original_filepath3 = ?, cfiles_rename_filepath3 = ?, cfiles_original_filepath4 = ?, cfiles_rename_filepath4 = ?, cboard_lastmodified = sysdate, local_no = ? where cboard_no = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -281,7 +281,9 @@ public class CboardDao {
 			pstmt.setString(8, cboard.getCfilesRenameFilepath3());
 			pstmt.setString(9, cboard.getCfilesOriginalFilepath4());
 			pstmt.setString(10, cboard.getCfilesRenameFilepath4());
-			pstmt.setInt(11, cboard.getCboardNo());
+			pstmt.setString(11, cboard.getLocalNo());
+			pstmt.setInt(12, cboard.getCboardNo());
+			System.out.println(cboard.getLocalNo());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

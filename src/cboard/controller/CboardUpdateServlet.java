@@ -60,7 +60,6 @@ public class CboardUpdateServlet extends HttpServlet {
 		cboard.setCboardTitle(mrequest.getParameter("title"));
 		cboard.setCboardContent(mrequest.getParameter("content"));
 		cboard.setLocalNo(mrequest.getParameter("local"));
-
 		File newOriginFile = null;
 		File originFile = null;
 		String deleteFlag = null;
