@@ -1,18 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@  page 
- 	import="jboard.model.vo.Jboard , java.util.ArrayList, java.sql.Date"%>
+ 	import="jboard.model.vo.Jboard , java.util.ArrayList, java.sql.Date"
+ 	import="java.awt.Image,  java.awt.Image , com.sun.jimi.core.Jimi , com.sun.jimi.core.JimiException , com.sun.jimi.core.JimiUtils" 
+ %>
+
  <%
  	ArrayList<Jboard> list = (ArrayList<Jboard>) request.getAttribute("list");
    int listCount = ((Integer) request.getAttribute("listCount")).intValue();
    int startPage = ((Integer) request.getAttribute("startPage")).intValue();
    int endPage = ((Integer) request.getAttribute("endPage")).intValue();
    int maxPage = ((Integer) request.getAttribute("maxPage")).intValue();
-   int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
+   int currentPage = ((Integer) request.getAttribute("page")).intValue();
    	String titleSearch = request.getParameter("titlesearch");
 	String local = request.getParameter("local"); 
     String listSearch = request.getParameter("listsearch");
 	String[] localArr = { "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구" };
+
+	
+	
 %>
 
 
@@ -57,7 +63,9 @@
                 <!--종류 리스트-->
                 <div class="sort-area">  
                     <h4>전체 <%=listCount%>개</h4>
+                     <% if(loginMember != null){ %>
                     <button onclick="showWriteForm();" class="write_btn">글쓰기</button>
+                    <%} %>
                     <div>
                         <form action="/anavada/jblist" method="post" id="sel" name="form1">
                         
@@ -97,7 +105,7 @@
                                     <option value="highlike" ${param.listsearch eq"highlike"?"selected" :"" }>좋아요순</option>
                             </select>
                             
-                            <input type="text" name="titlesearch" placeholder="검색어를 입력해주세요.">
+                            <input type="text" name="titlesearch" maxlength="16" minlength="2" placeholder="검색어를 입력해주세요.">
                             <button class="top-search"><i class="xi-search"></i></button>
                             
                         </form>
@@ -106,14 +114,18 @@
                 </div>
 
                 <ul class="product">
-                <% for (Jboard j : list ){ %>
-                    <li onclick="location.href='product_view.jsp'">
-                        <div><img src="/anavada/resources/images/test/testImg.jpg"/></div>
-                        <h2><%= j.getJboardTitle()%></h2>
-                        <h3><%=j.getJboardPrice() %><span> 원 <%=j.getLocalNo() %></span></h3>
+                <% for (Jboard jboard : list ){ %>
+                    <li onclick="location.href='/anavada/jbdetail?jboardno=<%= jboard.getJboardNo() %>&jbclist?jboardno=<%=jboard.getJboardNo()%>&page=<%=currentPage%>'">
+                    <% if (jboard.getJboardRenameFilePath1() !=null){%>
+                        <div><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath1()%>"/></div>
+                        <%}else{ %>
+                        <div><img src="/anavada/resources/jboardfiles/테스트.jpg"/></div>
+                        <%}  %>
+                        <h2><%= jboard.getJboardTitle()%></h2>
+                        <h3><%=jboard.getJboardPrice() %><span> 원 <%=jboard.getLocalNo() %></span></h3>
                        
-                        <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%=j.getJboardLike() %></span></i>
-                        <span><%=localArr[Integer.parseInt(j.getLocalNo())-1]%></span>
+                        <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%=jboard.getJboardLike() %></span></i>
+                        <span><%=localArr[Integer.parseInt(jboard.getLocalNo())-1]%></span>
                         
                         </p>
                     </li>
@@ -124,7 +136,9 @@
 
                 </div>
                 <div class="write-btn">
+                <% if (loginMember != null){ %>
                     <a><button onclick="showWriteForm();" class="write_btn">글쓰기</button></a>
+                    <%} %>
                 </div>
 
             </div>

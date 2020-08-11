@@ -17,7 +17,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-
+import jboard.ImageUtil;
 import jboard.model.service.JboardService;
 import jboard.model.vo.Jboard;
 
@@ -49,7 +49,7 @@ public class JboardInsertServlet extends HttpServlet {
 			view.forward(request, response);
 		}
 
-		int maxSize = 1024 * 1024 * 5; //용량 5메가로 제한
+		int maxSize = 1024 * 1024 * 10; //용량 5메가로 제한
 
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/jboardfiles");
 		// 4. request 를 MultipartRequest 로 변환해야 함
@@ -66,18 +66,27 @@ public class JboardInsertServlet extends HttpServlet {
 		jboard.setJboardTitle(mrequest.getParameter("title"));
 		jboard.setJboardPrice(Integer.parseInt(mrequest.getParameter("price")));
 		jboard.setJboardContent(mrequest.getParameter("content"));
-
+		jboard.setMemberId(mrequest.getParameter("memberid"));
+	
 		
-		String originalFileName1 = mrequest.getFilesystemName("ofile1");
-		jboard.setJboardOrignalFilePath1(originalFileName1);
-		if (originalFileName1 != null) {
+		
+		for ( int i=1 ; i<5;i++) {
+		String originalFileName= mrequest.getFilesystemName("ofile" +i);
+		System.out.println("ofile"+i);
+		switch (i) {
+		case 1: jboard.setJboardOrignalFilePath1(originalFileName); break;
+		case 2: jboard.setJboardOrignalFilePath2(originalFileName); break;
+		case 3: jboard.setJboardOrignalFilePath3(originalFileName); break;
+		case 4: jboard.setJboardOrignalFilePath4(originalFileName); break;
+		}
+		if (originalFileName != null) {
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyMMddHHmmss");
-			String renameFileName1 = sdf.format(new java.sql.Date(System.currentTimeMillis()));
-			renameFileName1 += "." + originalFileName1.substring(originalFileName1.lastIndexOf(".") + 1);
-			File originFile = new File(savePath + "\\" + originalFileName1);
-			File renameFile = new File(savePath + "\\" + renameFileName1);
-
+			String renameFileName = sdf.format(new java.sql.Date(System.currentTimeMillis()));
+			renameFileName +=i +"." + originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+			
+			File originFile = new File(savePath + "\\" + originalFileName);
+			File renameFile = new File(savePath + "\\" + renameFileName);
 			if (!originFile.renameTo(renameFile)) {
 				FileInputStream fin = new FileInputStream(originFile);
 				FileOutputStream fout = new FileOutputStream(renameFile);
@@ -91,16 +100,22 @@ public class JboardInsertServlet extends HttpServlet {
 				fout.close();
 				originFile.delete(); 
 			} 
-			jboard.setJboardRenameFilePath1(renameFileName1);
+			
+			
+			switch (i) {
+			case 1: jboard.setJboardRenameFilePath1(renameFileName); break;
+			case 2: jboard.setJboardRenameFilePath2(renameFileName); break;
+			case 3: jboard.setJboardRenameFilePath3(renameFileName); break;
+			case 4: jboard.setJboardRenameFilePath4(renameFileName); break;
+			}
+			ImageUtil.resize(renameFile, renameFile, 450, 450); //renameFile 크기를 450,450 으로 고정
+			
 		}
-
-		// 6.서비스 객체 생성하고 메소드로 notice 객체 전달하고
-		// 처리된 결과 받기
+		}
 		int result = new JboardService().insertJboard(jboard);
-
-		// 7.받은 결과로 성공/실패 페이지 내보내기
+		
 		if (result > 0) {
-			response.sendRedirect("blist?page=1");
+			response.sendRedirect("jblist?page=1");
 		} else {
 			view = request.getRequestDispatcher("views/common/error.jsp");
 			request.setAttribute("message", "새 게시원글 등록 실패!");

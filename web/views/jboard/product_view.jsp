@@ -1,9 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@  page 
+ 	import="jboard.model.vo.Jboard , java.util.ArrayList, java.sql.Date, jboard.model.vo.Comment"%>
+<%
+	ArrayList<Comment> list = (ArrayList<Comment>) request.getAttribute("list");
+	Jboard jboard = (Jboard)(request.getAttribute("jboardno"));
+	String titleSearch = request.getParameter("titlesearch");
+	String listSearch = request.getParameter("listsearch");
+	int commentListCount = ((Integer) request.getAttribute("commentlistcount")).intValue();
+	int currentPage = ((Integer)request.getAttribute("page")).intValue();
+	String[] localArr = { "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구" };
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+       function commentReply(){
+            if($('#commentReply').css('display') == 'block'){
+            $('#commentReply').hide();
+        }else{
+            $('#commentReply').show();
+        }
+        }
+        </script>
+</head>
     <%@ include file="../include/head.jsp" %>
+    
 <style>
     .swiper-container {
         width: 100%;
@@ -82,10 +106,26 @@
                     <dt>
                         <div class="swiper-container gallery-top">
                             <ul class="swiper-wrapper">
-                                <li class="swiper-slide"><img src="/anavada/resources/images/test/testImg.jpg"/></li>
-                                <li class="swiper-slide"><img src="/anavada/resources/images/test/testImg.jpg"/></li>
-                                <li class="swiper-slide"><img src="/anavada/resources/images/test/testImg.jpg"/></li>
-                                <li class="swiper-slide"><img src="/anavada/resources/images/test/testImg.jpg"/></li>
+                            <%if (jboard.getJboardRenameFilePath1() !=null){ %>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath1()%>"/></li>
+                                <%}else{ %>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/테스트.jpg"/></li>
+                                <%} %>
+                                 <%if (jboard.getJboardRenameFilePath1() !=null){ %>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath2()%>"/></li>
+                                <%}else{ %>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/테스트.jpg"/></li>
+                                <%} %>
+                                 <%if (jboard.getJboardRenameFilePath1() !=null){ %>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath3()%>"/></li>
+                                <%}else{ %>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/테스트.jpg"/></li>
+                                <%} %>
+                                 <%if (jboard.getJboardRenameFilePath1() !=null){ %>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath4()%>"/></li>
+                                <%}else{ %>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/테스트.jpg"/></li>
+                                <%} %>
                             </ul>
                             <!-- Add Arrows -->
                             <div class="swiper-button-next swiper-button-white"></div>
@@ -93,10 +133,10 @@
                         </div>
                         <div class="swiper-container gallery-thumbs">
                             <ol class="swiper-wrapper">
-                                <li class="swiper-slide"><img src="/anavada/resources/images/test/testImg.jpg"/></li>
-                                <li class="swiper-slide"><img src="/anavada/resources/images/test/testImg.jpg"/></li>
-                                <li class="swiper-slide"><img src="/anavada/resources/images/test/testImg.jpg"/></li>
-                                <li class="swiper-slide"><img src="/anavada/resources/images/test/testImg.jpg"/></li>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath1()%>"/></li>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath2()%>"/></li>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath3()%>"/></li>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath4()%>"/></li>
                             </ol>
                         </div>
     
@@ -120,99 +160,82 @@
                                     disableOnInteraction: false,
                                 },
                                 thumbs: {
-                                swiper: galleryThumbs
+                               swiper: galleryThumbs
                                 }
                             });
                         </script>
                     </dt>
                     <dd>
                         <dl>
-                           <dt>[ 종로구 ]</dt>
+                           <dt><%=localArr[Integer.parseInt(jboard.getLocalNo())-1] %></dt>
                            <dd>
                                <button type="button" onclick="#none" class="lookup_btn">사기조회</button>
                                <button type="button" onclick="#none" class="lookup_btn">신고하기</button>
                            </dd>
                         </dl>
                         <div>
-                            <i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i>
-                            <h2 class="product_name"><b>상품명 : </b><span>아나바다 피규어</span></h2>
-                            <h3 class="product_price"><b>판매가격 : </b><span>7,000,000</span>원</h3>
+                            <i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%=jboard.getJboardLike() %></span></i>
+                            <h2 class="product_name"><b>상품명 : </b><span><%=jboard.getJboardTitle() %></span></h2>
+                            <h3 class="product_price"><b>판매가격 : </b><span><%=jboard.getJboardPrice() %></span>원</h3>
                             <p class="view-ctn">
-                                너 없는 지금도 눈부신 하늘과<br>
-                                눈부시게 웃는 사람들<br>
-                                나의 헤어짐을 모르는 세상은<br>
-                                슬프도록 그대로인데<br><br>
-
-                                시간마저 데려가지 못하게<br>
-                                나만은 널 보내지 못했나봐<br>
-                                가시처럼 깊게 박힌 기억은<br>
-                                아파도 아픈 줄 모르고
+                                <%= jboard.getJboardContent() %>
                             </p>
                             <div>
-                                <b>판매자 아이디 : </b>asdf123<br/>
-                                <b>등록일자 : </b>2020.08.10&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;<b>최종수정일자 : </b>2020.08.16
+                                <b>판매자 아이디 : <%= jboard.getMemberId()%> &nbsp; &nbsp; / &nbsp; &nbsp; 조회수 : <%=jboard.getJboardCount()%></b><br/>
+                                <b>등록일자 : </b><%= jboard.getJboardDate()%> &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;<b>최종수정일자 : </b><%=jboard.getJboardUpdate() %>
                             </div>
                         </div>
                     </dd>
                 </dl>
                 <div class="view-btn">
-                    <a href="#none" class="btn btn-prev">이전글</a>
-                    <a href="product_list.jsp" class="btn btn-list">목록</a>
+                    <a href="" class="btn btn-prev">이전글</a>
+                 	<% if (loginMember != null){%>
+                 	<%	if(loginMember.getMemberId().equals(jboard.getMemberId())){ %>
+                 	<a href="/anavada/jbupview?jboardno=<%=jboard.getJboardNo() %>&page=<%=currentPage %>" class="btn btn-list">수정</a>
+                 	<a href="/anavada/views/jboard/product_updateView.jsp" class="btn btn-list">삭제</a>
+                 	<%}} %>
+                    <a href="javascript:history.go(-1);" class="btn btn-list">목록</a>
                     <a href="#none" class="btn btn-next">다음글</a>
                 </div>
                 
                 <div class="cmt_wrap">
-                    <form action="" method="">
+                    <form action="/anavada/jbdetail?jboardno=<%= jboard.getJboardNo() %>&jbclist?jboardno=<%=jboard.getJboardNo()%>/jbcinsert.ss'"  method="">
                         <fieldset>
                             <div class="cmt_form">
-                                <h4 class="cmt_head">댓글 77</h4>
+                                <h4 class="cmt_head">전체 댓글 수 :<%=commentListCount %></h4>
                                 <div class="cmt_body">
 <textarea name="" style="resize: none; width:100%; min-height:100px; max-height:100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
-                                    <div class="cmt_ok"><input type="submit" value="등록"></div>
+                                    <div class="cmt_ok">
+                                    <input type="submit" value="등록"></div>
                                 </div>
                             </div>
                         </fieldset>
                     </form>
                     <ul class="cmt_con">
-                        <li>
+                    
+                    <% for (Comment comment : list ){ %>
+                    <% if (list.size()>0 && jboard.getJboardNo() == comment.getJboardNo()){ %>
+                        <li> 
                             <div>
-                                <h4>user : asdf123</h4><span>2020.08.16. 12:12:00</span>
+                                <h4><%=comment.getCommentId() %></h4><span>마지막 수정일<%=comment.getCommentLastModified() %></span>
                             </div>
-                            <p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를 미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
-                            <button>대댓글</button>
-                            <div class="Subcmt_form">
-                                <form action="" method="">
+                            <p><%=comment.getCommentContent() %></p>
+                            <button onclick="commentReply()">대댓글</button>
+                            <div style="display:none" class="Subcmt_form" id="commentReply">
+                                <form action="/anavada/jbdetail?jboardno=<%= jboard.getJboardNo() %>&jbclist?jboardno=<%=jboard.getJboardNo()%>/jbcinsert.ss'" method="">
+                               
                                     <fieldset>
                                         <div class="cmt_form">
                                             <div class="cmt_body">
 <textarea name="" style="resize: none; width:100%; min-height:100px; max-height:100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
-                                            <div class="cmt_ok"><input type="submit" value="등록"></div>
+                                            <div class="cmt_ok"><input type="submit" value="등록" onclick="" location.href='/anavada/jbdetail?jboardno=<%= comment.getJboardNo() %>'></div>
                                             </div>
                                         </div>
                                     </fieldset>
                                 </form>
                             </div>
                         </li>
-                        <li>
-                            <div>
-                                <h4>user : asdf123</h4><span>2020.08.16. 12:12:00</span>
-                            </div>
-                            <p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를 미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
-                            <button>대댓글</button>
-                            <div class="Subcmt_form">
-                                 <div>
-                                    <h4>user : asdf123</h4><span>2020.08.16. 12:12:00</span>
-                                </div>
-                                <p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를 미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <h4>user : asdf123</h4><span>2020.08.16. 12:12:00</span>
-                            </div>
-                            <p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를 미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
-                            <button>대댓글</button>
-                        </li>
+                      <%}} %>
                     </ul>
                     <button class="cmt_in">댓글 더보기 <i class="glyphicon glyphicon-menu-right"></i></button>
                 </div>

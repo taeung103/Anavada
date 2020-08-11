@@ -35,61 +35,71 @@ public class JboardListViewServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		//뷰로 내보내는 값에 한글이 있다면 인코딩 처리함
 		response.setContentType("text/html; charset=UTF-8");
-				String titleSearch = request.getParameter("titlesearch");
-				String listSearch = request.getParameter("listsearch");
+		
+		String titleSearch = request.getParameter("titlesearch");
+		String listSearch = request.getParameter("listsearch");
+		
+		String local = request.getParameter("local");
+		//System.out.println("local : " + local);
+		//System.out.println("titleSearch : " + titleSearch);
+		//System.out.println("listSearch : " + listSearch);
+		if (listSearch== null|| listSearch.equals("null")) {
+			listSearch = null;
+		}
+		if (local == null || local.equals("null") ||local.equals("0")) {
+			local = null;
+		}
+		if (titleSearch == null || titleSearch.equals("null")||titleSearch.getBytes().length==0) {
+			titleSearch = null;
+		}
+		int currentPage = 1;
+		
+		if (request.getParameter("page") != null) {
+				currentPage = Integer.parseInt(request.getParameter("page"));
+		}
+		
+		int limit = 10;
+
+		JboardService jbservice = new JboardService();
+		
+		int listCount = jbservice.getListCount(local, titleSearch);
+		
+		ArrayList<Jboard> list = jbservice.selectList(currentPage, limit, local, listSearch, titleSearch);
+		
+		
 				
-				String local = request.getParameter("local");
-				if (local == null) {
-					local ="0";
-				}
-				if (listSearch== null) {
-					listSearch = "latestposts";
-				}
-				int currentPage = 1;
+		int maxPage = (int)((double)listCount / limit + 0.9);
+		int startPage = (((int)((double)currentPage / limit + 0.9)) - 1) * limit + 1;
+		int endPage = startPage + limit -1;
+		if (maxPage < endPage) {
+				endPage = maxPage;
+		}
+		RequestDispatcher view = null;
+		if (list.size() > 0 ) {
+				view = request.getRequestDispatcher("views/jboard/product_list.jsp");
+				request.setAttribute("list", list);
+				request.setAttribute("currentPage", currentPage);
+				request.setAttribute("maxPage", maxPage);
+				request.setAttribute("startPage", startPage);
+				request.setAttribute("endPage", endPage);
+				request.setAttribute("listCount", listCount);
+				request.setAttribute("local" , local);
+				request.setAttribute("listsearch", listSearch);
+				request.setAttribute("titlesearch", titleSearch);
+				request.setAttribute("page", currentPage);
+				view.forward(request, response);
 				
-				if (request.getParameter("page") != null) {
-						currentPage = Integer.parseInt(request.getParameter("page"));
-				}
-				
-				int limit = 10;
-				System.out.println(local);
-				System.out.println(listSearch);
-				System.out.println(titleSearch);
-				JboardService jbservice = new JboardService();
-				
-				int listCount = jbservice.getListCount(local, titleSearch);
-				
-				ArrayList<Jboard> list = jbservice.selectList(currentPage, limit, local, listSearch, titleSearch);
-				
-				
-						
-				int maxPage = (int)((double)listCount / limit + 0.9);
-				int startPage = (((int)((double)currentPage / limit + 0.9)) - 1) * limit + 1;
-				int endPage = startPage + limit -1;
-				if (maxPage < endPage) {
-						endPage = maxPage;
-				}
-				RequestDispatcher view = null;
-				if (list.size() > 0 ) {
-						view = request.getRequestDispatcher("views/jboard/product_list.jsp");
-						request.setAttribute("list", list);
-						request.setAttribute("currentPage", currentPage);
-						request.setAttribute("maxPage", maxPage);
-						request.setAttribute("startPage", startPage);
-						request.setAttribute("endPage", endPage);
-						request.setAttribute("listCount", listCount);
-						request.setAttribute("local" , local);
-						request.setAttribute("listsearch", listSearch);
-						view.forward(request, response);
-						
-				}else {
-						view = request.getRequestDispatcher("views/common/error.jsp");
-						request.setAttribute("message",  currentPage + " 페이지에 대한 목록 조회 실패!");
-						view.forward(request, response);
-				}
-			
-	}
+		}else {
+				view = request.getRequestDispatcher("views/common/error.jsp");
+				request.setAttribute("message",  currentPage + " 페이지에 대한 목록 조회 실패!");
+				view.forward(request, response);
+		}
 	
+}
+
+
+
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
