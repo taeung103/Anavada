@@ -1,12 +1,134 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"
+	import="java.util.ArrayList, fboard.model.vo.Fboard"%>
+	
+<%
+	ArrayList<Fboard> list = (ArrayList<Fboard>) request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <%@ include file="../include/head.jsp"%>
+
+<style>
+/* 카카오맵 오버레이 꾸미기  */
+.wrap {
+	position: absolute;
+	left: 0;
+	bottom: 40px;
+	width: 288px;
+	height: 132px;
+	margin-left: -144px;
+	text-align: left;
+	overflow: hidden;
+	font-size: 12px;
+	font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+	line-height: 1.5;
+}
+
+.wrap * {
+	padding: 0;
+	margin: 0;
+}
+
+.wrap .info {
+	width: 286px;
+	height: 120px;
+	border-radius: 5px;
+	border-bottom: 2px solid #ccc;
+	border-right: 1px solid #ccc;
+	overflow: hidden;
+	background: #fff;
+}
+
+.wrap .info:nth-child(1) {
+	border: 0;
+	box-shadow: 0px 1px 2px #888;
+}
+
+.info .title {
+	padding: 5px 0 0 10px;
+	height: 25px;
+	background: #eee;
+	border-bottom: 1px solid #ddd;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.info .close {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	color: #888;
+	width: 17px;
+	height: 17px;
+	background:
+		url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');
+}
+
+.info .close:hover {
+	cursor: pointer;
+}
+
+.info .body {
+	position: relative;
+	overflow: hidden;
+}
+
+.info .desc {
+	position: relative;
+	margin: 13px 0 0 90px;
+	height: 75px;
+}
+
+.desc .ellipsis {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.desc .jibun {
+	font-size: 11px;
+	color: #888;
+	margin-top: -2px;
+}
+
+.info .img {
+	position: absolute;
+	top: 6px;
+	left: 5px;
+	width: 73px;
+	height: 71px;
+	border: 1px solid #ddd;
+	color: #888;
+	overflow: hidden;
+}
+
+.info:after {
+	content: '';
+	position: absolute;
+	margin-left: -12px;
+	left: 50%;
+	bottom: 0;
+	width: 22px;
+	height: 12px;
+	background:
+		url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
+}
+
+.info .link {
+	color: #5085BB;
+}
+/* 카카오맵 오버레이 꾸미기  끝 */
+</style>
+
 </head>
 <body oncontextmenu="return false" onselectstart="return false"
 	ondragstart="return false">
+	
+	<script type="text/javascript"
+	src="/testjson/resources/jquery-3.5.1.min.js"></script>
+	
 	<div id="wrap">
 		<%@ include file="../include/header.jsp"%>
 
@@ -32,24 +154,73 @@
 			<!--서브 비주얼/타이틀 끝-->
 
 			<!-- 리스트 -->
+			    <div class="areaEvent_list">
+                <div class="areaEvent_map">
+                    <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.453554125798!2d126.98089706565142!3d37.56793627979763!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2eee632d73f%3A0x15cc2733ad91fd28!2zS0gg7KCV67O06rWQ7Jyh7JuQ!5e0!3m2!1sko!2skr!4v1595997675697!5m2!1sko!2skr" width="100%" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe></div> -->
+                    <div id="map" style="width: 100%; height: 500px;"></div>
+                    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=53d444db7d449eb66c0229426868cf97"></script>
+                    <script>
+                        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                        mapOption = {
+                            center : new kakao.maps.LatLng(37.5311008, 126.9810742), // 지도의 중심좌표
+                            level : 9 // 지도의 확대 레벨
+                           /*  mapTypeId : kakao.maps.MapTypeId.ROADMAP */
+                        };
 
-			<div class="areaEvent_list">
-				<div class="areaEvent_map">
-					<!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.453554125798!2d126.98089706565142!3d37.56793627979763!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2eee632d73f%3A0x15cc2733ad91fd28!2zS0gg7KCV67O06rWQ7Jyh7JuQ!5e0!3m2!1sko!2skr!4v1595997675697!5m2!1sko!2skr" width="100%" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe></div> -->
-					<div id="map" style="width: 100%; height: 500px;"></div>
-					<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=53d444db7d449eb66c0229426868cf97"></script>
-					<script>
-						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-						mapOption = {
-							center : new kakao.maps.LatLng(37.5311008, 126.9810742), // 지도의 중심좌표
-							level : 8, // 지도의 확대 레벨
-							mapTypeId : kakao.maps.MapTypeId.ROADMAP
-						// 지도종류
-						};
+                        // 지도를 생성한다 
+                        var map = new kakao.maps.Map(mapContainer, mapOption);
+                     // 지도에 마커를 표시합니다 
+                 		<% int index = 0;%>
+                		<%for (Fboard f : list) { index++;%>
+                		var marker<%=index%> = new daum.maps.Marker({
+                			map : map,
+                			position : new daum.maps.LatLng(<%=f.getMapY()%>, <%=f.getMapX()%>)
+                		});
 
-						// 지도를 생성한다 
-						var map = new kakao.maps.Map(mapContainer, mapOption);
-					</script>
+                		// 커스텀 오버레이에 표시할 컨텐츠 입니다
+                		// 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+                		// 별도의 이벤트 메소드를 제공하지 않습니다 
+                		var content<%=index%> = '<div class="wrap">'
+                				+ '    <div class="info">'
+                				+ '        <div class="title">' + "<%=  f.getFestivalTitle()%>"
+                				+ '            <div class="close" onclick="closeOverlay<%=index%>()" title="닫기"></div>'
+                				+ '        </div>'
+                				+ '        <div class="body">'
+                				+ '            <div class="img">'
+                				+ '                <img src="<%= f.getThumbnail() %>" width="73" height="70" alt="NoImage">'
+                				+ '           </div>'
+                				+ '            <div class="desc">'
+                				+ '                <div class="ellipsis">서울시 <%= f.getLocalName()%></div>'
+                				+ '                <div class="jibun ellipsis"><%=f.getFestivalStartDate()%> ~ <%=f.getFestivalEndDate()%></div>'
+                				+ '                <div><a href="/testjson/views/festivalDetailView.jsp?fboardno=<%=f.getFboardNo()%>&festivalEndDate=<%=f.getFestivalEndDate()%>" target="_blank" class="link">상세 페이지로 이동</a></div>'
+                				+ '           </div>' + '        </div>' + '    </div>'
+                				+ '</div>'; 
+                	
+                 		// 마커 위에 커스텀오버레이를 표시합니다
+                		// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+                		var overlay<%=index%> = new daum.maps.CustomOverlay({
+                			content : content<%=index%>,
+                			map : map,
+                			position : marker<%=index%>.getPosition()
+                		});
+                		
+                		overlay<%=index%>.setMap(null);	// 처음 시작할때는 오버레이 표시 안하기
+                		
+                		// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+                		daum.maps.event.addListener(marker<%=index%>, 'click', function() {
+                			overlay<%=index%>.setMap(map);
+                		});
+
+                		// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+                		function closeOverlay<%=index%>() {
+                			overlay<%=index%>.setMap(null); 
+                			}
+                		<%}%>
+                		
+                	</script>
+                <!-- 카카오맵 지도 끝 -->
+			
+					
 					<!--종류 리스트-->
 					<div class="sort-area">
 						<h4>전체 150개</h4>
