@@ -1,6 +1,7 @@
 package creply.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -56,9 +57,10 @@ public class SubCreplyWriteServlet extends HttpServlet {
 		if (result > 0) {
 			response.sendRedirect("/anavada/cdetail?cnum=" + cboardNum);
 		} else {
-			view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("messgae", "새 게시들 등록 처리 실패");
-			view.forward(request, response);
+			response.setContentType("text/html; charset=UTF-8");
+            PrintWriter pwriter = response.getWriter();
+            pwriter.println("<script>alert('대댓글 작성 실패.');location.href='/anavada/cdetail?cnum=" + cboardNum + "';</script>");
+            pwriter.close();
 		}
 	}
 
