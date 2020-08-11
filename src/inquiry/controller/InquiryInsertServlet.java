@@ -47,8 +47,7 @@ public class InquiryInsertServlet extends HttpServlet {
 		
 		Inquiry inquiry = new Inquiry();
 		
-//		inquiry.setIqId();
-		inquiry.setIqId("user01");
+		inquiry.setIqId(mrequest.getParameter("id"));
 		inquiry.setIqTitle(mrequest.getParameter("title"));
 		inquiry.setIqContent(mrequest.getParameter("content"));
 		

@@ -2,13 +2,16 @@ package admin.notice.inquiryController;
 
 import java.io.File;
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.notice.answer.model.service.AnswerService;
 import inquiry.model.service.InquiryService;
+import inquiry.model.vo.Inquiry;
 
 /**
  * Servlet implementation class AdminInquiryDeleteServlet
@@ -29,7 +32,10 @@ public class AdminInquiryDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	int result = new InquiryService().deleteInquiry(Integer.parseInt(request.getParameter("no")));
+    	
+    	int iqNo = Integer.parseInt(request.getParameter("no"));
+    	
+    	int result = new InquiryService().deleteInquiry(iqNo);
 
     	String savePath = request.getSession().getServletContext().getRealPath("/resources/noticefiles/inquiryfiles");
 		
@@ -40,6 +46,9 @@ public class AdminInquiryDeleteServlet extends HttpServlet {
 		
 		if(result > 0) {
 			
+			AnswerService aservice = new AnswerService();
+			aservice.deleteAnswer(aservice.searchAnNo(iqNo));
+			
 			if(rfile != null) {
 				new File(savePath + "\\" + rfile).delete();
 			}if(rfile2 != null) {
@@ -48,7 +57,7 @@ public class AdminInquiryDeleteServlet extends HttpServlet {
 				new File(savePath + "\\" + rfile3).delete();
 			}
 			
-			response.sendRedirect("ailist");
+			response.sendRedirect("ailist.ss");
 		}
 	}
 

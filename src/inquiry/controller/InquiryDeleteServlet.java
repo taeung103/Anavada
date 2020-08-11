@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.notice.answer.model.service.AnswerService;
 import inquiry.model.service.InquiryService;
 
 /**
@@ -29,10 +30,12 @@ public class InquiryDeleteServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int result = new InquiryService().deleteInquiry(Integer.parseInt(request.getParameter("no")));
-		
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    	int iqNo = Integer.parseInt(request.getParameter("no"));
+
+    	int result = new InquiryService().deleteInquiry(iqNo);
+
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/noticefiles/inquiryfiles");
 		
 		String rfile = request.getParameter("rfile");
@@ -41,6 +44,9 @@ public class InquiryDeleteServlet extends HttpServlet {
 		
 		
 		if(result > 0) {
+			
+			AnswerService aservice = new AnswerService();
+			aservice.deleteAnswer(aservice.searchAnNo(iqNo));
 			
 			if(rfile != null) {
 				new File(savePath + "\\" + rfile).delete();

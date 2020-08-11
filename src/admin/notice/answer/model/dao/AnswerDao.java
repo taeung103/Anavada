@@ -5,6 +5,7 @@ import static common.JDBCTemp.close;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 import admin.notice.answer.model.vo.Answer;
 
@@ -100,6 +101,29 @@ public class AnswerDao {
 		}
 		
 		return result;
+	}
+
+	public int searchAnNo(Connection conn, int iqNo) {
+		int anNo = 0;
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String query = "select an_no from answer where iq_no = " + iqNo;
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				anNo = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+		}
+		
+		return anNo;
 	}
 	
 }

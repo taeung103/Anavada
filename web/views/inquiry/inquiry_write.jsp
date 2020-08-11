@@ -31,7 +31,7 @@
             <!-- 글쓰기 -->
             <div class="write-area">
                 <form action="/anavada/iinsert.ss" method="post" enctype="multipart/form-data">
-<%-- <input type="hidden" value="<%= loginMember.get %>"> --%>
+				<input type="hidden" value="<%= loginMember.getMemberId() %>" name="id">
                     <h2>문의하기 작성</h2>
 
                     <table>

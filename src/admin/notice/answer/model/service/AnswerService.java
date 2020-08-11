@@ -45,6 +45,13 @@ public class AnswerService {
 		else rollback(conn);
 		return result;
 	}
+
+	public int searchAnNo(int iqNo) {
+		Connection conn = getConnection();
+		int anNo = adao.searchAnNo(conn, iqNo);
+		close(conn);
+		return anNo;
+	}
 	
 	
 }
