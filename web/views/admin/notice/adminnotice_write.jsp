@@ -7,12 +7,32 @@
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
+       <%@ include file="../../include/header.jsp" %>
+
+        <!-- 컨텐츠 -->
+        <div id="content">
+
+            <!--서브 비주얼/타이틀-->
+            <div class="visual-sub-vagas notice-vagas">
+                <div class="vsv-copy sub-title">
+                   <div>
+                        <ul class="navi">
+                            <li><a href="#none">홈</a></li>
+                            <li><a href="#none">고객센터</a></li>
+                            <li class="glyphicon glyphicon-menu-right"><a href="#none">문의하기</a></li>
+                        </ul>
+                    </div>
+                    <h2><span>문의하기</span></h2>
+                    <h3>관리자에게 문의할 수 있는 공간입니다.</h3>
+                </div>
+            </div>
+            <!--서브 비주얼/타이틀 끝-->
 
 
             <!-- 글쓰기 -->
             <div class="write-area">
-                <h2>공지사항 작성</h2>
-                <form action="/anavada/aninsert" method="post" enctype="multipart/form-data">
+                <h2>관리자용 공지사항 작성</h2>
+                <form action="/anavada/aninsert.ss" method="post" enctype="multipart/form-data">
 <%-- 최후에 합치기      <input type="hidden" value="<%= loginMember.getUserId()%>" name = "writer"> --%>
                     <table>
                         <colgroup>
@@ -22,11 +42,11 @@
                         <tbody>
                             <tr>
                                 <td>제목</td>
-                                <td><input type="text" name="title" title="" class="form-control w100p" placeholder="제목" /></td>
+                                <td><input type="text" name="title" title="" class="form-control w100p" placeholder="제목" required></td>
                             </tr>
                             <tr>
                                 <td>내용</td>
-                                <td><textarea name="content"  class="form-control" style="resize: none; width:100%; min-height:300px; max-height:300px;"></textarea></td>
+                                <td><textarea name="content"  class="form-control" style="resize: none; width:100%; min-height:300px; max-height:300px;" required></textarea></td>
                             </tr>
                             <tr>
                                 <td>첨부파일</td>
@@ -47,7 +67,7 @@
         </div>
         <!-- 컨텐츠 끝 -->
 
-        <%@ include file="../include/admin_footer.jsp" %>
+        <%@ include file="../../include/footer.jsp" %>
     </div>
 </body>
 </html>

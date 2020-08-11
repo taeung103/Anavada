@@ -156,7 +156,6 @@ public class NoticeDao {
 		
 		int startRow = (currentPage - 1) * limit +1;
 		int endRow = startRow + limit - 1;
-		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, "%" + keyword + "%");
@@ -286,6 +285,62 @@ public class NoticeDao {
 		}
 		
 		return result;
+	}
+
+	public int updateNotice(Connection conn, Notice notice) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update notice set no_title = ?, no_content = ?, no_date = sysdate, no_original = ?, no_rename = ? where no_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, notice.getNoTitle());
+			pstmt.setString(2, notice.getNoContent());
+			pstmt.setString(3, notice.getNoOriginal());
+			pstmt.setString(4, notice.getNoRename());
+			pstmt.setInt(5, notice.getNoNo());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public ArrayList<String> selectRfiles(Connection conn, int[] checkedNum) {
+		ArrayList<String> list = new ArrayList<>();
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String query = "";
+		
+		if(checkedNum.length == 1) {
+			query = "select no_rename from notice where no_no = " + checkedNum[0];
+		}else {
+			query = "select no_rename from notice where no_no in (";
+			for(int i=0; i<checkedNum.length-1; i++) {
+				query += checkedNum[i] + ", ";
+			}
+			query += checkedNum[checkedNum.length-1] + ")";
+		}
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			while(rset.next()) {
+				String rfile = rset.getString("no_rename");
+				list.add(rfile);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+		}
+		
+		return list;
 	}
 	
 	

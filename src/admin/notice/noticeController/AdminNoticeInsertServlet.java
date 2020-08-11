@@ -1,4 +1,4 @@
-package admin.notice.controller;
+package admin.notice.noticeController;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,7 +22,7 @@ import notice.model.vo.Notice;
 /**
  * Servlet implementation class AdminNoticeInsertServlet
  */
-@WebServlet("/aninsert")
+@WebServlet("/aninsert.ss")
 public class AdminNoticeInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

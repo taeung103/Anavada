@@ -2,19 +2,28 @@
     pageEncoding="UTF-8" import="java.util.ArrayList, faq.model.vo.Faq"%>
 <%
 	ArrayList<Faq> list = (ArrayList<Faq>)request.getAttribute("list");
-	int currentPage = (Integer)request.getAttribute("currentPage");
-	int totalList = (Integer)request.getAttribute("totalList");
-	int totalPage = (Integer)request.getAttribute("totalPage");
-	int startPage = (Integer)request.getAttribute("startPage");
-	int endPage = (Integer)request.getAttribute("endPage");
-	System.out.println("currentPage : "+currentPage+", totalList : "+totalList+", startPage : "+startPage+", endPage : "+endPage+", list.size : "+list.size());
 %>
 <!DOCTYPE html>
 <html>
 <head>
     <%@ include file="../include/head.jsp" %>
 
-    <script type="text/javascript">
+ 	 <script type="text/javascript">
+ 	 
+ 	function slideContent(){
+ 		$(function(){
+ 			$(".question>ul").on("click", function(){
+ 				alert("d");
+ 					
+ 			});
+ 		});
+ 	}
+ 	 
+ 	/* $( function() {
+ 	    $( "#accordion" ).accordion();
+ 	  } ); */
+ 	 
+ 	 /* function slideContent(){
         $(function(){
             var qna = $(".qna_list .question");
             var i;
@@ -26,8 +35,8 @@
                     $(this).next(".ctn").slideToggle(300);
                 })            
             }
-        });
-    </script>
+        });} */
+    </script> 
     <script type="text/javascript">
         $(function(){
             $('.faqTap a').click(function(){
@@ -40,6 +49,59 @@
                 $("#" + tab_data).addClass('on');
             })
         });
+    </script> 
+    
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		$("#faqCategory>a").each(function(){
+    			$(this).click(function(){
+    				category = $(this).text();
+    				//alert(category+"가 선택되었습니다");
+    				$("faqCategory>a").removeAttr("class")
+    				$(this).attr("class","active");
+    				$.ajax({
+    					url: "/anavada/fselect",
+    					type: "get",
+    					data: { "category":category },
+    					dataType: "json",
+    					success: function(data){
+    						//object ==> string으로 변환
+    						var jsonStr = JSON.stringify(data);
+    						//string ==> json객체로 바꿈
+    						var json = JSON.parse(jsonStr);
+    						
+    						var values = "";
+    						for(var i in json.list){
+    							values += "<ul class='question' onclick='slideContent();'><li class='Qmarker'><span>Q</span></li><li class='title'>";
+    							
+    							switch(json.list[i].cate){
+    							case 1 : values += "<span class='Msel'>회원정보</span>"; break;
+        						case 2 : values += "<span class='Psel'>중고거래</span>"; break;
+        						case 3 : values += "<span class='Csel'>커뮤니티</span>"; break;
+        						case 4 : values += "<span class='Esel'>지역축제</span>"; break;
+    							}
+    							
+    							values += decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") 
+    									+ "</li><li>관리자</li><li>" + json.list[i].date + "</li></ul><ul class='ctn'><li class='Amarker'><span>A</span></li><li><h4>답변</h4><p>" 
+    									+ decodeURIComponent(json.list[i].content).replace(/\+/gi, " ") 
+    									+ "</p></li></ul>";
+    									
+    						} //for in
+    						switch(category){
+    						case "전체" : $("#tab01").html(values); break;
+    						case "회원정보" : $("#tab02").html(values); break;
+    						case "중고거래" : $("#tab03").html(values); break;
+    						case "커뮤니티" : $("#tab04").html(values); break;
+    						case "지역축제" : $("#tab05").html(values); break;
+    						}
+    					},
+    					error: function(a,b,c){
+    						console.log(c);
+    					}
+    				});
+    			})
+    		})
+    	})
     </script>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
@@ -67,7 +129,7 @@
 
             <!-- 리스트 -->
             <div class="list-area">
-                <div class="faqTap">
+                <div class="faqTap" id="faqCategory">
                     <a href="#none" class="active" data-tab="tab01">전체</a>
                     <a href="#none" data-tab="tab02">회원정보</a>
                     <a href="#none" data-tab="tab03">중고거래</a>
@@ -76,7 +138,6 @@
                 </div>
                 <!--종류 리스트-->
                 <div class="sort-area" style="margin-top:30px;">  
-                    <h4>전체 <%= list.size() %>개</h4>
                     <div>
                         <form action="" method="" id="">
                             목록 분류 : <select name="" class="ListSelect">
@@ -91,426 +152,27 @@
                     </div>
                 </div>
                 
-                <div class="qna_list on" id="tab01">
-                    <ul class="question active">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Psel">중고거래</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn first_ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Msel">회원정보</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Csel">커뮤니티</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Esel">지역축제</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Csel">커뮤니티</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Esel">지역축제</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
+                <div class="qna_list" id="tab01">
                 </div>
+                
                 <div class="qna_list" id="tab02">
-                    <ul class="question active">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Msel">회원정보</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn first_ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Msel">회원정보</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Msel">회원정보</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Msel">회원정보</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Msel">회원정보</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Msel">회원정보</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
                 </div>
+                
                 <div class="qna_list" id="tab03">
-                    <ul class="question active">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Psel">중고거래</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn first_ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Psel">중고거래</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Psel">중고거래</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Psel">중고거래</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Psel">중고거래</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Psel">중고거래</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
                 </div>
+                
                 <div class="qna_list" id="tab04">
-                    <ul class="question active">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Csel">커뮤니티</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn first_ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Csel">커뮤니티</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Csel">커뮤니티</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Csel">커뮤니티</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Csel">커뮤니티</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Csel">커뮤니티</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
                 </div>
+                
                 <div class="qna_list" id="tab05">
-                    <ul class="question active">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Esel">지역축제</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn first_ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Esel">지역축제</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Esel">지역축제</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Esel">지역축제</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Esel">지역축제</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title"><span class="Esel">지역축제</span>아이디/비밀번호는 어디서 찾나요?</li>
-                        <li>관리자</li>
-                        <li>2020.07.31</li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.<br/>아이디/비밀번호는 로그인 > 회원정보 찾기를 통해 찾으실 수 있습니다.</p>
-                        </li>
-                    </ul>
+                </div>
+                
                 </div>
                 
             </div>
             <!-- 리스트 끝 -->
+<br><br><br><br><br><br>
 
-
-            <!-- 페이지넘버 -->
-            <dl class="list-paging pb80">
-                <dd>
-                    <a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
-                    <a href="#none" class="active">1</a>
-                    <a href="#none">2</a>
-                    <a href="#none">3</a><!-- 활성화 class="active" -->
-                    <a href="#none">4</a>
-                    <a href="#none">5</a>
-                    <a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
-                </dd>
-            </dl>
-            <!-- 페이지넘버 끝 -->
-
-        </div>
         <!-- 컨텐츠 끝 -->
 
         <%@ include file="../include/footer.jsp" %>

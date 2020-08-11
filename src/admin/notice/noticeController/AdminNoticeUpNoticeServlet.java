@@ -1,4 +1,4 @@
-package admin.notice.controller;
+package admin.notice.noticeController;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import notice.model.service.NoticeService;
 import notice.model.vo.Notice;
 
 /**
@@ -43,8 +45,10 @@ public class AdminNoticeUpNoticeServlet extends HttpServlet {
 		
 		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "utf-8", new DefaultFileRenamePolicy());
 		
+		int no = Integer.parseInt(mrequest.getParameter("no"));
+		
 		Notice notice = new Notice();
-		notice.setNoNo(Integer.parseInt(mrequest.getParameter("no")));
+		notice.setNoNo(no);
 		notice.setNoTitle(mrequest.getParameter("title"));
 		notice.setNoContent(mrequest.getParameter("content"));
 		
@@ -53,14 +57,13 @@ public class AdminNoticeUpNoticeServlet extends HttpServlet {
 		String ofileName = mrequest.getParameter("ofile");
 		String rfileName = mrequest.getParameter("rfile");
 		
-		String newOfileName = mrequest.getParameter("upfile");
+		String newOfileName = mrequest.getFilesystemName("upfile");
 		
 		File ofile = new File(savePath + "/" + rfileName);
-		
 		File newOfile = new File(savePath + "/" + newOfileName);
 		
 		if(newOfileName != null) {
-			notice.setNoOriginal("newOfileName");
+			notice.setNoOriginal(newOfileName);
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 			String newRfileName = sdf.format(new java.sql.Date(System.currentTimeMillis()));
@@ -89,12 +92,25 @@ public class AdminNoticeUpNoticeServlet extends HttpServlet {
 		}else if(ofileName != null && delCheck != null && delCheck.equals("yes")) {
 			notice.setNoOriginal(null);
 			notice.setNoRename(null);
-			ofile.delete();
-		}else if(ofileName != null && (newOfileName == null || ofileName.equals(newOfileName) && newOfile.length() == ofile.length())) {
+			System.out.println(delCheck);
+			if(ofile.delete()) System.out.println("ofile.delete() 실행됨");
 			
+			
+		}else if(ofileName != null && newOfileName == null) {
+			notice.setNoOriginal(ofileName);
+			notice.setNoRename(rfileName);
 		}
 		
+		NoticeService nservice = new NoticeService();
+		int result = nservice.updateNotice(notice);
 		
+		if(result > 0) {
+			notice = nservice.selectOne(no);
+			RequestDispatcher view = request.getRequestDispatcher("views/admin/notice/adminnotice_view.jsp");
+			request.setAttribute("notice", notice);
+			request.setAttribute("currentPage", Integer.parseInt(mrequest.getParameter("page")));
+			view.forward(request, response);
+		}
 		
 	}
 

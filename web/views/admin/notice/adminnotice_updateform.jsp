@@ -11,7 +11,23 @@
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
-
+    
+ 			<!--서브 비주얼/타이틀-->
+            <div class="visual-sub-vagas notice-vagas">
+                <div class="vsv-copy sub-title">
+                   <div>
+                        <ul class="navi">
+                            <li><a href="#none">홈</a></li>
+                            <li><a href="#none">고객센터</a></li>
+                            <li class="glyphicon glyphicon-menu-right"><a href="#none">공지사항</a></li>
+                        </ul>
+                    </div>
+                    <h2><span>공지사항</span></h2>
+                    <h3>'Anavada'의 소식을 빠르게 확인할 수 있는 공간입니다.</h3>
+                </div>
+            </div>
+            <!--서브 비주얼/타이틀 끝-->
+            
             <!-- 글쓰기 -->
             <div class="write-area">
                 <h2>공지사항 수정</h2>
@@ -47,9 +63,9 @@
                     </table>
 
                     <div class="write-btn">
-                    	<input type="reset" class="btn btn-list" value="작성취소">
+                    	<input type="reset" class="btn btn-list" value="수정취소">
                         <a onclick="javascipt:history.go(-1); return false;" class="btn btn-list">목록</a>
-                        <input type="submit" class="btn btn-success" value="작성하기">
+                        <input type="submit" class="btn btn-success" value="수정하기">
                     </div>
                 </form>
             </div>
@@ -58,7 +74,6 @@
         </div>
         <!-- 컨텐츠 끝 -->
 
-        <%@ include file="../include/admin_footer.jsp" %>
-    </div>
+        <%@ include file="../../include/footer.jsp" %>
 </body>
 </html>

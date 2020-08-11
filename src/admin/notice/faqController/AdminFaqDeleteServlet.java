@@ -1,27 +1,28 @@
-package admin.notice.controller;
+package admin.notice.faqController;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import notice.model.service.NoticeService;
+import faq.model.service.FaqService;
 
 /**
  * Servlet implementation class AdminNoticeDeleteServlet
  */
-@WebServlet("/andelete")
-public class AdminNoticeDeleteServlet extends HttpServlet {
+@WebServlet("/afdelete")
+public class AdminFaqDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminNoticeDeleteServlet() {
+    public AdminFaqDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,19 +33,19 @@ public class AdminNoticeDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String[] checkRow = request.getParameter("checkRow").split(",");
-		System.out.println(request.getParameter("checkRow")+", "+checkRow.length);
 		
 		int[] checkedNum = new int[checkRow.length];
 		for(int i=0; i<checkRow.length; i++) {
 			checkedNum[i] = Integer.parseInt(checkRow[i]);
-			System.out.print(checkedNum[i]+", ");
-		}System.out.println();
+		}
 		
-		int result = new NoticeService().deleteNotice(checkedNum);
-
-		if(result > 0)
-			response.sendRedirect("anlist");
+		FaqService fservice = new FaqService();
 		
+		int result = fservice.deleteFaq(checkedNum);
+		
+		if(result > 0) {
+			response.sendRedirect("aflist.ss");
+		}
 	}
 
 	/**

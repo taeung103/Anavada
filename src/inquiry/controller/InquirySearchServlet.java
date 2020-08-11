@@ -1,4 +1,4 @@
-package admin.notice.controller;
+package inquiry.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import notice.model.service.NoticeService;
-import notice.model.vo.Notice;
+import inquiry.model.service.InquiryService;
+import inquiry.model.vo.Inquiry;
 
 /**
- * Servlet implementation class NoticeSearchServlet
+ * Servlet implementation class InquirySearchServlet
  */
-@WebServlet("/ansearch")
-public class AdminNoticeSearchServlet extends HttpServlet {
+@WebServlet("/isearch")
+public class InquirySearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminNoticeSearchServlet() {
+    public InquirySearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,50 +33,46 @@ public class AdminNoticeSearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("utf-8"); //필터생기면 지우기
-		
-		String selected = request.getParameter("selected");
-		String keyword = request.getParameter("keyword");
-		NoticeService nservice = new NoticeService();
-		
+		request.setCharacterEncoding("utf-8");
+
 		int currentPage = 1;
 		if(request.getParameter("page") != null)
 			currentPage = Integer.parseInt(request.getParameter("page"));
+
+		int limit = 10;
 		
-		int countList = 6;
-		int countPage = 10;
+		String selected = request.getParameter("selected");
+		String keyword = request.getParameter("keyword");
 		
+		ArrayList<Inquiry> list = null;
+		InquiryService iservice = new InquiryService();
 		int totalList = 0;
 		
-		ArrayList<Notice> list = null;
-		if(selected.equals("title")) {
-			list = nservice.searchTorC(currentPage, countList, keyword, selected);
-			totalList = nservice.getListCount("title", keyword);
-		}else {
-			list = nservice.searchTorC(currentPage, countList, keyword, selected);
-			totalList = nservice.getListCount("content", keyword);
+		switch(selected) {
+		case "title" : list = iservice.searchTCW("t", keyword, currentPage, limit); totalList = iservice.getListCount("t", keyword); break;
+		case "content" : list = iservice.searchTCW("c", keyword, currentPage, limit); totalList = iservice.getListCount("c", keyword); break;
+		case "writer" : list = iservice.searchTCW("w", keyword, currentPage, limit); totalList = iservice.getListCount("w", keyword); break;
 		}
 		
-		int totalPage = (int)((double)totalList / countList + 0.9) ;
-		int startPage = (((int)((double)currentPage / countPage + 0.9)) - 1) * countPage + 1;
-		int endPage = startPage + countPage - 1;
+		int totalPage = (int)((double) totalList / limit + 0.9);
+		int startPage = ((int)(((double) currentPage / limit) + 0.9) -1) * limit +1;
+		int endPage = startPage + limit -1;
 		if(endPage > totalPage)
 			endPage = totalPage;
 		
-		RequestDispatcher view = null;
 		if(list.size() > -1) {
-			view = request.getRequestDispatcher("views/admin/notice/adminnotice_list.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("views/inquiry/inquiry_list.jsp");
 			request.setAttribute("list", list);
-			request.setAttribute("currentPage", currentPage);
+			request.setAttribute("page", currentPage);
+			request.setAttribute("totalList", totalList);
 			request.setAttribute("totalPage", totalPage);
 			request.setAttribute("startPage", startPage);
 			request.setAttribute("endPage", endPage);
-			request.setAttribute("totalList", totalList);
-			request.setAttribute("keyword", keyword);
 			request.setAttribute("selected", selected);
+			request.setAttribute("keyword", keyword);
 			view.forward(request, response);
 		}
-
+		
 	}
 
 	/**

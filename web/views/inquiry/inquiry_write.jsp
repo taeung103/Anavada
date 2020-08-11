@@ -30,8 +30,8 @@
 
             <!-- 글쓰기 -->
             <div class="write-area">
-                <form action="" method="post">
-
+                <form action="/anavada/iinsert.ss" method="post" enctype="multipart/form-data">
+				<input type="hidden" value="<%= loginMember.getMemberId() %>" name="id">
                     <h2>문의하기 작성</h2>
 
                     <table>
@@ -43,43 +43,31 @@
                             <tr>
                                 <td>카테고리</td>
                                 <td>
-                                    <label><input type="radio" name="ctgr" id="" title="문의">문의하기</label>
-                                    <!--label><input type="radio" name="ctgr" id="" title="신고">신고</label-->
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>비밀글</td>
-                                <td>
-                                    <label><input type="radio" name="" id="" title="비밀글 체크">비밀글 체크</label>
-                                    <p>회원 본인만 열람 가능합니다.</p>
+                                    <label><input type="radio" name="type" value="member" required>회원정보</label>
+                                    <label><input type="radio" name="type" value="error">오류</label>
+                                    <label><input type="radio" name="type" value="proposal">제안하기</label>
+                                    <label><input type="radio" name="type" value="etc">기타</label>
                                 </td>
                             </tr>
                             <tr>
                                 <td>제목</td>
-                                <td><input type="text" name="" title="" class="form-control w100p" placeholder="제목" /></td>
+                                <td><input type="text" name="title" class="form-control w100p" placeholder="제목" required></td>
                             </tr>
-                            <!--tr>
-                                <td>신고회원 아이디</td>
-                                <td><input type="text" name="" title="" class="form-control w100p" placeholder="신고회원 아이디" /></td>
-                            </tr-->
                             <tr>
                                 <td>내용</td>
-                                <td><textarea name="" rows="" cols="" class="form-control" style="resize: none; width:100%; min-height:300px; max-height:300px;"></textarea></td>
-                            </tr>
-                            <tr>
-                                <td>url</td>
-                                <td><input type="text" name="" title="" class="form-control w100p" placeholder="url" /></td>
+                                <td><textarea name="content" class="form-control" style="resize: none; width:100%; min-height:300px; max-height:300px;" required></textarea></td>
                             </tr>
                             <tr>
                                 <td>첨부파일</td>
-                                <td><input type="file" name="FileName"></td>
+                                <td><input type="file" name="ofile1"><input type="file" name="ofile2"><input type="file" name="ofile3"></td>
+                                
                             </tr>
                         </tbody>
                     </table>
 
                     <div class="write-btn">
-                        <a href="inquiry_list.jsp" class="btn btn-list">목록</a>
-                        <a href="#" class="btn btn-success">작성하기</a>
+                        <a href="javascript:history.go(-1);" class="btn btn-list">목록</a>
+                        <input type="submit" class="btn btn-success" value="작성하기" style="width:100px;">
                     </div>
                 </form>
             </div>

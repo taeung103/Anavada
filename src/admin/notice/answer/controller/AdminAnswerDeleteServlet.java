@@ -1,28 +1,27 @@
-package admin.notice.controller;
+package admin.notice.answer.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import notice.model.service.NoticeService;
-import notice.model.vo.Notice;
+import admin.notice.answer.model.service.AnswerService;
+import inquiry.model.service.InquiryService;
 
 /**
- * Servlet implementation class AdminNoticeDetailServlet
+ * Servlet implementation class AdminAnswerDeleteServlet
  */
-@WebServlet("/andetail")
-public class AdminNoticeDetailServlet extends HttpServlet {
+@WebServlet("/aadelete")
+public class AdminAnswerDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminNoticeDetailServlet() {
+    public AdminAnswerDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,17 +31,17 @@ public class AdminNoticeDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Notice notice = new NoticeService().selectOne(Integer.parseInt(request.getParameter("no")));
+		int iqNo = Integer.parseInt(request.getParameter("iqNo"));
+		int anNo = Integer.parseInt(request.getParameter("anNo"));
 		
-		if(notice != null) {
-			RequestDispatcher view = request.getRequestDispatcher("views/admin/notice/adminnotice_view.jsp");
-			request.setAttribute("notice", notice);
-			request.setAttribute("currentPage", Integer.parseInt(request.getParameter("page")));
-			request.setAttribute("selected", request.getParameter("selected"));
-			request.setAttribute("keyword", request.getParameter("keyword"));
-			view.forward(request, response);
+		int result = new AnswerService().deleteAnswer(anNo);
+		
+		if(result > 0) {
+			
+			new InquiryService().changeIqAnswer("N", iqNo);
+			
+			response.sendRedirect("aidetail?no="+iqNo+"&page="+Integer.parseInt(request.getParameter("page")));
 		}
-		
 	}
 
 	/**
