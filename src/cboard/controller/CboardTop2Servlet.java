@@ -44,6 +44,7 @@ public class CboardTop2Servlet extends HttpServlet {
 		for (Cboard cboard : list) {
 			JSONObject job = new JSONObject();
 			
+			job.put("cnum", cboard.getCboardNo());
 			job.put("local", cboard.getLocalNo());
 			job.put("ctitle", URLEncoder.encode(cboard.getCboardTitle(), "utf-8"));
 			job.put("ccontent", cboard.getCboardContent());

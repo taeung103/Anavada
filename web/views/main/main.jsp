@@ -19,7 +19,7 @@ $(function(){
 			var values = "";
 			for (var i in json.list) {
 				values += "<dl><dt><span>" + idx + "</span></dt><dd>"
-					+ "<h3 onclick=\"location.href=''\"><span>[" + json.list[i].local + "] </span>" 
+					+ "<h3 onclick=\"location.href='/anavada/cdetail?cnum=" + json.list[i].cnum +"'\"><span>[" + json.list[i].local + "] </span>" 
 					+ decodeURIComponent(json.list[i].ctitle).replace(/\+/gi, " ") + "</h3>"
 					+ "<p class=\"con\" onclick=\"location.href=''\">"
 					+ decodeURIComponent(json.list[i].ccontent).replace(/\+/gi, " ")

@@ -334,7 +334,7 @@ public class CboardDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		String query = "select * "  
-								+ "from (select rownum rnum, local_no, cboard_title, cboard_content, "
+								+ "from (select rownum rnum, cboard_no, local_no, cboard_title, cboard_content, "
 								+ "cboard_likecount, cboard_viewcount " 
 								+ "from (select * from cboard "  
 								+ "order by cboard_viewcount desc))"  
@@ -346,6 +346,7 @@ public class CboardDao {
 			while (rset.next()) {
 				Cboard cboard = new Cboard();
 				
+				cboard.setCboardNo(rset.getInt("cboard_no"));
 				cboard.setLocalNo(rset.getString("local_no"));
 				cboard.setCboardTitle(rset.getString("cboard_title"));
 				cboard.setCboardContent(rset.getString("cboard_content"));

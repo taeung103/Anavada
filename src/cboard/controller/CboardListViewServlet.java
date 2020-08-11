@@ -37,6 +37,10 @@ public class CboardListViewServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("page"));
 		}
 		String local = request.getParameter("local");
+		if (request.getParameter("local") != null) {
+			local = "0";
+		}
+		
 		String search = request.getParameter("search");
 		String keyword = request.getParameter("keyword");
 		
