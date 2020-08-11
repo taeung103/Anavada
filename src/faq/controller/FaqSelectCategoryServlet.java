@@ -40,24 +40,24 @@ public class FaqSelectCategoryServlet extends HttpServlet {
 		
 		String cate = null;
 		cate = request.getParameter("category");
-		
+		System.out.println(cate);
 		ArrayList<Faq> list = null;
 		FaqService fservice = new FaqService();
 		
-		int cNum = 0;
-		if(request.getParameter("cate") != null)
-		cNum = Integer.parseInt(request.getParameter("cate"));
+//		int cNum = 0;
+//		if(request.getParameter("cate") != null)
+//		cNum = Integer.parseInt(request.getParameter("cate"));
 		
-		if(cNum == 10) {
-			list = fservice.selectAll(); System.out.println("1"); System.out.println(list.size());
-			
-			RequestDispatcher view = request.getRequestDispatcher("views/notice/faq_list.jsp");
-			request.setAttribute("list", list);
-			view.forward(request, response);
-		
-		}
-		else if(cate != null) {
-			int no = 0;System.out.println("1");
+//		if(cNum == 10) {
+//			list = fservice.selectAll();
+//			
+//			RequestDispatcher view = request.getRequestDispatcher("views/notice/faq_list.jsp");
+//			request.setAttribute("list", list);
+//			view.forward(request, response);
+//		
+//		}
+		if(cate != null && !cate.equals("전체")) {
+			int no = 0;
 			switch(cate) {
 			case "회원정보" : no = 1; break;
 			case "중고거래" : no = 2; break;
@@ -68,8 +68,8 @@ public class FaqSelectCategoryServlet extends HttpServlet {
 			list = fservice.selectCategory(no);
 		}
 		else if(cate.equals("전체")) {
-			list = fservice.selectAll();System.out.println("2");}
-
+			list = fservice.selectAll(); System.out.println("실행");
+		}
 		
 		JSONObject sendJSON = new JSONObject();
 		JSONArray jarr = new JSONArray();

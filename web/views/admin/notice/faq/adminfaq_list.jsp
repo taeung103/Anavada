@@ -83,10 +83,6 @@ function deleteAction(){
 						<%= totalList %>개
 					</h4>
 					<div>
-					<!-- <button>회원가입</button>
-					<button>회원가입</button>
-					<button>회원가입</button>
-					<button>회원가입</button> -->
 						<form action="/anavada/afsearch" method="post" id="">
 							목록 분류 : <select name="selected" class="ListSelect">
 								<option value="none" selected disabled>분류 선택</option>

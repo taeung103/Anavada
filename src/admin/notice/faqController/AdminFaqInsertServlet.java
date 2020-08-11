@@ -15,13 +15,13 @@ import faq.model.vo.Faq;
  * Servlet implementation class FaqInsertServlet
  */
 @WebServlet("/afinsert.ss")
-public class FaqInsertServlet extends HttpServlet {
+public class AdminFaqInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FaqInsertServlet() {
+    public AdminFaqInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

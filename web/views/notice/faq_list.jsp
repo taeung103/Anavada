@@ -9,7 +9,21 @@
     <%@ include file="../include/head.jsp" %>
 
  	 <script type="text/javascript">
- 	 function slideContent(){
+ 	 
+ 	function slideContent(){
+ 		$(function(){
+ 			$(".question>ul").on("click", function(){
+ 				alert("d");
+ 					
+ 			});
+ 		});
+ 	}
+ 	 
+ 	/* $( function() {
+ 	    $( "#accordion" ).accordion();
+ 	  } ); */
+ 	 
+ 	 /* function slideContent(){
         $(function(){
             var qna = $(".qna_list .question");
             var i;
@@ -21,7 +35,7 @@
                     $(this).next(".ctn").slideToggle(300);
                 })            
             }
-        });}
+        });} */
     </script> 
     <script type="text/javascript">
         $(function(){
@@ -51,7 +65,6 @@
     					data: { "category":category },
     					dataType: "json",
     					success: function(data){
-    							console.log(category);
     						//object ==> string으로 변환
     						var jsonStr = JSON.stringify(data);
     						//string ==> json객체로 바꿈
@@ -139,35 +152,7 @@
                     </div>
                 </div>
                 
-                
-                 
-                
-                
-                
-                
-                <div class="qna_list">
-                <% if(list != null) { %>
-                <% for(Faq f : list) { %>
-                	<ul class="question">
-                        <li class="Qmarker"><span>Q</span></li>
-                        <li class="title">
-                        <% switch(f.getFaqCategory()) { 
-    							case 1 : %><span class='Msel'>회원정보</span><%break;
-        						case 2 : %><span class='Psel'>중고거래</span><%break;
-        						case 3 : %><span class='Csel'>커뮤니티</span><%break;
-        						case 4 : %><span class='Esel'>지역축제</span><%break; } %>
-                        	<%= f.getFaqTitle() %></li>
-                        <li>관리자</li>
-                        <li><%= f.getFaqDate() %></li>
-                    </ul>
-                    <ul class="ctn">
-                        <li class="Amarker"><span>A</span></li>
-                        <li>
-                            <h4>답변</h4>
-                            <p><%= f.getFaqContent() %></p>
-                        </li>
-                    </ul>
-                <% } } %>
+                <div class="qna_list" id="tab01">
                 </div>
                 
                 <div class="qna_list" id="tab02">
@@ -182,14 +167,12 @@
                 <div class="qna_list" id="tab05">
                 </div>
                 
-
                 </div>
                 
             </div>
             <!-- 리스트 끝 -->
 <br><br><br><br><br><br>
 
-        </div>
         <!-- 컨텐츠 끝 -->
 
         <%@ include file="../include/footer.jsp" %>
