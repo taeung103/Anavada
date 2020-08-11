@@ -4,40 +4,40 @@
 <head>
     <%@ include file="../include/head.jsp" %>
     <script type="text/javascript">
-$(function(){
-	$.ajax({
-		url : "/anavada/ctop2",
-		type : "get",
-		dataType : "json",
-		success : function(data) {
-			console.log("success : " + data);
-			// object ==> string으로 변환
-			var jsonStr = JSON.stringify(data);
-			// string ==> json 객채로 바꿈
-			var json = JSON.parse(jsonStr);
-			var idx = 1;
-			var values = "";
-			for (var i in json.list) {
-				values += "<dl><dt><span>" + idx + "</span></dt><dd>"
-					+ "<h3 onclick=\"location.href='/anavada/cdetail?cnum=" + json.list[i].cnum +"'\"><span>[" + json.list[i].local + "] </span>" 
-					+ decodeURIComponent(json.list[i].ctitle).replace(/\+/gi, " ") + "</h3>"
-					+ "<p class=\"con\" onclick=\"location.href=''\">"
-					+ decodeURIComponent(json.list[i].ccontent).replace(/\+/gi, " ")
-					+ "</p>" 
-					+ " <p><i class=\"good_i glyphicon glyphicon-heart-empty\">좋아요<span>" + json.list[i].clike
-					+ "</span></i>"
-					+ "<i class=\"score_i glyphicon glyphicon-user\">조회수" + json.list[i].cview
-					+ "</span></i></p> </dd></dl>";
-					idx++;
-			} // for in
-			
-			$("#ctoplist").html($("#ctoplist").html() + values);
-		},
-		error : function(jqXHR, textstatus, errorthrown) {
-			console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown);
-		}
-	});
-});
+		$(function(){
+			$.ajax({
+				url : "/anavada/ctop2",
+				type : "get",
+				dataType : "json",
+				success : function(data) {
+					console.log("success : " + data);
+					// object ==> string으로 변환
+					var jsonStr = JSON.stringify(data);
+					// string ==> json 객채로 바꿈
+					var json = JSON.parse(jsonStr);
+					var idx = 1;
+					var values = "";
+					for (var i in json.list) {
+						values += "<dl><dt><span>" + idx + "</span></dt><dd>"
+							+ "<h3 onclick=\"location.href='/anavada/cdetail?cnum=" + json.list[i].cnum +"'\"><span>[" + json.list[i].local + "] </span>" 
+							+ decodeURIComponent(json.list[i].ctitle).replace(/\+/gi, " ") + "</h3>"
+							+ "<p class=\"con\" onclick=\"location.href=''\">"
+							+ decodeURIComponent(json.list[i].ccontent).replace(/\+/gi, " ")
+							+ "</p>" 
+							+ " <p><i class=\"good_i glyphicon glyphicon-heart-empty\">좋아요<span>" + json.list[i].clike
+							+ "</span></i>"
+							+ "<i class=\"score_i glyphicon glyphicon-user\">조회수" + json.list[i].cview
+							+ "</span></i></p> </dd></dl>";
+							idx++;
+					} // for in
+					
+					$("#ctoplist").html($("#ctoplist").html() + values);
+				},
+				error : function(jqXHR, textstatus, errorthrown) {
+					console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown);
+				}
+			});
+		});
     </script>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
@@ -152,22 +152,7 @@ $(function(){
                     <h2>우리동네 커뮤니티!</h2>
                     <a href="#none" class="more">더보기 +</a>
                     <div class="Cnt_list" id="ctoplist">
-                        <!-- <dl>
-                            <dt><span>1</span></dt>
-                            <dd>
-                                <h3 onclick="location.href=''"><span>[종로구] </span>응용 SW 기초기술 활용</h3>
-                                <p class="con" onclick="location.href=''">정보시스템 진단 및 모의해킹 전문가 양성 과정 1회차_실전대비면접</p>
-                                <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i><i class="score_i glyphicon glyphicon-user">조회수<span>+999</span></i></p>
-                            </dd>
-                        </dl>
-                        <dl>
-                            <dt><span>2</span></dt>
-                            <dd>
-                                <h3 onclick="location.href=''"><span>[종로구] </span>응용 SW 기초기술 활용</h3>
-                                <p class="con" onclick="location.href=''">정보시스템 진단 및 모의해킹 전문가 양성 과정 1회차_실전대비면접</p>
-                                <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i><i class="score_i glyphicon glyphicon-user">조회수<span>+999</span></i></p>
-                            </dd>
-                        </dl> -->
+                     	<!-- AJAX로 처리 -->
                     </div>
                 </div>
             </div>
