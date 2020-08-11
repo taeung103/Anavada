@@ -1,6 +1,8 @@
 package creply.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,6 +41,11 @@ public class CreplyUpdateServlet extends HttpServlet {
 		
 		if (result > 0) {
 			response.sendRedirect("/anavada/cdetail?cnum=" + cboardNum);
+		} else {
+			response.setContentType("text/html; charset=UTF-8");
+            PrintWriter writer = response.getWriter();
+            writer.println("<script>alert('댓글 수정 실패.');location.href='/anavada/cdetail?cnum=" + cboardNum + "';</script>");
+            writer.close();
 		}
 	}
 
