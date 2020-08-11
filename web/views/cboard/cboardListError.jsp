@@ -113,7 +113,10 @@
 					<a href="views/cboard/community_write.jsp">글쓰기</a>
 					
 				</div>
-
+				<div class="view-btn">
+					<a href="/anavada/clistview?page=1&local=0"
+						class="btn btn-list">목록</a>
+				</div>
 			</div>
 
 
@@ -124,67 +127,6 @@
 			<!-- 페이지넘버 -->
 			<dl class="list-paging pb80">
 				<dd>
-					<%
-						if (currentPage <= 1) {
-					%>
-					<a><i class="glyphicon glyphicon-backward"></i></a>
-					<%
-						} else {
-					%>
-					<a href="/anavada/clistview?local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"><i class="glyphicon glyphicon-backward"></i></a>
-					<% } %>
-					<%
-						if (startPage  <= 1) {
-					%>
-					<a><i class="glyphicon glyphicon-menu-left"></i></a>
-					<%
-						} else {
-					%>
-					<a href="/anavada/clistview?page=<%=startPage - 10%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>">
-						<i class="glyphicon glyphicon-menu-left"></i>
-					</a>
-					<%
-						}
-					%>
-					<%
-						for (int p = startPage; p <= endPage; p++) {
-					%>
-					<%
-						if (currentPage == p) {
-					%>
-					<a href="/anavada/clistview?page=<%=p%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>" class="active"><%= p %></a>
-					<%
-						} else {
-					%>
-					<a href="/anavada/clistview?page=<%=p%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"><%=p%></a>
-					<%
-						}
-					%>
-					<%
-						}
-					%>
-					<%
-						if (endPage >= maxPage) {
-					%>
-					<a><i class="glyphicon glyphicon-menu-right"></i></a>
-					<%
-						} else {
-					%>
-					<a href="/anavada/clistview?page=<%=endPage + 1%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"><i class="glyphicon glyphicon-menu-right"></i></a>
-					<%
-						}
-					%>
-					<%
-						if (currentPage >= maxPage) {
-					%>
-					<a><i class="glyphicon glyphicon-forward"></i></a>
-					<%
-						} else {
-					%>
-					<a href="/anavada/clistview?page=<%=maxPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"><i class="glyphicon glyphicon-forward"></i></a>
-					<%
-						}
-					%> 
 				</dd>
 			</dl>
 			<!-- 페이지넘버 끝 -->
