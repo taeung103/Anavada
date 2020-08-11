@@ -63,16 +63,10 @@ public class InquiryUpdateInquiryServlet extends HttpServlet {
 		inquiry.setIqOriginal(mrequest.getParameter("ofile"));
 		inquiry.setIqRename(mrequest.getParameter("rfile"));
 		inquiry.setIqOriginal2(mrequest.getParameter("ofile2"));
-		inquiry.setIqRename(mrequest.getParameter("rfile2"));
+		inquiry.setIqRename2(mrequest.getParameter("rfile2"));
 		inquiry.setIqOriginal3(mrequest.getParameter("ofile3"));
-		inquiry.setIqRename(mrequest.getParameter("rfile3"));
+		inquiry.setIqRename3(mrequest.getParameter("rfile3"));
 		
-		System.out.println(mrequest.getParameter("ofile"));
-		System.out.println(mrequest.getParameter("rfile"));
-		System.out.println(mrequest.getParameter("ofile2"));
-		System.out.println(mrequest.getParameter("rfile2"));
-		System.out.println(mrequest.getParameter("ofile3"));
-		System.out.println(mrequest.getParameter("rfile3"));
 		
 		Enumeration em = mrequest.getFileNames();
 		

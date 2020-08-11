@@ -398,22 +398,49 @@ public class InquiryDao {
 	public int updateInquiry(Connection conn, Inquiry inquiry) {
 		int result = 0;
 		PreparedStatement pstmt = null;
+		int count = 0;
+		String query = "update inquiry set iq_title = ?, iq_content = ?, iq_date = sysdate, ";
+					
+		if(!inquiry.getIqOriginal().equals("null")) {
+			query += "iq_original = ?, iq_rename = ?, ";
+			count += 2;
+		}
+		if(!inquiry.getIqOriginal2().equals("null")) {
+			query += "iq_original2 = ?, iq_rename2 = ?, ";
+			count += 2;
+		}
+		if(!inquiry.getIqOriginal3().equals("null")) {
+			query += "iq_original3 = ?, iq_rename3 = ?, ";
+			count += 2;
+		}
+		query += "iq_type = ? where iq_no = ?";
+		count += 2;
 		
-		String query = "update inquiry set iq_title = ?, iq_content = ?, iq_date = sysdate, iq_original = ?, iq_rename = ?, "
-										+ "iq_original2 = ?, iq_rename2 = ?, iq_original3 = ?, iq_rename3 = ?, iq_type = ? where iq_no = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, inquiry.getIqTitle());
 			pstmt.setString(2, inquiry.getIqContent());
-			pstmt.setString(3, inquiry.getIqOriginal());
-			pstmt.setString(4, inquiry.getIqRename());
-			pstmt.setString(5, inquiry.getIqOriginal2());
-			pstmt.setString(6, inquiry.getIqRename2());
-			pstmt.setString(7, inquiry.getIqOriginal3());
-			pstmt.setString(8, inquiry.getIqRename3());
-			pstmt.setString(9, inquiry.getIqType());
-			pstmt.setInt(10, inquiry.getIqNo());
+			
+			for(int i=3; i<count+1;) {
+				
+				if(!inquiry.getIqOriginal().equals("null")) {
+					pstmt.setString(i, inquiry.getIqOriginal()); i++;
+					pstmt.setString(i, inquiry.getIqRename()); i++;
+				}
+				if(!inquiry.getIqOriginal2().equals("null")) {
+					pstmt.setString(i, inquiry.getIqOriginal2()); i++;
+					pstmt.setString(i, inquiry.getIqRename2()); i++;
+				}
+				if(!inquiry.getIqOriginal3().equals("null")) {
+					pstmt.setString(i, inquiry.getIqOriginal3()); i++;
+					pstmt.setString(i, inquiry.getIqRename3()); i++;
+				}
+				
+				pstmt.setString(i, inquiry.getIqType()); i++;
+				pstmt.setInt(i, inquiry.getIqNo()); i++;
+			}
+			
 			result = pstmt.executeUpdate();
 			
 		} catch (Exception e) {

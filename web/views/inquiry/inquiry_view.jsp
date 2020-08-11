@@ -45,8 +45,9 @@
                 <ul>
                     <li><span>작성자 : </span><%= inquiry.getIqId() %></li>
                     <li><span>등록일 : </span><%= inquiry.getIqDate() %></li>
+                    <li><span>첨부파일 : </span></li>
                     <% if(inquiry.getIqOriginal() != null) { %>
-                    <li><span>첨부파일 : </span><a href="/anavada/ifdown?ofile=<%= inquiry.getIqOriginal() %>&rfile=<%= inquiry.getIqRename() %>" download><%= inquiry.getIqOriginal() %></a></li>
+                    <li><a href="/anavada/ifdown?ofile=<%= inquiry.getIqOriginal() %>&rfile=<%= inquiry.getIqRename() %>" download><%= inquiry.getIqOriginal() %></a></li>
                     <% } if(inquiry.getIqOriginal2() != null) { %>
                     <li><a href="/anavada/ifdown?ofile=<%= inquiry.getIqOriginal2() %>&rfile=<%= inquiry.getIqRename2() %>" download><%= inquiry.getIqOriginal2() %></a></li>
                     <% } if(inquiry.getIqOriginal3() != null) { %>

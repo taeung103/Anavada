@@ -1,0 +1,38 @@
+1. 이전글 다음글
+- 현재 페이지 반영
+- 검색한 결과에서만 이전다음 반영
+- 이전,다음글이 없으면 alert
+
+2. list 페이징처리
+- movePage() 로 null값 판별 후
+이어지는 페이지 변경?
+
+
+???
+<a href="faq_write.jsp" class="write_btn">글쓰기</a>
+
+3. 관리자페이지에 .ss붙이기
+4. 관리자용 서블릿에도 .ss붙이기
+
+7. 관리자가 여러명이 될 경우
+notice write 에 loginMember.get어쩌구로id전달
+
+9. inquiry 서블릿에 .ss
+
+10. inquiry 로그인 아이디 넣기 아이디에 해당하는 글만
+볼 수 있게
+
+11. inquiry 체크옵션
+
+12. 엔터입력
+https://88240.tistory.com/52
+
+
+
+
+***** sql 고친것들
+1. notice의 
+NO_DATE DATE DEFAULT SYSDATE,
+NO_COUNT NUMBER DEFAULT 0,
+
+

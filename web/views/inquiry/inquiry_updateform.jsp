@@ -19,26 +19,6 @@
 <head>
 	<script type="text/javascript" src="/anavada/resources/js/jquery-3.5.1.min.js"></script>
     <%@ include file="../include/head.jsp" %> 
-
-<script type="text/javascript">
-function deleteAction(){
-	var checkRow = "";
-	$("input[name='checkDel']:checked").each(function(){
-		checkRow = checkRow + $(this).val() + ",";
-	});
-	checkRow = checkRow.substring(0, checkRow.lastIndexOf(","));
-	
-	if(checkRow == "") {
-		alert("삭제할 대상을 선택하세요.");
-		return false;
-	}
-	
-	console.log("### checkRow => {"+checkRow+"}");
-	
-	if(confirm("삭제하시겠습니까?"))
-		location.href = "/anavada/ideletefile?no=<%= inquiry.getIqNo() %>&checkRow="+checkRow;
-}
-</script>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
@@ -66,16 +46,14 @@ function deleteAction(){
             <!-- 글쓰기 -->
             <div class="write-area">
                 <form action="/anavada/iupdateiq" method="post" enctype="multipart/form-data">
-<%-- <input type="hidden" value="<%= loginMember.get %>"> --%>
-				<input type="hidden" value="<%= inquiry.getIqId() %>" name="id">
 				<input type="hidden" value="<%= inquiry.getIqNo() %>" name="no">
 				<input type="hidden" value="<%= currentPage %>" name="page">
 				<input type="hidden" value="<%= inquiry.getIqOriginal() %>" name="ofile">
 				<input type="hidden" value="<%= inquiry.getIqRename() %>" name="rfile">
-				<input type="hidden" value="<%= inquiry.getIqOriginal() %>" name="ofile2">
-				<input type="hidden" value="<%= inquiry.getIqRename() %>" name="rfile2">
-				<input type="hidden" value="<%= inquiry.getIqOriginal() %>" name="ofile3">
-				<input type="hidden" value="<%= inquiry.getIqRename() %>" name="rfile3">
+				<input type="hidden" value="<%= inquiry.getIqOriginal2() %>" name="ofile2">
+				<input type="hidden" value="<%= inquiry.getIqRename2() %>" name="rfile2">
+				<input type="hidden" value="<%= inquiry.getIqOriginal3() %>" name="ofile3">
+				<input type="hidden" value="<%= inquiry.getIqRename3() %>" name="rfile3">
                     <h2>문의글 수정</h2>
 
                     <table>
