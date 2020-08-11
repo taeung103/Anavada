@@ -32,6 +32,11 @@
 			$(this).siblings(".Subcmt_update").toggle(200);
 		});
 	});
+	$(function (){
+		$(".Cmt_update_btn").click(function () {
+			$(this).siblings(".Cmt_update").toggle(200);
+		});
+	});
 </script>
 </head>
 <body oncontextmenu="return false" onselectstart="return false"
@@ -170,14 +175,16 @@
 							<button class="Subcmt_btn">대댓글</button>
 							<% if(loginMember != null && loginMember.getMemberId().equals(c.getMemberId())) { %>
 							<button onclick="location.href='/anavada/crdelete?crnum=<%= c.getCreplyNo() %>&depth=<%= c.getCreplyDepth() %>&cnum=<%= cboard.getCboardNo() %>'" style="float: right;">삭제</button>
-							<button class="Subcmt_update_btn" style="float: right;margin-right: 10px;">수정</button>
+							<button class="Cmt_update_btn" style="float: right;margin-right: 10px;">수정</button>
 									<!-- 댓글수정입력 폼 시작 -->
-									<div class="Subcmt_update" style="display: none;">
-										<form action="scwrite.ss" method="post">
+									<div class="Cmt_update" style="display: none;">
+										<form action="crupdate.ss" method="post">
+										<input type="hidden" name="crnum" value="<%= c.getCreplyNo() %>">
+										<input type="hidden" name="cnum" value="<%= c.getCbaordNo() %>">
 										<fieldset>
 											<div class="cmt_form">
 												<div class="cmt_body">
-													<textarea name="content" style="resize: none; width: 100%; min-height: 100px; max-height: 100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
+													<textarea name="content" style="resize: none; width: 100%; min-height: 100px; max-height: 100px;" onfocus="this.value='';"><%= c.getCreplyContent() %></textarea>
 													<div class="cmt_ok">
 													<input type="submit" value="수정">
 													</div>
@@ -189,6 +196,7 @@
 									<!-- 댓글수정입력 폼 끝 -->
 							<% } %>
 							<% if(loginMember != null) { %>
+								<!-- 댓글 등록 폼 시작 -->
 								<div class="Subcmt" style="display: none;">
 									<form action="scwrite.ss" method="post">
 									<input type="hidden" name="writer" value="<%=loginMember.getMemberId()%>">
@@ -206,10 +214,12 @@
 										</fieldset>
 									</form>
 								</div>
+								<!-- 댓글 등록 폼 끝 -->
 									
 								<% } %>
 								<% for(Creply sc : srlist) { %>
 								<% if(c.getCreplyNo() == sc.getParantReply()) { %>
+								<!-- 댓글 수정 입력 폼 시작 -->
 								<div class="Subcmt_form" style="background-color: #E6E6E6;">
 									<div>
 										<h4><%= sc.getMemberId() %></h4>
@@ -221,11 +231,12 @@
 									<button class="Subcmt_update_btn" style="float: right;margin-right: 10px;">수정</button>
 									<div class="Subcmt_update" style="display: none;">
 										<form action="crupdate.ss" method="post">
-										<input type="hidden" name="prnum" value="<%=c.getCreplyNo()%>">
+										<input type="hidden" name="crnum" value="<%= sc.getCreplyNo() %>">
+										<input type="hidden" name="cnum" value="<%= sc.getCbaordNo() %>">
 										<fieldset>
 											<div class="cmt_form">
 												<div class="cmt_body">
-													<textarea name="content" style="resize: none; width: 100%; min-height: 100px; max-height: 100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
+													<textarea name="content" style="resize: none; width: 100%; min-height: 100px; max-height: 100px;" onfocus="this.value='';"><%= sc.getCreplyContent() %></textarea>
 													<div class="cmt_ok">
 													<input type="submit" value="수정">
 													</div>
@@ -236,6 +247,7 @@
 									</div>
 									<% } %>
 								</div>
+								<!-- 댓글 수정 입력 폼 끝 -->
 								<% } %>
 								<% } %>
 						</li>

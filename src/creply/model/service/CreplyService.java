@@ -61,4 +61,16 @@ public class CreplyService {
 		close(conn);
 		return result;
 	}
+
+	public int updateCreply(int creplyNum, String content) {
+		Connection conn = getConnection();
+		int result = crdao.updateCreply(conn, creplyNum, content);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 }

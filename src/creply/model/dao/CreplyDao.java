@@ -155,4 +155,24 @@ public class CreplyDao {
 		return result;
 	}
 
+	public int updateCreply(Connection conn, int creplyNum, String content) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update creply set creply_content = ? where creply_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, content);
+			pstmt.setInt(2, creplyNum);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }
