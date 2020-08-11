@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="member.model.vo.Member"%>
   <header id="admin_header">
    
     <h1 class="logo">Anavada</h1>  
@@ -9,7 +8,7 @@
         
         <h2><p>회원관리</p></h2>
         <ul>
-            <li><a href="../member/memberList.jsp">전체회원</a></li>
+            <li><a href="/anavada/mlist.cp">전체회원</a></li>
             <li><a href="../member/memberSecession.jsp">탈퇴회원</a></li>
             <li><a href="../member/memberDeclare.jsp">신고회원</a></li>
         </ul>

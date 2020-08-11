@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="member.model.vo.Member"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +28,7 @@
                     <h4>전체 150개</h4>
                     <div>
                         <form action="" method="" id="">
-                            목록 분류 : <select name="" class="ListSelect">
+                           	 목록 분류 : <select name="" class="ListSelect">
                                     <option value="분류 선택" selected="selected">분류 선택</option>
                                     <option value="아이디">아이디</option>
                                     <option value="이름">이름</option>
@@ -72,19 +71,21 @@
                             <th>접속일</th>
                             <th>신고여부</th>
                         </tr>
+						<% for(Member m : list){ %>
                         <tr>
                             <td class="checkBox"><input type="checkbox"></td>
                             <td class="number">10</td>
-                            <td class="id">user10</td>
-                            <td class="name">이순신</td>
-                            <td class="originalFile">충무공신.jpg</td>
-                            <td class="renameFile">충무공신2.jpg</td>
-                            <td class="email">user@naver.com</td>
-                            <td class="phone">010-1111-1111</td>
-                            <td class="joinDate">2020.08.02</td>
-                            <td class="lastAccessDate">2020.08.02</td>
-                            <td class="declareId">user01</td>
+                            <td class="id"><%= m.getMemberId() %></td>
+                            <td class="name"><%= m.getMemberName() %></td>
+                            <td class="originalFile"><%= m.getFileOriginal() %></td>
+                            <td class="renameFile"><%= m.getFileRename() %></td>
+                            <td class="email"><%= m.getMemberEmail() %></td>
+                            <td class="phone"><%= m.getMemberPhone() %></td>
+                            <td class="joinDate"><%= m.getJoinDate() %></td>
+                            <td class="lastAccessDate"><%= m.getLastAccessDate() %></td>
+                            <td class="declareId"><%= m.getDeclareId() %></td>
                         </tr>
+                        <% } %>
                         <tr>
                             <td class="checkBox"><input type="checkbox"></td>
                             <td class="number">9</td>

@@ -1,13 +1,23 @@
 package member.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import member.model.service.MemberService;
 import member.model.vo.Member;
@@ -27,26 +37,36 @@ public class JoinServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
 
-		request.setCharacterEncoding("utf-8");
-		
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
 		//암호화처리 회원가입
 		Member member = new Member();
 		member.setMemberId(request.getParameter("memberId"));
 		member.setMemberPwd(request.getParameter("memberPwd"));
+		member.setFileOriginal(request.getParameter("fileOriginal"));
 		member.setMemberName(request.getParameter("memberName"));
 		member.setMemberEmail(request.getParameter("memberEmail"));
+		member.setEmailAuth(request.getParameter("emailAuth"));
 		member.setMemberPhone(request.getParameter("memberPhone"));
-
 		member.setMemberName(String.join(",", request.getParameterValues("memberName")));
-		
+
+		System.out.println("member : " + member);
+
 		int result = new MemberService().insertMember(member);
 
-		if(result > 0) {
+		if(result > 0) {			
 			response.sendRedirect("views/member/join_complete.jsp");
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
@@ -55,13 +75,4 @@ public class JoinServlet extends HttpServlet {
 			writer.close();
 		}
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }

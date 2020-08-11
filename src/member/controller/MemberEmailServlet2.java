@@ -9,46 +9,32 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import member.model.service.MemberService;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class MemberMypageServlet
  */
-@WebServlet("/login.cp")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/memail2")
+public class MemberEmailServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public MemberEmailServlet2() {
         super();
         // TODO Auto-generated constructor stub
     }
+
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId = request.getParameter("memberId");
-		String memberPwd = request.getParameter("memberPwd");
-		
-		MemberService mservice = new MemberService();
-		Member loginMember = mservice.loginCheck(memberId, memberPwd);
-
-		if(loginMember != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("loginMember", loginMember);
-			response.sendRedirect("index.jsp");
-		} else {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('아이디 또는 비밀번호가 일치하지 않습니다.\\n다시 입력해주세요.'); location.href=document.referrer;</script>");
-			writer.close();
-		}
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -56,8 +42,22 @@ public class LoginServlet extends HttpServlet {
 	 */
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+        String AuthenticationKey2 = (String)request.getSession().getAttribute("AuthenticationKey2");
+        String AuthenticationUser2 = request.getParameter("emailAuth");
 
+		String returnValue = null;
+
+		if(!AuthenticationKey2.equals(AuthenticationUser2)) {
+			returnValue = "not";
+		} else {
+			returnValue = "ok";
+		}
+		
+		//출력스트림 만들고 값 내보내기
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(returnValue);
+		out.flush();
+		out.close();	
+	}
 }

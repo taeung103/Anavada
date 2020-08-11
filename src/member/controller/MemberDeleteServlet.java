@@ -31,15 +31,14 @@ public class MemberDeleteServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String memberId = request.getParameter("memberId");
 		int result = new MemberService().deleteMember(memberId);
 		
-		System.out.println(memberId);
 		if(result > 0) {
 			response.sendRedirect("/anavada/logout");
 		} else {
@@ -47,7 +46,6 @@ public class MemberDeleteServlet extends HttpServlet {
 			request.setAttribute("message", memberId + " 회원님의 탈퇴 요청 실패.");
 			view.forward(request, response);
 		}
-		
 	}
 
 	/**

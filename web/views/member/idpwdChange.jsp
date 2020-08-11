@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,22 +27,22 @@
             <!--서브 비주얼/타이틀 끝-->
 
 
-            <!-- 회원정보 찾기 -->
+            <!-- 패스워드 바꾸기 -->
             <form name="idpw" method="post" action="/anavada/pwdChange.cp">
-                <legend>회원정보 찾기</legend>
-                <div class="MBwrap">
-                    <div class="MBidpw">
-                        <h1>회원정보 찾기</h1>
-                        <h2>회원정보 찾기를 통해 발급받은 인증번호를 통해<br/>인증번호 확인 후 비밀번호를 변경할 수 있습니다.</h2>
-                        <div>
-                            <input type="text" name="memberEmail" id="memberEmail" title="인증번호" class="form-control w100p" placeholder="발급받은 인증번호를 입력하세요."/>
-                            <input type="password" name="memberPwd" title="새 비밀번호" class="form-control w100p" placeholder="'새 비밀번호 입력(4자이상 12자이내)" maxlength="12"/>
-                            <input type="password" name="memberPwd2" title="새 비밀번호" class="form-control w100p" placeholder="새 비밀번호 재확인" maxlength="12"/>
-                            <a class="idpw_btn" href="/anavada/idPwdFind" class="hvr-sweep-to-right">확인</a>
-                            <input type="submit" value="비밀번호 변경하기"class="idpw_btn" >
-                        </div>
-                    </div>
-                </div>
+            <legend>패스워드 바꾸기</legend>
+			<div class="MBwrap">
+			    <div class="MBidpw">
+			        <h1>회원정보 찾기</h1>
+			        <h2>회원정보 찾기를 통해 발급받은 인증번호를 통해<br/>인증번호 확인 후 비밀번호를 변경할 수 있습니다.</h2>
+			        <div>
+			            <input type="text" name="AuthenticationUser" id="AuthenticationUser" title="인증번호" class="form-control w100p" placeholder="발급 인증번호 입력"/>
+			            <input type="text" name="memberId" title="아이디" class="form-control w100p" placeholder="아이디" maxlength="12"/>
+			            <input type="password" name="memberPwd" title="새 비밀번호" class="form-control w100p" placeholder="'새 비밀번호 입력(4자이상 12자이내)" maxlength="12"/>
+			            <input type="password" name="memberPwd2" title="새 비밀번호 재입력" class="form-control w100p" placeholder="새 비밀번호 재입력" maxlength="12"/>
+			            <input type="submit" value="비밀번호 변경하기"class="idpw_btn" >
+			        </div>
+			    </div>
+			</div>
             </form>
             <!-- 회원정보 찾기 끝 -->
         </div>

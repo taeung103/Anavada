@@ -7,6 +7,7 @@
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
         <%@ include file="../include/header.jsp" %>
+        
         <!-- 컨텐츠 -->
         <div id="content">
 
@@ -47,10 +48,7 @@
                 <!-- 프로필 -->
 				<dl class="profile">
 					<dt>
-						<div>
-							<img src="/anavada/resources/images/test/testImg.jpg"
-								width="200px" height="200px">
-						</div>
+						<div><%= member.getMemberName() %></div>
 					</dt>
 					<dd>
 						<div><span>이름</span> : <%= member.getMemberName() %></div>
@@ -61,19 +59,14 @@
 					</dd>
 				</dl>
 				<!-- 프로필 끝 -->
-                <form action="/anavada/mupdate.cp" method="post">
+                <!-- form method="post" onsubmit="return validate();" enctype="multipart/form-data"-->
+                <form method="post" onsubmit="return validate();">
                 <table class="InfoModify_table">
                     <colgroup>
                         <col width="20%">
                         <col width="80%">
                     </colgroup>
                     <tbody>
-                        <tr>
-                            <td>프로필 사진</td>
-                            <td>
-								<input type="file" name="memberOriginal" title="프로필 사진"/>
-                            </td>
-                        </tr>
                         <tr>
                             <td>아이디</td>
                             <td><input type="text" name="memberId" id="memberId" title="아이디" class="form-control w100p" placeholder="아이디" value="<%= member.getMemberId() %>" readonly/></td>
@@ -85,9 +78,9 @@
                         <tr>
                             <td>신규 비밀번호</td>
                             <td class="newPwd">
-                                <input type="password" name="memberPwd2" id="memberPw2" title="신규 비밀번호" class="form-control w100p mb5" placeholder="신규 비밀번호 입력"/><br/>
-
-                                <input type="text" name="memberPwd3" id="memberPw3" title="신규 비밀번호 재확인" class="form-control w100p" placeholder="신규 비밀번호 재입력"/>
+                                <input type="password" name="newPwd" id="newPwd" title="신규 비밀번호" class="form-control w70p mb5" placeholder="신규 비밀번호 입력"/><br/>
+                                <input type="password" name="newPwdOK" id="newPwdOK" title="신규 비밀번호 재입력" class="form-control w70p" placeholder="신규 비밀번호 재입력"/>
+                                <a href="#none" class="btnS1" onclick="return myInfoPwd();">변경하기</a><br/>
                             </td>
                         </tr>
                         <tr>
@@ -97,11 +90,13 @@
                         <tr>
                             <td>이메일</td>
                             <td class="emailArea">
-                                <input type="email" name="memberEmail" title="이메일" class="form-control w70p mb5" placeholder="이메일" value="<%= member.getMemberEmail() %>" />
-                                <a href="#none" class="btnS1">인증하기</a><br/>
+                                <input type="email" name="memberEmail" id="memberEmail" title="이메일" class="form-control w70p mb5" placeholder="@naver.com(필수)" value="<%= member.getMemberEmail() %>" />
+                                <a href="#none" class="btnS1" onclick="return joinEmailCheck();">인증번호 발송</a>
+                                <p style="margin-bottom:5px;">네이버 이메일만 인증번호 발송이 가능합니다.</p>
 
-                                <input type="text" name="emailAuth" title="인증번호" class="form-control w70p" placeholder="인증번호" />
-                                <a href="#none" class="btnS1">인증확인</a></td>
+                                <input type="text" name="emailAuth" id="emailAuth" title="인증번호" class="form-control w70p" placeholder="인증번호" value="<%= member.getEmailAuth() %>" />
+                                <a href="#none" class="btnS1" onclick="return EmailAuthOK();">인증확인</a>
+                            </td>
                         </tr>
                         <tr>
                             <td>휴대폰</td>
@@ -117,17 +112,12 @@
                 <div class="write-btn">
                     <a href="javascript:history.go(-1);">이전 페이지</a>
                     <input class="btn btn-list" type="reset" value="수정취소">
-                    <input class="btn btn-success" type="submit" value="수정하기">
+                    <input class="btn btn-success" type="submit" value="수정하기" onclick="action='/anavada/mupdate.cp'">
                 </div>
 				</form>
             </div>
         </div>
         <!-- 컨텐츠 끝 -->
-	    <script>
-		    function memberDelete(){
-		    	location.href ="/anavada/mdelete.cp?memberId=<%= member.getMemberId()%>";
-		    }
-	    </script>
     <%@ include file="../include/footer.jsp" %>
     </div>
 </body>

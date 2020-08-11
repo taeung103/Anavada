@@ -1,6 +1,7 @@
 package member.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import member.model.dao.MemberDao;
 import member.model.vo.Member;
@@ -36,6 +37,13 @@ public class MemberService {
 		int idChk = mdao.selectCheckId(conn, memberId);
 		close(conn);
 		return idChk;
+	}
+
+	public Member selectMyInfo(String memberId) {
+		Connection conn = getConnection();
+		Member member = mdao.selectMyInfo(conn, memberId);
+		close(conn);
+		return member;
 	}
 
 	public Member selectMember(String memberId) {
@@ -74,6 +82,34 @@ public class MemberService {
 		return member;
 	}
 
+	public int userPwdUpdate(Member member) {
+		Connection conn = getConnection();
+		int result = mdao.userPwdUpdate(conn, member);
+		if(result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int updateMemberPwd(Member member) {
+		Connection conn = getConnection();
+		int result = mdao.updateMemberPwd(conn, member);
+		if(result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public ArrayList<Member> selectAllList() {
+		Connection conn = getConnection();
+		ArrayList<Member> list = mdao.selectAllList(conn);
+		close(conn);
+		return list;
+	}
 
 	
 }

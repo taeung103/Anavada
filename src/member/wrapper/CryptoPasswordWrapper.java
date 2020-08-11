@@ -18,11 +18,16 @@ public class CryptoPasswordWrapper extends HttpServletRequestWrapper { // HttpSe
 		// memberPwd의 값만 암호화 처리
 		if (name != null && name.equals("memberPwd")) {
 			value = getSha512(super.getParameter(name));
+		} else if (name != null && name.equals("memberPwd2")) {
+			value = getSha512(super.getParameter(name));
+		} else if (name != null && name.equals("newPwd")) {
+			value = getSha512(super.getParameter(name));
+		} else if (name != null && name.equals("newPwdOK")) {
+			value = getSha512(super.getParameter(name));
 		} else {
 			// memberPwd 가 아닌 값들은 그대로 둠
 			value = super.getParameter(name);
 		}
-
 		return value;
 	}
 
