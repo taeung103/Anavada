@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
@@ -128,9 +129,10 @@ public class CboardWriteServlet extends HttpServlet {
 		if (result > 0) {
 			response.sendRedirect("/anavada/clistview?page=1&local=0");
 		} else {
-			view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("messgae", "새 게시들 등록 처리 실패");
-			view.forward(request, response);
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println("<script>alert('글작성 실패');location.href='/anavada/clistview?page=1&local=0';</script>");
+			writer.close();
 		}
 	}
 
