@@ -85,6 +85,30 @@ public class CboardService {
 		return result;
 	}
 
+	public int upLikeCount(int cboardNum) {
+		Connection conn = getConnection();
+		int result = cdao.upLikeCount(conn, cboardNum);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public int upReportCount(int cboardNum) {
+		Connection conn = getConnection();
+		int result = cdao.upReportCount(conn, cboardNum);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
 	
 
 }

@@ -295,4 +295,38 @@ public class CboardDao {
 		return result;
 	}
 
+	public int upLikeCount(Connection conn, int cboardNum) {
+		int result = 0;
+		Statement stmt = null;
+		
+		String query = "update cboard set cboard_likecount = (cboard_likecount + 1) where cboard_no = " + cboardNum;
+		
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(query); 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);;
+		}
+		return result;
+	}
+
+	public int upReportCount(Connection conn, int cboardNum) {
+		int result = 0;
+		Statement stmt = null;
+		
+		String query = "update cboard set cboard_reportcount = (cboard_reportcount + 1) where cboard_no = " + cboardNum;
+		
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(query); 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);;
+		}
+		return result;
+	} 
+
 }

@@ -38,6 +38,29 @@
 		});
 	});
 </script>
+<style type="text/css">
+.like {
+	width: 50px;
+	height: 50px;
+	padding: 1px;
+	border-radius:50%;
+	border: 0px;
+	margin-right: 15px;
+}
+.report{
+	width: 50px;
+	height: 50px;
+	padding: 1px;
+	border-radius:50%;
+	border: 0px;
+	margin-right: 15px;
+}
+font{
+	font-size: 20px;
+	margin-right: 15px;
+}
+
+</style>
 </head>
 <body oncontextmenu="return false" onselectstart="return false"
 	ondragstart="return false">
@@ -111,6 +134,18 @@
 				<div class="view-ctn">
 					<%=cboard.getCboardContent()%>
 				</div>
+				<div style="float: center; margin: 10px; text-align: center;">
+				<div style="display: inline-block;">
+					<button onclick="location.href='/anavada/uplike?cnum=<%=cboard.getCboardNo() %>'" class="like"><i class="xi-heart" style="font-size: 300%;"></i></button>
+					<br><font><%= cboard.getLikeCount() %></font>
+				</div>
+				<div style="display: inline-block;">
+					<button  onclick="location.href='/anavada/upreport?cnum=<%=cboard.getCboardNo() %>'" class="report"><i class="xi-error" style="font-size: 300%;"></i></button>
+					<br><font><%= cboard.getReportCount() %></font>
+				</div>
+				</div>
+				
+				
 
 				<div class="view-btn">
 					<%
