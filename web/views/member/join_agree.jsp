@@ -2,21 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="../include/head.jsp"%>
-<script type="text/javascript">
-	function agreeChkOn() {
-		if ((document.getElementById("ChkY").checked && document.getElementById("ChkY2").checked) == true ) {
-			document.location.href = "join_customer.jsp";
-			return false;
-		} else if (document.getElementById("ChkN").checked == true) {
-			alert("동의 체크시 다음페이지로 이동 가능합니다.");
-			return false;
-		} else if (document.getElementById("ChkN2").checked == true) {
-			alert("동의 체크시 다음페이지로 이동 가능합니다.");
-			return false;
-		}
-	}
-</script>
+	<%@ include file="../include/head.jsp"%>
 </head>
 <body oncontextmenu="return false" onselectstart="return false"
 	ondragstart="return false">

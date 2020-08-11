@@ -17,9 +17,13 @@ public class Member implements java.io.Serializable {
 	private String memberPhone;
 	private java.sql.Date joinDate;
 	private java.sql.Date lastAccessDate;
+	private String newPwd;
+	private String newPwdOK;
+	private String declareId;
 	
 	public Member(String memberId, String memberPwd, String memberName, String fileOriginal, String fileRename,
-			String memberEmail, String emailAuth, String memberPhone, Date joinDate, Date lastAccessDate) {
+			String memberEmail, String emailAuth, String memberPhone, Date joinDate, Date lastAccessDate, String newPwd,
+			String newPwdOK, String declareId) {
 		super();
 		this.memberId = memberId;
 		this.memberPwd = memberPwd;
@@ -31,6 +35,9 @@ public class Member implements java.io.Serializable {
 		this.memberPhone = memberPhone;
 		this.joinDate = joinDate;
 		this.lastAccessDate = lastAccessDate;
+		this.newPwd = newPwd;
+		this.newPwdOK = newPwdOK;
+		this.declareId = declareId;
 	}
 
 	public String getMemberId() {
@@ -113,6 +120,30 @@ public class Member implements java.io.Serializable {
 		this.lastAccessDate = lastAccessDate;
 	}
 
+	public String getNewPwd() {
+		return newPwd;
+	}
+
+	public void setNewPwd(String newPwd) {
+		this.newPwd = newPwd;
+	}
+
+	public String getNewPwdOK() {
+		return newPwdOK;
+	}
+
+	public void setNewPwdOK(String newPwdOK) {
+		this.newPwdOK = newPwdOK;
+	}
+
+	public String getDeclareId() {
+		return declareId;
+	}
+
+	public void setDeclareId(String declareId) {
+		this.declareId = declareId;
+	}
+
 	public static long getSelectserviceuid() {
 		return selectServiceUID;
 	}
@@ -122,8 +153,11 @@ public class Member implements java.io.Serializable {
 		return "Member [memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName=" + memberName
 				+ ", fileOriginal=" + fileOriginal + ", fileRename=" + fileRename + ", memberEmail=" + memberEmail
 				+ ", emailAuth=" + emailAuth + ", memberPhone=" + memberPhone + ", joinDate=" + joinDate
-				+ ", lastAccessDate=" + lastAccessDate + "]";
+				+ ", lastAccessDate=" + lastAccessDate + ", newPwd=" + newPwd + ", newPwdOK=" + newPwdOK
+				+ ", declareId=" + declareId + "]";
 	}
+	
+	
 	
 	
 }

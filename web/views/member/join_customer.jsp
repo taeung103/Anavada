@@ -3,90 +3,6 @@
 <html>
 <head>
     <%@ include file="../include/head.jsp" %>
-	<script>
-		function validate() {
-			//암호일치 확인
-			var pwdValue = document.getElementById("memberPwd").value;
-			var pwdValue2 = document.getElementById("memberPwd2").value;
-			if (pwdValue !== pwdValue2) {
-				alert("암호와 암호 확인의 값이 일치하지 않습니다.");
-				document.getElementById("memberPwd").select();
-				return false; //전송 취소함
-			}
-			return true; //전송함
-		}
-		//아이디 중복 체크 확인을 위한 ajax 실행 처리용 함수
-		function joinldCheck() {
-			$.ajax({
-				url : "/anavada/idchk",
-				type : "post",
-				data : {
-					memberId : $("#memberId").val()
-				}, // input에 입력된 값을 가져올땐 .val() 작성
-				success : function(data) {
-					if (data == "ok") { // == 같다. 표현
-						alert("사용 가능한 아이디입니다.");
-						$("#memberPwd").focus();
-					} else {
-						alert("이미 사용중인 아이디입니다.\n다시 입력하세요.");
-						$("#memberId").select();
-					}
-				},
-				error : function(jqXHR, textstatus, errorthrown) { // jqXHR, textstatus, errorthrown : 에러표시 함수가 있음.
-					console.log("error : " + jqXHR + ", " + textstatus + ", "
-							+ errorthrown);
-				}
-			});
-			return false;
-		}
-		//이메일 인증코드 전송
-		function joinEmailCheck() {
-			$.ajax({
-				url : "/anavada/memail",
-				type : "post",
-				data : {
-					memberEmail : $("#memberEmail").val()
-				}, // input에 입력된 값을 가져올땐 .val() 작성
-				success : function(data) {
-					if (data == "ok") { // == 같다. 표현
-						alert("이메일 인증번호가 이메일로 발송되었습니다.\n확인해주세요.");
-						$("#emailAuth").focus();
-					} else {
-
-					}
-				},
-				error : function(jqXHR, textstatus, errorthrown) { // jqXHR, textstatus, errorthrown : 에러표시 함수가 있음.
-					console.log("error : " + jqXHR + ", " + textstatus + ", "
-							+ errorthrown);
-				}
-			});
-			return false;
-		}
-		//이메일 인증코드 확인
-		function joinEmailAuthOK() {
-			$.ajax({
-				url : "/anavada/memail2",
-				type : "post",
-				data : {
-					emailAuth : $("#emailAuth").val()
-				}, // input에 입력된 값을 가져올땐 .val() 작성
-				success : function(data) {
-					if (data == "ok") { // == 같다. 표현
-						alert("이메일 인증이 완료되었습니다.");
-						$("#memberPhone").focus();
-					} else {
-						alert("이메일 인증이 실패했습니다.\n다시 입력해주세요.");
-						$("#emailAuth").select();
-					}
-				},
-				error : function(jqXHR, textstatus, errorthrown) { // jqXHR, textstatus, errorthrown : 에러표시 함수가 있음.
-					console.log("error : " + jqXHR + ", " + textstatus + ", "
-							+ errorthrown);
-				}
-			});
-			return false;
-		}
-	</script>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
@@ -112,8 +28,8 @@
 
 
             <!-- 회원가입 고객가입 -->
-            <form name="join" method="post" onsubmit="return validate();" class="form-inline" enctype="multipart/form-data">
-            <!--form name="join" method="post" onsubmit="return validate();" class="form-inline"-->
+            <!-- form name="join" method="post" onsubmit="return validate();" class="form-inline" enctype="multipart/form-data"-->
+            <form name="join" method="post" onsubmit="return validate();" class="form-inline">
                 <div class="MBwrap">
                     <div class="MBjoin_wrap">
                         <ul class="joinDepth">
@@ -134,9 +50,6 @@
                                     <li class="pwArea2">
                                         <input type="password" name="memberPwd2" title="비밀번호 재확인" class="form-control w40p" placeholder="비밀번호 재입력(필수)" maxlength="12" required/>
                                     </li>
-                                    <li class="fileUpload" style="margin-bottom: 10px;">
-										프로필 사진 등록 : <input type="file" name="fileOriginal" id="fileOriginal" title="프로필 사진"/>
-									</li>
                                     <li style="margin-bottom: 10px;"><input type="text" name="memberName" id="memberName" title="이름" class="form-control w50p" placeholder="이름(필수)" required/></li>
                                     <li><input type="email" name="memberEmail" id="memberEmail" title="이메일" class="form-control w50p" placeholder="@naver.com(필수)" required/>
                                         <a href="#none" class="btnS1" onclick="return joinEmailCheck();">인증번호 발송</a>

@@ -3,93 +3,11 @@
 <html>
 <head>
     <%@ include file="../include/head.jsp" %>
-    <script>
-		function validate() {
-			//암호일치 확인
-			var pwdValue = document.getElementById("memberPwd").value;
-			var pwdValue2 = document.getElementById("memberPwd2").value;
-			if (pwdValue !== pwdValue2) {
-				alert("암호와 암호 확인의 값이 일치하지 않습니다.");
-				document.getElementById("memberPwd").select();
-				return false; //전송 취소함
-			}
-			return true; //전송함
-		}
-		//패스워드 변경
-		function myInfoPwd() {
-			$.ajax({
-				url : "/anavada/myInfoPwdChange",
-				type : "post",
-				data : {
-					memberPwd : $("#memberPwd").val()
-				}, // input에 입력된 값을 가져올땐 .val() 작성
-				success : function(data) {
-					if (data == "ok") { // == 같다. 표현
-						alert("이메일 인증번호가 이메일로 발송되었습니다.\n확인해주세요.");
-						$("#emailAuth").focus();
-					} else {
-
-					}
-				},
-				error : function(jqXHR, textstatus, errorthrown) { // jqXHR, textstatus, errorthrown : 에러표시 함수가 있음.
-					console.log("error : " + jqXHR + ", " + textstatus + ", "
-							+ errorthrown);
-				}
-			});
-			return false;
-		}
-		//이메일 인증코드 전송
-		function joinEmailCheck() {
-			$.ajax({
-				url : "/anavada/memail",
-				type : "post",
-				data : {
-					memberEmail : $("#memberEmail").val()
-				}, // input에 입력된 값을 가져올땐 .val() 작성
-				success : function(data) {
-					if (data == "ok") { // == 같다. 표현
-						alert("이메일 인증번호가 이메일로 발송되었습니다.\n확인해주세요.");
-						$("#emailAuth").focus();
-					} else {
-
-					}
-				},
-				error : function(jqXHR, textstatus, errorthrown) { // jqXHR, textstatus, errorthrown : 에러표시 함수가 있음.
-					console.log("error : " + jqXHR + ", " + textstatus + ", "
-							+ errorthrown);
-				}
-			});
-			return false;
-		}
-		//이메일 인증코드 확인
-		function EmailAuthOK() {
-			$.ajax({
-				url : "/anavada/memail2",
-				type : "post",
-				data : {
-					emailAuth : $("#emailAuth").val()
-				}, // input에 입력된 값을 가져올땐 .val() 작성
-				success : function(data) {
-					if (data == "ok") { // == 같다. 표현
-						alert("이메일 인증이 완료되었습니다.");
-						$("#memberPhone").focus();
-					} else {
-						alert("이메일 인증이 실패했습니다.\n다시 입력해주세요.");
-						$("#emailAuth").select();
-					}
-				},
-				error : function(jqXHR, textstatus, errorthrown) { // jqXHR, textstatus, errorthrown : 에러표시 함수가 있음.
-					console.log("error : " + jqXHR + ", " + textstatus + ", "
-							+ errorthrown);
-				}
-			});
-			return false;
-		}
-	</script>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
         <%@ include file="../include/header.jsp" %>
+        
         <!-- 컨텐츠 -->
         <div id="content">
 
@@ -130,12 +48,7 @@
                 <!-- 프로필 -->
 				<dl class="profile">
 					<dt>
-						<div>
-							<img src="/anavada/resources/memberfile/<%= member.getFileRename() %>" id="profileImg" width="200px" height="200px">
-						</div>
-						<div>
-							<img src="/anavada/resources/images/test/testImg.jpg" width="200px" height="200px">
-						</div>
+						<div><%= member.getMemberName() %></div>
 					</dt>
 					<dd>
 						<div><span>이름</span> : <%= member.getMemberName() %></div>
@@ -146,20 +59,14 @@
 					</dd>
 				</dl>
 				<!-- 프로필 끝 -->
-                <form method="post" onsubmit="return validate();" enctype="multipart/form-data">
+                <!-- form method="post" onsubmit="return validate();" enctype="multipart/form-data"-->
+                <form method="post" onsubmit="return validate();">
                 <table class="InfoModify_table">
                     <colgroup>
                         <col width="20%">
                         <col width="80%">
                     </colgroup>
                     <tbody>
-                        <tr>
-                            <td>프로필 사진</td>
-                            <td class="fileUpload" >
-								프로필 사진 등록 : <input type="file" name="fileOriginal" id="fileOriginal" title="프로필 사진" value="<%= member.getFileRename() %>"/>
-								<p class="mt5">기존 파일 : <%= member.getFileRename() %></p>
-                            </td>
-                        </tr>
                         <tr>
                             <td>아이디</td>
                             <td><input type="text" name="memberId" id="memberId" title="아이디" class="form-control w100p" placeholder="아이디" value="<%= member.getMemberId() %>" readonly/></td>
@@ -172,7 +79,7 @@
                             <td>신규 비밀번호</td>
                             <td class="newPwd">
                                 <input type="password" name="newPwd" id="newPwd" title="신규 비밀번호" class="form-control w70p mb5" placeholder="신규 비밀번호 입력"/><br/>
-                                <input type="text" name="newPwd2" id="newPwd2" title="신규 비밀번호 재입력" class="form-control w70p" placeholder="신규 비밀번호 재입력"/>
+                                <input type="password" name="newPwdOK" id="newPwdOK" title="신규 비밀번호 재입력" class="form-control w70p" placeholder="신규 비밀번호 재입력"/>
                                 <a href="#none" class="btnS1" onclick="return myInfoPwd();">변경하기</a><br/>
                             </td>
                         </tr>
@@ -211,11 +118,6 @@
             </div>
         </div>
         <!-- 컨텐츠 끝 -->
-	    <script>
-		    function memberDelete(){
-		    	location.href ="/anavada/mdelete.cp?memberId=<%= member.getMemberId()%>";
-		    }
-	    </script>
     <%@ include file="../include/footer.jsp" %>
     </div>
 </body>

@@ -3,6 +3,8 @@ package member.model.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import member.model.vo.Member;
 import static common.JDBCTemp.*;
@@ -238,6 +240,66 @@ public class MemberDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	public int updateMemberPwd(Connection conn, Member member) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update member set member_pwd = ? where member_id = ?"; 
+		
+		System.out.println("member123456789 : " + member);
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, member.getNewPwdOK());
+			pstmt.setString(2, member.getMemberId());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public ArrayList<Member> selectAllList(Connection conn) {
+		ArrayList<Member> list = new ArrayList<Member>();
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String qeury = "SELECT MEMBER_ID, DECLARE_OK FROM MEMBER " + 
+				"JOIN DECLARE_ADMIN ON(MEMBER_ID = DECLARE_ID); " + 
+				"SELECT *  FROM MEMBER " + 
+				"LEFT JOIN DECLARE_ADMIN ON (MEMBER_ID = DECLARE_ID);";
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(qeury);
+			
+			if(rset.next()) {
+				Member member = new Member();
+				member.setMemberId(rset.getString("member_id"));
+				member.setMemberPwd(rset.getString("member_pwd"));
+				member.setMemberName(rset.getString("member_name"));
+				member.setFileOriginal(rset.getString("profile_original"));
+				member.setFileRename(rset.getString("profile_rename"));
+				member.setMemberEmail(rset.getString("member_email"));
+				member.setEmailAuth(rset.getString("emailauth"));
+				member.setMemberPhone(rset.getString("member_phone"));
+				member.setJoinDate(rset.getDate("join_date"));
+				member.setLastAccessDate(rset.getDate("last_access_date"));
+				member.setDeclareId(rset.getString("declare_id"));
+				
+				list.add(member);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return list;
 	}
 
 }

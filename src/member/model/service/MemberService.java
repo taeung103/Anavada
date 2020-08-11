@@ -1,6 +1,7 @@
 package member.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import member.model.dao.MemberDao;
 import member.model.vo.Member;
@@ -90,6 +91,24 @@ public class MemberService {
 			rollback(conn);
 		close(conn);
 		return result;
+	}
+
+	public int updateMemberPwd(Member member) {
+		Connection conn = getConnection();
+		int result = mdao.updateMemberPwd(conn, member);
+		if(result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public ArrayList<Member> selectAllList() {
+		Connection conn = getConnection();
+		ArrayList<Member> list = mdao.selectAllList(conn);
+		close(conn);
+		return list;
 	}
 
 	

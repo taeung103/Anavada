@@ -41,43 +41,50 @@ public class MyInfoPwdChange extends HttpServlet {
 	 */
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//패스워드 변경
+		Member member = new Member();
+		member.setMemberId(request.getParameter("memberId"));
+		member.setMemberPwd(request.getParameter("memberPwd"));
+		member.setNewPwd(request.getParameter("newPwd"));
+		member.setNewPwdOK(request.getParameter("newPwdOK"));
 		
-		String memberPwd = request.getParameter("memberPwd");
-		Member pwd = new MemberService().selectMember(memberPwd);
+        String memberId = request.getParameter("memberId");
+        String memberPwd = request.getParameter("memberPwd");
+        String newPwd = request.getParameter("newPwd");
+        String newPwdOK = request.getParameter("newPwdOK");
+        
+	    Member originalMember = new MemberService().selectMember(memberId);
+	    
+		String returnValue = null;
 
-
-        if(!pwd.equals(memberPwd)){
-            System.out.println("기존 패스워드랑 일치하지 않습니다.");
-
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('기존 패스워드랑 일치하지 않습니다.'); location.href=document.referrer;</script>");
-			writer.close();
-        	
-        } else {
-        	Member member = new Member();
-			member.setMemberPwd(request.getParameter("memberPwd"));
-			
-			int result = new MemberService().userPwdUpdate(member);
+		if(originalMember.getMemberPwd().equals(memberPwd) && newPwd.equals(newPwdOK) && newPwd.getBytes().length > 1 && newPwdOK.getBytes().length > 1) {
 	        
-			System.out.println(result);
+        	int result = new MemberService().updateMemberPwd(member);
+        	
+        	System.out.println(result);
+	    
+			if(result > 0) {
+				returnValue = "ok";
+			}
 			
-    		if(result > 0) {
-    		    String newPwd = request.getParameter("newPwd");
-    			String newPwd2 = request.getParameter("newPwd2");
-    			
-    			if(newPwd.equals(newPwd2)) {
-        			response.setContentType("text/html; charset=UTF-8");
-        			PrintWriter writer = response.getWriter();
-        			writer.println("<script>alert('비밀번호가 변경되었습니다.\\n로그인페이지로 이동합니다.'); location.href='views/member/login.jsp';</script>");
-        			writer.close();
-    			} else { // 수정 실패시
-        			response.setContentType("text/html; charset=UTF-8");
-        			PrintWriter writer = response.getWriter();
-        			writer.println("<script>alert('입력하신 비밀번호가 일치하지 않습니다.\\n다시 입력해주세요.'); location.href='views/member/idpwdChange.jsp';</script>");
-        			writer.close();
-        		}
-    		}
-        }
+		} else if(memberPwd.getBytes().length < 1) {
+			returnValue = "not";
+		} else if(!originalMember.getMemberPwd().equals(memberPwd)) {
+			returnValue = "not2";
+		} else if(newPwd.getBytes().length < 1 ) {
+			returnValue = "not3";
+		} else if(newPwdOK.getBytes().length < 1 ) {
+			returnValue = "not4";
+		} else if(!newPwd.equals(newPwdOK)) {
+			returnValue = "not5";
+		}
+		
+		//출력스트림 만들고 값 내보내기
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(returnValue);
+		out.flush();
+		out.close();
+
 	}
 }
