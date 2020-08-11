@@ -109,25 +109,25 @@
                                 <td>
                                     <% if (jboard.getJboardOrignalFilePath1() != null){ %>
                                     		<%= jboard.getJboardOrignalFilePath1() %> &nbsp;
-                                    		<input type = "checkbox" name= "delflag1" value="yes"> 파일삭제
+                                    		<input type = "checkbox" name= "delflag1" value="yes"> 1번째파일삭제
                                     		<br>
                                     		<%} %>
                                     <input type="file" name="upfile1" style="margin-bottom:10px;" accept="image/gif,image/jpeg,image/png"/>
                                     <% if (jboard.getJboardOrignalFilePath2() != null){ %>
                                     		<%= jboard.getJboardOrignalFilePath2() %> &nbsp;
-                                    		<input type = "checkbox" name= "delflag2" value="yes"> 파일삭제
+                                    		<input type = "checkbox" name= "delflag2" value="yes"> 2번째파일삭제
                                     		<br>
                                     		<%} %>
                                     <input type="file" name="upfile2" style="margin-bottom:10px;"accept="image/gif,image/jpeg,image/png"/>
                                     <% if (jboard.getJboardOrignalFilePath3() != null){ %>
                                     		<%= jboard.getJboardOrignalFilePath3() %> &nbsp;
-                                    		<input type = "checkbox" name= "delflag3" value="yes"> 파일삭제
+                                    		<input type = "checkbox" name= "delflag3" value="yes"> 3번째파일삭제
                                     		<br>
                                     		<%} %>
                                     <input type="file" name="upfile3" style="margin-bottom:10px;"accept="image/gif,image/jpeg,image/png"/>
                                     <% if (jboard.getJboardOrignalFilePath4() != null){ %>
                                     		<%= jboard.getJboardOrignalFilePath4() %> &nbsp;
-                                    		<input type = "checkbox" name= "delflag4" value="yes"> 파일삭제
+                                    		<input type = "checkbox" name= "delflag4" value="yes"> 4번째파일삭제
                                     		<br>
                                     		<%} %>
                                     <input type="file" name="upfile4" style="margin-bottom:10px;"accept="image/gif,image/jpeg,image/png"/>

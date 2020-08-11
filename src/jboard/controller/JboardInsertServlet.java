@@ -49,7 +49,7 @@ public class JboardInsertServlet extends HttpServlet {
 			view.forward(request, response);
 		}
 
-		int maxSize = 1024 * 1024 * 5; //용량 5메가로 제한
+		int maxSize = 1024 * 1024 * 10; //용량 5메가로 제한
 
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/jboardfiles");
 		// 4. request 를 MultipartRequest 로 변환해야 함

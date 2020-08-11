@@ -117,9 +117,9 @@
                 <% for (Jboard jboard : list ){ %>
                     <li onclick="location.href='/anavada/jbdetail?jboardno=<%= jboard.getJboardNo() %>&jbclist?jboardno=<%=jboard.getJboardNo()%>&page=<%=currentPage%>'">
                     <% if (jboard.getJboardRenameFilePath1() !=null){%>
-                        <div><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath1()%>+'1'"/></div>
+                        <div><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath1()%>"/></div>
                         <%}else{ %>
-                        <div><img src="/anavada/resources/jboardfiles/test/testImg.jpg"/></div>
+                        <div><img src="/anavada/resources/jboardfiles/테스트.jpg"/></div>
                         <%}  %>
                         <h2><%= jboard.getJboardTitle()%></h2>
                         <h3><%=jboard.getJboardPrice() %><span> 원 <%=jboard.getLocalNo() %></span></h3>

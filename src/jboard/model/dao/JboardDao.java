@@ -57,7 +57,7 @@ public class JboardDao {
 			int listCount = 0;
 			Statement stmt = null;
 			ResultSet rset = null;
-			System.out.println( "로컬값 :" +local + "titleSearch값 " + titleSearch);
+			//System.out.println( "로컬값 :" +local + "titleSearch값 " + titleSearch);
 			String query  = "SELECT COUNT(*) FROM JBOARD "
 			+(local != null && !local.equals("0") ? "WHERE LOCAL_NO ="+local : "");
 			
@@ -114,7 +114,7 @@ public class JboardDao {
 					query +=" AND RNUM >=? AND RNUM <=? ";
 			
 					
-				System.out.println(query);
+				//System.out.println(query);
 			
 			int startRow = (currentPage - 1) * limit + 1; 
 			int endRow = startRow + limit - 1;
@@ -280,7 +280,7 @@ public class JboardDao {
 					pstmt.setInt(15,  jboard.getJboardNo());
 					
 					result = pstmt.executeUpdate();
-					System.out.println(result);
+					System.out.println("업데이트 값 :"+result);
 			} catch (Exception e) {
 				 e.printStackTrace();
 			}finally {

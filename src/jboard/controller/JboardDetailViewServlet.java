@@ -49,8 +49,6 @@ public class JboardDetailViewServlet extends HttpServlet {
 				int commentListCount = jbcservice.getCommentCount(jboardno);
 				
 				
-				
-				System.out.println(commentListCount + "잘나오는지 한번 더 체크");
 				RequestDispatcher view = null;
 				if(jboard != null) {
 					view = request.getRequestDispatcher("views/jboard/product_view.jsp");

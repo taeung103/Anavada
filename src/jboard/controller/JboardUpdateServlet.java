@@ -51,7 +51,7 @@ public class JboardUpdateServlet extends HttpServlet {
 		}
 		
 		
-		int maxSize = 1024 * 1024 * 5;
+		int maxSize = 1024 * 1024 * 10;
 
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/jboardfiles");
 		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8",
@@ -70,15 +70,24 @@ public class JboardUpdateServlet extends HttpServlet {
 		int jboardNo = Integer.parseInt(mrequest.getParameter("jboardno"));
 		jboard.setJboardNo(jboardNo);
 		
+		File newOriginFile = null;
+		File originFile = null;
 		for (int i = 1; i<5 ; i++) {
 		String deleteFlag = mrequest.getParameter("delflag"+i);
 		String originFilePath = mrequest.getParameter("ofile"+i);
 		String renameFilePath = mrequest.getParameter("rfile"+i);
 		String originalFileName = mrequest.getFilesystemName("upfile"+i); 
-		
-		File newOriginFile = new File(savePath + "/" + originalFileName);
-		File originFile = new File(savePath + "/" + renameFilePath);
-		
+		 switch (i) {
+         case 1: newOriginFile = new File(savePath + "/" + originalFileName);
+            	 originFile = new File(savePath + "/" + renameFilePath);		break;
+         case 2: newOriginFile = new File(savePath + "/" + originalFileName);
+    	 		 originFile = new File(savePath + "/" + renameFilePath);		break;
+         case 3: newOriginFile = new File(savePath + "/" + originalFileName);
+    	 		 originFile = new File(savePath + "/" + renameFilePath);		break;
+         case 4: newOriginFile = new File(savePath + "/" + originalFileName);
+    	 		 originFile = new File(savePath + "/" + renameFilePath);		break;
+         }
+
 		if (originalFileName != null) {
 			
 			switch (i) {
@@ -92,7 +101,7 @@ public class JboardUpdateServlet extends HttpServlet {
 
 			String renameFileName = sdf.format(new java.sql.Date(System.currentTimeMillis()));
 
-			renameFileName +=i+ "." + originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+			renameFileName +=i+ "." + originFilePath.substring(originFilePath.lastIndexOf(".") + 1);
 
 			File renameFile = new File(savePath + "\\" + renameFileName);
 			if (!newOriginFile.renameTo(renameFile)) {
@@ -117,50 +126,48 @@ public class JboardUpdateServlet extends HttpServlet {
 			case 3 : jboard.setJboardRenameFilePath3(renameFileName);		break;
 			case 4 : jboard.setJboardRenameFilePath4(renameFileName);		break;
 			}
-			
+			//System.out.println("첫번째rename 값 : "+jboard.getJboardRenameFilePath1());
+			//System.out.println("첫번째original값:" + originalFileName);
 			if(originFilePath != null) {
 					originFile.delete();
 			}	
 		}else if (originFilePath != null && deleteFlag != null && deleteFlag.equals("yes")) {
-
+			//System.out.println("두번째rename 값 : "+jboard.getJboardRenameFilePath1());
+			//System.out.println("두번째original값:" + originalFileName);
 			switch (i) {
 			case 1 :jboard.setJboardOrignalFilePath1(null);
-					  jboard.setJboardRenameFilePath1(null);		break;
+					jboard.setJboardRenameFilePath1(null);		break;
 			case 2 :jboard.setJboardOrignalFilePath2(null);
-			  		  jboard.setJboardRenameFilePath2(null);		break;
+			  		jboard.setJboardRenameFilePath2(null);		break;
 			case 3 :jboard.setJboardOrignalFilePath3(null);
-			          jboard.setJboardRenameFilePath3(null);		break;
+			        jboard.setJboardRenameFilePath3(null);		break;
 			case 4 :jboard.setJboardOrignalFilePath4(null);
-			          jboard.setJboardRenameFilePath4(null);		break;
+			        jboard.setJboardRenameFilePath4(null);		break;
 			}
-		
-
 		originFile.delete();			
-		}else if(originFilePath != null && (originalFileName == null || originFilePath.equals(originalFileName)
-				&& newOriginFile.length() == originFile.length())) {
-			switch (i) {
-			case 1 :jboard.setJboardOrignalFilePath1(originFilePath);
-					  jboard.setJboardRenameFilePath1(renameFilePath);		break;
-			case 2 :jboard.setJboardOrignalFilePath1(originFilePath);
-			  		  jboard.setJboardRenameFilePath1(renameFilePath);		break;
-			case 3 :jboard.setJboardOrignalFilePath1(originFilePath);
-					  jboard.setJboardRenameFilePath1(renameFilePath);		break;
-			case 4 :jboard.setJboardOrignalFilePath1(originFilePath);
-			  		  jboard.setJboardRenameFilePath1(renameFilePath);		break;
+			} else if(originFilePath != null && (originFilePath.equals(originalFileName) &&
+				  newOriginFile.length() == originFile.length())||originalFileName == null ) {
+				   switch (i) { 
+				   case 1:jboard.setJboardOrignalFilePath1(originFilePath);
+				   		  jboard.setJboardRenameFilePath1(renameFilePath); break;
+				   case 2:jboard.setJboardOrignalFilePath1(originFilePath);
+			   		  jboard.setJboardRenameFilePath1(renameFilePath); break; 
+				   case 3:jboard.setJboardOrignalFilePath1(originFilePath);
+				   		  jboard.setJboardRenameFilePath1(renameFilePath); break; 
+				   case 4:jboard.setJboardOrignalFilePath1(originFilePath);
+				   		  jboard.setJboardRenameFilePath1(renameFilePath); break; 
 			}
-		
-		}
-		
 		}
 		int result = new JboardService().jboardUpdate(jboard);
-		System.out.println(result);
+		
 		if (result > 0) {
 			response.sendRedirect("jblist?page=" + currentPage);
 		} else {
 			view = request.getRequestDispatcher("views/common/error.jsp");
 			request.setAttribute("message", jboardNo +"번 게시원글 수정 실패!");
 			view.forward(request, response);
-	}
+		}
+		}
 	}
 
 	/**

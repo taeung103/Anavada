@@ -74,7 +74,6 @@ public class CommentDao {
 			close(rset);
 			close(stmt);
 		}
-		System.out.println(commentListCount+" 잘나오는지 체크");
 		return commentListCount;
 }
 	

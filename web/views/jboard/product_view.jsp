@@ -106,10 +106,26 @@
                     <dt>
                         <div class="swiper-container gallery-top">
                             <ul class="swiper-wrapper">
-                                <li class="swiper-slide"><img src="/anavada/resources/images/test/testImg.jpg"/></li>
-                                <li class="swiper-slide"><img src="/anavada/resources/images/test/testImg.jpg"/></li>
-                                <li class="swiper-slide"><img src="/anavada/resources/images/test/testImg.jpg"/></li>
-                                <li class="swiper-slide"><img src="/anavada/resources/images/test/testImg.jpg"/></li>
+                            <%if (jboard.getJboardRenameFilePath1() !=null){ %>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath1()%>"/></li>
+                                <%}else{ %>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/테스트.jpg"/></li>
+                                <%} %>
+                                 <%if (jboard.getJboardRenameFilePath1() !=null){ %>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath2()%>"/></li>
+                                <%}else{ %>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/테스트.jpg"/></li>
+                                <%} %>
+                                 <%if (jboard.getJboardRenameFilePath1() !=null){ %>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath3()%>"/></li>
+                                <%}else{ %>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/테스트.jpg"/></li>
+                                <%} %>
+                                 <%if (jboard.getJboardRenameFilePath1() !=null){ %>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath4()%>"/></li>
+                                <%}else{ %>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/테스트.jpg"/></li>
+                                <%} %>
                             </ul>
                             <!-- Add Arrows -->
                             <div class="swiper-button-next swiper-button-white"></div>
@@ -117,10 +133,10 @@
                         </div>
                         <div class="swiper-container gallery-thumbs">
                             <ol class="swiper-wrapper">
-                                <li class="swiper-slide"><img src="/anavada/resources/images/test/testImg.jpg"/></li>
-                                <li class="swiper-slide"><img src="/anavada/resources/images/test/testImg.jpg"/></li>
-                                <li class="swiper-slide"><img src="/anavada/resources/images/test/testImg.jpg"/></li>
-                                <li class="swiper-slide"><img src="/anavada/resources/images/test/testImg.jpg"/></li>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath1()%>"/></li>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath2()%>"/></li>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath3()%>"/></li>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath4()%>"/></li>
                             </ol>
                         </div>
     

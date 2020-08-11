@@ -35,6 +35,7 @@ public class JboardUpdateViewServlet extends HttpServlet {
 		int currentPage = Integer.parseInt(request.getParameter("page"));
 
 		Jboard jboard = new JboardService().selectJboard(jboardNo);
+		System.out.println("meet 값 :"+jboard.getJboardMeet());
 		RequestDispatcher view = null;
 		if (jboard != null) {
 				view = request.getRequestDispatcher("views/jboard/product_updateView.jsp");

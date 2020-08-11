@@ -40,10 +40,9 @@ public class JboardListViewServlet extends HttpServlet {
 		String listSearch = request.getParameter("listsearch");
 		
 		String local = request.getParameter("local");
-		System.out.println("local : " + local);
-		System.out.println("titleSearch : " + titleSearch);
-		System.out.println("listSearch : " + listSearch);
-		System.out.println(local);
+		//System.out.println("local : " + local);
+		//System.out.println("titleSearch : " + titleSearch);
+		//System.out.println("listSearch : " + listSearch);
 		if (listSearch== null|| listSearch.equals("null")) {
 			listSearch = null;
 		}
