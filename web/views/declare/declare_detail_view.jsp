@@ -63,6 +63,7 @@
                     <a href="/anavada/dbolist" class="btn btn-list">목록</a>
                     <!-- <a href="#none" class="btn btn-next">다음글</a> -->
                     <a href="/anavada/dboupmove.ad?dboNo=<%= dbo.getDboNo() %>" class="btn btn-list">상태 수정하기</a> &nbsp;
+                    <a hrdf="/anavada/dbodelete.ad?dboNo=<%= dbo.getDboNo()%>"class="btn btn-list">삭제하기</a>
                 </div>
             </div>
             <!-- 상세 끝 -->

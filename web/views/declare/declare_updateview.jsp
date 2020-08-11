@@ -34,18 +34,20 @@
             <!-- 상태수정page -->
             <div class="view-area">
 				<form action="/anavada/dboupdate.ad" method="post"
-					onesubmit="return validate();" enctype="multipart/form-data">
+					onesubmit="return validate();" >
 					<input type="hidden" name="no" value=<%= dbo.getDboNo() %>>
 					<h3 class="declare_btn2">
 						<span> <i class="glyphicon glyphicon-bell"></i>
 						<td>
 								<%if(dbo.getDboChe() != null ){%>								
 								<input type="radio" name="che" value="Y" >처리완료 
+								<input type="radio" name="che" value="N" >처리미완료
 								<% }else{ %>&nbsp; <% } %>
 						</td></span>
 					</h3>
 					<h2>
-						<span class="declare">신고</span><td><%= dbo.getDboTitle() %></td>
+						<span class="declare">신고</span>
+						<td><%= dbo.getDboTitle() %></td>
 					</h2>
 					<ul>
 					    <li><span>글번호 : </span>

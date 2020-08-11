@@ -38,12 +38,21 @@ public class DBoAdminUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 관리자용 신고게시판 수정 처리용 컨트롤러
 
+	
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		System.out.println("서블릿왓나?");
 		DBo dbo = new DBo();
 		
 		dbo.setDboChe(request.getParameter("che"));
-	System.out.println(dbo);
+		dbo.setDboNo(Integer.parseInt(request.getParameter("no")));
+	System.out.println("=============="
+			+request.getParameter("che")+request.getParameter("no"));
 						
 		int result = new DBoService().updateDBo(dbo);		
 
@@ -56,14 +65,6 @@ public class DBoAdminUpdateServlet extends HttpServlet {
 			request.setAttribute("message", dbo.getDboNo() + "번 공지사항 수정 실패!");
 			view.forward(request, response);
 		}
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }
