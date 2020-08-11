@@ -49,4 +49,16 @@ public class CreplyService {
 		close(conn);
 		return rlist;
 	}
+
+	public int deleteCreply(int creplyNum, int depth) {
+		Connection conn = getConnection();
+		int result = crdao.deleteCreply(conn, creplyNum, depth);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 }

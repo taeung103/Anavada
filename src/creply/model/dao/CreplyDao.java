@@ -18,7 +18,7 @@ public class CreplyDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = "select * from creply where cboard_no = ? and creply_depth = 1";
+		String query = "select * from creply where cboard_no = ? and creply_depth = 1 order by creply_no asc";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -52,7 +52,7 @@ public class CreplyDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = "select * from creply where cboard_no = ? and creply_depth = 2";
+		String query = "select * from creply where cboard_no = ? and creply_depth = 2 order by creply_no asc";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -121,6 +121,29 @@ public class CreplyDao {
 			pstmt.setString(3, creply.getCreplyContent());
 			if (creply.getParantReply() != 0) {
 				pstmt.setInt(4, creply.getParantReply());
+			}
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteCreply(Connection conn, int creplyNum, int depth) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "delete from creply where creply_no = ? "
+				+ (depth == 1 ? "or parant_reply = ?" : "");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, creplyNum);
+			if (depth == 1) {
+				pstmt.setInt(2, creplyNum);
 			}
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

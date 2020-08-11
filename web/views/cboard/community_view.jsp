@@ -23,13 +23,13 @@
 <%@ include file="../include/head.jsp"%>
 <script type="text/javascript">
 	$(function (){
-		$("#Subcmt_btn").click(function () {
+		$(".Subcmt_btn").click(function () {
 			$(this).siblings(".Subcmt").toggle(200);
 		});
 	});
 	$(function (){
 		$(".Subcmt_update_btn").click(function () {
-			$(this).next().toggle(200);
+			$(this).siblings(".Subcmt_update").toggle(200);
 		});
 	});
 </script>
@@ -167,10 +167,11 @@
 								<span><%= c.getCreplyDate() %></span>
 							</div>
 							<p><%= c.getCreplyContent() %></p>
-							<button id="Subcmt_btn">대댓글</button>
+							<button class="Subcmt_btn">대댓글</button>
 							<% if(loginMember != null && loginMember.getMemberId().equals(c.getMemberId())) { %>
-							<button style="float: right;">삭제</button>
+							<button onclick="location.href='/anavada/crdelete?crnum=<%= c.getCreplyNo() %>&depth=<%= c.getCreplyDepth() %>&cnum=<%= cboard.getCboardNo() %>'" style="float: right;">삭제</button>
 							<button class="Subcmt_update_btn" style="float: right;margin-right: 10px;">수정</button>
+									<!-- 댓글수정입력 폼 시작 -->
 									<div class="Subcmt_update" style="display: none;">
 										<form action="scwrite.ss" method="post">
 										<fieldset>
@@ -185,6 +186,7 @@
 										</fieldset>
 										</form>
 									</div>
+									<!-- 댓글수정입력 폼 끝 -->
 							<% } %>
 							<% if(loginMember != null) { %>
 								<div class="Subcmt" style="display: none;">
@@ -204,6 +206,7 @@
 										</fieldset>
 									</form>
 								</div>
+									
 								<% } %>
 								<% for(Creply sc : srlist) { %>
 								<% if(c.getCreplyNo() == sc.getParantReply()) { %>
@@ -214,10 +217,11 @@
 									</div>
 									<p><%= sc.getCreplyContent() %></p>
 									<% if(loginMember != null && loginMember.getMemberId().equals(sc.getMemberId())) { %>
-									<button style="float: right;">삭제</button>
+									<button onclick="location.href='/anavada/crdelete?crnum=<%= sc.getCreplyNo() %>&depth=<%= sc.getCreplyDepth() %>&cnum=<%= cboard.getCboardNo() %>'" style="float: right;">삭제</button>
 									<button class="Subcmt_update_btn" style="float: right;margin-right: 10px;">수정</button>
 									<div class="Subcmt_update" style="display: none;">
-										<form action="scwrite.ss" method="post">
+										<form action="crupdate.ss" method="post">
+										<input type="hidden" name="prnum" value="<%=c.getCreplyNo()%>">
 										<fieldset>
 											<div class="cmt_form">
 												<div class="cmt_body">
