@@ -34,7 +34,6 @@ public class CreplyDao {
 				creply.setCreplyDate(rset.getDate("creply_date"));
 				creply.setCreplyContent(rset.getString("creply_content"));
 				creply.setParantReply(rset.getInt("parant_reply"));
-				creply.setCreplyOrder(rset.getInt("creply_order"));
 				creply.setCreplyDepth(rset.getInt("creply_depth"));
 				
 				rlist.add(creply);
@@ -69,7 +68,6 @@ public class CreplyDao {
 				creply.setCreplyDate(rset.getDate("creply_date"));
 				creply.setCreplyContent(rset.getString("creply_content"));
 				creply.setParantReply(rset.getInt("parant_reply"));
-				creply.setCreplyOrder(rset.getInt("creply_order"));
 				creply.setCreplyDepth(rset.getInt("creply_depth"));
 				
 				srlist.add(creply);
@@ -113,7 +111,6 @@ public class CreplyDao {
 		
 		String query = "insert into creply values(CREPLY_SEQ.nextval, ?, ?, sysdate, ?, "
 				+ (creply.getParantReply() != 0 ? "?, " : "null, ")
-				+ "null, "
 				+ (creply.getParantReply() != 0 ? "2" : "1")
 				+ ")";
 		
