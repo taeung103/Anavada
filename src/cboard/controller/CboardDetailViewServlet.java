@@ -1,6 +1,7 @@
 package cboard.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import cboard.model.service.CboardService;
 import cboard.model.vo.Cboard;
+import creply.model.service.CreplyService;
+import creply.model.vo.Creply;
 
 /**
  * Servlet implementation class CboardDetailViewServlet
@@ -31,6 +34,8 @@ public class CboardDetailViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		
 		int cboardNum = Integer.parseInt(request.getParameter("cnum"));
 		int currentPage = 1;
 		if (request.getParameter("page") != null) {
@@ -46,23 +51,25 @@ public class CboardDetailViewServlet extends HttpServlet {
 		
 		cservice.addReadCount(cboardNum);
 		
-		Cboard cboard = cservice.selectCBoard(cboardNum);
-
-		System.out.println(cboard);
-		System.out.println(currentPage);
-		System.out.println(local);
-		System.err.println(search);
-		System.out.println(keyword);
+		Cboard cboard = cservice.selectCboard(cboardNum);
+		
+		CreplyService crservice = new CreplyService();
+		ArrayList<Creply> rlist = crservice.creplyList(cboardNum);
+		ArrayList<Creply> srlist = crservice.subCreplyList(cboardNum);
+		int allReplyCount = crservice.allReplyCount(cboardNum);
 		
 		RequestDispatcher view = null;
 		if (cboard != null) {
 			view = request.getRequestDispatcher("views/cboard/community_view.jsp");
+			request.setAttribute("rlist", rlist);
+			request.setAttribute("srlist", srlist);
 			request.setAttribute("cboard", cboard);
 			request.setAttribute("page", currentPage);
 			request.setAttribute("local", local);
 			request.setAttribute("search", search);
 			request.setAttribute("keyword", keyword);
 			request.setAttribute("allListCount", allListCount);
+			request.setAttribute("allReplyCount", allReplyCount);
 			view.forward(request, response);
 		} else {
 			view = request.getRequestDispatcher("views/common/error.jsp");

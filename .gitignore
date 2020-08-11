@@ -3,4 +3,6 @@
 *.classpath
 */classes/*
 *.class
-/jspwork/
+/jspwork/*
+/dpscript/
+

@@ -35,9 +35,9 @@ public class CboardService {
 		close(conn);
 	}
 
-	public Cboard selectCBoard(int cboardNum) {
+	public Cboard selectCboard(int cboardNum) {
 		Connection conn = getConnection();
-		Cboard cboard = cdao.selectBoard(conn, cboardNum);
+		Cboard cboard = cdao.selectCboard(conn, cboardNum);
 		close(conn);
 		return cboard;
 	}
@@ -48,5 +48,74 @@ public class CboardService {
 		close(conn);
 		return listCount;
 	}
+
+	public int insertCboard(Cboard cboard) {
+		Connection conn = getConnection();
+		int result = cdao.insertCboard(conn, cboard);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public int deleteCboard(int cboardNum) {
+		Connection conn = getConnection();
+		int result = cdao.deleteCboard(conn, cboardNum);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public int updateCboard(Cboard cboard) {
+		Connection conn = getConnection();
+		int result = cdao.updateCboard(conn, cboard);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public int upLikeCount(int cboardNum) {
+		Connection conn = getConnection();
+		int result = cdao.upLikeCount(conn, cboardNum);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public int upReportCount(int cboardNum) {
+		Connection conn = getConnection();
+		int result = cdao.upReportCount(conn, cboardNum);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public ArrayList<Cboard> selectTop2() {
+		Connection conn = getConnection();
+		ArrayList<Cboard> list = cdao.selectTop2(conn);
+		close(conn);
+		return list;
+	}
+
+	
 
 }

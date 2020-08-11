@@ -146,13 +146,12 @@ public class CboardDao {
 		return result;
 	}
 
-	public Cboard selectBoard(Connection conn, int cboardNum) {
+	public Cboard selectCboard(Connection conn, int cboardNum) {
 		Cboard cboard = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		String query = "select * from cboard where cboard_no = ?";
-		System.out.println(query);
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -196,7 +195,7 @@ public class CboardDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		
-		String query = "select count(*) from cboard ";
+		String query = "select max(cboard_no) from cboard";
 		
 		try {
 			stmt = conn.createStatement();
@@ -213,5 +212,156 @@ public class CboardDao {
 		}
 		return allListCount;
 	}
+
+	public int insertCboard(Connection conn, Cboard cboard) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "insert into cboard values(cboard_seq.nextval, ?, ?, ?, sysdate, null, default, default, default, default, default, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, cboard.getMemberId());
+			pstmt.setString(2, cboard.getCboardTitle());
+			pstmt.setString(3, cboard.getCboardContent());
+			pstmt.setString(4, cboard.getLocalNo());
+			pstmt.setString(5, cboard.getCfilesOriginalFilepath1());
+			pstmt.setString(6, cboard.getCfilesRenameFilepath1());
+			pstmt.setString(7, cboard.getCfilesOriginalFilepath2());
+			pstmt.setString(8, cboard.getCfilesRenameFilepath2());
+			pstmt.setString(9, cboard.getCfilesOriginalFilepath3());
+			pstmt.setString(10, cboard.getCfilesRenameFilepath3());
+			pstmt.setString(11, cboard.getCfilesOriginalFilepath4());
+			pstmt.setString(12, cboard.getCfilesRenameFilepath4());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteCboard(Connection conn, int cboardNum) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "delete from cboard where cboard_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, cboardNum);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateCboard(Connection conn, Cboard cboard) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update cboard set cboard_title = ?, cboard_content = ?, cfiles_original_filepath1 = ?, cfiles_rename_filepath1 = ?, cfiles_original_filepath2 = ?, cfiles_rename_filepath2 = ?, "
+				+ " cfiles_original_filepath3 = ?, cfiles_rename_filepath3 = ?, cfiles_original_filepath4 = ?, cfiles_rename_filepath4 = ?, cboard_lastmodified = sysdate, local_no = ? where cboard_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, cboard.getCboardTitle());
+			pstmt.setString(2, cboard.getCboardContent());
+			pstmt.setString(3, cboard.getCfilesOriginalFilepath1());
+			pstmt.setString(4, cboard.getCfilesRenameFilepath1());
+			pstmt.setString(5, cboard.getCfilesOriginalFilepath2());
+			pstmt.setString(6, cboard.getCfilesRenameFilepath2());
+			pstmt.setString(7, cboard.getCfilesOriginalFilepath3());
+			pstmt.setString(8, cboard.getCfilesRenameFilepath3());
+			pstmt.setString(9, cboard.getCfilesOriginalFilepath4());
+			pstmt.setString(10, cboard.getCfilesRenameFilepath4());
+			pstmt.setString(11, cboard.getLocalNo());
+			pstmt.setInt(12, cboard.getCboardNo());
+			System.out.println(cboard.getLocalNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int upLikeCount(Connection conn, int cboardNum) {
+		int result = 0;
+		Statement stmt = null;
+		
+		String query = "update cboard set cboard_likecount = (cboard_likecount + 1) where cboard_no = " + cboardNum;
+		
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(query); 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);;
+		}
+		return result;
+	}
+
+	public int upReportCount(Connection conn, int cboardNum) {
+		int result = 0;
+		Statement stmt = null;
+		
+		String query = "update cboard set cboard_reportcount = (cboard_reportcount + 1) where cboard_no = " + cboardNum;
+		
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(query); 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);;
+		}
+		return result;
+	}
+
+	public ArrayList<Cboard> selectTop2(Connection conn) {
+		ArrayList<Cboard> list = new ArrayList<Cboard>();
+		Statement stmt = null;
+		ResultSet rset = null;
+		String query = "select * "  
+								+ "from (select rownum rnum, cboard_no, local_no, cboard_title, cboard_content, "
+								+ "cboard_likecount, cboard_viewcount " 
+								+ "from (select * from cboard "  
+								+ "order by cboard_viewcount desc))"  
+								+ "where rnum >= 1 and rnum <= 2";
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			while (rset.next()) {
+				Cboard cboard = new Cboard();
+				
+				cboard.setCboardNo(rset.getInt("cboard_no"));
+				cboard.setLocalNo(rset.getString("local_no"));
+				cboard.setCboardTitle(rset.getString("cboard_title"));
+				cboard.setCboardContent(rset.getString("cboard_content"));
+				cboard.setLikeCount(rset.getInt("cboard_likecount"));
+				cboard.setCboardViewCount(rset.getInt("cboard_viewcount"));
+				
+				list.add(cboard);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		return list;
+	} 
 
 }

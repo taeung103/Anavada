@@ -1,9 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@page
-	import="cboard.model.vo.Cboard, java.util.ArrayList, java.sql.Date"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page import="cboard.model.vo.Cboard, java.util.ArrayList, java.sql.Date"%>
 <%
-	ArrayList<Cboard> list = (ArrayList<Cboard>) request.getAttribute("list");
+	ArrayList<Cboard> list = (ArrayList<Cboard>)request.getAttribute("list");
 	String local = String.valueOf(request.getAttribute("local"));
 	String search = String.valueOf(request.getAttribute("search"));
 	String keyword = String.valueOf(request.getAttribute("keyword"));
@@ -12,22 +10,19 @@
 	int endPage = ((Integer) request.getAttribute("endPage")).intValue();
 	int maxPage = ((Integer) request.getAttribute("maxPage")).intValue();
 	int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
-	
-	String[] localArr = { "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구" };
+	String[] localArr = { "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", 
+			"서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구" };
 %>
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="../include/head.jsp"%>
+	<%@ include file="../include/head.jsp"%>
 </head>
-<body oncontextmenu="return false" onselectstart="return false"
-	ondragstart="return false">
+<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
 	<div id="wrap">
 		<%@ include file="../include/header.jsp"%>
-
 		<!-- 컨텐츠 -->
 		<div id="content">
-
 			<!--서브 비주얼/타이틀-->
 			<div class="visual-sub-vagas community-vagas">
 				<div class="vsv-copy sub-title">
@@ -48,13 +43,13 @@
 
 			<!-- 리스트 -->
 			<div class="list-area">
-				<!--종류 리스트-->
+				<!-- 지역 종류 리스트-->
 				<div class="sort-area">
-					<h4>
-						전체 게시글
-						<%=listCount%>개
-					</h4>
-					<a href="community_write.jsp" class="write_btn">글쓰기</a>
+					<h4>전체 게시글	<%=listCount%>개</h4>
+					<% if(loginMember != null) {%>
+						<a href="views/cboard/community_write.jsp" class="write_btn">글쓰기</a>
+					<% } %>
+					
 					<div>
 						<form action="/anavada/clistview" method="get" style="display: inline-block;">
 							지역 분류 : 
@@ -87,6 +82,7 @@
 								<option value="25"<% if (local.equals("25")) { %>selected="selected"<% } %>>중랑구</option>
 							</select>
 						</form>
+						
 						<form action="/anavada/clistview"  style="display: inline-block;">
 							<input type="hidden" name="local" value="<%=local%>">
 							<select name="search" class="ListSelect">
@@ -94,58 +90,44 @@
 								<option value="content">내용</option>
 								<option value="writer">작성자</option>
 							</select> <input type="text" name="keyword" placeholder="검색어를 입력해주세요.">
-							<button class="top-search" type="submit">
-								<i class="xi-search"></i>
-							</button>
+							<button class="top-search" type="submit"><i class="xi-search"></i></button>
 						</form>
 					</div>
 				</div>
 
 				<table class="cmnt_list">
 					<tbody>
-						<%
-							for (Cboard c : list) {
-						%>
-						<tr onclick="location.href='/anavada/cdetail?cnum=<%=c.getCboardNo()%>&page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>'">
-							<td class="number"><%=c.getCboardNo()%></td>
-							<td class="title">
-								<h2>
-									<span><%= localArr[Integer.parseInt(c.getLocalNo()) - 1] %></span><%=c.getCboardTitle()%>
-								</h2>
-								<ul>
-									<li>작성자 : <%=c.getMemberId()%></li>
-									<li>작성일 : <%=c.getDate()%></li>
-									<li>조회수 : <%=c.getCboardViewCount()%></li>
-									<li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%=c.getLikeCount()%></span></i></li>
-								</ul>
-							</td>
-							<td class="fileDown"><i class="glyphicon glyphicon-picture"></i></td>
-						</tr>
-						<%
-							}
-						%>
-					</tbody>
-				</table>
+						<% for (Cboard c : list) { %>
+							<tr onclick="location.href='/anavada/cdetail?cnum=<%=c.getCboardNo()%>&page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>'">
+								<td class="number"><%=c.getCboardNo()%></td>
+								<td class="title">
+									<h2>
+										<span><%= localArr[Integer.parseInt(c.getLocalNo()) - 1] %></span><%=c.getCboardTitle()%>
+									</h2>
+									<ul>
+										<li>작성자 : <%=c.getMemberId()%></li>
+										<li>작성일 : <%=c.getDate()%></li>
+										<li>조회수 : <%=c.getCboardViewCount()%></li>
+										<li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%=c.getLikeCount()%></span></i></li>
+									</ul>
+								</td>
+								<td class="fileDown"><i class="glyphicon glyphicon-picture"></i></td>
+							</tr>
+						<% } %>
+						</tbody>
+					</table>
 
-
-				<div class="list-no">
-					<%
-						if (currentPage + 1 > maxPage) {
-					%>
-					<p>
-						<img src="/anavada/resources/images/btnIcn/icn_big_listNo.png"
-							alt="" title="" />
-					</p>
-					<h1>목록이 없습니다.</h1>
-					<%
-						}
-					%>
-
-				</div>
-
+					<div class="list-no">
+						<% if (currentPage + 1 > maxPage) {	%>
+							<p><img src="/anavada/resources/images/btnIcn/icn_big_listNo.png" alt="" title="" /></p>
+							<h1>목록이 없습니다.</h1>
+						<% } %>
+					</div>
 
 				<div class="write-btn">
-					<a href="community_write.jsp">글쓰기</a>
+					<% if(loginMember != null) {%>
+					<a href="views/cboard/community_write.jsp">글쓰기</a>
+					<% } %>
 				</div>
 
 			</div>
@@ -158,7 +140,7 @@
 			<!-- 페이지넘버 -->
 			<dl class="list-paging pb80">
 				<dd>
-					 <%
+					<%
 						if (currentPage <= 1) {
 					%>
 					<a><i class="glyphicon glyphicon-backward"></i></a>
