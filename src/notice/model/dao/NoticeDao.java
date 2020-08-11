@@ -156,7 +156,6 @@ public class NoticeDao {
 		
 		int startRow = (currentPage - 1) * limit +1;
 		int endRow = startRow + limit - 1;
-		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, "%" + keyword + "%");

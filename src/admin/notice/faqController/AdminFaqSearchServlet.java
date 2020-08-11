@@ -14,16 +14,16 @@ import faq.model.service.FaqService;
 import faq.model.vo.Faq;
 
 /**
- * Servlet implementation class AdminFaqListServlet
+ * Servlet implementation class AdminInquirySearchServlet
  */
-@WebServlet("/aflist.ss")
-public class AdminFaqListServlet extends HttpServlet {
+@WebServlet("/afsearch")
+public class AdminFaqSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminFaqListServlet() {
+    public AdminFaqSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,6 +32,12 @@ public class AdminFaqListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8"); //필터생기면 지우기
+		
+		String selected = request.getParameter("selected");
+		String keyword = request.getParameter("keyword");
+		FaqService iservice = new FaqService();
+		
 		int currentPage = 1;
 		if(request.getParameter("page") != null)
 			currentPage = Integer.parseInt(request.getParameter("page"));
@@ -39,16 +45,19 @@ public class AdminFaqListServlet extends HttpServlet {
 		int countList = 6;
 		int countPage = 10;
 		
-		FaqService iservice = new FaqService();
-		int totalList = iservice.getListCount();
+		int totalList = 0;
 		
-		int totalPage = (int)(((double)totalList / countList) + 0.9);
-		int startPage = ((int)(((double)currentPage / countPage) + 0.9) - 1) * countPage + 1;
+		ArrayList<Faq> list = null;
+		switch(selected) {
+		case "title" : list = iservice.searchTorC(currentPage, countList, keyword, "t"); totalList = iservice.getListCount("t", keyword); break;
+		case "content" : list = iservice.searchTorC(currentPage, countList, keyword, "c"); totalList = iservice.getListCount("c", keyword); break;
+		}
+		
+		int totalPage = (int)((double)totalList / countList + 0.9) ;
+		int startPage = (((int)((double)currentPage / countPage + 0.9)) - 1) * countPage + 1;
 		int endPage = startPage + countPage - 1;
 		if(endPage > totalPage)
 			endPage = totalPage;
-		
-		ArrayList<Faq> list = iservice.selectAll(currentPage, countList);
 		
 		RequestDispatcher view = null;
 		if(list.size() > -1) {
@@ -56,9 +65,11 @@ public class AdminFaqListServlet extends HttpServlet {
 			request.setAttribute("list", list);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("totalPage", totalPage);
-			request.setAttribute("totalList", totalList);
 			request.setAttribute("startPage", startPage);
 			request.setAttribute("endPage", endPage);
+			request.setAttribute("totalList", totalList);
+			request.setAttribute("keyword", keyword);
+			request.setAttribute("selected", selected);
 			view.forward(request, response);
 		}
 	}
