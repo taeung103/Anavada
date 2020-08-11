@@ -327,6 +327,40 @@ public class CboardDao {
 			close(stmt);;
 		}
 		return result;
+	}
+
+	public ArrayList<Cboard> selectTop2(Connection conn) {
+		ArrayList<Cboard> list = new ArrayList<Cboard>();
+		Statement stmt = null;
+		ResultSet rset = null;
+		String query = "select * "  
+								+ "from (select rownum rnum, local_no, cboard_title, cboard_content, "
+								+ "cboard_likecount, cboard_viewcount " 
+								+ "from (select * from cboard "  
+								+ "order by cboard_viewcount desc))"  
+								+ "where rnum >= 1 and rnum <= 2";
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			while (rset.next()) {
+				Cboard cboard = new Cboard();
+				
+				cboard.setLocalNo(rset.getString("local_no"));
+				cboard.setCboardTitle(rset.getString("cboard_title"));
+				cboard.setCboardContent(rset.getString("cboard_content"));
+				cboard.setLikeCount(rset.getInt("cboard_likecount"));
+				cboard.setCboardViewCount(rset.getInt("cboard_viewcount"));
+				
+				list.add(cboard);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		return list;
 	} 
 
 }

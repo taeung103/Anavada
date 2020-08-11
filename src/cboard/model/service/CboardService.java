@@ -109,6 +109,13 @@ public class CboardService {
 		return result;
 	}
 
+	public ArrayList<Cboard> selectTop2() {
+		Connection conn = getConnection();
+		ArrayList<Cboard> list = cdao.selectTop2(conn);
+		close(conn);
+		return list;
+	}
+
 	
 
 }
