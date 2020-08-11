@@ -18,6 +18,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import jboard.ImageUtil;
 import jboard.model.service.JboardService;
 import jboard.model.vo.Jboard;
 
@@ -40,81 +41,61 @@ public class JboardUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//게시 원글 수정 처리용 컨트롤러
-		//첨부파일 전송 기능이 있음.
-
-		// 1. multipart 방식으로 인코딩되어서 전송되었는지 확인함
+				
+		
 		RequestDispatcher view = null;
-		if (!ServletFileUpload.isMultipartContent(request)) { // multipart방식으로 전송이 오지 않았다면
+		if (!ServletFileUpload.isMultipartContent(request)) {
 			view = request.getRequestDispatcher("views/common/error.jsp");
 			request.setAttribute("message", "form 의 enctype='multipart/form-data' 속성 누락됨");
 			view.forward(request, response);
 		}
-
+		
+		
 		int maxSize = 1024 * 1024 * 5;
 
-		// 3. 업로드되는 파일의 저장 폴더 지정하기
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/jboardfiles");
-		// 4. request 를 MultipartRequest 로 변환해야 함
-		// cos.jar 가 제공하는 클래스를 사용함
-		// 전송온 파일은 자동 지정 폴더에 저장됨
 		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8",
 				new DefaultFileRenamePolicy());
-		// new DefaultFileRenamePolicy()폴더에 같은 이름이 있으면 파일명(1) 이런식으로 변경
-
-		// 5. 데이터베이스에 기록할 값 꺼내기
-		// mrequest 로 추출해야함
 
 		Jboard jboard = new Jboard();
-
+		jboard.setJboardPost(mrequest.getParameter("post"));
+		jboard.setJboardMeet(mrequest.getParameter("meet"));
+		jboard.setLocalNo(mrequest.getParameter("local"));
 		jboard.setJboardTitle(mrequest.getParameter("title"));
+		jboard.setJboardPrice(Integer.parseInt(mrequest.getParameter("price")));
 		jboard.setJboardContent(mrequest.getParameter("content"));
-		int jboardNo = Integer.parseInt(mrequest.getParameter("bnum"));
-		jboard.setJboardNo(jboardNo);
+		jboard.setMemberId(mrequest.getParameter("memberid"));
+		
 		int currentPage = Integer.parseInt(mrequest.getParameter("page"));
+		int jboardNo = Integer.parseInt(mrequest.getParameter("jboardno"));
+		jboard.setJboardNo(jboardNo);
 		
-		//이전 등록 파일 삭제 여부 값 추출
-		String deleteFlag = mrequest.getParameter("delflag");
+		for (int i = 1; i<5 ; i++) {
+		String deleteFlag = mrequest.getParameter("delflag"+i);
+		String originFilePath = mrequest.getParameter("ofile"+i);
+		String renameFilePath = mrequest.getParameter("rfile"+i);
+		String originalFileName = mrequest.getFilesystemName("upfile"+i); 
 		
-		//이전 등록 파일명 추출
-		String originFilePath = mrequest.getParameter("ofile1");
-		String renameFilePath = mrequest.getParameter("rfile1");
-		
-		// 새로운 첨부 파일명 추출
-		String originalFileName = mrequest.getFilesystemName("upfile"); 
-		
-		//원래 파일과 새로 업로드된 파일의 이름이 같고,
-		//파일 용량도 동일하면 원래 이름 그대로 객체에 기록함
-		//업로드된  파일의 File 객체 만들기
 		File newOriginFile = new File(savePath + "/" + originalFileName);
-		//이전 저장된 파일의 File 객체 만들기
 		File originFile = new File(savePath + "/" + renameFilePath);
 		
-		// 첨부파일이 없었는데 추가된 경우와
-		// 첨부파일이 있는데 변경된 경우 둘 다 해당됨
 		if (originalFileName != null) {
-			jboard.setJboardOrignalFilePath1(originalFileName);
 			
-			// 새로운 첨부파일이 있을 때만 이름바꾸기 실행함
-			// 바꿀 파일명에 대한 포맷 문자열 만들기 : 년월일시분초 형식으로
+			switch (i) {
+			case 1 : jboard.setJboardOrignalFilePath1(originalFileName);		break;
+			case 2 : jboard.setJboardOrignalFilePath2(originalFileName);		break;
+			case 3 : jboard.setJboardOrignalFilePath3(originalFileName);		break;
+			case 4 : jboard.setJboardOrignalFilePath4(originalFileName);		break;
+			}
+
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyMMddHHmmss");
-			// 바꿀 파일명 만들기
-			// sdf.format(new java.sql.Date(System.currentTimeMillis())) => 파일명
-			// originalFileName.substring(originalFileName.lastIndexOf(".")+1); => 확장자명
-			// 업로드된 파일의 확장자를 추출해서 , 새 파일명에 붙여줌
+
 			String renameFileName = sdf.format(new java.sql.Date(System.currentTimeMillis()));
 
-			// 업로드된 파일의 확장자를 추출해서 , 새 파일명에 붙여줌
-			renameFileName += "." + originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+			renameFileName +=i+ "." + originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
 
-			// 원본 파일명 rename 처리를 위해서 File 객체 만들기
 			File renameFile = new File(savePath + "\\" + renameFileName);
-
-			// 이름 바꾸기 실행함
 			if (!newOriginFile.renameTo(renameFile)) {
-				// renameTo() 메소드가 실패(false)한 경우에 직접 바꾸기함
-				// 원본 파일 내용 읽어서, 복사본에 기록하고
-				// 완료되면, 원본 파일 삭제함
 				FileInputStream fin = new FileInputStream(newOriginFile);
 				FileOutputStream fout = new FileOutputStream(renameFile);
 				int data = -1;
@@ -125,35 +106,54 @@ public class JboardUpdateServlet extends HttpServlet {
 
 				fin.close();
 				fout.close();
-				newOriginFile.delete(); // 새로 업로드된 원본 파일 삭제함
-			} // 직접 이름 바꾸기
-			jboard.setJboardRenameFilePath1(renameFileName);
+				newOriginFile.delete(); 
+			} 
 			
-			//이전 첨부파일이 있었다면
-			if(originFilePath != null) {
-					originFile.delete();
+			ImageUtil.resize(renameFile, renameFile, 450, 450); // 새로 업로드 된 파일 리사이즈
+			
+			switch (i) {
+			case 1 : jboard.setJboardRenameFilePath1(renameFileName);		break;
+			case 2 : jboard.setJboardRenameFilePath2(renameFileName);		break;
+			case 3 : jboard.setJboardRenameFilePath3(renameFileName);		break;
+			case 4 : jboard.setJboardRenameFilePath4(renameFileName);		break;
 			}
 			
-		}else if (originFilePath != null && deleteFlag != null
-				&& deleteFlag.equals("yes")) {
-		//원래 첨부파일이 있었는데 파일삭제가 선택된 경우
-		jboard.setJboardOrignalFilePath1(null);
-		jboard.setJboardRenameFilePath1(null);
-		
-		//폴더에 저장된 파일도 삭제함
-		originFile.delete();			
-		}else if(originFilePath != null && (originalFileName == null || 
-				originFilePath.equals(originalFileName)
-				&& newOriginFile.length() == originFile.length())) {
-			//원래 첨부파일이 있었는데 변경되지 않은 경우
-			jboard.setJboardOrignalFilePath1(originFilePath);
-			jboard.setJboardRenameFilePath1(renameFilePath);
-		}
-		// 6.서비스 객체 생성하고 메소드로 notice 객체 전달하고
-		// 처리된 결과 받기
-		int result = new JboardService().jboardUpdate(jboard);
+			if(originFilePath != null) {
+					originFile.delete();
+			}	
+		}else if (originFilePath != null && deleteFlag != null && deleteFlag.equals("yes")) {
 
-		// 7.받은 결과로 성공/실패 페이지 내보내기
+			switch (i) {
+			case 1 :jboard.setJboardOrignalFilePath1(null);
+					  jboard.setJboardRenameFilePath1(null);		break;
+			case 2 :jboard.setJboardOrignalFilePath2(null);
+			  		  jboard.setJboardRenameFilePath2(null);		break;
+			case 3 :jboard.setJboardOrignalFilePath3(null);
+			          jboard.setJboardRenameFilePath3(null);		break;
+			case 4 :jboard.setJboardOrignalFilePath4(null);
+			          jboard.setJboardRenameFilePath4(null);		break;
+			}
+		
+
+		originFile.delete();			
+		}else if(originFilePath != null && (originalFileName == null || originFilePath.equals(originalFileName)
+				&& newOriginFile.length() == originFile.length())) {
+			switch (i) {
+			case 1 :jboard.setJboardOrignalFilePath1(originFilePath);
+					  jboard.setJboardRenameFilePath1(renameFilePath);		break;
+			case 2 :jboard.setJboardOrignalFilePath1(originFilePath);
+			  		  jboard.setJboardRenameFilePath1(renameFilePath);		break;
+			case 3 :jboard.setJboardOrignalFilePath1(originFilePath);
+					  jboard.setJboardRenameFilePath1(renameFilePath);		break;
+			case 4 :jboard.setJboardOrignalFilePath1(originFilePath);
+			  		  jboard.setJboardRenameFilePath1(renameFilePath);		break;
+			}
+		
+		}
+		
+		}
+		int result = new JboardService().jboardUpdate(jboard);
+		System.out.println(result);
 		if (result > 0) {
 			response.sendRedirect("jblist?page=" + currentPage);
 		} else {

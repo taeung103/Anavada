@@ -11,7 +11,7 @@
    int startPage = ((Integer) request.getAttribute("startPage")).intValue();
    int endPage = ((Integer) request.getAttribute("endPage")).intValue();
    int maxPage = ((Integer) request.getAttribute("maxPage")).intValue();
-   int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
+   int currentPage = ((Integer) request.getAttribute("page")).intValue();
    	String titleSearch = request.getParameter("titlesearch");
 	String local = request.getParameter("local"); 
     String listSearch = request.getParameter("listsearch");
@@ -115,7 +115,7 @@
 
                 <ul class="product">
                 <% for (Jboard jboard : list ){ %>
-                    <li onclick="location.href='/anavada/jbdetail?jboardno=<%= jboard.getJboardNo() %>&jbclist?jboardno=<%=jboard.getJboardNo()%>'">
+                    <li onclick="location.href='/anavada/jbdetail?jboardno=<%= jboard.getJboardNo() %>&jbclist?jboardno=<%=jboard.getJboardNo()%>&page=<%=currentPage%>'">
                     <% if (jboard.getJboardRenameFilePath1() !=null){%>
                         <div><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath1()%>+'1'"/></div>
                         <%}else{ %>

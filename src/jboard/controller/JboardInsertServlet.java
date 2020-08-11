@@ -1,6 +1,5 @@
 package jboard.controller;
 
-import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -18,9 +17,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import com.sun.jimi.core.Jimi;
-import com.sun.jimi.core.JimiUtils;
-
+import jboard.ImageUtil;
 import jboard.model.service.JboardService;
 import jboard.model.vo.Jboard;
 
@@ -72,11 +69,10 @@ public class JboardInsertServlet extends HttpServlet {
 		jboard.setMemberId(mrequest.getParameter("memberid"));
 	
 		
-		System.out.println(jboard);
 		
 		for ( int i=1 ; i<5;i++) {
 		String originalFileName= mrequest.getFilesystemName("ofile" +i);
-		System.out.println(originalFileName);
+		System.out.println("ofile"+i);
 		switch (i) {
 		case 1: jboard.setJboardOrignalFilePath1(originalFileName); break;
 		case 2: jboard.setJboardOrignalFilePath2(originalFileName); break;
@@ -87,10 +83,10 @@ public class JboardInsertServlet extends HttpServlet {
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyMMddHHmmss");
 			String renameFileName = sdf.format(new java.sql.Date(System.currentTimeMillis()));
-			renameFileName += "." + originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+			renameFileName +=i +"." + originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+			
 			File originFile = new File(savePath + "\\" + originalFileName);
 			File renameFile = new File(savePath + "\\" + renameFileName);
-
 			if (!originFile.renameTo(renameFile)) {
 				FileInputStream fin = new FileInputStream(originFile);
 				FileOutputStream fout = new FileOutputStream(renameFile);
@@ -104,40 +100,20 @@ public class JboardInsertServlet extends HttpServlet {
 				fout.close();
 				originFile.delete(); 
 			} 
-
+			
+			
 			switch (i) {
 			case 1: jboard.setJboardRenameFilePath1(renameFileName); break;
 			case 2: jboard.setJboardRenameFilePath2(renameFileName); break;
 			case 3: jboard.setJboardRenameFilePath3(renameFileName); break;
 			case 4: jboard.setJboardRenameFilePath4(renameFileName); break;
 			}
-			String orgFile = "D:\\anavada_workspace\\anavadaProject\\web\\resources/jboardfiles";
-			orgFile += jboard.getJboardOrignalFilePath1();
-			
-			String thumbFile ="D:\\anavada_workspace\\anavadaProject\\web\\resources/jboardfiles";
-			thumbFile += jboard.getJboardOrignalFilePath1() +"1";
-			 try{
-				 
-			        // 썸네일 설정
-			        Image thumbnail = JimiUtils.getThumbnail(orgFile, 500, 500, Jimi.IN_MEMORY);
-			 
-			        // 썸네일 생성
-			        Jimi.putImage(thumbnail, thumbFile);
-			 
-			 
-			    }catch(Exception e){
-			        e.printStackTrace();
-			    }
-
-
+			ImageUtil.resize(renameFile, renameFile, 450, 450); //renameFile 크기를 450,450 으로 고정
 			
 		}
 		}
-		// 6.서비스 객체 생성하고 메소드로 notice 객체 전달하고
-		// 처리된 결과 받기
 		int result = new JboardService().insertJboard(jboard);
 		
-		// 7.받은 결과로 성공/실패 페이지 내보내기
 		if (result > 0) {
 			response.sendRedirect("jblist?page=1");
 		} else {

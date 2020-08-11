@@ -42,7 +42,6 @@ public class JboardDao {
 					pstmt.setString(14, jboard.getMemberId());
 					pstmt.setString(15, jboard.getLocalNo());
 					result = pstmt.executeUpdate();
-					System.out.println(result);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}finally {
@@ -69,7 +68,6 @@ public class JboardDao {
 			}
 			
 			
-			System.out.println(query);
 			try {
 					stmt = conn.createStatement();
 					rset = stmt.executeQuery(query);
@@ -182,7 +180,7 @@ public class JboardDao {
 		return list; 
 	}
 
-		public Jboard selectOne(Connection conn, int jboardNo) {
+		public Jboard selectJboard(Connection conn, int jboardNo) {
 			Jboard jboard = null;
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
@@ -252,5 +250,44 @@ public class JboardDao {
 			
 			return result;
 		}
+
+		public int jboardUpdate(Connection conn, Jboard jboard) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			
+			String query = "update jboard set jboard_title = ?, jboard_content  = ? , jboard_price = ?,  "
+					+ "jboard_update = default , "
+					+ "jfiles_original_filepath1 = ? , jfiles_rename_filepath1 = ? , jfiles_original_filepath2 = ? , "
+					+ "jfiles_rename_filepath2 = ? , jfiles_original_filepath3 = ? , jfiles_rename_filepath3 = ? , "
+					+ "jfiles_original_filepath4 = ? , jfiles_rename_filepath4 = ? , jboard_meet = ?, jboard_post= ?, local_no= ? "
+					+ "where jboard_no = ?";
+			try {
+					pstmt = conn.prepareStatement(query);
+					pstmt.setString(1, jboard.getJboardTitle());
+					pstmt.setString(2, jboard.getJboardContent());
+					pstmt.setInt(3,  jboard.getJboardPrice());
+					pstmt.setString(4, jboard.getJboardOrignalFilePath1());
+					pstmt.setString(5, jboard.getJboardRenameFilePath1());
+					pstmt.setString(6, jboard.getJboardOrignalFilePath2());
+					pstmt.setString(7, jboard.getJboardRenameFilePath2());
+					pstmt.setString(8, jboard.getJboardOrignalFilePath3());
+					pstmt.setString(9, jboard.getJboardRenameFilePath3());
+					pstmt.setString(10, jboard.getJboardOrignalFilePath4());
+					pstmt.setString(11, jboard.getJboardRenameFilePath4());
+					pstmt.setString(12, jboard.getJboardMeet());
+					pstmt.setString(13,  jboard.getJboardPost());
+					pstmt.setString(14, jboard.getLocalNo());
+					pstmt.setInt(15,  jboard.getJboardNo());
+					
+					result = pstmt.executeUpdate();
+					System.out.println(result);
+			} catch (Exception e) {
+				 e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			
+			return result;
+}
 		
 }

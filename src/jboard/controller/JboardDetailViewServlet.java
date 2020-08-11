@@ -38,6 +38,7 @@ public class JboardDetailViewServlet extends HttpServlet {
 		
 				
 				int jboardno = Integer.parseInt(request.getParameter("jboardno"));
+				int currentPage = Integer.parseInt(request.getParameter("page"));
 				Jboard jboard = new JboardService().selectJboard(jboardno);
 				JboardService jbservice = new JboardService();
 				jbservice.addReadCount(jboardno);
@@ -56,6 +57,7 @@ public class JboardDetailViewServlet extends HttpServlet {
 					request.setAttribute("jboardno", jboard);
 					request.setAttribute("list", list);
 					request.setAttribute("commentlistcount", commentListCount);
+					request.setAttribute("page", currentPage);
 					view.forward(request, response);
 				}else {
 					view = request.getRequestDispatcher("views/common/error.jsp");

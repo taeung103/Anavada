@@ -40,7 +40,9 @@ public class JboardListViewServlet extends HttpServlet {
 		String listSearch = request.getParameter("listsearch");
 		
 		String local = request.getParameter("local");
-		String page = request.getParameter("page");
+		System.out.println("local : " + local);
+		System.out.println("titleSearch : " + titleSearch);
+		System.out.println("listSearch : " + listSearch);
 		System.out.println(local);
 		if (listSearch== null|| listSearch.equals("null")) {
 			listSearch = null;
@@ -58,9 +60,6 @@ public class JboardListViewServlet extends HttpServlet {
 		}
 		
 		int limit = 10;
-		System.out.println("로컬값 :" +local);
-		System.out.println("리스트서치 값 :" +listSearch);
-		System.out.println("제목 검색 값 :" +titleSearch);
 
 		JboardService jbservice = new JboardService();
 		
@@ -88,7 +87,7 @@ public class JboardListViewServlet extends HttpServlet {
 				request.setAttribute("local" , local);
 				request.setAttribute("listsearch", listSearch);
 				request.setAttribute("titlesearch", titleSearch);
-				request.setAttribute("page", page);
+				request.setAttribute("page", currentPage);
 				view.forward(request, response);
 				
 		}else {

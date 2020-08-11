@@ -42,7 +42,7 @@ public class JboardService {
 
 		public Jboard selectJboard(int jboardNo) {
 			Connection conn = getConnection();
-			Jboard jboard = bdao.selectOne(conn, jboardNo);
+			Jboard jboard = bdao.selectJboard(conn, jboardNo);
 			
 			close(conn);
 			return jboard;
@@ -61,8 +61,14 @@ public class JboardService {
 		}
 
 		public int jboardUpdate(Jboard jboard) {
-			// TODO Auto-generated method stub
-			return 0;
+			Connection conn = getConnection();
+			int result = bdao.jboardUpdate(conn, jboard);
+			if (result > 0)
+				commit(conn);
+			else
+				rollback(conn);
+			close(conn);
+			return result;
 		}
 
 		

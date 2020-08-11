@@ -6,9 +6,9 @@
 	ArrayList<Comment> list = (ArrayList<Comment>) request.getAttribute("list");
 	Jboard jboard = (Jboard)(request.getAttribute("jboardno"));
 	String titleSearch = request.getParameter("titlesearch");
-	String local = request.getParameter("local"); 
 	String listSearch = request.getParameter("listsearch");
 	int commentListCount = ((Integer) request.getAttribute("commentlistcount")).intValue();
+	int currentPage = ((Integer)request.getAttribute("page")).intValue();
 	String[] localArr = { "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구" };
 
 %>
@@ -172,7 +172,12 @@
                     </dd>
                 </dl>
                 <div class="view-btn">
-                    <a href="/anavada/jblist?page=1&local=<%=local%>&listsearch=<%=listSearch%>&titlesearch=<%=titleSearch%>" class="btn btn-prev">이전글</a>
+                    <a href="" class="btn btn-prev">이전글</a>
+                 	<% if (loginMember != null){%>
+                 	<%	if(loginMember.getMemberId().equals(jboard.getMemberId())){ %>
+                 	<a href="/anavada/jbupview?jboardno=<%=jboard.getJboardNo() %>&page=<%=currentPage %>" class="btn btn-list">수정</a>
+                 	<a href="/anavada/views/jboard/product_updateView.jsp" class="btn btn-list">삭제</a>
+                 	<%}} %>
                     <a href="javascript:history.go(-1);" class="btn btn-list">목록</a>
                     <a href="#none" class="btn btn-next">다음글</a>
                 </div>
