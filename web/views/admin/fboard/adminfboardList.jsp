@@ -7,9 +7,9 @@
 <title>지역축제 관리자</title>
 </head>
 <body>
-<a href="/testjson/finsert.ad2">[축제 DB에 insert]</a> &nbsp;&nbsp;
-<a href="/testjson/finsert.ad2">[축제 DB에 update]</a> &nbsp;&nbsp;
-<a href="/testjson/finsert.ad2">[축제 DB에 delete]</a> &nbsp;&nbsp;
+<a href="/anavada/fbinsert.ad">[축제 DB에 insert]</a> &nbsp;&nbsp;
+<a href="/anavada/fbupdate.ad">[축제 DB에 update]</a> &nbsp;&nbsp;
+<a href="/anavada/fbdelete.ad">[축제 DB에 delete]</a> &nbsp;&nbsp;
 
 
 
