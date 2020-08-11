@@ -2,6 +2,8 @@ package cboard.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,6 +43,11 @@ public class CboardDeleteServlet extends HttpServlet {
 					}
 				}
 				response.sendRedirect("/anavada/clistview?page=1&local=0");
+			} else {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter writer = response.getWriter();
+				writer.println("<script>alert('글삭제 실패');location.href='/anavada/cdetail?cnum=" + cboardNum + "';</script>");
+				writer.close();
 			}
 		
 	}
