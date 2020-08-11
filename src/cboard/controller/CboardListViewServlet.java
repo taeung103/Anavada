@@ -73,8 +73,16 @@ public class CboardListViewServlet extends HttpServlet {
 			request.setAttribute("keyword", keyword);
 			view.forward(request, response);
 		} else {
-			view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("message", "error");
+			view = request.getRequestDispatcher("views/common/cboardListError.jsp");
+			request.setAttribute("list", list);
+			request.setAttribute("currentPage", currentPage);
+			request.setAttribute("maxPage", maxPage);
+			request.setAttribute("startPage", startPage);
+			request.setAttribute("endPage", endPage);
+			request.setAttribute("listCount", listCount);
+			request.setAttribute("local", local);
+			request.setAttribute("search", search);
+			request.setAttribute("keyword", keyword);
 			view.forward(request, response);
 		}
 	}
