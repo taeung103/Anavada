@@ -1,8 +1,10 @@
 package creply.model.vo;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Creply {
+public class Creply implements Serializable{
+	public static final long serialVersionUID = 32L;
 	private int creplyNo;
 	private int cbaordNo;
 	private String memberId;
