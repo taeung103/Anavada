@@ -49,9 +49,9 @@ public class FaqService {
 		return list;
 	}
 	
-	public ArrayList<Faq> searchTorC(int currentPage, int limit, String keyword, String column) {
+	public ArrayList<Faq> searchTCC(int currentPage, int limit, String keyword, String column) {
 		Connection conn = getConnection();
-		ArrayList<Faq> list = fdao.searchTorC(conn, currentPage, limit, keyword, column);
+		ArrayList<Faq> list = fdao.searchTCC(conn, currentPage, limit, keyword, column);
 		close(conn);
 		return list;
 	}
@@ -64,7 +64,30 @@ public class FaqService {
 		else rollback(conn);
 		return result;
 	}
+
+	public Faq selectOne(int no) {
+		Connection conn = getConnection();
+		Faq faq = fdao.selectOne(conn, no);
+		close(conn);
+		return faq;
+	}
 	
+	public int updateFaq(Faq faq) {
+		Connection conn = getConnection();
+		int result = fdao.updateFaq(conn, faq);
+		if(result > 0)
+			commit(conn);
+		else rollback(conn);
+		return result;
+	}
 	
+	public int deleteFaq(int[] checkedNum) {
+		Connection conn = getConnection();
+		int result = fdao.deleteFaq(conn, checkedNum);
+		if(result > 0)
+			commit(conn);
+		else rollback(conn);
+		return result;
+	}
 	
 }

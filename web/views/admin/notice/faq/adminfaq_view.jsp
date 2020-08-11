@@ -2,13 +2,20 @@
     pageEncoding="UTF-8" import="faq.model.vo.Faq"%>
 <%
 	Faq faq = (Faq)request.getAttribute("faq");
-	int currentPage = (Integer)request.getAttribute("currentPage");
+	int currentPage = (Integer)request.getAttribute("page");
 	String selected = null;
 	String keyword = null;
 	if(request.getAttribute("selected") != null && request.getAttribute("keyword") != null) {
 		selected = (String)request.getAttribute("selected");
 		keyword = (String)request.getAttribute("keyword");
 	}
+	String category = null;
+	switch(faq.getFaqCategory()) {
+    case 1 : category = "회원정보"; break;
+    case 2 : category = "중고거래"; break;
+    case 3 : category = "커뮤니티"; break;
+    case 4 : category = "지역축제"; break;
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -45,7 +52,7 @@
                 <ul>
                     <li><span>작성자 : </span><%= faq.getFaqId() %></li>
                     <li><span>등록일 : </span><%= faq.getFaqDate() %></li>
-                    <li><span>조회수 : </span><%= faq.getFaqCount() %></li>
+                    <li><span>카테고리 : </span><%= category %></li>
                 </ul>
 
                 <div class="view-ctn">
@@ -54,13 +61,11 @@
 
                 <div class="view-btn">
                     <% if(request.getParameter("selected") != null && request.getParameter("keyword") != null) { %>
-                    <a href="/anavada/anupdateview?no=<%= faq.getFaqNo() %>&page=<%= currentPage %>" class="btn btn-list">수정</a>
-                    <a href="/anavada/ansearch?page=<%= currentPage %>&selected=<%= selected %>&keyword=<%= keyword %>" class="btn btn-list">목록</a>
+                    <a href="/anavada/afupdateview?no=<%= faq.getFaqNo() %>&page=<%= currentPage %>" class="btn btn-list">수정</a>
+                    <a href="/anavada/afsearch?page=<%= currentPage %>&selected=<%= selected %>&keyword=<%= keyword %>" class="btn btn-list">목록</a>
                     <% }else { %>
-                    <a href="/anavada/andetail?no=<%= faq.getFaqNo()-1 %>&page=<%= currentPage %>" class="btn btn-prev">이전글</a>
-                    <a href="/anavada/anupdateview?no=<%= faq.getFaqNo() %>&page=<%= currentPage %>" class="btn btn-list">수정</a>
-                    <a href="/anavada/anlist.ss?page=<%= currentPage %>" class="btn btn-list">목록</a>
-                    <a href="/anavada/andetail?no=<%= faq.getFaqNo()+1 %>&page=<%= currentPage %>" class="btn btn-next">다음글</a>
+                    <a href="/anavada/afupdateview?no=<%= faq.getFaqNo() %>&page=<%= currentPage %>" class="btn btn-list">수정</a>
+                    <a href="/anavada/aflist.ss?page=<%= currentPage %>" class="btn btn-list">목록</a>
                     <% } %>
                     
                 </div>

@@ -36,7 +36,7 @@ public class AdminFaqSearchServlet extends HttpServlet {
 		
 		String selected = request.getParameter("selected");
 		String keyword = request.getParameter("keyword");
-		FaqService iservice = new FaqService();
+		FaqService fservice = new FaqService();
 		
 		int currentPage = 1;
 		if(request.getParameter("page") != null)
@@ -49,8 +49,9 @@ public class AdminFaqSearchServlet extends HttpServlet {
 		
 		ArrayList<Faq> list = null;
 		switch(selected) {
-		case "title" : list = iservice.searchTorC(currentPage, countList, keyword, "t"); totalList = iservice.getListCount("t", keyword); break;
-		case "content" : list = iservice.searchTorC(currentPage, countList, keyword, "c"); totalList = iservice.getListCount("c", keyword); break;
+		case "title" : list = fservice.searchTCC(currentPage, countList, keyword, "t"); totalList = fservice.getListCount("t", keyword); break;
+		case "content" : list = fservice.searchTCC(currentPage, countList, keyword, "c"); totalList = fservice.getListCount("c", keyword); break;
+		case "cate"	: list = fservice.searchTCC(currentPage, countList, keyword, "cate"); totalList = fservice.getListCount("cate", keyword); break;
 		}
 		
 		int totalPage = (int)((double)totalList / countList + 0.9) ;

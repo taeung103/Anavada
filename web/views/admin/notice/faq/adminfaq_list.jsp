@@ -44,7 +44,7 @@ function deleteAction(){
 	console.log("### checkRow => {"+checkRow+"}");
 	
 	if(confirm("삭제 하시겠습니까?"))
-		location.href = "/anavada/andelete?checkRow="+checkRow;
+		location.href = "/anavada/afdelete?checkRow="+checkRow;
 }
 
 </script>
@@ -55,6 +55,8 @@ function deleteAction(){
 
         <div id="admin_container">
 
+ 			
+
             <!-- 상단 타이틀 -->
             <div class="admin_title">
                 <div class="admin_path">
@@ -63,11 +65,17 @@ function deleteAction(){
                 </div>
             </div>
             <!-- //상단 타이틀 -->
-
+			<br><br>
+			<div align="center" style="position:relative; left:4.5cm;">
+			<button onclick="javascript:location.href='/anavada/afsearch?selected=cate&keyword=1'">회원가입</button>
+			<button onclick="javascript:location.href='/anavada/afsearch?selected=cate&keyword=2'">중고거래</button>
+			<button onclick="javascript:location.href='/anavada/afsearch?selected=cate&keyword=3'">커뮤니티</button>
+			<button onclick="javascript:location.href='/anavada/afsearch?selected=cate&keyword=4'">지역축제</button> 
+			</div>
+			
             <!-- 본문내용 -->
             <div class="list-area">
-
-
+            
                 <!-- 검색영역 -->
 				<div class="sort-area">
 					<h4>
@@ -75,6 +83,10 @@ function deleteAction(){
 						<%= totalList %>개
 					</h4>
 					<div>
+					<!-- <button>회원가입</button>
+					<button>회원가입</button>
+					<button>회원가입</button>
+					<button>회원가입</button> -->
 						<form action="/anavada/afsearch" method="post" id="">
 							목록 분류 : <select name="selected" class="ListSelect">
 								<option value="none" selected disabled>분류 선택</option>
@@ -112,7 +124,6 @@ function deleteAction(){
                                 <ul>
                                     <li>작성자 : <%= f.getFaqId() %></li>
                                     <li>작성일 : <%= f.getFaqDate() %></li>
-                                    <li>조회수 : <%= f.getFaqCount() %></li>
                                 </ul>
                             </td>
                         </tr>
@@ -126,7 +137,6 @@ function deleteAction(){
                                 <ul>
                                     <li>작성자 : <%= f.getFaqId() %></li>
                                     <li>작성일 : <%= f.getFaqDate() %></li>
-                                    <li>조회수 : <%= f.getFaqCount() %></li>
                                 </ul>
                             </td>
                         </tr>

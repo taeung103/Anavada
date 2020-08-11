@@ -1,7 +1,8 @@
-package faq.controller;
+ package admin.notice.faqController;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,16 +13,16 @@ import faq.model.service.FaqService;
 import faq.model.vo.Faq;
 
 /**
- * Servlet implementation class FaqInsertServlet
+ * Servlet implementation class AdminFaqUpdateViewServlet
  */
-@WebServlet("/afinsert.ss")
-public class FaqInsertServlet extends HttpServlet {
+@WebServlet("/afupdateview")
+public class AdminFaqUpdateViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FaqInsertServlet() {
+    public AdminFaqUpdateViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,24 +30,15 @@ public class FaqInsertServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
-		int category = Integer.parseInt(request.getParameter("checkCate"));
-		System.out.println(title + ", "+ content);
-		Faq faq = new Faq();
-		faq.setFaqTitle(title);
-		faq.setFaqContent(content);
-		faq.setFaqCategory(category);
-		
-		int result = new FaqService().insertFaq(faq);
-		
-		if(result > 0) {
-			response.sendRedirect("aflist.ss");
-		}
-		
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	Faq faq = new FaqService().selectOne(Integer.parseInt(request.getParameter("no")));
+
+    	if(faq != null) {
+    		RequestDispatcher view = request.getRequestDispatcher("views/admin/notice/faq/adminfaq_updateform.jsp");
+    		request.setAttribute("faq", faq);
+    		request.setAttribute("page", Integer.parseInt(request.getParameter("page")));
+    		view.forward(request, response);
+    	}
 	}
 
 	/**
