@@ -55,8 +55,8 @@
                             <tr>
                                 <td>지역 분류</td>
                                 <td>
-                                    <select name="local" class="LocationSelect">
-                                        <option value="0" selected="selected">지역선택</option>
+                                    <select name="local" class="LocationSelect" required="required">
+                                        <option value="" selected="selected">지역선택</option>
 										<option value="1" <% if (local.equals("1"))  { %>selected="selected"<% } %>>강남구</option>
 										<option value="2" <% if (local.equals("2"))  { %>selected="selected"<% } %>>강동구</option>
 										<option value="3" <% if (local.equals("3"))  { %>selected="selected"<% } %>>강북구</option>
