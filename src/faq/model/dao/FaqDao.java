@@ -9,7 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import faq.model.vo.Faq;
-import oracle.net.aso.q;
 
 public class FaqDao {
 	public FaqDao() {}

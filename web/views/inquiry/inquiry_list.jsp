@@ -18,6 +18,18 @@
 <html>
 <head>
     <%@ include file="../include/head.jsp" %> 
+<script type="text/javascript">
+function loginCheck(data, data1, no, page, selected, keyword){
+	
+	if(data1 == data && selected == null && keyword == null)
+		location.href = "/anavada/idetail.ss?no="+no+"&page="+page;
+	else if(data1 == data && selected != null && keyword != null)
+		location.href = "/anavada/idetail.ss?no="+no+"&page="+page+"&selected="+selected+"&keyword="+keyword;
+	else
+		alert("회원님이 작성한 게시물이 아닙니다.");
+}
+
+</script>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
@@ -68,7 +80,7 @@
                 	<table>
                     	<tbody>
                     	<% for(Inquiry i : list) { %>
-                        	<tr onclick="location.href='/anavada/idetail.ss?no=<%= i.getIqNo() %>&page=<%= currentPage %>'">
+                        	<tr onclick="loginCheck('<%= i.getIqId() %>','<%= loginMember.getMemberId() %>','<%= i.getIqNo() %>','<%= currentPage %>',null, null);">
                             	<td class="number"><%= i.getIqNo() %></td>
                             	<td class="title">
                                 	<h2><span class="inquiry">문의</span><%= i.getIqTitle() %></h2>
@@ -93,7 +105,7 @@
                 	<table>
                     	<tbody>
                     	<% for(Inquiry i : list) { %>
-                        	<tr onclick="location.href='/anavada/idetail.ss?no=<%= i.getIqNo() %>&page=<%= currentPage %>&selected=<%= selected %>&keyword=<%= keyword %>'">
+                        	<tr onclick="loginCheck('<%= i.getIqId() %>','<%= loginMember.getMemberId() %>','<%= i.getIqNo() %>','<%= currentPage %>','<%= selected %>', '<%= keyword %>');">
                             	<td class="number"><%= i.getIqNo() %></td>
                             	<td class="title">
                                 	<h2><span class="inquiry">문의</span><%= i.getIqTitle() %></h2>

@@ -51,7 +51,7 @@
     					data: { "category":category },
     					dataType: "json",
     					success: function(data){
-    							console.log("success : " + data);
+    							console.log(category);
     						//object ==> string으로 변환
     						var jsonStr = JSON.stringify(data);
     						//string ==> json객체로 바꿈
@@ -59,14 +59,23 @@
     						
     						var values = "";
     						for(var i in json.list){
-    							values += "<ul class='question' onclick='slideContent();'><li class='Qmarker'><span>Q</span></li><li class='title'>" 
-    									+ decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") 
+    							values += "<ul class='question' onclick='slideContent();'><li class='Qmarker'><span>Q</span></li><li class='title'>";
+    							
+    							switch(json.list[i].cate){
+    							case 1 : values += "<span class='Msel'>회원정보</span>"; break;
+        						case 2 : values += "<span class='Psel'>중고거래</span>"; break;
+        						case 3 : values += "<span class='Csel'>커뮤니티</span>"; break;
+        						case 4 : values += "<span class='Esel'>지역축제</span>"; break;
+    							}
+    							
+    							values += decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") 
     									+ "</li><li>관리자</li><li>" + json.list[i].date + "</li></ul><ul class='ctn'><li class='Amarker'><span>A</span></li><li><h4>답변</h4><p>" 
     									+ decodeURIComponent(json.list[i].content).replace(/\+/gi, " ") 
     									+ "</p></li></ul>";
     									
     						} //for in
     						switch(category){
+    						case "전체" : $("#tab01").html(values); break;
     						case "회원정보" : $("#tab02").html(values); break;
     						case "중고거래" : $("#tab03").html(values); break;
     						case "커뮤니티" : $("#tab04").html(values); break;
@@ -116,7 +125,6 @@
                 </div>
                 <!--종류 리스트-->
                 <div class="sort-area" style="margin-top:30px;">  
-                    <h4>전체 <%= list.size() %>개</h4>
                     <div>
                         <form action="" method="" id="">
                             목록 분류 : <select name="" class="ListSelect">
@@ -132,7 +140,34 @@
                 </div>
                 
                 
-                <div class="qna_list" id="tab01">
+                 
+                
+                
+                
+                
+                <div class="qna_list">
+                <% if(list != null) { %>
+                <% for(Faq f : list) { %>
+                	<ul class="question">
+                        <li class="Qmarker"><span>Q</span></li>
+                        <li class="title">
+                        <% switch(f.getFaqCategory()) { 
+    							case 1 : %><span class='Msel'>회원정보</span><%break;
+        						case 2 : %><span class='Psel'>중고거래</span><%break;
+        						case 3 : %><span class='Csel'>커뮤니티</span><%break;
+        						case 4 : %><span class='Esel'>지역축제</span><%break; } %>
+                        	<%= f.getFaqTitle() %></li>
+                        <li>관리자</li>
+                        <li><%= f.getFaqDate() %></li>
+                    </ul>
+                    <ul class="ctn">
+                        <li class="Amarker"><span>A</span></li>
+                        <li>
+                            <h4>답변</h4>
+                            <p><%= f.getFaqContent() %></p>
+                        </li>
+                    </ul>
+                <% } } %>
                 </div>
                 
                 <div class="qna_list" id="tab02">
