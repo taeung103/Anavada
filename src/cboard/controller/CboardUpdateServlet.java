@@ -202,7 +202,7 @@ public class CboardUpdateServlet extends HttpServlet {
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('글수정 실패');location.href='/anavada/clistview?page=1&local=0';</script>");
+			writer.println("<script>alert('글수정 실패');location.href='/anavada/cdetail?cnum=" + cboard.getCboardNo() + "';</script>");
 			writer.close();
 		}
 
