@@ -95,4 +95,18 @@ public class NoticeService {
 		return list;
 	}
 
+	public ArrayList<Notice> selectCountTop3() {
+		Connection conn = getConnection();
+		ArrayList<Notice> list = ndao.selectCountTop3(conn);
+		close(conn);
+		return list;
+	}
+
+	public ArrayList<Notice> selectRecentTop3() {
+		Connection conn = getConnection();
+		ArrayList<Notice> list = ndao.selectRecentTop3(conn);
+		close(conn);
+		return list;
+	}
+
 }

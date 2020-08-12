@@ -272,7 +272,7 @@ public class NoticeDao {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "admin01");
+			pstmt.setString(1, "admin");
 			pstmt.setString(2, notice.getNoTitle());
 			pstmt.setString(3, notice.getNoContent());
 			pstmt.setString(4, notice.getNoOriginal());
@@ -337,6 +337,66 @@ public class NoticeDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
+			close(stmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<Notice> selectCountTop3(Connection conn) {
+		ArrayList<Notice> list = new ArrayList<>();
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from (select rank() over(order by no_count desc)rnum, no_no, no_title, no_count from notice) where rnum > 0 and rnum < 4";
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			while(rset.next()) {
+				Notice notice = new Notice();
+				
+				notice.setNoNo(rset.getInt("no_no"));
+				notice.setNoTitle(rset.getString("no_title"));
+				notice.setNoCount(rset.getInt("no_count"));
+				
+				list.add(notice);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<Notice> selectRecentTop3(Connection conn) {
+		ArrayList<Notice> list = new ArrayList<>();
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from (select rank() over(order by no_date desc)rnum, no_no, no_title, no_count from notice) where rnum > 0 and rnum < 4";
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			while(rset.next()) {
+				Notice notice = new Notice();
+				
+				notice.setNoNo(rset.getInt("no_no"));
+				notice.setNoTitle(rset.getString("no_title"));
+				notice.setNoCount(rset.getInt("no_count"));
+				
+				list.add(notice);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
 			close(stmt);
 		}
 		

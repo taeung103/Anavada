@@ -15,6 +15,13 @@
 <html>
 <head>
     <%@ include file="../../../include/head.jsp" %> 
+    
+    <script type="text/javascript">
+    
+    
+    </script>
+    
+    
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
@@ -78,10 +85,10 @@
                 
                 
                <!-- 댓글 --> 
-                
+<!-- *********************************************************************************** -->                
                   <div class="cmt_wrap">
                 <% if(answer == null) { %>
-                    <form action="/anavada/aainsert.ss" method="post">
+                    <form action="" method="post">
                     <input type="hidden" name="id" value="<%= inquiry.getIqId() %>">
                     <input type="hidden" name="no" value="<%= inquiry.getIqNo() %>">
                         <fieldset>
@@ -94,7 +101,7 @@
                             </div>
                         </fieldset>
                     </form>
-                    
+<!-- *********************************************************************************** -->                    
                     <% }else { %>
                     <ul class="cmt_con">
                         <li>

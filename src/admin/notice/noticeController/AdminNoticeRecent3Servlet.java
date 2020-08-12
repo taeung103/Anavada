@@ -1,29 +1,32 @@
-package faq.controller;
+package admin.notice.noticeController;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import faq.model.service.FaqService;
-import faq.model.vo.Faq;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import notice.model.service.NoticeService;
+import notice.model.vo.Notice;
 
 /**
- * Servlet implementation class FaqListServlet
+ * Servlet implementation class AdminNoticeRecent3Servlet
  */
-@WebServlet("/flist")
-public class FaqListServlet extends HttpServlet {
+@WebServlet("/anRecent3")
+public class AdminNoticeRecent3Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FaqListServlet() {
+    public AdminNoticeRecent3Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,17 +36,28 @@ public class FaqListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		FaqService fservice = new FaqService();
+		ArrayList<Notice> list = new NoticeService().selectRecentTop3();
+		System.out.println(list.size());
+		JSONObject sendJSON = new JSONObject();
+		JSONArray jarr = new JSONArray();
 		
-		ArrayList<Faq> list = fservice.selectAll();
-		
-		RequestDispatcher view = null;
-		if(list.size() > 0) {
-			view = request.getRequestDispatcher("views/notice/faq_list.jsp");
-			request.setAttribute("list", list);
-			view.forward(request, response);
+		for(Notice n : list) {
+			JSONObject job = new JSONObject();
+			
+			job.put("no", n.getNoNo());
+			job.put("title", n.getNoTitle());
+			job.put("count", n.getNoCount());
+			
+			jarr.add(job);
 		}
 		
+		sendJSON.put("list", jarr);
+		
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.write(sendJSON.toJSONString());
+		out.flush();
+		out.close();
 	}
 
 	/**
