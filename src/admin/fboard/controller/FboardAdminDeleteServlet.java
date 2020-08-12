@@ -1,4 +1,4 @@
-package fboard.controller;
+package admin.fboard.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

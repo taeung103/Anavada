@@ -1,4 +1,4 @@
-package fboard.controller;
+package admin.fboard.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -9,24 +9,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import fboard.FestivalInformation;
 import fboard.model.service.FboardService;
 import fboard.model.vo.Fboard;
 
 /**
- * Servlet implementation class FboardAdminInsertServlet
+ * Servlet implementation class FboardAdminUpdateServlet
  */
-@WebServlet("/fbinsert.ad")
-public class FboardAdminInsertServlet extends HttpServlet {
+@WebServlet("/fbupdate.ad")
+public class FboardAdminUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FboardAdminInsertServlet() {
+    public FboardAdminUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,22 +33,32 @@ public class FboardAdminInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 축제 id로 제공되는 축제 id랑 축제 게시판 번호 비교후 없으면 insert
-		System.out.println("FboardAdminInsertServlet");
+		// 현재 등록된 축제 수정일이(modifiedtime) 변경된 경우(select 중복체크) 해당 축제 update
+		System.out.println("FboardAdminUpdateServlet");
+		JSONArray jsonArray = FestivalInformation.festival();
 		
 		Fboard fboard = new Fboard();
 		FboardService fbService = new FboardService();
-		int totalInsert = 0;
-		JSONArray jsonArray = FestivalInformation.festival();
-		
+		int totalUpdate = 0;
 		for (int i = 0; i < jsonArray.size(); i++) {
 			JSONObject data = (JSONObject) (JSONObject) jsonArray.get(i);
 
 			String fboardNo = data.get("contentid").toString();
-			int selectResult = fbService.selectFboard(fboardNo);
-			System.out.println("select : " + fboardNo + " 결과(1:유 0:무) : " + selectResult);
-
-			if (selectResult == 0) {
+			
+			String fesivalModifiedDate = data.get("modifiedtime").toString();
+			
+			int selectResult = new FboardService().selectFboard(fboardNo, fesivalModifiedDate);
+			System.out.println("select : " + fboardNo + " 결과(1:유 100:무 0:해당축제 데이터가 없음) : " + selectResult);
+			//selectResult == 1 해당 축제 수정이 없을 경우
+			
+			if(selectResult == 0) { // 축제 정보가 아예 없을 경우
+				System.out.println("축제 번호 : " + fboardNo +  " 축제 수정일 : " + fesivalModifiedDate);
+				System.out.println(fboardNo + " 축제 정보가 없습니다. insert하세요");
+			}
+			
+			
+			if(selectResult == 100) {	//축제 수정일이 바뀌었을 경우
+				System.out.println("축제 번호 : " + fboardNo +  "축제 수정일 : " + fesivalModifiedDate);
 
 				fboard.setFboardNo(fboardNo);				
 				fboard.setFestivalTitle(data.get("title").toString());
@@ -63,6 +71,7 @@ public class FboardAdminInsertServlet extends HttpServlet {
 
 				String thumbnail;
 				if (data.get("firstimage2") == null) {
+					System.out.println("썸네일 null");
 					thumbnail = "/anavada/resources/images/noimage.png";
 				} else {
 					thumbnail = data.get("firstimage2").toString();
@@ -70,14 +79,13 @@ public class FboardAdminInsertServlet extends HttpServlet {
 
 				fboard.setThumbnail(thumbnail);
 
-				fbService.insertFboard(fboard);
-				System.out.println("insert된 : " + fboard);
-				totalInsert += 1;
+				fbService.updateFboard(fboard);
+				System.out.println("update된 : " + fboard);
+				totalUpdate += 1;
 			}
+			
 		}
-
-		System.out.println("insert한 개수 : " + totalInsert);
-
+		System.out.println("update한 개수 : " + totalUpdate);
 	}
 
 	/**
