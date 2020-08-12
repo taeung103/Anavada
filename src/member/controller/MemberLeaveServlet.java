@@ -20,13 +20,13 @@ import member.model.vo.Member;
  * Servlet implementation class MemberMypageServlet
  */
 @WebServlet("/mdelete.cp")
-public class MemberDeleteServlet extends HttpServlet {
+public class MemberLeaveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberDeleteServlet() {
+    public MemberLeaveServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

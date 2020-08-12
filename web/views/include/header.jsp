@@ -32,10 +32,10 @@
                     </form>
                 </li>
                 <% if(loginMember == null){ %>
-                <li><a class="hover_line01" href="../member/join_agree.jsp">JOIN</a></li>
+                <li><a class="hover_line01" href="/anavada/views/member/join_agree.jsp">JOIN</a></li>
                 <li><a class="hover_line01" href="/anavada/views/member/login.jsp">LOGIN</a></li>
                 <% } else if(loginMember.getMemberId().equals("admin")){ %>
-                <li><a class="hover_line01" href="/anavada/views/admin/member/memberList.jsp">관리자페이지</a></li>
+                <li><a class="hover_line01" href="/anavada/mlist.ad?memberId=<%= loginMember.getMemberId() %>">관리자페이지</a></li>
                 <li><a class="hover_line01" href="/anavada/logout">LOGOUT</a></li>
                 <% } else { %>
                 <li><a class="hover_line01" href="/anavada/mypage.cp?memberId=<%= loginMember.getMemberId() %>">MYPAGE</a></li>

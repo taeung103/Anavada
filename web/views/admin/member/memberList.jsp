@@ -1,4 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="member.model.vo.Member"%>
+<%
+	int listCount = ((Integer)request.getAttribute("listCount")).intValue();
+	int startPage = ((Integer)request.getAttribute("startPage")).intValue();
+	int endPage = ((Integer)request.getAttribute("endPage")).intValue();
+	int maxPage = ((Integer)request.getAttribute("maxPage")).intValue();
+	int currentPage = ((Integer)request.getAttribute("currentPage")).intValue();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,23 +28,20 @@
 
             <!-- 본문내용 -->
             <div class="list-area">
-
-
                 <!-- 검색영역 -->
                 <div class="sort-area">  
-                    <h4>전체 150개</h4>
+                    <h4>전체 회원 <%= listCount %>명</h4>
                     <div>
-                        <form action="" method="" id="">
-                           	 목록 분류 : <select name="" class="ListSelect">
-                                    <option value="분류 선택" selected="selected">분류 선택</option>
-                                    <option value="아이디">아이디</option>
-                                    <option value="이름">이름</option>
-                                    <option value="이메일">이메일</option>
-                                    <option value="전화번호">전화번호</option>
+                        <form method="get" id="">
+                           	 목록 분류 : <select action="/anavada/msearch.ad" name="search" class="ListSelect">
+                                    <!--option value="분류 선택" selected="selected">분류 선택</option-->
+                                    <option value="userId" elected="selected">아이디</option>
+                                    <option value="userName">이름</option>
+                                    <option value="userEmail">이메일</option>
+                                    <option value="userPhone">전화번호</option>
                             </select>
-                            
-                            <input type="text" placeholder="검색어를 입력해주세요.">
-                            <button class="top-search"><i class="xi-search"></i></button>
+                            <input type="text" name="keyword" placeholder="검색어를 입력해주세요.">
+                            <button type="submit" class="top-search"><i class="xi-search"></i></button>
                         </form>
                     </div>
                 </div>
@@ -46,15 +50,13 @@
                 <table class="memberTable">
                     <colgroup>
                         <col width="5%">
-                        <col width="5%">
-                        <col width="10%">
                         <col width="8%">
                         <col width="10%">
                         <col width="10%">
                         <col width="*">
+                        <col width="18%">
                         <col width="10%">
-                        <col width="8%">
-                        <col width="8%">
+                        <col width="10%">
                         <col width="8%">
                     </colgroup>
                     <tbody>
@@ -63,8 +65,6 @@
                             <th>번호</th>
                             <th>아이디</th>
                             <th>이름</th>
-                            <th>기존썸네일</th>
-                            <th>신규썸네일</th>
                             <th>이메일</th>
                             <th>전화번호</th>
                             <th>가입일</th>
@@ -72,147 +72,64 @@
                             <th>신고여부</th>
                         </tr>
 
+						<% for(Member m : list){ %>
                         <tr>
-                            <td class="checkBox"><input type="checkbox"></td>
-                            <td class="number">9</td>
-                            <td class="id">user09</td>
-                            <td class="name">이순신</td>
-                            <td class="originalFile">충무공신.jpg</td>
-                            <td class="renameFile">충무공신2.jpg</td>
-                            <td class="email">user@naver.com</td>
-                            <td class="phone">010-1111-1111</td>
-                            <td class="joinDate">2020.08.02</td>
-                            <td class="lastAccessDate">2020.08.02</td>
-                            <td class="declareId"></td>
+                            <td class="checkBox"><input type="checkbox" name="Mleave" id="Mleave"></td>
+                            <td class="number"><%= m.getmNumber() %></td>
+                            <td class="id"><%= m.getMemberId() %></td>
+                            <td class="name"><%= m.getMemberName() %></td>
+                            <td class="email"><%= m.getMemberEmail() %></td>
+                            <td class="phone"><%= m.getMemberPhone() %></td>
+                            <td class="joinDate"><%= m.getJoinDate() %></td>
+                            <td class="lastAccessDate"><%= m.getLastAccessDate() %></td>
+                            <td class="declareOK"><%= m.getDeclareOK() %></td>
                         </tr>
-                        <tr>
-                            <td class="checkBox"><input type="checkbox"></td>
-                            <td class="number">8</td>
-                            <td class="id">user08</td>
-                            <td class="name">이순신</td>
-                            <td class="originalFile">충무공신.jpg</td>
-                            <td class="renameFile">충무공신2.jpg</td>
-                            <td class="email">user@naver.com</td>
-                            <td class="phone">010-1111-1111</td>
-                            <td class="joinDate">2020.08.02</td>
-                            <td class="lastAccessDate">2020.08.02</td>
-                            <td class="declareId"></td>
-                        </tr>
-                        <tr>
-                            <td class="checkBox"><input type="checkbox"></td>
-                            <td class="number">7</td>
-                            <td class="id">user07</td>
-                            <td class="name">이순신</td>
-                            <td class="originalFile">충무공신.jpg</td>
-                            <td class="renameFile">충무공신2.jpg</td>
-                            <td class="email">user@naver.com</td>
-                            <td class="phone">010-1111-1111</td>
-                            <td class="joinDate">2020.08.02</td>
-                            <td class="lastAccessDate">2020.08.02</td>
-                            <td class="declareId"></td>
-                        </tr>
-                        <tr>
-                            <td class="checkBox"><input type="checkbox"></td>
-                            <td class="number">6</td>
-                            <td class="id">user06</td>
-                            <td class="name">이순신</td>
-                            <td class="originalFile">충무공신.jpg</td>
-                            <td class="renameFile">충무공신2.jpg</td>
-                            <td class="email">user@naver.com</td>
-                            <td class="phone">010-1111-1111</td>
-                            <td class="joinDate">2020.08.02</td>
-                            <td class="lastAccessDate">2020.08.02</td>
-                            <td class="declareId"></td>
-                        </tr>
-                        <tr>
-                            <td class="checkBox"><input type="checkbox"></td>
-                            <td class="number">5</td>
-                            <td class="id">user05</td>
-                            <td class="name">이순신</td>
-                            <td class="originalFile">충무공신.jpg</td>
-                            <td class="renameFile">충무공신2.jpg</td>
-                            <td class="email">user@naver.com</td>
-                            <td class="phone">010-1111-1111</td>
-                            <td class="joinDate">2020.08.02</td>
-                            <td class="lastAccessDate">2020.08.02</td>
-                            <td class="declareId"></td>
-                        </tr>
-                        <tr>
-                            <td class="checkBox"><input type="checkbox"></td>
-                            <td class="number">4</td>
-                            <td class="id">user04</td>
-                            <td class="name">이순신</td>
-                            <td class="originalFile">충무공신.jpg</td>
-                            <td class="renameFile">충무공신2.jpg</td>
-                            <td class="email">user@naver.com</td>
-                            <td class="phone">010-1111-1111</td>
-                            <td class="joinDate">2020.08.02</td>
-                            <td class="lastAccessDate">2020.08.02</td>
-                            <td class="declareId"></td>
-                        </tr>
-                        <tr>
-                            <td class="checkBox"><input type="checkbox"></td>
-                            <td class="number">3</td>
-                            <td class="id">user03</td>
-                            <td class="name">이순신</td>
-                            <td class="originalFile">충무공신.jpg</td>
-                            <td class="renameFile">충무공신2.jpg</td>
-                            <td class="email">user@naver.com</td>
-                            <td class="phone">010-1111-1111</td>
-                            <td class="joinDate">2020.08.02</td>
-                            <td class="lastAccessDate">2020.08.02</td>
-                            <td class="declareId"></td>
-                        </tr>
-                        <tr>
-                            <td class="checkBox"><input type="checkbox"></td>
-                            <td class="number">2</td>
-                            <td class="id">user02</td>
-                            <td class="name">이순신</td>
-                            <td class="originalFile">충무공신.jpg</td>
-                            <td class="renameFile">충무공신2.jpg</td>
-                            <td class="email">user@naver.com</td>
-                            <td class="phone">010-1111-1111</td>
-                            <td class="joinDate">2020.08.02</td>
-                            <td class="lastAccessDate">2020.08.02</td>
-                            <td class="declareId"></td>
-                        </tr>
-                        <tr>
-                            <td class="checkBox"><input type="checkbox"></td>
-                            <td class="number">1</td>
-                            <td class="id">user01</td>
-                            <td class="name">이순신</td>
-                            <td class="originalFile">충무공신.jpg</td>
-                            <td class="renameFile">충무공신2.jpg</td>
-                            <td class="email">user@naver.com</td>
-                            <td class="phone">010-1111-1111</td>
-                            <td class="joinDate">2020.08.02</td>
-                            <td class="lastAccessDate">2020.08.02</td>
-                            <td class="declareId"></td>
-                        </tr>
-                       
+                        <% } %>
+
                     </tbody>
                 </table>
-
-                <p class="warning_text"> *삭제한 회원은 복구가 불가능하니 신중하게 선택하세요.</p>
+                <p class="warning_text"> *탈퇴된 회원은 되돌릴 수 없습니다. 신중하게 선택하세요.</p>
                 <!-- //게시판 -->
 
                 <!-- 버튼 -->
                 <div class="btn_wrap">
-                    <a href="#" class="btn-left btn_gray">선택삭제</a>
-                    <a href="notice_write.php" class="btn-right btn_white">등록</a>
+                    <a href="#" class="btn-left btn_gray">선택탈퇴</a>
                 </div>
                 <!-- //버튼 -->
 
                 <!-- 페이징 -->
                 <dl class="list-paging">
                     <dd>
-                        <a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
-                        <a href="#none" class="active">1</a>
-                        <a href="#none">2</a>
-                        <a href="#none">3</a><!-- 활성화 class="active" -->
-                        <a href="#none">4</a>
-                        <a href="#none">5</a>
+                   	<% if(currentPage <= 1){ %>
+                    	<a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
+                   	<% } else { %>
+                   		<a href="/anavada/mlist.ad?page=<%= startPage %>"><i class="glyphicon glyphicon-menu-left"></i></a>
+                    <% } %>
+                    
+                   	<% if(1 <= currentPage){ %>
+                   		<a href="/anavada/mlist.ad?page=<%= currentPage - 1 %>"><i class="glyphicon glyphicon-menu-left"></i></a>
+                    	<% } else { %>
+                   		<a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
+                   	<% } %>
+                    
+                    <% for(int p = startPage; p <= endPage; p++){ %>
+                    	<% if(currentPage == p){ %>
+                        <a href="#none" class="active"><%= p %></a>
+                   	<% } else { %>
+                        <a href="/anavada/mlist.ad?page=<%= p %>"><%= p %></a>
+                    	<% } %>
+                    <% } %>
+                    
+					<% if(currentPage < maxPage){ %>
+                        <a href="/anavada/mlist.ad?page=<%= currentPage + 1 %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+					<% } else { %>
                         <a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
+					<% } %>
+					<% if(currentPage >= maxPage){ %>
+                        <a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
+					<% } else { %>
+                        <a href="/anavada/mlist.ad?page=<%= maxPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+					<% } %>					
                     </dd>
                 </dl>
                 <!-- //페이징 -->
