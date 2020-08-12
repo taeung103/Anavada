@@ -56,8 +56,6 @@ public class MemberUpdateServlet extends HttpServlet {
 		member.setMemberId(request.getParameter("memberId"));
 		member.setMemberPwd(request.getParameter("memberPwd"));
 		member.setMemberName(request.getParameter("memberName"));
-		member.setFileOriginal(request.getParameter("fileOriginal"));
-		member.setFileRename(request.getParameter("fileRename"));
 		member.setMemberEmail(request.getParameter("memberEmail"));
 		member.setEmailAuth(request.getParameter("emailAuth"));
 		member.setMemberPhone(request.getParameter("memberPhone"));

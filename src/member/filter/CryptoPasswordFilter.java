@@ -38,7 +38,6 @@ public class CryptoPasswordFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		System.out.println("CryptoPasswordFilter 의 doFilter() run...");
 
 		// 필터는 request 에 저장된 데이터 값의 변경을 할 수 없음
 		// 전송값에 가공 처리를 행 한다면 래퍼(Wrapper)클래스를 사용함
@@ -48,9 +47,6 @@ public class CryptoPasswordFilter implements Filter {
 
 		// 필터가 래퍼를 실행함
 		CryptoPasswordWrapper cpwrapper = new CryptoPasswordWrapper(hrequest);
-		System.out.println("hrequest : " + hrequest);
-		System.out.println("cpwrapper : " + cpwrapper);
-
 		// wrapper 처리한 결과를 필터가 받아서 서블릿으로 넘김
 		// chain.doFilter(request, response);
 		chain.doFilter(cpwrapper, response);

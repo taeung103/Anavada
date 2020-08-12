@@ -19,7 +19,6 @@
 <script src="/anavada/resources/js/member.js"></script>
 
 <!--티스토리 불펌금지-->
-
 <script type="text/javascript">
     var omitformtags=["input", "textarea", "select"]
     omitformtags=omitformtags.join("|")

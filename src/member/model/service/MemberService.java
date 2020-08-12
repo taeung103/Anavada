@@ -104,12 +104,25 @@ public class MemberService {
 		return result;
 	}
 
-	public ArrayList<Member> selectAllList() {
+	public ArrayList<Member> selectAllList(int currentPage, int limit, String search, String keyword) {
 		Connection conn = getConnection();
-		ArrayList<Member> list = mdao.selectAllList(conn);
+		ArrayList<Member> list = mdao.selectAllList(conn, currentPage, limit, search, keyword);
 		close(conn);
 		return list;
 	}
 
-	
+	public int getListCount(String search, String keyword) {
+		Connection conn = getConnection();
+		int listCount = mdao.getListCount(conn);
+		close(conn);
+		return listCount;
+	}
+
+	public ArrayList<Member> selectLeaveList(int currentPage, int limit, String search, String keyword) {
+		Connection conn = getConnection();
+		ArrayList<Member> list = mdao.selectLeaveList(conn, currentPage, limit, search, keyword);
+		close(conn);
+		return list;
+	}
+
 }

@@ -8,8 +8,8 @@
         
         <h2><p>회원관리</p></h2>
         <ul>
-            <li><a href="/anavada/mlist.cp">전체회원</a></li>
-            <li><a href="../member/memberSecession.jsp">탈퇴회원</a></li>
+            <li><a href="/anavada/mlist.ad">전체회원</a></li>
+            <li><a href="/anavada/leavelist.ad">탈퇴회원</a></li>
             <li><a href="../member/memberDeclare.jsp">신고회원</a></li>
         </ul>
         <h2><p>중고거래/커뮤니티관리</p></h2>
@@ -34,9 +34,9 @@
         <h2><p>홈페이지관리</p></h2>
         <ul>
             <li><a href="/anavada/blist.ad">사용자배너</a></li>
-            <li><a href="../member/adminPwd.jsp">관리자 계정변경</a></li>
+            <li><a href="/anavada/mypage.cp?memberId=<%= loginMember.getMemberId() %>">관리자 정보변경</a></li>
             <li class="homeBtn"><a href="/anavada/">home</a></li>
-            <li class="logoutBtn"><a href="#none">로그아웃</a></li>
+            <li class="logoutBtn"><a href="/anavada/logout">로그아웃</a></li>
         </ul>
     </div>
     <!-- //gnb -->

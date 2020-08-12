@@ -7,11 +7,10 @@ public class Member implements java.io.Serializable {
 	
 	private static final long selectServiceUID = 1L;
 	
+	private String mNumber;
 	private String memberId;
 	private String memberPwd;
 	private String memberName;
-	private String fileOriginal;
-	private String fileRename;
 	private String memberEmail;
 	private String emailAuth;
 	private String memberPhone;
@@ -19,17 +18,17 @@ public class Member implements java.io.Serializable {
 	private java.sql.Date lastAccessDate;
 	private String newPwd;
 	private String newPwdOK;
-	private String declareId;
+	private String declareOK;
+	private java.sql.Date secessionDate;
 	
-	public Member(String memberId, String memberPwd, String memberName, String fileOriginal, String fileRename,
-			String memberEmail, String emailAuth, String memberPhone, Date joinDate, Date lastAccessDate, String newPwd,
-			String newPwdOK, String declareId) {
+	public Member(String mNumber, String memberId, String memberPwd, String memberName, String memberEmail,
+			String emailAuth, String memberPhone, Date joinDate, Date lastAccessDate, String newPwd, String newPwdOK,
+			String declareOK, Date secessionDate) {
 		super();
+		this.mNumber = mNumber;
 		this.memberId = memberId;
 		this.memberPwd = memberPwd;
 		this.memberName = memberName;
-		this.fileOriginal = fileOriginal;
-		this.fileRename = fileRename;
 		this.memberEmail = memberEmail;
 		this.emailAuth = emailAuth;
 		this.memberPhone = memberPhone;
@@ -37,7 +36,16 @@ public class Member implements java.io.Serializable {
 		this.lastAccessDate = lastAccessDate;
 		this.newPwd = newPwd;
 		this.newPwdOK = newPwdOK;
-		this.declareId = declareId;
+		this.declareOK = declareOK;
+		this.secessionDate = secessionDate;
+	}
+
+	public String getmNumber() {
+		return mNumber;
+	}
+
+	public void setmNumber(String mNumber) {
+		this.mNumber = mNumber;
 	}
 
 	public String getMemberId() {
@@ -62,22 +70,6 @@ public class Member implements java.io.Serializable {
 
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
-	}
-
-	public String getFileOriginal() {
-		return fileOriginal;
-	}
-
-	public void setFileOriginal(String fileOriginal) {
-		this.fileOriginal = fileOriginal;
-	}
-
-	public String getFileRename() {
-		return fileRename;
-	}
-
-	public void setFileRename(String fileRename) {
-		this.fileRename = fileRename;
 	}
 
 	public String getMemberEmail() {
@@ -136,12 +128,20 @@ public class Member implements java.io.Serializable {
 		this.newPwdOK = newPwdOK;
 	}
 
-	public String getDeclareId() {
-		return declareId;
+	public String getDeclareOK() {
+		return declareOK;
 	}
 
-	public void setDeclareId(String declareId) {
-		this.declareId = declareId;
+	public void setDeclareOK(String declareOK) {
+		this.declareOK = declareOK;
+	}
+
+	public java.sql.Date getSecessionDate() {
+		return secessionDate;
+	}
+
+	public void setSecessionDate(java.sql.Date secessionDate) {
+		this.secessionDate = secessionDate;
 	}
 
 	public static long getSelectserviceuid() {
@@ -150,14 +150,10 @@ public class Member implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "Member [memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName=" + memberName
-				+ ", fileOriginal=" + fileOriginal + ", fileRename=" + fileRename + ", memberEmail=" + memberEmail
-				+ ", emailAuth=" + emailAuth + ", memberPhone=" + memberPhone + ", joinDate=" + joinDate
-				+ ", lastAccessDate=" + lastAccessDate + ", newPwd=" + newPwd + ", newPwdOK=" + newPwdOK
-				+ ", declareId=" + declareId + "]";
+		return "Member [mNumber=" + mNumber + ", memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName="
+				+ memberName + ", memberEmail=" + memberEmail + ", emailAuth=" + emailAuth + ", memberPhone="
+				+ memberPhone + ", joinDate=" + joinDate + ", lastAccessDate=" + lastAccessDate + ", newPwd=" + newPwd
+				+ ", newPwdOK=" + newPwdOK + ", declareOK=" + declareOK + ", secessionDate=" + secessionDate + "]";
 	}
-	
-	
-	
-	
+
 }

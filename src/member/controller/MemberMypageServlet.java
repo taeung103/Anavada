@@ -36,8 +36,12 @@ public class MemberMypageServlet extends HttpServlet {
 		Member member = new MemberService().selectMember(memberId);
 		
 		RequestDispatcher view = null;
-		if(member != null) {
+		if(member != null && !member.getMemberId().equals("admin")) {
 			view = request.getRequestDispatcher("views/member/MyInfoModify.jsp");
+			request.setAttribute("member", member);
+			view.forward(request, response);
+		} else if(member.getMemberId().equals("admin")) {
+			view = request.getRequestDispatcher("views/admin/member/adminPwd.jsp");
 			request.setAttribute("member", member);
 			view.forward(request, response);
 		} else {

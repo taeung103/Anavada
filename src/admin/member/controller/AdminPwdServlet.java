@@ -1,4 +1,4 @@
-package member.controller;
+package admin.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MemberSearchServlet
+ * Servlet implementation class AdminPwdServlet
  */
-@WebServlet("/msearch")
-public class MemberSearchServlet extends HttpServlet {
+@WebServlet("/adminpwd.ad")
+public class AdminPwdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberSearchServlet() {
+    public AdminPwdServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

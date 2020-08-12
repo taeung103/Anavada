@@ -45,18 +45,17 @@ public class MemberDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "insert into member values(?, ?, ?, ?, ?, ?, ?, ?, sysdate, sysdate)";
+		String query = "insert into member values(?, ?, ?, ?, ?, ?, ?, sysdate, sysdate)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, member.getMemberId());
-			pstmt.setString(2, member.getMemberPwd());
-			pstmt.setString(3, member.getMemberName());
-			pstmt.setString(4, member.getFileOriginal());
-			pstmt.setString(5, member.getFileRename());
-			pstmt.setString(6, member.getMemberEmail());
-			pstmt.setString(7, member.getEmailAuth());
-			pstmt.setString(8, member.getMemberPhone());
+			pstmt.setString(1, member.getmNumber());
+			pstmt.setString(2, member.getMemberId());
+			pstmt.setString(3, member.getMemberPwd());
+			pstmt.setString(4, member.getMemberName());
+			pstmt.setString(5, member.getMemberEmail());
+			pstmt.setString(6, member.getEmailAuth());
+			pstmt.setString(7, member.getMemberPhone());
 			
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -105,8 +104,6 @@ public class MemberDao {
 				member = new Member();
 				member.setMemberId(memberId);
 				member.setMemberName(rset.getString("member_name"));
-				member.setFileOriginal(rset.getString("profile_original"));
-				member.setFileRename(rset.getString("profile_rename"));
 				member.setMemberEmail(rset.getString("member_email"));
 				member.setEmailAuth(rset.getString("emailAuth"));
 				member.setMemberPhone(rset.getString("member_phone"));
@@ -140,8 +137,6 @@ public class MemberDao {
 				member.setMemberId(memberId);
 				member.setMemberPwd(rset.getString("member_pwd"));
 				member.setMemberName(rset.getString("member_name"));
-				member.setFileOriginal(rset.getString("profile_original"));
-				member.setFileRename(rset.getString("profile_rename"));
 				member.setMemberEmail(rset.getString("member_email"));
 				member.setEmailAuth(rset.getString("emailauth"));
 				member.setMemberPhone(rset.getString("member_phone"));
@@ -160,18 +155,16 @@ public class MemberDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "update member set member_pwd = ?, member_name = ?, profile_original = ?, profile_rename = ?, member_email = ?, emailauth = ?, member_phone = ? where member_id = ?"; 
+		String query = "update member set member_pwd = ?, member_name = ?, member_email = ?, emailauth = ?, member_phone = ? where member_id = ?"; 
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, member.getMemberPwd());
 			pstmt.setString(2, member.getMemberName());
-			pstmt.setString(3, member.getFileOriginal());
-			pstmt.setString(4, member.getFileRename());
-			pstmt.setString(5, member.getMemberEmail());
-			pstmt.setString(6, member.getEmailAuth());
-			pstmt.setString(7, member.getMemberPhone());
-			pstmt.setString(8, member.getMemberId());
+			pstmt.setString(3, member.getMemberEmail());
+			pstmt.setString(4, member.getEmailAuth());
+			pstmt.setString(5, member.getMemberPhone());
+			pstmt.setString(6, member.getMemberId());
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -248,7 +241,6 @@ public class MemberDao {
 		
 		String query = "update member set member_pwd = ? where member_id = ?"; 
 		
-		System.out.println("member123456789 : " + member);
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, member.getNewPwdOK());
@@ -262,35 +254,72 @@ public class MemberDao {
 		return result;
 	}
 
-	public ArrayList<Member> selectAllList(Connection conn) {
+	public ArrayList<Member> selectAllList(Connection conn, int currentPage, int limit, String search, String keyword) {
 		ArrayList<Member> list = new ArrayList<Member>();
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String qeury = "SELECT MEMBER_ID, DECLARE_OK FROM MEMBER " + 
-				"JOIN DECLARE_ADMIN ON(MEMBER_ID = DECLARE_ID); " + 
-				"SELECT *  FROM MEMBER " + 
-				"LEFT JOIN DECLARE_ADMIN ON (MEMBER_ID = DECLARE_ID);";
+		String query = "SELECT * FROM (SELECT ROWNUM RNUM, MNUM, MEMBER_ID, MEMBER_PWD, MEMBER_NAME, " + 
+				"MEMBER_EMAIL, EMAILAUTH, MEMBER_PHONE, JOIN_DATE, LAST_ACCESS_DATE " + 
+				"FROM (SELECT * FROM MEMBER ORDER BY JOIN_DATE DESC)) LEFT JOIN DECLARE_ADMIN ON (MEMBER_ID = DECLARE_ID)" +
+				(search != null && search.equals("userId") ? "and MEMBER_ID like ? " : "") +
+				(search != null && search.equals("userName") ? "and MEMBER_NAME like ? " : "") +
+				(search != null && search.equals("userEmail") ? "and MEMBER_EMAIL like ? " : "") +
+				(search != null && search.equals("userPhone") ? "and MEMBER_PHONE like ? " : "") +
+				"WHERE RNUM >= ? AND RNUM <= ?";
+	       
+		int startRow = (currentPage - 1) * limit + 1;
+		int endRow = startRow + limit - 1; //51에 -1을 해서 50까지만 보여지게
 		
 		try {
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery(qeury);
+			int pstmtnum = 1;
+			pstmt = conn.prepareStatement(query);
+			if ((search != null && search.equals("")) || (search != null && search.equals("userId")) 
+				 || (search != null && search.equals("userName")) || (search != null &&search.equals("userEmail"))
+				 || (search != null && search.equals("userPhone")) ) {
+				 pstmt.setString(pstmtnum++, "%" + keyword + "%");
+			}
+			pstmt.setInt(pstmtnum++, startRow);
+			pstmt.setInt(pstmtnum++, endRow);
+			rset = pstmt.executeQuery();
 			
-			if(rset.next()) {
+			while(rset.next()) {
 				Member member = new Member();
+				member.setmNumber(rset.getString("mnum"));
 				member.setMemberId(rset.getString("member_id"));
 				member.setMemberPwd(rset.getString("member_pwd"));
 				member.setMemberName(rset.getString("member_name"));
-				member.setFileOriginal(rset.getString("profile_original"));
-				member.setFileRename(rset.getString("profile_rename"));
 				member.setMemberEmail(rset.getString("member_email"));
 				member.setEmailAuth(rset.getString("emailauth"));
 				member.setMemberPhone(rset.getString("member_phone"));
 				member.setJoinDate(rset.getDate("join_date"));
 				member.setLastAccessDate(rset.getDate("last_access_date"));
-				member.setDeclareId(rset.getString("declare_id"));
+				member.setDeclareOK(rset.getString("declare_ok"));
 				
-				list.add(member);
+				list.add(member);				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int getListCount(Connection conn) {
+		int listCount = 0;
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String query = "select count(*) from member";
+
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -298,7 +327,57 @@ public class MemberDao {
 			close(rset);
 			close(stmt);
 		}
+		return listCount;
+	}
+
+	public ArrayList<Member> selectLeaveList(Connection conn, int currentPage, int limit, String search, String keyword) {
+		ArrayList<Member> list = new ArrayList<Member>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		
+		String query = "SELECT * FROM (SELECT ROWNUM RNUM, SSNUM, SECESSION_ID, SECESSION_PWD, SECESSION_NAME, " + 
+				"SECESSION_EMAIL, SECESSION_PHONE, MJOIN_DATE, SECESSION_DATE " + 
+				"FROM (SELECT * FROM SECESSION ORDER BY SECESSION_DATE DESC))" +
+				(search != null && search.equals("userId") ? "and MEMBER_ID like ? " : "") +
+				(search != null && search.equals("userName") ? "and MEMBER_NAME like ? " : "") +
+				(search != null && search.equals("userEmail") ? "and MEMBER_EMAIL like ? " : "") +
+				(search != null && search.equals("userPhone") ? "and MEMBER_PHONE like ? " : "") +
+				"WHERE RNUM >= ? AND RNUM <= ?";
+	       
+		int startRow = (currentPage - 1) * limit + 1;
+		int endRow = startRow + limit - 1; //51에 -1을 해서 50까지만 보여지게
+		
+		try {
+			int pstmtnum = 1;
+			pstmt = conn.prepareStatement(query);
+			if ((search != null && search.equals("")) || (search != null && search.equals("userId")) 
+				 || (search != null && search.equals("userName")) || (search != null &&search.equals("userEmail"))
+				 || (search != null && search.equals("userPhone")) ) {
+				 pstmt.setString(pstmtnum++, "%" + keyword + "%");
+			}
+			pstmt.setInt(pstmtnum++, startRow);
+			pstmt.setInt(pstmtnum++, endRow);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Member member = new Member();
+				member.setmNumber(rset.getString("ssnum"));
+				member.setMemberId(rset.getString("secession_id"));
+				member.setMemberPwd(rset.getString("secession_pwd"));
+				member.setMemberName(rset.getString("secession_name"));
+				member.setMemberEmail(rset.getString("secession_email"));
+				member.setMemberPhone(rset.getString("secession_phone"));
+				member.setJoinDate(rset.getDate("mjoin_date"));
+				member.setSecessionDate(rset.getDate("secession_date"));
+				
+				list.add(member);				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
 		return list;
 	}
 
