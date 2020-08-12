@@ -2,9 +2,6 @@
     pageEncoding="UTF-8" import="java.util.ArrayList, faq.model.vo.Faq"%>
 <%
 	ArrayList<Faq> list = (ArrayList<Faq>)request.getAttribute("list");
-	String[] id = new String[4];
-	id[0] = "answer01";	id[1] = "answer02";	id[2] = "answer03";	id[3] = "answer04";
-	int i = 0;
 %>
 <!DOCTYPE html>
 <html>
@@ -14,7 +11,7 @@
     <style type="text/css">
     input[type="radio"] { display:none; }
     input[type="radio"] + label { display:inline-block;padding:20px;background:#ccc;color:#999;font-size:14px;cursor:pointer; }
-    input[type="radio"]:checked + label { background:#aaa;color:#000; }
+    input[name="tabmenu"]:checked + label { background:#aaa;color:#000; }
     
     .conbox { width:500px;margin:0 auto;display:none; }
 	input[id="tab01"]:checked ~ .con1 { display:block; }
@@ -24,7 +21,7 @@
 	input[id="tab05"]:checked ~ .con5 { display:block; }
 	
 	
-	input[id*="answer"] { display:none; }
+	/* input[id*="answer"] { display:none; } */
 	input[id*="answer"] + label {
 		display:block;
 	 	padding:20px;
@@ -41,66 +38,51 @@
 		overflow:hidden;
 		background:#ebf8ff;
 		font-size:11px; 
-	}
-	input[id*="answer"] + label + div p {
+	} 
+	 input[id*="answer"] + label + div p {
 		display:inline-block;
 		padding:20px;
 	}
-	input[id*="answer"]:checked + label + div { max-height:100px; }
+	input[id*="answer"]:checked + label + div { max-height:100px; } /**/
     </style>
     
     <script type="text/javascript">
     $(function(){
-//    	$("input[name=tabmenu]").on("change", function(){
-    		$("input[name=tabmenu]").each(function(index){
-    			$(this).click(function(){
-    				category = $(this).val();
-    				console.log(category);
-    				$.ajax({
-    					url: "/anavada/fselect",
-    					type: "get",
-    					data: { "category":category },
-    					dataType: "json",
-    					success: function(data){ console.log(data);
-    						//object ==> string으로 변환
-    						var jsonStr = JSON.stringify(data);
-    						//string ==> json객체로 바꿈
-    						var json = JSON.parse(jsonStr);
-    						
-    						var values = "";
-    						for(var i in json.list){
+    	$("input[name=tabmenu]").each(function(index){
+    		$(this).click(function(){
+    			category = $(this).val();
+    			$.ajax({
+    				url: "/anavada/fselect",
+    				type: "get",
+    				data: { "category":category },
+    				dataType: "json",
+    				success: function(data){
+    					
+    					var jsonStr = JSON.stringify(data);
+    					var json = JSON.parse(jsonStr);
+    					
+    					var values = "";
+    					for(var i in json.list){
     							
-    							values += "<input type='radio' name='accordion' id='answer"+ json.list[i].no +"'><label for='answer"
-    									+ json.list[i].no +"'>"+ decodeURIComponent(json.list[i].title).replace(/\+/gi, " ")
-    									+"</label><div><p>"+ decodeURIComponent(json.list[i].content).replace(/\+/gi, " ") +"</p></div>";
-    							
-    							
-    							
-    							<%-- <% for(Faq f : list) { %>
-                				<input type="radio" name="accordion" id="answer<%= f.getFaqNo() %>">
-                				<label for="answer<%= f.getFaqNo() %>"><%= f.getFaqTitle() %></label>
-                				<div><p><%= f.getFaqContent() %></p></div>
-                			<% } %> --%>
-    							
+    						values += "<input type='radio' name='accordion' id='answer"+ json.list[i].no +"'><label for='answer"
+    								+ json.list[i].no +"'>"+ decodeURIComponent(json.list[i].title).replace(/\+/gi, " ")
+    								+"</label><div><p>"+ decodeURIComponent(json.list[i].content).replace(/\+/gi, " ") +"</p></div>";
                 			
-                			
-    						} //for in
-    						console.log(values);
-    						switch(category){
-    						case "회원정보" : $("#t02").html(values); break;
-    						case "중고거래" : $("#t03").html(values); break;
-    						case "커뮤니티" : $("#t04").html(values); break;
-    						case "지역축제" : $("#t05").html(values); break;
-    						}
-    					},
-    					error: function(a,b,c){
-    						console.log(c);
+    					} //for in
+    					switch(category){
+    					case "회원정보" : $("#t02").html(values); break;
+    					case "중고거래" : $("#t03").html(values); break;
+    					case "커뮤니티" : $("#t04").html(values); break;
+    					case "지역축제" : $("#t05").html(values); break;
     					}
-    				});
-    			});
-    		});
-    	});
-//    });
+    				},
+    				error: function(a,b,c){
+    					console.log(c);
+    				}
+    			}); //ajax;
+    		}); //click;
+    	}); //each;
+    });
     
     </script>
 </head>
@@ -128,7 +110,7 @@
             <!--서브 비주얼/타이틀 끝-->
             <br><br><br>
             <div class="tab_content" align="center">
-            	<input type="radio" name="tabmenu" id="tab01" checked value="전체">
+            	<input type="radio" name="tabmenu" id="tab01" checked> <!-- value="전체"> -->
             	<label for="tab01">전체</label>
             	<input type="radio" name="tabmenu" id="tab02" value="회원정보">
             	<label for="tab02">회원정보</label>
@@ -140,14 +122,13 @@
             	<label for="tab05">지역축제</label>
             	<br><br><br>
             	
-            	<div class="conbox con1">
-            		<!-- <div class="accordion"> -->
-            			<% for(Faq f : list) { %>
-            				<input type="radio" name="accordion" id="answer<%= f.getFaqNo() %>">
-            				<label for="answer<%= f.getFaqNo() %>"><%= f.getFaqTitle() %></label>
-            				<div><p><%= f.getFaqContent() %></p></div>
-            			<% } %>
-            		<!-- </div> -->
+            	<div class="conbox con1" id="t01">
+            	 	<div class="open" id="open">
+            		<% for(Faq f : list) { %>
+            			<input type="radio" name="accordion" id="Fanswer<%= f.getFaqNo() %>">
+            			<label for="Fanswer<%= f.getFaqNo() %>"><%= f.getFaqTitle() %></label>
+            			<div><p><%= f.getFaqContent() %></p></div>
+            		<% } %></div>
             	</div>
             	<div class="conbox con2" id="t02"></div>
             	<div class="conbox con3" id="t03"></div>

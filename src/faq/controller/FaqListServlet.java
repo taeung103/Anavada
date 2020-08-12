@@ -34,7 +34,6 @@ public class FaqListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		FaqService fservice = new FaqService();
-//		int totalList = fservice.getListCount();
 		
 		ArrayList<Faq> list = fservice.selectAll();
 		

@@ -272,7 +272,7 @@ public class NoticeDao {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "admin01");
+			pstmt.setString(1, "admin");
 			pstmt.setString(2, notice.getNoTitle());
 			pstmt.setString(3, notice.getNoContent());
 			pstmt.setString(4, notice.getNoOriginal());

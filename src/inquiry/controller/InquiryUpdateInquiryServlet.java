@@ -102,14 +102,12 @@ public class InquiryUpdateInquiryServlet extends HttpServlet {
 				}
 
 				switch(file) {
-				case "newofile1" : inquiry.setIqOriginal(ofileOriginalName); inquiry.setIqRename(rfileName); System.out.println("1 : "+ofileOriginalName);break;
-				case "newofile2" : inquiry.setIqOriginal2(ofileOriginalName); inquiry.setIqRename2(rfileName); System.out.println("2 : "+ofileOriginalName);break;
-				case "newofile3" : inquiry.setIqOriginal3(ofileOriginalName); inquiry.setIqRename3(rfileName); System.out.println("3 : "+ofileOriginalName);break;
+				case "newofile1" : inquiry.setIqOriginal(ofileOriginalName); inquiry.setIqRename(rfileName); break;
+				case "newofile2" : inquiry.setIqOriginal2(ofileOriginalName); inquiry.setIqRename2(rfileName); break;
+				case "newofile3" : inquiry.setIqOriginal3(ofileOriginalName); inquiry.setIqRename3(rfileName); break;
 
 				}
 
-			}else {
-				
 			}
 			bonusNumber++;
 		}
