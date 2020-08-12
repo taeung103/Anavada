@@ -115,7 +115,7 @@
 
                 <div class="view-btn">
                   	<!--  <a href="#none" class="btn btn-prev">이전글</a> -->
-                    <a href="areaEvent_list.jsp" class="btn btn-list">목록</a>
+                    <a href="/anavada/fbklist" class="btn btn-list">목록</a>
                    <!--  <a href="#none" class="btn btn-next">다음글</a> -->
                 </div>
                 
