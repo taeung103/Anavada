@@ -372,4 +372,37 @@ public class FboardDao {
 			}
 			return result;
 		}
+
+		// 관리자 확인용 fboard, 조건 수정일 기준
+		public ArrayList<Fboard> selectFboardList(Connection conn) {
+			ArrayList<Fboard> list = new ArrayList<Fboard>();
+			Statement stmt = null;
+			ResultSet rset = null;
+
+			String query = "select * from fboard order by festival_modifieddate desc";
+
+			try {
+				stmt = conn.createStatement();
+				rset = stmt.executeQuery(query);
+
+				while (rset.next()) {
+					Fboard fboard = new Fboard();
+
+					fboard.setFboardNo(rset.getString(1));
+					fboard.setFestivalTitle(rset.getString(2));
+					fboard.setFestivalStartDate(rset.getString(4));
+					fboard.setFestivalEndDate(rset.getString(5));
+					fboard.setFesivalModifiedDate(rset.getString(6));
+					fboard.setThumbnail(rset.getString(12));
+
+					list.add(fboard);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(stmt);
+			}
+			return list;
+		}
 }

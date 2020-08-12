@@ -143,5 +143,13 @@ public class FboardService {
 			
 		}
 
+		//관리자 확인용 fboard 전체 가지고 오기
+		public ArrayList<Fboard> selectFboardList() {
+			Connection conn = getConnection();
+			ArrayList<Fboard> list = fdao.selectFboardList(conn);
+			close(conn);
+			return list;
+		}
+
 
 }
