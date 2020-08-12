@@ -1,4 +1,4 @@
-package declare.model.vo;
+package admin.declare.model.vo;
 
 public class Declare implements java.io.Serializable {
 	public static final long SerializableUID = 6662L;

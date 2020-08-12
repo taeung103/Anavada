@@ -1,4 +1,4 @@
-package declare.controller;
+package admin.declare.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import declare.model.service.DeclareService;
-import declare.model.vo.Declare;
+import admin.declare.model.service.DeclareService;
+import admin.declare.model.vo.Declare;
 
 /**
  * Servlet implementation class DeclareAdminListServlet
@@ -42,8 +42,8 @@ public class DeclareAdminListServlet extends HttpServlet {
 		int listCount = dservice.getListCount();
 		System.out.println(listCount + "서블릿");//확인용
 
-		ArrayList<Declare> list = dservice.selectList(currentPage, limit);
-		System.out.println(list);
+		ArrayList<Declare> dlist = dservice.selectList(currentPage, limit);
+		System.out.println(dlist);
 		
 		int maxPage = (int) ((double) listCount / limit + 0.9);
 		int startPage = (((int) ((double) currentPage / limit + 0.9)) - 1) * limit + 1;
@@ -52,9 +52,9 @@ public class DeclareAdminListServlet extends HttpServlet {
 			endPage = maxPage;
 		}
 		RequestDispatcher view = null;
-		if (list.size() > 0) {
+		if (dlist.size() > 0) {
 			view = request.getRequestDispatcher("views/admin/declare/admindeclareListView.jsp");
-			request.setAttribute("list", list);
+			request.setAttribute("list", dlist);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("maxPage", maxPage);
 			request.setAttribute("startPage", startPage);

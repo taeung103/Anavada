@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList, banner.model.vo.Banner"%>
 <%
-	ArrayList<Banner> list = (ArrayList<Banner>) request.getAttribute("list");
+	ArrayList<Banner> blist = (ArrayList<Banner>) request.getAttribute("list");
 	int listCount = ((Integer) request.getAttribute("listCount")).intValue();
 	int startPage = ((Integer) request.getAttribute("startPage")).intValue();
 	int endPage = ((Integer) request.getAttribute("endPage")).intValue();
@@ -12,7 +12,7 @@
 <html>
 <head>
 <title>banner</title>
-   <%@ include file="../include/admin_head.jsp" %> 
+   <%@ include file="/views/admin/include/admin_head.jsp" %> 
 </head>
 <body>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
@@ -35,7 +35,7 @@
             <div class="list-area">
                <!--종류 리스트-->
                 <div class="sort-area">  
-                    <h4>전체 <%= list.size() %> 개</h4>
+                    <h4>전체 <%= blist.size() %> 개</h4>
                     <a href="/anavada/views/admin/banner/banner_change.jsp" class="write_btn">배너 등록</a>
                     <div>
                         <!-- <form action="" method="" id="">
@@ -54,7 +54,7 @@
                 <form action=""> 
                 <table >
                 <tr><th>번호</th><th>제목</th><th>배너보이기/숨기기</th><th>첨부파일</th><th>사이즈</th><th>배너URL</th></tr>
-                    <%for(Banner b : list) { 
+                    <%for(Banner b : blist) { 
                     System.out.println(b);%>
                  <tr>
                  <td><a href="/anavada/bselone.ad?bannerNo=<%= b.getBannerNo()%>"><%= b.getBannerNo() %></a></td>

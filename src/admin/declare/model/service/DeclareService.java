@@ -1,4 +1,4 @@
-package declare.model.service;
+package admin.declare.model.service;
 
 import static common.JDBCTemp.*;
 
@@ -6,9 +6,10 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import banner.model.vo.Banner;
-import declare.model.dao.DeclareDao;
+import cboard.model.vo.Cboard;
+import admin.declare.model.dao.DeclareDao;
 import declare.model.vo.DBo;
-import declare.model.vo.Declare;
+import admin.declare.model.vo.Declare;
 
 public class DeclareService {
 	
@@ -71,6 +72,14 @@ public class DeclareService {
 	public ArrayList<Declare> selectList(int currentPage, int limit) {
 		Connection conn = getConnection();
 		ArrayList<Declare> list = ddao.selectList(conn, currentPage, limit);
+		close(conn);
+		return list;
+	}
+
+
+	public ArrayList<Declare> countUp() {
+		Connection conn = getConnection();
+		ArrayList<Declare> list = ddao.countUp(conn);
 		close(conn);
 		return list;
 	}
