@@ -31,6 +31,8 @@ public class FboardAdminDeleteServlet extends HttpServlet {
 		// 매년 연도가 바뀌면 이전 년도 축제 해당 게시판 delete
 		System.out.println("FboardAdminDeleteServlet");
 		new FboardService().deleteFboard();
+		
+		response.sendRedirect("/anavada/views/admin/fboard/adminfboardList.jsp");
 	}
 
 	/**
