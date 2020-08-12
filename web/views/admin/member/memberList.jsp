@@ -71,7 +71,39 @@
                             <th>접속일</th>
                             <th>신고여부</th>
                         </tr>
+						<script>
+	                    	
+							
+							$('#memberLeaveBtn').click(function() {
+								var checkbox = [];
+								$("input[name=Mleave]:checked").each(function() {
+									checkbox.push($(this).val());
+									console.log(checkarr);
+								});
+								if (checkbox.length == 0) {
+									alert("값을 선택하세요.");
+									return;
+								}
 
+								jQuery.ajaxSettings.traditional = true;
+
+								$.ajax({
+									url : "/anavada/adminleave.ad",
+									type : "post",
+									dataType : "json",
+									data : {
+										'checkbox' : checkbox
+									},
+									success : function(msg) {
+										alert(msg);
+									},
+									error : function(jqXHR, textStatus, errorThrown){
+						                  console.log("jqXHR : " +jqXHR +
+						                		  "textStatus : " + textStatus + 
+						                		  "errorThrown : " + errorThrown);
+								});
+							});
+						</script>
 						<% for(Member m : list){ %>
                         <tr>
                             <td class="checkBox"><input type="checkbox" name="Mleave" id="Mleave"></td>
@@ -93,7 +125,7 @@
 
                 <!-- 버튼 -->
                 <div class="btn_wrap">
-                    <a href="#" class="btn-left btn_gray">선택탈퇴</a>
+                    <a href="#" id="memberLeaveBtn" class="btn-left btn_gray">선택탈퇴</a>
                 </div>
                 <!-- //버튼 -->
 
