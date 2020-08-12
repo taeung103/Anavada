@@ -111,31 +111,21 @@
                             <th>작성일자</th>
                             <th>수정일자</th>
                         </tr>
-                        <%for(Cboard c : clist) {%>
-                        <tr onclick="location.href='/anavada/cdetail?cnum=<%= c.getCboardNo()%>'">
-                            <td class="checkBox" onclick="event.cancelBubble=true"><input type="checkbox" name = "check" value="checked"></td>
-                            <td class="number"><%= c.getCboardNo() %></td>
-                            <td class="id"><%= c.getMemberId() %></td>
-                            <td class="name"><%= localArr[Integer.parseInt(c.getLocalNo()) - 1] %></td>
-                            <td class="originalFile"><%= c.getCboardTitle() %></td>
-                            <td class="email"><%= c.getCboardViewCount() %></td>
-                            <td class="renameFile"><%= c.getLikeCount() %></td>
-                            <td class="phone"><%= c.getDate() %></td>
-                            <td class="phone"><%= c.getLastmodifiedDate() %></td>
-                        </tr>
-                        <% } %>
-                                               
                     </tbody>
                 </table>
+                <dl style="text-align: center; margin: inherit;">
+           	        <p><img src="/anavada/resources/images/btnIcn/icn_big_listNo.png" ></p>
+					<h1>목록이 없습니다.</h1>
+				</dl>
 
-                <p class="warning_text"> *삭제한 글은 복구가 불가능하니 신중하게 선택하세요.</p>
-                <!-- //게시판 -->
+                <!-- <p class="warning_text"> *삭제한 글은 복구가 불가능하니 신중하게 선택하세요.</p>
+                //게시판
 
-                <!-- 버튼 -->
+                버튼
                 <div class="btn_wrap">
                     <a href="#" class="btn-left btn_gray">선택삭제</a>
                     <a href="notice_write.php" class="btn-right btn_white">등록</a>
-                </div>
+                </div> -->
                 <!-- //버튼 -->
 
                 <!-- 페이징 -->

@@ -16,7 +16,7 @@ import cboard.model.vo.Cboard;
 /**
  * Servlet implementation class AdminCboardListServlet
  */
-@WebServlet("/adclistview")
+@WebServlet("/adclistview.ad")
 public class AdminCboardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -73,7 +73,7 @@ public class AdminCboardListServlet extends HttpServlet {
 			request.setAttribute("keyword", keyword);
 			view.forward(request, response);
 		} else {
-			view = request.getRequestDispatcher("views/cboard/cboardListError.jsp");
+			view = request.getRequestDispatcher("views/admin/cboard/communityAdminListError.jsp");
 			request.setAttribute("list", list);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("maxPage", maxPage);
