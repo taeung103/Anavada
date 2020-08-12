@@ -16,6 +16,48 @@
 <html>
 <head>
     <%@ include file="../include/admin_head.jsp" %>
+    <script type="text/javascript">
+	$(function () {
+	    $("#delete_btn").click(function() {
+		    var checkarr = []
+			$("input[name=check]:checked").each(function() {
+				checkarr.push($(this).val());
+				console.log(checkarr);
+			});
+		    
+		    $.ajax({
+		    	url:'/anavada/adcdelete.ad',
+		    	type: 'get',
+		    	traditional: true,
+		    	data: {
+		    		checkarr : checkarr.join(',')
+		    	},
+		    	success : function(data){
+		            console.log("컨트롤러에서 받은 MSG : " + data);
+		        },
+		     
+		        //Ajax 실패시 호출
+		        error : function(jqXHR, textStatus, errorThrown){
+		            console.log("jqXHR : " +jqXHR +"textStatus : " + textStatus + "errorThrown : " + errorThrown);
+		        }
+		    });
+		});
+	    
+	    
+	});
+    
+    /*
+    document.addEventListener('DOMContentLoaded', function () {
+    	console.log('DOMContentLoaded');
+    	document.querySelector('#delete_btn').addEventListener('click', function () {
+    		console.log('click delete_btn');
+    		document.querySelectorAll('input[name=check]:checked').forEach(function (elem) {
+    			console.log('elem', elem)
+    		});
+    	});
+    });
+    */
+	</script>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
@@ -85,7 +127,7 @@
                     </div>
                 </div>
                 <!-- 검색영역 끝 -->
-                <form action="adcdelete.ad">
+                <form>
                 <input type="hidden" name="vals" value="$()">
                 <table class="cboardTable" style="width: inherit;" co>
                     <colgroup>
@@ -135,11 +177,11 @@
                 <!-- //게시판 -->
 
                 <!-- 버튼 -->
+                <!-- //버튼 -->
                 <div class="btn_wrap">
-                    <a href="/anavada/adcdelete.ad?" class="btn-left btn_gray">선택삭제</a>
+                    <button id="delete_btn" class="btn-left btn_gray">선택삭제</button>
                     <a href="notice_write.php" class="btn-right btn_white">등록</a>
                 </div>
-                <!-- //버튼 -->
                 </form>
 
                 

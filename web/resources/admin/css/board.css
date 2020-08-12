@@ -507,6 +507,21 @@
     background-color: #444;
     border: 1px solid #444;
 }
+.btn_wrap button {
+    width: 120px;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 15px;
+    padding: 6px 0;
+}
+.btn_wrap button.btn-left {
+    float: left;
+}
+.btn_wrap button.btn_gray {
+    color: #fff;
+    background-color: #999;
+    border: 1px solid #999;
+}
 .view-btn {
     text-align: center;
     overflow: hidden;
