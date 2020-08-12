@@ -34,7 +34,7 @@ public class EncodingFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		System.out.println("EncodingFilter doFilter run...");
+
 		// place your code here
 		
 		//전송방식이 post일때는 반드시 request 에 대해서 인코딩해야함

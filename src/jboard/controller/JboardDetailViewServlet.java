@@ -38,7 +38,13 @@ public class JboardDetailViewServlet extends HttpServlet {
 		
 				
 				int jboardno = Integer.parseInt(request.getParameter("jboardno"));
-				int currentPage = Integer.parseInt(request.getParameter("page"));
+				
+				int currentPage = 1;
+				if (request.getParameter("page") != null) {
+					currentPage = Integer.parseInt(request.getParameter("page"));
+				}
+				
+				
 				Jboard jboard = new JboardService().selectJboard(jboardno);
 				JboardService jbservice = new JboardService();
 				jbservice.addReadCount(jboardno);
@@ -47,7 +53,6 @@ public class JboardDetailViewServlet extends HttpServlet {
 				CommentService jbcservice = new CommentService();
 				ArrayList<Comment> list = jbcservice.CommentList(jboardno);
 				int commentListCount = jbcservice.getCommentCount(jboardno);
-				
 				
 				RequestDispatcher view = null;
 				if(jboard != null) {

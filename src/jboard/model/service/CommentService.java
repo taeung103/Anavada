@@ -10,15 +10,16 @@ import java.util.ArrayList;
 
 import jboard.model.dao.CommentDao;
 import jboard.model.vo.Comment;
+import jboard.model.vo.Jboard;
 
 
 public class CommentService {
 	private CommentDao cdao = new CommentDao();
 	public CommentService() {}
 	
-		public int insertComment(Comment comment) {
+		public int insertComment(Comment reply) {
 			Connection conn = getConnection();
-			int result = cdao.insertComment(conn, comment);
+			int result = cdao.insertComment(conn, reply);
 			if(result > 0)
 				commit(conn);
 			else
@@ -73,6 +74,8 @@ public class CommentService {
 			return result;
 		}
 
+		}
+
 
 		
-	}
+	

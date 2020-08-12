@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@  page 
- 	import="jboard.model.vo.Jboard , java.util.ArrayList, java.sql.Date, jboard.model.vo.Comment"%>
+ 	import="jboard.model.vo.Jboard , java.util.ArrayList, java.sql.Date, jboard.model.vo.Comment" %>
 <%
 	ArrayList<Comment> list = (ArrayList<Comment>) request.getAttribute("list");
+	
 	Jboard jboard = (Jboard)(request.getAttribute("jboardno"));
 	String titleSearch = request.getParameter("titlesearch");
 	String listSearch = request.getParameter("listsearch");
@@ -109,22 +110,22 @@
                             <%if (jboard.getJboardRenameFilePath1() !=null){ %>
                                 <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath1()%>"/></li>
                                 <%}else{ %>
-                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/테스트.jpg"/></li>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/test.jpg"/></li>
                                 <%} %>
-                                 <%if (jboard.getJboardRenameFilePath1() !=null){ %>
+                                 <%if (jboard.getJboardRenameFilePath2() !=null){ %>
                                 <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath2()%>"/></li>
                                 <%}else{ %>
-                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/테스트.jpg"/></li>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/test.jpg"/></li>
                                 <%} %>
-                                 <%if (jboard.getJboardRenameFilePath1() !=null){ %>
+                                 <%if (jboard.getJboardRenameFilePath3() !=null){ %>
                                 <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath3()%>"/></li>
                                 <%}else{ %>
-                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/테스트.jpg"/></li>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/test.jpg"/></li>
                                 <%} %>
-                                 <%if (jboard.getJboardRenameFilePath1() !=null){ %>
+                                 <%if (jboard.getJboardRenameFilePath4() !=null){ %>
                                 <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath4()%>"/></li>
                                 <%}else{ %>
-                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/테스트.jpg"/></li>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/test.jpg"/></li>
                                 <%} %>
                             </ul>
                             <!-- Add Arrows -->
@@ -133,10 +134,26 @@
                         </div>
                         <div class="swiper-container gallery-thumbs">
                             <ol class="swiper-wrapper">
+                             <%if (jboard.getJboardRenameFilePath1() !=null){ %>
                                 <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath1()%>"/></li>
+                                <%}else{ %>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/테스트.jpg"/></li>
+                                <%} %>
+                               <%if (jboard.getJboardRenameFilePath2() !=null){ %>
                                 <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath2()%>"/></li>
+                                <%}else{ %>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/테스트.jpg"/></li>
+                                <%} %>
+                                 <%if (jboard.getJboardRenameFilePath3() !=null){ %>
                                 <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath3()%>"/></li>
+                                <%}else{ %>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/테스트.jpg"/></li>
+                                <%} %>
+                                 <%if (jboard.getJboardRenameFilePath4() !=null){ %>
                                 <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath4()%>"/></li>
+                                <%}else{ %>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/테스트.jpg"/></li>
+                                <%} %>
                             </ol>
                         </div>
     
@@ -199,7 +216,9 @@
                 </div>
                 
                 <div class="cmt_wrap">
-                    <form action="/anavada/jbdetail?jboardno=<%= jboard.getJboardNo() %>&jbclist?jboardno=<%=jboard.getJboardNo()%>/jbcinsert.ss'"  method="">
+                  <form action="/anavada/jbcinsert.ss" method="post">
+                                <input type= "hidden" name="jboardno" value = "<%=jboard.getJboardNo() %>">
+                     
                         <fieldset>
                             <div class="cmt_form">
                                 <h4 class="cmt_head">전체 댓글 수 :<%=commentListCount %></h4>
@@ -215,6 +234,7 @@
                     
                     <% for (Comment comment : list ){ %>
                     <% if (list.size()>0 && jboard.getJboardNo() == comment.getJboardNo()){ %>
+                      
                         <li> 
                             <div>
                                 <h4><%=comment.getCommentId() %></h4><span>마지막 수정일<%=comment.getCommentLastModified() %></span>
@@ -222,13 +242,14 @@
                             <p><%=comment.getCommentContent() %></p>
                             <button onclick="commentReply()">대댓글</button>
                             <div style="display:none" class="Subcmt_form" id="commentReply">
-                                <form action="/anavada/jbdetail?jboardno=<%= jboard.getJboardNo() %>&jbclist?jboardno=<%=jboard.getJboardNo()%>/jbcinsert.ss'" method="">
-                               
+                                <form action="/anavada/jbcinsert.ss" method="post">
+                               <input type= "hidden" name="commentno" value = "<%=comment.getCommentNo() %>">
+                                <input type= "hidden" name="jboardno" value = "<%=jboard.getJboardNo() %>">
                                     <fieldset>
                                         <div class="cmt_form">
                                             <div class="cmt_body">
-<textarea name="" style="resize: none; width:100%; min-height:100px; max-height:100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
-                                            <div class="cmt_ok"><input type="submit" value="등록" onclick="" location.href='/anavada/jbdetail?jboardno=<%= comment.getJboardNo() %>'></div>
+<textarea name="commentcontent" style="resize: none; width:100%; min-height:100px; max-height:100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
+                                            <div class="cmt_ok"><input type="submit" value="등록" ></div>
                                             </div>
                                         </div>
                                     </fieldset>

@@ -39,6 +39,40 @@
 			});
 		});
     </script>
+     <script type="text/javascript">
+                    $(function(){
+                    	
+                    	$.ajax({
+            				url: "/anavada/jtop3",
+            				type: "get",
+            				dataType: "json",
+            				success : function(data) {
+            					console.log("success : " + data);
+            					// object ==> string으로 변환
+            					var jsonStr = JSON.stringify(data);
+            					// string ==> json 객채로 바꿈
+            					var json = JSON.parse(jsonStr);
+								var values ="";
+								for (var i in json.list) {
+        						values +="<li onclick=\"location.href='/anavada/jbdetail?jboardno="+ json.list[i].jboardno +"'\">"
+                                +"<div><img src=/anavada/resources/jboardfiles/"+ json.list[i].pic+">"
+                                +"</div>"
+                                +"<h3>"+decodeURIComponent(json.list[i].title).replace(/\+/gi, " ")
+                                +"</h3>"
+                                +"<h4>"+json.list[i].price+ "<span>원</span></h4>"
+                                +"<p><p><i class=\"good_i glyphicon glyphicon-heart-empty\">좋아요<span>" +json.list[i].like+"</span></i></p>"
+                            	+"</li>";
+        					} // for in
+
+                    	$("#jtoplist").html($("#jtoplist").html() + values);
+        				},
+        				error: function(jqXHR, textstatus, errorthrown) {
+        					console.log("error : " + jqXHR + ", " + textstatus + ", "+ errorthrown);
+        				}
+        		});
+        	
+        });
+</script>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
@@ -120,31 +154,8 @@
                 <div class="mianPdt">
                     <h2>지금 당장 만나는 중고거래!</h2>
                     <a href="#none" class="more">더보기 +</a>
-                    <ul class="Pdt_list">
-                        <li onclick="location.href=''">
-                            <div><img src="/anavada/resources/images/test/testImg.jpg"/></div>
-                            <h3>밤하늘의 별</h3>
-                            <h4>700,000 <span>원</span></h4>
-                            <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></p>
-                        </li>
-                        <li onclick="location.href=''">
-                            <div><img src="/anavada/resources/images/test/testImg.jpg"/></div>
-                            <h3>찌릿찌릿</h3>
-                            <h4>800,000 <span>원</span></h4>
-                            <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></p>
-                        </li>
-                        <li onclick="location.href=''">
-                            <div><img src="/anavada/resources/images/test/testImg.jpg"/></div>
-                            <h3>집집집집</h3>
-                            <h4>1,000,000 <span>원</span></h4>
-                            <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></p>
-                        </li>
-                        <li onclick="location.href=''">
-                            <div><img src="/anavada/resources/images/test/testImg.jpg"/></div>
-                            <h3>레몬에이드</h3>
-                            <h4>7,800,000 <span>원</span></h4>
-                            <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></p>
-                        </li>
+                    <ul class="Pdt_list" id= "jtoplist">
+            			<!-- AJAX로 처리 -->
                     </ul>
                 </div>
 

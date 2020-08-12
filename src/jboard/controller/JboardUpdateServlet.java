@@ -100,8 +100,8 @@ public class JboardUpdateServlet extends HttpServlet {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyMMddHHmmss");
 
 			String renameFileName = sdf.format(new java.sql.Date(System.currentTimeMillis()));
-
-			renameFileName +=i+ "." + originFilePath.substring(originFilePath.lastIndexOf(".") + 1);
+			System.out.println("originFilePath :" +originFilePath);
+			renameFileName +=i+ "." + originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
 
 			File renameFile = new File(savePath + "\\" + renameFileName);
 			if (!newOriginFile.renameTo(renameFile)) {
@@ -145,21 +145,22 @@ public class JboardUpdateServlet extends HttpServlet {
 			        jboard.setJboardRenameFilePath4(null);		break;
 			}
 		originFile.delete();			
-			} else if(originFilePath != null && (originFilePath.equals(originalFileName) &&
-				  newOriginFile.length() == originFile.length())||originalFileName == null ) {
+			} else if(originFilePath != null && (originalFileName == null ||originFilePath.equals(originalFileName) &&
+				  newOriginFile.length() == originFile.length())) {
 				   switch (i) { 
 				   case 1:jboard.setJboardOrignalFilePath1(originFilePath);
 				   		  jboard.setJboardRenameFilePath1(renameFilePath); break;
-				   case 2:jboard.setJboardOrignalFilePath1(originFilePath);
-			   		  jboard.setJboardRenameFilePath1(renameFilePath); break; 
-				   case 3:jboard.setJboardOrignalFilePath1(originFilePath);
-				   		  jboard.setJboardRenameFilePath1(renameFilePath); break; 
-				   case 4:jboard.setJboardOrignalFilePath1(originFilePath);
-				   		  jboard.setJboardRenameFilePath1(renameFilePath); break; 
+				   case 2:jboard.setJboardOrignalFilePath2(originFilePath);
+			   		  jboard.setJboardRenameFilePath2(renameFilePath); break; 
+				   case 3:jboard.setJboardOrignalFilePath3(originFilePath);
+				   		  jboard.setJboardRenameFilePath3(renameFilePath); break; 
+				   case 4:jboard.setJboardOrignalFilePath4(originFilePath);
+				   		  jboard.setJboardRenameFilePath4(renameFilePath); break; 
 			}
 		}
+		}
 		int result = new JboardService().jboardUpdate(jboard);
-		
+	
 		if (result > 0) {
 			response.sendRedirect("jblist?page=" + currentPage);
 		} else {
@@ -167,7 +168,7 @@ public class JboardUpdateServlet extends HttpServlet {
 			request.setAttribute("message", jboardNo +"번 게시원글 수정 실패!");
 			view.forward(request, response);
 		}
-		}
+		
 	}
 
 	/**

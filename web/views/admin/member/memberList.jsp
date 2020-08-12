@@ -71,21 +71,7 @@
                             <th>접속일</th>
                             <th>신고여부</th>
                         </tr>
-						<% for(Member m : list){ %>
-                        <tr>
-                            <td class="checkBox"><input type="checkbox"></td>
-                            <td class="number">10</td>
-                            <td class="id"><%= m.getMemberId() %></td>
-                            <td class="name"><%= m.getMemberName() %></td>
-                            <td class="originalFile"><%= m.getFileOriginal() %></td>
-                            <td class="renameFile"><%= m.getFileRename() %></td>
-                            <td class="email"><%= m.getMemberEmail() %></td>
-                            <td class="phone"><%= m.getMemberPhone() %></td>
-                            <td class="joinDate"><%= m.getJoinDate() %></td>
-                            <td class="lastAccessDate"><%= m.getLastAccessDate() %></td>
-                            <td class="declareId"><%= m.getDeclareId() %></td>
-                        </tr>
-                        <% } %>
+					
                         <tr>
                             <td class="checkBox"><input type="checkbox"></td>
                             <td class="number">9</td>
