@@ -60,7 +60,7 @@ public class FboardReplyDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		String query = "insert into fboard_reply values(SEQ_ID.NEXTVAL, ?, ?, ?, ?, ?, (select to_char(sysdate, 'YYYY.MM.DD HH:MI:SS') from dual))";
+		String query = "insert into fboard_reply values(FBREPLY_SEQ.NEXTVAL, ?, ?, ?, ?, ?, (select to_char(sysdate, 'YYYY.MM.DD HH:MI:SS') from dual))";
 
 		try {
 			pstmt = conn.prepareStatement(query);
