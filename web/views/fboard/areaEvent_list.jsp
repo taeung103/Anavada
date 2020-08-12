@@ -123,10 +123,9 @@
 </style>
 
 </head>
+
 <body oncontextmenu="return false" onselectstart="return false"
 	ondragstart="return false">
-	
-<script type="text/javascript" src="/anavada/resources/js/jquery-3.5.1.min.js"></script>
 	
 	<div id="wrap">
 		<%@ include file="../include/header.jsp"%>
@@ -191,7 +190,7 @@
                 				+ '            <div class="desc">'
                 				+ '                <div class="ellipsis">서울시 <%= f.getLocalName()%></div>'
                 				+ '                <div class="jibun ellipsis"><%=f.getFestivalStartDate()%> ~ <%=f.getFestivalEndDate()%></div>'
-                				+ '                <div><a href="/testjson/views/festivalDetailView.jsp?fboardno=<%=f.getFboardNo()%>&festivalEndDate=<%=f.getFestivalEndDate()%>" class="link">상세 페이지로 이동</a></div>'
+                				+ '                <div><a href="/anavada/views/fboard/areaEvent_view.jsp?fboardno=<%=f.getFboardNo()%>&festivalEndDate=<%=f.getFestivalEndDate()%>" target="_blank" class="link">상세 페이지로 이동</a></div>'
                 				+ '           </div>' + '        </div>' + '    </div>'
                 				+ '</div>'; 
                 	
@@ -267,57 +266,61 @@
 							</form>
 						</div>
 					</div>
-					<!--종류 리스트 끝-->
-
-					<!-- 축제게시판 가지고 오기 (ajax)  -->
-					<script type="text/javascript">
-	
-					/* 축제 정보 ajax로 처리하기  */
-					$(document).ready(function() {
-						$.ajax({
-							url : "/anavada/fblist",
-							type : "get",
-							dataType : "json",
-							success : function(data){
-								console.log("현재 진행 중인 축제 게시판 success : " + data);
-				
-								//object ==> string 으로 변환
-								var jsonStr = JSON.stringify(data);
-								//string ==> json 객체로 바꿈
-								var json = JSON.parse(jsonStr);
-								var totalcount = (json.list).length;	//가지고온 축제 개수
-								var values = "";
-								$("#totalcount").text( '축제 총 개수 : ' + totalcount);
-				
-								for(var i in json.list) {
-									values += "<tr onclick='moveDetailPage(" + json.list[i].fboardNo + ", " + json.list[i].festivalEndDate + ");'>" +
-									"<td class='number'>" + json.list[i].fboardNo + "</td>" +
-									"<td class='sum'><img src='"+ json.list[i].thumbnail +"' width='150px' height='100px' ></td>" +
-									"<td name='ftitle' class='title'><h4><span>" +  decodeURIComponent(json.list[i].festivalTitle).replace(/\+/gi, " ") + "</span></h4></td>" +
-									"<td><ul>" +
-									"<li>축제 지역 : " + json.list[i].localName + "</li>" +
-									"<li>축제기간 : "+ json.list[i].festivalStartDate + " ~ " + json.list[i].festivalEndDate+ "</li>" +
-									"<li>조회수 : " + json.list[i].readcount + "<span> 댓글 : " + json.list[i].replycount +  "</span></li>" +
-									"</ul></td></tr>" 
-								}	//for in
-				
-								$("#fboard-table").html(values);	
-							},
-							error : function(jqXHR, textstatus, errorthrown){
-								console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown);
-							}
-						});	//ajax
-					});	//document.ready
 					
-
-					function moveDetailPage(boardNo, festivalEndDate) {
-						console.log(boardNo, festivalEndDate);
-						location.href = '/anavad/views/festivalDetailView.jsp?fboardno=' + boardNo + '&festivalEndDate=' + festivalEndDate;
-					}
+						<!-- 지난 축제 모두보기 -->
+				<script type="text/javascript">
+				/* 축제 정보 ajax로 처리하기  */
+				$(document).ready(function() {
+					$.ajax({
+					url : "/anavada/fblist",
+					type : "get",
+					dataType : "json",
+					success : function(data){
+						console.log("success : " + data);
+				
+						//object ==> string 으로 변환
+						var jsonStr = JSON.stringify(data);
+						//string ==> json 객체로 바꿈
+						var json = JSON.parse(jsonStr);
+						var totalcount = (json.list).length;	//가지고온 축제 개수
+						var values = "";
+						$("#totalcount").text( '전체 : ' + totalcount);
+				
+						for(var i in json.list) {
+						values += "<tr onclick='moveDetailPage(" + json.list[i].fboardNo + ", " + json.list[i].festivalEndDate + ");'>" +
+						"<td class='number'>" + json.list[i].fboardNo + "</td>" +
+						"<td class='sum'><img src='"+ json.list[i].thumbnail +"' width='150px' height='100px' ></td>" +
+						"<td class='title'><h2><span>" +  decodeURIComponent(json.list[i].festivalTitle).replace(/\+/gi, " ") + "</span></h2>" +
+						"<ul>" +
+							"<li>축제 지역 : " + json.list[i].localName + "</li>" +
+							"<li>축제기간 : "+ json.list[i].festivalStartDate + " ~ " + json.list[i].festivalEndDate+ "</li>" +
+							"<li>조회수 : " + json.list[i].readcount + "<span>  댓글 : " + json.list[i].replycount +  "</span></li>" +
+						"</ul></td></tr>" 
+						}	//for in
 					
-					</script>
-									
-	<!-- 						<tr onclick="location.href='areaEvent_view.jsp';">
+					$("#fboard-table").html(values);	
+				
+				},
+				error : function(jqXHR, textstatus, errorthrown){
+					console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown);
+				}
+			});	//ajax
+		});	//document.ready
+		/* 축제 정보 ajax로 처리하기 끝내기 */
+		
+		/* 상세페이지로 이동 */
+		function moveDetailPage(boardNo, festivalEndDate) {
+			console.log(boardNo, festivalEndDate);
+			location.href = '/anavada/views/fboard/areaEvent_view.jsp?fboardno=' + boardNo + '&festivalEndDate=' + festivalEndDate;
+		}
+
+	</script>
+					
+					
+					<!-- 축제 목록 table  -->
+					<table id="fboard-table" class="cmnt_list">
+						<tbody>
+<!-- 							<tr onclick="location.href='areaEvent_view.jsp';">
 								<td class="number">10</td>
 								<td class="sum"><img
 									src="/anavada/resources/images/test/testImg.jpg" width="150px"
@@ -339,15 +342,9 @@
 									</ul>
 								</td>
 							</tr> -->
-						
-								
-					<!-- 축제 게시판 목록 나오기  -->
-					<table id="fboard-table" class="cmnt_list">
-						<tbody>	
-							
 						</tbody>
 					</table>
-
+					<!-- 축제 목록 table 끝 -->
 
 					<div class="list-no">
 						<p>
@@ -363,8 +360,6 @@
 					</div>
 
 				</div>
-
-
 				<!-- 리스트 끝 -->
 
 
