@@ -260,6 +260,7 @@ public class FboardDao {
 					fboard.setFestivalEndDate(rset.getString("festival_enddate"));
 					fboard.setLocalName(rset.getString("local_name"));
 					fboard.setReadcount(rset.getInt("readcount"));
+					fboard.setFesivalModifiedDate(rset.getString("festival_modifieddate"));
 				}
 
 			} catch (SQLException e) {
