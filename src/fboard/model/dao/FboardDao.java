@@ -326,7 +326,7 @@ public class FboardDao {
 			ResultSet rset = null;
 			
 			String query = "select rownum, fboard_no, festival_title, festival_enddate, thumbnail, local_name " + 
-					"from (select * from fboard left join location using (local_no) where festival_enddate > sysdate -1 order by festival_enddate asc) where rownum <= 8";
+					"from (select * from fboard left join location using (local_no) where festival_enddate > sysdate -1 order by festival_enddate asc) where rownum <= 6";
 			
 			try {
 				stmt = conn.createStatement();
