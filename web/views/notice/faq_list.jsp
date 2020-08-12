@@ -2,69 +2,66 @@
     pageEncoding="UTF-8" import="java.util.ArrayList, faq.model.vo.Faq"%>
 <%
 	ArrayList<Faq> list = (ArrayList<Faq>)request.getAttribute("list");
+	String[] id = new String[4];
+	id[0] = "answer01";	id[1] = "answer02";	id[2] = "answer03";	id[3] = "answer04";
+	int i = 0;
 %>
 <!DOCTYPE html>
 <html>
 <head>
     <%@ include file="../include/head.jsp" %>
-
- 	 <script type="text/javascript">
- 	 
- 	function slideContent(){
- 		$(function(){
- 			$(".question>ul").on("click", function(){
- 				alert("d");
- 					
- 			});
- 		});
- 	}
- 	 
- 	/* $( function() {
- 	    $( "#accordion" ).accordion();
- 	  } ); */
- 	 
- 	 /* function slideContent(){
-        $(function(){
-            var qna = $(".qna_list .question");
-            var i;
-            for (i=0; i < qna.length; i++){
-                qna.eq(i).click(function(){
-                    qna.removeClass("active");
-                    $(this).toggleClass("active");
-                    qna.next().css("display","none");
-                    $(this).next(".ctn").slideToggle(300);
-                })            
-            }
-        });} */
-    </script> 
-    <script type="text/javascript">
-        $(function(){
-            $('.faqTap a').click(function(){
-                var tab_data = $(this).attr('data-tab');
-
-                $('.faqTap a').removeClass('active');
-                $('.qna_list').removeClass('on');
-
-                $(this).addClass('active');
-                $("#" + tab_data).addClass('on');
-            })
-        });
-    </script> 
+    
+    <style type="text/css">
+    input[type="radio"] { display:none; }
+    input[type="radio"] + label { display:inline-block;padding:20px;background:#ccc;color:#999;font-size:14px;cursor:pointer; }
+    input[type="radio"]:checked + label { background:#aaa;color:#000; }
+    
+    .conbox { width:500px;margin:0 auto;display:none; }
+	input[id="tab01"]:checked ~ .con1 { display:block; }
+	input[id="tab02"]:checked ~ .con2 { display:block; }
+	input[id="tab03"]:checked ~ .con3 { display:block; }
+	input[id="tab04"]:checked ~ .con4 { display:block; }
+	input[id="tab05"]:checked ~ .con5 { display:block; }
+	
+	
+	input[id*="answer"] { display:none; }
+	input[id*="answer"] + label {
+		display:block;
+	 	padding:20px;
+		border:1px solid #232188;
+		border-bottom:0;
+		color:#fff;
+		font-weight:900;
+		background:#3634a5;
+		cursor:pointer;
+	}
+	input[id*="answer"] + label + div {
+		max-height:0;
+		transition: all .35s;
+		overflow:hidden;
+		background:#ebf8ff;
+		font-size:11px; 
+	}
+	input[id*="answer"] + label + div p {
+		display:inline-block;
+		padding:20px;
+	}
+	input[id*="answer"]:checked + label + div { max-height:100px; }
+    </style>
     
     <script type="text/javascript">
-    	$(document).ready(function(){
-    		$("#faqCategory>a").each(function(){
+    $(function(){
+//    	$("input[name=tabmenu]").on("change", function(){
+    		$("input[name=tabmenu]").each(function(index){
     			$(this).click(function(){
-    				category = $(this).text();
-    				//alert(category+"가 선택되었습니다");
-    				$("faqCategory>a").removeAttr("class")
-    				$(this).attr("class","active");
+    				category = $(this).val();
+    				console.log(category);
     				$.ajax({
     					url: "/anavada/fselect",
     					type: "get",
     					data: { "category":category },
     					dataType: "json",
-    					success: function(data){
+    					success: function(data){ console.log(data);
     						//object ==> string으로 변환
     						var jsonStr = JSON.stringify(data);
     						//string ==> json객체로 바꿈
@@ -72,40 +69,43 @@
     						
     						var values = "";
     						for(var i in json.list){
-    							values += "<ul class='question' onclick='slideContent();'><li class='Qmarker'><span>Q</span></li><li class='title'>";
     							
-    							switch(json.list[i].cate){
-    							case 1 : values += "<span class='Msel'>회원정보</span>"; break;
-        						case 2 : values += "<span class='Psel'>중고거래</span>"; break;
-        						case 3 : values += "<span class='Csel'>커뮤니티</span>"; break;
-        						case 4 : values += "<span class='Esel'>지역축제</span>"; break;
-    							}
+    							values += "<input type='radio' name='accordion' id='answer"+ json.list[i].no +"'><label for='answer"
+    									+ json.list[i].no +"'>"+ decodeURIComponent(json.list[i].title).replace(/\+/gi, " ")
+    									+"</label><div><p>"+ decodeURIComponent(json.list[i].content).replace(/\+/gi, " ") +"</p></div>";
     							
-    							values += decodeURIComponent(json.list[i].title).replace(/\+/gi, " ") 
-    									+ "</li><li>관리자</li><li>" + json.list[i].date + "</li></ul><ul class='ctn'><li class='Amarker'><span>A</span></li><li><h4>답변</h4><p>" 
-    									+ decodeURIComponent(json.list[i].content).replace(/\+/gi, " ") 
-    									+ "</p></li></ul>";
-    									
+    							
+    							
+    							<%-- <% for(Faq f : list) { %>
+                				<input type="radio" name="accordion" id="answer<%= f.getFaqNo() %>">
+                				<label for="answer<%= f.getFaqNo() %>"><%= f.getFaqTitle() %></label>
+                				<div><p><%= f.getFaqContent() %></p></div>
+                			<% } %> --%>
+    							
+                			
+                			
     						} //for in
+    						console.log(values);
     						switch(category){
-    						case "전체" : $("#tab01").html(values); break;
-    						case "회원정보" : $("#tab02").html(values); break;
-    						case "중고거래" : $("#tab03").html(values); break;
-    						case "커뮤니티" : $("#tab04").html(values); break;
-    						case "지역축제" : $("#tab05").html(values); break;
+    						case "회원정보" : $("#t02").html(values); break;
+    						case "중고거래" : $("#t03").html(values); break;
+    						case "커뮤니티" : $("#t04").html(values); break;
+    						case "지역축제" : $("#t05").html(values); break;
     						}
     					},
     					error: function(a,b,c){
     						console.log(c);
     					}
     				});
-    			})
-    		})
-    	})
+    			});
+    		});
+    	});
+//    });
+    
     </script>
 </head>
-<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
-    <div id="wrap">
+<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false"> 	 
+	<div id="wrap">
         <%@ include file="../include/header.jsp" %>
 
         <!-- 컨텐츠 -->
@@ -126,56 +126,40 @@
                 </div>
             </div>
             <!--서브 비주얼/타이틀 끝-->
-
-            <!-- 리스트 -->
-            <div class="list-area">
-                <div class="faqTap" id="faqCategory">
-                    <a href="#none" class="active" data-tab="tab01">전체</a>
-                    <a href="#none" data-tab="tab02">회원정보</a>
-                    <a href="#none" data-tab="tab03">중고거래</a>
-                    <a href="#none" data-tab="tab04">커뮤니티</a>
-                    <a href="#none" data-tab="tab05">지역축제</a>
-                </div>
-                <!--종류 리스트-->
-                <div class="sort-area" style="margin-top:30px;">  
-                    <div>
-                        <form action="" method="" id="">
-                            목록 분류 : <select name="" class="ListSelect">
-                                    <option value="분류 선택" selected="selected">분류 선택</option>
-                                    <option value="제목">제목</option>
-                                    <option value="내용">내용</option>
-                            </select>
-                            
-                            <input type="text" placeholder="검색어를 입력해주세요.">
-                            <button class="top-search"><i class="xi-search"></i></button>
-                        </form>
-                    </div>
-                </div>
-                
-                <div class="qna_list" id="tab01">
-                </div>
-                
-                <div class="qna_list" id="tab02">
-                </div>
-                
-                <div class="qna_list" id="tab03">
-                </div>
-                
-                <div class="qna_list" id="tab04">
-                </div>
-                
-                <div class="qna_list" id="tab05">
-                </div>
-                
-                </div>
-                
+            <br><br><br>
+            <div class="tab_content" align="center">
+            	<input type="radio" name="tabmenu" id="tab01" checked value="전체">
+            	<label for="tab01">전체</label>
+            	<input type="radio" name="tabmenu" id="tab02" value="회원정보">
+            	<label for="tab02">회원정보</label>
+            	<input type="radio" name="tabmenu" id="tab03" value="중고거래">
+            	<label for="tab03">중고거래</label>
+            	<input type="radio" name="tabmenu" id="tab04" value="커뮤니티">
+            	<label for="tab04">커뮤니티</label>
+            	<input type="radio" name="tabmenu" id="tab05" value="지역축제">
+            	<label for="tab05">지역축제</label>
+            	<br><br><br>
+            	
+            	<div class="conbox con1">
+            		<!-- <div class="accordion"> -->
+            			<% for(Faq f : list) { %>
+            				<input type="radio" name="accordion" id="answer<%= f.getFaqNo() %>">
+            				<label for="answer<%= f.getFaqNo() %>"><%= f.getFaqTitle() %></label>
+            				<div><p><%= f.getFaqContent() %></p></div>
+            			<% } %>
+            		<!-- </div> -->
+            	</div>
+            	<div class="conbox con2" id="t02"></div>
+            	<div class="conbox con3" id="t03"></div>
+            	<div class="conbox con4" id="t04"></div>
+            	<div class="conbox con5" id="t05"></div>
             </div>
-            <!-- 리스트 끝 -->
-<br><br><br><br><br><br>
-
-        <!-- 컨텐츠 끝 -->
-
+            <br><br><br>
+            
+            
+                    
+          </div>  
         <%@ include file="../include/footer.jsp" %>
-    </div>
+	</div>
 </body>
 </html>

@@ -56,7 +56,7 @@ public class FaqSelectCategoryServlet extends HttpServlet {
 //			view.forward(request, response);
 //		
 //		}
-		if(cate != null && !cate.equals("전체")) {
+		if(cate != null) { //&& !cate.equals("전체")) {
 			int no = 0;
 			switch(cate) {
 			case "회원정보" : no = 1; break;
@@ -67,9 +67,9 @@ public class FaqSelectCategoryServlet extends HttpServlet {
 			
 			list = fservice.selectCategory(no);
 		}
-		else if(cate.equals("전체")) {
-			list = fservice.selectAll(); System.out.println("실행");
-		}
+//		else if(cate.equals("전체")) {
+//			list = fservice.selectAll(); System.out.println("실행");
+//		}
 		
 		JSONObject sendJSON = new JSONObject();
 		JSONArray jarr = new JSONArray();
@@ -77,8 +77,9 @@ public class FaqSelectCategoryServlet extends HttpServlet {
 		for(Faq f : list) {
 			JSONObject job = new JSONObject();
 			
+			job.put("no", f.getFaqNo());
 			job.put("title", URLEncoder.encode(f.getFaqTitle(), "utf-8"));
-			job.put("date", f.getFaqDate().toString());
+//			job.put("date", f.getFaqDate().toString());
 			job.put("content", URLEncoder.encode(f.getFaqContent(), "utf-8"));
 			job.put("cate", f.getFaqCategory());
 			
