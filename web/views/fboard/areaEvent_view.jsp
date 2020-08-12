@@ -48,19 +48,55 @@
                 </div>
             </div>
             <!--서브 비주얼/타이틀 끝-->
+            
+            <!-- 축제 상세보기 -->
+            		<script type="text/javascript">
+					$(function() {
+					$.ajax({
+						url : "/anavada/fbdetail",
+						type : "get",
+						data : {fboardno : <%= fboardNo%>},
+						dataType : "json",
+						success : function(data) {
+							console.log("success : " + data);
+								
+						$('#title').text(data.title);
+						$('#localname').text("서울시  ", data.localName);
+						$('#createdd').text("축제 수정일 : " + data.festivalmodifiedDate);
+						$('#readcount').text("조회수 " + data.readcount);
+						$('#firstimage').attr("src", data.firstimage);
+						
+						$('#festivaloverview').html(data.overview);
+						
+						var values = 
+						'<tr><th>축제 상세 주소</th><td colspan="3">' + data.addr1 + data.addr2 + '</td></tr>' +
+                         '<tr><th>축제 기간</th><td colspan="3">'+ data.period  + '</td></tr>' +
+                    	'<tr><th>홈페이지</th><td colspan="3">'  + data.homepage + '</td></tr>' +
+                    	'<tr><th>주최/주최기간 문의</th><td colspan="3">' + data.telname + ", " + data.tel + '</td></tr>';
+                    	
+						$('#fbdetail').append(values);
+						},
+						error : function(jqXHR, textstatus, errorthrown) {
+							console.log("error : " + jqXHR + ", " + textstatus
+									+ ", " + errorthrown);
+						}
+					}); //ajax
+
+		}); //document.ready
+	</script>
+            
 
             <!-- 상세 -->
             <div class="view-area areaEvent_view">
-                <h2><span>서울시 종로구</span>여우樂 페스티벌 2020</h2>
+                 <h2 id="title"><span id="localname">서울시 종로구</span>여우樂 페스티벌 2020</h2>
                 <ul>
-                    <li><span>작성자 : </span>홍길동</li>
-                    <li><span>작성일 : </span>2020.07.30</li>
-                    <li><span>조회수 : </span>30</li>
-                    <li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></li>
+                    <li><span>작성자 : </span>관리자</li>
+                    <li id="createdd"></li>
+                    <li id="readcount"></li>
                 </ul>
                 <div class="areaEvent_info">
-                    <div><img src="/anavada/resources/images/test/testImg.jpg" width="400px" height="400px"></div>
-                    <table>
+                   <div><img id="firstimage" src="" width="500px" height="333px"></div>
+                    <table id="fbdetail">
                         <colgroup>
                             <col width="15%">
                             <col width="35%">
@@ -68,78 +104,148 @@
                             <col width="35%">
                         </colgroup>
                         <tbody>
-                            <tr>
-                                <th>개최지역</th>
-                                <td>서울시 종로구</td>
-                                <th>축제성격</th>
-                                <td>문화예술</td>
-                            </tr>
-                            <tr>
-                                <th>축제장소</th>
-                                <td>국립극장 하늘, 달오름</td>
-                                <th>주최/주관기관</th>
-                                <td>국립극장</td>
-                            </tr>
-                            <tr>
-                                <th>개최기간</th>
-                                <td>2020.07.30 ~ 2020.08.30</td>
-                                <th>주죄문의</th>
-                                <td>국립극장 관리자 02-2222-2222</td>
-                            </tr>
-                            <tr>
-                                <th>url</th>
-                                <td colspan="3"><a href="#none">https://www.gov.kr/portal/vfnews/850605?pageIndex=5</a></td>
-                            </tr>
-                            <tr>
-                                <th>첨부파일#1</th>
-                                <td colspan="3"><a href="#none" download>지역축제_종로구.pdf</a></td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
                 <h2>축제설명</h2>
-                <div class="view-ctn">
-                        너 없는 지금도 눈부신 하늘과<br/>
-                        눈부시게 웃는 사람들<br/>
-                        나의 헤어짐을 모르는 세상은<br/>
-                        슬프도록 그대로인데<br/><br/>
+                <div id="festivaloverview" class="view-ctn">
+                </div>  
 
-                        시간마저 데려가지 못하게<br/>
-                        나만은 널 보내지 못했나봐<br/>
-                        가시처럼 깊게 박힌 기억은<br/>
-                        아파도 아픈 줄 모르고<br/><br/>
 
-                        그대 기억이 지난 사랑이<br/>
-                        내 안을 파고 드는 가시가 되어<br/>
-                        제발 가라고 아주 가라고<br/>
-                        애써도 나를 괴롭히는데<br/><br/>
-
-                        아픈 만큼 너를 잊게 된다면<br/>
-                        차라리 앓고 나면 그만인데<br/>
-                        가시처럼 깊게 박힌 기억은<br/>
-                        아파도 아픈 줄 모르고
-                </div>
 
                 <div class="view-btn">
-                    <a href="#none" class="btn btn-prev">이전글</a>
+                  	<!--  <a href="#none" class="btn btn-prev">이전글</a> -->
                     <a href="areaEvent_list.jsp" class="btn btn-list">목록</a>
-                    <a href="#none" class="btn btn-next">다음글</a>
+                   <!--  <a href="#none" class="btn btn-next">다음글</a> -->
                 </div>
                 
+                
+                
+                
                 <div class="cmt_wrap">
-                    <form action="" method="">
+                
+                
+<!--                     <form action="" method="">
                         <fieldset>
                             <div class="cmt_form">
                                 <h4 class="cmt_head">댓글 77</h4>
                                 <div class="cmt_body">
-<textarea name="" style="resize: none; width:100%; min-height:100px; max-height:100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
+					<textarea name="" style="resize: none; width:100%; min-height:100px; max-height:100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
                                     <div class="cmt_ok"><input type="submit" value="등록"></div>
                                 </div>
                             </div>
                         </fieldset>
+                    </form> -->
+                    
+                                        <form name="replysubmit" method="post" action="">
+                        <fieldset>
+                            <div class="cmt_form">
+                            <h4 id="totalcount" class="cmt_head">댓글 : 4</h4>
+                                <div class="cmt_body">
+                                <input type="hidden" id="boardno" name="boardno" value="<%= fboardNo%>">    
+                                <input type="hidden" id= "memberid" name="memberid" value="user01">	<!-- 나중에 멤버아이디 변경하기 -->
+								<textarea id="replyContent" name="replyContent" style="resize: none; width:100%; min-height:100px; max-height:100px;" placeholder="댓글을 작성해주세요"></textarea>
+                                 <div class="cmt_ok"><input type="button" value="등록" onclick="ReplySubmit(${result.code})"></div>
+                               	 </div>
+                            </div>
+                        </fieldset>
                     </form>
-                    <ul class="cmt_con">
-                        <li>
+                    
+                     <script type="text/javascript">
+                      $(function(){
+                    	  getCommentList()
+                      });
+                    	  
+                      function getCommentList() {
+                    	  $.ajax({
+      						url : "/anavada/fbreplylist",
+      						type : "get",
+      						data : {fboardno : <%= fboardNo%>},
+      						dataType : "json",
+      						success : function(data) {
+      							console.log("success : " + data);
+      							console.log("댓글 나오기")
+      							
+      							var jsonStr = JSON.stringify(data);
+								var json = JSON.parse(jsonStr);
+								var totalcount = (json.list).length;	//가지고온 축제 개수
+								var values = "";
+								$("#totalcount").text('댓글 : ' + totalcount );
+								
+								for(var i in json.list) {
+								values += '<li><div>' +
+                                '<h4>user : ' + json.list[i].memberId + '</h4><span>' + json.list[i].fboardReplyCreatDate + '</span>' +
+                                '</div><p>' + decodeURIComponent(json.list[i].fboardReplyContent).replace(/\+/gi, " ") + '</p>' + 
+                                '<div class="cmt_ok"><input type="submit" value="삭제" onclick="Replydelete(' + json.list[i].fboardReplyNo + ');"></div>' +
+                                '<button onclick="">대댓글</button>'
+                                
+                                /* '<div class="Subcmt_form">' +
+                                '<form name="replysubmit" method="post" action="/testjosn/fbreplyinsert.ss?fboardReplyLev=2&fboardReplyPNo=' + json.list[i].fboardReplyNo + '">' +
+                                    '<fieldset><div class="cmt_form"><div class="cmt_body"><textarea id="replycontent" style="resize: none; width:100%; min-height:100px; max-height:100px;">비방글은 작성하실 수 없습니다.</textarea>' +
+                                            '<div class="cmt_ok"><input type="submit" value="등록" onclick="ReplySubmit()"></div>' +
+                                            '</div>' +
+                                        '</div>' +
+                                    '</fieldset></form></div>' +
+                          		'</li>' */
+								}	//for in
+								
+								$("#fbreply").empty();
+								 $("#fbreply").html($("#reply").html() + values);
+
+								/* $("#reply").html($("#reply").html() + values); */
+      						},
+      						error : function(jqXHR, textstatus, errorthrown) {
+      							console.log("error : " + jqXHR + ", " + textstatus
+      									+ ", " + errorthrown);
+      						}
+      					}); //ajax
+                      }	
+                      
+                      
+                      function ReplySubmit(code) {
+                          if (document.getElementById("replyContent").value == "") {
+                              alert("내용을 입력해주세요");
+                              return false;
+                    }else
+                  	  $.ajax({
+                  		url : "/anavada/fbreplyinsert.ss",
+                	        type:'POST',
+                	        data : {replyContent : $('#replyContent').val(), memberid : $('#memberid').val(), boardno : $('#boardno').val()},
+                	        success : function(data){
+                	        	 alert("댓글이 등록되었습니다."); 
+                	                getCommentList();
+                	                $("#replyContent").val("");
+                	        },
+                	        error:function(request,status,error){
+                	        	console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown);
+                	       }
+                	    });
+                    }
+                    
+                    function Replydelete(fboardReplyNo) {
+                  	  console.log(fboardReplyNo + "댓글 삭제하기")
+                  	  /* location.href="/testjson/fbreplydelete?fboardReplyNo=" + fboardReplyNo; */
+                  	  
+                  	  $.ajax({
+                    		url : "/anavada/fbreplydelete.ss",
+                  	        type:'POST',
+                  	        data : {fboardReplyno : fboardReplyNo},
+                  	        success : function(data){
+                  	        	 alert("댓글이 삭제되었습니다."); 
+                  	                getCommentList();
+                  	        },
+                  	        error:function(request,status,error){
+                  	        	console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown);
+                  	       }
+                  	        
+                  	    });
+                    }
+
+                      
+                    </script>
+                    
+                    <ul id="fbreply" class="cmt_con">
+<!--                        <li>
                             <div>
                                 <h4>user : asdf123</h4><span>2020.08.16. 12:12:00</span>
                             </div>
@@ -150,7 +256,7 @@
                                     <fieldset>
                                         <div class="cmt_form">
                                             <div class="cmt_body">
-<textarea name="" style="resize: none; width:100%; min-height:100px; max-height:100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
+							<textarea name="" style="resize: none; width:100%; min-height:100px; max-height:100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
                                             <div class="cmt_ok"><input type="submit" value="등록"></div>
                                             </div>
                                         </div>
@@ -177,7 +283,7 @@
                             </div>
                             <p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를 미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
                             <button>대댓글</button>
-                        </li>
+                        </li>  -->
                     </ul>
                     <button class="cmt_in">댓글 더보기 <i class="glyphicon glyphicon-menu-right"></i></button>
                 </div>
