@@ -190,7 +190,7 @@
                 				+ '            <div class="desc">'
                 				+ '                <div class="ellipsis">서울시 <%= f.getLocalName()%></div>'
                 				+ '                <div class="jibun ellipsis"><%=f.getFestivalStartDate()%> ~ <%=f.getFestivalEndDate()%></div>'
-                				+ '                <div><a href="/anavada/views/fboard/areaEvent_view.jsp?fboardno=<%=f.getFboardNo()%>&festivalEndDate=<%=f.getFestivalEndDate()%>" target="_blank" class="link">상세 페이지로 이동</a></div>'
+                				+ '                <div><a href="/anavada/views/fboard/areaEvent_view.jsp?fboardno=<%=f.getFboardNo()%>&festivalEndDate=<%=f.getFestivalEndDate()%>" class="link">상세 페이지로 이동</a></div>'
                 				+ '           </div>' + '        </div>' + '    </div>'
                 				+ '</div>'; 
                 	
