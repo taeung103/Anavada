@@ -49,7 +49,7 @@ public class AdminNoticeDeleteServlet extends HttpServlet {
 		if(result > 0) {
 			for(String rfile : list)
 				new File(savePath + "\\" + rfile).delete();
-			response.sendRedirect("anlist");
+			response.sendRedirect("anlist.ss");
 		}
 	}
 
