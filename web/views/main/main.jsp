@@ -184,21 +184,45 @@
                     </div>
                 </div>
             </div>
-            <div class="mainEvent">
+
+		<!-- 지역축제 top6 ajax -->
+		 <script type="text/javascript">
+		$(function(){
+			$.ajax({
+				url : "/anavada/fbtop6",
+				type : "post",
+				dataType : "json",
+				success : function(data) {
+					console.log("success : " + data);
+					var jsonStr = JSON.stringify(data);
+					var json = JSON.parse(jsonStr);
+					var values = "";
+					for (var i in json.list) {
+						values += '<li><a href="/anavada/views/fboard/areaEvent_view.jsp?fboardno=' 
+						+ + json.list[i].fboardNo + '&festivalEndDate=' +json.list[i].festivalEndDate
+						+ '"><img src="' + json.list[i].thumbnail + '" width="150px" height="100px"/><h3>' + decodeURIComponent(json.list[i].festivalTitle).replace(/\+/gi, " ")
+						+ '</h3></a></li>&nbsp;&nbsp;&nbsp';
+					} // for in
+					
+					$("#fbtop6list").html(values);
+				},
+				error : function(jqXHR, textstatus, errorthrown) {
+					console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown);
+				}
+			});
+		});
+    </script>
+	<!-- 지역축제 top6 ajax 끝 -->
+                       
+       <div class="mainEvent">
                 <h2>함께 즐기는 지역축제</h2>
                 <p>남녀노소 모두와 나누는 우리 지역만의 축제로!</p>
-                <ul>
-                    <li><a href="#none"><img src="/anavada/resources/images/test/testImg.jpg" width="150px" height="150px" /></a></li>
-                    <li><a href="#none"><img src="/anavada/resources/images/test/testImg.jpg" width="150px" height="150px" /></a></li>
-                    <li><a href="#none"><img src="/anavada/resources/images/test/testImg.jpg" width="150px" height="150px" /></a></li>
-                    <li><a href="#none"><img src="/anavada/resources/images/test/testImg.jpg" width="150px" height="150px" /></a></li>
-                    <li><a href="#none"><img src="/anavada/resources/images/test/testImg.jpg" width="150px" height="150px" /></a></li>
-                    <li><a href="#none"><img src="/anavada/resources/images/test/testImg.jpg" width="150px" height="150px" /></a></li>
-                    <li><a href="#none"><img src="/anavada/resources/images/test/testImg.jpg" width="150px" height="150px" /></a></li>
-                    <li><a href="#none"><img src="/anavada/resources/images/test/testImg.jpg" width="150px" height="150px" /></a></li>
+                <ul id="fbtop6list">
+                    <!-- 지역축제 top6 들어갈 자리 -->
                 </ul>    
-            </div>           
+            </div>            
         </div>
+
 
         <%@ include file="../include/footer.jsp" %> 
     </div>

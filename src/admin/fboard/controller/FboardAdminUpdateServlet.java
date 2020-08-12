@@ -1,4 +1,4 @@
-package fboard.controller;
+package admin.fboard.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -86,6 +86,8 @@ public class FboardAdminUpdateServlet extends HttpServlet {
 			
 		}
 		System.out.println("update한 개수 : " + totalUpdate);
+		
+		response.sendRedirect("/anavada/views/admin/fboard/adminfboardList.jsp");
 	}
 
 	/**

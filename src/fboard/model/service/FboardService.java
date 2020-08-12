@@ -129,5 +129,27 @@ public class FboardService {
 			return list;
 		}
 
+		// 축제게시판 전부 삭제하기
+		public void deleteAllFboard() {
+			Connection conn = getConnection();
+			int result = fdao.deleteAllFboard(conn);
+			if(result > 0) { 
+				commit(conn);
+				System.out.println("전부 삭제되었습니다");
+			} else
+				rollback(conn);
+			System.out.println("삭제 될게 없습니다");
+			close(conn);
+			
+		}
+
+		//관리자 확인용 fboard 전체 가지고 오기
+		public ArrayList<Fboard> selectFboardList() {
+			Connection conn = getConnection();
+			ArrayList<Fboard> list = fdao.selectFboardList(conn);
+			close(conn);
+			return list;
+		}
+
 
 }

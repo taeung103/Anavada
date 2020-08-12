@@ -20,7 +20,7 @@ public class FboardDao {
 		public int insertFboard(Connection conn, Fboard fboard) {
 			int result = 0;
 			PreparedStatement pstmt = null;
-			String query = "insert into fboard values(?, ?, ?, ?, ?, ?, ?, ?, default, default, default, ?)";
+			String query = "insert into fboard values(?, ?, ?, ?, ?, ?, ?, ?, default, 'admin', default, ?)";
 
 			try {
 				pstmt = conn.prepareStatement(query);
@@ -260,6 +260,7 @@ public class FboardDao {
 					fboard.setFestivalEndDate(rset.getString("festival_enddate"));
 					fboard.setLocalName(rset.getString("local_name"));
 					fboard.setReadcount(rset.getInt("readcount"));
+					fboard.setFesivalModifiedDate(rset.getString("festival_modifieddate"));
 				}
 
 			} catch (SQLException e) {
@@ -325,7 +326,7 @@ public class FboardDao {
 			ResultSet rset = null;
 			
 			String query = "select rownum, fboard_no, festival_title, festival_enddate, thumbnail, local_name " + 
-					"from (select * from fboard left join location using (local_no) where festival_enddate > sysdate -1 order by festival_enddate asc) where rownum <= 8";
+					"from (select * from fboard left join location using (local_no) where festival_enddate > sysdate -1 order by festival_enddate asc) where rownum <= 6";
 			
 			try {
 				stmt = conn.createStatement();
@@ -354,4 +355,55 @@ public class FboardDao {
 			return list;
 		}
 
+		//축제 게시판 전부 삭제
+		public int deleteAllFboard(Connection conn) {
+			int result = 0;
+			Statement stmt = null;
+
+			String query = "delete fboard"; 
+
+			try {
+				stmt = conn.createStatement();
+
+				result = stmt.executeUpdate(query);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(stmt);
+			}
+			return result;
+		}
+
+		// 관리자 확인용 fboard, 조건 수정일 기준
+		public ArrayList<Fboard> selectFboardList(Connection conn) {
+			ArrayList<Fboard> list = new ArrayList<Fboard>();
+			Statement stmt = null;
+			ResultSet rset = null;
+
+			String query = "select * from fboard order by festival_modifieddate desc";
+
+			try {
+				stmt = conn.createStatement();
+				rset = stmt.executeQuery(query);
+
+				while (rset.next()) {
+					Fboard fboard = new Fboard();
+
+					fboard.setFboardNo(rset.getString(1));
+					fboard.setFestivalTitle(rset.getString(2));
+					fboard.setFestivalStartDate(rset.getString(4));
+					fboard.setFestivalEndDate(rset.getString(5));
+					fboard.setFesivalModifiedDate(rset.getString(6));
+					fboard.setThumbnail(rset.getString(12));
+
+					list.add(fboard);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(stmt);
+			}
+			return list;
+		}
 }

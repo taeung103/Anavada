@@ -1,4 +1,4 @@
-package fboard.controller;
+package admin.fboard.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -63,7 +63,7 @@ public class FboardAdminInsertServlet extends HttpServlet {
 
 				String thumbnail;
 				if (data.get("firstimage2") == null) {
-					thumbnail = "/anavada/resources/images/noimage.png";
+					thumbnail = "/anavada/resources/images/content/noimage.png";
 				} else {
 					thumbnail = data.get("firstimage2").toString();
 				}
@@ -77,6 +77,8 @@ public class FboardAdminInsertServlet extends HttpServlet {
 		}
 
 		System.out.println("insert한 개수 : " + totalInsert);
+		
+		response.sendRedirect("/anavada/views/admin/fboard/adminfboardList.jsp");
 
 	}
 

@@ -123,11 +123,9 @@
 </style>
 
 </head>
+
 <body oncontextmenu="return false" onselectstart="return false"
 	ondragstart="return false">
-	
-	<script type="text/javascript"
-	src="/testjson/resources/jquery-3.5.1.min.js"></script>
 	
 	<div id="wrap">
 		<%@ include file="../include/header.jsp"%>
@@ -192,7 +190,7 @@
                 				+ '            <div class="desc">'
                 				+ '                <div class="ellipsis">서울시 <%= f.getLocalName()%></div>'
                 				+ '                <div class="jibun ellipsis"><%=f.getFestivalStartDate()%> ~ <%=f.getFestivalEndDate()%></div>'
-                				+ '                <div><a href="/testjson/views/festivalDetailView.jsp?fboardno=<%=f.getFboardNo()%>&festivalEndDate=<%=f.getFestivalEndDate()%>" target="_blank" class="link">상세 페이지로 이동</a></div>'
+                				+ '                <div><a href="/anavada/views/fboard/areaEvent_view.jsp?fboardno=<%=f.getFboardNo()%>&festivalEndDate=<%=f.getFestivalEndDate()%>" class="link">상세 페이지로 이동</a></div>'
                 				+ '           </div>' + '        </div>' + '    </div>'
                 				+ '</div>'; 
                 	
@@ -223,7 +221,7 @@
 					
 					<!--종류 리스트-->
 					<div class="sort-area">
-						<h4>전체 150개</h4>
+						<h4 id="totalcount">전체 150개</h4>
 						<a href="areaEvent_write.jsp" class="write_btn">글쓰기</a>
 						<div>
 							<form action="" method="" id="">
@@ -268,10 +266,61 @@
 							</form>
 						</div>
 					</div>
+					
+						<!-- 지난 축제 모두보기 -->
+				<script type="text/javascript">
+				/* 축제 정보 ajax로 처리하기  */
+				$(document).ready(function() {
+					$.ajax({
+					url : "/anavada/fblist",
+					type : "get",
+					dataType : "json",
+					success : function(data){
+						console.log("success : " + data);
+				
+						//object ==> string 으로 변환
+						var jsonStr = JSON.stringify(data);
+						//string ==> json 객체로 바꿈
+						var json = JSON.parse(jsonStr);
+						var totalcount = (json.list).length;	//가지고온 축제 개수
+						var values = "";
+						$("#totalcount").text( '전체 : ' + totalcount);
+				
+						for(var i in json.list) {
+						values += "<tr onclick='moveDetailPage(" + json.list[i].fboardNo + ", " + json.list[i].festivalEndDate + ");'>" +
+						"<td class='number'>" + json.list[i].fboardNo + "</td>" +
+						"<td class='sum'><img src='"+ json.list[i].thumbnail +"' width='150px' height='100px' ></td>" +
+						"<td class='title'><h2><span>" +  decodeURIComponent(json.list[i].festivalTitle).replace(/\+/gi, " ") + "</span></h2>" +
+						"<ul>" +
+							"<li>축제 지역 : " + json.list[i].localName + "</li>" +
+							"<li>축제기간 : "+ json.list[i].festivalStartDate + " ~ " + json.list[i].festivalEndDate+ "</li>" +
+							"<li>조회수 : " + json.list[i].readcount + "<span>  댓글 : " + json.list[i].replycount +  "</span></li>" +
+						"</ul></td></tr>" 
+						}	//for in
+					
+					$("#fboard-table").html(values);	
+				
+				},
+				error : function(jqXHR, textstatus, errorthrown){
+					console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown);
+				}
+			});	//ajax
+		});	//document.ready
+		/* 축제 정보 ajax로 처리하기 끝내기 */
+		
+		/* 상세페이지로 이동 */
+		function moveDetailPage(boardNo, festivalEndDate) {
+			console.log(boardNo, festivalEndDate);
+			location.href = '/anavada/views/fboard/areaEvent_view.jsp?fboardno=' + boardNo + '&festivalEndDate=' + festivalEndDate;
+		}
 
-					<table class="cmnt_list">
+	</script>
+					
+					
+					<!-- 축제 목록 table  -->
+					<table id="fboard-table" class="cmnt_list">
 						<tbody>
-							<tr onclick="location.href='areaEvent_view.jsp';">
+<!-- 							<tr onclick="location.href='areaEvent_view.jsp';">
 								<td class="number">10</td>
 								<td class="sum"><img
 									src="/anavada/resources/images/test/testImg.jpg" width="150px"
@@ -292,196 +341,10 @@
 										<li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></li>
 									</ul>
 								</td>
-							</tr>
-							<tr onclick="location.href='areaEvent_view.jsp';">
-								<td class="number">9</td>
-								<td class="sum"><img
-									src="/anavada/resources/images/test/testImg.jpg" width="150px"
-									height="150px"></td>
-								<td class="title">
-									<h2>
-										<span>서울시 중구</span>서울 물순환 시민문화제 2020
-									</h2>
-									<p>올해 3회차로 개최되는 2018 서울 물 순환시민문화제는 물 순환의 의미, 빗물의 중요성 환기 및 물
-										절약을 실천하는 환경 시민을 육성하고 길거리, 볼거리, 체험거리 등이 풍성하고 다양하고 재미있는 여름철 서울시
-										대표 축제이다.</p>
-									<ul>
-										<li>작성자 : 홍길동</li>
-										<li>축제기간 : 2020.07.30 ~ 2020.08.30</li>
-										<li>조회수 : 30</li>
-										<li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></li>
-									</ul>
-								</td>
-							</tr>
-							<tr onclick="location.href='areaEvent_view.jsp';">
-								<td class="number">8</td>
-								<td class="sum"><img
-									src="/anavada/resources/images/test/testImg.jpg" width="150px"
-									height="150px"></td>
-								<td class="title">
-									<h2>
-										<span>서울시 종로구</span>비건페스타 2020
-									</h2>
-									<p>3회 비건페스타가 오는 8월 SETEC에서 개최됩니다. 동물, 환경, 건강을 생각하는 착한소비를
-										지향하는 제3회 비건페스타는 식품&음료, 패션&뷰티, 생활용품, 친환경 기자재 등 비건 소비재를 한자리에서 만날
-										수 있는 국내 최대 비건 전문 전시회입니다.</p>
-									<ul>
-										<li>작성자 : 홍길동</li>
-										<li>축제기간 : 2020.07.30 ~ 2020.08.30</li>
-										<li>조회수 : 30</li>
-										<li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></li>
-									</ul>
-								</td>
-							</tr>
-							<tr onclick="location.href='areaEvent_view.jsp';">
-								<td class="number">7</td>
-								<td class="sum"><img
-									src="/anavada/resources/images/test/testImg.jpg" width="150px"
-									height="150px"></td>
-								<td class="title">
-									<h2>
-										<span>서울시 종로구</span>여우樂 페스티벌 2020
-									</h2>
-									<p>올해로 11회를 맞이하는 여우락 페스티벌은 전통의 뿌리를 이어오는 명인들의 내공과 우리 음악의 외연을
-										넓힌 실력파 앙상블의 연주로 믿고보는 무대를 선보인다. 끊임없이 우리 음악의 가능성을 실험하는 아티스트들의
-										도전적이고 새로운 무대를 가장 먼저 확인할 수 있으며, 대중성 있는 음악과의 협업으로 에너지를 뿜어내는 신나는
-										공연까지 만날 수 있다. 2020 여우樂 페스티벌은 전통에서부터 현재에 이르는 우리 음악의 다양한 스펙트럼을
-										보여 줄 것이다.</p>
-									<ul>
-										<li>작성자 : 홍길동</li>
-										<li>축제기간 : 2020.07.30 ~ 2020.08.30</li>
-										<li>조회수 : 30</li>
-										<li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></li>
-									</ul>
-								</td>
-							</tr>
-							<tr onclick="location.href='areaEvent_view.jsp';">
-								<td class="number">6</td>
-								<td class="sum"><img
-									src="/anavada/resources/images/test/testImg.jpg" width="150px"
-									height="150px"></td>
-								<td class="title">
-									<h2>
-										<span>서울시 중구</span>서울 물순환 시민문화제 2020
-									</h2>
-									<p>올해 3회차로 개최되는 2018 서울 물 순환시민문화제는 물 순환의 의미, 빗물의 중요성 환기 및 물
-										절약을 실천하는 환경 시민을 육성하고 길거리, 볼거리, 체험거리 등이 풍성하고 다양하고 재미있는 여름철 서울시
-										대표 축제이다.</p>
-									<ul>
-										<li>작성자 : 홍길동</li>
-										<li>축제기간 : 2020.07.30 ~ 2020.08.30</li>
-										<li>조회수 : 30</li>
-										<li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></li>
-									</ul>
-								</td>
-							</tr>
-							<tr onclick="location.href='areaEvent_view.jsp';">
-								<td class="number">5</td>
-								<td class="sum"><img
-									src="/anavada/resources/images/test/testImg.jpg" width="150px"
-									height="150px"></td>
-								<td class="title">
-									<h2>
-										<span>서울시 종로구</span>비건페스타 2020
-									</h2>
-									<p>3회 비건페스타가 오는 8월 SETEC에서 개최됩니다. 동물, 환경, 건강을 생각하는 착한소비를
-										지향하는 제3회 비건페스타는 식품&음료, 패션&뷰티, 생활용품, 친환경 기자재 등 비건 소비재를 한자리에서 만날
-										수 있는 국내 최대 비건 전문 전시회입니다.</p>
-									<ul>
-										<li>작성자 : 홍길동</li>
-										<li>축제기간 : 2020.07.30 ~ 2020.08.30</li>
-										<li>조회수 : 30</li>
-										<li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></li>
-									</ul>
-								</td>
-							</tr>
-							<tr onclick="location.href='areaEvent_view.jsp';">
-								<td class="number">4</td>
-								<td class="sum"><img
-									src="/anavada/resources/images/test/testImg.jpg" width="150px"
-									height="150px"></td>
-								<td class="title">
-									<h2>
-										<span>서울시 종로구</span>여우樂 페스티벌 2020
-									</h2>
-									<p>올해로 11회를 맞이하는 여우락 페스티벌은 전통의 뿌리를 이어오는 명인들의 내공과 우리 음악의 외연을
-										넓힌 실력파 앙상블의 연주로 믿고보는 무대를 선보인다. 끊임없이 우리 음악의 가능성을 실험하는 아티스트들의
-										도전적이고 새로운 무대를 가장 먼저 확인할 수 있으며, 대중성 있는 음악과의 협업으로 에너지를 뿜어내는 신나는
-										공연까지 만날 수 있다. 2020 여우樂 페스티벌은 전통에서부터 현재에 이르는 우리 음악의 다양한 스펙트럼을
-										보여 줄 것이다.</p>
-									<ul>
-										<li>작성자 : 홍길동</li>
-										<li>축제기간 : 2020.07.30 ~ 2020.08.30</li>
-										<li>조회수 : 30</li>
-										<li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></li>
-									</ul>
-								</td>
-							</tr>
-							<tr onclick="location.href='areaEvent_view.jsp';">
-								<td class="number">3</td>
-								<td class="sum"><img
-									src="/anavada/resources/images/test/testImg.jpg" width="150px"
-									height="150px"></td>
-								<td class="title">
-									<h2>
-										<span>서울시 중구</span>서울 물순환 시민문화제 2020
-									</h2>
-									<p>올해 3회차로 개최되는 2018 서울 물 순환시민문화제는 물 순환의 의미, 빗물의 중요성 환기 및 물
-										절약을 실천하는 환경 시민을 육성하고 길거리, 볼거리, 체험거리 등이 풍성하고 다양하고 재미있는 여름철 서울시
-										대표 축제이다.</p>
-									<ul>
-										<li>작성자 : 홍길동</li>
-										<li>축제기간 : 2020.07.30 ~ 2020.08.30</li>
-										<li>조회수 : 30</li>
-										<li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></li>
-									</ul>
-								</td>
-							</tr>
-							<tr onclick="location.href='areaEvent_view.jsp';">
-								<td class="number">2</td>
-								<td class="sum"><img
-									src="/anavada/resources/images/test/testImg.jpg" width="150px"
-									height="150px"></td>
-								<td class="title">
-									<h2>
-										<span>서울시 종로구</span>비건페스타 2020
-									</h2>
-									<p>3회 비건페스타가 오는 8월 SETEC에서 개최됩니다. 동물, 환경, 건강을 생각하는 착한소비를
-										지향하는 제3회 비건페스타는 식품&음료, 패션&뷰티, 생활용품, 친환경 기자재 등 비건 소비재를 한자리에서 만날
-										수 있는 국내 최대 비건 전문 전시회입니다.</p>
-									<ul>
-										<li>작성자 : 홍길동</li>
-										<li>축제기간 : 2020.07.30 ~ 2020.08.30</li>
-										<li>조회수 : 30</li>
-										<li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></li>
-									</ul>
-								</td>
-							</tr>
-							<tr onclick="location.href='areaEvent_view.jsp';">
-								<td class="number">1</td>
-								<td class="sum"><img
-									src="/anavada/resources/images/test/testImg.jpg" width="150px"
-									height="150px"></td>
-								<td class="title">
-									<h2>
-										<span>서울시 종로구</span>여우樂 페스티벌 2020
-									</h2>
-									<p>올해로 11회를 맞이하는 여우락 페스티벌은 전통의 뿌리를 이어오는 명인들의 내공과 우리 음악의 외연을
-										넓힌 실력파 앙상블의 연주로 믿고보는 무대를 선보인다. 끊임없이 우리 음악의 가능성을 실험하는 아티스트들의
-										도전적이고 새로운 무대를 가장 먼저 확인할 수 있으며, 대중성 있는 음악과의 협업으로 에너지를 뿜어내는 신나는
-										공연까지 만날 수 있다. 2020 여우樂 페스티벌은 전통에서부터 현재에 이르는 우리 음악의 다양한 스펙트럼을
-										보여 줄 것이다.</p>
-									<ul>
-										<li>작성자 : 홍길동</li>
-										<li>축제기간 : 2020.07.30 ~ 2020.08.30</li>
-										<li>조회수 : 30</li>
-										<li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></li>
-									</ul>
-								</td>
-							</tr>
+							</tr> -->
 						</tbody>
 					</table>
-
+					<!-- 축제 목록 table 끝 -->
 
 					<div class="list-no">
 						<p>
@@ -497,8 +360,6 @@
 					</div>
 
 				</div>
-
-
 				<!-- 리스트 끝 -->
 
 
