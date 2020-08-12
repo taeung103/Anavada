@@ -280,7 +280,7 @@ public class JboardDao {
 					pstmt.setInt(15,  jboard.getJboardNo());
 					
 					result = pstmt.executeUpdate();
-					System.out.println("업데이트 값 :"+result);
+		
 			} catch (Exception e) {
 				 e.printStackTrace();
 			}finally {
@@ -289,5 +289,59 @@ public class JboardDao {
 			
 			return result;
 }
+
+		public int jboardDelete(Connection conn, int jboardNo) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			
+			String query = "delete from jboard where jboard_no = ?";
+			try {
+					pstmt = conn.prepareStatement(query);
+					pstmt.setInt(1,  jboardNo);
+					
+					result = pstmt.executeUpdate();
+			} catch (Exception e) {
+				 e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			
+			return result;
+			
+		}
+
+		public ArrayList<Jboard> selectNewTop3(Connection conn) {
+			ArrayList<Jboard> list = new ArrayList<Jboard>();
+			Statement stmt = null;
+			ResultSet rset = null;
+
+			String query = "SELECT * " + 
+								"FROM (SELECT ROWNUM RNUM, JBOARD_NO, JBOARD_TITLE, JBOARD_PRICE, "
+								+ " JBOARD_LIKE, JFILES_RENAME_FILEPATH1, JBOARD_DATE " 
+								+"FROM (SELECT * FROM JBOARD"  
+								+" ORDER BY JBOARD_DATE DESC))" 
+								+"WHERE RNUM >=1 AND RNUM <=4";
+			try {
+					stmt = conn.createStatement();
+					rset = stmt.executeQuery(query);
+				while(rset.next()) {
+					Jboard jboard = new Jboard();
+
+					jboard.setJboardNo(rset.getInt("jboard_no"));
+					jboard.setJboardTitle(rset.getString("jboard_title"));
+					jboard.setJboardPrice(rset.getInt("jboard_price"));
+					jboard.setJboardLike(rset.getInt("jboard_like"));
+					jboard.setJboardRenameFilePath1(rset.getString("JFILES_RENAME_FILEPATH1"));
+					list.add(jboard);
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(rset);
+				close(stmt);
+			}
+			return list;
+		}
 		
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import jboard.model.dao.JboardDao;
 import jboard.model.vo.Jboard;
+import notice.model.vo.Notice;
 
 public class JboardService {
 		
@@ -69,6 +70,24 @@ public class JboardService {
 				rollback(conn);
 			close(conn);
 			return result;
+		}
+
+		public int jboardDelete(int jboardNo) {
+			Connection conn = getConnection();
+			int result = bdao.jboardDelete(conn, jboardNo );
+			if (result > 0)
+				commit(conn);
+			else
+				rollback(conn);
+			close(conn);
+			return result;
+		}
+
+		public ArrayList<Jboard> selectNewTop3() {
+			Connection conn = getConnection();
+			ArrayList<Jboard> list = bdao.selectNewTop3(conn);
+			close(conn);
+			return list;
 		}
 
 		

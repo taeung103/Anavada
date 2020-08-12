@@ -15,36 +15,36 @@ import jboard.model.vo.Jboard;
 public class CommentDao {
 	public CommentDao () {}
 
-	public int insertComment(Connection conn, Comment comment) {
+	public int insertComment(Connection conn, Comment reply) {
 		int result = 0;
 		 PreparedStatement pstmt = null;
 		 
 		 String query = null;
 		 
-		 if(comment.getCommentLevel() ==1) { 
+		 if(reply.getCommentLevel() ==1) { 
 			 query = "insert into jboard_comment values ("
-						+ "(select max(comment_no) + 1 from jboard_comment),"
-						+ "?, ?, sysdate, sysdate, ?, ?, ?, 1 "
-						+ "(select max(comment_no) + 1 from jboard_comment))";
+						+ "JBOARD_COMMENT_SEQ.nextval , ?, ?, sysdate, "
+						+ "sysdate, ?, ?, JBOARD_COMMENT_SEQ.nextval , 1 "
+						+ "?";
 		 }
-		 if(comment.getCommentLevel() == 2) {
+		 if(reply.getCommentLevel() == 2) {
 			 query ="insert into jboard_comment values ("
-						+ "(select max(comment_no) + 1 from jboard_comment),"
-						+ "?, ?, sysdate, sysdate, ?, ?, ?, 2, ? ";
+						+ "JBOARD_COMMENT_SEQ.nextval , ?, ? ,sysdate, sysdate, ?"
+						+ "?, ?,  ?, ?, ?, 2, ? ";
 						
 		 }
 		 try {
 			 	pstmt = conn.prepareStatement(query);
-			 	pstmt.setString(1, comment.getCommentContent());
-			 	pstmt.setString(2, comment.getCommentId());
-			 	pstmt.setInt(3, comment.getJboardNo());
-			 	pstmt.setInt(4, comment.getCommentRef());
-			 	if (comment.getCommentLevel() == 1) {
-			 		pstmt.setInt(5, comment.getCommentReplySeq());
+			 	pstmt.setString(1, reply.getCommentId());
+			 	pstmt.setString(2, reply.getCommentContent());
+			 	pstmt.setInt(3, reply.getJboardNo());
+			 	pstmt.setInt(4, reply.getJboardNo());
+			 	if (reply.getCommentLevel() == 1) {
+			 		pstmt.setInt(5, reply.getCommentReplySeq());
 			 	}
-			 	if(comment.getCommentLevel() == 2) {
-			 			pstmt.setInt(5,  comment.getCommentReplyRef());
-			 			pstmt.setInt(6,  comment.getCommentReplySeq());
+			 	if(reply.getCommentLevel() == 2) {
+			 			pstmt.setInt(5,  reply.getCommentReplyRef());
+			 			pstmt.setInt(6,  reply.getCommentReplySeq());
 			 	}
 			 	result = pstmt.executeUpdate();				 	
 		} catch (Exception e) {
@@ -79,9 +79,39 @@ public class CommentDao {
 	
 
 	public int updateReplySeq(Connection conn, Comment reply) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = null;
+		
+		if(reply.getCommentLevel() == 1) {
+				query = "update jboard_comment set comment_reply_seq = comment_reply_seq + 1 "
+						+"where comment_ref = ? and comment_level = ?";
+		}
+		if(reply.getCommentLevel() ==2) {
+			query = "update jboard_comment set comment_reply_seq = comment_reply_seq + 1 "
+					+"where comment_ref = ? and comment_level = ? "
+					+ "and comment_reply_ref = ?";
+		}
+		
+		try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setInt(1, reply.getCommentRef());
+				pstmt.setInt(2, reply.getCommentLevel());
+				if (reply.getCommentLevel() ==2) {
+						pstmt.setInt(3, reply.getCommentReplyRef());
+				}
+				
+				result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
+	
 
 	public int updateReply(Connection conn, Comment reply) {
 		// TODO Auto-generated method stub
@@ -132,6 +162,8 @@ public class CommentDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 
 	
