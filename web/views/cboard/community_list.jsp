@@ -83,7 +83,7 @@
 							</select>
 						</form>
 						
-						<form action="/anavada/clistview"  style="display: inline-block;">
+						<form action="/anavada/clistview" method="post"style="display: inline-block;">
 							<input type="hidden" name="local" value="<%=local%>">
 							<select name="search" class="ListSelect">
 								<option value="title">제목</option>
