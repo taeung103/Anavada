@@ -55,8 +55,8 @@
                             <tr>
                                 <td>지역 분류</td>
                                 <td>
-                                    <select name="local" class="LocationSelect">
-                                        <option value="0" selected="selected">지역선택</option>
+                                    <select name="local" class="LocationSelect" required="required">
+                                        <option value="" selected="selected">지역선택</option>
 										<option value="1" <% if (local.equals("1"))  { %>selected="selected"<% } %>>강남구</option>
 										<option value="2" <% if (local.equals("2"))  { %>selected="selected"<% } %>>강동구</option>
 										<option value="3" <% if (local.equals("3"))  { %>selected="selected"<% } %>>강북구</option>
@@ -87,11 +87,11 @@
                             </tr>
                             <tr>
                                 <td>제목</td>
-                                <td><input type="text" name="title" class="form-control w100p" placeholder="제목"  value="<%=cboard.getCboardTitle()%>"></td>
+                                <td><input type="text" name="title" class="form-control w100p" placeholder="제목"  value="<%=cboard.getCboardTitle()%>" required="required"></td>
                             </tr>
                             <tr>
                                 <td>내용</td>
-                                <td><textarea name="content" rows="10" cols="1000" class="form-control" style="resize: none; width:100%; min-height:300px; max-height:300px;"><%= cboard.getCboardContent() %></textarea></td>
+                                <td><textarea name="content" rows="10" cols="1000" class="form-control" style="resize: none; width:100%; min-height:300px; max-height:300px;" required="required"><%= cboard.getCboardContent() %></textarea></td>
                             </tr>
                             <% for(int i = 0; i < 4; i++) { %>
                             <tr>

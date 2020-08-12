@@ -1,6 +1,8 @@
-package creply.controller;
+package cboard.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,16 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import cboard.model.service.CboardService;
 
 /**
- * Servlet implementation class UpReportCountServlet
+ * Servlet implementation class UpLikeCountServlet
  */
-@WebServlet("/upreport")
-public class UpReportCountServlet extends HttpServlet {
+@WebServlet("/uplike")
+public class UpLikeCountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpReportCountServlet() {
+    public UpLikeCountServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,12 +30,17 @@ public class UpReportCountServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-int cboardNum = Integer.parseInt(request.getParameter("cnum"));
+		int cboardNum = Integer.parseInt(request.getParameter("cnum"));
 		
-		int result = new CboardService().upReportCount(cboardNum);
+		int result = new CboardService().upLikeCount(cboardNum);
 		
 		if (result > 0) {
 			response.sendRedirect("/anavada/cdetail?cnum=" + cboardNum);
+		} else {
+			response.setContentType("text/html; charset=UTF-8");
+            PrintWriter writer = response.getWriter();
+            writer.println("<script>alert('좋아요 실패.');location.href='/anavada/cdetail?cnum=" + cboardNum + "';</script>");
+            writer.close();
 		}
 		
 	}

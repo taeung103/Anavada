@@ -1,6 +1,7 @@
 package cboard.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,9 +43,10 @@ public class CboardUpdateView extends HttpServlet {
 			request.setAttribute("local", local);
 			view.forward(request, response);
 		} else {
-			view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("message", cboardNum + "번 게시글 수정페이지로 이동 실패");
-			view.forward(request, response);
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println("<script>alert('글수정 권한이 없습니다.');location.href='/anavada/cdetail?cnum=" + cboard.getCboardNo() + "';</script>");
+			writer.close();
 		}
 		
 	}

@@ -1,6 +1,7 @@
 package cboard.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -72,9 +73,10 @@ public class CboardDetailViewServlet extends HttpServlet {
 			request.setAttribute("allReplyCount", allReplyCount);
 			view.forward(request, response);
 		} else {
-			view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("message", "error");
-			view.forward(request, response);
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter writer = response.getWriter();
+            writer.println("<script>alert('존재하지 않는 글입니다.');location.href='/anavada/clistview?page=1&local=0';</script>");
+            writer.close();
 		}
 	}
 

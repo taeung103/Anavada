@@ -45,7 +45,7 @@
 			<div class="list-area">
 				<!-- 지역 종류 리스트-->
 				<div class="sort-area">
-					<h4>전체 게시글	<%=listCount%>개</h4>
+					<h4>전체 게시글	0개</h4>
 					<% if(loginMember != null) {%>
 						<a href="views/cboard/community_write.jsp" class="write_btn">글쓰기</a>
 					<% } %>
@@ -83,7 +83,7 @@
 							</select>
 						</form>
 						
-						<form action="/anavada/clistview" method="post"style="display: inline-block;">
+						<form action="/anavada/clistview"  style="display: inline-block;">
 							<input type="hidden" name="local" value="<%=local%>">
 							<select name="search" class="ListSelect">
 								<option value="title">제목</option>
@@ -97,39 +97,26 @@
 
 				<table class="cmnt_list">
 					<tbody>
-						<% for (Cboard c : list) { %>
-							<tr onclick="location.href='/anavada/cdetail?cnum=<%=c.getCboardNo()%>&page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>'">
-								<td class="number"><%=c.getCboardNo()%></td>
-								<td class="title">
-									<h2>
-										<span><%= localArr[Integer.parseInt(c.getLocalNo()) - 1] %></span><%=c.getCboardTitle()%>
-									</h2>
-									<ul>
-										<li>작성자 : <%=c.getMemberId()%></li>
-										<li>작성일 : <%=c.getDate()%></li>
-										<li>조회수 : <%=c.getCboardViewCount()%></li>
-										<li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%=c.getLikeCount()%></span></i></li>
-									</ul>
-								</td>
-								<td class="fileDown"><i class="glyphicon glyphicon-picture"></i></td>
-							</tr>
-						<% } %>
+						
 						</tbody>
 					</table>
 
 					<div class="list-no">
-						<% if (currentPage + 1 > maxPage) {	%>
+					
 							<p><img src="/anavada/resources/images/btnIcn/icn_big_listNo.png" alt="" title="" /></p>
 							<h1>목록이 없습니다.</h1>
-						<% } %>
+						
 					</div>
 
 				<div class="write-btn">
-					<% if(loginMember != null) {%>
+					
 					<a href="views/cboard/community_write.jsp">글쓰기</a>
-					<% } %>
+					
 				</div>
-
+				<div class="view-btn">
+					<a href="/anavada/clistview?page=1&local=0"
+						class="btn btn-list">목록</a>
+				</div>
 			</div>
 
 
@@ -140,67 +127,6 @@
 			<!-- 페이지넘버 -->
 			<dl class="list-paging pb80">
 				<dd>
-					<%
-						if (currentPage <= 1) {
-					%>
-					<a><i class="glyphicon glyphicon-backward"></i></a>
-					<%
-						} else {
-					%>
-					<a href="/anavada/clistview?local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"><i class="glyphicon glyphicon-backward"></i></a>
-					<% } %>
-					<%
-						if (startPage  <= 1) {
-					%>
-					<a><i class="glyphicon glyphicon-menu-left"></i></a>
-					<%
-						} else {
-					%>
-					<a href="/anavada/clistview?page=<%=startPage - 10%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>">
-						<i class="glyphicon glyphicon-menu-left"></i>
-					</a>
-					<%
-						}
-					%>
-					<%
-						for (int p = startPage; p <= endPage; p++) {
-					%>
-					<%
-						if (currentPage == p) {
-					%>
-					<a href="/anavada/clistview?page=<%=p%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>" class="active"><%= p %></a>
-					<%
-						} else {
-					%>
-					<a href="/anavada/clistview?page=<%=p%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"><%=p%></a>
-					<%
-						}
-					%>
-					<%
-						}
-					%>
-					<%
-						if (endPage >= maxPage) {
-					%>
-					<a><i class="glyphicon glyphicon-menu-right"></i></a>
-					<%
-						} else {
-					%>
-					<a href="/anavada/clistview?page=<%=endPage + 1%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"><i class="glyphicon glyphicon-menu-right"></i></a>
-					<%
-						}
-					%>
-					<%
-						if (currentPage >= maxPage) {
-					%>
-					<a><i class="glyphicon glyphicon-forward"></i></a>
-					<%
-						} else {
-					%>
-					<a href="/anavada/clistview?page=<%=maxPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"><i class="glyphicon glyphicon-forward"></i></a>
-					<%
-						}
-					%> 
 				</dd>
 			</dl>
 			<!-- 페이지넘버 끝 -->
