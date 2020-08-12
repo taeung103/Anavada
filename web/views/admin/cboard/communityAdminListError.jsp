@@ -117,16 +117,12 @@
            	        <p><img src="/anavada/resources/images/btnIcn/icn_big_listNo.png" ></p>
 					<h1>목록이 없습니다.</h1>
 				</dl>
-
-                <!-- <p class="warning_text"> *삭제한 글은 복구가 불가능하니 신중하게 선택하세요.</p>
-                //게시판
-
-                버튼
+                <p class="warning_text"> *삭제한 글은 복구가 불가능하니 신중하게 선택하세요.</p>
                 <div class="btn_wrap">
-                    <a href="#" class="btn-left btn_gray">선택삭제</a>
-                    <a href="notice_write.php" class="btn-right btn_white">등록</a>
-                </div> -->
-                <!-- //버튼 -->
+                    <a href="/anavada/adcdelete.ad" class="btn-left btn_gray">선택삭제</a>
+                    <a href="/anavada/adcdelete.ad" class="btn-right btn_white">등록</a>
+                </div>
+                <!-- 버튼 -->
 
                 <!-- 페이징 -->
                 <dl class="list-paging">

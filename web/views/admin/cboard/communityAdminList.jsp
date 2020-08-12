@@ -15,7 +15,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%@ include file="../include/admin_head.jsp" %> 
+    <%@ include file="../include/admin_head.jsp" %>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
@@ -37,9 +37,8 @@
 
 
                 <!-- 검색영역 -->
-                <div class="sort-area">  
-                    <h4>전체 150개</h4>
-                    <div>
+                <div class="sort-area">
+                    <h4>전체 <%= listCount %>개</h4>
                         <div>
 						<form action="/anavada/adclistview.ad" method="get" style="display: inline-block;">
 							지역 분류 : 
@@ -86,6 +85,8 @@
                     </div>
                 </div>
                 <!-- 검색영역 끝 -->
+                <form action="adcdelete.ad">
+                <input type="hidden" name="vals" value="$()">
                 <table class="cboardTable" style="width: inherit;" co>
                     <colgroup>
                         <col width="10%">
@@ -111,9 +112,10 @@
                             <th>작성일자</th>
                             <th>수정일자</th>
                         </tr>
+                        
                         <%for(Cboard c : clist) {%>
                         <tr onclick="location.href='/anavada/cdetail?cnum=<%= c.getCboardNo()%>'">
-                            <td class="checkBox" onclick="event.cancelBubble=true"><input type="checkbox" name = "check" value="checked"></td>
+                            <td class="checkBox" onclick="event.cancelBubble=true"><input type="checkbox" name="check" value="<%= c.getCboardNo()%>"></td>
                             <td class="number"><%= c.getCboardNo() %></td>
                             <td class="id"><%= c.getMemberId() %></td>
                             <td class="name"><%= localArr[Integer.parseInt(c.getLocalNo()) - 1] %></td>
@@ -123,20 +125,24 @@
                             <td class="phone"><%= c.getDate() %></td>
                             <td class="phone"><%= c.getLastmodifiedDate() %></td>
                         </tr>
-                        <% } %>
+                        <%
+                       		}
+						%>
                                                
-                    </tbody>
+                </tbody>
                 </table>
-
                 <p class="warning_text"> *삭제한 글은 복구가 불가능하니 신중하게 선택하세요.</p>
                 <!-- //게시판 -->
 
                 <!-- 버튼 -->
                 <div class="btn_wrap">
-                    <a href="#" class="btn-left btn_gray">선택삭제</a>
+                    <a href="/anavada/adcdelete.ad?" class="btn-left btn_gray">선택삭제</a>
                     <a href="notice_write.php" class="btn-right btn_white">등록</a>
                 </div>
                 <!-- //버튼 -->
+                </form>
+
+                
 
                 <!-- 페이징 -->
                 <dl class="list-paging">
