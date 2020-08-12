@@ -86,7 +86,7 @@
                                 </ul>
                             </td>
                             <td class="fileDown" onclick="location.href='/anavada/aidetail?page=<%= currentPage %>&no=<%= i.getIqNo() %>&selected=<%= selected %>&keyword=<%= keyword %>'">
-                            <% if(i.getIqOriginal() != null) { %>
+                            <% if(i.getIqOriginal() != null || i.getIqOriginal2() != null || i.getIqOriginal3() != null) { %>
                             <i class="glyphicon glyphicon-floppy-saved" onclick="location.href='/anavada/aidetail?page=<%= currentPage %>&no=<%= i.getIqNo() %>&selected=<%= selected %>&keyword=<%= keyword %>'"></i>
                             <% } %>
                             </td>
@@ -107,7 +107,7 @@
                                 </ul>
                             </td>
                             <td class="fileDown" onclick="location.href='/anavada/aidetail?page=<%= currentPage %>&no=<%= i.getIqNo() %>'">
-                            <% if(i.getIqOriginal() != null) { %>
+                            <% if(i.getIqOriginal() != null || i.getIqOriginal2() != null || i.getIqOriginal3() != null) { %>
                             <i class="glyphicon glyphicon-floppy-saved" onclick="location.href='/anavada/aidetail?page=<%= currentPage %>&no=<%= i.getIqNo() %>'"></i>
                             <% } %>
                             </td>
