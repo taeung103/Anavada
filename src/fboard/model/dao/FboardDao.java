@@ -20,7 +20,7 @@ public class FboardDao {
 		public int insertFboard(Connection conn, Fboard fboard) {
 			int result = 0;
 			PreparedStatement pstmt = null;
-			String query = "insert into fboard values(?, ?, ?, ?, ?, ?, ?, ?, default, default, default, ?)";
+			String query = "insert into fboard values(?, ?, ?, ?, ?, ?, ?, ?, default, 'admin', default, ?)";
 
 			try {
 				pstmt = conn.prepareStatement(query);
