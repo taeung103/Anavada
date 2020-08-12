@@ -36,9 +36,9 @@ public class AdminCboardListServlet extends HttpServlet {
 		if (request.getParameter("page") != null) {
 			currentPage = Integer.parseInt(request.getParameter("page"));
 		}
-		String local = request.getParameter("local");
+		String local = "0";
 		if (request.getParameter("local") != null) {
-			local = "0";
+			local = request.getParameter("local");
 		}
 		
 		String search = request.getParameter("search");

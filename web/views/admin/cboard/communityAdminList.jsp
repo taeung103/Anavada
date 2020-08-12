@@ -40,7 +40,39 @@
                 <div class="sort-area">  
                     <h4>전체 150개</h4>
                     <div>
-                        <form action="" method="" id="">
+                        <div>
+						<form action="/anavada/adclistview" method="get" style="display: inline-block;">
+							지역 분류 : 
+							<select name="local" class="LocationSelect" onchange="this.form.submit()">
+								<option value="0" selected="selected">지역선택</option>
+								<option value="1" <% if (local.equals("1"))  { %>selected="selected"<% } %>>강남구</option>
+								<option value="2" <% if (local.equals("2"))  { %>selected="selected"<% } %>>강동구</option>
+								<option value="3" <% if (local.equals("3"))  { %>selected="selected"<% } %>>강북구</option>
+								<option value="4" <% if (local.equals("4"))  { %>selected="selected"<% } %>>강서구</option>
+								<option value="5" <% if (local.equals("5"))  { %>selected="selected"<% } %>>관악구</option>
+								<option value="6" <% if (local.equals("6"))  { %>selected="selected"<% } %>>광진구</option>
+								<option value="7" <% if (local.equals("7"))  { %>selected="selected"<% } %>>구로구</option>
+								<option value="8" <% if (local.equals("8"))  { %>selected="selected"<% } %>>금천구</option>
+								<option value="9" <% if (local.equals("9"))  { %>selected="selected"<% } %>>노원구</option>
+								<option value="10"<% if (local.equals("10")) { %>selected="selected"<% } %>>도봉구</option>
+								<option value="11"<% if (local.equals("11")) { %>selected="selected"<% } %>>동대문구</option>
+								<option value="12"<% if (local.equals("12")) { %>selected="selected"<% } %>>동작구</option>
+								<option value="13"<% if (local.equals("13")) { %>selected="selected"<% } %>>마포구</option>
+								<option value="14"<% if (local.equals("14")) { %>selected="selected"<% } %>>서대문구</option>
+								<option value="15"<% if (local.equals("15")) { %>selected="selected"<% } %>>서초구</option>
+								<option value="16"<% if (local.equals("16")) { %>selected="selected"<% } %>>성동구</option>
+								<option value="17"<% if (local.equals("17")) { %>selected="selected"<% } %>>성북구</option>
+								<option value="18"<% if (local.equals("18")) { %>selected="selected"<% } %>>송파구</option>
+								<option value="19"<% if (local.equals("19")) { %>selected="selected"<% } %>>양천구</option>
+								<option value="20"<% if (local.equals("20")) { %>selected="selected"<% } %>>영등포구</option>
+								<option value="21"<% if (local.equals("21")) { %>selected="selected"<% } %>>용산구</option>
+								<option value="22"<% if (local.equals("22")) { %>selected="selected"<% } %>>은평구</option>
+								<option value="23"<% if (local.equals("23")) { %>selected="selected"<% } %>>종로구</option>
+								<option value="24"<% if (local.equals("24")) { %>selected="selected"<% } %>>중구</option>
+								<option value="25"<% if (local.equals("25")) { %>selected="selected"<% } %>>중랑구</option>
+							</select>
+						</form>
+                        <form action="" method="" id="" style="display: inline-block;">
                            	 목록 분류 : <select name="" class="ListSelect">
                                     <option value="분류 선택" selected="selected">분류 선택</option>
                                     <option value="아이디">아이디</option>
@@ -87,7 +119,7 @@
                             <td class="checkBox"><input type="checkbox"></td>
                             <td class="number"><%= c.getCboardNo() %></td>
                             <td class="id"><%= c.getMemberId() %></td>
-                            <td class="name"><%= c.getLocalNo() %></td>
+                            <td class="name"><%= localArr[Integer.parseInt(c.getLocalNo()) - 1] %></td>
                             <td class="originalFile"><%= c.getCboardTitle() %></td>
                             <td class="email"><%= c.getCboardViewCount() %></td>
                             <td class="renameFile"><%= c.getLikeCount() %></td>
