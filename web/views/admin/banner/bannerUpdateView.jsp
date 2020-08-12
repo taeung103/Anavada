@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>배너상세글</title>
-<%@ include file="../include/admin_head.jsp" %>
+<%@ include file="/views/admin/include/admin_head.jsp" %>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">

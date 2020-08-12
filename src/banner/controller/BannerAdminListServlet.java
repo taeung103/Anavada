@@ -55,8 +55,8 @@ public class BannerAdminListServlet extends HttpServlet {
 		int listCount = bservice.getListCount();
 		System.out.println(listCount + "서블릿");//확인용
 
-		ArrayList<Banner> list = bservice.selectList(currentPage, limit);
-		System.out.println(list);
+		ArrayList<Banner> blist = bservice.selectList(currentPage, limit);
+		System.out.println(blist);
 		
 		int maxPage = (int) ((double) listCount / limit + 0.9);
 		int startPage = (((int) ((double) currentPage / limit + 0.9)) - 1) * limit + 1;
@@ -65,9 +65,9 @@ public class BannerAdminListServlet extends HttpServlet {
 			endPage = maxPage;
 		}
 		RequestDispatcher view = null;
-		if (list.size() > 0) {
+		if (blist.size() > 0) {
 			view = request.getRequestDispatcher("views/admin/banner/bannerAdminListview.jsp");
-			request.setAttribute("list", list);
+			request.setAttribute("list", blist);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("maxPage", maxPage);
 			request.setAttribute("startPage", startPage);

@@ -1,4 +1,4 @@
-package declare.model.dao;
+package admin.declare.model.dao;
 
 import static common.JDBCTemp.close;
 
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import banner.model.vo.Banner;
 import declare.model.vo.DBo;
-import declare.model.vo.Declare;
+import admin.declare.model.vo.Declare;
 
 public class DeclareDao {
 	public DeclareDao() {}
@@ -190,6 +190,26 @@ public class DeclareDao {
 			close(pstmt);
 		}
 		return list;
+	}
+
+	public ArrayList<Declare> countUp(Connection conn) {
+		ArrayList<Declare> list = new ArrayList<Declare>();
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "update declare_admin set declare_count = declare_count + 1 where declare_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, );
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+	
 	}
 
 

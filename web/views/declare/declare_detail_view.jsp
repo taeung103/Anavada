@@ -34,10 +34,10 @@
             <!-- 상세 -->
             <div class="view-area">
                 <h3 class="declare_btn2"><span><i class="glyphicon glyphicon-bell"></i>
-                										<td><%if(dbo.getDboChe() != "Y"){%>
-                												<h3><span >처리중</span></h3>
-                												<% }else{%>
+                										<td><%if(dbo.getDboChe().equals("Y")){%>
                 												<h3><span >처리완료</span></h3>
+                												<% }else{%>
+                												<h3><span >처리중</span></h3>
                 												<% } %></td></span></h3>
                 <h2><span class="declare">신고</span><td><%= dbo.getDboTitle() %></td></h2>
                 <ul>

@@ -1,4 +1,4 @@
-package declare.controller;
+package admin.declare.controller;
 
 import java.io.IOException;
 
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import declare.model.service.DeclareService;
-import declare.model.vo.Declare;
+import admin.declare.model.service.DeclareService;
+import admin.declare.model.vo.Declare;
 
 /**
  * Servlet implementation class DeclareAdminInsertServlet

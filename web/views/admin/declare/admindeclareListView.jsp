@@ -1,8 +1,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="declare.model.vo.Declare"%>
+	pageEncoding="UTF-8" import="admin.declare.model.vo.Declare"%>
 <%
-	ArrayList<Declare> list = (ArrayList<Declare>) request.getAttribute("list");
+	ArrayList<Declare> dlist = (ArrayList<Declare>) request.getAttribute("list");
 	int listCount = ((Integer) request.getAttribute("listCount")).intValue();
 	int startPage = ((Integer) request.getAttribute("startPage")).intValue();
 	int endPage = ((Integer) request.getAttribute("endPage")).intValue();
@@ -14,7 +14,7 @@
 <head>
 <meta charset="UTF-8">
 <title>신고자관리</title>
-<%@ include file="../include/admin_head.jsp"%>
+ <%@ include file="/views/admin/include/admin_head.jsp"%> 
 </head>
 <body oncontextmenu="return false" onselectstart="return false"
 	ondragstart="return false">
@@ -37,11 +37,7 @@
 				<!--종류 리스트-->
 				<div style="width: 500px; float: left;">
 					<div class="sort-area">
-						<h4>
-							전체
-							<%= list.size() %>
-							개
-						</h4>
+						<h4> 전체 <%= list.size() %>개 </h4>
 						<!-- <a href="/anavada/views/admin/declare/admindeclareWriteView.jsp" class="write_btn">블랙회원 등록</a> -->
 						<!-- <a href="/anavada/ddelete.ad" class="write_btn">삭제하기</a> -->
 						<div>
@@ -84,13 +80,6 @@
 							+paramdata.substr(0, paramdata.length-1)
 	})
 }) */
-function checkAll(){
-	if($("input[name=checkAll]").is(":checked")){
-		$("input[name=checkDel]").prop("checked", true);
-	}else{
-		$("input[name=checkDel]").prop("checked", false);
-	}
-}
 function deleteAction(){
 	var checkRow = "";
 	$("input[name='checkDel']:checked").each(function(){
@@ -107,28 +96,65 @@ function deleteAction(){
 	if(confirm("삭제 하시겠습니까?"))
 		location.href = "/anavada/ddelete.ad?checkRow="+checkRow;
 }
+$(function(){
+	$("#countUP").click(function(){
+		$.ajax({
+			url : "/anavada/dcountup",
+			type: "get",
+			dataType:"json",
+			success:function(data){
+				var jsonStr = JSON.stringify(data);
+				var json = JSON.parse(jsonStr);
+				var values = "";
+				for(var i in json.list){
+					
+					/* $("#countUP").html($("#countUP").html()+"<br>"
+							+ json.list[i].no + ", "
+							+ decodeURIComponent(json.list[i].title).replace(/\+/gi, " ")
+							+ ","+ json.list[i].writer + ", " 
+							+ decodeURIComponent(json.list[i].content).replace(/\+/gi, " ")
+							+ "," + json.list[i].date); */
+				}
+			},
+			error: function(jqXHR, testStatus, errorThrown){
+				console.log("error: " + jqXHR + "," + testStatus + "," + errorThrown);
+			}	
+		});
+	});
+	$("#all").on("click", function(){
+		if($('input:checkbox[id="all"]').is(":checked")==true){
+			$('input:checkbox[name="no"]').each(function(){
+				this.checked = true;
+			});
+		}else{
+			$('input:checkbox[name="no"]').each(function(){
+				this.checked = false;
+			});
+		}
+	});
+})
 	</script>
 					<form action="">
 						<table>
 							<tbody>
 								<tr>
-								    <th></th>
+								    <th> <input type="checkbox" id="all">전체</th>
 									<th>번호</th>
 									<th>신고회원</th>
 									<th>신고횟수</th>
 									<th>제한설정</th>
 								</tr>
-								<% for(Declare d : list){ %>
+								<% for(Declare d : dlist){ %>
 								<tr>
-									<td class="checkBox"><input type="checkbox" name="checkDel" value="<%= d.getDeclareNo() %>"></td>
-									<td><%= d.getDeclareNo() %></td>
+									<td class="checkBox"><input type="checkbox" name="no"> </td>
+									<td type="number" id="no"><%= d.getDeclareNo() %></td>
 									<td><%= d.getDeclareId() %></td>
-									<td><%= d.getDeclareCount() %></td>
-									<td>
-										<% if(d.getDeclareOk().equals("N")){ %> 
-										</i>제한없음</span> &nbsp; 
+									<td><%= d.getDeclareCount() %> &nbsp; &nbsp; <button id="countUP">UP</button></td>
+									
+								    <td><% if(d.getDeclareOk().equals("Y")){ %> 
+										</i>신고당함</span> &nbsp; 
 										<% }else{// 배너가 보이게 하려면%>
-										</i>제한설정</span> &nbsp; <% }  %>
+										</i>신고사항없음</span> &nbsp; <% }  %>
 									</td>
 								</tr>
 								<% } %>
@@ -139,7 +165,7 @@ function deleteAction(){
 							<a href="/anavada/dlist.ad">목록</a>
 						</div> -->
 						<!-- 버튼 -->
-						<input type="checkBox" name="checkAll" onclick="checkAll();" class="checkBox"> 전체 선택<br>
+						<!-- <input type="checkBox" name="checkAll" onclick="checkAll();" class="checkBox"> 전체 선택<br> -->
                 	<div class="btn_wrap">
                    	 <a onclick="deleteAction();" class="btn-left btn_gray">선택삭제</a>
               		</div>

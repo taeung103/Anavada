@@ -267,10 +267,8 @@ public class MemberDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		
-		String qeury = "SELECT MEMBER_ID, DECLARE_OK FROM MEMBER " + 
-				"JOIN DECLARE_ADMIN ON(MEMBER_ID = DECLARE_ID); " + 
-				"SELECT *  FROM MEMBER " + 
-				"LEFT JOIN DECLARE_ADMIN ON (MEMBER_ID = DECLARE_ID);";
+		String qeury = "SELECT *  FROM MEMBER " + 
+				"LEFT JOIN DECLARE_ADMIN ON (MEMBER_ID = DECLARE_ID)";
 		
 		try {
 			stmt = conn.createStatement();
