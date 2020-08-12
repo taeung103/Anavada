@@ -354,4 +354,22 @@ public class FboardDao {
 			return list;
 		}
 
+		//축제 게시판 전부 삭제
+		public int deleteAllFboard(Connection conn) {
+			int result = 0;
+			Statement stmt = null;
+
+			String query = "delete fboard"; 
+
+			try {
+				stmt = conn.createStatement();
+
+				result = stmt.executeUpdate(query);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(stmt);
+			}
+			return result;
+		}
 }
