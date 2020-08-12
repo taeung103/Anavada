@@ -176,7 +176,7 @@
 								values += '<li><div>' +
                                 '<h4>user : ' + json.list[i].memberId + '</h4><span>' + json.list[i].fboardReplyCreatDate + '</span>' +
                                 '</div><p>' + decodeURIComponent(json.list[i].fboardReplyContent).replace(/\+/gi, " ") + '</p>' + 
-                                '<div class="cmt_ok"><input type="submit" value="삭제" onclick="Replydelete(' + json.list[i].fboardReplyNo + ');"></div>' +
+                                '<div class="cmt_delete" style="float: right;"><input type="submit" value="삭제" onclick="Replydelete(' + json.list[i].fboardReplyNo + ');"></div>' +
                                 '<button onclick="">대댓글</button>'
                                 
                                 /* '<div class="Subcmt_form">' +
