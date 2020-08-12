@@ -1,10 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.Calendar, java.text.SimpleDateFormat"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String fboardNo = request.getParameter("fboardno");
+ 	int festivalEndDate = Integer.parseInt(request.getParameter("festivalEndDate").toString());
+	System.out.println(fboardNo + ",  "  + festivalEndDate); 
+%>
 <!DOCTYPE html>
 <html>
 <head>
     <%@ include file="../include/head.jsp" %> 
 </head>
+	<!-- 현재 진행중이지 않은 축제 알리기 -->
+	<script type="text/javascript">
+ 	console.log(<%=fboardNo %>, <%= festivalEndDate%>);
+	<% 
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+    Calendar c1 = Calendar.getInstance();
+	int strToday = Integer.parseInt(sdf.format(c1.getTime()));
+	
+	if(festivalEndDate < strToday) { %>
+		alert('지난 축제 입니다');
+	<% } %>
+
+	</script>
+
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
         <%@ include file="../include/header.jsp" %>
