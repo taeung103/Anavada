@@ -34,6 +34,10 @@
 		    	},
 		    	success : function(data){
 		            console.log("컨트롤러에서 받은 MSG : " + data);
+		            var dataSplit = data.split('/');
+		            if (dataSplit.length === 2) {
+		            	alert(dataSplit[1] + '개 중 ' + dataSplit[0] + '개가 삭제되었습니다.');
+		            }
 		        },
 		     
 		        //Ajax 실패시 호출
@@ -45,18 +49,6 @@
 	    
 	    
 	});
-    
-    /*
-    document.addEventListener('DOMContentLoaded', function () {
-    	console.log('DOMContentLoaded');
-    	document.querySelector('#delete_btn').addEventListener('click', function () {
-    		console.log('click delete_btn');
-    		document.querySelectorAll('input[name=check]:checked').forEach(function (elem) {
-    			console.log('elem', elem)
-    		});
-    	});
-    });
-    */
 	</script>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">

@@ -33,22 +33,18 @@ public class AdminCboardDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String check = request.getParameter("checkarr");
 		String[] splitCheck = check.split(",");
-		ArrayList<Integer> list = new ArrayList<Integer>();
-		for (String checkstr : splitCheck) { // 반복1
-			list.add(Integer.parseInt(checkstr));
-		}
-		for (Integer integer : list) { // 반복2
-			System.out.println(integer);
-		}
+		
+		int successCount = 0;
 		
 		CboardService cservice = new CboardService();
-		
-		for (Integer deleteChk : list) { // 반복3?
-			cservice.deleteCboard(deleteChk);
+		for (String checkstr : splitCheck) { // 반복1
+			if (cservice.deleteCboard(Integer.parseInt(checkstr)) > 0) {
+				successCount++;
+			}
 		}
 		
 		PrintWriter writer = response.getWriter();
-		writer.print("yo");
+		writer.print(successCount + "/" + splitCheck.length);
 		writer.close();
 	}
 
