@@ -115,7 +115,7 @@
         </div>
         <!-- 비주얼영역 끝 -->
 
-
+		<!-- 공지사항 ajax -->
         <div class="main_content">
         <script type="text/javascript">
         	$.ajax({
