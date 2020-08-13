@@ -75,8 +75,6 @@ public class FboardLIstServlet extends HttpServlet {
 					
 					//축제 시작일, 종료일 날짜 format하기
 					// String -> Date 축제 시작일, 종료일
-					String startDate = null;
-					String endDate = null;
 					Date dstartDate = null;
 					Date dendDate = null;
 					SimpleDateFormat transFormat = new SimpleDateFormat("yyyyMMdd");
@@ -90,8 +88,8 @@ public class FboardLIstServlet extends HttpServlet {
 					
 					// Date format하기 축제 시작일, 종료일
 					transFormat = new SimpleDateFormat("yyyy. MM. dd");
-					startDate = transFormat.format(dstartDate);
-					endDate = transFormat.format(dendDate);
+					String startDate = transFormat.format(dstartDate);
+					String endDate = transFormat.format(dendDate);
 					
 					job.put("fboardNo", fboard.getFboardNo());
 					job.put("festivalTitle", URLEncoder.encode(fboard.getFestivalTitle(), "utf-8"));
