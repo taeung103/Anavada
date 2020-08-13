@@ -77,10 +77,16 @@ public class DeclareService {
 	}
 
 
-	public ArrayList<Declare> countUp() {
+	public int countUp(int dno) {
 		Connection conn = getConnection();
-		ArrayList<Declare> list = ddao.countUp(conn);
+		int result = ddao.countUp(conn, dno);
+		if(result > 0)
+			commit(conn);
+		else
+			rollback(conn);
 		close(conn);
-		return list;
+		return result;
 	}
+
+
 }

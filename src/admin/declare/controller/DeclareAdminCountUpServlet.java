@@ -1,8 +1,10 @@
 package admin.declare.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,17 +37,26 @@ public class DeclareAdminCountUpServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		ArrayList<Declare> list = new DeclareService().countUp();
-		String no = request.getParameter("no");
-		System.out.println("no :" + no);
+		//ArrayList<Declare> list = new DeclareService().countUp();
+		int dno = Integer.parseInt(request.getParameter("ddno"));
+		System.out.println("dno :" + dno);
 		
 		
-		JSONObject sendJSON = new JSONObject();
-		JSONArray jarr = new JSONArray();
-		for(Declare declare : list) {
-			JSONObject job = new JSONObject();
-			job.put("count", declare.getDeclareCount());
-		}
+		 int result = new DeclareService().countUp(dno);
+		 System.out.println("업 :" + result);//dao에서 db업시킨것
+		 response.setContentType("text/html;charset=utf-8");
+		 
+		/*
+		 * if(result > 0) { String data = result
+		 * 
+		 * }else { RequestDispatcher view =
+		 * request.getRequestDispatcher("views/common/error.jsp");
+		 * request.setAttribute("message", "카운트 값 가져오기 실패"); view.forward(request,
+		 * response); }
+		 */
+		 PrintWriter pw = response.getWriter();
+		 pw.println(1);
+		
 	}
 
 	/**

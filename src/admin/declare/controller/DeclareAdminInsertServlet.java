@@ -44,7 +44,7 @@ public class DeclareAdminInsertServlet extends HttpServlet {
 				
 				Declare declare = new Declare();
 				declare.setDeclareId(request.getParameter("blackid"));
-				//declare.setDeclareOk(request.getParameter("controller"));
+				declare.setDeclareOk(request.getParameter("controller"));
 				//declare.setDeclareCount(Integer.parseInt(request.getParameter("count")));
 				System.out.println(request.getParameter("blackid"));
 				

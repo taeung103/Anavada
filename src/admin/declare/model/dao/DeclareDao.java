@@ -76,10 +76,11 @@ public class DeclareDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "insert into declare_admin values ((select max(declare_no) +1 from declare_admin), ?, 1, default)";
+		String query = "insert into declare_admin values ((select max(declare_no) +1 from declare_admin), ?, 1, ?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, declare.getDeclareId());
+			pstmt.setString(2, declare.getDeclareOk());
 			
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -192,8 +193,7 @@ public class DeclareDao {
 		return list;
 	}
 
-	public ArrayList<Declare> countUp(Connection conn) {
-		ArrayList<Declare> list = new ArrayList<Declare>();
+	public int countUp(Connection conn, int dno) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -201,7 +201,7 @@ public class DeclareDao {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, );
+			pstmt.setInt(1, dno);
 			
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -209,7 +209,7 @@ public class DeclareDao {
 		}finally {
 			close(pstmt);
 		}
-	
+	   return result;
 	}
 
 
