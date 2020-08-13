@@ -12,20 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import declare.model.service.DBoService;
 import declare.model.vo.DBo;
-import notice.model.service.NoticeService;
-import notice.model.vo.Notice;
 
 /**
- * Servlet implementation class DBoSearchOneServlet
+ * Servlet implementation class DBoListServlet
  */
-@WebServlet("/dbosearch")
-public class DBoSearchOneServlet extends HttpServlet {
+@WebServlet("/dbolist.ad")
+public class DBoAdminListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DBoSearchOneServlet() {
+    public DBoAdminListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,39 +31,39 @@ public class DBoSearchOneServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		request.setCharacterEncoding("utf-8");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 신고게시판 목록보기 처리용 컨트롤러
 		
-		String selected = request.getParameter("selected");
-		String keyword = request.getParameter("keyword");
-		DBoService dboservice = new DBoService();
+		/*
+		 * ArrayList<DBo> list = new DBoService().selectAll(); System.out.println(list);
+		 * RequestDispatcher view = null; if(list.size()>0) { view =
+		 * request.getRequestDispatcher("views/declare/declare_list.jsp");
+		 * request.setAttribute("list", list); view.forward(request, response); }else {
+		 * view = request.getRequestDispatcher("views/common/error.jsp");
+		 * request.setAttribute("message", "조회된 목록이 없습니다."); view.forward(request,
+		 * response); }
+		 */
 		
 		int currentPage = 1;
-		if(request.getParameter("page") != null)
+		if (request.getParameter("page") != null) {
 			currentPage = Integer.parseInt(request.getParameter("page"));
-		int limit = 10;
-		
-		int listCount = 0;
-		
-		ArrayList<DBo> list = null;
-		if(selected.equals("jboard")) {
-			list = dboservice.searchTorC(currentPage, limit, keyword, selected);
-			listCount = dboservice.getListCount("title", keyword);
-		}else {
-			list = dboservice.searchTorC(currentPage, limit, keyword, selected);
-			listCount = dboservice.getListCount("content", keyword);
 		}
+		int limit = 10;
+		DBoService dboservice = new DBoService();
+
+		int listCount = dboservice.getListCount();
+		System.out.println(listCount + "서블릿");//확인용
+
+		ArrayList<DBo> list = dboservice.selectList(currentPage, limit);
 		
-		int maxPage = (int)((double)listCount / limit + 0.9) ;
-		int startPage = (((int)((double)currentPage / limit + 0.9)) - 1) * limit + 1;
+		int maxPage = (int) ((double) listCount / limit + 0.9);
+		int startPage = (((int) ((double) currentPage / limit + 0.9)) - 1) * limit + 1;
 		int endPage = startPage + limit - 1;
-		if(endPage > maxPage)
+		if (maxPage < endPage) {
 			endPage = maxPage;
-		
-		/* DBo dbo = dboservice.selectCountTop1(); */
-		
+		}
 		RequestDispatcher view = null;
-		if(list.size() > -1 ) {
+		if (list.size() > 0) {
 			view = request.getRequestDispatcher("views/declare/declare_Admin_list.jsp");
 			request.setAttribute("list", list);
 			request.setAttribute("currentPage", currentPage);
@@ -73,14 +71,15 @@ public class DBoSearchOneServlet extends HttpServlet {
 			request.setAttribute("startPage", startPage);
 			request.setAttribute("endPage", endPage);
 			request.setAttribute("listCount", listCount);
-			/* request.setAttribute("dbo", dbo); */
-			request.setAttribute("keyword", keyword);
-			request.setAttribute("selected", selected);
+
+			view.forward(request, response);
+		} else {
+			view = request.getRequestDispatcher("views/common/error.jsp");
+			request.setAttribute("message", currentPage + "페이지에 대한 목록 조회 실패!");
 			view.forward(request, response);
 		}
-
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

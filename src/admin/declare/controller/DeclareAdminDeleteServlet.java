@@ -2,6 +2,7 @@ package admin.declare.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -38,8 +39,11 @@ public class DeclareAdminDeleteServlet extends HttpServlet {
 		int[] checkedNum = new int[checkRow.length];
 		for(int i=0; i<checkRow.length; i++) {
 			checkedNum[i] = Integer.parseInt(checkRow[i]);
-			System.out.print(checkedNum[i]+", ");
-		}System.out.println();
+			System.out.print(checkedNum[i]+", 서블릿");
+		}
+		
+		DeclareService dservice = new DeclareService();
+		
 		
 		int result = new DeclareService().deleteDeclare(checkedNum);
 

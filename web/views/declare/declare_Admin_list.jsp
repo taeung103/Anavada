@@ -48,33 +48,25 @@
                     <h4>전체 <%= listCount %> 개</h4>
                     <a href="/anavada/views/declare/declare_write.jsp" class="write_btn">글쓰기</a>
                     <div>
-                    <form action="/anavada/dbosearch?page=1" method="post" id="">
+                      <form action="/anavada/dbosearch?page=1" method="post" id="">
                                                유형 선택 : <select name="selected" class="ListSelect">
                                     <option value="none" selected disabled>유형선택</option>
                                     <option value="jboard">중고거래</option>
                                     <option value="cboard">커뮤니티</option>
                          		    </select>
                             
-                            <input type="text" placeholder="검색어를 입력해주세요.">
+                            <input type="text" name="keyword" placeholder="검색어를 입력해주세요.">
                             <button class="top-search"><i class="xi-search"></i></button>
                         </form> 
                     </div>
                 </div>
-                
-<script type="text/javascript">
-$(function(){
-	$("#click").on("click", function(){
-			alert('권한이 없습니다. 글쓰기만 가능합니다.') 
-	});
-}); 
-
-</script>                
-           
+          
                 <form id="" action="" > 
                 <table>
                 <tbody>
                 <%for(DBo d : list) { System.out.println(d);%>
-                <tr id="click" onclick="location.href='/anavada/dbolist';" >
+                <tr id="click" onclick="location.href='/anavada/dbodetail.ad?dboNo=<%= d.getDboNo()%>';" >
+                	<%-- <% if(loginMember != null && loginMember.getMemberId().equals("admin")){ %> --%>
                     <td class="number"><%= d.getDboNo() %></td>
                     <td class="title">
                         <h2><span class="declare">신고</span><%= d.getDboTitle() %></h2>
@@ -93,13 +85,15 @@ $(function(){
             		    <% }  %></td> 
                     </td>
                  </tr>
-
+                   <%--  <% }else{ %>
+                    <% } %> --%>
+               
                 <% } %>
                 </table>
 
                 <div class="list-no">
                  <% if(listCount > 0) {%>
-                    <a href="/anavada/dbolist">목록</a>
+                    <a href="/anavada/dbolist.ad">목록</a>
                  <%}else{ %>
                     <p><img src="/anavada/resources/images/btnIcn/icn_big_listNo.png" alt="" title="" /></p>
                     <h1>목록이 없습니다.</h1>
@@ -110,8 +104,6 @@ $(function(){
 
             </div>
             <!-- 리스트 끝 -->
-
-
 
             <!-- 페이지넘버 -->
             <dl class="list-paging pb80">

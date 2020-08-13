@@ -60,7 +60,6 @@ public class DBoService {
 		close(conn);
 		return list;
 	}
-
 	public int getListCount() {
 		Connection conn = getConnection();
 		int listCount = dbodao.getListCount(conn);
@@ -68,9 +67,23 @@ public class DBoService {
 		return listCount;
 	}
 
+	public int getListCount(String column, String keyword) {
+		Connection conn = getConnection();
+		int listCount = dbodao.getListCount(conn, column, keyword);
+		close(conn);
+		return listCount;
+	}
+
 	public ArrayList<DBo> selectList(int currentPage, int limit) {
 		Connection conn = getConnection();
 		ArrayList<DBo> list = dbodao.selectList(conn, currentPage, limit);
+		close(conn);
+		return list;
+	}
+
+	public ArrayList<DBo> searchTorC(int currentPage, int limit, String keyword, String column) {
+		Connection conn = getConnection();
+		ArrayList<DBo> list = dbodao.searchTorC(conn, currentPage, limit, keyword, column);
 		close(conn);
 		return list;
 	}

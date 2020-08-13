@@ -97,44 +97,44 @@ function deleteAction(){
 		location.href = "/anavada/ddelete.ad?checkRow="+checkRow;
 }
 $(function(){
-	$("#countUP").click(function(){
-		$.ajax({
-			url : "/anavada/dcountup",
-			type: "get",
-			dataType:"json",
-			success:function(data){
-				var jsonStr = JSON.stringify(data);
-				var json = JSON.parse(jsonStr);
-				var values = "";
-				for(var i in json.list){
-					
-					/* $("#countUP").html($("#countUP").html()+"<br>"
-							+ json.list[i].no + ", "
-							+ decodeURIComponent(json.list[i].title).replace(/\+/gi, " ")
-							+ ","+ json.list[i].writer + ", " 
-							+ decodeURIComponent(json.list[i].content).replace(/\+/gi, " ")
-							+ "," + json.list[i].date); */
-				}
-			},
-			error: function(jqXHR, testStatus, errorThrown){
-				console.log("error: " + jqXHR + "," + testStatus + "," + errorThrown);
-			}	
-		});
-	});
 	$("#all").on("click", function(){
 		if($('input:checkbox[id="all"]').is(":checked")==true){
-			$('input:checkbox[name="no"]').each(function(){
+			$('input:checkbox[name="checkDel"]').each(function(){
 				this.checked = true;
 			});
 		}else{
-			$('input:checkbox[name="no"]').each(function(){
+			$('input:checkbox[name="checkDel"]').each(function(){
 				this.checked = false;
 			});
 		}
 	});
 })
+function datasend(dno){ 
+	//클릭할때 실행할 내용을 정의하는 부분
+ 	$.ajax({
+		type: "get",
+		url : "/anavada/dcountup",
+		data : {"ddno" : dno}, 
+ 		dataType:"text", 
+		success: function(data){
+		console.log("success :" + data);
+		 	//$("#dcount").html($("#dcount").text()+"<br>"+ data);
+		 	alert("성공!")
+		 	$("#dcount"+dno).text(data);
+	 		
+		},
+		error: function(jqXHR, testStatus, errorThrown){
+			alert("실패...");
+			console.log("error: " + jqXHR + "," + testStatus + "," + errorThrown);
+			
+		}
+		
+	}) 
+}
+
+
 	</script>
-					<form action="">
+					<form action="" id="">
 						<table>
 							<tbody>
 								<tr>
@@ -145,18 +145,19 @@ $(function(){
 									<th>제한설정</th>
 								</tr>
 								<% for(Declare d : dlist){ %>
-								<tr>
-									<td class="checkBox"><input type="checkbox" name="no"> </td>
-									<td type="number" id="no"><%= d.getDeclareNo() %></td>
-									<td><%= d.getDeclareId() %></td>
-									<td><%= d.getDeclareCount() %> &nbsp; &nbsp; <button id="countUP">UP</button></td>
+										<tr>
+											<td class="checkBox"><input type="checkbox" name="checkDel" value="<%= d.getDeclareNo() %>"> </td>
+											<td type="number" id="dno"><%= d.getDeclareNo() %></td>
+											<td><%= d.getDeclareId() %></td>
+											<td><span  id="dcount<%= d.getDeclareNo() %>"><%= d.getDeclareCount() %></span> &nbsp; &nbsp; 
+												<input type="button" value="신고" onclick="datasend(<%= d.getDeclareNo() %>)" ></td>
+										    <td><% if(d.getDeclareOk().equals("Y")){ %> 
+												</i>신고당함</span> &nbsp; 
+												<% }else{// 배너가 보이게 하려면%>
+												</i>신고사항없음</span> &nbsp; <% }  %>
+											</td>
+										</tr>
 									
-								    <td><% if(d.getDeclareOk().equals("Y")){ %> 
-										</i>신고당함</span> &nbsp; 
-										<% }else{// 배너가 보이게 하려면%>
-										</i>신고사항없음</span> &nbsp; <% }  %>
-									</td>
-								</tr>
 								<% } %>
 							</tbody>
 						</table>
@@ -241,27 +242,10 @@ $(function(){
 											<td>로그인제한 설정(Y/N)</td>
 											<td>
 												<!-- <input type="text" name="check" title="" class="form-control w100p" placeholder="Y/N" /> -->
-												<label><input type="radio" name="controller"
-													id="제한설정" value="Y">제한설정</label> <label><input
-													type="radio" name="controller" id="제한없음" value="N" checked>제한없음</label>
+												<label><input type="radio" name="controller" id="제한설정" value="Y">제한설정</label> 
+												<label><input type="radio" name="controller" id="제한없음" value="N">제한없음</label>
 											</td>
 										</tr>
-										<!-- <tr>
-                                        <td>설명</td>
-                                        <td><textarea name="content" rows="" cols="" class="form-control" style="resize: none; width:100%; min-height:200px; max-height:200px;"></textarea></td>
-                                    </tr>
-                                    <tr>
-                                        <td>배너파일등록</td>
-                                        <td><input type="file" name="ofile"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>URL등록</td>
-                                        <td><input type="text" name="url" title="" class="form-control w100p" placeholder="http://" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>배경사이즈</td>
-                                       <td><input type="text" name="size" title="" class="form-control w100p" placeholder="사이즈" /></td>
-                                    </tr> -->
 									</tbody>
 								</table>
 							</div>
