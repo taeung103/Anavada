@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="member.model.vo.Member"%>
 <%
-	int listCount = ((Integer)request.getAttribute("listCount")).intValue();
+	int slistCount = ((Integer)request.getAttribute("slistCount")).intValue();
 	int startPage = ((Integer)request.getAttribute("startPage")).intValue();
 	int endPage = ((Integer)request.getAttribute("endPage")).intValue();
 	int maxPage = ((Integer)request.getAttribute("maxPage")).intValue();
@@ -30,7 +30,7 @@
             <div class="list-area">
 				<!-- 검색영역 -->
                 <div class="sort-area">  
-                    <h4>전체 회원 <%= listCount %>명</h4>
+                    <h4>전체 회원 <%= slistCount %>명</h4>
                     <div>
                         <form method="get" id="">
                            	 목록 분류 : <select action="/anavada/msearch.ad" name="search" class="ListSelect">
@@ -50,13 +50,14 @@
                 <table class="memberTable">
                     <colgroup>
                         <col width="5%">
+                        <col width="8%">
                         <col width="10%">
-                        <col width="15%">
                         <col width="10%">
                         <col width="*">
-                        <col width="15%">
+                        <col width="18%">
                         <col width="10%">
                         <col width="10%">
+                        <col width="8%">
                     </colgroup>
                     <tbody>
                         <tr>
@@ -68,10 +69,11 @@
                             <th>전화번호</th>
                             <th>가입일</th>
                             <th>탈퇴일</th>
+                            <th>탈퇴여부</th>
                         </tr>
                         <% for(Member m : list){ %>
                         <tr>
-                            <td class="checkBox"><input type="checkbox" name="Mleave" id="Mleave"></td>
+                            <td class="checkBox"><input type="checkbox" name="leaveChk" id="leaveChk" value="<%= m.getMemberId()%>"></td>
                             <td class="number"><%= m.getmNumber() %></td>
                             <td class="id"><%= m.getMemberId() %></td>
                             <td class="name"><%= m.getMemberName() %></td>
@@ -79,17 +81,18 @@
                             <td class="phone"><%= m.getMemberPhone() %></td>
                             <td class="joinDate"><%= m.getJoinDate() %></td>
                             <td class="SecessionDate"><%= m.getSecessionDate() %></td>
+                            <td class="SecessionOK"><%= m.getSecessionOK() %></td>
                         </tr>
                         <% } %>
                     </tbody>
                 </table>
 
-                <p class="warning_text">*탈퇴한 회원의 정보는 탈퇴일로부터 90일간 보관되며 90일 초과시 자동 삭제됩니다.</p>
+                <p class="warning_text">*삭제한 회원 정보는 되돌릴 수 없습니다.</p>
                 <!-- //게시판 -->
 
                 <!-- 버튼 -->
                 <div class="btn_wrap">
-                    <a href="#" class="btn-left btn_gray">선택삭제</a>
+                    <a href="#none" id="deleteBtn" class="btn-left btn_gray">선택삭제</a>
                 </div>
                 <!-- //버튼 -->
 
@@ -99,11 +102,11 @@
                    	<% if(currentPage <= 1){ %>
                     	<a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
                    	<% } else { %>
-                   		<a href="/anavada/mlist.ad?page=<%= startPage %>"><i class="glyphicon glyphicon-menu-left"></i></a>
+                   		<a href="/anavada/leavelist.ad?page=<%= startPage %>"><i class="glyphicon glyphicon-menu-left"></i></a>
                     <% } %>
                     
-                   	<% if(1 <= currentPage){ %>
-                   		<a href="/anavada/mlist.ad?page=<%= currentPage - 1 %>"><i class="glyphicon glyphicon-menu-left"></i></a>
+                   	<% if(1 < currentPage){ %>
+                   		<a href="/anavada/leavelist.ad?page=<%= currentPage - 1 %>"><i class="glyphicon glyphicon-menu-left"></i></a>
                     	<% } else { %>
                    		<a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
                    	<% } %>
@@ -112,19 +115,19 @@
                     	<% if(currentPage == p){ %>
                         <a href="#none" class="active"><%= p %></a>
                    	<% } else { %>
-                        <a href="/anavada/mlist.ad?page=<%= p %>"><%= p %></a>
+                        <a href="/anavada/leavelist.ad?page=<%= p %>"><%= p %></a>
                     	<% } %>
                     <% } %>
                     
 					<% if(currentPage < maxPage){ %>
-                        <a href="/anavada/mlist.ad?page=<%= currentPage + 1 %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+                        <a href="/anavada/leavelist.ad?page=<%= currentPage + 1 %>"><i class="glyphicon glyphicon-menu-right"></i></a>
 					<% } else { %>
                         <a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
 					<% } %>
 					<% if(currentPage >= maxPage){ %>
                         <a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
 					<% } else { %>
-                        <a href="/anavada/mlist.ad?page=<%= maxPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+                        <a href="/anavada/leavelist.ad?page=<%= maxPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
 					<% } %>					
                     </dd>
                 </dl>

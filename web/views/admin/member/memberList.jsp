@@ -71,42 +71,9 @@
                             <th>접속일</th>
                             <th>신고여부</th>
                         </tr>
-						<script>
-	                    	
-							
-							$('#memberLeaveBtn').click(function() {
-								var checkbox = [];
-								$("input[name=Mleave]:checked").each(function() {
-									checkbox.push($(this).val());
-									console.log(checkarr);
-								});
-								if (checkbox.length == 0) {
-									alert("값을 선택하세요.");
-									return;
-								}
-
-								jQuery.ajaxSettings.traditional = true;
-
-								$.ajax({
-									url : "/anavada/adminleave.ad",
-									type : "post",
-									dataType : "json",
-									data : {
-										'checkbox' : checkbox
-									},
-									success : function(msg) {
-										alert(msg);
-									},
-									error : function(jqXHR, textStatus, errorThrown){
-						                  console.log("jqXHR : " +jqXHR +
-						                		  "textStatus : " + textStatus + 
-						                		  "errorThrown : " + errorThrown);
-								});
-							});
-						</script>
 						<% for(Member m : list){ %>
                         <tr>
-                            <td class="checkBox"><input type="checkbox" name="Mleave" id="Mleave"></td>
+                            <td class="checkBox"><input type="checkbox" name="leaveChk" id="leaveChk" value="<%= m.getMemberId()%>"></td>
                             <td class="number"><%= m.getmNumber() %></td>
                             <td class="id"><%= m.getMemberId() %></td>
                             <td class="name"><%= m.getMemberName() %></td>
@@ -125,7 +92,7 @@
 
                 <!-- 버튼 -->
                 <div class="btn_wrap">
-                    <a href="#" id="memberLeaveBtn" class="btn-left btn_gray">선택탈퇴</a>
+                    <a href="#none" id="leaveBtn" class="btn-left btn_gray">탈퇴선택</a>
                 </div>
                 <!-- //버튼 -->
 
@@ -138,7 +105,7 @@
                    		<a href="/anavada/mlist.ad?page=<%= startPage %>"><i class="glyphicon glyphicon-menu-left"></i></a>
                     <% } %>
                     
-                   	<% if(1 <= currentPage){ %>
+                   	<% if(1 < currentPage){ %>
                    		<a href="/anavada/mlist.ad?page=<%= currentPage - 1 %>"><i class="glyphicon glyphicon-menu-left"></i></a>
                     	<% } else { %>
                    		<a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>

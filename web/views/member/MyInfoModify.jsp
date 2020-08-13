@@ -104,7 +104,7 @@
                         </tr>
                         <tr>
                             <td>회원탈퇴</td>
-                            <td><button type="button" class="leaveBtn" onclick="memberDelete();">회원탈퇴</button></td>
+                            <td><button type="button" class="leaveBtn" onclick="memberLeave();">회원탈퇴</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -115,6 +115,16 @@
                     <input class="btn btn-success" type="submit" value="수정하기" onclick="action='/anavada/mupdate.cp'">
                 </div>
 				</form>
+		        <script>
+		      		//탈퇴하기
+			        function memberLeave(){
+			        	var memberDelete = confirm('탈퇴하면 다시 되돌릴 수 없습니다.\n신중하게 선택해주세요. 탈퇴하시겠습니까?');
+			        	if(memberLeave){
+			            	location.href ="/anavada/mleave.cp?memberId=<%= member.getMemberId()%>";
+			        	} else {
+			        	}
+			        }
+		        </script>
             </div>
         </div>
         <!-- 컨텐츠 끝 -->

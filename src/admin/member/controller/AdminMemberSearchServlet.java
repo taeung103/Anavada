@@ -13,13 +13,13 @@ import member.model.service.MemberService;
  * Servlet implementation class MemberSearchServlet
  */
 @WebServlet("/msearch.ad")
-public class MemberSearchServlet extends HttpServlet {
+public class AdminMemberSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberSearchServlet() {
+    public AdminMemberSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

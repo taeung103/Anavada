@@ -34,7 +34,6 @@ public class CryptoPasswordWrapper extends HttpServletRequestWrapper { // HttpSe
 	// 패스워드 암호화 처리하는 메소드
 	private String getSha512(String password) {
 		String cryptoPwd = null;
-
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA-512");
 			// 암호화 처리를 위해 문자열을 byte[]로 바꿈
@@ -43,6 +42,7 @@ public class CryptoPasswordWrapper extends HttpServletRequestWrapper { // HttpSe
 			md.update(pwdValues);
 			// 암호화된 byte[]을 다시 String 으로 바꾼다.
 			cryptoPwd = Base64.getEncoder().encodeToString(pwdValues);
+			System.out.println("cryptoPwd : " + cryptoPwd);
 		} catch (Exception e) {
 			System.out.println("Sha512 Error!!!");
 			e.printStackTrace();
