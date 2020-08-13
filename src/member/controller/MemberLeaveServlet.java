@@ -19,7 +19,7 @@ import member.model.vo.Member;
 /**
  * Servlet implementation class MemberMypageServlet
  */
-@WebServlet("/mdelete.cp")
+@WebServlet("/mleave.cp")
 public class MemberLeaveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

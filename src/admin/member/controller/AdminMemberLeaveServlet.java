@@ -1,6 +1,8 @@
 package admin.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,16 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import member.model.service.MemberService;
 
 /**
- * Servlet implementation class MemberSearchServlet
+ * Servlet implementation class AdminLeaveServlet
  */
-@WebServlet("/msearch.ad")
-public class MemberSearchServlet extends HttpServlet {
+@WebServlet("/adminleave.ad")
+public class AdminMemberLeaveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberSearchServlet() {
+    public AdminMemberLeaveServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,9 +30,25 @@ public class MemberSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String Chk = request.getParameter("checkarr");
+		String[] dataChk = Chk.split(",");
+		System.out.println("Chk : " + Chk);
+		System.out.println("dataChk : " + dataChk);
 		
-		String search = request.getParameter("search");
-		String keyword = request.getParameter("keyword");
+		int leaveCount = 0;
+		MemberService mservice = new MemberService();
+		
+		
+		for(String checkstr : dataChk) { //반복문
+			if(mservice.leaveMember(Integer.parseInt(checkstr)) > 0) {
+				leaveCount++;
+			}
+		}
+		
+		
+		PrintWriter writer = response.getWriter();
+		writer.print(leaveCount + "/" + dataChk.length);
+		writer.close();
 	
 	
 	}

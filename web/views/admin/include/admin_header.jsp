@@ -8,8 +8,8 @@
         
         <h2><p>회원관리</p></h2>
         <ul>
-            <li><a href="/anavada/mlist.ad">전체회원</a></li>
-            <li><a href="/anavada/leavelist.ad">탈퇴회원</a></li>
+            <li><a href="/anavada/mlist.ad?secessionOK=N">전체회원</a></li>
+            <li><a href="/anavada/mlist.ad?secessionOK=Y">탈퇴회원</a></li>
             <li><a href="../member/memberDeclare.jsp">신고회원</a></li>
         </ul>
         <h2><p>중고거래/커뮤니티관리</p></h2>

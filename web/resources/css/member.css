@@ -421,8 +421,15 @@
     margin-right: 50px;
 }
 .profile dt div {
-    width: 200px;
+	width: 200px;
     line-height: 200px;
+    text-align: center;
+    border: 2px solid #FF8A3D;
+    background-color: #00cebb;
+    border-radius: 50%;
+    font-size: 40px;
+    font-weight: 500;
+    color: #fff;
 }
 .profile dt div img {
     border-radius: 50%;

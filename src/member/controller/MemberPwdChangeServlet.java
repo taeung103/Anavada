@@ -17,13 +17,13 @@ import member.model.vo.Member;
  * Servlet implementation class MemberMypageServlet
  */
 @WebServlet("/pwdChange.cp")
-public class PwdChangeServlet extends HttpServlet {
+public class MemberPwdChangeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PwdChangeServlet() {
+    public MemberPwdChangeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
