@@ -43,9 +43,9 @@ public class FboardTop6Servlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 축제 종료일 기준 top8
-		ArrayList<Fboard> list = new FboardService().selectTop8();
-		System.out.println(list.size());
+		// 축제 종료일 기준 top6
+		ArrayList<Fboard> list = new FboardService().selectTop6();
+		//System.out.println(list.size());
 		
 		JSONObject sendJSON = new JSONObject();
 		JSONArray jarr = new JSONArray();
@@ -59,7 +59,6 @@ public class FboardTop6Servlet extends HttpServlet {
 			job.put("thumbnail", fboard.getThumbnail());
 			job.put("localName", fboard.getLocalName());
 			
-			
 			jarr.add(job);
 		}	//for each
 		
@@ -71,7 +70,7 @@ public class FboardTop6Servlet extends HttpServlet {
 		out.flush();
 		out.close();
 		
-		System.out.println(sendJSON);
+		//System.out.println(sendJSON);
 	}
 
 }

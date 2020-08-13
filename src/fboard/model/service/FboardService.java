@@ -121,14 +121,6 @@ public class FboardService {
 			return list;
 		}
 
-		// 축제 종료일 기준 top8
-		public ArrayList<Fboard> selectTop8() {
-			Connection conn = getConnection();
-			ArrayList<Fboard> list = fdao.selectTop8(conn);
-			close(conn);
-			return list;
-		}
-
 		// 축제게시판 전부 삭제하기
 		public void deleteAllFboard() {
 			Connection conn = getConnection();
@@ -147,6 +139,14 @@ public class FboardService {
 		public ArrayList<Fboard> selectFboardList() {
 			Connection conn = getConnection();
 			ArrayList<Fboard> list = fdao.selectFboardList(conn);
+			close(conn);
+			return list;
+		}
+		
+		// 축제 종료일 기준 top6
+		public ArrayList<Fboard> selectTop6() {
+			Connection conn = getConnection();
+			ArrayList<Fboard> list = fdao.selectTop6(conn);
 			close(conn);
 			return list;
 		}
