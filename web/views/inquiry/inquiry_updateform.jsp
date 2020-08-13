@@ -18,7 +18,13 @@
 <html>
 <head>
 	<script type="text/javascript" src="/anavada/resources/js/jquery-3.5.1.min.js"></script>
-    <%@ include file="../include/head.jsp" %> 
+    <%@ include file="../include/head.jsp" %>
+    <script type="text/javascript">
+    function deleteFile(no, value, page) {
+    	if(confirm("삭제하시겠습니까?"))
+    		location.href = "/anavada/ideletefile?no="+no+"&value="+value+"&page="+page;
+    }
+    </script>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
@@ -79,15 +85,15 @@
                                 <td>내용</td>
                                 <td><textarea name="content" class="form-control" style="resize: none; width:100%; min-height:300px; max-height:300px;"><%= inquiry.getIqContent() %></textarea></td>
                             </tr>
-                            <tr>
+                            <tr class="filebox">
                                 <td>첨부파일</td>
                                 <td>
                                 <% if(inquiry.getIqOriginal() != null) { fileExist[0] = true;%>
-                                	<%= inquiry.getIqOriginal() %> &nbsp; <button onclick="javascript:location.href='/anavada/ideletefile?no=<%= inquiry.getIqNo() %>&page=<%= currentPage %>&value=1'; return false;">삭제</button> &nbsp; &nbsp; &nbsp; &nbsp;
+                                	<%= inquiry.getIqOriginal() %> &nbsp; <button onclick="deleteFile(<%= inquiry.getIqNo() %>, 1, <%= currentPage %>); return false;">삭제</button> &nbsp; &nbsp; &nbsp; &nbsp;
                                 <% } if(inquiry.getIqOriginal2() != null) { fileExist[1] = true;%>
-                                	<%= inquiry.getIqOriginal2() %> &nbsp; <button onclick="javascript:location.href='/anavada/ideletefile?no=<%= inquiry.getIqNo() %>&page=<%= currentPage %>&value=2'; return false;">삭제</button> &nbsp; &nbsp; &nbsp; &nbsp;
+                                	<%= inquiry.getIqOriginal2() %> &nbsp; <button onclick="deleteFile(<%= inquiry.getIqNo() %>, 2, <%= currentPage %>); return false;">삭제</button> &nbsp; &nbsp; &nbsp; &nbsp;
                                 <% } if(inquiry.getIqOriginal3() != null) { fileExist[2] = true;%>
-                               		<%= inquiry.getIqOriginal3() %> &nbsp; <button onclick="javascript:location.href='/anavada/ideletefile?no=<%= inquiry.getIqNo() %>&page=<%= currentPage %>&value=3'; return false;">삭제</button>
+                               		<%= inquiry.getIqOriginal3() %> &nbsp; <button onclick="deleteFile(<%= inquiry.getIqNo() %>, 3, <%= currentPage %>); return false;">삭제</button>
                                 <% } %>
                                 
                                 <% for(int i=0; i<fileExist.length; i++) { 

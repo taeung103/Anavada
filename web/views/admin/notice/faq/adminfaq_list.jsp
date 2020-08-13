@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList, faq.model.vo.Faq"%>
 <%
-	ArrayList<Faq> list = (ArrayList<Faq>)request.getAttribute("list");
+	ArrayList<Faq> listFaq = (ArrayList<Faq>)request.getAttribute("list");
 	int currentPage = (Integer)request.getAttribute("currentPage");
 	int totalPage = (Integer)request.getAttribute("totalPage");
 	int startPage = (Integer)request.getAttribute("startPage");
@@ -111,7 +111,7 @@ function deleteAction(){
 				<table>
                     <tbody>
                     <% if(selected != null && keyword != null) {%>
-                    <% for(Faq f : list) { %>
+                    <% for(Faq f : listFaq) { %>
                         <tr>
                             <td class="checkBox"><input type="checkbox" name="checkDel" value="<%= f.getFaqNo() %>"></td>
                             <td class="number" onclick="location.href='/anavada/afdetail?page=<%= currentPage %>&no=<%= f.getFaqNo() %>&selected=<%= selected %>&keyword=<%= keyword %>'"><%= f.getFaqNo() %></td>
@@ -124,7 +124,7 @@ function deleteAction(){
                             </td>
                         </tr>
                      <% } }else { %>
-                     <% for(Faq f : list) { %>
+                     <% for(Faq f : listFaq) { %>
                         <tr>
                             <td class="checkBox"><input type="checkbox" name="checkDel" value="<%= f.getFaqNo() %>"></td>
                             <td class="number" onclick="location.href='/anavada/afdetail?page=<%= currentPage %>&no=<%= f.getFaqNo() %>'"><%= f.getFaqNo() %></td>

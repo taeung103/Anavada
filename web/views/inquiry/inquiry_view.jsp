@@ -55,7 +55,7 @@
                     <% } %>
                 </ul>
 
-                <div class="view-ctn"><%= inquiry.getIqContent() %></div>
+                <div class="view-ctn"><%= inquiry.getIqContent().replace("\r\n","<br>") %></div>
 				
 				<div align="right">
 				<br>

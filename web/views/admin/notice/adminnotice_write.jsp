@@ -33,7 +33,6 @@
             <div class="write-area">
                 <h2>관리자용 공지사항 작성</h2>
                 <form action="/anavada/aninsert.ss" method="post" enctype="multipart/form-data">
-<%-- 최후에 합치기      <input type="hidden" value="<%= loginMember.getUserId()%>" name = "writer"> --%>
                     <table>
                         <colgroup>
                             <col width="20%">

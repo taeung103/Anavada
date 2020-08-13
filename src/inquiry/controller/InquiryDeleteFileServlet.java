@@ -2,16 +2,18 @@ package inquiry.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import inquiry.model.service.InquiryService;
+import inquiry.model.vo.Inquiry;
 
 /**
  * Servlet implementation class InquiryDeleteFileServlet
@@ -32,9 +34,10 @@ public class InquiryDeleteFileServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		int no = Integer.parseInt(request.getParameter("no"));
 		int rnum = Integer.parseInt(request.getParameter("value"));
+		int page = Integer.parseInt(request.getParameter("page"));
 		
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/noticefiles/inquiryfiles");
 		
@@ -54,7 +57,7 @@ public class InquiryDeleteFileServlet extends HttpServlet {
 			case 3 : new File(savePath + "\\" + rfile).delete(); break;
 			}
 			
-			response.sendRedirect("iupdateview?no="+no+"&page="+Integer.parseInt(request.getParameter("page")));
+			response.sendRedirect("iupdateview?no="+no+"&page="+page);
 		}
 	}
 

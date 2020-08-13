@@ -76,6 +76,53 @@
         	
         });
 </script>
+<!-- 공지사항 ajax -->
+<script type="text/javascript">
+	$.ajax({
+		url: "/anavada/anTop3",
+        type: "get",
+        dataType: "json",
+        success: function(data) {
+				var jsonStr = JSON.stringify(data);
+        		var json = JSON.parse(jsonStr);
+        			
+        		var values = "<li><h2><span>[공지]</span> 'Anavada' 조회수가 높은 공지사항 3개입니다!</h2></li>";
+        		for(var i in json.list){
+        			values += "<li><h2 onclick='movePage("+ json.list[i].no +");'>"+ json.list[i].title +"</h2>";
+        			values += "<div>조회수 : "+ json.list[i].count +"</div></li>";
+        		}
+        		$("#topNotice").html(values);console.log(values);
+        		},
+        		error: function(jqXHR, textStatus, errorThrown){
+        			console.log("error : "+jqXHR+", "+textStatus+", "+errorThrown);
+        		}
+	});
+        	
+    $.ajax({
+        url: "/anavada/anRecent3",
+        type: "get",
+        dataType: "json",
+        success: function(data) {
+        		var jsonStr = JSON.stringify(data);
+        		var json = JSON.parse(jsonStr);
+        			
+        		var values = "<li><h2><span>[공지]</span> 'Anavada' 최근에 등록한 공지사항 3개입니다!</h2></li>";
+        		for(var i in json.list){
+        			values += "<li><h2 onclick='movePage("+ json.list[i].no +");'>"+ json.list[i].title +"</h2>";
+        			values += "<div>조회수 : "+ json.list[i].count +"</div></li>";
+        		}
+        		$("#recentNotice").html(values);console.log(values);
+        		},
+        		error: function(jqXHR, textStatus, errorThrown){
+        			console.log("error : "+jqXHR+", "+textStatus+", "+errorThrown);
+        		}
+	});
+
+function movePage(num){
+	location.href="/anavada/ndetail?no="+num;
+}
+</script>
+<!-- 공지사항 ajax 끝 -->
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
@@ -118,58 +165,30 @@
         </div>
         <!-- 비주얼영역 끝 -->
 
-
+		
         <div class="main_content">
-        <script type="text/javascript">
-        	$.ajax({
-        		url: "/anavada/anTop3",
-        		type: "get",
-        		dataType: "json",
-        		success: function(data) {
-        			var jsonStr = JSON.stringify(data);
-        			var json = JSON.parse(jsonStr);
-        			
-        			var values = "<li><h2><span>[공지]</span> 'Anavada' 조회수가 높은 공지사항 3개입니다!</h2></li>";
-        			for(var i in json.list){
-        				values += "<li><h2 onclick='movePage("+ json.list[i].no +");'>"+ json.list[i].title +"</h2>";
-        				values += "<div>조회수 : "+ json.list[i].count +"</div></li>";
-        			}
-        			$("#topNotice").html(values);console.log(values);
-        		},
-        		error: function(jqXHR, textStatus, errorThrown){
-        			console.log("error : "+jqXHR+", "+textStatus+", "+errorThrown);
-        		}
-        	});
+        
+        	<!-- 공지사항 -->
         	
-        	$.ajax({
-        		url: "/anavada/anRecent3",
-        		type: "get",
-        		dataType: "json",
-        		success: function(data) {
-        			var jsonStr = JSON.stringify(data);
-        			var json = JSON.parse(jsonStr);
-        			
-        			var values = "<li><h2><span>[공지]</span> 'Anavada' 최근에 등록한 공지사항 3개입니다!</h2></li>";
-        			for(var i in json.list){
-        				values += "<li><h2 onclick='movePage("+ json.list[i].no +");'>"+ json.list[i].title +"</h2>";
-        				values += "<div>조회수 : "+ json.list[i].count +"</div></li>";
-        			}
-        			$("#recentNotice").html(values);console.log(values);
-        		},
-        		error: function(jqXHR, textStatus, errorThrown){
-        			console.log("error : "+jqXHR+", "+textStatus+", "+errorThrown);
-        		}
-        	});
-        	
-        	function movePage(num){
-        		location.href="/anavada/ndetail?no="+num;
-        	}
-        </script>
-            <div id="mainNotice" class="mainNotice">
-                <ul class="Notice" id="topNotice"></ul>
-                <ul class="Notice" id="recentNotice"></ul>
-            </div>
-
+            <div class="mainNotice">
+	            <div id="mainNotice">
+	                <ul class="Notice" id="topNotice"><!-- 
+	                <li><h2><span>[공지]</span> 'Anavada' 조회수가 높은 공지사항 3개입니다!</h2></li>
+	        		<li><h2 onclick='movePage();'>title1</h2><div>조회수 : </div></li>
+	        		<li><h2 onclick='movePage();'>title2</h2><div>조회수 : </div></li>
+	        		<li><h2 onclick='movePage();'>title3</h2><div>조회수 : </div></li> -->
+	                </ul>
+	            </div>
+	            <div id="mainNoticeTop3">
+	                <ul class="Notice" id="recentNotice"><!-- 
+	                <li><h2><span>[공지]</span> 'Anavada' 최신순 높은 공지사항 3개입니다!</h2></li>
+	        		<li><h2 onclick='movePage();'>최신순1</h2><div>조회수 : </div></li>
+	        		<li><h2 onclick='movePage();'>최신순2</h2><div>조회수 : </div></li>
+	        		<li><h2 onclick='movePage();'>최신순3</h2><div>조회수 : </div></li> -->
+	                </ul>
+	            </div>
+            </div><!-- 공지사항 끝 -->
+			
             <div>
                 <div class="mianPdt">
                     <h2>지금 당장 만나는 중고거래!</h2>
