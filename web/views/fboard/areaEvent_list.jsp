@@ -262,7 +262,7 @@
 					</div>
 					<!-- 종류리스트 끝 -->
 					
-						<!-- 축제 가지고 오기 -->
+				<!-- 축제 가지고 오기 -->
 				<script type="text/javascript">
 				
 				/* 항상 축제가지고 오는 메소드 */
@@ -334,20 +334,16 @@
 					$('#sortSelect').change(function(){
 						searchFboard();
 					});
+					
 				}); //document.ready
 					
 				
 		/* 상세페이지로 이동 */
 		function moveDetailPage(boardNo, festivalEndDate) {
-			console.log(boardNo, festivalEndDate);
-			location.href = '/anavada/views/fboard/areaEvent_view.jsp?fboardno=' + boardNo + '&festivalEndDate=' + festivalEndDate;
+			location.href = '"/anavada/views/fboard/areaEvent_view.jsp?fboardno=' + boardNo + '&festivalEndDate=' + festivalEndDate + '";'
 		}
 				
-				function zeroList() {
-					
-				}
-	</script>
-					
+		</script>
 					
 					<!-- 축제 목록 table  -->
 					<table id="fboard-table" class="cmnt_list">
@@ -366,11 +362,10 @@
 						<h1>목록이 없습니다.</h1>
 					</div>
 
-
 <!-- 					<div class="write-btn">
 						<a href="areaEvent_write.jsp">글쓰기</a>
 					</div> -->
-
+					
 				</div>
 				<!-- 리스트 끝 -->
 
@@ -387,9 +382,10 @@
 					</dd>
 				</dl>
 				<!-- 페이지넘버 끝 -->
-
+				
 			</div>
 			<!-- 컨텐츠 끝 -->
+			</div>
 
 			<%@ include file="../include/footer.jsp"%>
 		</div>

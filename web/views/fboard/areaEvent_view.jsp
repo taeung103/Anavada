@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.Calendar, java.text.SimpleDateFormat"%>
+<%@ page import="java.util.Calendar, java.text.SimpleDateFormat, java.util.Date"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String fboardNo = request.getParameter("fboardno");
- 	int festivalEndDate = Integer.parseInt(request.getParameter("festivalEndDate").toString());
-	System.out.println(fboardNo + ",  "  + festivalEndDate); 
+ 	String festivalEndDate = request.getParameter("festivalEndDate");
 %>
 <!DOCTYPE html>
 <html>
@@ -14,13 +13,15 @@
 </head>
 	<!-- 현재 진행중이지 않은 축제 알리기 -->
 	<script type="text/javascript">
- 	console.log(<%=fboardNo %>, <%= festivalEndDate%>);
 	<% 
+	SimpleDateFormat transFormat = new SimpleDateFormat("yyyy.MM.dd");
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	Date dfestivalEndDate = transFormat.parse(festivalEndDate);
+	int ifestivalEndDate = Integer.parseInt(sdf.format(dfestivalEndDate));
     Calendar c1 = Calendar.getInstance();
 	int strToday = Integer.parseInt(sdf.format(c1.getTime()));
 	
-	if(festivalEndDate < strToday) { %>
+	if(ifestivalEndDate < strToday) { %>
 		alert('지난 축제 입니다');
 	<% } %>
 

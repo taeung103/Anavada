@@ -87,7 +87,7 @@ public class FboardLIstServlet extends HttpServlet {
 					}
 					
 					// Date format하기 축제 시작일, 종료일
-					transFormat = new SimpleDateFormat("yyyy. MM. dd");
+					transFormat = new SimpleDateFormat("yyyy.MM.dd");
 					String startDate = transFormat.format(dstartDate);
 					String endDate = transFormat.format(dendDate);
 					
