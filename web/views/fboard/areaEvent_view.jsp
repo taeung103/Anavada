@@ -137,13 +137,13 @@
                         </fieldset>
                     </form> -->
                     
-                                        <form name="replysubmit" method="post" action="">
+                       <form name="replysubmit" method="post" action="">
                         <fieldset>
                             <div class="cmt_form">
                             <h4 id="totalcount" class="cmt_head">댓글 : 4</h4>
                                 <div class="cmt_body">
                                 <input type="hidden" id="boardno" name="boardno" value="<%= fboardNo%>">    
-                                <input type="hidden" id= "memberid" name="memberid" value="user01">	<!-- 나중에 멤버아이디 변경하기 -->
+                                <input type="hidden" id= "memberid" name="memberid" value="<%= loginMember.getMemberId()%>">
 								<textarea id="replyContent" name="replyContent" style="resize: none; width:100%; min-height:100px; max-height:100px;" placeholder="댓글을 작성해주세요"></textarea>
                                  <div class="cmt_ok"><input type="button" value="등록" onclick="ReplySubmit(${result.code})"></div>
                                	 </div>
