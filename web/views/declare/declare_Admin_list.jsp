@@ -60,21 +60,13 @@
                         </form> 
                     </div>
                 </div>
-                
-<script type="text/javascript">
-$(function(){
-	$("#click").on("click", function(){
-			alert('권한이 없습니다. 글쓰기만 가능합니다.') 
-	});
-}); 
-
-</script>                
-           
+          
                 <form id="" action="" > 
                 <table>
                 <tbody>
                 <%for(DBo d : list) { System.out.println(d);%>
-                <tr id="click" onclick="location.href='/anavada/dbolist';" >
+                <tr id="click" onclick="location.href='/anavada/dbodetail.ad?dboNo=<%= d.getDboNo()%>';" >
+                	<%-- <% if(loginMember != null && loginMember.getMemberId().equals("admin")){ %> --%>
                     <td class="number"><%= d.getDboNo() %></td>
                     <td class="title">
                         <h2><span class="declare">신고</span><%= d.getDboTitle() %></h2>
@@ -92,7 +84,9 @@ $(function(){
             		    <% }  %></td> 
                     </td>
                  </tr>
-
+                   <%--  <% }else{ %>
+                    <% } %> --%>
+               
                 <% } %>
                 </table>
 
@@ -109,8 +103,6 @@ $(function(){
 
             </div>
             <!-- 리스트 끝 -->
-
-
 
             <!-- 페이지넘버 -->
             <dl class="list-paging pb80">
