@@ -125,7 +125,7 @@
                         <h3><%=jboard.getJboardPrice() %><span> 원 <%=jboard.getLocalNo() %></span></h3>
                        
                         <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%=jboard.getJboardLike() %></span></i>
-                        <span><%=localArr[Integer.parseInt(jboard.getLocalNo())-1]%></span>
+                        <span><%=localArr[Integer.parseInt(jboard.getLocalNo())]%></span>
                         
                         </p>
                     </li>
@@ -162,7 +162,7 @@
                     <%}} %>
                     <!--  다음 그룹으로 이동처리 -->
                     <% if (endPage +10 <= maxPage){ %>
-                    <a href="/anavada/jblist?page=<%= endPage + 10 %>&local=<%=local%>&listsearch=<%=listSearch%>&titlesearch=<%=titleSearch%>"><i class="glyphicon glyphicon-menu-right"></i></a>
+                    <a href="/anavada/jblist?page=<%= endPage +1%>&local=<%=local%>&listsearch=<%=listSearch%>&titlesearch=<%=titleSearch%>"><i class="glyphicon glyphicon-menu-right"></i></a>
                     <%} %>
                     
                     <% if (currentPage >= maxPage){ %>

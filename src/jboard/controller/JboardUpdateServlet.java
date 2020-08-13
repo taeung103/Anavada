@@ -100,7 +100,6 @@ public class JboardUpdateServlet extends HttpServlet {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyMMddHHmmss");
 
 			String renameFileName = sdf.format(new java.sql.Date(System.currentTimeMillis()));
-			System.out.println("originFilePath :" +originFilePath);
 			renameFileName +=i+ "." + originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
 
 			File renameFile = new File(savePath + "\\" + renameFileName);

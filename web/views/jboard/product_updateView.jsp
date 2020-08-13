@@ -5,11 +5,10 @@
 	Jboard jboard = (Jboard)request.getAttribute("jboardno");
 	
 	int currentPage = ((Integer)request.getAttribute("page")).intValue();
-	String post = jboard.getJboardPost();
-	String meet = jboard.getJboardMeet();
-	String local = jboard.getLocalNo();
+	String post = String.valueOf(request.getAttribute("post"));	
+	String meet =String.valueOf(request.getAttribute("meet"));
+	String local = String.valueOf(request.getAttribute("local"));
 	
-
 %>
 <!DOCTYPE html>
 <html>
@@ -66,8 +65,8 @@
                             <tr>
                                 <td>거래방법</td>
                                 <td>
-                                    <label><input type="checkbox" name="meet" id="meet" title="직거래" value="Y"  <% if (meet == "Y")  { %>checked<% } %>>직거래</label>
-                                    <label><input type="checkbox" name="post" id="post" title="우편거래" value="Y" <% if (post == "Y")  { %>checked<% } %>> 우편거래</label>
+                                    <label><input type="checkbox" name="meet" id="ck1" title="직거래" value="Y"  <% if (meet.equals("Y"))  { %>checked<% } %>>직거래</label>
+                                    <label><input type="checkbox" name="post" id="ck2" title="우편거래" value="Y" <% if (post.equals("Y"))  { %>checked<% } %>> 우편거래</label>
                                 </td>
                             </tr>
                             <tr>
