@@ -114,7 +114,6 @@ public class FboardDetailServlet extends HttpServlet {
 				out.write(dataObj.toJSONString());
 				out.flush();
 				out.close();
-				
 			}
 
 	/**

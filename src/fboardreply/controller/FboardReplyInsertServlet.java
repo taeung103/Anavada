@@ -50,7 +50,7 @@ public class FboardReplyInsertServlet extends HttpServlet {
 		String replyContent = request.getParameter("replyContent");
 		String memberId =request.getParameter("memberid");
 		
-		memberId = "user01";	//전송이 null로 와서 일단 임시방편
+		//memberId = "user01";	//전송이 null로 와서 일단 임시방편
 		
 		System.out.println("전송 온 값 : " + boardNo + ", " + memberId + ", " + replyContent);
 		

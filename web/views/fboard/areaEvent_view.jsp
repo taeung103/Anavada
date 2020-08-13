@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.Calendar, java.text.SimpleDateFormat"%>
+<%@ page import="java.util.Calendar, java.text.SimpleDateFormat, java.util.Date"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String fboardNo = request.getParameter("fboardno");
- 	int festivalEndDate = Integer.parseInt(request.getParameter("festivalEndDate").toString());
-	System.out.println(fboardNo + ",  "  + festivalEndDate); 
+ 	String festivalEndDate = request.getParameter("festivalEndDate");
 %>
 <!DOCTYPE html>
 <html>
@@ -14,13 +13,15 @@
 </head>
 	<!-- 현재 진행중이지 않은 축제 알리기 -->
 	<script type="text/javascript">
- 	console.log(<%=fboardNo %>, <%= festivalEndDate%>);
 	<% 
+	SimpleDateFormat transFormat = new SimpleDateFormat("yyyy.MM.dd");
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	Date dfestivalEndDate = transFormat.parse(festivalEndDate);
+	int ifestivalEndDate = Integer.parseInt(sdf.format(dfestivalEndDate));
     Calendar c1 = Calendar.getInstance();
 	int strToday = Integer.parseInt(sdf.format(c1.getTime()));
 	
-	if(festivalEndDate < strToday) { %>
+	if(ifestivalEndDate < strToday) { %>
 		alert('지난 축제 입니다');
 	<% } %>
 
@@ -88,7 +89,7 @@
 
             <!-- 상세 -->
             <div class="view-area areaEvent_view">
-                 <h2 id="title"><span id="localname">서울시 종로구</span>여우樂 페스티벌 2020</h2>
+                 <h2 id="title"><span id="localname">서울시 </span>중구</h2>
                 <ul>
                     <li><span>작성자 : </span>관리자</li>
                     <li id="createdd"></li>
@@ -137,13 +138,13 @@
                         </fieldset>
                     </form> -->
                     
-                                        <form name="replysubmit" method="post" action="">
+                       <form name="replysubmit" method="post" action="">
                         <fieldset>
                             <div class="cmt_form">
                             <h4 id="totalcount" class="cmt_head">댓글 : 4</h4>
                                 <div class="cmt_body">
                                 <input type="hidden" id="boardno" name="boardno" value="<%= fboardNo%>">    
-                                <input type="hidden" id= "memberid" name="memberid" value="user01">	<!-- 나중에 멤버아이디 변경하기 -->
+                                <input type="hidden" id= "memberid" name="memberid" value="<%= loginMember.getMemberId()%>">
 								<textarea id="replyContent" name="replyContent" style="resize: none; width:100%; min-height:100px; max-height:100px;" placeholder="댓글을 작성해주세요"></textarea>
                                  <div class="cmt_ok"><input type="button" value="등록" onclick="ReplySubmit(${result.code})"></div>
                                	 </div>

@@ -114,17 +114,9 @@ public class FboardService {
 		}
 
 		// 축제게시판 목록 조회 가지고 오기
-		public ArrayList<Fboard> selectList() {
+		public ArrayList<Fboard> selectList(String allList, int locationSelect, String sortSelect, String title) {
 			Connection conn = getConnection();
-			ArrayList<Fboard> list = fdao.selectList(conn);
-			close(conn);
-			return list;
-		}
-
-		// 축제 종료일 기준 top8
-		public ArrayList<Fboard> selectTop8() {
-			Connection conn = getConnection();
-			ArrayList<Fboard> list = fdao.selectTop8(conn);
+			ArrayList<Fboard> list = fdao.selectList(conn, allList, locationSelect, sortSelect, title);
 			close(conn);
 			return list;
 		}
@@ -147,6 +139,14 @@ public class FboardService {
 		public ArrayList<Fboard> selectFboardList() {
 			Connection conn = getConnection();
 			ArrayList<Fboard> list = fdao.selectFboardList(conn);
+			close(conn);
+			return list;
+		}
+		
+		// 축제 종료일 기준 top6
+		public ArrayList<Fboard> selectTop6() {
+			Connection conn = getConnection();
+			ArrayList<Fboard> list = fdao.selectTop6(conn);
 			close(conn);
 			return list;
 		}
