@@ -141,13 +141,13 @@ font {
 					</div>
 					<% } else { %>
 					<div style="display: inline-block;">
-						<button type="button" onclick="alert('로그인 후 이용해주세요');" class="like">
+						<button type="button" onclick="alert('로그인 후 이용해주세요');location.href='/anavada/views/member/login.jsp';" class="like">
 							<i class="xi-heart" style="font-size: 300%;"></i>
 						</button>
 						<br> <font><%= cboard.getLikeCount() %></font>
 					</div>
 					<div style="display: inline-block;">
-						<button type="button" onclick="alert('로그인 후 이용해주세요');" type="button" class="report">
+						<button type="button" onclick="alert('로그인 후 이용해주세요');location.href='/anavada/views/member/login.jsp';" type="button" class="report">
 							<i class="xi-error" style="font-size: 300%;"></i>
 						</button>
 						<br> <font>신고</font>
