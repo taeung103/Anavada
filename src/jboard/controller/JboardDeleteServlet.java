@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.model.service.BoardService;
 import jboard.model.service.JboardService;
 
 /**
@@ -32,18 +31,18 @@ public class JboardDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//게시글 삭제시 저장된 파일도 같이 삭제함
 		int jboardNo = Integer.parseInt(request.getParameter("jboardno"));
+		
 		if (new JboardService().jboardDelete(jboardNo) > 0) {
-			for(int i=1; 1<5 ; i++) {
-				String renameFileName = request.getParameter("rfile"+i);
-					if(renameFileName != null) {
-						String savePath = request.getSession().getServletContext().getRealPath("/resources/jboardfiles");
-						new File(savePath + "\\" + renameFileName).delete();
+			for (int i = 1; i < 5; i++) {
+				String renameFileName = request.getParameter("rfile" +i);
+				if (renameFileName != null) {
+					String savePath = request.getSession().getServletContext().getRealPath("resources/jboardfiles");
+					new File(savePath+ "\\" + renameFileName).delete();
+				}
 			}
-					response.sendRedirect("/anavada/jblist?page=1");
-			}
-		}else {
+			response.sendRedirect("/anavada/jblist?page=1");
+		} else {
 				RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
 				request.setAttribute("message", jboardNo + "번 글 삭제 실패!");
 				view.forward(request, response);

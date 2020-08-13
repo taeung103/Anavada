@@ -35,12 +35,17 @@ public class JboardUpdateViewServlet extends HttpServlet {
 		int currentPage = Integer.parseInt(request.getParameter("page"));
 
 		Jboard jboard = new JboardService().selectJboard(jboardNo);
-		System.out.println("meet 값 :"+jboard.getJboardMeet());
+		String post = jboard.getJboardPost();
+		String meet = jboard.getJboardMeet(); 
+		String local = jboard.getLocalNo();
 		RequestDispatcher view = null;
 		if (jboard != null) {
 				view = request.getRequestDispatcher("views/jboard/product_updateView.jsp");
 				request.setAttribute("jboardno", jboard);
 				request.setAttribute("page", currentPage);
+				request.setAttribute("post", post);
+				request.setAttribute("meet", meet);
+				request.setAttribute("local", local);
 				view.forward(request, response);
 		}else {
 				view = request.getRequestDispatcher("views/common/error.jsp");

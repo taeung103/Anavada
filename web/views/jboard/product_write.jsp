@@ -9,7 +9,6 @@
 <html>
 <head>
     <%@ include file="../include/head.jsp" %>
-    
 
 
 </head>
@@ -50,8 +49,8 @@
                             <tr>
                                 <td>거래방법</td>
                                 <td>
-                                    <label><input type="checkbox" name="meet" id="meet" title="직거래" value="Y" > 직거래</label>
-                                    <label><input type="checkbox" name="post" id="post" title="우편거래" value="Y"> 우편거래</label>
+                                    <label><input type="checkbox" name="meet" id="ck1" title="직거래" value="Y" > 직거래</label>
+                                    <label><input type="checkbox" name="post" id="ck2" title="우편거래" value="Y"> 우편거래</label>
                                 </td>
                             </tr>
                             <tr>
@@ -94,7 +93,7 @@
                                     <input type="file" name="ofile2" style="margin-bottom:10px;"accept="image/gif,image/jpeg,image/png"/>
                                     <input type="file" name="ofile3" style="margin-bottom:10px;"accept="image/gif,image/jpeg,image/png"/>
                                     <input type="file" name="ofile4" style="margin-bottom:10px;"accept="image/gif,image/jpeg,image/png"/>
-                                    <p>대표 이미지는 500x500 사이즈로 올려주세요.</p>
+                                    <p>대표 이미지는 450x450 사이즈로 올려주세요.</p>
                                 
                                 </td>
                             </tr>

@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 import jboard.model.dao.CommentDao;
 import jboard.model.vo.Comment;
-import jboard.model.vo.Jboard;
 
 
 public class CommentService {
@@ -63,9 +62,22 @@ public class CommentService {
 			close(conn);
 			
 		}
-		public int updateReply(Comment reply) {
+
+		public int insertReplyComment(Comment reply) {
 			Connection conn = getConnection();
-			int result = cdao.updateReply(conn, reply);
+			int result = cdao.insertReplyComment(conn, reply);
+			if (result > 0)
+				commit(conn);
+			else
+				rollback(conn);
+			close(conn);
+			return result;
+			
+		}
+		
+		public int commentDelete(int commentNo) {
+			Connection conn = getConnection();
+			int result = cdao.commentDelete(conn, commentNo );
 			if (result > 0)
 				commit(conn);
 			else
@@ -74,7 +86,17 @@ public class CommentService {
 			return result;
 		}
 
+		public int updateComment(Comment reply) {
+			Connection conn = getConnection();
+			int result = cdao.updateComment(conn, reply);
+			if (result > 0)
+				commit(conn);
+			else
+				rollback(conn);
+			close(conn);
+			return result;
 		}
+}
 
 
 		

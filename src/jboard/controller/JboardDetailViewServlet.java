@@ -49,11 +49,12 @@ public class JboardDetailViewServlet extends HttpServlet {
 				JboardService jbservice = new JboardService();
 				jbservice.addReadCount(jboardno);
 				
+				String post = jboard.getJboardPost();
+				String meet = jboard.getJboardMeet();
 				
 				CommentService jbcservice = new CommentService();
 				ArrayList<Comment> list = jbcservice.CommentList(jboardno);
 				int commentListCount = jbcservice.getCommentCount(jboardno);
-				
 				RequestDispatcher view = null;
 				if(jboard != null) {
 					view = request.getRequestDispatcher("views/jboard/product_view.jsp");
@@ -61,6 +62,8 @@ public class JboardDetailViewServlet extends HttpServlet {
 					request.setAttribute("list", list);
 					request.setAttribute("commentlistcount", commentListCount);
 					request.setAttribute("page", currentPage);
+					request.setAttribute("post", post);
+					request.setAttribute("meet", meet);
 					view.forward(request, response);
 				}else {
 					view = request.getRequestDispatcher("views/common/error.jsp");

@@ -45,9 +45,9 @@ public class JboardNewTop3Servlet extends HttpServlet {
 		
 		JSONArray jarr = new JSONArray();
 		
-		//list 에서 notice 하나씩 꺼내서 jarr 에 복사 저장하기
+
 		for(Jboard jboard : list) {
-				//notice 저장용 json 객체 만들기
+
 				JSONObject job = new JSONObject();
 				job.put("jboardno" , jboard.getJboardNo());
 				job.put("title", URLEncoder.encode(jboard.getJboardTitle(), "utf-8"));
@@ -58,11 +58,11 @@ public class JboardNewTop3Servlet extends HttpServlet {
 				jarr.add(job);
 				
 		}
-		System.out.println(jarr);
-		//전송용 객체에 배열 저장하기
+
+
 		sendJSON.put("list" , jarr);
 		
-		//요청자에게 응답 내보내기
+
 		response.setContentType("application/json ; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.write(sendJSON.toJSONString());

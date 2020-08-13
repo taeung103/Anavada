@@ -8,9 +8,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import board.model.vo.Board;
 import jboard.model.vo.Comment;
-import jboard.model.vo.Jboard;
 
 public class CommentDao {
 	public CommentDao () {}
@@ -21,31 +19,16 @@ public class CommentDao {
 		 
 		 String query = null;
 		 
-		 if(reply.getCommentLevel() ==1) { 
 			 query = "insert into jboard_comment values ("
 						+ "JBOARD_COMMENT_SEQ.nextval , ?, ?, sysdate, "
-						+ "sysdate, ?, ?, JBOARD_COMMENT_SEQ.nextval , 1 "
-						+ "?";
-		 }
-		 if(reply.getCommentLevel() == 2) {
-			 query ="insert into jboard_comment values ("
-						+ "JBOARD_COMMENT_SEQ.nextval , ?, ? ,sysdate, sysdate, ?"
-						+ "?, ?,  ?, ?, ?, 2, ? ";
-						
-		 }
+						+ "sysdate, ?, JBOARD_COMMENT_SEQ.nextval ,0, 0 ,0)";
+		
+		
 		 try {
 			 	pstmt = conn.prepareStatement(query);
 			 	pstmt.setString(1, reply.getCommentId());
 			 	pstmt.setString(2, reply.getCommentContent());
 			 	pstmt.setInt(3, reply.getJboardNo());
-			 	pstmt.setInt(4, reply.getJboardNo());
-			 	if (reply.getCommentLevel() == 1) {
-			 		pstmt.setInt(5, reply.getCommentReplySeq());
-			 	}
-			 	if(reply.getCommentLevel() == 2) {
-			 			pstmt.setInt(5,  reply.getCommentReplyRef());
-			 			pstmt.setInt(6,  reply.getCommentReplySeq());
-			 	}
 			 	result = pstmt.executeUpdate();				 	
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -54,6 +37,7 @@ public class CommentDao {
 		}
 		 return result;
 	}
+	
 	public int getCommentCount(Connection conn , int jboardNo) {
 		int commentListCount = 0;
 		Statement stmt =null;
@@ -124,11 +108,12 @@ public class CommentDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = "SELECT * FROM JBOARD_COMMENT WHERE JBOARD_NO = ?";
+		String query = "SELECT * FROM JBOARD_COMMENT WHERE JBOARD_NO = ? "
+							+"ORDER BY COMMENT_REF ASC, COMMENT_REPLY_REF, COMMENT_LEVEL";
 		try {
 			
 				pstmt = conn.prepareStatement(query);
-				pstmt.setInt(1, jboardNo);
+				pstmt.setInt(1, jboardNo);	
 			
 				
 				rset = pstmt.executeQuery();
@@ -159,13 +144,132 @@ public class CommentDao {
 }
 
 	public Comment selectComment(Connection conn, int commentNo) {
-		// TODO Auto-generated method stub
-		return null;
+		Comment comment = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from jboard_comment where comment_no = ?";
+		
+		try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setInt(1, commentNo);
+				
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					comment = new Comment();
+					
+					comment.setCommentNo(commentNo);
+					comment.setCommentId(rset.getString("comment_id"));
+					comment.setCommentContent(rset.getString("comment_content"));
+					comment.setCommentDate(rset.getDate("comment_date"));
+					comment.setCommentLastModified(rset.getDate("comment_lastmodified"));
+					comment.setJboardNo(rset.getInt("jboard_no"));
+					comment.setCommentRef(rset.getInt("comment_ref"));
+					comment.setCommentReplyRef(rset.getInt("comment_reply_ref"));
+					comment.setCommentLevel(rset.getInt("comment_level"));
+					comment.setCommentReplySeq(rset.getInt("comment_reply_seq"));
+					
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		return comment;
+}
+
+	public int insertReplyComment(Connection conn, Comment reply) {
+		int result = 0;
+		 PreparedStatement pstmt = null;
+		 
+		 String query = null;
+		 
+		 if(reply.getCommentLevel() ==1) { 
+			 query = "insert into jboard_comment values ("
+						+ "JBOARD_COMMENT_SEQ.nextval,"
+						+ "?, ?, sysdate, sysdate, ?, ?, JBOARD_COMMENT_SEQ.nextval, "
+						+ "1 , ?)";
+						
+		 }
+		 if(reply.getCommentLevel() == 2) {
+			 query = "insert into jboard_comment values ("
+						+ "JBOARD_COMMENT_SEQ.nextval,"
+						+ "?, ?, sysdate, sysdate, ?, ?, "
+						+ "?, 2, ?)";	
+		 }
+		 
+		 try {
+			 	pstmt = conn.prepareStatement(query);
+			 	pstmt.setString(1, reply.getCommentId());
+			 	pstmt.setString(2, reply.getCommentContent());
+			 	pstmt.setInt(3, reply.getJboardNo());
+			 	pstmt.setInt(4, reply.getCommentRef());
+		 	 	
+			 	if (reply.getCommentLevel() == 1) {
+			 	 	pstmt.setInt(5, reply.getCommentReplySeq());
+			 	}
+			 	if(reply.getCommentLevel() == 2) {
+			 			pstmt.setInt(5,  reply.getCommentReplyRef());
+			 			pstmt.setInt(6, reply.getCommentReplySeq());
+			 	}
+			 	result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		 return result;
 	}
 
-	
+	public int commentDelete(Connection conn, int commentNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "delete from jboard_comment where comment_no = ?";
+		
+		try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setInt(1, commentNo);
+				
+				result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
-
-	
+	public int updateComment(Connection conn, Comment reply) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update jboard_comment set comment_content  = ?, comment_lastmodified = sysdate where comment_no = ?";
+		try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, reply.getCommentContent());
+				pstmt.setInt(2,  reply.getCommentNo());
+				result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			 e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 }
+	}
+		
+	
+
+	
+
+	
+
+
+	
+
 
