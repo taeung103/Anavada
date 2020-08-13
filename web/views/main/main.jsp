@@ -153,7 +153,7 @@
             <div>
                 <div class="mianPdt">
                     <h2>지금 당장 만나는 중고거래!</h2>
-                    <a href="#none" class="more">더보기 +</a>
+                    <a  href="/anavada/jblist" class="more">더보기 +</a>
                     <ul class="Pdt_list" id= "jtoplist">
             			<!-- AJAX로 처리 -->
                     </ul>
