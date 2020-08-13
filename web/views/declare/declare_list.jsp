@@ -45,15 +45,15 @@
             <div class="list-area">
                <!--종류 리스트-->
                 <div class="sort-area">  
-                    <h4>전체 <%= list.size() %> 개</h4>
+                    <h4>전체 <%= listCount %> 개</h4>
                     <a href="/anavada/views/declare/declare_write.jsp" class="write_btn">글쓰기</a>
                     <div>
-                        <form action="" method="" id="">
-                            유형 선택 : <select name="" class="ListSelect">
-                                    <option value="분류 선택" selected="selected">유형</option>
-                                    <option value="중고거래 신고">중고거래</option>
-                                    <option value="커뮤니티 신고">커뮤니티</option>
-                            </select>
+                    <form action="/anavada/dbosearch?page=1" method="post" id="">
+                                               유형 선택 : <select name="selected" class="ListSelect">
+                                    <option value="none" selected disabled>유형선택</option>
+                                    <option value="jboard">중고거래</option>
+                                    <option value="cboard">커뮤니티</option>
+                         		    </select>
                             
                             <input type="text" placeholder="검색어를 입력해주세요.">
                             <button class="top-search"><i class="xi-search"></i></button>
@@ -82,6 +82,7 @@ $(function(){
                             <li>작성자 : <%= d.getDboMid() %></li>
                             <li>작성일 : <%= d.getDboDate() %></li>
                             <li>조회수 : 30 <!-- 나중에 --></li>
+                            <li>유형 : <%= d.getDboType() %></li>
                         </ul>
                     </td>
                     <td class="declare_btn">

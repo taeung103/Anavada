@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import declare.model.vo.DBo;
-import declare.model.vo.Declare;
 
 public class DBoDao {
 	public DBoDao() {}
@@ -253,5 +252,95 @@ public class DBoDao {
 		}
 		return list;
 	}
+
+	public ArrayList<DBo> searchTorC(Connection conn, int currentPage, int limit, String keyword, String column) {
+		ArrayList<DBo> list = new ArrayList<DBo>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from (select rank() over (order by declare_no desc) rnum, declare_no, member_id, declare_title, declare_date, declare_type, "
+				+ "declare_content, declare_original, declare_rename, declare_url, declare_id, declareche from declare_board ";
+		
+		if(column.equals("jboard"))
+			query += " where declare_type like ? and declare_title like ?) where rnum >= ? and rnum <= ?";
+		else query += " where declare_type like ? and declare_title like ?) where rnum >= ? and rnum <= ?";
+		
+		int startRow = (currentPage - 1) * limit +1;
+		int endRow = startRow + limit - 1;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			if(column.equals("jboard")) {
+				pstmt.setString(1, "%중고%");
+				pstmt.setString(2, "%" + keyword + "%");
+			}else {
+				pstmt.setString(1, "%커뮤니티%");
+				pstmt.setString(2, "%" + keyword + "%");
+			}
+			
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				DBo dbo = new DBo();
+				dbo.setDboNo(rset.getInt("declare_no"));
+				dbo.setDboMid(rset.getString("member_id"));
+				dbo.setDboTitle(rset.getString("declare_title"));
+				dbo.setDboDate(rset.getDate("declare_date"));
+				dbo.setDboType(rset.getString("declare_type"));
+				dbo.setDboContent(rset.getString("declare_content"));
+				dbo.setDboOriginal(rset.getString("declare_original"));
+				dbo.setDboRename(rset.getString("declare_rename"));
+				dbo.setDboUrl(rset.getString("declare_url"));
+				dbo.setDboBId(rset.getString("declare_id"));
+				dbo.setDboChe(rset.getString("declareche"));
+
+				list.add(dbo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int getListCount(Connection conn, String column, String keyword) {
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select count(*) from declare_board ";
+		
+		if(column.equals("jboard"))
+			query += "where declare_type like ? and declare_title like ?";
+		else query += "where declare_type like ? and declare_title like ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			if(column.equals("jboard")) {
+				pstmt.setString(1, "%중고%");
+				pstmt.setString(2, "%" + keyword + "%");
+			}else {
+				pstmt.setString(1, "%커뮤니티%");
+				pstmt.setString(2, "%" + keyword + "%");
+			}
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next())
+				listCount = rset.getInt(1);
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		return listCount;
+	}
+	
 
 }
