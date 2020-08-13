@@ -19,7 +19,35 @@ public class FboardDao {
 	public FboardDao() {
 	}
 	
-	// 축제 정보 가져와서 추가하기 insert
+	// (관리자) 축제 정보 DB에 저장하기 전에 이미 축제게시판에있는지 확인하기 select
+	public int selectFboard(Connection conn, String fboardNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select count(*) from fboard where fboard_no = ?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, fboardNo);
+
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				result = rset.getInt(1);
+			} else {
+				result = rset.getInt(1);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+		// (관리자) 축제 정보 가져와서 추가하기 insert
 		public int insertFboard(Connection conn, Fboard fboard) {
 			int result = 0;
 			PreparedStatement pstmt = null;
@@ -38,7 +66,6 @@ public class FboardDao {
 				pstmt.setString(9, fboard.getThumbnail());
 
 				result = pstmt.executeUpdate();
-
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
@@ -46,35 +73,9 @@ public class FboardDao {
 			}
 			return result;
 		}
-		// 축제 정보 DB에 저장하기 전에 이미 축제게시판에있는지 확인하기 select
-		public int selectFboard(Connection conn, String fboardNo) {
-			int result = 0;
-			PreparedStatement pstmt = null;
-			ResultSet rset = null;
-			String query = "select count(*) from fboard where fboard_no = ?";
 
-			try {
-				pstmt = conn.prepareStatement(query);
-				pstmt.setString(1, fboardNo);
 
-				rset = pstmt.executeQuery();
-
-				if (rset.next()) {
-					result = rset.getInt(1);
-				} else {
-					result = rset.getInt(1);
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				close(rset);
-				close(pstmt);
-			}
-			return result;
-		}
-
-		// 축제 수정날짜 비교 (축제 번호, 수정날짜로)
+		// (관리자) 축제 수정날짜 비교 (축제 번호, 수정날짜로)
 		public int selectFboard(Connection conn, String fboardNo, String fesivalModifiedDate) {
 			int result = 0;
 			PreparedStatement pstmt = null;
@@ -102,11 +103,10 @@ public class FboardDao {
 				close(rset);
 				close(pstmt);
 			}
-
 			return result;
 		}
 
-		// 축제게시판 수정하기
+		// (관리자) 축제게시판 수정하기
 		public int updateFboard(Connection conn, Fboard fboard) {
 			int result = 0;
 			PreparedStatement pstmt = null;
@@ -127,7 +127,6 @@ public class FboardDao {
 				pstmt.setString(9, fboard.getFboardNo());
 
 				result = pstmt.executeUpdate();
-
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
@@ -136,12 +135,30 @@ public class FboardDao {
 			return result;
 		}
 
-		// 축제 게시판 삭제하기
+		// (관리자) 축제 게시판 삭제하기
 		public int deleteFboard(Connection conn) {
 			int result = 0;
 			Statement stmt = null;
 
-			String query = "delete from fboard where substr(festival_enddate, 1, 4) < extract( year from sysdate)"; // 삭제는 쿼리문으로 처리
+			String query = "delete from fboard where substr(festival_enddate, 1, 4) < extract( year from sysdate)";	// 매년 연도가 바뀌면 이전 년도 축제 해당 게시판 delete
+
+			try {
+				stmt = conn.createStatement();
+				result = stmt.executeUpdate(query);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(stmt);
+			}
+			return result;
+		}
+		
+		// (관리자) 축제 게시판 전부 삭제하기
+		public int deleteAllFboard(Connection conn) {
+			int result = 0;
+			Statement stmt = null;
+
+			String query = "delete fboard"; 
 
 			try {
 				stmt = conn.createStatement();
@@ -154,7 +171,41 @@ public class FboardDao {
 			}
 			return result;
 		}
+		
+		// (관리자) fboard 전체 가지고 오기
+		public ArrayList<Fboard> selectFboardList(Connection conn) {
+			ArrayList<Fboard> list = new ArrayList<Fboard>();
+			Statement stmt = null;
+			ResultSet rset = null;
 
+			String query = "select * from fboard order by festival_modifieddate desc";
+
+			try {
+				stmt = conn.createStatement();
+				rset = stmt.executeQuery(query);
+
+				while (rset.next()) {
+					Fboard fboard = new Fboard();
+
+					fboard.setFboardNo(rset.getString(1));
+					fboard.setFestivalTitle(rset.getString(2));
+					fboard.setFestivalStartDate(rset.getString(4));
+					fboard.setFestivalEndDate(rset.getString(5));
+					fboard.setFesivalModifiedDate(rset.getString(6));
+					fboard.setThumbnail(rset.getString(12));
+
+					list.add(fboard);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(stmt);
+			}
+			return list;
+		}
+		
+		
 		// 총 축제 게시글 몇개인지 select
 		public int getListCount(Connection conn) {
 			int listCount = 0;
@@ -178,15 +229,15 @@ public class FboardDao {
 			}
 			return listCount;
 		}
-
-		// 맵 용 축제 게시판 전체 리스트
+		
+		
+		// 카카오맵 축제 게시판 전체 리스트
 		public ArrayList<Fboard> selectKList(Connection conn) {
 			ArrayList<Fboard> list = new ArrayList<Fboard>();
 			Statement stmt = null;
 			ResultSet rset = null;
 
-			// 
-			String query = "select * from fboard left join location using (local_no) order by FESTIVAL_ENDDATE asc";	//현재 진행중인 축제 보기
+			String query = "select * from fboard left join location using (local_no) where festival_enddate > sysdate -1";	//현재 진행중인 축제 보기
 
 			try {
 				stmt = conn.createStatement();
@@ -378,57 +429,9 @@ public class FboardDao {
 
 
 
-		//축제 게시판 전부 삭제
-		public int deleteAllFboard(Connection conn) {
-			int result = 0;
-			Statement stmt = null;
 
-			String query = "delete fboard"; 
 
-			try {
-				stmt = conn.createStatement();
 
-				result = stmt.executeUpdate(query);
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				close(stmt);
-			}
-			return result;
-		}
-
-		// 관리자 확인용 fboard, 조건 수정일 기준
-		public ArrayList<Fboard> selectFboardList(Connection conn) {
-			ArrayList<Fboard> list = new ArrayList<Fboard>();
-			Statement stmt = null;
-			ResultSet rset = null;
-
-			String query = "select * from fboard order by festival_modifieddate desc";
-
-			try {
-				stmt = conn.createStatement();
-				rset = stmt.executeQuery(query);
-
-				while (rset.next()) {
-					Fboard fboard = new Fboard();
-
-					fboard.setFboardNo(rset.getString(1));
-					fboard.setFestivalTitle(rset.getString(2));
-					fboard.setFestivalStartDate(rset.getString(4));
-					fboard.setFestivalEndDate(rset.getString(5));
-					fboard.setFesivalModifiedDate(rset.getString(6));
-					fboard.setThumbnail(rset.getString(12));
-
-					list.add(fboard);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				close(rset);
-				close(stmt);
-			}
-			return list;
-		}
 		
 		
 		// 축제 종료일 기준 top6
