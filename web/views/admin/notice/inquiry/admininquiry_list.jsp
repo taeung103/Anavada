@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList, inquiry.model.vo.Inquiry"%>
 <%
-	ArrayList<Inquiry> list = (ArrayList<Inquiry>)request.getAttribute("list");
+	ArrayList<Inquiry> listInquiry = (ArrayList<Inquiry>)request.getAttribute("list");
 	int currentPage = (Integer)request.getAttribute("currentPage");
 	int totalPage = (Integer)request.getAttribute("totalPage");
 	int startPage = (Integer)request.getAttribute("startPage");
@@ -75,7 +75,7 @@
 				<table>
                     <tbody>
                     <% if(selected != null && keyword != null) {%>
-                    <% for(Inquiry i : list) { %>
+                    <% for(Inquiry i : listInquiry) { %>
                         <tr>
                             <td class="number" onclick="location.href='/anavada/aidetail?page=<%= currentPage %>&no=<%= i.getIqNo() %>&selected=<%= selected %>&keyword=<%= keyword %>'"><%= i.getIqNo() %></td>
                             <td class="title" onclick="location.href='/anavada/aidetail?page=<%= currentPage %>&no=<%= i.getIqNo() %>&selected=<%= selected %>&keyword=<%= keyword %>'">
@@ -96,7 +96,7 @@
                             <% }else { %><td></td><% } %>
                         </tr>
                      <% } }else { %>
-                     <% for(Inquiry i : list) { %>
+                     <% for(Inquiry i : listInquiry) { %>
                         <tr>
                             <td class="number" onclick="location.href='/anavada/aidetail?page=<%= currentPage %>&no=<%= i.getIqNo() %>'"><%= i.getIqNo() %></td>
                             <td class="title" onclick="location.href='/anavada/aidetail?page=<%= currentPage %>&no=<%= i.getIqNo() %>'">

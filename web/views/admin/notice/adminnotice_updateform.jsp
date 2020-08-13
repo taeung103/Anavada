@@ -32,7 +32,6 @@
             <div class="write-area">
                 <h2>공지사항 수정</h2>
                 <form action="/anavada/anupnotice" method="post" enctype="multipart/form-data">
-<%-- 최후에 합치기      <input type="hidden" value="<%= loginMember.getUserId()%>" name="writer"> --%>
 				<input type="hidden" value="<%= notice.getNoNo()%>" name="no">
 				<input type="hidden" value="<%= currentPage %>" name="page">
 				<input type="hidden" value="<%= notice.getNoOriginal() %>" name="ofile">

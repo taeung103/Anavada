@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList, notice.model.vo.Notice"%>
 <%
-	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+	ArrayList<Notice> listNotice = (ArrayList<Notice>)request.getAttribute("list");
 	int currentPage = (Integer)request.getAttribute("currentPage");
 	int totalPage = (Integer)request.getAttribute("totalPage");
 	int startPage = (Integer)request.getAttribute("startPage");
@@ -18,7 +18,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%@ include file="../include/admin_head.jsp" %> 
+    <%@ include file="../include/admin_head.jsp" %>
 <script type="text/javascript" src="/anavada/resources/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 function checkAll(){
@@ -103,7 +103,7 @@ function deleteAction(){
 				<table>
                     <tbody>
                     <% if(selected != null && keyword != null) {%>
-                    <% for(Notice n : list) { %>
+                    <% for(Notice n : listNotice) { %>
                         <tr>
                             <td class="checkBox"><input type="checkbox" name="checkDel" value="<%= n.getNoNo() %>"></td>
                             <td class="number" onclick="location.href='/anavada/andetail?page=<%= currentPage %>&no=<%= n.getNoNo() %>&selected=<%= selected %>&keyword=<%= keyword %>'"><%= n.getNoNo() %></td>
@@ -122,7 +122,7 @@ function deleteAction(){
                             </td>
                         </tr>
                      <% } }else { %>
-                     <% for(Notice n : list) { %>
+                     <% for(Notice n : listNotice) { %>
                         <tr>
                             <td class="checkBox"><input type="checkbox" name="checkDel" value="<%= n.getNoNo() %>"></td>
                             <td class="number" onclick="location.href='/anavada/andetail?page=<%= currentPage %>&no=<%= n.getNoNo() %>'"><%= n.getNoNo() %></td>

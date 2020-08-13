@@ -38,9 +38,6 @@
             })
         });
     </script>
-    <script type="text/javascript">
-    	
-    </script>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">

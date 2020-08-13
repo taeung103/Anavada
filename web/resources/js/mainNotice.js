@@ -16,6 +16,14 @@ jQuery(function(){
         direction : "Up"    //left=옆으로스크롤, up=위로스크롤, 공란=아래로 스크롤
     });
 
+    jQuery('#mainNoticeTop3').Vnewsticker({
+        speed: 1000,         //스크롤 스피드
+        pause: 3000,        //잠시 대기 시간
+        mousePause: true,   //마우스 오버시 일시정지(true=일시정지)
+        showItems: 1,       //스크롤 목록 갯수 지정(1=한줄만 보임)
+        direction : "Up"    //left=옆으로스크롤, up=위로스크롤, 공란=아래로 스크롤
+    });
+
     jQuery('#').Vnewsticker({
         speed: 700,         //스크롤 스피드
         pause: 2000,        //잠시 대기 시간
