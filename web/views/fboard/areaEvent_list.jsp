@@ -176,8 +176,6 @@
                 		});
 
                 		// 커스텀 오버레이에 표시할 컨텐츠 입니다
-                		// 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
-                		// 별도의 이벤트 메소드를 제공하지 않습니다 
                 		var content<%=index%> = '<div class="wrap">'
                 				+ '    <div class="info">'
                 				+ '        <div class="title">' + "<%=  f.getFestivalTitle()%>"
@@ -221,12 +219,12 @@
 					
 					<!--종류 리스트-->
 					<div class="sort-area">
-						<h4 id="totalcount">전체 150개</h4>
-						<a href="areaEvent_write.jsp" class="write_btn">글쓰기</a>
-						<div>
-							<form action="" method="" id="">
-								지역 분류 : <select name="" class="LocationSelect">
-									<option value="지역선택" selected="selected">지역선택</option>
+ 						<h4 id="totalcount">전체 150개</h4>
+						<!-- <a href="areaEvent_write.jsp" class="write_btn">글쓰기</a> -->
+						<div> 
+							<input type="checkbox" id="allList">이번년도 축제 모두 보기
+								지역 분류 : <select name="" id="locationSelect" class="LocationSelect">
+									<option value="0" selected="selected">서울특별시</option>
 									<option value="1">강남구</option>
 									<option value="2">강동구</option>
 									<option value="3">강북구</option>
@@ -252,99 +250,113 @@
 									<option value="23">종로구</option>
 									<option value="24">중구</option>
 									<option value="25">중랑구</option>
-								</select> <select name="" class="ListSelect">
-									<option value="분류 선택" selected="selected">분류 선택</option>
-									<option value="제목">제목</option>
-									<option value="내용">내용</option>
-									<option value="작성자">작성자</option>
-									<option value="작성자">조회순</option>
-									<option value="작성자">마감순</option>
-								</select> <input type="text" placeholder="검색어를 입력해주세요.">
-								<button class="top-search">
-									<i class="xi-search"></i>
-								</button>
-							</form>
+								</select> 
+								<select id="sortSelect" class="ListSelect">
+									<option value="enddateAsc" selected="selected">종료일 최신순</option>
+									<option value="readcountDesc">조회수 높은순</option>
+									<option value="replyDesc">댓글 많은순</option>
+								</select>
+								 <input type="text" id=title onkeyup="searchFboard()" placeholder="축제명을 입력해주세요.">
+							<!-- 	<button class="top-search"><i class="xi-search"></i></button> -->
 						</div>
 					</div>
+					<!-- 종류리스트 끝 -->
 					
-						<!-- 지난 축제 모두보기 -->
+						<!-- 축제 가지고 오기 -->
 				<script type="text/javascript">
-				/* 축제 정보 ajax로 처리하기  */
+				
+				/* 항상 축제가지고 오는 메소드 */
 				$(document).ready(function() {
+					searchFboard();
+				});	//document.ready
+				
+				
+				/* 축제 가지고 오기 ajax 끝 */
+				function searchFboard() {
+					console.log("searchFboard()");
 					$.ajax({
-					url : "/anavada/fblist",
-					type : "get",
-					dataType : "json",
-					success : function(data){
-						console.log("success : " + data);
-				
-						//object ==> string 으로 변환
-						var jsonStr = JSON.stringify(data);
-						//string ==> json 객체로 바꿈
-						var json = JSON.parse(jsonStr);
-						var totalcount = (json.list).length;	//가지고온 축제 개수
-						var values = "";
-						$("#totalcount").text( '전체 : ' + totalcount);
-				
-						for(var i in json.list) {
-						values += "<tr onclick='moveDetailPage(" + json.list[i].fboardNo + ", " + json.list[i].festivalEndDate + ");'>" +
-						"<td class='number'>" + json.list[i].fboardNo + "</td>" +
-						"<td class='sum'><img src='"+ json.list[i].thumbnail +"' width='150px' height='100px' ></td>" +
-						"<td class='title'><h2><span>" +  decodeURIComponent(json.list[i].festivalTitle).replace(/\+/gi, " ") + "</span></h2>" +
-						"<ul>" +
-							"<li>축제 지역 : " + json.list[i].localName + "</li>" +
-							"<li>축제기간 : "+ json.list[i].festivalStartDate + " ~ " + json.list[i].festivalEndDate+ "</li>" +
-							"<li>조회수 : " + json.list[i].readcount + "<span>  댓글 : " + json.list[i].replycount +  "</span></li>" +
-						"</ul></td></tr>" 
-						}	//for in
-					
-					$("#fboard-table").html(values);	
-				
-				},
-				error : function(jqXHR, textstatus, errorthrown){
-					console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown);
+						url : "/anavada/fblist",
+						type : "get",
+						data : { allList : $('#allList').val(), locationSelect : $("#locationSelect").val(), 
+							sortSelect: $('#sortSelect').val(), title : $('#title').val()},
+						dataType : "json",
+						success : function(data){
+							console.log(" fblist success : " + data);
+							
+							var jsonStr = JSON.stringify(data);
+							var json = JSON.parse(jsonStr);
+							var totalcount = (json.list).length;	//가지고온 축제 개수
+							var values = "";
+							$("#totalcount").text( '전체 : ' + totalcount);
+							
+							for(var i in json.list) {
+								values += "<tr onclick='moveDetailPage(" + json.list[i].fboardNo + ", " + json.list[i].festivalEndDate + ");'>" +
+								"<td class='number'>" + json.list[i].fboardNo + "</td>" +
+								"<td class='sum'><img src='"+ json.list[i].thumbnail +"' width='150px' height='100px' ></td>" +
+								"<td  name='ftitle' class='title'><h4><span>" +  decodeURIComponent(json.list[i].festivalTitle).replace(/\+/gi, " ") + "</span></h4></td>" +
+								"<td><ul>" +
+										"<li>축제 지역 : " + json.list[i].localName + "</li>" +
+										"<li>축제기간 : "+ json.list[i].festivalStartDate + " ~ " + json.list[i].festivalEndDate+ "</li>" +
+										"<li>조회수 : " + json.list[i].readcount + "<span> 댓글 : " + json.list[i].replycount +  "</span></li>" +
+									"</ul></td></tr>" 
+							}	//for in
+							
+							$("#fboard-table").html(values);	
+						},
+						error : function(jqXHR, textstatus, errorthrown){
+							console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown);
+						}
+					});	//ajax 
 				}
-			});	//ajax
-		});	//document.ready
-		/* 축제 정보 ajax로 처리하기 끝내기 */
+				/* 축제 가지고 오기 ajax 끝 */
 		
+				
+				/* 검색 ajax로 메소드 이동 */
+				$(function(){
+					
+					/* 전체보기 check 값설정 후 ajax로 메소드 이동 */
+					$('#allList').change(function(){
+			 			if($('#allList').is(":checked")) {
+			 				$('#allList').val("true");
+			 				searchFboard();
+			 			} else {
+			 				$('#allList').val("on");
+			 				searchFboard();
+			 			} 
+					});
+					
+					/* 지역별 ajax로 메소드 이동 */
+					$('#locationSelect').change(function(){
+						searchFboard();
+					});
+					
+					/* 정렬 ajax로 메소드 이동 */
+					$('#sortSelect').change(function(){
+						searchFboard();
+					});
+				}); //document.ready
+					
+				
 		/* 상세페이지로 이동 */
 		function moveDetailPage(boardNo, festivalEndDate) {
 			console.log(boardNo, festivalEndDate);
 			location.href = '/anavada/views/fboard/areaEvent_view.jsp?fboardno=' + boardNo + '&festivalEndDate=' + festivalEndDate;
 		}
-
+				
+				function zeroList() {
+					
+				}
 	</script>
 					
 					
 					<!-- 축제 목록 table  -->
 					<table id="fboard-table" class="cmnt_list">
 						<tbody>
-<!-- 							<tr onclick="location.href='areaEvent_view.jsp';">
-								<td class="number">10</td>
-								<td class="sum"><img
-									src="/anavada/resources/images/test/testImg.jpg" width="150px"
-									height="150px"></td>
-								<td class="title">
-									<h2>
-										<span>서울시 종로구</span>여우樂 페스티벌 2020
-									</h2>
-									<p>올해로 11회를 맞이하는 여우락 페스티벌은 전통의 뿌리를 이어오는 명인들의 내공과 우리 음악의 외연을
-										넓힌 실력파 앙상블의 연주로 믿고보는 무대를 선보인다. 끊임없이 우리 음악의 가능성을 실험하는 아티스트들의
-										도전적이고 새로운 무대를 가장 먼저 확인할 수 있으며, 대중성 있는 음악과의 협업으로 에너지를 뿜어내는 신나는
-										공연까지 만날 수 있다. 2020 여우樂 페스티벌은 전통에서부터 현재에 이르는 우리 음악의 다양한 스펙트럼을
-										보여 줄 것이다.</p>
-									<ul>
-										<li>작성자 : 홍길동</li>
-										<li>축제기간 : 2020.07.30 ~ 2020.08.30</li>
-										<li>조회수 : 30</li>
-										<li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>+999</span></i></li>
-									</ul>
-								</td>
-							</tr> -->
+
 						</tbody>
 					</table>
 					<!-- 축제 목록 table 끝 -->
+
 
 					<div class="list-no">
 						<p>
@@ -355,9 +367,9 @@
 					</div>
 
 
-					<div class="write-btn">
+<!-- 					<div class="write-btn">
 						<a href="areaEvent_write.jsp">글쓰기</a>
-					</div>
+					</div> -->
 
 				</div>
 				<!-- 리스트 끝 -->

@@ -272,21 +272,56 @@ public class FboardDao {
 		}
 
 		//게시판리스트
-		public ArrayList<Fboard> selectList(Connection conn) {
+		public ArrayList<Fboard> selectList(Connection conn, String allList, int locationSelect, String sortSelect, String title) {
 			ArrayList<Fboard> list = new ArrayList<Fboard>();
-			Statement stmt = null;
+			PreparedStatement pstmt = null;
 			ResultSet rset = null;
 
-			// sysdate가 date라서 비교가 정확하게 되지 않아 오늘 날짜를 포함 못시킴, 조건 : 현재 진행중인 축제, 정렬 : 마감일기준
-			// 오름차순
+			// 기본 : allList=on, location=0, sortSelect=enddateAsc (sysdate가 date라서 비교가 정확하게 되지 않아 오늘 날짜를 포함 못시킴)
 			String query = "select f.local_no, f.fboard_no, f.festival_title, f.festival_startdate, f.festival_enddate, f.festival_modifieddate, f.map_y, f.map_x, f.bmodify_date, "
-					+ "f.member_id, f.readcount, f.thumbnail, l.local_name, (select count(fboard_no) from fboard_reply where fboard_no = f.fboard_no)"
-					+ "from fboard f left join location l on (f.local_no = l.local_no)"	
-					+ "where festival_enddate > sysdate -1 order by festival_enddate asc";	
+					+ "f.member_id, f.readcount, f.thumbnail, l.local_name, (select count(fboard_no) from fboard_reply where fboard_no = f.fboard_no) replycount "
+					+ "from fboard f left join location l on (f.local_no = l.local_no) ";
 
+			//지난 축제보기 여부
+			if(allList == "true" || allList.equals("true")) { 
+				query += "where substr( festival_enddate, 1, 4) = EXTRACT (year from sysdate) "; 
+			} else { 
+				query += "where festival_enddate > sysdate -1 "; 
+			} 
+			
+			//지역 선택
+			 if(locationSelect != 0) { 
+				 query += " and f.local_no = ? "; 
+			 }
+			 
+			//제목 검색
+			 if(!(title == null || title.equals("null"))) {
+				 query += " and upper(f.festival_title) like upper(?) "; 
+			 }
+			 
+			//정렬 선택 (종료일 마감순(enddateAsc), 조회수 높은순(readcountDesc), 댓글 많은순(replyDesc))
+			if(sortSelect == "enddateAsc" || sortSelect.equals("enddateAsc")) {
+				query += " order by festival_enddate asc";
+			} else if (sortSelect == "readcountDesc" || sortSelect.equals("readcountDesc")) {
+				query += " order by readcount desc";
+			}  else if (sortSelect == "replyDesc" || sortSelect.equals("replyDesc")) {
+				query += " order by 14 desc";
+			}
+			
+			System.out.println(query);
+			
 			try {
-				stmt = conn.createStatement();
-				rset = stmt.executeQuery(query);
+				pstmt = conn.prepareStatement(query);
+				if(locationSelect != 0 && (title == null || title.equals("null"))) {
+					pstmt.setString(1, Integer.toString(locationSelect));
+				} else if (locationSelect == 0 && !(title == null || title.equals("null"))) {
+					pstmt.setString(1, "%" + title + "%");
+				} else if (locationSelect != 0 && !(title == null || title.equals("null"))) {
+					pstmt.setString(1, Integer.toString(locationSelect));
+					pstmt.setString(2, "%" + title + "%");
+				}
+				
+				rset = pstmt.executeQuery();
 
 				while (rset.next()) {
 					Fboard fboard = new Fboard();
@@ -313,7 +348,7 @@ public class FboardDao {
 				e.printStackTrace();
 			} finally {
 				close(rset);
-				close(stmt);
+				close(pstmt);
 			}
 
 			return list;

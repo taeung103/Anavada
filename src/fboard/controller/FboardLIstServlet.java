@@ -37,9 +37,30 @@ public class FboardLIstServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 전체 축제정보 가지고 오기
+
+		// 정렬, search용 처리 컨트롤러
+		System.out.println("FboardSearchServlet2");
 		
-				ArrayList<Fboard> list = new FboardService().selectList();
+		//지난 축제도 보기
+		String allList = (request.getParameter("allList"));
+		
+		//지역 선택
+		int locationSelect = Integer.parseInt(request.getParameter("locationSelect"));
+		
+		//정렬 선택
+		String sortSelect = request.getParameter("sortSelect");
+		
+		//제목 검색
+		String title = request.getParameter("title").trim();	//공백제거
+		
+		if(title == null || title.equals("")) {
+			title = null;
+		}
+		
+		System.out.println(allList + ", " +  locationSelect + ", " + sortSelect + ", " + title);
+		
+		ArrayList<Fboard> list = new FboardService().selectList(allList, locationSelect, sortSelect, title);
+		
 				System.out.println("List : " + list.size());
 				
 				JSONObject sendJSON = new JSONObject();

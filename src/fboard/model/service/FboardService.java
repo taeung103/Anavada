@@ -114,9 +114,9 @@ public class FboardService {
 		}
 
 		// 축제게시판 목록 조회 가지고 오기
-		public ArrayList<Fboard> selectList() {
+		public ArrayList<Fboard> selectList(String allList, int locationSelect, String sortSelect, String title) {
 			Connection conn = getConnection();
-			ArrayList<Fboard> list = fdao.selectList(conn);
+			ArrayList<Fboard> list = fdao.selectList(conn, allList, locationSelect, sortSelect, title);
 			close(conn);
 			return list;
 		}
