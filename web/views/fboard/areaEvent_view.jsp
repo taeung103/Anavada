@@ -88,7 +88,7 @@
 
             <!-- 상세 -->
             <div class="view-area areaEvent_view">
-                 <h2 id="title"><span id="localname">서울시 종로구</span>여우樂 페스티벌 2020</h2>
+                 <h2 id="title"><span id="localname">서울시 </span>중구</h2>
                 <ul>
                     <li><span>작성자 : </span>관리자</li>
                     <li id="createdd"></li>

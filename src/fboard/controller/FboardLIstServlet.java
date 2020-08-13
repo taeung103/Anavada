@@ -3,7 +3,10 @@ package fboard.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -62,6 +65,7 @@ public class FboardLIstServlet extends HttpServlet {
 		ArrayList<Fboard> list = new FboardService().selectList(allList, locationSelect, sortSelect, title);
 		
 				System.out.println("List : " + list.size());
+
 				
 				JSONObject sendJSON = new JSONObject();
 				JSONArray jarr = new JSONArray();
@@ -69,11 +73,31 @@ public class FboardLIstServlet extends HttpServlet {
 				for(Fboard fboard : list) {
 					JSONObject job = new JSONObject();
 					
+					//축제 시작일, 종료일 날짜 format하기
+					// String -> Date 축제 시작일, 종료일
+					String startDate = null;
+					String endDate = null;
+					Date dstartDate = null;
+					Date dendDate = null;
+					SimpleDateFormat transFormat = new SimpleDateFormat("yyyyMMdd");
+					try {
+						dstartDate = transFormat.parse(fboard.getFestivalStartDate());
+						dendDate = transFormat.parse(fboard.getFestivalEndDate());
+						
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					
+					// Date format하기 축제 시작일, 종료일
+					transFormat = new SimpleDateFormat("yyyy. MM. dd");
+					startDate = transFormat.format(dstartDate);
+					endDate = transFormat.format(dendDate);
+					
 					job.put("fboardNo", fboard.getFboardNo());
 					job.put("festivalTitle", URLEncoder.encode(fboard.getFestivalTitle(), "utf-8"));
 					job.put("localNo", fboard.getLocalNo());
-					job.put("festivalStartDate", fboard.getFestivalStartDate());
-					job.put("festivalEndDate", fboard.getFestivalEndDate());
+					job.put("festivalStartDate", startDate);
+					job.put("festivalEndDate", endDate);
 					job.put("fesivalModifiedDate", fboard.getFesivalModifiedDate());
 					job.put("mapX", fboard.getMapX());
 					job.put("mapY", fboard.getMapY());
