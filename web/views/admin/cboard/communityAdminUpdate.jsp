@@ -7,37 +7,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="../include/head.jsp"%>
+<%@ include file="../include/admin_head.jsp"%>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
 	<div id="wrap">
-		<%@ include file="../include/header.jsp"%>
+		<%@ include file="../include/admin_header.jsp"%>
 
-		<!-- 컨텐츠 -->
-		<div id="content">
+		<div id="admin_container">
 
-			<!--서브 비주얼/타이틀-->
-			<div class="visual-sub-vagas community-vagas">
-				<div class="vsv-copy sub-title">
-					<div>
-						<ul class="navi">
-							<li><a href="#none">홈</a></li>
-							<li><a href="#none">고객센터</a></li>
-							<li class="glyphicon glyphicon-menu-right"><a href="#none">커뮤니티</a></li>
-						</ul>
-					</div>
-					<h2>
-						<span>커뮤니티</span>
-					</h2>
-					<h3>우리의 이웃과 'Anavada'를 통해 소통할 수 있는 공간입니다.</h3>
+			<!-- 상단 타이틀 -->
+			<div class="admin_title">
+				<div class="admin_path">
+					<h3>커뮤니티</h3>
+					<h2>| 글작성</h2>
 				</div>
 			</div>
-			<!--서브 비주얼/타이틀 끝-->
+			<!-- //상단 타이틀 -->
 
-			<!-- 글쓰기 -->
 			<div class="write-area">
 				<h2>커뮤니티 작성</h2>
-				<form action="/anavada/cupdate" method="post" enctype="multipart/form-data">
+				<form action="/anavada/adcupdate.ad" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="cnum" value="<%=cboard.getCboardNo()%>">
 					<input type="hidden" name="ofile1" value="<%if (cboard.getCfilesOriginalFilepath1() != null) {%><%=cboard.getCfilesOriginalFilepath1()%><%}%>">
 					<input type="hidden" name="rfile1" value="<%if (cboard.getCfilesRenameFilepath1() != null) {%><%=cboard.getCfilesRenameFilepath1()%><%}%>">
@@ -151,26 +140,21 @@
 									%>
 									<input type="file" name="upfile<%=i + 1%>">
 								</td>
-
 							</tr>
 							<%
 								}
 							%>
-
 						</tbody>
 					</table>
 					<div class="write-btn">
-						<a href="/anavada/clistview?page=1&local=0" class="btn btn-list">목록</a>
-						<button class="btn btn-success" onclick="location.href=/anavada/cupdate">수정하기</button>
+						<a href="/anavada/adclistview.ad?page=1&local=0" class="btn btn-list">목록</a>
+						<button class="btn btn-success" onclick="location.href=/anavada/adcupdate.ad">수정하기</button>
 					</div>
 				</form>
 			</div>
-			<!-- 글쓰기 끝 -->
-
 		</div>
-		<!-- 컨텐츠 끝 -->
 
-		<%@ include file="../include/footer.jsp"%>
+		<%@ include file="../include/admin_footer.jsp"%>
 	</div>
 </body>
 </html>

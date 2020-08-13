@@ -1,7 +1,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="cboard.model.service.CboardService"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="cboard.model.vo.Cboard"%>
 <%@page import="creply.model.vo.Creply"%>
 <%
@@ -26,13 +25,9 @@
 		$(".Subcmt_btn").click(function () {
 			$(this).siblings(".Subcmt").toggle(200);
 		});
-	});
-	$(function (){
 		$(".Subcmt_update_btn").click(function () {
 			$(this).siblings(".Subcmt_update").toggle(200);
 		});
-	});
-	$(function (){
 		$(".Cmt_update_btn").click(function () {
 			$(this).siblings(".Cmt_update").toggle(200);
 		});
@@ -43,29 +38,29 @@
 	width: 50px;
 	height: 50px;
 	padding: 1px;
-	border-radius:50%;
+	border-radius: 50%;
 	border: 0px;
-	margin-right: 15px;
-}
-.report{
-	width: 50px;
-	height: 50px;
-	padding: 1px;
-	border-radius:50%;
-	border: 0px;
-	margin-right: 15px;
-}
-font{
-	font-size: 20px;
 	margin-right: 15px;
 }
 
+.report {
+	width: 50px;
+	height: 50px;
+	padding: 1px;
+	border-radius: 50%;
+	border: 0px;
+	margin-right: 15px;
+}
+
+font {
+	font-size: 20px;
+	margin-right: 15px;
+}
 </style>
 </head>
-<body oncontextmenu="return false" onselectstart="return false"
-	ondragstart="return false">
+<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
 	<div id="wrap">
-	<%@ include file="../include/header.jsp"%>
+		<%@ include file="../include/header.jsp"%>
 		<!-- 컨텐츠 -->
 		<div id="content">
 
@@ -103,25 +98,21 @@ font{
 						for (int i = 0; i < 4; i++) {
 					%>
 					<%
-						if (i == 0 && (cboard.getCfilesOriginalFilepath1() != null)) {
+						if (i == 0 && (cboard.getCfilesOriginalFilepath1() != null) && !cboard.getCfilesOriginalFilepath1().equals("null")) {
 					%>
-					<li><span>첨부파일#1 : </span><a
-						href="/anavada/cfdown?ofile=<%=cboard.getCfilesOriginalFilepath1()%>&rfile=<%=cboard.getCfilesRenameFilepath1()%>"><%=cboard.getCfilesOriginalFilepath1()%></a></li>
+					<li><span>첨부파일#1 : </span><a href="/anavada/cfdown?ofile=<%=cboard.getCfilesOriginalFilepath1()%>&rfile=<%=cboard.getCfilesRenameFilepath1()%>"><%=cboard.getCfilesOriginalFilepath1()%></a></li>
 					<%
-						} else if (i == 1 && cboard.getCfilesOriginalFilepath2() != null) {
+						} else if (i == 1 && cboard.getCfilesOriginalFilepath2() != null && !cboard.getCfilesOriginalFilepath2().equals("null")) {
 					%>
-					<li><span>첨부파일#2 : </span><a
-						href="/anavada/cfdown?ofile=<%=cboard.getCfilesOriginalFilepath2()%>&rfile=<%=cboard.getCfilesRenameFilepath2()%>"><%=cboard.getCfilesOriginalFilepath2()%></a></li>
+					<li><span>첨부파일#2 : </span><a href="/anavada/cfdown?ofile=<%=cboard.getCfilesOriginalFilepath2()%>&rfile=<%=cboard.getCfilesRenameFilepath2()%>"><%=cboard.getCfilesOriginalFilepath2()%></a></li>
 					<%
-						} else if (i == 2 && cboard.getCfilesOriginalFilepath3() != null) {
+						} else if (i == 2 && cboard.getCfilesOriginalFilepath3() != null && !cboard.getCfilesOriginalFilepath3().equals("null")) {
 					%>
-					<li><span>첨부파일#3 : </span><a
-						href="/anavada/cfdown?ofile=<%=cboard.getCfilesOriginalFilepath3()%>&rfile=<%=cboard.getCfilesRenameFilepath3()%>"><%=cboard.getCfilesOriginalFilepath3()%></a></li>
+					<li><span>첨부파일#3 : </span><a href="/anavada/cfdown?ofile=<%=cboard.getCfilesOriginalFilepath3()%>&rfile=<%=cboard.getCfilesRenameFilepath3()%>"><%=cboard.getCfilesOriginalFilepath3()%></a></li>
 					<%
-						} else if (i == 3 && cboard.getCfilesOriginalFilepath4() != null) {
+						} else if (i == 3 && cboard.getCfilesOriginalFilepath4() != null && !cboard.getCfilesOriginalFilepath4().equals("null")) {
 					%>
-					<li><span>첨부파일#4 : </span><a
-						href="/anavada/cfdown?ofile=<%=cboard.getCfilesOriginalFilepath4()%>&rfile=<%=cboard.getCfilesRenameFilepath4()%>"><%=cboard.getCfilesOriginalFilepath4()%></a></li>
+					<li><span>첨부파일#4 : </span><a href="/anavada/cfdown?ofile=<%=cboard.getCfilesOriginalFilepath4()%>&rfile=<%=cboard.getCfilesRenameFilepath4()%>"><%=cboard.getCfilesOriginalFilepath4()%></a></li>
 					<%
 						}
 					%>
@@ -132,63 +123,77 @@ font{
 				</ul>
 				<%} %>
 				<div class="view-ctn">
-					<%=cboard.getCboardContent()%>
+					<%=cboard.getCboardContent().replace("\r\n","<br>")%>
 				</div>
 				<div style="float: center; margin: 10px; text-align: center;">
-				<div style="display: inline-block;">
-					<button onclick="location.href='/anavada/uplike?cnum=<%=cboard.getCboardNo() %>'" class="like"><i class="xi-heart" style="font-size: 300%;"></i></button>
-					<br><font><%= cboard.getLikeCount() %></font>
+					<% if(loginMember != null) { %>
+					<div style="display: inline-block;">
+						<button onclick="location.href='/anavada/uplike?cnum=<%=cboard.getCboardNo() %>'" class="like">
+							<i class="xi-heart" style="font-size: 300%;"></i>
+						</button>
+						<br> <font><%= cboard.getLikeCount() %></font>
+					</div>
+					<div style="display: inline-block;">
+						<button onclick="location.href='/anavada/views/declare/declare_write.jsp'" class="report">
+							<i class="xi-error" style="font-size: 300%;"></i>
+						</button>
+						<br> <font>신고</font>
+					</div>
+					<% } else { %>
+					<div style="display: inline-block;">
+						<button type="button" onclick="alert('로그인 후 이용해주세요');" class="like">
+							<i class="xi-heart" style="font-size: 300%;"></i>
+						</button>
+						<br> <font><%= cboard.getLikeCount() %></font>
+					</div>
+					<div style="display: inline-block;">
+						<button type="button" onclick="alert('로그인 후 이용해주세요');" type="button" class="report">
+							<i class="xi-error" style="font-size: 300%;"></i>
+						</button>
+						<br> <font>신고</font>
+					</div>
+					<% } %>
 				</div>
-				<div style="display: inline-block;">
-					<button  onclick="location.href='/anavada/upreport?cnum=<%=cboard.getCboardNo() %>'" class="report"><i class="xi-error" style="font-size: 300%;"></i></button>
-					<br><font><%= cboard.getReportCount() %></font>
-				</div>
-				</div>
-				
-				
+
+
 
 				<div class="view-btn">
 					<%
 						if (cboard.getCboardNo() > 1) {
 					%>
-					<a
-						href="/anavada/cdetail?cnum=<%=cboard.getCboardNo() - 1%>&page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"
-						class="btn btn-prev">이전글</a>
+					<a href="/anavada/cdetail?cnum=<%=cboard.getCboardNo() - 1%>&page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>" class="btn btn-prev">이전글</a>
 					<%
 						}
 					%>
 					<%
 						if (cboard.getCboardNo() < allListCount) {
 					%>
-					<a
-						href="/anavada/cdetail?cnum=<%=cboard.getCboardNo() + 1%>&page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"
-						class="btn btn-next">다음글</a>
+					<a href="/anavada/cdetail?cnum=<%=cboard.getCboardNo() + 1%>&page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>" class="btn btn-next">다음글</a>
 					<%
 						}
 					%>
 				</div>
 				<div class="view-btn">
 					<% if(loginMember != null && loginMember.getMemberId().equals(cboard.getMemberId())) { %>
-					<a href="/anavada/cupdateview.ss?cnum=<%= cboard.getCboardNo() %>&local=<%= cboard.getLocalNo() %>"
-						class="btn btn-list">수정</a> 
+					<a href="/anavada/cupdateview.ss?cnum=<%= cboard.getCboardNo() %>&local=<%= cboard.getLocalNo() %>" class="btn btn-list">수정</a>
 					<% } %>
 					<% if(loginMember != null && loginMember.getMemberId().equals(cboard.getMemberId())) { %>
 					<a href="/anavada/cdelete?cnum=<%=cboard.getCboardNo()%>&rfile1=<%=cboard.getCfilesRenameFilepath1()%>
-						&rfile2=<%=cboard.getCfilesRenameFilepath2()%>&rfile3=<%=cboard.getCfilesRenameFilepath3()%>&rfile4=<%=cboard.getCfilesRenameFilepath4()%>"
-						class="btn btn-list">삭제</a>
+						&rfile2=<%=cboard.getCfilesRenameFilepath2()%>&rfile3=<%=cboard.getCfilesRenameFilepath3()%>&rfile4=<%=cboard.getCfilesRenameFilepath4()%>" class="btn btn-list">삭제</a>
 					<% } %>
-						 
-					<a href="/anavada/clistview?page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"
-						class="btn btn-list">목록</a>
+
+					<a href="/anavada/clistview?page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>" class="btn btn-list">목록</a>
 				</div>
 				<div class="cmt_wrap">
-				<% if(loginMember != null) { %>
+					<h4 class="cmt_head">
+						댓글
+						<%= allReplyCount %></h4>
+					<% if(loginMember != null) { %>
 					<form action="crwrite.ss" method="post">
 						<input type="hidden" name="writer" value="<%=loginMember.getMemberId()%>">
 						<input type="hidden" name="cnum" value="<%=cboard.getCboardNo()%>">
 						<fieldset>
 							<div class="cmt_form">
-								<h4 class="cmt_head">댓글 <%= allReplyCount %></h4>
 								<div class="cmt_body">
 									<textarea name="content" style="resize: none; width: 100%; min-height: 100px; max-height: 100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
 									<div class="cmt_ok">
@@ -198,74 +203,62 @@ font{
 							</div>
 						</fieldset>
 					</form>
-				<% } %>
+					<% } %>
 					<ul class="cmt_con">
-					<% for(Creply c : rlist) {%>
+						<% for(Creply c : rlist) {%>
 						<li>
 							<div>
 								<h4><%= c.getMemberId() %></h4>
 								<span><%= c.getCreplyDate() %></span>
 							</div>
-							<p><%= c.getCreplyContent() %></p>
-							<button class="Subcmt_btn">대댓글</button>
-							<% if(loginMember != null && loginMember.getMemberId().equals(c.getMemberId())) { %>
+							<p><%= c.getCreplyContent().replace("\r\n","<br>") %></p>
+							<button class="Subcmt_btn">대댓글</button> <% if(loginMember != null && loginMember.getMemberId().equals(c.getMemberId())) { %>
 							<button onclick="location.href='/anavada/crdelete?crnum=<%= c.getCreplyNo() %>&depth=<%= c.getCreplyDepth() %>&cnum=<%= cboard.getCboardNo() %>'" style="float: right;">삭제</button>
-							<button class="Cmt_update_btn" style="float: right;margin-right: 10px;">수정</button>
-									<!-- 댓글수정입력 폼 시작 -->
-									<div class="Cmt_update" style="display: none;">
-										<form action="crupdate.ss" method="post">
-										<input type="hidden" name="crnum" value="<%= c.getCreplyNo() %>">
-										<input type="hidden" name="cnum" value="<%= c.getCbaordNo() %>">
-										<fieldset>
-											<div class="cmt_form">
-												<div class="cmt_body">
-													<textarea name="content" style="resize: none; width: 100%; min-height: 100px; max-height: 100px;" onfocus="this.value='';"><%= c.getCreplyContent() %></textarea>
-													<div class="cmt_ok">
+							<button class="Cmt_update_btn" style="float: right; margin-right: 10px;">수정</button> <!-- 댓글수정입력 폼 시작 -->
+							<div class="Cmt_update" style="display: none;">
+								<form action="crupdate.ss" method="post">
+									<input type="hidden" name="crnum" value="<%= c.getCreplyNo() %>">
+									<input type="hidden" name="cnum" value="<%= c.getCbaordNo() %>">
+									<fieldset>
+										<div class="cmt_form">
+											<div class="cmt_body">
+												<textarea name="content" style="resize: none; width: 100%; min-height: 100px; max-height: 100px;" onfocus="this.value='';"><%= c.getCreplyContent() %></textarea>
+												<div class="cmt_ok">
 													<input type="submit" value="수정">
-													</div>
 												</div>
 											</div>
-										</fieldset>
-										</form>
-									</div>
-									<!-- 댓글수정입력 폼 끝 -->
-							<% } %>
-							<% if(loginMember != null) { %>
-								<!-- 댓글 등록 폼 시작 -->
-								<div class="Subcmt" style="display: none;">
-									<form action="scwrite.ss" method="post">
+										</div>
+									</fieldset>
+								</form>
+							</div> <!-- 댓글수정입력 폼 끝 --> <% } %> <% if(loginMember != null) { %> <!-- 댓글 등록 폼 시작 -->
+							<div class="Subcmt" style="display: none;">
+								<form action="scwrite.ss" method="post">
 									<input type="hidden" name="writer" value="<%=loginMember.getMemberId()%>">
 									<input type="hidden" name="cnum" value="<%=cboard.getCboardNo()%>">
 									<input type="hidden" name="prnum" value="<%=c.getCreplyNo()%>">
-										<fieldset>
-											<div class="cmt_form">
-												<div class="cmt_body">
-													<textarea name="content" style="resize: none; width: 100%; min-height: 100px; max-height: 100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
-													<div class="cmt_ok">
+									<fieldset>
+										<div class="cmt_form">
+											<div class="cmt_body">
+												<textarea name="content" style="resize: none; width: 100%; min-height: 100px; max-height: 100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
+												<div class="cmt_ok">
 													<input type="submit" value="등록">
-													</div>
 												</div>
 											</div>
-										</fieldset>
-									</form>
+										</div>
+									</fieldset>
+								</form>
+							</div> <!-- 댓글 등록 폼 끝 --> <% } %> <% for(Creply sc : srlist) { %> <% if(c.getCreplyNo() == sc.getParantReply()) { %> <!-- 댓글 수정 입력 폼 시작 -->
+							<div class="Subcmt_form" style="background-color: #E6E6E6;">
+								<div>
+									<h4><%= sc.getMemberId() %></h4>
+									<span><%= sc.getCreplyDate() %></span>
 								</div>
-								<!-- 댓글 등록 폼 끝 -->
-									
-								<% } %>
-								<% for(Creply sc : srlist) { %>
-								<% if(c.getCreplyNo() == sc.getParantReply()) { %>
-								<!-- 댓글 수정 입력 폼 시작 -->
-								<div class="Subcmt_form" style="background-color: #E6E6E6;">
-									<div>
-										<h4><%= sc.getMemberId() %></h4>
-										<span><%= sc.getCreplyDate() %></span>
-									</div>
-									<p><%= sc.getCreplyContent() %></p>
-									<% if(loginMember != null && loginMember.getMemberId().equals(sc.getMemberId())) { %>
-									<button onclick="location.href='/anavada/crdelete?crnum=<%= sc.getCreplyNo() %>&depth=<%= sc.getCreplyDepth() %>&cnum=<%= cboard.getCboardNo() %>'" style="float: right;">삭제</button>
-									<button class="Subcmt_update_btn" style="float: right;margin-right: 10px;">수정</button>
-									<div class="Subcmt_update" style="display: none;">
-										<form action="crupdate.ss" method="post">
+								<p><%= sc.getCreplyContent().replace("\r\n","<br>") %></p>
+								<% if(loginMember != null && loginMember.getMemberId().equals(sc.getMemberId())) { %>
+								<button onclick="location.href='/anavada/crdelete?crnum=<%= sc.getCreplyNo() %>&depth=<%= sc.getCreplyDepth() %>&cnum=<%= cboard.getCboardNo() %>'" style="float: right;">삭제</button>
+								<button class="Subcmt_update_btn" style="float: right; margin-right: 10px;">수정</button>
+								<div class="Subcmt_update" style="display: none;">
+									<form action="crupdate.ss" method="post">
 										<input type="hidden" name="crnum" value="<%= sc.getCreplyNo() %>">
 										<input type="hidden" name="cnum" value="<%= sc.getCbaordNo() %>">
 										<fieldset>
@@ -273,20 +266,17 @@ font{
 												<div class="cmt_body">
 													<textarea name="content" style="resize: none; width: 100%; min-height: 100px; max-height: 100px;" onfocus="this.value='';"><%= sc.getCreplyContent() %></textarea>
 													<div class="cmt_ok">
-													<input type="submit" value="수정">
+														<input type="submit" value="수정">
 													</div>
 												</div>
 											</div>
 										</fieldset>
-										</form>
-									</div>
-									<% } %>
+									</form>
 								</div>
-								<!-- 댓글 수정 입력 폼 끝 -->
 								<% } %>
-								<% } %>
+							</div> <!-- 댓글 수정 입력 폼 끝 --> <% } %> <% } %>
 						</li>
-					<% } %>
+						<% } %>
 					</ul>
 					<button class="cmt_in">
 						댓글 더보기 <i class="glyphicon glyphicon-menu-right"></i>

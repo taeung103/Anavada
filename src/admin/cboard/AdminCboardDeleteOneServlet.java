@@ -1,4 +1,4 @@
-package cboard.controller;
+package admin.cboard;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,21 +15,21 @@ import cboard.model.service.CboardService;
 /**
  * Servlet implementation class CboardDeleteServlet
  */
-@WebServlet("/cdelete")
-public class CboardDeleteServlet extends HttpServlet {
+@WebServlet("/adcdeleteone.ad")
+public class AdminCboardDeleteOneServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CboardDeleteServlet() {
+ * @see HttpServlet#HttpServlet()
+ */
+    public AdminCboardDeleteOneServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
     /**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+ * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+ */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
         int cboardNum = Integer.parseInt(request.getParameter("cnum"));
 
@@ -46,12 +46,13 @@ public class CboardDeleteServlet extends HttpServlet {
                     new File(savePath + "\\" + renameFileName).delete();
                 }
             }
-            response.sendRedirect("/anavada/clistview?page=1&local=0");
+            response.sendRedirect("/anavada/adclistview.ad?page=1&local=0");
         } else {
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter writer = response.getWriter();
             writer.println(
-                "<script>alert('글삭제 실패');location.href='/anavada/cdetail?cnum=" + cboardNum + "';</script>"
+                "<script>alert('글삭제 실패');location.href='/anavada/adcdetail.ad?cnum=" +
+                cboardNum + "';</script>"
             );
             writer.close();
         }
@@ -59,8 +60,8 @@ public class CboardDeleteServlet extends HttpServlet {
     }
 
     /**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+ * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+ */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
         // TODO Auto-generated method stub
         doGet(request, response);

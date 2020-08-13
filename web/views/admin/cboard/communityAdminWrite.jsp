@@ -1,38 +1,35 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="cboard.model.vo.Cboard"%>
+<%
+	ArrayList<Cboard> clist = (ArrayList<Cboard>)request.getAttribute("list");
+	String local = String.valueOf(request.getAttribute("local"));
+	String search = String.valueOf(request.getAttribute("search"));
+	String keyword = String.valueOf(request.getAttribute("keyword"));
+	String[] localArr = { "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", 
+			"서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구" };
+%>
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="../include/head.jsp"%>
+<%@ include file="../include/admin_head.jsp"%>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
 	<div id="wrap">
-		<%@ include file="../include/header.jsp"%>
+		<%@ include file="../include/admin_header.jsp"%>
 
-		<!-- 컨텐츠 -->
-		<div id="content">
+		<div id="admin_container">
 
-			<!--서브 비주얼/타이틀-->
-			<div class="visual-sub-vagas community-vagas">
-				<div class="vsv-copy sub-title">
-					<div>
-						<ul class="navi">
-							<li><a href="#none">홈</a></li>
-							<li><a href="#none">고객센터</a></li>
-							<li class="glyphicon glyphicon-menu-right"><a href="#none">커뮤니티</a></li>
-						</ul>
-					</div>
-					<h2>
-						<span>커뮤니티</span>
-					</h2>
-					<h3>우리의 이웃과 'Anavada'를 통해 소통할 수 있는 공간입니다.</h3>
+			<!-- 상단 타이틀 -->
+			<div class="admin_title">
+				<div class="admin_path">
+					<h3>커뮤니티</h3>
+					<h2>| 글작성</h2>
 				</div>
 			</div>
-			<!--서브 비주얼/타이틀 끝-->
+			<!-- //상단 타이틀 -->
 
-			<!-- 글쓰기 -->
 			<div class="write-area">
-				<h2>커뮤니티 작성</h2>
-				<form action="/anavada/cinsert" method="post" enctype="multipart/form-data">
+				<h2>관리자 커뮤니티 작성</h2>
+				<form action="/anavada/adcwrite.ad" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="writer" value="<%= loginMember.getMemberId() %>">
 					<table>
 						<colgroup>
@@ -97,17 +94,14 @@
 						</tbody>
 					</table>
 					<div class="write-btn">
-						<a href="/anavada/clistview?page=1&local=0" class="btn btn-list">목록</a>
+						<a class="btn btn_list" href="/anavada/adclistview.ad?page=1&local=0" class="btn btn-list">목록</a>
 						<button class="btn btn-success">작성하기</button>
 					</div>
 				</form>
 			</div>
-			<!-- 글쓰기 끝 -->
 
+			<%@ include file="../include/admin_footer.jsp"%>
 		</div>
-		<!-- 컨텐츠 끝 -->
-
-		<%@ include file="../include/footer.jsp"%>
 	</div>
 </body>
 </html>

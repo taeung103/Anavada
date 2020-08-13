@@ -39,12 +39,13 @@ public class CboardUpdateServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 
-		
 		RequestDispatcher view = null;
 		if (!ServletFileUpload.isMultipartContent(request)) {
 			view = request.getRequestDispatcher("views/common/error.jsp");
@@ -52,11 +53,12 @@ public class CboardUpdateServlet extends HttpServlet {
 			view.forward(request, response);
 		}
 
-		int maxSize =1024 * 1024 * 10;
+		int maxSize = 1024 * 1024 * 10;
 
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/cboardfiles");
 
-		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
+		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8",
+				new DefaultFileRenamePolicy());
 
 		Cboard cboard = new Cboard();
 
@@ -71,8 +73,7 @@ public class CboardUpdateServlet extends HttpServlet {
 		String renameFilePath = null;
 		String originalFileName = null;
 		String renameFileName = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmSSSSSS");
-		
+
 		for (int i = 0; i < 4; i++) {
 			deleteFlag = mrequest.getParameter("delflag" + (i + 1));
 			originFilePath = mrequest.getParameter("ofile" + (i + 1));
@@ -115,11 +116,11 @@ public class CboardUpdateServlet extends HttpServlet {
 					cboard.setCfilesOriginalFilepath4(originalFileName);
 					break;
 				}
-
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmSSSSSS");
 
 				renameFileName = sdf.format(new java.sql.Date(System.currentTimeMillis()));
 
-				renameFileName += i + "." + originFilePath.substring(originFilePath.lastIndexOf(".")+1);
+				renameFileName += i + "." + originFilePath.substring(originFilePath.lastIndexOf(".") + 1);
 
 				File renameFile = new File(savePath + "\\" + renameFileName);
 
@@ -153,7 +154,7 @@ public class CboardUpdateServlet extends HttpServlet {
 				if (originFilePath != null) {
 					originFile.delete();
 				}
-			} else if(originFilePath != null && deleteFlag != null && deleteFlag.equals("yes")) {
+			} else if (originFilePath != null && deleteFlag != null && deleteFlag.equals("yes")) {
 				switch (i + 1) {
 				case 1:
 					cboard.setCfilesOriginalFilepath1(null);
@@ -173,8 +174,9 @@ public class CboardUpdateServlet extends HttpServlet {
 					break;
 				}
 				originFile.delete();
-			} else if (originFilePath != null && (originalFileName == null || originFilePath.equals(originalFileName) && originFilePath.contentEquals(originalFileName)
-					&& newOriginFile.length() == originFile.length())) {
+			} else if (originFilePath != null && (originalFileName == null
+					|| originFilePath.equals(originalFileName) && originFilePath.contentEquals(originalFileName)
+							&& newOriginFile.length() == originFile.length())) {
 				switch (i + 1) {
 				case 1:
 					cboard.setCfilesOriginalFilepath1(originFilePath);
@@ -198,20 +200,23 @@ public class CboardUpdateServlet extends HttpServlet {
 		}
 		int result = new CboardService().updateCboard(cboard);
 		if (result > 0) {
-			response.sendRedirect("/anavada/clistview?page=1&local=0");
+			response.sendRedirect("/anavada/cdetail?cnum=" + cboard.getCboardNo());
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('글수정 실패');location.href='/anavada/cdetail?cnum=" + cboard.getCboardNo() + "';</script>");
+			writer.println("<script>alert('글수정 실패');location.href='/anavada/cdetail?cnum=" + cboard.getCboardNo()
+					+ "';</script>");
 			writer.close();
 		}
 
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

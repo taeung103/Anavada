@@ -233,7 +233,6 @@
 }
 
 
-
 /*게시판 글작성 */
 .admin-board-write {
     width:100%;
@@ -522,6 +521,23 @@
     background-color: #999;
     border: 1px solid #999;
 }
+.btn_wrap button.btn_gray:hover {
+    background-color: #444;
+    border: 1px solid #444;
+}
+.btn_wrap button.btn-right {
+    float: right;
+}
+.btn_wrap button.btn_white {
+    color: #333;
+    border: 1px solid #777;
+}
+.btn_wrap button.btn_white {
+    color: #fff;
+    border: 1px solid #344fa0;
+    background-color:#344fa0;
+}
+
 .view-btn {
     text-align: center;
     overflow: hidden;
@@ -685,4 +701,443 @@
 }
 .homeBtn:hover a, .logoutBtn:hover a {
     background-color:#FF8A3D !important;
+}
+
+
+/* 글작성 */
+.write-area {
+    width:1100px;
+    margin:0 auto;
+    overflow: hidden;
+    padding: 60px 0 100px;
+}
+.write-area h2 {
+    color: #333;
+    font-size: 32px;
+    padding: 0 0 30px;
+    line-height: 35px;
+    text-align: center;
+}
+.write-area h3 {
+    color: #777;
+    font-size: 14px;
+    padding-bottom: 40px;
+    text-align: center;
+}
+.write-area table {
+    width:100%;
+    border-top: 1px solid #333;
+}
+.write-area table tbody {
+    width:100%;
+}
+.write-area table tbody tr {
+    border-bottom: 1px solid #ddd;
+    line-height: 46px;
+}
+.write-area table tbody tr td:first-child {
+    color: #333;
+    font-size: 16px;
+    padding: 10px 0 10px 7%;
+}
+.write-area table tbody tr td:last-child {
+    color: #777;
+    font-size: 16px;
+    padding: 10px 7% 10px 0;
+}
+.write-area table tbody tr td P {
+    line-height: 20px;
+    font-size: 14px;
+}
+.write-area table tbody tr td select {
+    height: 42px;
+    line-height: 42px;
+    color: #777;
+    padding: 6px 20px;
+    font-size: 14px;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.write-area table tbody tr td input {
+    height: 48px;
+    line-height: 48px;
+}
+.write-area table tbody tr td label {
+    margin-right:15px;
+}
+.write-area table tbody tr td label input[type="radio"] {
+    margin-right: 5px;
+    margin-top: 0;
+    width: 16px;
+}
+.write-area table tbody tr td input[type="file"] {
+    height: auto;
+    line-height: normal;
+    border: 1px solid #999;
+}
+.write-area .write-info {
+    padding-top: 30px;
+    width: 100%;
+    overflow: hidden;
+}
+.write-area .write-info > p {
+    width: 100%;
+    max-height: 140px;
+    border: 1px solid #ccc;
+    overflow-y:scroll;
+    padding: 30px;
+    color: #444;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    margin-bottom: 15px;
+}
+.write-area .write-info .check-radio {
+    width: 100%;
+    text-align: left;
+    font-size: 14px;
+    line-height: 20px;
+}
+.write-area .write-info .check-radio label {
+    margin-right: 15px;
+}
+.write-area .write-info .check-radio label input[type="radio"] {
+    width: 14px;
+    height: 14px;
+    margin-right: 5px;
+}
+
+
+
+/*btn*/
+.list-no {
+    text-align: center;
+    padding: 60px 0;
+}
+.write-btn {
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+    font-size: 0;
+    padding-top: 60px;
+}
+.list-table .write-btn {
+    text-align: right;
+}
+.write-btn a {
+    display: inline-block;
+    border: 1px solid #FF8A3D;
+    line-height: 36px;
+    padding: 0;
+    width: 140px;
+    height: 38px;
+    font-size: 15px;
+    border-radius: 5px;
+    color: #FF8A3D;
+    margin: 0 15px;
+}
+.write-area .write-btn a.btn-success {
+    color: #fff;
+}
+.write-btn a:hover {
+    color: #fff;
+    background-color: #FF8A3D;
+}
+.write-btn .btn-list {
+    color: #FF8A3D;
+}
+.write-btn > input {
+    display: inline-block;
+    border: 1px solid #FF8A3D;
+    line-height: 30px;
+    padding: 0;
+    width: 120px;
+    font-size: 15px;
+    border-radius: 5px;
+    color: #FF8A3D;
+    margin: 0 15px;
+    background-color:#fff;
+    vertical-align: inherit;
+}
+.write-btn > input.btn-success {
+    color: #fff;
+    background-color:#FF8A3D;
+}
+.write-btn > input:hover {
+    color: #fff;
+    background-color: #FF8A3D;
+}
+.write-btn > input.btn-list {
+    color: #FF8A3D;
+}
+.write-btn > input.btn-list:hover {
+    color: #fff;
+    background-color: #FF8A3D;
+}
+/* 공지사항-상세 */
+.view-area {
+    overflow: hidden;
+    width:1100px;
+    margin:0 auto;
+    padding: 60px 0 100px;
+}
+.view-area h2 {
+    font-size: 32px;
+    line-height: 36px;
+    color: #333;
+    text-align: center;
+    padding-bottom: 40px;
+}
+.view-area h2 span {
+    color: #FF8A3D;
+    margin-right: 30px;
+    position: relative;
+}
+.view-area h2 span:before {
+    content: '';
+    position: absolute;
+    top: 15%;
+    right: -20px;
+    height: 70%;
+    border-right:1px solid #ccc;
+}
+.view-area > ul {
+    text-align: center;
+    overflow: hidden;
+    border-top: 1px solid #333;
+    padding: 20px 0;
+    border-bottom: 1px solid #ddd;
+    background-color: #e9f5ff;
+}
+.view-area > ul li {
+    position: relative;
+    font-size: 15px;
+    color: #777;
+    margin: 0 20px;
+    display: inline-block;
+}
+.view-area > ul li:before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    right: -22px;
+    height: 12px;
+    border-right:1px solid #ccc;
+}
+.view-area > ul li:last-child:before {
+    border-right: none;
+}
+.view-area > ul li span {
+    color: #333;
+}
+.view-area > ul li i {
+    font-size: 15px;
+}
+.view-area .view-ctn {
+    width: 100%;
+    padding: 50px 40px;
+    font-size: 15px;
+    color: #666;
+    line-height: 24px;
+    border-bottom: 1px solid #333;
+}
+.view-btn {
+    text-align: center;
+    overflow: hidden;
+    padding: 60px 0 0;
+}
+.view-btn a {
+    display:inline-block;
+}
+.view-btn .btn-list {
+    font-size: 15px;
+    color: #fff;
+    line-height: 30px;
+    padding: 0 30px;
+    border-radius: 5px;
+    background-color: #FF8A3D;
+    border: 1px solid #FF8A3D;
+}
+.view-btn .btn-list:hover {
+    background-color: #ff6b08;
+    border: 1px solid #ff6b08;
+}
+.view-btn .btn-prev {
+    font-size: 15px;
+    color: #555;
+    float: left;
+    line-height: 30px;
+    background-image: url(../../images/content/library_left.png);
+    background-repeat: no-repeat;
+    background-position: left 0 top 7px;
+    background-size: 23px 15px;
+    padding: 0 10px 0 30px;
+}
+.view-btn .btn-next {
+    font-size: 15px;
+    color: #555;
+    float: right;
+    line-height: 30px;
+    background-image: url(../../images/content/library_right.png);
+    background-repeat: no-repeat;
+    background-position: right 0 top 7px;
+    background-size: 23px 15px;
+    padding: 0 30px 0 10px;
+}
+.view-area .inquiry {
+    color: #3d47ff !important;
+}
+.view-area .declare {
+    color: #ff3d4a !important;
+}
+.view-area .declare_btn2 {
+    margin-bottom: 30px;
+}
+.view-area .declare_btn2 span {
+    font-size: 20px;
+    width: 140px;
+    line-height: 40px;
+}
+
+/*댓글*/
+.cmt_wrap {
+    overflow: hidden;
+    margin-top: 50px;
+}
+.cmt_wrap .cmt_form {
+    overflow: hidden;
+}
+
+.cmt_wrap .cmt_head {
+    text-align: left;
+    font-size: 20px;
+    font-weight: 700;
+    font-family:'Noto Sans KR';
+    margin-bottom: 10px;
+}
+
+.cmt_wrap .cmt_form .cmt_head {
+    text-align: left;
+    font-size: 20px;
+    font-weight: 700;
+    font-family:'Noto Sans KR';
+    margin-bottom: 10px;
+}
+.cmt_wrap .cmt_form .cmt_body {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.cmt_wrap .cmt_form .cmt_body > textarea {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #777;
+    border: none;
+    border-radius: 5px;
+    box-shadow: none;
+}
+.cmt_wrap .cmt_form .cmt_body .cmt_ok {
+    border-top: 1px solid #ccc;
+    text-align: right;
+    padding: 6px;
+}
+.cmt_wrap .cmt_form .cmt_body .cmt_ok input[type="submit"] {
+    background-color: #555;
+    border: 1px solid #555;
+    color: #fff;
+    padding: 3px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 5px;
+}
+.cmt_wrap .cmt_form .cmt_body .cmt_ok input[type="submit"]:hover {
+    background-color: #222;
+}
+.cmt_wrap .cmt_con {
+    overflow: hidden;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    background-color: #fcfcfc;
+    margin-bottom: 10px;
+}
+.cmt_wrap .cmt_con li {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border-bottom: 1px dotted #999;
+}
+.cmt_wrap .cmt_con li:last-child {
+    border-bottom:none;
+}
+.cmt_wrap .cmt_con li div {
+    position: relative;
+    overflow: hidden;
+}
+.cmt_wrap .cmt_con li div h4 {
+    float: left;
+    width: 50%;
+    font-family:'Noto Sans KR';
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: 500;
+}
+.cmt_wrap .cmt_con li div b {
+    float: right;
+    width: 50%;
+    font-size: 13px;
+}
+.cmt_wrap .cmt_con li div span {
+    float: right;
+    color: #999;
+}
+.cmt_wrap .cmt_con li p {
+    line-height: 18px;
+}
+.cmt_wrap .cmt_in {
+    background-color: #fff;
+    border: none;
+    float: right;
+    color: #888;
+}
+.cmt_wrap .cmt_in:hover {
+    color: #FF8A3D;
+}
+.cmt_wrap .cmt_con button {
+    font-size: 12px;
+    margin-top: 10px;
+    line-height: 18px;
+}
+.cmt_wrap .cmt_con .Subcmt_form {
+    margin: 10px 0 0;
+    padding: 10px 10px 20px;
+    border-top: 1px dotted #ccc;
+    overflow: hidden;
+}
+.cmt_wrap .cmt_con .Subcmt_form .cmt_form .cmt_body {
+    margin-bottom: 0;
+}
+
+/*커뮤니티*/
+.cmnt_list {
+    
+}
+.cmnt_list tbody tr:hover {
+    background-color: rgba(236, 242, 255, 1) !important;
+}
+.cmnt_list tbody tr td.title > h2 span {
+    background-color: #003dc7 !important;
+}
+.cmnt_list tbody tr td.title > ul > li i {
+    font-size: 14px;
+}
+.cmnt_view h2 span {
+    color: #003dc7 !important;
 }

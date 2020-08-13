@@ -1,4 +1,4 @@
-package cboard.controller;
+package admin.creply;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cboard.model.service.CboardService;
+import creply.model.service.CreplyService;
 
 /**
- * Servlet implementation class UpLikeCountServlet
+ * Servlet implementation class CreplyUpdateServlet
  */
-@WebServlet("/uplike")
-public class UpLikeCountServlet extends HttpServlet {
+@WebServlet("/adcrupdate.ss")
+public class CreplyUpdateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpLikeCountServlet() {
+    public CreplyUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,22 +30,26 @@ public class UpLikeCountServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        int creplyNum = Integer.parseInt(request.getParameter("crnum"));
         int cboardNum = Integer.parseInt(request.getParameter("cnum"));
+        String content = request.getParameter("content");
 
-        int result = new CboardService().upLikeCount(cboardNum);
+        CreplyService crservice = new CreplyService();
+
+        int result = crservice.updateCreply(creplyNum, content);
 
         if (result > 0) {
-            response.sendRedirect("/anavada/cdetail?cnum=" + cboardNum);
+            response.sendRedirect("/anavada/adcdetail.ad?cnum=" + cboardNum);
         } else {
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter writer = response.getWriter();
             writer.println(
-                "<script>alert('좋아요 실패.');location.href='/anavada/cdetail?cnum=" + cboardNum +
-                "';</script>"
+                "<script>alert('댓글 수정 실패.');location.href='/anavada/cdetail?cnum=" +
+                cboardNum + "';</script>"
             );
             writer.close();
         }
-
     }
 
     /**

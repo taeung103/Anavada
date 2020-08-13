@@ -1,4 +1,4 @@
-package cboard.controller;
+package admin.cboard;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,16 +17,16 @@ import creply.model.service.CreplyService;
 import creply.model.vo.Creply;
 
 /**
- * Servlet implementation class CboardDetailViewServlet
+ * Servlet implementation class AdminCboardDetailViewServlet
  */
-@WebServlet("/cdetail")
-public class CboardDetailViewServlet extends HttpServlet {
+@WebServlet("/adcdetail.ad")
+public class AdminCboardDetailViewServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CboardDetailViewServlet() {
+    public AdminCboardDetailViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,10 +42,7 @@ public class CboardDetailViewServlet extends HttpServlet {
         if (request.getParameter("page") != null) {
             currentPage = Integer.parseInt(request.getParameter("page"));
         }
-        String local = "0";
-        if (request.getParameter("local") != null) {
-            local = request.getParameter("local");
-        }
+        String local = request.getParameter("local");
         String search = request.getParameter("search");
         String keyword = request.getParameter("keyword");
 
@@ -64,7 +61,9 @@ public class CboardDetailViewServlet extends HttpServlet {
 
         RequestDispatcher view = null;
         if (cboard != null) {
-            view = request.getRequestDispatcher("views/cboard/community_view.jsp");
+            view = request.getRequestDispatcher(
+                "views/admin/cboard/communityAdminDetailView.jsp"
+            );
             request.setAttribute("rlist", rlist);
             request.setAttribute("srlist", srlist);
             request.setAttribute("cboard", cboard);
@@ -79,8 +78,8 @@ public class CboardDetailViewServlet extends HttpServlet {
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter writer = response.getWriter();
             writer.println(
-                "<script>alert('존재하지 않는 글입니다.');location.href='/anavada/clistview?page=1&local=" +
-                "0';</script>"
+                "<script>alert('존재하지 않는 글입니다.');location.href='/anavada/adclistview.ad?page=1&l" +
+                "ocal=0';</script>"
             );
             writer.close();
         }

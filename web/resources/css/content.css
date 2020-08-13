@@ -303,6 +303,15 @@
 .cmt_wrap .cmt_form {
     overflow: hidden;
 }
+
+.cmt_wrap .cmt_head {
+    text-align: left;
+    font-size: 20px;
+    font-weight: 700;
+    font-family:'Noto Sans KR';
+    margin-bottom: 10px;
+}
+
 .cmt_wrap .cmt_form .cmt_head {
     text-align: left;
     font-size: 20px;
@@ -899,6 +908,9 @@
     margin:0 auto;
     padding: 60px 0 100px;
 }
+.view-area font {
+	font-family: inherit;
+}
 .view-area h2 {
     font-size: 32px;
     line-height: 36px;
@@ -1192,3 +1204,4 @@
     color: #fff;
     background-color: #FF8A3D;
 }
+

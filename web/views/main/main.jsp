@@ -30,6 +30,9 @@
 							+ "</span></i></p> </dd></dl>";
 							idx++;
 					} // for in
+					if (json.list.length === 0) {
+						values += "<div class=\"no-content\">없음</div>";
+					}
 					
 					$("#ctoplist").html($("#ctoplist").html() + values);
 				},
@@ -178,7 +181,7 @@
 
                 <div class="mianCnt">
                     <h2>우리동네 커뮤니티!</h2>
-                    <a href="#none" class="more">더보기 +</a>
+                    <a href="/anavada/clistview?page=1&local=0" class="more">더보기 +</a>
                     <div class="Cnt_list" id="ctoplist">
                      	<!-- AJAX로 처리 -->
                     </div>

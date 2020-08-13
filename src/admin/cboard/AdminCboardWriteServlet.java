@@ -1,4 +1,4 @@
-package cboard.controller;
+package admin.cboard;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,16 +23,16 @@ import cboard.model.service.CboardService;
 import cboard.model.vo.Cboard;
 
 /**
- * Servlet implementation class CboardWriteServlet
+ * Servlet implementation class AdminCboardWriteServlet
  */
-@WebServlet("/cinsert")
-public class CboardWriteServlet extends HttpServlet {
+@WebServlet("/adcwrite.ad")
+public class AdminCboardWriteServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CboardWriteServlet() {
+    public AdminCboardWriteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -142,13 +142,13 @@ public class CboardWriteServlet extends HttpServlet {
         int result = new CboardService().insertCboard(cboard);
 
         if (result > 0) {
-            response.sendRedirect("/anavada/clistview?page=1&local=0");
+            response.sendRedirect("/anavada/adclistview.ad?page=1&local=0");
         } else {
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter writer = response.getWriter();
             writer.println(
-                "<script>alert('글작성 실패');location.href='/anavada/clistview?page=1&local=0';</sc" +
-                "ript>"
+                "<script>alert('글작성 실패');location.href='/anavada/adclistview.ad?page=1&local=0'" +
+                ";</script>"
             );
             writer.close();
         }

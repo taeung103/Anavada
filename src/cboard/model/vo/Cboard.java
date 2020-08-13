@@ -15,8 +15,6 @@ public class Cboard implements Serializable{
 	private int cboardViewCount;
 	private int replyCount;
 	private int likeCount;
-	private int reportCount;
-	private String cboardDisplay;
 	private String localNo;
 	private String cfilesOriginalFilepath1;
 	private String cfilesRenameFilepath1;
@@ -30,8 +28,8 @@ public class Cboard implements Serializable{
 	public Cboard() {}
 
 	public Cboard(int cboardNo, String memberId, String cboardTitle, String cboardContent, Date date,
-			Date lastmodifiedDate, int cboardViewCount, int replyCount, int likeCount, int reportCount,
-			String cboardDisplay, String localNo, String cfilesOriginalFilepath1, String cfilesRenameFilepath1,
+			Date lastmodifiedDate, int cboardViewCount, int replyCount, int likeCount, 
+			String localNo, String cfilesOriginalFilepath1, String cfilesRenameFilepath1,
 			String cfilesOriginalFilepath2, String cfilesRenameFilepath2, String cfilesOriginalFilepath3,
 			String cfilesRenameFilepath3, String cfilesOriginalFilepath4, String cfilesRenameFilepath4) {
 		super();
@@ -44,8 +42,6 @@ public class Cboard implements Serializable{
 		this.cboardViewCount = cboardViewCount;
 		this.replyCount = replyCount;
 		this.likeCount = likeCount;
-		this.reportCount = reportCount;
-		this.cboardDisplay = cboardDisplay;
 		this.localNo = localNo;
 		this.cfilesOriginalFilepath1 = cfilesOriginalFilepath1;
 		this.cfilesRenameFilepath1 = cfilesRenameFilepath1;
@@ -129,22 +125,6 @@ public class Cboard implements Serializable{
 		this.likeCount = likeCount;
 	}
 
-	public int getReportCount() {
-		return reportCount;
-	}
-
-	public void setReportCount(int reportCount) {
-		this.reportCount = reportCount;
-	}
-
-	public String getCboardDisplay() {
-		return cboardDisplay;
-	}
-
-	public void setCboardDisplay(String cboardDisplay) {
-		this.cboardDisplay = cboardDisplay;
-	}
-
 	public String getLocalNo() {
 		return localNo;
 	}
@@ -222,7 +202,7 @@ public class Cboard implements Serializable{
 		return "Cboard [cboardNo=" + cboardNo + ", memberId=" + memberId + ", cboardTitle=" + cboardTitle
 				+ ", cboardContent=" + cboardContent + ", date=" + date + ", lastmodifiedDate=" + lastmodifiedDate
 				+ ", cboardViewCount=" + cboardViewCount + ", replyCount=" + replyCount + ", likeCount=" + likeCount
-				+ ", reportCount=" + reportCount + ", cboardDisplay=" + cboardDisplay + ", localNo=" + localNo
+				+ ", reportCount=" + ", localNo=" + localNo
 				+ ", cfilesOriginalFilepath1=" + cfilesOriginalFilepath1 + ", cfilesRenameFilepath1="
 				+ cfilesRenameFilepath1 + ", cfilesOriginalFilepath2=" + cfilesOriginalFilepath2
 				+ ", cfilesRenameFilepath2=" + cfilesRenameFilepath2 + ", cfilesOriginalFilepath3="

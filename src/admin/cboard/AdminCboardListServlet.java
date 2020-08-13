@@ -1,4 +1,4 @@
-package cboard.controller;
+package admin.cboard;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,21 +9,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import cboard.model.service.CboardService;
 import cboard.model.vo.Cboard;
 
 /**
- * Servlet implementation class CboardListViewServlet
+ * Servlet implementation class AdminCboardListServlet
  */
-@WebServlet("/clistview")
-public class CboardListViewServlet extends HttpServlet {
+@WebServlet("/adclistview.ad")
+public class AdminCboardListServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CboardListViewServlet() {
+    public AdminCboardListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,7 +36,8 @@ public class CboardListViewServlet extends HttpServlet {
             currentPage = Integer.parseInt(request.getParameter("page"));
         }
         String local = "0";
-        if (request.getParameter("local") != null) {
+
+        if (request.getParameter("local") != null && !request.getParameter("local").equals("null")) {
             local = request.getParameter("local");
         }
 
@@ -67,7 +67,9 @@ public class CboardListViewServlet extends HttpServlet {
 
         RequestDispatcher view = null;
         if (list.size() > 0) {
-            view = request.getRequestDispatcher("views/cboard/community_list.jsp");
+            view = request.getRequestDispatcher(
+                "views/admin/cboard/communityAdminList.jsp"
+            );
             request.setAttribute("list", list);
             request.setAttribute("currentPage", currentPage);
             request.setAttribute("maxPage", maxPage);
@@ -79,7 +81,9 @@ public class CboardListViewServlet extends HttpServlet {
             request.setAttribute("keyword", keyword);
             view.forward(request, response);
         } else {
-            view = request.getRequestDispatcher("views/cboard/cboardListError.jsp");
+            view = request.getRequestDispatcher(
+                "views/admin/cboard/communityAdminListError.jsp"
+            );
             request.setAttribute("list", list);
             request.setAttribute("currentPage", currentPage);
             request.setAttribute("maxPage", maxPage);

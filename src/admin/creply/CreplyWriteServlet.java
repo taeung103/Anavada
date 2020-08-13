@@ -1,4 +1,4 @@
-package cboard.controller;
+package admin.creply;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cboard.model.service.CboardService;
-import cboard.model.vo.Cboard;
+import creply.model.service.CreplyService;
+import creply.model.vo.Creply;
 
 /**
- * Servlet implementation class CboardUpdateView
+ * Servlet implementation class CreplyWriteServlet
  */
-@WebServlet("/cupdateview.ss")
-public class CboardUpdateView extends HttpServlet {
+@WebServlet("/adcrwrite.ss")
+public class CreplyWriteServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CboardUpdateView() {
+    public CreplyWriteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,26 +32,42 @@ public class CboardUpdateView extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+
         int cboardNum = Integer.parseInt(request.getParameter("cnum"));
-        String local = request.getParameter("local");
-        Cboard cboard = new CboardService().selectCboard(cboardNum);
+        String writer = request.getParameter("writer");
+        String content = request.getParameter("content");
+
+        Creply creply = new Creply();
+
+        creply.setCbaordNo(cboardNum);
+        creply.setMemberId(writer);
+        creply.setCreplyContent(content);
+
+        int result = new CreplyService().insertCreply(creply);
+
+        System
+            .out
+            .println(cboardNum);
+        System
+            .out
+            .println(writer);
+        System
+            .out
+            .println(content);
 
         RequestDispatcher view = null;
-        if (cboard != null) {
-            view = request.getRequestDispatcher("views/cboard/community_update.jsp");
-            request.setAttribute("cboard", cboard);
-            request.setAttribute("local", local);
-            view.forward(request, response);
+        if (result > 0) {
+            response.sendRedirect("/anavada/adcdetail.ad?cnum=" + cboardNum);
         } else {
             response.setContentType("text/html; charset=UTF-8");
-            PrintWriter writer = response.getWriter();
-            writer.println(
-                "<script>alert('글수정 권한이 없습니다.');location.href='/anavada/cdetail?cnum=" +
-                cboard.getCboardNo() + "';</script>"
+            PrintWriter pwriter = response.getWriter();
+            pwriter.println(
+                "<script>alert('댓글 작성 실패.');location.href='/anavada/cdetail?cnum=" +
+                cboardNum + "';</script>"
             );
-            writer.close();
+            pwriter.close();
         }
-
     }
 
     /**
