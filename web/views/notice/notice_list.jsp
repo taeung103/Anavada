@@ -79,7 +79,11 @@
 
 				<table>
                     <tbody>
-                        <tr onclick="location.href='notice_view.jsp';" class="active">
+                    	<% if(selected != null && keyword != null) { %>
+                    	<tr onclick="location.href='/anavada/ndetail?no=<%= notice.getNoNo() %>&page=<%= currentPage %>&selected=<%= selected %>&keyword=<%= keyword %>';" class="active">
+                    	<% }else { %>
+                        <tr onclick="location.href='/anavada/ndetail?no=<%= notice.getNoNo() %>&page=<%= currentPage %>';" class="active">
+                        <% } %>
                             <td class="number"><%= notice.getNoNo() %></td>
                             <td class="title">
                                 <h2><span>공지</span><%= notice.getNoTitle() %></h2>
