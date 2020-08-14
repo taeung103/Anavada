@@ -67,8 +67,7 @@
 						
 						$('#festivaloverview').html(data.overview);
 						
-						var values = 
-						'<tr><th>축제 상세 주소</th><td colspan="3">' + data.addr1 + data.addr2 + '</td></tr>' +
+						var values = '<tr><th>축제 상세 주소</th><td colspan="3">' + data.addr1 + data.addr2 + '</td></tr>' +
                          '<tr><th>축제 기간</th><td colspan="3">'+ data.period  + '</td></tr>' +
                     	'<tr><th>홈페이지</th><td colspan="3">'  + data.homepage + '</td></tr>' +
                     	'<tr><th>주최/주최기간 문의</th><td colspan="3">' + data.telname + ", " + data.tel + '</td></tr>';
@@ -179,8 +178,8 @@
                           		'</li>' */
 								}	//for in
 								
-								$("#fbreply").empty();
-								 $("#fbreply").html($("#reply").html() + values);
+								 $("#fbreply").empty();
+								 $("#fbreply").html(values);
 
 								/* $("#reply").html($("#reply").html() + values); */
       						},
@@ -245,8 +244,7 @@
                     <ul id="fbreply" class="cmt_con">
                     </ul>
                     
-                    
-                    <button class="cmt_in">댓글 더보기 <i class="glyphicon glyphicon-menu-right"></i></button>
+                   <!--  <button class="cmt_in">댓글 더보기 <i class="glyphicon glyphicon-menu-right"></i></button> -->
              	 </div>
             </div>
             <!-- 상세 끝 -->

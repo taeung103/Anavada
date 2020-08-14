@@ -257,7 +257,7 @@
 									<option value="readcountDesc">조회수 높은순</option>
 									<option value="replyDesc">댓글 많은순</option>
 								</select>
-								축제 명 : </label><input type="text" id=title onkeyup="searchFboard()" placeholder="축제명을 입력하세요">
+								축제 명 : <input type="text" id=title onkeyup="searchFboard()" placeholder="축제명을 입력하세요">
 							 <button class="top-search"><i class="xi-search"></i></button> 
 						</div>
 					</div>
