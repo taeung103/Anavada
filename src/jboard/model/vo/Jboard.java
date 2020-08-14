@@ -26,15 +26,16 @@ public class Jboard implements java.io.Serializable {
 		private String jboardCheck;		
 		private String jboardMeet;
 		private String jboardPost;
-		private String memberId;
-		private String localNo;
+		private String memberId; 
+		private String localNo; //지역번호
+		private String userIp; //user의 아이피를 확인하고 좋아요 중복 되지 않게 하기 위해 추가
 
 		public Jboard(int jboardNo, String jboardTitle, String jboardContent, int jboardPrice, Date jboardDate,
 				Date jboardUpdate, int jboardCount, int jboardLike, String jboardOrignalFilePath1,
 				String jboardRenameFilePath1, String jboardOrignalFilePath2, String jboardRenameFilePath2,
 				String jboardOrignalFilePath3, String jboardRenameFilePath3, String jboardOrignalFilePath4,
 				String jboardRenameFilePath4, String jboardCheck, String jboardMeet, String jboardPost, String memberId,
-				String localNo) {
+				String localNo, String userIp) {
 			super();
 			this.jboardNo = jboardNo;
 			this.jboardTitle = jboardTitle;
@@ -57,6 +58,7 @@ public class Jboard implements java.io.Serializable {
 			this.jboardPost = jboardPost;
 			this.memberId = memberId;
 			this.localNo = localNo;
+			this.userIp = userIp;
 		}
 
 		public int getJboardNo() {
@@ -227,6 +229,14 @@ public class Jboard implements java.io.Serializable {
 			this.localNo = localNo;
 		}
 
+		public String getUserIp() {
+			return userIp;
+		}
+
+		public void setUserIp(String userIp) {
+			this.userIp = userIp;
+		}
+
 		@Override
 		public String toString() {
 			return "Jboard [jboardNo=" + jboardNo + ", jboardTitle=" + jboardTitle + ", jboardContent=" + jboardContent
@@ -238,8 +248,9 @@ public class Jboard implements java.io.Serializable {
 					+ ", jboardRenameFilePath3=" + jboardRenameFilePath3 + ", jboardOrignalFilePath4="
 					+ jboardOrignalFilePath4 + ", jboardRenameFilePath4=" + jboardRenameFilePath4 + ", jboardCheck="
 					+ jboardCheck + ", jboardMeet=" + jboardMeet + ", jboardPost=" + jboardPost + ", memberId="
-					+ memberId + ", localNo=" + localNo + "]";
+					+ memberId + ", localNo=" + localNo + ", userIp=" + userIp + "]";
 		}
+		
 		
 		
 		

@@ -23,7 +23,7 @@ public class JboardDao {
 
 			String query = "insert into jboard values ("
 					+ "SEQ_JBOARD_NO.nextval ,? , ? , ? ,sysdate, sysdate, 0, 0, ?, ?, ?, ?, ?, ? , ?, ?,"
-					+ "default,?,?,?,?)";
+					+ "default,?,?,?,?,default)";
 			try {
 					pstmt = conn.prepareStatement(query);
 					pstmt.setString(1,  jboard.getJboardTitle());
@@ -343,5 +343,29 @@ public class JboardDao {
 			}
 			return list;
 		}
+		
+		public int insertJboardLike(Connection conn, Jboard jboard) {
+			int result = 0;
+			
+			PreparedStatement pstmt = null;
+
+			String query = "insert into jboard_like values ("
+					+ "?,?,?";
+			try {
+					pstmt = conn.prepareStatement(query);
+					pstmt.setString(1,  jboard.getMemberId());
+					pstmt.setInt(2, jboard.getJboardNo());
+					pstmt.setString(3, jboard.getUserIp());
+					result = pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			
+			return result;
+	}
+		
+		
 		
 }
