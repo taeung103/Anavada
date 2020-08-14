@@ -139,7 +139,7 @@
                        <form name="replysubmit" method="post" action="">
                         <fieldset>
                             <div class="cmt_form">
-                            <h4 id="totalcount" class="cmt_head">댓글 : 4</h4>
+                            <h4 id="totalcount" class="cmt_head"></h4>
                                 <div class="cmt_body">
                                 <input type="hidden" id="boardno" name="boardno" value="<%= fboardNo%>">    
                                 <input type="hidden" id= "memberid" name="memberid" value="<%= loginMember.getMemberId()%>">

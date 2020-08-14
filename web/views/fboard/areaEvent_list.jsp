@@ -256,8 +256,8 @@
 									<option value="readcountDesc">조회수 높은순</option>
 									<option value="replyDesc">댓글 많은순</option>
 								</select>
-								 <input type="text" id=title onkeyup="searchFboard()" placeholder="축제명을 입력해주세요.">
-							<!-- 	<button class="top-search"><i class="xi-search"></i></button> -->
+								축제 명 : </label><input type="text" id=title onkeyup="searchFboard()" placeholder="축제명을 입력하세요">
+							 	<button class="top-search"><i class="xi-search"></i></button> 
 						</div>
 					</div>
 					<!-- 종류리스트 끝 -->
@@ -342,7 +342,6 @@
 		function moveDetailPage(boardNo, festivalEndDate) {
 			location.href = '/anavada/views/fboard/areaEvent_view.jsp?fboardno=' + boardNo + '&festivalEndDate=' + festivalEndDate ;
 		}
-				
 		</script>
 					
 					<!-- 축제 목록 table  -->
