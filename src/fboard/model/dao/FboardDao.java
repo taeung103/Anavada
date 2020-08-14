@@ -246,30 +246,11 @@ public class FboardDao {
 				while (rset.next()) {
 					Fboard fboard = new Fboard();
 					
-					//축제 시작일, 종료일 날짜 format하기
-					// String -> Date 축제 시작일, 종료일
-					Date dstartDate = null;
-					Date dendDate = null;
-					SimpleDateFormat transFormat = new SimpleDateFormat("yyyyMMdd");
-					try {
-						dstartDate = transFormat.parse(rset.getString(4));
-						dendDate = transFormat.parse(rset.getString(5));
-						
-					} catch (ParseException e) {
-						e.printStackTrace();
-					}
-					
-					// Date format하기 축제 시작일, 종료일
-					transFormat = new SimpleDateFormat("yyyy.MM.dd");
-					String startDate = transFormat.format(dstartDate);
-					String endDate = transFormat.format(dendDate);
-					
-
 					fboard.setLocalNo(rset.getString(1));
 					fboard.setFboardNo(rset.getString(2));
 					fboard.setFestivalTitle(rset.getString(3));
-					fboard.setFestivalStartDate(startDate);
-					fboard.setFestivalEndDate(endDate);
+					fboard.setFestivalStartDate(rset.getString(4));
+					fboard.setFestivalEndDate(rset.getString(5));
 					fboard.setFesivalModifiedDate(rset.getString(6));
 					fboard.setMapX(rset.getString(7));
 					fboard.setMapY(rset.getString(8));
