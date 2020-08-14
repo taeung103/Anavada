@@ -73,7 +73,7 @@
                 <tbody>
                 <%for(DBo d : list) { System.out.println(d);%>
                 <tr id="click" onclick="location.href='/anavada/dbodetail.ad?dboNo=<%= d.getDboNo()%>';" >
-                	<%-- <% if(loginMember != null && loginMember.getMemberId().equals("admin")){ %> --%>
+                	
                     <td class="number"><%= d.getDboNo() %></td>
                     <td class="title">
                         <h2><span class="declare">신고</span><%= d.getDboTitle() %></h2>
