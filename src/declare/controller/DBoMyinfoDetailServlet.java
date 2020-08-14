@@ -15,14 +15,14 @@ import declare.model.vo.DBo;
 /**
  * Servlet implementation class DBoAdminDetailServlet
  */
-@WebServlet("/dbodetail.ad")
-public class DBoAdminDetailServlet extends HttpServlet {
+@WebServlet("/dbodetail")
+public class DBoMyinfoDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DBoAdminDetailServlet() {
+    public DBoMyinfoDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +31,13 @@ public class DBoAdminDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 신고게시판 신고글 관리자용 상세보기 처리용 컨트롤러
+		// 신고게시판 신고글 마이페이지에서 상세보기 처리용 컨트롤러
         int dboNo = Integer.parseInt(request.getParameter("dboNo"));
 				DBo dbo = new DBoService().selectOne(dboNo);
 		
 		RequestDispatcher view = null;
 		if(dbo != null) {
-			view = request.getRequestDispatcher("views/declare/declare_detail_view.jsp");
+			view = request.getRequestDispatcher("views/declare/declare_myinfo_detail_view.jsp");
 			request.setAttribute("dbo", dbo);
 			view.forward(request, response);
 		}else { 

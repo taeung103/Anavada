@@ -50,7 +50,7 @@
                     <div>
                     <form action="/anavada/dbosearch?page=1" method="post" id="">
                                                유형 선택 : <select name="selected" class="ListSelect">
-                                    <option value="none" selected disabled>유형선택</option>
+                                    <option value="none" selected>유형선택</option>
                                     <option value="jboard">중고거래</option>
                                     <option value="cboard">커뮤니티</option>
                          		    </select>
