@@ -205,32 +205,6 @@ public class FboardDao {
 			return list;
 		}
 		
-		
-		// 총 축제 게시글 몇개인지 select
-		public int getListCount(Connection conn) {
-			int listCount = 0;
-			Statement stmt = null;
-			ResultSet rset = null;
-
-			String query = "select count(*) from fboard";
-
-			try {
-				stmt = conn.createStatement();
-				rset = stmt.executeQuery(query);
-
-				if (rset.next())
-					listCount = rset.getInt(1);
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				close(rset);
-				close(stmt);
-			}
-			return listCount;
-		}
-		
-		
 		// 카카오맵 축제 게시판 전체 리스트
 		public ArrayList<Fboard> selectKList(Connection conn) {
 			ArrayList<Fboard> list = new ArrayList<Fboard>();
@@ -273,6 +247,7 @@ public class FboardDao {
 			return list;
 		}
 
+		//조회수 증가
 		public int updateReadcount(Connection conn, String fboardNo) {
 			int result = 0;
 			PreparedStatement pstmt = null;
@@ -410,12 +385,6 @@ public class FboardDao {
 		}
 
 
-
-
-
-
-		
-		
 		// 축제 종료일 기준 top6
 		public ArrayList<Fboard> selectTop6(Connection conn) {
 			ArrayList<Fboard> list = new ArrayList<Fboard>();
