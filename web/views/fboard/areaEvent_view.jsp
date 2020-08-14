@@ -129,19 +129,26 @@
                         </fieldset>
                     </form> -->
                     
+                   
+                    
                        <form name="replysubmit" method="post" action="">
                         <fieldset>
                             <div class="cmt_form">
                             <h4 id="totalcount" class="cmt_head"></h4>
+                             <% if(!(loginMember == null)) { %>
                                 <div class="cmt_body">
                                 <input type="hidden" id="boardno" name="boardno" value="<%= fboardNo%>">    
-                               <input type="hidden" id= "memberid" name="memberid" value="<%= loginMember.getMemberId()%>"> 
+                                
+                                 <input type="hidden" id= "memberid" name="memberid" value="<%= loginMember.getMemberId()%>"> 
+                               
 								<textarea id="replyContent" name="replyContent" style="resize: none; width:100%; min-height:100px; max-height:100px;" placeholder="댓글을 작성해주세요"></textarea>
                                  <div class="cmt_ok"><input type="button" value="등록" onclick="ReplySubmit(${result.code})"></div>
                                	 </div>
+                               	 <% } %>
                             </div>
                         </fieldset>
                     </form>
+                    
                     
                      <script type="text/javascript">
                       $(function(){
