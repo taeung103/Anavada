@@ -222,7 +222,7 @@
  						<h4 id="totalcount">전체 150개</h4>
 						<!-- <a href="areaEvent_write.jsp" class="write_btn">글쓰기</a> -->
 						<div> 
-							<input type="checkbox" id="allList">이번년도 축제 모두 보기
+							<input type="checkbox" id="lastList">지난 축제 보기
 								지역 분류 : <select name="" id="locationSelect" class="LocationSelect">
 									<option value="0" selected="selected">서울특별시</option>
 									<option value="1">강남구</option>
@@ -257,7 +257,7 @@
 									<option value="replyDesc">댓글 많은순</option>
 								</select>
 								축제 명 : </label><input type="text" id=title onkeyup="searchFboard()" placeholder="축제명을 입력하세요">
-							 	<button class="top-search"><i class="xi-search"></i></button> 
+							 <button class="top-search"><i class="xi-search"></i></button> 
 						</div>
 					</div>
 					<!-- 종류리스트 끝 -->
@@ -277,7 +277,7 @@
 					$.ajax({
 						url : "/anavada/fblist",
 						type : "get",
-						data : { allList : $('#allList').val(), locationSelect : $("#locationSelect").val(), 
+						data : { lastList : $('#lastList').val(), locationSelect : $("#locationSelect").val(), 
 							sortSelect: $('#sortSelect').val(), title : $('#title').val()},
 						dataType : "json",
 						success : function(data){
@@ -315,12 +315,12 @@
 				$(function(){
 					
 					/* 전체보기 check 값설정 후 ajax로 메소드 이동 */
-					$('#allList').change(function(){
-			 			if($('#allList').is(":checked")) {
-			 				$('#allList').val("true");
+					$('#lastList').change(function(){
+			 			if($('#lastList').is(":checked")) {
+			 				$('#lastList').val("true");
 			 				searchFboard();
 			 			} else {
-			 				$('#allList').val("on");
+			 				$('#lastList').val("on");
 			 				searchFboard();
 			 			} 
 					});

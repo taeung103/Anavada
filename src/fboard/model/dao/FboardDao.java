@@ -326,7 +326,7 @@ public class FboardDao {
 		}
 
 		//게시판리스트
-		public ArrayList<Fboard> selectList(Connection conn, String allList, int locationSelect, String sortSelect, String title) {
+		public ArrayList<Fboard> selectList(Connection conn, String lastList, int locationSelect, String sortSelect, String title) {
 			ArrayList<Fboard> list = new ArrayList<Fboard>();
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
@@ -337,8 +337,9 @@ public class FboardDao {
 					+ "from fboard f left join location l on (f.local_no = l.local_no) ";
 
 			//지난 축제보기 여부
-			if(allList == "true" || allList.equals("true")) { 
-				query += "where substr( festival_enddate, 1, 4) = EXTRACT (year from sysdate) "; 
+			if(lastList == "true" || lastList.equals("true")) { 
+				//query += "where substr( festival_enddate, 1, 4) = EXTRACT (year from sysdate) "; 
+				query += "where festival_enddate < sysdate -1";
 			} else { 
 				query += "where festival_enddate > sysdate -1 "; 
 			} 

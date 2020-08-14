@@ -45,7 +45,7 @@ public class FboardLIstServlet extends HttpServlet {
 		System.out.println("FboardSearchServlet2");
 		
 		//지난 축제도 보기
-		String allList = (request.getParameter("allList"));
+		String lastList = (request.getParameter("lastList"));
 		
 		//지역 선택
 		int locationSelect = Integer.parseInt(request.getParameter("locationSelect"));
@@ -60,9 +60,9 @@ public class FboardLIstServlet extends HttpServlet {
 			title = null;
 		}
 		
-		System.out.println(allList + ", " +  locationSelect + ", " + sortSelect + ", " + title);
+		System.out.println(lastList + ", " +  locationSelect + ", " + sortSelect + ", " + title);
 		
-		ArrayList<Fboard> list = new FboardService().selectList(allList, locationSelect, sortSelect, title);
+		ArrayList<Fboard> list = new FboardService().selectList(lastList, locationSelect, sortSelect, title);
 		
 				System.out.println("List : " + list.size());
 
