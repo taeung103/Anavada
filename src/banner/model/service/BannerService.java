@@ -76,5 +76,23 @@ public class BannerService {
 		return banner;
 	}
 
+	public int deletecheBanner(int[] checkedNum) {
+		Connection conn = getConnection();
+		int result = bdao.deletecheBanner(conn, checkedNum);
+		if(result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public ArrayList<String> selectRfiles(int[] checkedNum) {
+		Connection conn = getConnection();
+		ArrayList<String> list = bdao.selectRfiles(conn, checkedNum);
+		close(conn);
+		return list;
+	}
+
 
 }
