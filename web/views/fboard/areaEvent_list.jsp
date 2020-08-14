@@ -151,10 +151,11 @@
 			</div>
 			<!--서브 비주얼/타이틀 끝-->
 
-			<!-- 리스트 -->
-			    <div class="areaEvent_list">
+			<!-- 전체 리스트 -->
+			  <div class="areaEvent_list">
+			  
+			    <!-- 맵 리스트 -->
                 <div class="areaEvent_map">
-                    <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.453554125798!2d126.98089706565142!3d37.56793627979763!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2eee632d73f%3A0x15cc2733ad91fd28!2zS0gg7KCV67O06rWQ7Jyh7JuQ!5e0!3m2!1sko!2skr!4v1595997675697!5m2!1sko!2skr" width="100%" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe></div> -->
                     <div id="map" style="width: 100%; height: 500px;"></div>
                     <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=53d444db7d449eb66c0229426868cf97"></script>
                     <script>
@@ -214,7 +215,7 @@
                 		<%}%>
                 		
                 	</script>
-                <!-- 카카오맵 지도 끝 -->
+                <!-- 맵 리스트 끝 -->
 			
 					
 					<!--종류 리스트-->
@@ -224,7 +225,7 @@
 						<div> 
 							<input type="checkbox" id="lastList">지난 축제 보기
 								지역 분류 : <select name="" id="locationSelect" class="LocationSelect">
-									<option value="0" selected="selected">서울특별시</option>
+									<option value="0" selected="selected">지역 선택</option>
 									<option value="1">강남구</option>
 									<option value="2">강동구</option>
 									<option value="3">강북구</option>
@@ -262,10 +263,10 @@
 					</div>
 					<!-- 종류리스트 끝 -->
 					
-				<!-- 축제 가지고 오기 -->
+				<!-- 축제 게시판 리스트  -->
 				<script type="text/javascript">
 				
-				/* 항상 축제가지고 오는 메소드 */
+				/* 항상 축제 게시판 가지고 오기 */
 				$(document).ready(function() {
 					searchFboard();
 				});	//document.ready
@@ -300,7 +301,6 @@
 										"<li>조회수 : " + json.list[i].readcount + "<span> 댓글 : " + json.list[i].replycount +  "</span></li>" +
 									"</ul></td></tr>" 
 							}	//for in
-							
 							$("#fboard-table").html(values);	
 						},
 						error : function(jqXHR, textstatus, errorthrown){
@@ -314,7 +314,7 @@
 				/* 검색 ajax로 메소드 이동 */
 				$(function(){
 					
-					/* 전체보기 check 값설정 후 ajax로 메소드 이동 */
+					/* 지난축제 check 값설정 후 ajax로 메소드 이동 */
 					$('#lastList').change(function(){
 			 			if($('#lastList').is(":checked")) {
 			 				$('#lastList').val("true");
@@ -343,6 +343,7 @@
 			location.href = '/anavada/views/fboard/areaEvent_view.jsp?fboardno=' + boardNo + '&festivalEndDate=' + festivalEndDate ;
 		}
 		</script>
+		<!-- 축제 게시판 리스트  -->
 					
 					<!-- 축제 목록 table  -->
 					<table id="fboard-table" class="cmnt_list">
@@ -351,8 +352,9 @@
 						</tbody>
 					</table>
 					<!-- 축제 목록 table 끝 -->
+					
 
-
+					<!-- 목록이 없음 표시  -->
 					<div class="list-no">
 						<p>
 							<img src="/anavada/resources/images/btnIcn/icn_big_listNo.png"
@@ -360,14 +362,9 @@
 						</p>
 						<h1>목록이 없습니다.</h1>
 					</div>
-
-<!-- 					<div class="write-btn">
-						<a href="areaEvent_write.jsp">글쓰기</a>
-					</div> -->
 					
 				</div>
-				<!-- 리스트 끝 -->
-
+				<!-- 전체 리스트 끝 -->
 
 				<!-- 페이지넘버 -->
 				<dl class="list-paging pb80">
