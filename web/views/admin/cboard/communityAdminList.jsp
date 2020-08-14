@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="cboard.model.vo.Cboard"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="cboard.model.vo.Cboard, java.util.ArrayList, java.sql.Date"%>
 <%
 	ArrayList<Cboard> clist = (ArrayList<Cboard>)request.getAttribute("list");
 	String local = String.valueOf(request.getAttribute("local"));
