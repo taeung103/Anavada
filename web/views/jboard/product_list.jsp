@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@  page 
- 	import="jboard.model.vo.Jboard , java.util.ArrayList, java.sql.Date"
- 	import="java.awt.Image,  java.awt.Image , com.sun.jimi.core.Jimi , com.sun.jimi.core.JimiException , com.sun.jimi.core.JimiUtils" 
+ 	import="jboard.model.vo.Jboard , java.util.ArrayList, java.sql.Date, java.awt.Image"
  %>
 
  <%
@@ -63,8 +62,10 @@
                 <!--종류 리스트-->
                 <div class="sort-area">  
                     <h4>전체 <%=listCount%>개</h4>
-                     <% if(loginMember != null){ %>
-                    <button onclick="showWriteForm();" class="write_btn">글쓰기</button>
+                     <% if (loginMember != null){ %>
+                    <a><button onclick="showWriteForm();" class="write_btn">글쓰기</button></a>
+                	 <% }else{ %>
+                    <a><button onclick="alert('로그인 후 이용해주세요');location.href='/anavada/views/member/login.jsp';" class="write_btn">글쓰기</button></a>
                     <%} %>
                     <div>
                         <form action="/anavada/jblist" method="post" id="sel" name="form1">
@@ -104,7 +105,7 @@
                                     <option value="lowprice"${param.listsearch eq"lowprice"?"selected" :"" }>가격낮은순</option>
                                     <option value="highlike" ${param.listsearch eq"highlike"?"selected" :"" }>좋아요순</option>
                             </select>
-                            
+                            제목 검색 :
                             <input type="text" name="titlesearch" maxlength="16" minlength="2" placeholder="검색어를 입력해주세요.">
                             <button class="top-search"><i class="xi-search"></i></button>
                             
@@ -122,24 +123,29 @@
                         <div><img src="/anavada/resources/jboardfiles/test.jpg"/></div>
                         <%}  %>
                         <h2><%= jboard.getJboardTitle()%></h2>
-                        <h3><%=jboard.getJboardPrice() %><span> 원 <%=jboard.getLocalNo() %></span></h3>
+                        <h3><%=jboard.getJboardPrice() %><span> 원 </span></h3>
                        
                         <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%=jboard.getJboardLike() %></span></i>
-                        <span><%=localArr[Integer.parseInt(jboard.getLocalNo())]%></span>
+                        <span></span>
                         
                         </p>
                     </li>
                     <%} %>
-                  
-                </ul>
-                <div class="list-no">
-
-                </div>
-                <div class="write-btn">
+                    <%if (currentPage + 1 > maxPage) {%>
+					<p><img src="/anavada/resources/images/btnIcn/icn_big_listNo.png" alt="" title="" /></p>
+					<h1>목록이 없습니다.</h1>
+					<%}%>
+				</div>
                 <% if (loginMember != null){ %>
-                    <a><button onclick="showWriteForm();" class="write_btn">글쓰기</button></a>
+                <div class="write-btn">
+                    <a href="views/jboard/product_write.jsp" class="write_btn">글쓰기</a>
+                  </div>
+                 <% }else{ %>
+                  <div class="write-btn">
+                    <a onclick="alert('로그인 후 이용해주세요');location.href='/anavada/views/member/login.jsp';" class="write_btn">글쓰기</a>
+                    </div>
                     <%} %>
-                </div>
+        
 
             </div>
             <!--  페이징 처리 -->

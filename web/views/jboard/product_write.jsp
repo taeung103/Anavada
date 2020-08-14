@@ -9,7 +9,7 @@
 <html>
 <head>
     <%@ include file="../include/head.jsp" %>
-
+    
 
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
@@ -49,15 +49,15 @@
                             <tr>
                                 <td>거래방법</td>
                                 <td>
-                                    <label><input type="checkbox" name="meet" id="ck1" title="직거래" value="Y" > 직거래</label>
-                                    <label><input type="checkbox" name="post" id="ck2" title="우편거래" value="Y"> 우편거래</label>
+                                    <label><input type="checkbox" name="meet" id="ck1" title="직거래" value="Y" class="no[]" > 직거래</label>
+                                    <label><input type="checkbox" name="post" id="ck2" title="우편거래" value="Y" class="no[]" > 우편거래</label>
                                 </td>
                             </tr>
                             <tr>
                                 <td>지역선택</td>
                                 <td>
-                                    <select name="location" class="LocationSelect">
-                                    <option value="0"  ${param.local eq"0"?"selected" :"" }>지역선택</option>
+                                    <select name="local" class="LocationSelect" required="required">
+                                    <option value=""  >지역선택</option>
                                     <option value="1" ${param.local eq"1"?"selected" :"" }>강남구</option>
                                     <option value="2" ${param.local eq"2"?"selected" :"" }>강동구</option>
                                     <option value="3" ${param.local eq"3"?"selected" :"" }>강북구</option>
@@ -109,14 +109,13 @@
                                 <td>상품설명</td>
                                 <td>
 										<textarea name="content" class="form-control"
-										style="resize: none; width: 100%; min-height: 600px; max-height: 600px;"
-										onfocus="this.value='';">
+										style="resize: none; width: 100%; min-height: 600px; max-height: 600px;">
 상품 설명을 상세하게 적어주세요.
 설명되지 않은 하자나 문제 발생시 책임은 판매자에게 있습니다.
+※ 사용자 정보 (이메일, 전화번호)
 ※ 구매정보 (구매일시, 구매시 가격)
 ※ 상품정보 (사이즈, 색상, 브랜드 등)
-※상품 사용감 (스크래치, 고장 수리 여부등)
-									</textarea>
+※상품 사용감 (스크래치, 고장 수리 여부등)</textarea>
 								</td>
                             </tr>
                         </tbody>

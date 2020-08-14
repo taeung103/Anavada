@@ -4,7 +4,7 @@
  <%@  page 
  	import="jboard.model.vo.Jboard , java.util.ArrayList, java.sql.Date, jboard.model.vo.Comment, java.text.SimpleDateFormat" %>
 <%
-	ArrayList<Comment> list = (ArrayList<Comment>) request.getAttribute("list");
+	ArrayList<Comment> clist = (ArrayList<Comment>) request.getAttribute("list");
 	//SimpleDateFormat lastUpdate =new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
 	Jboard jboard = (Jboard)(request.getAttribute("jboardno"));
 	String post = String.valueOf(request.getAttribute("post"));
@@ -20,7 +20,7 @@
 <html>
 <head>
 
-    <%@ include file="../include/head.jsp" %>
+<%@ include file="../include/admin_head.jsp"%>
     
         <script type="text/javascript">
         $(function (){
@@ -105,27 +105,23 @@ font{
 </script>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
-    <div id="wrap">
-        <%@ include file="../include/header.jsp" %>
+	<div id="wrap">
+		<%@ include file="../include/admin_header.jsp"%>
 
-        <!-- 컨텐츠 -->
-        <div id="content">
+		<div id="admin_container">
+		
+		
 
-            <!--서브 비주얼/타이틀-->
-            <div class="visual-sub-vagas product-vagas">
-                <div class="vsv-copy sub-title">
-                   <div>
-                        <ul class="navi">
-                            <li><a href="#none">홈</a></li>
-                            <li class="glyphicon glyphicon-menu-right"><a href="#none">중고거래</a></li>
-                        </ul>
-                    </div>
-                    <h2><span>중고거래</span></h2>
-                    <h3>우리의 이웃과 중고거래를 통해 변화되는 세상</h3>
-                </div>
-            </div>
-            <!--서브 비주얼/타이틀 끝-->
-
+			<!-- 상단 타이틀 -->
+			<div class="admin_title">
+				<div class="admin_path">
+					<h3>중고장터</h3>
+					<h2>| 리스트</h2>
+				</div>
+			</div>
+			<!-- //상단 타이틀 -->
+	<!-- 본문내용 -->
+			<div class="list-area">
 
             <!-- 뷰 -->
             <div class="product_view_area">
@@ -158,6 +154,7 @@ font{
                             <div class="swiper-button-next swiper-button-white"></div>
                             <div class="swiper-button-prev swiper-button-white"></div>
                         </div>
+                        
                         <div class="swiper-container gallery-thumbs">
                             <ol class="swiper-wrapper">
                              <%if (jboard.getJboardRenameFilePath1() !=null){ %>
@@ -243,8 +240,6 @@ font{
                 
                 <div class="cmt_wrap">
                   <form action="/anavada/jbcinsert.ss" method="post">
-                                
-                     
                         <fieldset>
                             <div class="cmt_form">
                                 <h4 class="cmt_head">전체 댓글 수 :<%=commentListCount %></h4>
@@ -256,14 +251,17 @@ font{
                                     <div class="cmt_ok">
                                     <input type="submit" value="등록"></div>
                                 </div>
-                            </div>
-                        </fieldset>
-                    </form>
-                    <%} %>
+                           </div>
+                              </fieldset>
+                                </form>
+ <%} %>
+                           
+                     
+                  
+                    <!--  -->
                     
-                    
-                    <% for (Comment comment : list ){ %>
-                    <% if (list.size()>0 && jboard.getJboardNo() == comment.getJboardNo()){ %>
+                    <% for (Comment comment : clist ){ %>
+                    <% if (clist.size()>0 && jboard.getJboardNo() == comment.getJboardNo()){ %>
                       <ul class="cmt_con">
                         <li> 
                             <div>
@@ -283,7 +281,7 @@ font{
 										<fieldset>
 											<div class="cmt_form">
 												<div class="cmt_body">
-													<textarea name="content" style="resize: none; width: 100%; min-height: 100px; max-height: 100px;" ><%= comment.getCommentContent() %></textarea>
+													<textarea name="content" style="resize: none; width: 100%; min-height: 100px; max-height: 100px;" onfocus="this.value='';"><%= comment.getCommentContent() %></textarea>
 													<div class="cmt_ok">
 													<input type="submit" value="수정">
 													</div>
@@ -309,17 +307,18 @@ font{
                                 </form>
                             </div>
                         </li>
-                      
+
                     </ul>
                   <%}} %>
                 </div>
             </div>
             <!-- 상세 끝 -->
-
-        </div>
         <!-- 컨텐츠 끝 -->
 
-        <%@ include file="../include/footer.jsp" %>
-    </div>
+			
+		</div>
+		<%@ include file="../include/admin_footer.jsp"%>
+	</div>
+	</div>
 </body>
 </html>

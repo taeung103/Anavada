@@ -1,4 +1,4 @@
-package jboard.controller;
+package admin.jboard;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,16 +14,16 @@ import jboard.model.service.JboardService;
 import jboard.model.vo.Jboard;
 
 /**
- * Servlet implementation class JboardListViewServlet
+ * Servlet implementation class AdminJboardListServlet
  */
-@WebServlet("/jblist")
-public class JboardListViewServlet extends HttpServlet {
-	private static final long serialVersionUID = 2L;
+@WebServlet("/adjlistview.ad")
+public class AdminJboardListServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JboardListViewServlet() {
+    public AdminJboardListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,12 +32,14 @@ public class JboardListViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+
 		String titleSearch = request.getParameter("titlesearch");
 		String listSearch = request.getParameter("listsearch");
 		
 		String local = request.getParameter("local");
+		System.out.println("local : " + local);
+		System.out.println("titleSearch : " + titleSearch);
+		System.out.println("listSearch : " + listSearch);
 		if (listSearch== null|| listSearch.equals("null")) {
 			listSearch = null;
 		}
@@ -59,7 +61,7 @@ public class JboardListViewServlet extends HttpServlet {
 		
 		int listCount = jbservice.getListCount(local, titleSearch);
 		
-		ArrayList<Jboard> list = jbservice.selectList(currentPage, limit, local, listSearch, titleSearch);
+		ArrayList<Jboard> jlist = jbservice.selectList(currentPage, limit, local, listSearch, titleSearch);
 		
 		
 				
@@ -70,9 +72,9 @@ public class JboardListViewServlet extends HttpServlet {
 				endPage = maxPage;
 		}
 		RequestDispatcher view = null;
-		if (list.size() > 0 ) {
-				view = request.getRequestDispatcher("views/jboard/product_list.jsp");
-				request.setAttribute("list", list);
+		if (jlist.size() > 0 ) {
+				view = request.getRequestDispatcher("views/admin/jboard/jboardAdminList.jsp");
+				request.setAttribute("jlist", jlist);
 				request.setAttribute("currentPage", currentPage);
 				request.setAttribute("maxPage", maxPage);
 				request.setAttribute("startPage", startPage);
@@ -91,10 +93,6 @@ public class JboardListViewServlet extends HttpServlet {
 		}
 	
 }
-
-
-
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
