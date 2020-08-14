@@ -216,6 +216,65 @@ public class BannerDao {
 		}
 		return banner;
 	}
+
+	public int deletecheBanner(Connection conn, int[] checkedNum) {
+		int result = 0;
+		Statement stmt = null;
+		
+		String query = null;
+		if(checkedNum.length == 1)
+			query = "delete from banner where banner_no = " + checkedNum[0];
+		else {
+			query = "delete from banner where banner_no in (";
+			for(int i=0; i<checkedNum.length-1; i++) {
+				query += checkedNum[i]+", ";
+			}
+			query += checkedNum[checkedNum.length-1]+")";
+		}
+		try {
+			stmt = conn.createStatement();			
+			result = stmt.executeUpdate(query);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+		}
+		return result;
+	}
+
+	public ArrayList<String> selectRfiles(Connection conn, int[] checkedNum) {
+		ArrayList<String> list = new ArrayList<>();
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String query = "";
+		
+		if(checkedNum.length == 1) {
+			query = "select no_rename from banner where banner_no = " + checkedNum[0];
+		}else {
+			query = "select no_rename from banner where banner_no in (";
+			for(int i=0; i<checkedNum.length-1; i++) {
+				query += checkedNum[i] + ", ";
+			}
+			query += checkedNum[checkedNum.length-1] + ")";
+		}
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			while(rset.next()) {
+				String rfile = rset.getString("banner_rename");
+				list.add(rfile);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+		}
+		
+		return list;
+	}
 		
 	
 	

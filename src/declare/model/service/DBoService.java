@@ -88,4 +88,18 @@ public class DBoService {
 		return list;
 	}
 
+	public int getListCount(String user) {
+		Connection conn = getConnection();
+		int listCount = dbodao.getListCount(conn, user);
+		close(conn);
+		return listCount;
+	}
+
+	public ArrayList<DBo> selectAllUser(int currentPage, int limit, String user) {
+		Connection conn = getConnection();
+		ArrayList<DBo> list = dbodao.selectAllUser(conn, currentPage, limit, user);
+		close(conn);
+		return list;
+	}
+
 }
