@@ -1,6 +1,8 @@
 package fboardreply.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,9 +42,17 @@ public class FboardReplyDeleteServlet extends HttpServlet {
 		
 		int fboardReplyNo = Integer.parseInt(request.getParameter("fboardReplyno"));
 		
-		int result = new FboardReplyService().deleteFboardReply(fboardReplyNo);
+		String memberId =request.getParameter("memberid");
 		
-		System.out.println("삭제 : " + result);
+		int result = new FboardReplyService().deleteFboardReply(fboardReplyNo, memberId);
+		
+		System.out.println("전송 온 값 : " + fboardReplyNo + ", " + memberId + "댓글 삭제 결과 : " + result);
+		
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(Integer.toString(result));	//result = 0 삭제 X, 1 = 삭제 O
+		out.flush();
+		out.close();
 		
 	}
 

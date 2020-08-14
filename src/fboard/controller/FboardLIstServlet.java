@@ -45,7 +45,7 @@ public class FboardLIstServlet extends HttpServlet {
 		System.out.println("FboardSearchServlet2");
 		
 		//지난 축제도 보기
-		String allList = (request.getParameter("allList"));
+		String lastList = (request.getParameter("lastList"));
 		
 		//지역 선택
 		int locationSelect = Integer.parseInt(request.getParameter("locationSelect"));
@@ -60,9 +60,9 @@ public class FboardLIstServlet extends HttpServlet {
 			title = null;
 		}
 		
-		System.out.println(allList + ", " +  locationSelect + ", " + sortSelect + ", " + title);
+		System.out.println(lastList + ", " +  locationSelect + ", " + sortSelect + ", " + title);
 		
-		ArrayList<Fboard> list = new FboardService().selectList(allList, locationSelect, sortSelect, title);
+		ArrayList<Fboard> list = new FboardService().selectList(lastList, locationSelect, sortSelect, title);
 		
 				System.out.println("List : " + list.size());
 
@@ -73,29 +73,11 @@ public class FboardLIstServlet extends HttpServlet {
 				for(Fboard fboard : list) {
 					JSONObject job = new JSONObject();
 					
-					//축제 시작일, 종료일 날짜 format하기
-					// String -> Date 축제 시작일, 종료일
-					Date dstartDate = null;
-					Date dendDate = null;
-					SimpleDateFormat transFormat = new SimpleDateFormat("yyyyMMdd");
-					try {
-						dstartDate = transFormat.parse(fboard.getFestivalStartDate());
-						dendDate = transFormat.parse(fboard.getFestivalEndDate());
-						
-					} catch (ParseException e) {
-						e.printStackTrace();
-					}
-					
-					// Date format하기 축제 시작일, 종료일
-					transFormat = new SimpleDateFormat("yyyy.MM.dd");
-					String startDate = transFormat.format(dstartDate);
-					String endDate = transFormat.format(dendDate);
-					
 					job.put("fboardNo", fboard.getFboardNo());
 					job.put("festivalTitle", URLEncoder.encode(fboard.getFestivalTitle(), "utf-8"));
 					job.put("localNo", fboard.getLocalNo());
-					job.put("festivalStartDate", startDate);
-					job.put("festivalEndDate", endDate);
+					job.put("festivalStartDate", fboard.getFestivalStartDate());
+					job.put("festivalEndDate", fboard.getFestivalEndDate());
 					job.put("fesivalModifiedDate", fboard.getFesivalModifiedDate());
 					job.put("mapX", fboard.getMapX());
 					job.put("mapY", fboard.getMapY());

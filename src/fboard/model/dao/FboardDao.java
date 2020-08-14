@@ -205,32 +205,6 @@ public class FboardDao {
 			return list;
 		}
 		
-		
-		// 총 축제 게시글 몇개인지 select
-		public int getListCount(Connection conn) {
-			int listCount = 0;
-			Statement stmt = null;
-			ResultSet rset = null;
-
-			String query = "select count(*) from fboard";
-
-			try {
-				stmt = conn.createStatement();
-				rset = stmt.executeQuery(query);
-
-				if (rset.next())
-					listCount = rset.getInt(1);
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				close(rset);
-				close(stmt);
-			}
-			return listCount;
-		}
-		
-		
 		// 카카오맵 축제 게시판 전체 리스트
 		public ArrayList<Fboard> selectKList(Connection conn) {
 			ArrayList<Fboard> list = new ArrayList<Fboard>();
@@ -246,30 +220,11 @@ public class FboardDao {
 				while (rset.next()) {
 					Fboard fboard = new Fboard();
 					
-					//축제 시작일, 종료일 날짜 format하기
-					// String -> Date 축제 시작일, 종료일
-					Date dstartDate = null;
-					Date dendDate = null;
-					SimpleDateFormat transFormat = new SimpleDateFormat("yyyyMMdd");
-					try {
-						dstartDate = transFormat.parse(rset.getString(4));
-						dendDate = transFormat.parse(rset.getString(5));
-						
-					} catch (ParseException e) {
-						e.printStackTrace();
-					}
-					
-					// Date format하기 축제 시작일, 종료일
-					transFormat = new SimpleDateFormat("yyyy.MM.dd");
-					String startDate = transFormat.format(dstartDate);
-					String endDate = transFormat.format(dendDate);
-					
-
 					fboard.setLocalNo(rset.getString(1));
 					fboard.setFboardNo(rset.getString(2));
 					fboard.setFestivalTitle(rset.getString(3));
-					fboard.setFestivalStartDate(startDate);
-					fboard.setFestivalEndDate(endDate);
+					fboard.setFestivalStartDate(rset.getString(4));
+					fboard.setFestivalEndDate(rset.getString(5));
 					fboard.setFesivalModifiedDate(rset.getString(6));
 					fboard.setMapX(rset.getString(7));
 					fboard.setMapY(rset.getString(8));
@@ -292,6 +247,7 @@ public class FboardDao {
 			return list;
 		}
 
+		//조회수 증가
 		public int updateReadcount(Connection conn, String fboardNo) {
 			int result = 0;
 			PreparedStatement pstmt = null;
@@ -345,7 +301,7 @@ public class FboardDao {
 		}
 
 		//게시판리스트
-		public ArrayList<Fboard> selectList(Connection conn, String allList, int locationSelect, String sortSelect, String title) {
+		public ArrayList<Fboard> selectList(Connection conn, String lastList, int locationSelect, String sortSelect, String title) {
 			ArrayList<Fboard> list = new ArrayList<Fboard>();
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
@@ -356,8 +312,9 @@ public class FboardDao {
 					+ "from fboard f left join location l on (f.local_no = l.local_no) ";
 
 			//지난 축제보기 여부
-			if(allList == "true" || allList.equals("true")) { 
-				query += "where substr( festival_enddate, 1, 4) = EXTRACT (year from sysdate) "; 
+			if(lastList == "true" || lastList.equals("true")) { 
+				//query += "where substr( festival_enddate, 1, 4) = EXTRACT (year from sysdate) "; 
+				query += "where festival_enddate < sysdate -1";
 			} else { 
 				query += "where festival_enddate > sysdate -1 "; 
 			} 
@@ -428,12 +385,6 @@ public class FboardDao {
 		}
 
 
-
-
-
-
-		
-		
 		// 축제 종료일 기준 top6
 		public ArrayList<Fboard> selectTop6(Connection conn) {
 			ArrayList<Fboard> list = new ArrayList<Fboard>();

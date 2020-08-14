@@ -32,17 +32,12 @@ public class JboardListViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		//뷰로 내보내는 값에 한글이 있다면 인코딩 처리함
-		response.setContentType("text/html; charset=UTF-8");
+		
 		
 		String titleSearch = request.getParameter("titlesearch");
 		String listSearch = request.getParameter("listsearch");
 		
 		String local = request.getParameter("local");
-		//System.out.println("local : " + local);
-		//System.out.println("titleSearch : " + titleSearch);
-		//System.out.println("listSearch : " + listSearch);
 		if (listSearch== null|| listSearch.equals("null")) {
 			listSearch = null;
 		}

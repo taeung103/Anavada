@@ -67,7 +67,7 @@ public class InquiryUpdateInquiryServlet extends HttpServlet {
 		inquiry.setIqOriginal3(mrequest.getParameter("ofile3"));
 		inquiry.setIqRename3(mrequest.getParameter("rfile3"));
 		
-		
+		System.out.println(inquiry);
 		Enumeration em = mrequest.getFileNames();
 		
 		int bonusNumber = 1;

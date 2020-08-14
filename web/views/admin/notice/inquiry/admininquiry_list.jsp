@@ -29,7 +29,7 @@
             <!-- 상단 타이틀 -->
             <div class="admin_title">
                 <div class="admin_path">
-                    <h3>공지사항</h3>
+                    <h3>문의하기</h3>
                     <h2>| 리스트</h2>
                 </div>
             </div>

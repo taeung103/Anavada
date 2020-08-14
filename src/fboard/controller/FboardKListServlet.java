@@ -44,7 +44,12 @@ public class FboardKListServlet extends HttpServlet {
 			view = request.getRequestDispatcher("views/fboard/areaEvent_list.jsp");
 			request.setAttribute("list", list);
 			view.forward(request, response);
-		}
+		} else { 
+	         view = request.getRequestDispatcher("views/common/error.jsp");
+	         request.setAttribute("message", "축제 정보를 가지고 올 수 없습니다.");
+	         view.forward(request, response);
+	      }
+
 		
 		System.out.println(list);
 	}

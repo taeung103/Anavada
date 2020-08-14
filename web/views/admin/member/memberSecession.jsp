@@ -30,10 +30,11 @@
             <div class="list-area">
 				<!-- 검색영역 -->
                 <div class="sort-area">  
-                    <h4>전체 회원 <%= slistCount %>명</h4>
+                    <h4>전체 탈퇴회원 <%= slistCount %>명</h4>
                     <div>
-                        <form method="get" id="">
-                           	 목록 분류 : <select action="/anavada/msearch.ad" name="search" class="ListSelect">
+                        <form action="/anavada/msearch.ad" method="get" id="">
+                        	<input type="hidden" value="Y" name="secessionOK">
+                           	 목록 분류 : <select name="search" class="ListSelect">
                                     <!--option value="분류 선택" selected="selected">분류 선택</option-->
                                     <option value="userId" elected="selected">아이디</option>
                                     <option value="userName">이름</option>
@@ -102,11 +103,11 @@
                    	<% if(currentPage <= 1){ %>
                     	<a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
                    	<% } else { %>
-                   		<a href="/anavada/leavelist.ad?page=<%= startPage %>"><i class="glyphicon glyphicon-menu-left"></i></a>
+                   		<a href="/anavada/mlist.ad?secessionOK=Y&page=<%= startPage %>"><i class="glyphicon glyphicon-menu-left"></i></a>
                     <% } %>
                     
                    	<% if(1 < currentPage){ %>
-                   		<a href="/anavada/leavelist.ad?page=<%= currentPage - 1 %>"><i class="glyphicon glyphicon-menu-left"></i></a>
+                   		<a href="/anavada/mlist.ad?secessionOK=Y&page=<%= currentPage - 1 %>"><i class="glyphicon glyphicon-menu-left"></i></a>
                     	<% } else { %>
                    		<a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
                    	<% } %>
@@ -115,19 +116,19 @@
                     	<% if(currentPage == p){ %>
                         <a href="#none" class="active"><%= p %></a>
                    	<% } else { %>
-                        <a href="/anavada/leavelist.ad?page=<%= p %>"><%= p %></a>
+                        <a href="/anavada/mlist.ad?secessionOK=Y&page=<%= p %>"><%= p %></a>
                     	<% } %>
                     <% } %>
                     
-					<% if(currentPage < maxPage){ %>
-                        <a href="/anavada/leavelist.ad?page=<%= currentPage + 1 %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+					<% if(currentPage <= maxPage){ %>
+                        <a href="/anavada/mlist.ad?secessionOK=Y&page=<%= currentPage + 1 %>"><i class="glyphicon glyphicon-menu-right"></i></a>
 					<% } else { %>
                         <a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
 					<% } %>
-					<% if(currentPage >= maxPage){ %>
+					<% if(currentPage > maxPage){ %>
                         <a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
 					<% } else { %>
-                        <a href="/anavada/leavelist.ad?page=<%= maxPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+                        <a href="/anavada/mlist.ad?secessionOK=Y&page=<%= endPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
 					<% } %>					
                     </dd>
                 </dl>

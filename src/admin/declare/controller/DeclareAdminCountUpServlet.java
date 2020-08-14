@@ -54,8 +54,12 @@ public class DeclareAdminCountUpServlet extends HttpServlet {
 		 * request.setAttribute("message", "카운트 값 가져오기 실패"); view.forward(request,
 		 * response); }
 		 */
+		 ArrayList<Declare> list = new DeclareService().selectAll();
+		 System.out.println(list);
+		 
+		 
 		 PrintWriter pw = response.getWriter();
-		 pw.println(1);
+		 pw.println("Count Up");
 		
 	}
 

@@ -32,9 +32,9 @@
                 <ul>
                     <li class="active"><a href="mypage.ss">정보수정</a></li>
                     <li><a href="MyProduct.jsp">중고거래조회</a></li>
-                    <li><a href="MyCmnt.jsp">커뮤니티조회</a></li>
+                    <li><a href="/anavada/mycmnt?memberID=<%=loginMember.getMemberId()%>">커뮤니티조회</a></li>
                     <li><a href="MyInquiry.jsp">문의하기조회</a></li>
-                    <li><a href="MyDeclare.jsp">신고하기조회</a></li>
+                    <li><a href="/anavada/dbomylist.ss?member=<%= loginMember.getMemberId()%>">신고하기조회</a></li>
                 </ul>
             </div>
             <!--서브 카테고리 끝-->

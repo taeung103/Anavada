@@ -20,7 +20,7 @@ public class DeclareDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		
-		String query = "select * from declare_admin order by notice desc";
+		String query = "select * from declare_admin order by declare_no desc";
 		
 		try {
 			stmt = conn.createStatement();

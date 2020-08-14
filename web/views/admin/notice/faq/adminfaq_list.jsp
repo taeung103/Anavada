@@ -60,13 +60,14 @@ function deleteAction(){
             <!-- 상단 타이틀 -->
             <div class="admin_title">
                 <div class="admin_path">
-                    <h3>공지사항</h3>
+                    <h3>FAQ</h3>
                     <h2>| 리스트</h2>
                 </div>
             </div>
             <!-- //상단 타이틀 -->
 			<br><br>
 			<div align="center" style="position:relative; left:4.5cm;">
+			<button onclick="javascript:location.href='/anavada/aflist.ss'">전체</button>
 			<button onclick="javascript:location.href='/anavada/afsearch?selected=cate&keyword=1'">회원가입</button>
 			<button onclick="javascript:location.href='/anavada/afsearch?selected=cate&keyword=2'">중고거래</button>
 			<button onclick="javascript:location.href='/anavada/afsearch?selected=cate&keyword=3'">커뮤니티</button>

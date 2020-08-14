@@ -138,7 +138,7 @@ function datasend(dno){
 						<table>
 							<tbody>
 								<tr>
-								    <th> <input type="checkbox" id="all">전체</th>
+								    <th> <!-- <input type="checkbox" id="all"> --></th>
 									<th>번호</th>
 									<th>신고회원</th>
 									<th>신고횟수</th>
@@ -150,7 +150,7 @@ function datasend(dno){
 											<td type="number" id="dno"><%= d.getDeclareNo() %></td>
 											<td><%= d.getDeclareId() %></td>
 											<td><span  id="dcount<%= d.getDeclareNo() %>"><%= d.getDeclareCount() %></span> &nbsp; &nbsp; 
-												<input type="button" value="신고" onclick="datasend(<%= d.getDeclareNo() %>)" ></td>
+												<input type="button" value="UP" onclick="datasend(<%= d.getDeclareNo() %>)" ></td>
 										    <td><% if(d.getDeclareOk().equals("Y")){ %> 
 												</i>신고당함</span> &nbsp; 
 												<% }else{// 배너가 보이게 하려면%>
@@ -165,10 +165,10 @@ function datasend(dno){
 						<!-- <div class="list-no">
 							<a href="/anavada/dlist.ad">목록</a>
 						</div> -->
-						<!-- 버튼 -->
-						<!-- <input type="checkBox" name="checkAll" onclick="checkAll();" class="checkBox"> 전체 선택<br> -->
-                	<div class="btn_wrap">
-                   	 <a onclick="deleteAction();" class="btn-left btn_gray">선택삭제</a>
+				<!-- 버튼 -->
+					<div class="btn_wrap">
+						<input type="checkbox" id="all" class="btn-left btn_gray"> 전체 선택
+                	    <a onclick="deleteAction();" class="btn-left btn_gray">선택삭제</a>
               		</div>
                 <!-- //버튼 -->
 

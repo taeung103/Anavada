@@ -362,19 +362,20 @@ public class MemberDao {
 		return list;
 	}
 
-	public int leaveMember(Connection conn, Member member, String memberId) {
+	public int leaveMember(Connection conn, String memberId) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
 		String query = "update member set secession_ok = 'Y', secession_date = sysdate where member_id = ?";
 		
 		try {
+			Member member = new Member();
 			pstmt = conn.prepareStatement(query);
-			pstmt.setDate(1, member.getSecessionDate());
-			pstmt.setString(2, member.getSecessionOK());
-			pstmt.setString(3, member.getMemberId());
+			pstmt.setString(1, memberId);
 			
 			result = pstmt.executeUpdate();
+			System.out.println("member : " + member);
+			System.out.println("pstmt : " + pstmt);
 
 			System.out.println("result : " + result);
 		} catch (Exception e) {

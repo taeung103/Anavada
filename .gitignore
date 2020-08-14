@@ -6,4 +6,7 @@
 /jspwork/*
 web/resources/cboardfiles/
 web/WEB-INF/jspwork/
+<<<<<<< HEAD
 web/resources/jboardfiles/
+=======
+>>>>>>> 43ca939ad14d221f8b8d4c6c19748bbe723363e0

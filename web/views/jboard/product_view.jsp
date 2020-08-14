@@ -283,7 +283,7 @@ font{
 										<fieldset>
 											<div class="cmt_form">
 												<div class="cmt_body">
-													<textarea name="content" style="resize: none; width: 100%; min-height: 100px; max-height: 100px;" onfocus="this.value='';"><%= comment.getCommentContent() %></textarea>
+													<textarea name="content" style="resize: none; width: 100%; min-height: 100px; max-height: 100px;" ><%= comment.getCommentContent() %></textarea>
 													<div class="cmt_ok">
 													<input type="submit" value="수정">
 													</div>
@@ -309,9 +309,9 @@ font{
                                 </form>
                             </div>
                         </li>
-                      <%}} %>
+                      
                     </ul>
-                    <button class="cmt_in">댓글 더보기 <i class="glyphicon glyphicon-menu-right"></i></button>
+                  <%}} %>
                 </div>
             </div>
             <!-- 상세 끝 -->

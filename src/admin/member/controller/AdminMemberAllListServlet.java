@@ -52,9 +52,9 @@ public class AdminMemberAllListServlet extends HttpServlet {
 		int startPage = (((int)((double)currentPage / limit + 0.9)) -1) * limit + 1;
 		int endPage = startPage + limit - 1;
 		
-		if(maxPage < endPage) {
+		if(maxPage < endPage && secessionOK.equals("N")) {
 			endPage = maxPage;
-		} else if(smaxPage < endPage) {
+		} else if(smaxPage < endPage && secessionOK.equals("Y")) {
 			endPage = smaxPage;
 		} else {
 			

@@ -47,7 +47,7 @@ public class NoticeDetailServlet extends HttpServlet {
 		NoticeService nservice = new NoticeService();
 		
 		nservice.addReadCount(no);
-		
+		int listCount = nservice.getListCount();
 		Notice notice = nservice.selectOne(no);
 		
 		RequestDispatcher view = null;
@@ -57,6 +57,7 @@ public class NoticeDetailServlet extends HttpServlet {
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("selected", selected);
 			request.setAttribute("keyword", keyword);
+			request.setAttribute("totalList", listCount);
 			view.forward(request, response);
 		}
 	}

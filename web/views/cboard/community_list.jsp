@@ -142,35 +142,34 @@
 					</tbody>
 				</table>
 
-				<div class="list-no">
 					<%
 						if (currentPage + 1 > maxPage) {
 					%>
+				<div class="list-no">
 					<p>
 						<img src="/anavada/resources/images/btnIcn/icn_big_listNo.png" alt="" title="" />
 					</p>
 					<h1>목록이 없습니다.</h1>
+				</div>
 					<%
 						}
 					%>
-				</div>
 
-				<div class="write-btn">
 					<%
 						if (loginMember != null) {
 					%>
+				<div class="write-btn">
 					<a href="views/cboard/community_write.jsp">글쓰기</a>
+				</div>
 					<%
 						}
 					%>
 				</div>
 
-			</div>
 
 
 			<!-- 리스트 끝 -->
 
-			""
 
 			<!-- 페이지넘버 -->
 			<dl class="list-paging pb80">

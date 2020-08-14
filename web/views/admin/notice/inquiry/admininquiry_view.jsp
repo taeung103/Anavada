@@ -15,13 +15,6 @@
 <html>
 <head>
     <%@ include file="../../../include/head.jsp" %> 
-    
-    <script type="text/javascript">
-    
-    
-    </script>
-    
-    
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
@@ -61,7 +54,7 @@
                     <% } %>
                 </ul>
 
-                <div class="view-ctn"><%= inquiry.getIqContent() %></div>
+                <div class="view-ctn"><%= inquiry.getIqContent().replace("\r\n", "<br>") %></div>
 				
 				<p class="warning_text" align="right" style="color:red;">
                     *삭제한 게시글은 복구가 불가능 하오니 신중하게 선택하시기 바랍니다.
@@ -88,7 +81,7 @@
 <!-- *********************************************************************************** -->                
                   <div class="cmt_wrap">
                 <% if(answer == null) { %>
-                    <form action="" method="post">
+                    <form action="aainsert.ss" method="post">
                     <input type="hidden" name="id" value="<%= inquiry.getIqId() %>">
                     <input type="hidden" name="no" value="<%= inquiry.getIqNo() %>">
                         <fieldset>
@@ -108,7 +101,7 @@
                             <div>
                                 <h4 style="font-size:15pt"> ● 관리자 답변입니다.</h4><span><%= answer.getAnDate() %></span>
                             </div><br>
-                            <p style="font-size:12pt"> &nbsp; &nbsp; &nbsp;<%= answer.getAnContent() %></p>
+                            <p style="font-size:12pt"><%= answer.getAnContent().replace("\r\n", "<br>") %></p>
                         </li>
                         
                     

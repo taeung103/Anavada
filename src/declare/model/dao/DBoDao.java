@@ -341,6 +341,74 @@ public class DBoDao {
 		}
 		return listCount;
 	}
+
+	public int getListCount(Connection conn, String user) {
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select count(*) from declare_board where member_id = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, user);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()){
+				listCount = rset.getInt(1);
+			}
+			
+		} catch (Exception e) {
+				e.printStackTrace();	
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
+
+	public ArrayList<DBo> selectAllUser(Connection conn, int currentPage, int limit, String user) {
+		ArrayList<DBo> list = new ArrayList<DBo>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query ="select * from (select rank() over(order by declare_no desc) rnum, declare_no, member_id, declare_title, declare_date, declare_type, "+
+				"declare_content, declare_original, declare_rename, declare_url, declare_id, declareche " + 
+				" from  declare_board) where member_id = ? and rnum >= ? and rnum <= ? ";
+
+		int startRow = (currentPage -1) * limit + 1;
+		int endRow = startRow + limit -1;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, user);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				DBo dbo = new DBo();
+				dbo.setDboNo(rset.getInt("declare_no"));
+				dbo.setDboMid(rset.getString("member_id"));
+				dbo.setDboTitle(rset.getString("declare_title"));
+				dbo.setDboDate(rset.getDate("declare_date"));
+				dbo.setDboType(rset.getString("declare_type"));
+				dbo.setDboContent(rset.getString("declare_content"));
+				dbo.setDboOriginal(rset.getString("declare_original"));
+				dbo.setDboRename(rset.getString("declare_rename"));
+				dbo.setDboUrl(rset.getString("declare_url"));
+				dbo.setDboBId(rset.getString("declare_id"));
+				dbo.setDboChe(rset.getString("declareche"));
+
+				list.add(dbo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 	
 
 }

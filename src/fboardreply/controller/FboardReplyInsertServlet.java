@@ -50,11 +50,6 @@ public class FboardReplyInsertServlet extends HttpServlet {
 		String replyContent = request.getParameter("replyContent");
 		String memberId =request.getParameter("memberid");
 		
-		//memberId = "user01";	//전송이 null로 와서 일단 임시방편
-		
-		System.out.println("전송 온 값 : " + boardNo + ", " + memberId + ", " + replyContent);
-		
-	
 		FboardReply reply = new FboardReply();
 		 
 		 reply.setFboardNo(boardNo); reply.setFboardReplyContent(replyContent);
@@ -63,7 +58,15 @@ public class FboardReplyInsertServlet extends HttpServlet {
 		
 		 int result = new FboardReplyService().insertFboardReply(reply);
 		  
-		 System.out.println("댓글 insert: " + result);
+		 System.out.println("전송 온 값 : " + boardNo + ", " + memberId + ", " + replyContent + "댓글 입력 결과: " + result);
+			
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.append(Integer.toString(result));	//result = 0  입력 X, 1 = 입력 O
+			out.flush();
+			out.close();
+		 
+		 
 		/*
 		 * response.setContentType("application/text; charset=utf-8"); PrintWriter out =
 		 * response.getWriter(); out.write(result);

@@ -19,6 +19,38 @@
     <div id="wrap">
         <%@ include file="../include/admin_header.jsp" %>
 
+<script type="text/javascript" src="/anavada/resources/js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+function deleteAction(){
+	var checkRow = "";
+	$("input[name='checkDel']:checked").each(function(){
+		checkRow = checkRow + $(this).val()+",";
+	});
+	checkRow = checkRow.substring(0, checkRow.lastIndexOf(","));
+	
+	if(checkRow == ""){
+		alert("삭제할 대상을 선택하세요.");
+		return false;
+	}
+	console.log("### checkRow => {"+checkRow+"}");
+	
+	if(confirm("삭제 하시겠습니까?"))
+		location.href = "/anavada//bcheckdel?checkRow="+checkRow;
+}
+$(function(){
+	$("#all").on("click", function(){
+		if($('input:checkbox[id="all"]').is(":checked")==true){
+			$('input:checkbox[name="checkDel"]').each(function(){
+				this.checked = true;
+			});
+		}else{
+			$('input:checkbox[name="checkDel"]').each(function(){
+				this.checked = false;
+			});
+		}
+	});
+})
+</script>
         <!-- 컨텐츠 -->
         <div id="admin_container">
         
@@ -35,7 +67,7 @@
             <div class="list-area">
                <!--종류 리스트-->
                 <div class="sort-area">  
-                    <h4>전체 <%= blist.size() %> 개</h4>
+                    <h4>전체 <%= listCount %> 개</h4>
                     <a href="/anavada/views/admin/banner/banner_change.jsp" class="write_btn">배너 등록</a>
                     <div>
                         <!-- <form action="" method="" id="">
@@ -50,37 +82,70 @@
                         </form>  -->
                     </div>
                 </div>
+                <!-- 검색영역 끝 -->
+                
+                <% if (list.size() == 0 ){ %>
+                <br><br>
+				<div class="list-no" align="center">
+					<p>
+						<img src="/anavada/resources/images/btnIcn/icn_big_listNo.png"
+							alt="" title="" />
+					</p>
+					<h1>목록이 없습니다.</h1>
+				</div><br><br>
+                <% }else{ %>
                 
                 <form action=""> 
-                <table >
-                <tr><th>번호</th><th>제목</th><th>배너보이기/숨기기</th><th>첨부파일</th><th>사이즈</th><th>배너URL</th></tr>
-                    <%for(Banner b : blist) { 
-                    System.out.println(b);%>
-                 <tr>
-                 <td><a href="/anavada/bselone.ad?bannerNo=<%= b.getBannerNo()%>"><%= b.getBannerNo() %></a></td>
-                 <td><a href="/anavada/bselone.ad?bannerNo=<%= b.getBannerNo()%>"><%= b.getBannerTitle() %></a></td>
-                 		<td><% if(b.getBannerChk().equals("H")){ %>
+                  <table class="memberTable">
+                	<colgroup>
+                        <col width="5%">
+                        <col width="8%">
+                        <col width="10%">
+                        <col width="10%">
+                        <col width="18%">
+                        <col width="10%">
+                        <col width="10%">
+                        <col width="8%">
+                    </colgroup>
+                
+                 <tbody>
+                  	<tr>
+                  		<th>선택</th>
+                		<th>번호</th>
+                		<th>제목</th>
+                		<th>배너보이기/숨기기</th>
+                		<th>첨부파일</th>
+                		<th>사이즈</th>
+                		<th>배너URL</th>
+               		</tr>
+                    <%for(Banner b : blist) { %>
+                <tr >
+                 <td class="checkBox"><input type="checkbox" name="checkDel" value="<%= b.getBannerNo() %>" ></td>
+                 <td class="number" onclick="location.href='/anavada/bselone.ad?bannerNo=<%= b.getBannerNo()%>'"><%= b.getBannerNo() %></td>
+                 <td class="title" onclick="location.href='/anavada/bselone.ad?bannerNo=<%= b.getBannerNo()%>'"><%= b.getBannerTitle() %></td>
+                 		<td class="check"><% if(b.getBannerChk().equals("H")){ %>
                  		            </i>숨기기</span> 
                  		         <% }else{// 배너가 보이게 하려면%>
                  		            </i>보이기</span> 
                  		          <% }  %></td> 
-                 <td><a href="/anavada/bselone.ad?bannerNo=<%= b.getBannerNo()%>"><%= b.getBannerOriginal() %></a></td>
-				 <td><a href="/anavada/bselone.ad?bannerNo=<%= b.getBannerNo()%>"><%= b.getBannerSize() %></a></td>    
-				 <td><a href="/anavada/bselone.ad?bannerNo=<%= b.getBannerNo()%>"><%= b.getBannerUrl() %></a></td>      		          
+                 <td class="original" onclick="location.href='/anavada/bselone.ad?bannerNo=<%= b.getBannerNo()%>'"><%= b.getBannerOriginal() %></td>
+				 <td class="size" onclick="location.href='/anavada/bselone.ad?bannerNo=<%= b.getBannerNo()%>'"><%= b.getBannerSize() %></td>    
+				 <td class="url" onclick="location.href='/anavada/bselone.ad?bannerNo=<%= b.getBannerNo()%>'"><%= b.getBannerUrl() %></td>      		          
                  </tr>
                  <% } %>
+                 </tbody>
                 </table>
-
-
-                <div class="list-no">
-                    <a href="/anavada/blist.ad">목록</a>
-                   
-                </div>
-
+                <% } %>
+                
               </form> 
 
             </div>
             <!-- 리스트 끝 -->
+            <input type="checkbox" id="all" name="checkAll" class="checkBox"> 전체 선택
+            <!-- 버튼 -->
+                <div class="btn_wrap">
+                    <a onclick="deleteAction();" class="btn-left btn_gray">선택삭제</a>
+                </div>
 
             <!-- 페이지넘버 -->
             <dl class="list-paging pb80">

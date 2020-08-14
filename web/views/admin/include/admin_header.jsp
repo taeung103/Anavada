@@ -14,12 +14,12 @@
         </ul>
         <h2><p>중고거래/커뮤니티관리</p></h2>
         <ul>
-            <li><a href="../product/product_list.jsp">중고거래</a></li>
+            <li><a href="../anavada/adjlistview.ad">중고거래</a></li>
             <li><a href="/anavada/adclistview.ad">커뮤니티</a></li>
         </ul>
         <h2><p>지역축제</p></h2>
         <ul>
-            <li><a href="../fboard/adminfboardList.jsp">지역축제</a></li>
+            <li><a href="/anavada/views/admin/fboard/adminfboardList.jsp">지역축제</a></li>
         </ul>
         
         

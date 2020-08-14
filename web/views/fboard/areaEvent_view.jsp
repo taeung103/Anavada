@@ -14,17 +14,15 @@
 	<!-- 현재 진행중이지 않은 축제 알리기 -->
 	<script type="text/javascript">
 	<% 
-	SimpleDateFormat transFormat = new SimpleDateFormat("yyyy.MM.dd");
+	int ifestivalEndDate = Integer.parseInt(festivalEndDate);
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-	Date dfestivalEndDate = transFormat.parse(festivalEndDate);
-	int ifestivalEndDate = Integer.parseInt(sdf.format(dfestivalEndDate));
     Calendar c1 = Calendar.getInstance();
 	int strToday = Integer.parseInt(sdf.format(c1.getTime()));
 	
 	if(ifestivalEndDate < strToday) { %>
 		alert('지난 축제 입니다');
 	<% } %>
-
+	
 	</script>
 
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
@@ -50,9 +48,9 @@
             </div>
             <!--서브 비주얼/타이틀 끝-->
             
-            <!-- 축제 상세보기 -->
-            		<script type="text/javascript">
-					$(function() {
+            <!-- 축제 상세보기 ajax -->
+            <script type="text/javascript">
+				$(function() {
 					$.ajax({
 						url : "/anavada/fbdetail",
 						type : "get",
@@ -69,8 +67,7 @@
 						
 						$('#festivaloverview').html(data.overview);
 						
-						var values = 
-						'<tr><th>축제 상세 주소</th><td colspan="3">' + data.addr1 + data.addr2 + '</td></tr>' +
+						var values = '<tr><th>축제 상세 주소</th><td colspan="3">' + data.addr1 + data.addr2 + '</td></tr>' +
                          '<tr><th>축제 기간</th><td colspan="3">'+ data.period  + '</td></tr>' +
                     	'<tr><th>홈페이지</th><td colspan="3">'  + data.homepage + '</td></tr>' +
                     	'<tr><th>주최/주최기간 문의</th><td colspan="3">' + data.telname + ", " + data.tel + '</td></tr>';
@@ -82,12 +79,11 @@
 									+ ", " + errorthrown);
 						}
 					}); //ajax
+				}); //document.ready
+		</script>
+		<!-- 축제 상세보기 ajax 끝 -->
 
-		}); //document.ready
-	</script>
-            
-
-            <!-- 상세 -->
+            <!-- 상세 div -->
             <div class="view-area areaEvent_view">
                  <h2 id="title"><span id="localname">서울시 </span>중구</h2>
                 <ul>
@@ -95,6 +91,7 @@
                     <li id="createdd"></li>
                     <li id="readcount"></li>
                 </ul>
+                 <!-- 상세 table -->
                 <div class="areaEvent_info">
                    <div><img id="firstimage" src="" width="500px" height="333px"></div>
                     <table id="fbdetail">
@@ -109,10 +106,8 @@
                     </table>
                 </div>
                 <h2>축제설명</h2>
-                <div id="festivaloverview" class="view-ctn">
-                </div>  
-
-
+                <div id="festivaloverview" class="view-ctn"></div>  
+                <!-- 상세 div -->
 
                 <div class="view-btn">
                   	<!--  <a href="#none" class="btn btn-prev">이전글</a> -->
@@ -121,43 +116,36 @@
                 </div>
                 
                 
+               <div class="cmt_wrap">
                 
-                
-                <div class="cmt_wrap">
-                
-                
-<!--                     <form action="" method="">
-                        <fieldset>
-                            <div class="cmt_form">
-                                <h4 class="cmt_head">댓글 77</h4>
-                                <div class="cmt_body">
-					<textarea name="" style="resize: none; width:100%; min-height:100px; max-height:100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
-                                    <div class="cmt_ok"><input type="submit" value="등록"></div>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </form> -->
                     
+                    <!-- 댓글 작성 폼 -->
                        <form name="replysubmit" method="post" action="">
                         <fieldset>
                             <div class="cmt_form">
-                            <h4 id="totalcount" class="cmt_head">댓글 : 4</h4>
+                            <h4 id="totalcount" class="cmt_head"></h4>
+                             <% if(!(loginMember == null)) { %>
                                 <div class="cmt_body">
                                 <input type="hidden" id="boardno" name="boardno" value="<%= fboardNo%>">    
-                                <input type="hidden" id= "memberid" name="memberid" value="<%= loginMember.getMemberId()%>">
-								<textarea id="replyContent" name="replyContent" style="resize: none; width:100%; min-height:100px; max-height:100px;" placeholder="댓글을 작성해주세요"></textarea>
+                                <input type="hidden" id= "memberid" name="memberid" value="<%= loginMember.getMemberId()%>"> 
+								<textarea id="replyContent" name="replyContent" style="resize: none; width:100%; min-height:100px; max-height:100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
                                  <div class="cmt_ok"><input type="button" value="등록" onclick="ReplySubmit(${result.code})"></div>
                                	 </div>
+                               	 <% } %>
                             </div>
                         </fieldset>
                     </form>
+                    <!-- 댓글 작성 폼 끝 -->
                     
+                    
+                    <!-- 댓글 리스트 -->
                      <script type="text/javascript">
                       $(function(){
                     	  getCommentList()
                       });
                     	  
-                      function getCommentList() {
+                    //댓글 리스트
+                      function getCommentList() {	
                     	  $.ajax({
       						url : "/anavada/fbreplylist",
       						type : "get",
@@ -177,7 +165,7 @@
 								values += '<li><div>' +
                                 '<h4>user : ' + json.list[i].memberId + '</h4><span>' + json.list[i].fboardReplyCreatDate + '</span>' +
                                 '</div><p>' + decodeURIComponent(json.list[i].fboardReplyContent).replace(/\+/gi, " ") + '</p>' + 
-                                '<div class="cmt_delete" style="float: right;"><input type="submit" value="삭제" onclick="Replydelete(' + json.list[i].fboardReplyNo + ');"></div>' +
+                                '<div class="cmt_delete" style="float: right;"><input type="button" value="삭제" onclick="Replydelete(' + json.list[i].fboardReplyNo + ');"></div>' +
                                 '<button onclick="">대댓글</button>'
                                 
                                 /* '<div class="Subcmt_form">' +
@@ -190,8 +178,8 @@
                           		'</li>' */
 								}	//for in
 								
-								$("#fbreply").empty();
-								 $("#fbreply").html($("#reply").html() + values);
+								 $("#fbreply").empty();
+								 $("#fbreply").html(values);
 
 								/* $("#reply").html($("#reply").html() + values); */
       						},
@@ -202,7 +190,7 @@
       					}); //ajax
                       }	
                       
-                      
+                      //댓글  추가
                       function ReplySubmit(code) {
                           if (document.getElementById("replyContent").value == "") {
                               alert("내용을 입력해주세요");
@@ -213,81 +201,51 @@
                 	        type:'POST',
                 	        data : {replyContent : $('#replyContent').val(), memberid : $('#memberid').val(), boardno : $('#boardno').val()},
                 	        success : function(data){
-                	        	 alert("댓글이 등록되었습니다."); 
-                	                getCommentList();
-                	                $("#replyContent").val("");
+                	          	if(data == 1) {
+                  	        	 	alert("댓글이 등록되었습니다."); 
+                  	        	} else {
+                  	        		alert("댓글 등록을 실패했습니다."); 
+                  	        	}
+                	        		 $("#replyContent").val("");
+                 	                getCommentList();
+                	               
                 	        },
                 	        error:function(request,status,error){
+                	        	alert("로그인후 이용해주세요.");
                 	        	console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown);
                 	       }
                 	    });
                     }
                     
-                    function Replydelete(fboardReplyNo) {
+                      // 댓글 삭제
+                    function Replydelete(fboardReplyNo, memberId) {
                   	  console.log(fboardReplyNo + "댓글 삭제하기")
-                  	  /* location.href="/testjson/fbreplydelete?fboardReplyNo=" + fboardReplyNo; */
                   	  
-                  	  $.ajax({
+                  	 	 $.ajax({
                     		url : "/anavada/fbreplydelete.ss",
                   	        type:'POST',
-                  	        data : {fboardReplyno : fboardReplyNo},
+                  	        data : {fboardReplyno : fboardReplyNo, memberid : $('#memberid').val() },
                   	        success : function(data){
-                  	        	 alert("댓글이 삭제되었습니다."); 
+                  	        	if(data == 1) {
+                  	        	 	alert("댓글이 삭제되었습니다."); 
+                  	        	} else {
+                  	        		alert("댓글 삭제를 실패했습니다."); 
+                  	        	}
                   	                getCommentList();
                   	        },
                   	        error:function(request,status,error){
                   	        	console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown);
-                  	       }
-                  	        
-                  	    });
+                  	     	  }
+                  	   	 });
                     }
 
-                      
                     </script>
                     
                     <ul id="fbreply" class="cmt_con">
-<!--                        <li>
-                            <div>
-                                <h4>user : asdf123</h4><span>2020.08.16. 12:12:00</span>
-                            </div>
-                            <p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를 미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
-                            <button>대댓글</button>
-                            <div class="Subcmt_form">
-                                <form action="" method="">
-                                    <fieldset>
-                                        <div class="cmt_form">
-                                            <div class="cmt_body">
-							<textarea name="" style="resize: none; width:100%; min-height:100px; max-height:100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
-                                            <div class="cmt_ok"><input type="submit" value="등록"></div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </form>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <h4>user : asdf123</h4><span>2020.08.16. 12:12:00</span>
-                            </div>
-                            <p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를 미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
-                            <button>대댓글</button>
-                            <div class="Subcmt_form">
-                                 <div>
-                                    <h4>user : asdf123</h4><span>2020.08.16. 12:12:00</span>
-                                </div>
-                                <p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를 미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <h4>user : asdf123</h4><span>2020.08.16. 12:12:00</span>
-                            </div>
-                            <p>가시가 되어 제발 가라고 아주 가라고 외쳐도 나는 그대로인데. 아주 사랑했던 나를 크게 두려웠던 나를 미치도록 너를 그리워했던 날 이제는 놓아줘. 보이지 않아. 내 안에 숨어. 잊으려 하면 할 수 록 더 다가와.</p>
-                            <button>대댓글</button>
-                        </li>  -->
                     </ul>
-                    <button class="cmt_in">댓글 더보기 <i class="glyphicon glyphicon-menu-right"></i></button>
-                </div>
+                    
+                   <!--  <button class="cmt_in">댓글 더보기 <i class="glyphicon glyphicon-menu-right"></i></button> -->
+             	 </div>
             </div>
             <!-- 상세 끝 -->
 

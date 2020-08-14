@@ -117,4 +117,27 @@ public class CboardService {
         return list;
     }
 
+	public ArrayList<Cboard> mySelectList(String memberID, int currentPage, int limit, String local, String search,
+			String keyword) {
+		Connection conn = getConnection();
+        ArrayList<Cboard> list = cdao.mySelectList(
+            conn,
+            memberID,
+            currentPage,
+            limit,
+            local,
+            search,
+            keyword
+        );
+        close(conn);
+        return list;
+	}
+	
+	public int getMyListCount(String memberID, String local, String search, String keyword) {
+		Connection conn = getConnection();
+		int listCount = cdao.getMyListCount(conn, memberID, local, search, keyword);
+		close(conn);
+		return listCount;
+	}
+
 }

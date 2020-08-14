@@ -31,7 +31,7 @@ public class DBoAdminDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 신고게시판 신고글 상세보기 처리용 컨트롤러
+		// 신고게시판 신고글 관리자용 상세보기 처리용 컨트롤러
         int dboNo = Integer.parseInt(request.getParameter("dboNo"));
 				DBo dbo = new DBoService().selectOne(dboNo);
 		
