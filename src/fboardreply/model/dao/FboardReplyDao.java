@@ -23,7 +23,7 @@ public class FboardReplyDao {
 		PreparedStatement stmt = null;
 		ResultSet rset = null;
 
-		String query = "select * from fboard_reply where fboard_no = ? order by fboardreply_creatdate desc";
+		String query = "select * from fboard_reply where fboard_no = ? order by fboardreply_creatdate asc";
 
 		try {
 			stmt = conn.prepareStatement(query);
