@@ -82,7 +82,7 @@
                             <div>
                                 <h4 style="font-size:13pt;">● user : 관리자</h4><span><%= answer.getAnDate() %></span>
                             </div><br>
-                            <p style="font-size:11pt;"> &nbsp; &nbsp; &nbsp;<%= answer.getAnContent() %></p>
+                            <p style="font-size:11pt;"><%= answer.getAnContent().replace("\r\n", "<br>") %></p>
                         </li>
                     </ul>
                 </div>

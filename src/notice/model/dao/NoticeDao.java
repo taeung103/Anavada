@@ -403,5 +403,32 @@ public class NoticeDao {
 		return list;
 	}
 	
-	
+	public int selectPreNext(Connection conn, int iqNo, int flag) {
+		int lagNum = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "";
+		if(flag == 1) //이전글 검색
+			query = "select lagnum from (select no_no, lag(no_no) over(order by no_no) lagnum from notice) where no_no = ?";
+		else
+			query = "select leadnum from (select no_no, lead(no_no) over(order by no_no) leadnum from notice) where no_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, iqNo);
+			rset = pstmt.executeQuery();
+
+			if(rset.next()) {
+				lagNum = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return lagNum;
+	}
 }

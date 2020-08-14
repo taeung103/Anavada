@@ -109,4 +109,10 @@ public class NoticeService {
 		return list;
 	}
 
+	public int selectPreNext(int iqNo, int flag) {
+		Connection conn = getConnection();
+		int lagNum = ndao.selectPreNext(conn, iqNo, flag);
+		close(conn);
+		return lagNum;
+	}
 }

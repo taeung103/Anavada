@@ -170,8 +170,8 @@ function movePage(num){
         
         	<!-- 공지사항 -->
         	
-            <div class="mainNotice">
-	            <div id="mainNotice">
+            <div class="mainNotice_wrap">
+	            <div id="mainNotice" class="mainNotice">
 	                <ul class="Notice" id="topNotice"><!-- 
 	                <li><h2><span>[공지]</span> 'Anavada' 조회수가 높은 공지사항 3개입니다!</h2></li>
 	        		<li><h2 onclick='movePage();'>title1</h2><div>조회수 : </div></li>
@@ -179,7 +179,7 @@ function movePage(num){
 	        		<li><h2 onclick='movePage();'>title3</h2><div>조회수 : </div></li> -->
 	                </ul>
 	            </div>
-	            <div id="mainNoticeTop3">
+	            <div id="mainNoticeTop3" class="mainNotice">
 	                <ul class="Notice" id="recentNotice"><!-- 
 	                <li><h2><span>[공지]</span> 'Anavada' 최신순 높은 공지사항 3개입니다!</h2></li>
 	        		<li><h2 onclick='movePage();'>최신순1</h2><div>조회수 : </div></li>

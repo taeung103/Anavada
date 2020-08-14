@@ -40,14 +40,15 @@ public class InquiryDao {
 	
 	public int getListCount(Connection conn, String user) {
 		int totalList = 0;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = "select count(*) from inquiry where iq_id = "+user;
+		String query = "select count(*) from inquiry where iq_id = ?";
 		
 		try {
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery(query);
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, user);
+			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
 				totalList = rset.getInt(1);
@@ -56,7 +57,7 @@ public class InquiryDao {
 			e.printStackTrace();
 		}finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		
 		return totalList;
@@ -416,30 +417,30 @@ public class InquiryDao {
 		query += "iq_type = ? where iq_no = ?";
 		count += 2;
 		
-		
+		System.out.println(query);
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, inquiry.getIqTitle());
 			pstmt.setString(2, inquiry.getIqContent());
 			
-			for(int i=3; i<count+1;) {
-				
-				if(!inquiry.getIqOriginal().equals("null")) {
-					pstmt.setString(i, inquiry.getIqOriginal()); i++;
-					pstmt.setString(i, inquiry.getIqRename()); i++;
-				}
-				if(!inquiry.getIqOriginal2().equals("null")) {
-					pstmt.setString(i, inquiry.getIqOriginal2()); i++;
-					pstmt.setString(i, inquiry.getIqRename2()); i++;
-				}
-				if(!inquiry.getIqOriginal3().equals("null")) {
-					pstmt.setString(i, inquiry.getIqOriginal3()); i++;
-					pstmt.setString(i, inquiry.getIqRename3()); i++;
-				}
-				
-				pstmt.setString(i, inquiry.getIqType()); i++;
-				pstmt.setInt(i, inquiry.getIqNo()); i++;
+			int i = 3;
+
+			if(!inquiry.getIqOriginal().equals("null")) {
+				pstmt.setString(i, inquiry.getIqOriginal()); i++;
+				pstmt.setString(i, inquiry.getIqRename()); i++;
 			}
+			if(!inquiry.getIqOriginal2().equals("null")) {
+				pstmt.setString(i, inquiry.getIqOriginal2()); i++;
+				pstmt.setString(i, inquiry.getIqRename2()); i++;
+			}
+			if(!inquiry.getIqOriginal3().equals("null")) {
+				pstmt.setString(i, inquiry.getIqOriginal3()); i++;
+				pstmt.setString(i, inquiry.getIqRename3()); i++;
+			}
+
+			pstmt.setString(i, inquiry.getIqType()); i++;
+			pstmt.setInt(i, inquiry.getIqNo()); i++;
+
 			
 			result = pstmt.executeUpdate();
 			
@@ -472,7 +473,6 @@ public class InquiryDao {
 		return result;
 	}
 
-	
 	
 	
 }

@@ -34,12 +34,24 @@ public class AdminNoticeDetailServlet extends HttpServlet {
 		
 		Notice notice = new NoticeService().selectOne(Integer.parseInt(request.getParameter("no")));
 		
+		int currentPage = 1;
+		if(request.getParameter("page") != null)
+			currentPage = Integer.parseInt(request.getParameter("page"));
+		String selected = null;
+		String keyword = null;
+		if(request.getParameter("selected") != null && request.getParameter("keyword") != null) {
+			selected = request.getParameter("selected");
+			keyword = request.getParameter("keyword");
+		}
+		int listCount = new NoticeService().getListCount();
+		
 		if(notice != null) {
 			RequestDispatcher view = request.getRequestDispatcher("views/admin/notice/adminnotice_view.jsp");
 			request.setAttribute("notice", notice);
 			request.setAttribute("currentPage", Integer.parseInt(request.getParameter("page")));
 			request.setAttribute("selected", request.getParameter("selected"));
 			request.setAttribute("keyword", request.getParameter("keyword"));
+			request.setAttribute("totalList", listCount);
 			view.forward(request, response);
 		}
 		

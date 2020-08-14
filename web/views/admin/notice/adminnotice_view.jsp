@@ -3,6 +3,7 @@
 <%
 	Notice notice = (Notice)request.getAttribute("notice");
 	int currentPage = (Integer)request.getAttribute("currentPage");
+	int totalList = (Integer)request.getAttribute("totalList");
 	String selected = null;
 	String keyword = null;
 	if(request.getAttribute("selected") != null && request.getAttribute("keyword") != null) {
@@ -14,6 +15,22 @@
 <html>
 <head>
     <%@ include file="../../include/head.jsp" %>
+    <script type="text/javascript">
+    function pre(num, no) {
+    	if(no == 1)
+    		alert("이전글이 없습니다.");
+    	else
+    		location.href = "/anavada/nprenex?no="+no+"&value="+1;
+    	
+    }
+    function next(num, no) {
+    	if(no == num)
+    		alert("다음글이 없습니다.");
+    	else
+    		location.href = "/anavada/nprenex?no="+no+"&value="+2;
+    	
+    }
+    </script>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
@@ -60,10 +77,10 @@
                     <a href="/anavada/anupdateview?no=<%= notice.getNoNo() %>&page=<%= currentPage %>" class="btn btn-list">수정</a>
                     <a href="/anavada/ansearch?page=<%= currentPage %>&selected=<%= selected %>&keyword=<%= keyword %>" class="btn btn-list">목록</a>
                     <% }else { %>
-                    <a href="/anavada/andetail?no=<%= notice.getNoNo()-1 %>&page=<%= currentPage %>" class="btn btn-prev">이전글</a>
+                    <a onclick="pre(1, <%= notice.getNoNo() %>);" class="btn btn-prev">이전글</a>
                     <a href="/anavada/anupdateview?no=<%= notice.getNoNo() %>&page=<%= currentPage %>" class="btn btn-list">수정</a>
                     <a href="/anavada/anlist.ss?page=<%= currentPage %>" class="btn btn-list">목록</a>
-                    <a href="/anavada/andetail?no=<%= notice.getNoNo()+1 %>&page=<%= currentPage %>" class="btn btn-next">다음글</a>
+                    <a onclick="next(<%= totalList %>, <%= notice.getNoNo() %>);" class="btn btn-next">다음글</a>
                     <% } %>
                     
                 </div>

@@ -107,7 +107,8 @@
                     </table>
 
                     <div class="write-btn">
-                        <a href="/anavada/ilist?page=<%= currentPage %>" class="btn btn-list">목록</a>
+                    	<input type="reset" class="btn btn-success" value="수정취소" style="width:100px;">
+                        <a onclick="javascipt:history.go(-1); return false;" class="btn btn-list">뒤로가기</a>
                         <input type="submit" class="btn btn-success" value="수정하기" style="width:100px;">
                     </div>
                 </form>
