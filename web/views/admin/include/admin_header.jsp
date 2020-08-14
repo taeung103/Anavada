@@ -19,7 +19,7 @@
         </ul>
         <h2><p>지역축제</p></h2>
         <ul>
-            <li><a href="../fboard/adminfboardList.jsp">지역축제</a></li>
+            <li><a href="/anavada/views/admin/fboard/adminfboardList.jsp">지역축제</a></li>
         </ul>
         
         
