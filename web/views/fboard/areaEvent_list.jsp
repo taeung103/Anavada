@@ -340,7 +340,7 @@
 				
 		/* 상세페이지로 이동 */
 		function moveDetailPage(boardNo, festivalEndDate) {
-			location.href = '/anavada/views/fboard/areaEvent_view.jsp?fboardno=' + boardNo + '&festivalEndDate=' + festivalEndDate ;
+			location.href = '"/anavada/views/fboard/areaEvent_view.jsp?fboardno=' + boardNo + '&festivalEndDate=' + festivalEndDate + '";'
 		}
 				
 		</script>
