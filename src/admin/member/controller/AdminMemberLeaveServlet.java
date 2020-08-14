@@ -33,24 +33,22 @@ public class AdminMemberLeaveServlet extends HttpServlet {
 		String Chk = request.getParameter("checkarr");
 		String[] dataChk = Chk.split(",");
 		System.out.println("Chk : " + Chk);
-		System.out.println("dataChk : " + dataChk);
 		
 		int leaveCount = 0;
 		MemberService mservice = new MemberService();
 		
-		
 		for(String checkstr : dataChk) { //반복문
-			if(mservice.leaveMember(Integer.parseInt(checkstr)) > 0) {
+			System.out.println("checkstr : " + checkstr);
+
+			int result = mservice.leaveMember(checkstr);
+			System.out.println("result : " + result);
+			if (result > 0) {
 				leaveCount++;
 			}
 		}
-		
-		
 		PrintWriter writer = response.getWriter();
 		writer.print(leaveCount + "/" + dataChk.length);
 		writer.close();
-	
-	
 	}
 
 	/**

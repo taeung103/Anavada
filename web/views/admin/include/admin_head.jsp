@@ -9,8 +9,8 @@
 <title>Anavada 관리자</title>
 
 <link rel="stylesheet" type="text/css" href="/anavada/resources/admin/css/common.css">
-<script src="/anavada/resources/js/jquery-1.12.4.js"></script>
-<script src="/anavada/resources/js/member.js"></script>
+<script src="/anavada/resources/admin/js/jquery-3.5.1.min.js"></script>
+<script src="/anavada/resources/admin/js/member.js"></script>
 
 <!--티스토리 불펌금지-->
 <script type="text/javascript">

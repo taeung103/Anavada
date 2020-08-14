@@ -64,9 +64,9 @@ public class MemberService {
 		return result;
 	}
 
-	public int leaveMember(Member member, String memberId) {
+	public int leaveMember(String memberId) {
 		Connection conn = getConnection();
-		int result = mdao.leaveMember(conn, member, memberId);
+		int result = mdao.leaveMember(conn, memberId);
 		if(result > 0)
 			commit(conn);
 		else
@@ -129,13 +129,6 @@ public class MemberService {
 		return listCount;
 	}
 
-//	public ArrayList<Member> selectLeaveList(int currentPage, int limit, String search, String keyword) {
-//		Connection conn = getConnection();
-//		ArrayList<Member> list = mdao.selectLeaveList(conn, currentPage, limit, search, keyword);
-//		close(conn);
-//		return list;
-//	}
-
 	public int getSListCount(String search, String keyword) {
 		Connection conn = getConnection();
 		int listCount = mdao.getSListCount(conn);
@@ -143,9 +136,5 @@ public class MemberService {
 		return listCount;
 	}
 
-	public int leaveMember(int parseInt) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 }

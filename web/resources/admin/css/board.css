@@ -200,6 +200,14 @@
     text-align: center;
     width: 100px;
 }
+.list-area table tbody tr td.declareOK {
+    color:red;
+    font-weight:500;
+}
+.list-area table tbody tr td.SecessionOK {
+    color:#004483;
+    font-weight:500;
+}
 .list-area .inquiry {
     background-color: #3d47ff !important;
 }

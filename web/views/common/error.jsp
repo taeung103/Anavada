@@ -6,8 +6,8 @@
 <meta charset="UTF-8">
 <title>anavada error page</title>
 </head>
-<body>
-에러다 이생퀴야
+<body style="text-align:center;">
+<h1>휴면.. 이것이 당신의 한계입니까?<br/>에러페이지입니다.</h1>
 <%= request.getAttribute("message") %>
 </body>
 </html>

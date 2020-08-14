@@ -32,8 +32,9 @@
                 <div class="sort-area">  
                     <h4>전체 회원 <%= listCount %>명</h4>
                     <div>
-                        <form method="get" id="">
-                           	 목록 분류 : <select action="/anavada/msearch.ad" name="search" class="ListSelect">
+                        <form action="/anavada/mlist.ad" method="get" id="">
+                        	<input type="hidden" value="N" name="secessionOK">
+                           	 목록 분류 : <select name="search" class="ListSelect">
                                     <!--option value="분류 선택" selected="selected">분류 선택</option-->
                                     <option value="userId" elected="selected">아이디</option>
                                     <option value="userName">이름</option>
@@ -72,6 +73,19 @@
                             <th>신고여부</th>
                         </tr>
 						<% for(Member m : list){ %>
+						<% if(m.getMemberId().equals("admin")){%>
+                        <tr style="background-color: #fcf8e3;">
+                            <td class="checkBox"><input type="checkbox" name="leaveChk" id="leaveChk" value="<%= m.getMemberId()%>" disabled></td>
+                            <td class="number"><%= m.getmNumber() %></td>
+                            <td class="id"><%= m.getMemberId() %></td>
+                            <td class="name"><%= m.getMemberName() %></td>
+                            <td class="email"><%= m.getMemberEmail() %></td>
+                            <td class="phone"><%= m.getMemberPhone() %></td>
+                            <td class="joinDate"><%= m.getJoinDate() %></td>
+                            <td class="lastAccessDate"><%= m.getLastAccessDate() %></td>
+                            <td class="declareOK"><%= m.getDeclareOK() %></td>
+                        </tr>
+                        <% } else { %>
                         <tr>
                             <td class="checkBox"><input type="checkbox" name="leaveChk" id="leaveChk" value="<%= m.getMemberId()%>"></td>
                             <td class="number"><%= m.getmNumber() %></td>
@@ -83,6 +97,7 @@
                             <td class="lastAccessDate"><%= m.getLastAccessDate() %></td>
                             <td class="declareOK"><%= m.getDeclareOK() %></td>
                         </tr>
+                        <% } %>
                         <% } %>
 
                     </tbody>
@@ -102,11 +117,11 @@
                    	<% if(currentPage <= 1){ %>
                     	<a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
                    	<% } else { %>
-                   		<a href="/anavada/mlist.ad?page=<%= startPage %>"><i class="glyphicon glyphicon-menu-left"></i></a>
+                   		<a href="/anavada/mlist.ad?secessionOK=N&page=<%= startPage %>"><i class="glyphicon glyphicon-menu-left"></i></a>
                     <% } %>
                     
                    	<% if(1 < currentPage){ %>
-                   		<a href="/anavada/mlist.ad?page=<%= currentPage - 1 %>"><i class="glyphicon glyphicon-menu-left"></i></a>
+                   		<a href="/anavada/mlist.ad?secessionOK=N&page=<%= currentPage - 1 %>"><i class="glyphicon glyphicon-menu-left"></i></a>
                     	<% } else { %>
                    		<a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
                    	<% } %>
@@ -115,19 +130,19 @@
                     	<% if(currentPage == p){ %>
                         <a href="#none" class="active"><%= p %></a>
                    	<% } else { %>
-                        <a href="/anavada/mlist.ad?page=<%= p %>"><%= p %></a>
+                        <a href="/anavada/mlist.ad?secessionOK=N&page=<%= p %>"><%= p %></a>
                     	<% } %>
                     <% } %>
                     
 					<% if(currentPage < maxPage){ %>
-                        <a href="/anavada/mlist.ad?page=<%= currentPage + 1 %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+                        <a href="/anavada/mlist.ad?secessionOK=N&page=<%= currentPage + 1 %>"><i class="glyphicon glyphicon-menu-right"></i></a>
 					<% } else { %>
                         <a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
 					<% } %>
-					<% if(currentPage >= maxPage){ %>
+					<% if(currentPage > maxPage){ %>
                         <a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
 					<% } else { %>
-                        <a href="/anavada/mlist.ad?page=<%= maxPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+                        <a href="/anavada/mlist.ad?secessionOK=N&page=<%= maxPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
 					<% } %>					
                     </dd>
                 </dl>
