@@ -281,11 +281,28 @@
 }
 .mainEvent ul li {    
     display: inline-block;
+    vertical-align: top;
     width: 12%;
 }
-.mainEvent ul li img {
+.mainEvent ul li a {
+	display : block;
+}
+.mainEvent ul li a img {
     width: 100%;
 }
-
+.mainEvent ul li a h3 {
+    font-family: "NotoSansKR", 'Malgun Gothic', '맑은 고딕', '돋움', sans-serif !important;
+    overflow: hidden;
+    line-height: 1.4;
+    height: 2.8em;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    font-size: 12px;
+    -webkit-box-orient: vertical;
+    margin-top: 6px;
+    font-weight: 700;
+    text-align: left;
+    word-break: break-all;
+}
 
 
