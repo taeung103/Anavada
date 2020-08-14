@@ -43,9 +43,9 @@ public class FboardReplyService {
 	}
 
 	//댓글 삭제하기
-	public int deleteFboardReply(int fboardReplyNo) {
+	public int deleteFboardReply(int fboardReplyNo, String memberId) {
 		Connection conn = getConnection();
-		int result = frdao.deleteFboardReply(conn, fboardReplyNo);
+		int result = frdao.deleteFboardReply(conn, fboardReplyNo, memberId);
 		if(result > 0) 
 			commit(conn);
 		else

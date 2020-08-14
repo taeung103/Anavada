@@ -22,7 +22,7 @@
 	if(ifestivalEndDate < strToday) { %>
 		alert('지난 축제 입니다');
 	<% } %>
-
+	
 	</script>
 
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
@@ -83,7 +83,6 @@
 
 		}); //document.ready
 	</script>
-            
 
             <!-- 상세 -->
             <div class="view-area areaEvent_view">
@@ -110,17 +109,11 @@
                 <div id="festivaloverview" class="view-ctn">
                 </div>  
 
-
-
                 <div class="view-btn">
                   	<!--  <a href="#none" class="btn btn-prev">이전글</a> -->
                     <a href="/anavada/fbklist" class="btn btn-list">목록</a>
                    <!--  <a href="#none" class="btn btn-next">다음글</a> -->
                 </div>
-                
-                
-                
-                
                 <div class="cmt_wrap">
                 
                 
@@ -142,7 +135,7 @@
                             <h4 id="totalcount" class="cmt_head"></h4>
                                 <div class="cmt_body">
                                 <input type="hidden" id="boardno" name="boardno" value="<%= fboardNo%>">    
-                                <input type="hidden" id= "memberid" name="memberid" value="<%= loginMember.getMemberId()%>">
+                               <input type="hidden" id= "memberid" name="memberid" value="<%= loginMember.getMemberId()%>"> 
 								<textarea id="replyContent" name="replyContent" style="resize: none; width:100%; min-height:100px; max-height:100px;" placeholder="댓글을 작성해주세요"></textarea>
                                  <div class="cmt_ok"><input type="button" value="등록" onclick="ReplySubmit(${result.code})"></div>
                                	 </div>
@@ -211,36 +204,44 @@
                 	        type:'POST',
                 	        data : {replyContent : $('#replyContent').val(), memberid : $('#memberid').val(), boardno : $('#boardno').val()},
                 	        success : function(data){
-                	        	 alert("댓글이 등록되었습니다."); 
-                	                getCommentList();
-                	                $("#replyContent").val("");
+                	          	if(data == 1) {
+                  	        	 	alert("댓글이 등록되었습니다."); 
+                  	        	} else {
+                  	        		alert("댓글 등록을 실패했습니다."); 
+                  	        	}
+                	        		 $("#replyContent").val("");
+                 	                getCommentList();
+                	               
                 	        },
                 	        error:function(request,status,error){
+                	        	alert("로그인후 이용해주세요.");
                 	        	console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown);
                 	       }
                 	    });
                     }
                     
-                    function Replydelete(fboardReplyNo) {
+                    function Replydelete(fboardReplyNo, memberId) {
                   	  console.log(fboardReplyNo + "댓글 삭제하기")
                   	  /* location.href="/testjson/fbreplydelete?fboardReplyNo=" + fboardReplyNo; */
                   	  
                   	  $.ajax({
                     		url : "/anavada/fbreplydelete.ss",
                   	        type:'POST',
-                  	        data : {fboardReplyno : fboardReplyNo},
+                  	        data : {fboardReplyno : fboardReplyNo, memberid : $('#memberid').val() },
                   	        success : function(data){
-                  	        	 alert("댓글이 삭제되었습니다."); 
+                  	        	if(data == 1) {
+                  	        	 	alert("댓글이 삭제되었습니다."); 
+                  	        	} else {
+                  	        		alert("댓글 삭제를 실패했습니다."); 
+                  	        	}
                   	                getCommentList();
                   	        },
                   	        error:function(request,status,error){
                   	        	console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown);
                   	       }
-                  	        
                   	    });
                     }
 
-                      
                     </script>
                     
                     <ul id="fbreply" class="cmt_con">

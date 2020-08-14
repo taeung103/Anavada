@@ -81,15 +81,16 @@ public class FboardReplyDao {
 	}
 
 	//댓글 삭제하기
-	public int deleteFboardReply(Connection conn, int fboardReplyNo) {
+	public int deleteFboardReply(Connection conn, int fboardReplyNo, String memberId) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "delete from fboard_reply where FBOARDREPLY_NO = ?";
+		String query = "delete from fboard_reply where FBOARDREPLY_NO = ? and member_id = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, fboardReplyNo);
+			pstmt.setString(2, memberId);
 			
 			result = pstmt.executeUpdate();
 			
