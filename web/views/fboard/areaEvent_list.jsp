@@ -258,7 +258,7 @@
 									<option value="replyDesc">댓글 많은순</option>
 								</select>
 								축제 명 : <input type="text" id=title onkeyup="searchFboard()" placeholder="축제명을 입력하세요">
-							 <button class="top-search"><i class="xi-search"></i></button> 
+							<!--  <button class="top-search"><i class="xi-search"></i></button>  -->
 						</div>
 					</div>
 					<!-- 종류리스트 끝 -->
