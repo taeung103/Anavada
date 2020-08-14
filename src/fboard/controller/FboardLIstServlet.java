@@ -73,29 +73,11 @@ public class FboardLIstServlet extends HttpServlet {
 				for(Fboard fboard : list) {
 					JSONObject job = new JSONObject();
 					
-					//축제 시작일, 종료일 날짜 format하기
-					// String -> Date 축제 시작일, 종료일
-					Date dstartDate = null;
-					Date dendDate = null;
-					SimpleDateFormat transFormat = new SimpleDateFormat("yyyyMMdd");
-					try {
-						dstartDate = transFormat.parse(fboard.getFestivalStartDate());
-						dendDate = transFormat.parse(fboard.getFestivalEndDate());
-						
-					} catch (ParseException e) {
-						e.printStackTrace();
-					}
-					
-					// Date format하기 축제 시작일, 종료일
-					transFormat = new SimpleDateFormat("yyyy.MM.dd");
-					String startDate = transFormat.format(dstartDate);
-					String endDate = transFormat.format(dendDate);
-					
 					job.put("fboardNo", fboard.getFboardNo());
 					job.put("festivalTitle", URLEncoder.encode(fboard.getFestivalTitle(), "utf-8"));
 					job.put("localNo", fboard.getLocalNo());
-					job.put("festivalStartDate", startDate);
-					job.put("festivalEndDate", endDate);
+					job.put("festivalStartDate", fboard.getFestivalStartDate());
+					job.put("festivalEndDate", fboard.getFestivalEndDate());
 					job.put("fesivalModifiedDate", fboard.getFesivalModifiedDate());
 					job.put("mapX", fboard.getMapX());
 					job.put("mapY", fboard.getMapY());
