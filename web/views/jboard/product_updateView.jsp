@@ -72,8 +72,8 @@
                             <tr>
                                 <td>지역선택</td>
                                 <td>
-                                  <select name="local" class="LocationSelect">
-                                <option value="0" selected="selected">지역선택</option>
+                                  <select name="local" class="LocationSelect" required="required">
+                              <option selected="selected" value="">지역선택</option>
                               <option value="1" <% if (local.equals("1"))  { %>selected="selected"<% } %>>강남구</option>
                               <option value="2" <% if (local.equals("2"))  { %>selected="selected"<% } %>>강동구</option>
                               <option value="3" <% if (local.equals("3"))  { %>selected="selected"<% } %>>강북구</option>
@@ -136,11 +136,11 @@
                             </tr>
                             <tr>
                                 <td>제목</td>
-                                <td><input type="text" name="title" class="form-control w100p" placeholder="제목" value= <%=jboard.getJboardTitle() %>></td>
+                                <td><input type="text" name="title" class="form-control w100p"  minlength="10" placeholder="제목" value= <%=jboard.getJboardTitle() %>></td>
                             </tr>
                             <tr>
                                 <td>판매희망가격</td>
-                                <td><input type="text" name="price"class="form-control w50p" placeholder="판매가"  
+                                <td><input type="text" name="price"class="form-control w50p" minlength="3"  placeholder="판매가"  
                                 		value ="<%=jboard.getJboardPrice() %>" style="float:left; margin-right: 20px;"/> 원</td>
                             </tr>
                             <tr>

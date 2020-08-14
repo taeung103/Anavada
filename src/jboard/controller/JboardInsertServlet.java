@@ -52,9 +52,7 @@ public class JboardInsertServlet extends HttpServlet {
 		int maxSize = 1024 * 1024 * 10; //용량 5메가로 제한
 
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/jboardfiles");
-		// 4. request 를 MultipartRequest 로 변환해야 함
-		// cos.jar 가 제공하는 클래스를 사용함
-		// 전송온 파일은 자동 지정 폴더에 저장됨
+
 		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8",
 				new DefaultFileRenamePolicy());
 
@@ -62,7 +60,7 @@ public class JboardInsertServlet extends HttpServlet {
 		Jboard jboard = new Jboard();
 		jboard.setJboardPost(mrequest.getParameter("post"));
 		jboard.setJboardMeet(mrequest.getParameter("meet"));
-		jboard.setLocalNo(mrequest.getParameter("location"));
+		jboard.setLocalNo(mrequest.getParameter("local"));
 		jboard.setJboardTitle(mrequest.getParameter("title"));
 		jboard.setJboardPrice(Integer.parseInt(mrequest.getParameter("price")));
 		jboard.setJboardContent(mrequest.getParameter("content"));
@@ -72,7 +70,7 @@ public class JboardInsertServlet extends HttpServlet {
 		
 		for ( int i=1 ; i<5;i++) {
 		String originalFileName= mrequest.getFilesystemName("ofile" +i);
-		System.out.println("ofile"+i);
+
 		switch (i) {
 		case 1: jboard.setJboardOrignalFilePath1(originalFileName); break;
 		case 2: jboard.setJboardOrignalFilePath2(originalFileName); break;
