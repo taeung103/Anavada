@@ -13,16 +13,16 @@ import notice.model.service.NoticeService;
 import notice.model.vo.Notice;
 
 /**
- * Servlet implementation class NoticeDetailServlet
+ * Servlet implementation class NoticePreNextServlet
  */
-@WebServlet("/ndetail")
-public class NoticeDetailServlet extends HttpServlet {
+@WebServlet("/nprenex")
+public class NoticePreNextServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeDetailServlet() {
+    public NoticePreNextServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,34 +32,16 @@ public class NoticeDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int no = Integer.parseInt(request.getParameter("no"));
-		int currentPage = 1;
-		if(request.getParameter("page") != null)
-			currentPage = Integer.parseInt(request.getParameter("page"));
-		String selected = null;
-		String keyword = null;
-		if(request.getParameter("selected") != null && request.getParameter("keyword") != null) {
-			selected = request.getParameter("selected");
-			keyword = request.getParameter("keyword");
-		}
-		
+		int iqNo = Integer.parseInt(request.getParameter("no"));
+		int flag = Integer.parseInt(request.getParameter("value"));
 		
 		NoticeService nservice = new NoticeService();
+		int pnNum = nservice.selectPreNext(iqNo, flag);
 		
-		nservice.addReadCount(no);
-		int listCount = nservice.getListCount();
-		Notice notice = nservice.selectOne(no);
-		
-		RequestDispatcher view = null;
-		if(notice != null) {
-			view = request.getRequestDispatcher("views/notice/notice_view.jsp");
-			request.setAttribute("notice", notice);
-			request.setAttribute("currentPage", currentPage);
-			request.setAttribute("selected", selected);
-			request.setAttribute("keyword", keyword);
-			request.setAttribute("totalList", listCount);
-			view.forward(request, response);
+		if(pnNum > 0) {
+			response.sendRedirect("ndetail?no="+pnNum);
 		}
+		
 	}
 
 	/**

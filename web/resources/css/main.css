@@ -51,7 +51,7 @@
 
 
 /*메인공지사항*/
-.mainNotice {
+.mainNotice_wrap {
     position: relative;
     width: 100%;
     overflow: hidden;
@@ -59,7 +59,7 @@
     margin-bottom: 60px;
     border-bottom: 1px dotted #aaa;
 }
-.mainNotice:before {
+.mainNotice_wrap:before {
     content: '';
     position: absolute;
     border-right: 1px dotted #aaa;
@@ -68,14 +68,26 @@
     height: 60%;
     top: 20%; 
 }
-.mainNotice ul {
+.mainNotice {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 50px !important;
+    margin-bottom: 60px;
+    border-bottom: 1px dotted #aaa;
+}
+.mainNotice {
     height:inherit;
     width: 48%;
     float: left;
 }
-.mainNotice ul:last-child {
+.mainNotice:last-child {
     float: right;
     right: 0 !important;
+}
+.mainNotice ul {
+    width: 100%;
+    height:inherit;
 }
 .mainNotice ul li {
     height:inherit;
