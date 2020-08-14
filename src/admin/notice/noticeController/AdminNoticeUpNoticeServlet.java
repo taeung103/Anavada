@@ -104,11 +104,14 @@ public class AdminNoticeUpNoticeServlet extends HttpServlet {
 		NoticeService nservice = new NoticeService();
 		int result = nservice.updateNotice(notice);
 		
+		int totalList = new NoticeService().getListCount();
+		
 		if(result > 0) {
 			notice = nservice.selectOne(no);
 			RequestDispatcher view = request.getRequestDispatcher("views/admin/notice/adminnotice_view.jsp");
 			request.setAttribute("notice", notice);
 			request.setAttribute("currentPage", Integer.parseInt(mrequest.getParameter("page")));
+			request.setAttribute("totalList", totalList);
 			view.forward(request, response);
 		}
 		
