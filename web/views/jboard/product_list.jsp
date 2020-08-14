@@ -151,7 +151,7 @@
             <!--  페이징 처리 -->
             <dl class="list-paging pb80">
                 <dd>
-                	<% if (currentPage <= 1){ %>
+                	<% if (currentPage < 1){ %>
               		<a><i class= "glyphicon glyphicon-backward"></i></a>
               		<%}else {%>
               		<a href="/anavada/jblist?page=1&local=<%=local%>&listsearch=<%=listSearch%>&titlesearch=<%=titleSearch%>"><i class= "glyphicon glyphicon-backward"></i></a>
@@ -167,7 +167,7 @@
                     <a href="/anavada/jblist?page=<%=p%>&local=<%=local%>&listsearch=<%=listSearch%>&titlesearch=<%=titleSearch%>"><%=p %></a>
                     <%}} %>
                     <!--  다음 그룹으로 이동처리 -->
-                    <% if (endPage +10 <= maxPage){ %>
+                    <% if (endPage +1 <= maxPage){ %>
                     <a href="/anavada/jblist?page=<%= endPage +1%>&local=<%=local%>&listsearch=<%=listSearch%>&titlesearch=<%=titleSearch%>"><i class="glyphicon glyphicon-menu-right"></i></a>
                     <%} %>
                     

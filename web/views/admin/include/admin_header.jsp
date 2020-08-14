@@ -10,7 +10,7 @@
         <ul>
             <li><a href="/anavada/mlist.ad?secessionOK=N">전체회원</a></li>
             <li><a href="/anavada/mlist.ad?secessionOK=Y">탈퇴회원</a></li>
-            <li><a href="../member/memberDeclare.jsp">신고회원</a></li>
+            <li><a href="/anavada/dlist.ad">신고회원</a></li>
         </ul>
         <h2><p>중고거래/커뮤니티관리</p></h2>
         <ul>
@@ -28,7 +28,6 @@
             <li><a href="/anavada/anlist.ss">공지사항</a></li>
             <li><a href="/anavada/aflist.ss">FAQ</a></li>
             <li><a href="/anavada/ailist.ss">문의하기</a></li>
-            <li><a href="/anavada/dlist.ad">신고자관리</a></li>
         </ul>
         
         <h2><p>홈페이지관리</p></h2>

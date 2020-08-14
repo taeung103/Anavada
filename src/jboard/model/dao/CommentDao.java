@@ -109,7 +109,7 @@ public class CommentDao {
 		ResultSet rset = null;
 		
 		String query = "SELECT * FROM JBOARD_COMMENT WHERE JBOARD_NO = ? "
-							+"ORDER BY COMMENT_REF ASC, COMMENT_REPLY_REF, COMMENT_LEVEL";
+							+"ORDER BY COMMENT_REF ASC, COMMENT_REPLY_REF, COMMENT_LEVEL, comment_reply_seq desc";
 		try {
 			
 				pstmt = conn.prepareStatement(query);

@@ -208,7 +208,7 @@
                    <a href="/anavada/adjlistview.ad?page=<%=p%>&local=<%=local%>&listsearch=<%=listSearch%>&titlesearch=<%=titleSearch%>"><%=p%></a>
                     <%}} %>
                     <!--  다음 그룹으로 이동처리 -->
-                    <% if (endPage +10 <= maxPage){ %>
+                    <% if (endPage +1 <= maxPage){ %>
                     <a href="/anavada/adjlistview.ad?page=<%=endPage + 1%>&local=<%=local%>&listsearch=<%=listSearch%>&titlesearch=<%=titleSearch%>"><i class="glyphicon glyphicon-menu-right"></i></a>
                     <%} %>
                     

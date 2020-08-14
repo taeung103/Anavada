@@ -37,7 +37,7 @@ public class DBoAdminDetailServlet extends HttpServlet {
 		
 		RequestDispatcher view = null;
 		if(dbo != null) {
-			view = request.getRequestDispatcher("views/declare/declare_detail_view.jsp");
+			view = request.getRequestDispatcher("views/declare/declareAdmin_detail_view.jsp");
 			request.setAttribute("dbo", dbo);
 			view.forward(request, response);
 		}else { 

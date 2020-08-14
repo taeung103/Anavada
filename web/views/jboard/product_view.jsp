@@ -250,7 +250,7 @@ font{
                                 <h4 class="cmt_head">전체 댓글 수 :<%=commentListCount %></h4>
                                 <% if(loginMember != null) { %>
                                 <input type= "hidden" name="jboardno" value = "<%=jboard.getJboardNo() %>">
-                                <input type= "hidden" name= "commentid"  value= "<%=jboard.getMemberId()%>">
+                                <input type= "hidden" name= "commentid"  value= "<%=loginMember.getMemberId()%>">
                                 <div class="cmt_body">
 <textarea name="commentcontent" style="resize: none; width:100%; min-height:100px; max-height:100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
                                     <div class="cmt_ok">
