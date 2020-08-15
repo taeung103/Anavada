@@ -51,13 +51,7 @@ public class FboardAdminUpdateServlet extends HttpServlet {
 			System.out.println("select : " + fboardNo + " 결과(1:유 100:무 0:해당축제 데이터가 없음) : " + selectResult);
 			//selectResult == 1 해당 축제 수정이 없을 경우
 			
-			if(selectResult == 0) { // 축제 정보가 아예 없을 경우
-				System.out.println("축제 번호 : " + fboardNo +  " 축제 수정일 : " + fesivalModifiedDate);
-				System.out.println(fboardNo + " 축제 정보가 없습니다. insert하세요");
-			}
-			
-			
-			if(selectResult == 100) {	//축제 수정일이 바뀌었을 경우
+			if(selectResult == 0) { // 축제 정보가 아예 없을 경우, 축제 수정일이 바뀌었을 경우
 				System.out.println("축제 번호 : " + fboardNo +  "축제 수정일 : " + fesivalModifiedDate);
 
 				fboard.setFboardNo(fboardNo);				

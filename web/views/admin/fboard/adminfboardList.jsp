@@ -52,8 +52,8 @@
                         
                         <a href="/anavada/fbinsert.ad">[축제 DB에 insert]</a> &nbsp;&nbsp;
 						<a href="/anavada/fbupdate.ad">[축제 DB에 update]</a> &nbsp;&nbsp;
-						<a href="/anavada/fbdelete.ad">[작년 축제 DB에 삭제하기]</a> &nbsp;&nbsp;
-						<a href="/anavada/fbdeleteall.ad">[축제게시판 DB에서 전부 삭제하기]</a> &nbsp;&nbsp;
+						<a href="/anavada/fbdelete.ad">[이전 축제 DB에서 삭제하기]</a> &nbsp;&nbsp;
+						<a href="/anavada/fbdeleteall.ad">[축제 DB에서 전부 삭제하기]</a> &nbsp;&nbsp;
 						
 						<script type="text/javascript" src="/anavada/resources/js/jquery-3.5.1.min.js"></script>
 						<script type="text/javascript">
