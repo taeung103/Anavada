@@ -60,7 +60,7 @@ public class FboardReplyDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		String query = "insert into fboard_reply values(FBREPLY_SEQ.NEXTVAL, ?, ?, ?, ?, ?, (select to_char(sysdate, 'YYYY.MM.DD HH:MI:SS') from dual), ?)";
+		String query = "insert into fboard_reply values(FBREPLY_SEQ.NEXTVAL, ?, ?, ?, ?, ?, (select to_char(sysdate, 'YYYY.MM.DD HH:MI:SS') from dual))";
 
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -69,7 +69,6 @@ public class FboardReplyDao {
 			pstmt.setString(3, reply.getFboardReplyContent());
 			pstmt.setInt(4, reply.getFboardReplyLev());
 			pstmt.setInt(5, reply.getFboardReplyRef());
-			pstmt.setInt(6, 1);
 
 			result = pstmt.executeUpdate();
 

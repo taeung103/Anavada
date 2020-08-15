@@ -18,7 +18,7 @@ public class Fboard implements java.io.Serializable{
 	private int readcount;
 	private String thumbnail;
 	private String localName;	//지역명
-	private int replycount = 0;	//댓글 수, 나중에 DB합치면 수정
+	private int replycount = 0;	//댓글 수
 	
 	public Fboard() {}
 
@@ -155,10 +155,10 @@ public class Fboard implements java.io.Serializable{
 	public String getLocalName() {
 		return localName;
 	}
+	
 	public void setLocalName(String localName) {
 		this.localName = localName;
 	}
-
 
 	public int getReplycount() {
 		return replycount;
@@ -183,7 +183,7 @@ public class Fboard implements java.io.Serializable{
 //LOCAL_NO	VARCHAR2(3 BYTE)
 //FESTIVAL_STARTDATE	VARCHAR2(8 BYTE)
 //FESTIVAL_ENDDATE	VARCHAR2(8 BYTE)
-//FESTIVAL_MODIFIEDDATE	VARCHAR2(15 BYTE)
+//FESTIVAL_MODIFIEDDATE	VARCHAR2(20 BYTE)
 //MAP_Y	VARCHAR2(30 BYTE)
 //MAP_X	VARCHAR2(30 BYTE)
 //BMODIFY_DATE	DATE
