@@ -42,6 +42,7 @@ public class JboardDao {
 					pstmt.setString(14, jboard.getMemberId());
 					pstmt.setString(15, jboard.getLocalNo());
 					pstmt.setString(16, jboard.getMemberIp());
+					
 					result = pstmt.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -186,7 +187,14 @@ public class JboardDao {
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
 			
-			String query = "SELECT * FROM JBOARD WHERE JBOARD_NO = ?";
+			String query = "SELECT JBOARD_NO, JBOARD_TITLE, JBOARD_CONTENT," 
+								   +"JBOARD_PRICE, JBOARD_DATE , JBOARD_UPDATE," 
+								   +"JBOARD_COUNT, JBOARD_LIKE, JFILES_ORIGINAL_FILEPATH1, JFILES_RENAME_FILEPATH1," 
+								   +"JFILES_ORIGINAL_FILEPATH2, JFILES_RENAME_FILEPATH2 , JFILES_ORIGINAL_FILEPATH3,"
+								   +"JFILES_RENAME_FILEPATH3, JFILES_ORIGINAL_FILEPATH4 , JFILES_RENAME_FILEPATH4,"
+								   +"JBOARD_CHECK , JBOARD_MEET, JBOARD_POST, MEMBER_ID, LOCAL_NO,  SUBSTR(MEMBER_IP,1,INSTR(MEMBER_IP,'.',1,2))" 
+								   +"FROM JBOARD "  
+								   +"WHERE JBOARD_NO= ?";
 			
 			try {
 				pstmt = conn.prepareStatement(query);
@@ -218,7 +226,7 @@ public class JboardDao {
 					jboard.setJboardPost(rset.getString("jboard_post"));
 					jboard.setMemberId(rset.getString("member_id"));
 					jboard.setLocalNo(rset.getString("local_no"));
-					jboard.setMemberIp(rset.getString("member_ip"));
+					jboard.setMemberIp(rset.getString("SUBSTR(MEMBER_IP,1,INSTR(MEMBER_IP,'.',1,2))"));
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -14,14 +14,14 @@ public class CommentDao {
 	public CommentDao () {}
 
 	public int insertComment(Connection conn, Comment reply) {
-		int result = 0;
+		 int result = 0;
 		 PreparedStatement pstmt = null;
 		 
 		 String query = null;
 		 
 			 query = "insert into jboard_comment values ("
 						+ "JBOARD_COMMENT_SEQ.nextval , ?, ?, sysdate, "
-						+ "sysdate, ?, JBOARD_COMMENT_SEQ.nextval ,0, 0 ,0)";
+						+ "sysdate, ?, JBOARD_COMMENT_SEQ.nextval ,0, 0 ,0,?)";
 		
 		
 		 try {
@@ -29,6 +29,7 @@ public class CommentDao {
 			 	pstmt.setString(1, reply.getCommentId());
 			 	pstmt.setString(2, reply.getCommentContent());
 			 	pstmt.setInt(3, reply.getJboardNo());
+			 	pstmt.setString(4, reply.getMemberIp());
 			 	result = pstmt.executeUpdate();				 	
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -69,21 +70,22 @@ public class CommentDao {
 		String query = null;
 		
 		if(reply.getCommentLevel() == 1) {
-				query = "update jboard_comment set comment_reply_seq = comment_reply_seq + 1 "
+				query = "update jboard_comment set comment_reply_seq = comment_reply_seq + 1 , member_ip = ? "
 						+"where comment_ref = ? and comment_level = ?";
 		}
 		if(reply.getCommentLevel() ==2) {
-			query = "update jboard_comment set comment_reply_seq = comment_reply_seq + 1 "
+			query = "update jboard_comment set comment_reply_seq = comment_reply_seq + 1 , member_ip = ? "
 					+"where comment_ref = ? and comment_level = ? "
 					+ "and comment_reply_ref = ?";
 		}
 		
 		try {
 				pstmt = conn.prepareStatement(query);
-				pstmt.setInt(1, reply.getCommentRef());
-				pstmt.setInt(2, reply.getCommentLevel());
+				pstmt.setString(1, reply.getMemberIp());
+				pstmt.setInt(2, reply.getCommentRef());
+				pstmt.setInt(3, reply.getCommentLevel());
 				if (reply.getCommentLevel() ==2) {
-						pstmt.setInt(3, reply.getCommentReplyRef());
+						pstmt.setInt(4, reply.getCommentReplyRef());
 				}
 				
 				result = pstmt.executeUpdate();
@@ -108,8 +110,11 @@ public class CommentDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = "SELECT * FROM JBOARD_COMMENT WHERE JBOARD_NO = ? "
-							+"ORDER BY COMMENT_REF ASC, COMMENT_REPLY_REF, COMMENT_LEVEL, comment_reply_seq desc";
+		String query = "SELECT COMMENT_NO,COMMENT_ID,COMMENT_CONTENT,COMMENT_DATE,COMMENT_LASTMODIFIED,"
+							  +"JBOARD_NO,COMMENT_REF,COMMENT_REPLY_REF," 
+							  +"COMMENT_LEVEL, COMMENT_REPLY_SEQ,SUBSTR(MEMBER_IP,1,INSTR(MEMBER_IP,'.',1,2)) "
+							  +"FROM JBOARD_COMMENT WHERE JBOARD_NO = ? "
+							  +"ORDER BY COMMENT_REF ASC, COMMENT_REPLY_REF, COMMENT_LEVEL, comment_reply_seq desc";
 		try {
 			
 				pstmt = conn.prepareStatement(query);
@@ -131,7 +136,7 @@ public class CommentDao {
 					comment.setCommentReplyRef(rset.getInt("comment_reply_ref"));
 					comment.setCommentLevel(rset.getInt("comment_level"));
 					comment.setCommentReplySeq(rset.getInt("comment_reply_seq"));
-					
+					comment.setMemberIp(rset.getString("SUBSTR(MEMBER_IP,1,INSTR(MEMBER_IP,'.',1,2))"));
 					list.add(comment);
 				}
 		} catch (Exception e) {
@@ -148,7 +153,10 @@ public class CommentDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = "select * from jboard_comment where comment_no = ?";
+		String query = "SELECT COMMENT_NO,COMMENT_ID,COMMENT_CONTENT,COMMENT_DATE,COMMENT_LASTMODIFIED,"
+						+"JBOARD_NO,COMMENT_REF,COMMENT_REPLY_REF,"
+						+"COMMENT_LEVEL, COMMENT_REPLY_SEQ,SUBSTR(MEMBER_IP,1,INSTR(MEMBER_IP,'.',1,2))"
+						+ "from jboard_comment where comment_no = ?";
 		
 		try {
 				pstmt = conn.prepareStatement(query);
@@ -169,7 +177,7 @@ public class CommentDao {
 					comment.setCommentReplyRef(rset.getInt("comment_reply_ref"));
 					comment.setCommentLevel(rset.getInt("comment_level"));
 					comment.setCommentReplySeq(rset.getInt("comment_reply_seq"));
-					
+					comment.setMemberIp(rset.getString("SUBSTR(MEMBER_IP,1,INSTR(MEMBER_IP,'.',1,2))"));
 				}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -190,14 +198,14 @@ public class CommentDao {
 			 query = "insert into jboard_comment values ("
 						+ "JBOARD_COMMENT_SEQ.nextval,"
 						+ "?, ?, sysdate, sysdate, ?, ?, JBOARD_COMMENT_SEQ.nextval, "
-						+ "1 , ?)";
+						+ "1 , ?, ?)";
 						
 		 }
 		 if(reply.getCommentLevel() == 2) {
 			 query = "insert into jboard_comment values ("
 						+ "JBOARD_COMMENT_SEQ.nextval,"
 						+ "?, ?, sysdate, sysdate, ?, ?, "
-						+ "?, 2, ?)";	
+						+ "?, 2, ?, ?)";	
 		 }
 		 
 		 try {
@@ -209,10 +217,12 @@ public class CommentDao {
 		 	 	
 			 	if (reply.getCommentLevel() == 1) {
 			 	 	pstmt.setInt(5, reply.getCommentReplySeq());
+			 	 	pstmt.setString(6,  reply.getMemberIp());
 			 	}
 			 	if(reply.getCommentLevel() == 2) {
 			 			pstmt.setInt(5,  reply.getCommentReplyRef());
 			 			pstmt.setInt(6, reply.getCommentReplySeq());
+			 			pstmt.setString(7, reply.getMemberIp());
 			 	}
 			 	result = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -247,11 +257,14 @@ public class CommentDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "update jboard_comment set comment_content  = ?, comment_lastmodified = sysdate where comment_no = ?";
+		String query = "update jboard_comment set comment_content  = ?, "
+							+ "comment_lastmodified = sysdate where comment_no = ?"
+							+ "member_ip = ?";
 		try {
 				pstmt = conn.prepareStatement(query);
 				pstmt.setString(1, reply.getCommentContent());
 				pstmt.setInt(2,  reply.getCommentNo());
+				pstmt.setString(3, reply.getMemberIp());
 				result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			 e.printStackTrace();

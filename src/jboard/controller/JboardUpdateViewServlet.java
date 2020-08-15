@@ -38,6 +38,17 @@ public class JboardUpdateViewServlet extends HttpServlet {
 		String post = jboard.getJboardPost();
 		String meet = jboard.getJboardMeet(); 
 		String local = jboard.getLocalNo();
+		
+		String MemberIp = request.getHeader("X-FORWARDED-FOR"); 
+	    if (MemberIp == null || MemberIp.length() == 0) {
+	    	MemberIp = request.getHeader("Proxy-Client-IP");
+	    }
+	    if (MemberIp == null || MemberIp.length() == 0) {
+	    	MemberIp = request.getHeader("WL-Proxy-Client-IP");
+	    }
+	    if (MemberIp == null || MemberIp.length() == 0) {
+	    	MemberIp = request.getRemoteAddr() ;
+	    }
 		RequestDispatcher view = null;
 		if (jboard != null) {
 				view = request.getRequestDispatcher("views/jboard/product_updateView.jsp");
@@ -46,6 +57,7 @@ public class JboardUpdateViewServlet extends HttpServlet {
 				request.setAttribute("post", post);
 				request.setAttribute("meet", meet);
 				request.setAttribute("local", local);
+				request.setAttribute("memberip", MemberIp);
 				view.forward(request, response);
 		}else {
 				view = request.getRequestDispatcher("views/common/error.jsp");

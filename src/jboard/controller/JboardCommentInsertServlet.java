@@ -47,13 +47,22 @@ public class JboardCommentInsertServlet extends HttpServlet {
 
 		String commentId = request.getParameter("commentid");
 		String commentContent = request.getParameter("commentcontent");
-
+		String MemberIp = request.getHeader("X-FORWARDED-FOR"); 
+	    if (MemberIp == null || MemberIp.length() == 0) {
+	    	MemberIp = request.getHeader("Proxy-Client-IP");
+	    }
+	    if (MemberIp == null || MemberIp.length() == 0) {
+	    	MemberIp = request.getHeader("WL-Proxy-Client-IP");
+	    }
+	    if (MemberIp == null || MemberIp.length() == 0) {
+	    	MemberIp = request.getRemoteAddr() ;
+	    }
 		CommentService jbcservice = new CommentService();
 		Comment reply = new Comment();
 		reply.setJboardNo(jboardNo);
 		reply.setCommentContent(commentContent);
 		reply.setCommentId(commentId);
-
+		reply.setMemberIp(MemberIp);
 
 		int result = jbcservice.insertComment(reply);
 		

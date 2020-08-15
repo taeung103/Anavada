@@ -55,6 +55,7 @@
                 <input type= "hidden" name= "rfile3" value="<%=jboard.getJboardRenameFilePath3() %>">
                 <input type= "hidden" name= "ofile4" value="<%=jboard.getJboardOrignalFilePath4() %>">
                 <input type= "hidden" name= "rfile4" value="<%=jboard.getJboardRenameFilePath4() %>">
+                <input type= "hidden" name= "memberip" value= "<%=jboard.getMemberIp() %>">
                 
                     <table>
                         <colgroup>

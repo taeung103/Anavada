@@ -43,16 +43,22 @@ public class JboardCommentReplyInserServlet extends HttpServlet {
 		Comment comment = jbcservice.selectComment(commentNo);
 		
 		Comment reply = new Comment();
-		System.out.println("내용 : " +commentContent);
-		System.out.println("Writer" +commentWriter);
-		System.out.println("보드번호" + jboardNo);
-		System.out.println("댓글번호" + commentNo);
+		String MemberIp = request.getHeader("X-FORWARDED-FOR"); 
+	    if (MemberIp == null || MemberIp.length() == 0) {
+	    	MemberIp = request.getHeader("Proxy-Client-IP");
+	    }
+	    if (MemberIp == null || MemberIp.length() == 0) {
+	    	MemberIp = request.getHeader("WL-Proxy-Client-IP");
+	    }
+	    if (MemberIp == null || MemberIp.length() == 0) {
+	    	MemberIp = request.getRemoteAddr() ;
+	    }
 		reply.setJboardNo(jboardNo);
 		reply.setCommentContent(commentContent);
 		reply.setCommentId(commentWriter);
 		reply.setCommentLevel(comment.getCommentLevel() + 1);
 		reply.setCommentRef(comment.getCommentRef());
-		
+		reply.setMemberIp(MemberIp);
 		if (reply.getCommentLevel() == 2) {
 			reply.setCommentReplyRef(comment.getCommentReplyRef());
 		}

@@ -224,7 +224,10 @@ font{
                              <% if (post.equals("Y"))  { %>우편거래상품<% } %></span></i><br>
                             <% for (Jboard lmember : likemember ){ %>
                                <%=lmember.getMemberId() %>
-                               <%} %>님이 좋아합니다.
+                               <%} %>
+                               <% if (jboard.getJboardLike() >0) {%>
+                            	   님이 좋아합니다.
+                               <% }%>
                             <h2 class="product_name"><b>상품명 : </b><span><%=jboard.getJboardTitle() %></span></h2>
                             <h3 class="product_price"><b>판매가격 : </b><span><%=jboard.getJboardPrice() %></span>원</h3>
                             <p class="view-ctn">
@@ -232,7 +235,8 @@ font{
                             </p>
                             <div>
                                 <b>판매자 아이디 : <%= jboard.getMemberId()%> &nbsp; &nbsp; / &nbsp; &nbsp; 조회수 : <%=jboard.getJboardCount()%></b><br/>
-                                <b>등록일자 : </b><%= jboard.getJboardDate()%> &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;<b>최종수정일자 : </b><%=jboard.getJboardUpdate() %>
+                                <b>등록일자 : </b><%= jboard.getJboardDate()%> &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;<b>최종수정일자 : </b><%=jboard.getJboardUpdate() %><br>
+                                <b>판매자 IP :</b> <%= jboard.getMemberIp()%>
                             </div>
                         </div>
                     </dd>
@@ -274,7 +278,7 @@ font{
                       <ul class="cmt_con">
                         <li> 
                             <div>
-                                <h4><%=comment.getCommentId() %></h4><span>마지막 수정일<%=comment.getCommentLastModified() %></span>
+                                <h4><%=comment.getCommentId() %></h4><span>마지막 수정일<%=comment.getCommentLastModified() %> &nbsp; &nbsp; 작성자 IP :<%=comment.getMemberIp() %></span>
                             </div>
                             <p><%=comment.getCommentContent().replace("\r\n","<br>") %></p>
                              <% if(loginMember != null&& comment.getCommentLevel()<2) { %>
