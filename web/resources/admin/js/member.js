@@ -19,7 +19,7 @@ $(function () {
 				var dataSplit = data.split('/');
 				if (dataSplit.length === 2) {
 				alert(/*dataSplit[1] + */dataSplit[0] + '명의 회원이 탈퇴되었습니다.');
-				location.href=document.referrer;
+				location.reload();
 				}
 			},
 			//Ajax 실패시 호출
@@ -52,7 +52,7 @@ $(function () {
 				var dataSplit = data.split('/');
 				if (dataSplit.length === 2) {
 				alert(/*dataSplit[1] + */dataSplit[0] + '명의 회원이 삭제되었습니다.');
-				location.href=document.referrer;
+				location.reload();
 				}
 			},
 			//Ajax 실패시 호출

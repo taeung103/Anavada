@@ -38,6 +38,8 @@ public class LoginServlet extends HttpServlet {
 		
 		MemberService mservice = new MemberService();
 		Member loginMember = mservice.loginCheck(memberId, memberPwd);
+		
+		System.out.println("loginMember : " + loginMember);
 
 		if(loginMember != null) {
 			HttpSession session = request.getSession();
@@ -46,7 +48,7 @@ public class LoginServlet extends HttpServlet {
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('아이디 또는 비밀번호가 일치하지 않습니다.\\n다시 입력해주세요.'); location.href=document.referrer;</script>");
+			writer.println("<script>alert('탈퇴한 회원이거나 아이디 또는 비밀번호가 일치하지 않습니다.\\n다시 입력해주세요.'); location.href=document.referrer;</script>");
 			writer.close();
 		}
 	}

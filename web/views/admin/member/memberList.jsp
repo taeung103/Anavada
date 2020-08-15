@@ -139,7 +139,7 @@
 					<% } else { %>
                         <a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
 					<% } %>
-					<% if(currentPage > maxPage){ %>
+					<% if(currentPage >= maxPage){ %>
                         <a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
 					<% } else { %>
                         <a href="/anavada/mlist.ad?secessionOK=N&page=<%= maxPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>

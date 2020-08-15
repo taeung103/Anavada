@@ -37,7 +37,7 @@ public class MemberLeaveServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String memberId = request.getParameter("memberId");
-		int result = new MemberService().deleteMember(memberId);
+		int result = new MemberService().leaveMember(memberId);
 		
 		if(result > 0) {
 			response.sendRedirect("/anavada/logout");
