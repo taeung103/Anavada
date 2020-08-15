@@ -138,7 +138,7 @@
 				</div>
                 <% if (loginMember != null){ %>
                 <div class="write-btn">
-                    <a href="views/jboard/product_write.jsp" class="write_btn">글쓰기</a>
+                    <a href="views/jboard/product_write.jsp?memberid=<%=loginMember.getMemberId()%>" class="write_btn">글쓰기</a>
                   </div>
                  <% }else{ %>
                   <div class="write-btn">

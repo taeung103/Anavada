@@ -462,4 +462,29 @@ public class JboardDao {
 			return list;
 		}
 
+		public int getOneDayLimitCount(Connection conn, String memberId) {
+			int listCount = 0;
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			//System.out.println( "로컬값 :" +local + "titleSearch값 " + titleSearch);
+			String query  = "SELECT COUNT(*) FROM JBOARD "
+							+"WHERE MEMBER_ID = ? AND TO_CHAR(JBOARD_DATE,'YYYYMMDD') = TO_CHAR(SYSDATE,'YYYYMMDD')";
+			
+			try {
+					pstmt = conn.prepareStatement(query);
+					pstmt.setString(1, memberId);
+					rset = pstmt.executeQuery();
+					
+					if (rset.next()) {
+						listCount = rset.getInt(1);
+					}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(rset);
+				close(pstmt);
+			}
+			return listCount;
+	}
+
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
@@ -49,6 +50,19 @@ public class JboardInsertServlet extends HttpServlet {
 			view.forward(request, response);
 		}
 		
+		JboardService jbservice = new JboardService();
+		String memberId = request.getParameter("memberid");
+		System.out.println(memberId);
+		int listcount=jbservice.getOneDayLimitCount(memberId);
+		System.out.println(listcount +" 하루 게시글 수");
+		if (listcount >= 6) {
+				response.setContentType("text/html); charset=UTF-8");
+				PrintWriter script = response.getWriter();
+				script.println("<script>");
+				script.println("alert('게시글은 하루에 5개를 초과 할 수 없습니다.');");
+				script.println("location.href='anavada/jblist';");
+;				script.println("</script>");
+		}
 		
 		int maxSize = 1024 * 1024 * 10; //용량 5메가로 제한
 

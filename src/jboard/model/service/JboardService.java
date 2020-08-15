@@ -142,6 +142,17 @@ public class JboardService {
 			
 			return list;
 		}
+
+		public int getOneDayLimitCount(String memberId) {
+			Connection conn = getConnection();
+			int listCount = bdao.getOneDayLimitCount(conn, memberId);
+			close(conn);
+					
+			return listCount;
+			
+		}
+
+		
 		
 	}
 
