@@ -99,16 +99,16 @@
                                 <% for(int i=0; i<fileExist.length; i++) { 
                                 	if(!fileExist[i]) {	
                                 		switch(i) {
-                                		case 0 : %><input type="file" name="newofile1"><%break;
-                                		case 1 : %><input type="file" name="newofile2"><%break;
+                                		case 0 : %><input type="file" name="newofile1" class="mb5"><%break;
+                                		case 1 : %><input type="file" name="newofile2" class="mb5"><%break;
                                 		case 2 : %><input type="file" name="newofile3"></td><%break;  } } } %>
                             </tr>
                         </tbody>
                     </table>
 
                     <div class="write-btn">
-                    	<input type="reset" class="btn btn-success" value="수정취소" style="width:100px;">
                         <a onclick="javascipt:history.go(-1); return false;" class="btn btn-list">뒤로가기</a>
+                    	<input type="reset" class="btn btn-success" value="수정취소" style="width:100px;">
                         <input type="submit" class="btn btn-success" value="수정하기" style="width:100px;">
                     </div>
                 </form>

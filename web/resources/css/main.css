@@ -146,9 +146,9 @@
     font-size: 12px;
     color: #FF8A3D;
 }
-.good_i span, .score_i span {
+/* .good_i span, .score_i span {
     color: #333;
-}
+} */
 .main_content .score_i {
     margin-left: 20px;
 }
