@@ -163,12 +163,12 @@
                         mapOption = {
                             center : new kakao.maps.LatLng(37.5311008, 126.9810742), // 지도의 중심좌표
                             level : 9 // 지도의 확대 레벨
-                           /*  mapTypeId : kakao.maps.MapTypeId.ROADMAP */
                         };
 
                         // 지도를 생성한다 
                         var map = new kakao.maps.Map(mapContainer, mapOption);
-                     // 지도에 마커를 표시합니다 
+                        
+                     	// 지도에 마커를 표시합니다 
                  		<% int index = 0;%>
                 		<%for (Fboard f : list) { index++;%>
                 		var marker<%=index%> = new daum.maps.Marker({
@@ -213,19 +213,17 @@
                 			overlay<%=index%>.setMap(null); 
                 			}
                 		<%}%>
-                		
                 	</script>
                 <!-- 맵 리스트 끝 -->
 			
-					
-					<!--종류 리스트-->
+					<!--검색 리스트-->
 					<div class="sort-area">
  						<h4 id="totalcount">전체 150개</h4>
 						<!-- <a href="areaEvent_write.jsp" class="write_btn">글쓰기</a> -->
 						<div> 
 							<input type="checkbox" id="lastList">지난 축제 보기
 								지역 분류 : <select name="" id="locationSelect" class="LocationSelect">
-									<option value="0" selected="selected">지역 선택</option>
+									<option value="0" selected="selected">지역 선택</option>	<!-- 서울시 전체 고정  -->
 									<option value="1">강남구</option>
 									<option value="2">강동구</option>
 									<option value="3">강북구</option>
@@ -253,26 +251,25 @@
 									<option value="25">중랑구</option>
 								</select> 
 								<select id="sortSelect" class="ListSelect">
-									<option value="enddateAsc" selected="selected">종료일 최신순</option>
+									<option value="enddateAsc" selected="selected">종료일 최신순</option>	<!-- 고정  -->
 									<option value="readcountDesc">조회수 높은순</option>
 									<option value="replyDesc">댓글 많은순</option>
 								</select>
-								축제 명 : <input type="text" id=title onkeyup="searchFboard()" placeholder="축제명을 입력하세요">
-							<!--  <button class="top-search"><i class="xi-search"></i></button>  -->
+								축제 명 : <input type="text" id=title onkeyup="searchFboard()" placeholder="축제명을 입력하세요">	<!-- placeholder 처리가 안됨 -->
+							<!--  <button class="top-search"><i class="xi-search"></i></button>  -->	<!-- ajax로 바로 처리하기때문에 버튼 필요없음 -->
 						</div>
 					</div>
-					<!-- 종류리스트 끝 -->
+					<!-- 검색 리스트 끝 -->
 					
 				<!-- 축제 게시판 리스트  -->
 				<script type="text/javascript">
 				
-				/* 항상 축제 게시판 가지고 오기 */
 				$(document).ready(function() {
-					searchFboard();
+					searchFboard();	// 항상 축제 게시판 가지고 오기 
 				});	//document.ready
 				
 				
-				/* 축제 가지고 오기 ajax 끝 */
+				/* 축제 가지고 오기 ajax */
 				function searchFboard() {
 					console.log("searchFboard()");
 					$.ajax({
@@ -343,7 +340,7 @@
 			location.href = '/anavada/views/fboard/areaEvent_view.jsp?fboardno=' + boardNo + '&festivalEndDate=' + festivalEndDate ;
 		}
 		</script>
-		<!-- 축제 게시판 리스트  -->
+		<!-- 축제 게시판 리스트 끝 -->
 					
 					<!-- 축제 목록 table  -->
 					<table id="fboard-table" class="cmnt_list">
@@ -366,18 +363,18 @@
 				</div>
 				<!-- 전체 리스트 끝 -->
 
-				<!-- 페이지넘버 -->
+<!-- 				페이지넘버
 				<dl class="list-paging pb80">
 					<dd>
 						<a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
 						<a href="#none" class="active">1</a> <a href="#none">2</a> <a
 							href="#none">3</a>
-						<!-- 활성화 class="active" -->
+						활성화 class="active"
 						<a href="#none">4</a> <a href="#none">5</a> <a href="#none"><i
 							class="glyphicon glyphicon-menu-right"></i></a>
 					</dd>
 				</dl>
-				<!-- 페이지넘버 끝 -->
+				페이지넘버 끝 -->
 				
 			</div>
 			<!-- 컨텐츠 끝 -->

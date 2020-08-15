@@ -57,6 +57,7 @@
 						
 						<script type="text/javascript" src="/anavada/resources/js/jquery-3.5.1.min.js"></script>
 						<script type="text/javascript">
+						/* api에서 제공하는 리스트 가지고 오기 */
 						$(function(){
 							$.ajax({
 								url : "/anavada/fapi.ad",
@@ -83,6 +84,7 @@
 								}
 							});	//ajax
 							
+							/* DB에 저장된 fboard 리스트 가지고 오기 */
 							$.ajax({
 								url : "/anavada/fblist.ad",
 								type : "get",
@@ -107,11 +109,8 @@
 									console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown);
 								}
 							});	//ajax
-							
 						});	//document.ready
-						
 						</script>
-						
 						
 						<div class="Comparisondiv">
 							<div class="apidiv">

@@ -115,9 +115,7 @@
                    <!--  <a href="#none" class="btn btn-next">다음글</a> -->
                 </div>
                 
-                
                <div class="cmt_wrap">
-                
                     
                     <!-- 댓글 작성 폼 -->
                        <form name="replysubmit" method="post" action="">
@@ -186,27 +184,26 @@
                           if (document.getElementById("replyContent").value == "") {
                               alert("내용을 입력해주세요");
                               return false;
-                    }else
-                  	  $.ajax({
-                  		url : "/anavada/fbreplyinsert.ss",
-                	        type:'POST',
-                	        data : {replyContent : $('#replyContent').val(), memberid : $('#memberid').val(), boardno : $('#boardno').val()},
-                	        success : function(data){
-                	          	if(data == 1) {
-                  	        	 	alert("댓글이 등록되었습니다."); 
-                  	        	} else {
-                  	        		alert("댓글 등록을 실패했습니다."); 
-                  	        	}
-                	        		 $("#replyContent").val("");
-                 	                getCommentList();
-                	               
-                	        },
-                	        error:function(request,status,error){
-                	        	alert("로그인후 이용해주세요.");
-                	        	console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown);
-                	       }
-                	    });
-                    }
+                    	}else
+                  	 		 $.ajax({
+                  				url : "/anavada/fbreplyinsert.ss",
+                	        	type:'POST',
+                	        	data : {replyContent : $('#replyContent').val(), memberid : $('#memberid').val(), boardno : $('#boardno').val()},
+                	        	success : function(data){
+                	          		if(data == 1) {
+                  	        		 	alert("댓글이 등록되었습니다."); 
+                  	        		} else {
+                  	        			alert("댓글 등록을 실패했습니다."); 
+                  	        		}
+                	        			 $("#replyContent").val("");
+                 	            	    getCommentList();
+	                	        },
+    	            	        error:function(request,status,error){
+        	        	        	alert("로그인후 이용해주세요.");
+            	    	        	console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown);
+                		       }
+                		    });
+                    	}
                     
                       // 댓글 삭제
                     function Replydelete(fboardReplyNo, memberId) {
@@ -234,7 +231,6 @@
                     
                     <ul id="fbreply" class="cmt_con">
                     </ul>
-                    
                    <!--  <button class="cmt_in">댓글 더보기 <i class="glyphicon glyphicon-menu-right"></i></button> -->
              	 </div>
             </div>
