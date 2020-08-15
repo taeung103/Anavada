@@ -164,18 +164,9 @@
 								for(var i in json.list) {
 								values += '<li><div>' +
                                 '<h4>user : ' + json.list[i].memberId + '</h4><span>' + json.list[i].fboardReplyCreatDate + '</span>' +
-                                '</div><p>' + decodeURIComponent(json.list[i].fboardReplyContent).replace(/\+/gi, " ") + '</p>' + 
-                                '<div class="cmt_delete" style="float: right;"><input type="button" value="삭제" onclick="Replydelete(' + json.list[i].fboardReplyNo + ');"></div>' +
-                                '<button onclick="">대댓글</button>'
-                                
-                                /* '<div class="Subcmt_form">' +
-                                '<form name="replysubmit" method="post" action="/testjosn/fbreplyinsert.ss?fboardReplyLev=2&fboardReplyPNo=' + json.list[i].fboardReplyNo + '">' +
-                                    '<fieldset><div class="cmt_form"><div class="cmt_body"><textarea id="replycontent" style="resize: none; width:100%; min-height:100px; max-height:100px;">비방글은 작성하실 수 없습니다.</textarea>' +
-                                            '<div class="cmt_ok"><input type="submit" value="등록" onclick="ReplySubmit()"></div>' +
-                                            '</div>' +
-                                        '</div>' +
-                                    '</fieldset></form></div>' +
-                          		'</li>' */
+                                '</div><pre>' + decodeURIComponent(json.list[i].fboardReplyContent).replace(/\+/gi, " ") + '</pre>' + 
+                                '<div class="cmt_delete" style="float: right;"><input type="button" value="삭제" onclick="Replydelete(' + json.list[i].fboardReplyNo + ');"></div>' 
+                                 +'<button onclick="">대댓글</button>' + '</li>'
 								}	//for in
 								
 								 $("#fbreply").empty();
