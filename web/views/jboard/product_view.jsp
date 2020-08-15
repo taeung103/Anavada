@@ -21,7 +21,7 @@
 <head>
 
     <%@ include file="../include/head.jsp" %>
-    
+    <!-- 대댓글 버튼 눌렀을 시 숨겨져 있던 입력창 출력 -->
         <script type="text/javascript">
         $(function (){
             $(".Subcmt_btn").click(function () {
@@ -217,7 +217,8 @@ font{
                            </dd>
                         </dl>
                         <div>
-                            <i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>&nbsp;<%=jboard.getJboardLike() %> &nbsp;  <% if (meet.equals("Y"))  { %>직거래상품<% } %> <% if (post.equals("Y"))  { %>우편거래상품<% } %></span></i>
+                            <i class="good_i glyphicon glyphicon-heart-empty">
+                            <a href="/anavada/jblike?jboardno=<%=jboard.getJboardNo()%>&memberid=<%=jboard.getMemberId()%>">좋아요</a><span>&nbsp;<%=jboard.getJboardLike() %> &nbsp;  <% if (meet.equals("Y"))  { %>직거래상품<% } %> <% if (post.equals("Y"))  { %>우편거래상품<% } %></span></i>
                             <h2 class="product_name"><b>상품명 : </b><span><%=jboard.getJboardTitle() %></span></h2>
                             <h3 class="product_price"><b>판매가격 : </b><span><%=jboard.getJboardPrice() %></span>원</h3>
                             <p class="view-ctn">

@@ -90,6 +90,49 @@ public class JboardService {
 			return list;
 		}
 
+		public int jboardInsertLike(Jboard jboard) {
+			Connection conn = getConnection();
+			int result = bdao.insertJboardLike(conn, jboard);
+			if(result > 0)
+				commit(conn);
+			else
+				rollback(conn);
+			close(conn);
+			return result;
+		}
+		
+		public int jboardLikeUp(int jboardNo) {
+			Connection conn = getConnection();
+			int result = bdao.jboardLikeUp(conn, jboardNo);
+			if (result > 0)
+				commit(conn);
+			else
+				rollback(conn);
+			close(conn);
+			
+			return result;
+		}
+
+		public void jboardLikeDown(int jboardNo) {
+			Connection conn = getConnection();
+			int result = bdao.jboardLikeDown(conn, jboardNo);
+			if (result > 0)
+				commit(conn);
+			else
+				rollback(conn);
+			close(conn);
+			
+		}
+
+		public void jboardDeleteLike(Jboard jboard) {
+			Connection conn = getConnection();
+			int result = bdao.jboardDeleteLike(conn, jboard );
+			if (result > 0)
+				commit(conn);
+			else
+				rollback(conn);
+			close(conn);
+		}
 		
 	}
 

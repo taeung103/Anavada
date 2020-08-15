@@ -242,7 +242,7 @@ public class JboardDao {
 					
 					result = pstmt.executeUpdate();
 			} catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
 			}finally {
 				close(pstmt);
 			}
@@ -349,13 +349,11 @@ public class JboardDao {
 			
 			PreparedStatement pstmt = null;
 
-			String query = "insert into jboard_like values ("
-					+ "?,?,?";
+			String query = "insert into jboard_like values  (?,?)";
 			try {
 					pstmt = conn.prepareStatement(query);
 					pstmt.setString(1,  jboard.getMemberId());
 					pstmt.setInt(2, jboard.getJboardNo());
-					pstmt.setString(3, jboard.getUserIp());
 					result = pstmt.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -365,7 +363,69 @@ public class JboardDao {
 			
 			return result;
 	}
-		
-		
-		
+
+		public int jboardLikeUp(Connection conn, int jboardNo) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			
+			String query = "update jboard set jboard_like= jboard_like + 1 "
+					+ "where jboard_no = ?";
+			
+			try {
+					pstmt = conn.prepareStatement(query);
+					
+					pstmt.setInt(1, jboardNo);
+					
+					result = pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			
+			
+			return result;
+		}
+
+		public int jboardLikeDown(Connection conn, int jboardNo) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			
+			String query = "update jboard set jboard_like= jboard_like - 1 "
+					+ "where jboard_no = ?";
+			
+			try {
+					pstmt = conn.prepareStatement(query);
+					
+					pstmt.setInt(1, jboardNo);
+					
+					result = pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			return result;
+		}
+
+		public int jboardDeleteLike(Connection conn, Jboard jboard) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			
+			String query = "delete from jboard_like where member_id = ? and jboard_no = ?";
+			try {
+					pstmt = conn.prepareStatement(query);
+					pstmt.setString(1, jboard.getMemberId());
+					pstmt.setInt(2, jboard.getJboardNo());
+					result = pstmt.executeUpdate();
+			} catch (Exception e) {
+				 e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			
+			return result;
+			
+		}
+
 }

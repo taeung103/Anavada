@@ -42,7 +42,7 @@ public class JboardCommentInsertServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		request.setCharacterEncoding("utf-8");
+		
 		int jboardNo = Integer.parseInt(request.getParameter("jboardno"));
 
 		String commentId = request.getParameter("commentid");

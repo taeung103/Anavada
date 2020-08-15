@@ -2,6 +2,7 @@ package jboard.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,9 +44,13 @@ public class JboardDeleteServlet extends HttpServlet {
 			}
 			response.sendRedirect("/anavada/jblist?page=1");
 		} else {
-				RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
-				request.setAttribute("message", jboardNo + "번 글 삭제 실패!");
-				view.forward(request, response);
+				response.setContentType("text/html); charset=UTF-8");
+				PrintWriter script = response.getWriter();
+				script.println("<script>");
+				script.println("alert('글삭제 실패');");
+				script.println("location.href='anavada/jbdetail?jboardno=" + jboardNo + "';");
+;				script.println("</script>");
+						
 		}
 	}
 
