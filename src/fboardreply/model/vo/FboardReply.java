@@ -15,7 +15,6 @@ public class FboardReply implements java.io.Serializable {
 	public FboardReply() {
 	}
 	
-	
 	public FboardReply(int fboardReplyNo, String fboardNo, String memberId, String fboardReplyContent,
 			int fboardReplyLev, int fboardReplyRef, String fboardReplyCreatDate) {
 		super();
@@ -28,76 +27,61 @@ public class FboardReply implements java.io.Serializable {
 		this.fboardReplyCreatDate = fboardReplyCreatDate;
 	}
 
-
 	public int getFboardReplyNo() {
 		return fboardReplyNo;
 	}
-
 
 	public void setFboardReplyNo(int fboardReplyNo) {
 		this.fboardReplyNo = fboardReplyNo;
 	}
 
-
 	public String getFboardNo() {
 		return fboardNo;
 	}
-
 
 	public void setFboardNo(String fboardNo) {
 		this.fboardNo = fboardNo;
 	}
 
-
 	public String getMemberId() {
 		return memberId;
 	}
-
 
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
 
-
 	public String getFboardReplyContent() {
 		return fboardReplyContent;
 	}
-
 
 	public void setFboardReplyContent(String fboardReplyContent) {
 		this.fboardReplyContent = fboardReplyContent;
 	}
 
-
 	public int getFboardReplyLev() {
 		return fboardReplyLev;
 	}
-
 
 	public void setFboardReplyLev(int fboardReplyLev) {
 		this.fboardReplyLev = fboardReplyLev;
 	}
 
-
 	public int getFboardReplyRef() {
 		return fboardReplyRef;
 	}
-
 
 	public void setFboardReplyRef(int fboardReplyRef) {
 		this.fboardReplyRef = fboardReplyRef;
 	}
 
-
 	public String getFboardReplyCreatDate() {
 		return fboardReplyCreatDate;
 	}
 
-
 	public void setFboardReplyCreatDate(String fboardReplyCreatDate) {
 		this.fboardReplyCreatDate = fboardReplyCreatDate;
 	}
-
 
 	@Override
 	public String toString() {
@@ -106,10 +90,6 @@ public class FboardReply implements java.io.Serializable {
 				+ ", fboardReplyRef=" + fboardReplyRef
 				+ ", fboardReplyCreatDate=" + fboardReplyCreatDate + "]";
 	}
-	
-	
-	
-
 	
 }
 

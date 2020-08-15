@@ -13,7 +13,6 @@ import fboardreply.model.vo.FboardReply;
 import fboard.model.vo.Fboard;
 
 public class FboardReplyService {
-
 	//DI
 	private FboardReplyDao frdao = new FboardReplyDao();
 	
@@ -26,7 +25,6 @@ public class FboardReplyService {
 		ArrayList<FboardReply> list = frdao.selectList(conn, fboardNo);
 		close(conn);
 		return list;
-
 	}
 
 	//댓글 입력하기
