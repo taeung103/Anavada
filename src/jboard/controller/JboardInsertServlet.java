@@ -48,7 +48,19 @@ public class JboardInsertServlet extends HttpServlet {
 			request.setAttribute("message", "form 의 enctype='multipart/form-data' 속성 누락됨");
 			view.forward(request, response);
 		}
+		String MemberIp = request.getHeader("X-FORWARDED-FOR"); 
 
+	    if (MemberIp == null || MemberIp.length() == 0) {
+	    	MemberIp = request.getHeader("Proxy-Client-IP");
+	    }
+	    if (MemberIp == null || MemberIp.length() == 0) {
+	    	MemberIp = request.getHeader("WL-Proxy-Client-IP");
+	    }
+	    if (MemberIp == null || MemberIp.length() == 0) {
+	    	MemberIp = request.getRemoteAddr() ;
+	    }
+		
+		
 		int maxSize = 1024 * 1024 * 10; //용량 5메가로 제한
 
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/jboardfiles");
@@ -65,7 +77,7 @@ public class JboardInsertServlet extends HttpServlet {
 		jboard.setJboardPrice(Integer.parseInt(mrequest.getParameter("price")));
 		jboard.setJboardContent(mrequest.getParameter("content"));
 		jboard.setMemberId(mrequest.getParameter("memberid"));
-	
+		jboard.setMemberIp(MemberIp);
 		
 		
 		for ( int i=1 ; i<5;i++) {

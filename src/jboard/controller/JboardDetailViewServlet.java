@@ -53,8 +53,11 @@ public class JboardDetailViewServlet extends HttpServlet {
 				String meet = jboard.getJboardMeet();
 				
 				CommentService jbcservice = new CommentService();
+				
 				ArrayList<Comment> list = jbcservice.CommentList(jboardno);
 				int commentListCount = jbcservice.getCommentCount(jboardno);
+				ArrayList likeMemberList = jbservice.getLikeMemberList(jboardno);
+				
 				RequestDispatcher view = null;
 				if(jboard != null) {
 					view = request.getRequestDispatcher("views/jboard/product_view.jsp");
@@ -64,6 +67,7 @@ public class JboardDetailViewServlet extends HttpServlet {
 					request.setAttribute("page", currentPage);
 					request.setAttribute("post", post);
 					request.setAttribute("meet", meet);
+					request.setAttribute("likememberlist", likeMemberList);
 					view.forward(request, response);
 				}else {
 					view = request.getRequestDispatcher("views/common/error.jsp");

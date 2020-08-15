@@ -36,7 +36,7 @@ public class JboardLikeServlet extends HttpServlet {
 		
 		int jboardNo =Integer.parseInt(request.getParameter("jboardno"));
 		String memberId = request.getParameter("memberid");
-		
+		System.out.println(memberId + "loginMember");
 	    JboardService jbservice = new JboardService();
 		Jboard jboard = new Jboard();
 		

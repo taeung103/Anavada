@@ -133,6 +133,15 @@ public class JboardService {
 				rollback(conn);
 			close(conn);
 		}
+
+
+		public ArrayList<Jboard> getLikeMemberList(int jboardno) {
+			Connection conn = getConnection();
+			ArrayList<Jboard> list = bdao.getLikeMemberList(conn , jboardno);
+			close(conn);
+			
+			return list;
+		}
 		
 	}
 

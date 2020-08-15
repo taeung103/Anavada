@@ -50,6 +50,17 @@ public class JboardUpdateServlet extends HttpServlet {
 			view.forward(request, response);
 		}
 		
+		String MemberIp = request.getHeader("X-FORWARDED-FOR"); 
+
+	    if (MemberIp == null || MemberIp.length() == 0) {
+	    	MemberIp = request.getHeader("Proxy-Client-IP");
+	    }
+	    if (MemberIp == null || MemberIp.length() == 0) {
+	    	MemberIp = request.getHeader("WL-Proxy-Client-IP");
+	    }
+	    if (MemberIp == null || MemberIp.length() == 0) {
+	    	MemberIp = request.getRemoteAddr() ;
+	    }
 		
 		int maxSize = 1024 * 1024 * 10;
 

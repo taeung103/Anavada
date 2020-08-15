@@ -28,12 +28,14 @@ public class Jboard implements java.io.Serializable {
 		private String jboardPost;
 		private String memberId; 
 		private String localNo; //지역번호
+		private String MemberIp; //게시글 작성자의 아이피
+
 		public Jboard(int jboardNo, String jboardTitle, String jboardContent, int jboardPrice, Date jboardDate,
 				Date jboardUpdate, int jboardCount, int jboardLike, String jboardOrignalFilePath1,
 				String jboardRenameFilePath1, String jboardOrignalFilePath2, String jboardRenameFilePath2,
 				String jboardOrignalFilePath3, String jboardRenameFilePath3, String jboardOrignalFilePath4,
 				String jboardRenameFilePath4, String jboardCheck, String jboardMeet, String jboardPost, String memberId,
-				String localNo, String memberList) {
+				String localNo, String memberIp) {
 			super();
 			this.jboardNo = jboardNo;
 			this.jboardTitle = jboardTitle;
@@ -56,6 +58,7 @@ public class Jboard implements java.io.Serializable {
 			this.jboardPost = jboardPost;
 			this.memberId = memberId;
 			this.localNo = localNo;
+			MemberIp = memberIp;
 		}
 
 		public int getJboardNo() {
@@ -226,6 +229,13 @@ public class Jboard implements java.io.Serializable {
 			this.localNo = localNo;
 		}
 
+		public String getMemberIp() {
+			return MemberIp;
+		}
+
+		public void setMemberIp(String memberIp) {
+			MemberIp = memberIp;
+		}
 
 		@Override
 		public String toString() {
@@ -238,10 +248,8 @@ public class Jboard implements java.io.Serializable {
 					+ ", jboardRenameFilePath3=" + jboardRenameFilePath3 + ", jboardOrignalFilePath4="
 					+ jboardOrignalFilePath4 + ", jboardRenameFilePath4=" + jboardRenameFilePath4 + ", jboardCheck="
 					+ jboardCheck + ", jboardMeet=" + jboardMeet + ", jboardPost=" + jboardPost + ", memberId="
-					+ memberId + ", localNo=" + localNo + "]";
+					+ memberId + ", localNo=" + localNo + ", MemberIp=" + MemberIp + "]";
 		}
-		
-		
 		
 		
 		

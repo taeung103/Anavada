@@ -5,6 +5,7 @@
  	import="jboard.model.vo.Jboard , java.util.ArrayList, java.sql.Date, jboard.model.vo.Comment, java.text.SimpleDateFormat" %>
 <%
 	ArrayList<Comment> list = (ArrayList<Comment>) request.getAttribute("list");
+	ArrayList<Jboard> likemember = (ArrayList<Jboard>)request.getAttribute("likememberlist");
 	//SimpleDateFormat lastUpdate =new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
 	Jboard jboard = (Jboard)(request.getAttribute("jboardno"));
 	String post = String.valueOf(request.getAttribute("post"));
@@ -218,7 +219,12 @@ font{
                         </dl>
                         <div>
                             <i class="good_i glyphicon glyphicon-heart-empty">
-                            <a href="/anavada/jblike?jboardno=<%=jboard.getJboardNo()%>&memberid=<%=jboard.getMemberId()%>">좋아요</a><span>&nbsp;<%=jboard.getJboardLike() %> &nbsp;  <% if (meet.equals("Y"))  { %>직거래상품<% } %> <% if (post.equals("Y"))  { %>우편거래상품<% } %></span></i>
+                            <a href="/anavada/jblike?jboardno=<%=jboard.getJboardNo()%>&memberid=<%=loginMember.getMemberId()%>">좋아요</a>
+                        	 <span>&nbsp;<%=jboard.getJboardLike() %> &nbsp;  <% if (meet.equals("Y"))  { %>직거래상품<% } %>
+                             <% if (post.equals("Y"))  { %>우편거래상품<% } %></span></i><br>
+                            <% for (Jboard lmember : likemember ){ %>
+                               <%=lmember.getMemberId() %>
+                               <%} %>님이 좋아합니다.
                             <h2 class="product_name"><b>상품명 : </b><span><%=jboard.getJboardTitle() %></span></h2>
                             <h3 class="product_price"><b>판매가격 : </b><span><%=jboard.getJboardPrice() %></span>원</h3>
                             <p class="view-ctn">
@@ -298,7 +304,7 @@ font{
                                 <form action="/anavada/jbcrinsert.ss" method="post">
                                <input type= "hidden" name="commentno" value = "<%=comment.getCommentNo() %>">
                                 <input type= "hidden" name="jboardno" value = "<%=jboard.getJboardNo() %>">
-                                <input type= "hidden" name="writer" value= "<%=jboard.getMemberId()%>">
+                                <input type= "hidden" name="writer" value= "<%=loginMember.getMemberId()%>">
                                     <fieldset>
                                         <div class="cmt_form">
                                             <div class="cmt_body">

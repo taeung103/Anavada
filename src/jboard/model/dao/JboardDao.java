@@ -23,7 +23,7 @@ public class JboardDao {
 
 			String query = "insert into jboard values ("
 					+ "SEQ_JBOARD_NO.nextval ,? , ? , ? ,sysdate, sysdate, 0, 0, ?, ?, ?, ?, ?, ? , ?, ?,"
-					+ "default,?,?,?,?,default)";
+					+ "default,?,?,?,?,?)";
 			try {
 					pstmt = conn.prepareStatement(query);
 					pstmt.setString(1,  jboard.getJboardTitle());
@@ -41,6 +41,7 @@ public class JboardDao {
 					pstmt.setString(13,  jboard.getJboardPost());
 					pstmt.setString(14, jboard.getMemberId());
 					pstmt.setString(15, jboard.getLocalNo());
+					pstmt.setString(16, jboard.getMemberIp());
 					result = pstmt.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -94,7 +95,7 @@ public class JboardDao {
 					"JBOARD_COUNT, JBOARD_LIKE, JFILES_ORIGINAL_FILEPATH1, JFILES_RENAME_FILEPATH1, " + 
 					"JFILES_ORIGINAL_FILEPATH2, JFILES_RENAME_FILEPATH2 , JFILES_ORIGINAL_FILEPATH3, " +
 					"JFILES_RENAME_FILEPATH3, JFILES_ORIGINAL_FILEPATH4 , JFILES_RENAME_FILEPATH4, " +
-					"JBOARD_CHECK , JBOARD_MEET, JBOARD_POST, MEMBER_ID, LOCAL_NO "+
+					"JBOARD_CHECK , JBOARD_MEET, JBOARD_POST, MEMBER_ID, LOCAL_NO, MEMBER_IP "+
 					"FROM (SELECT * FROM JBOARD " +
 					(local != null && !local.equals("0")? "WHERE LOCAL_NO =? " : "");
 					//query +=(titleSearch != null ? "AND JBOARD_TITLE LIKE ? " : "");
@@ -168,7 +169,7 @@ public class JboardDao {
 						jboard.setJboardPost(rset.getString("jboard_post"));
 						jboard.setMemberId(rset.getString("member_id"));
 						jboard.setLocalNo(rset.getString("local_no"));
-						
+						jboard.setMemberIp(rset.getString("member_ip"));
 						list.add(jboard);
 					}
 			} catch (Exception e) {
@@ -217,6 +218,7 @@ public class JboardDao {
 					jboard.setJboardPost(rset.getString("jboard_post"));
 					jboard.setMemberId(rset.getString("member_id"));
 					jboard.setLocalNo(rset.getString("local_no"));
+					jboard.setMemberIp(rset.getString("member_ip"));
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -259,7 +261,7 @@ public class JboardDao {
 					+ "jboard_update = default , "
 					+ "jfiles_original_filepath1 = ? , jfiles_rename_filepath1 = ? , jfiles_original_filepath2 = ? , "
 					+ "jfiles_rename_filepath2 = ? , jfiles_original_filepath3 = ? , jfiles_rename_filepath3 = ? , "
-					+ "jfiles_original_filepath4 = ? , jfiles_rename_filepath4 = ? , jboard_meet = ?, jboard_post= ?, local_no= ? "
+					+ "jfiles_original_filepath4 = ? , jfiles_rename_filepath4 = ? , jboard_meet = ?, jboard_post= ?, local_no= ?, member_ip= ? "
 					+ "where jboard_no = ?";
 			try {
 					pstmt = conn.prepareStatement(query);
@@ -277,8 +279,8 @@ public class JboardDao {
 					pstmt.setString(12, jboard.getJboardMeet());
 					pstmt.setString(13,  jboard.getJboardPost());
 					pstmt.setString(14, jboard.getLocalNo());
-					pstmt.setInt(15,  jboard.getJboardNo());
-					
+					pstmt.setString(15, jboard.getMemberIp());
+					pstmt.setInt(16,  jboard.getJboardNo());
 					result = pstmt.executeUpdate();
 		
 			} catch (Exception e) {
@@ -426,6 +428,30 @@ public class JboardDao {
 			
 			return result;
 			
+		}
+		public ArrayList<Jboard> getLikeMemberList(Connection conn, int jboardno) {
+			ArrayList<Jboard> list = new ArrayList<Jboard>();
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+
+			String query = "SELECT MEMBER_ID FROM JBOARD_LIKE WHERE JBOARD_NO = ?";
+			try {
+					pstmt = conn.prepareStatement(query);
+					pstmt.setInt(1, jboardno);
+					rset = pstmt.executeQuery();
+				while(rset.next()) {
+					Jboard jboard = new Jboard();
+					jboard.setMemberId(rset.getString("member_id"));
+					list.add(jboard);
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(rset);
+				close(pstmt);
+			}
+			return list;
 		}
 
 }
