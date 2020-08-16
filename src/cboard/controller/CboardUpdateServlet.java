@@ -76,7 +76,6 @@ public class CboardUpdateServlet extends HttpServlet {
 			originFilePath = mrequest.getParameter("ofile" + (i + 1));
 			renameFilePath = mrequest.getParameter("rfile" + (i + 1));
 			originalFileName = mrequest.getFilesystemName("upfile" + (i + 1));
-			System.out.println(originFilePath);
 			switch (i + 1) {
 			case 1:
 				newOriginFile = new File(savePath + "/" + originalFileName);

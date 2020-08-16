@@ -43,11 +43,6 @@ public class MyCmntServlet extends HttpServlet {
 		String memberID = request.getParameter("memberID");
 		String search = request.getParameter("search");
 		String keyword = request.getParameter("keyword");
-		System.out.println("memberID : " + memberID);
-		System.out.println("page : " + currentPage);
-		System.out.println("local : " + local);
-		System.out.println("search : " + search);
-		System.out.println("keyword : " + keyword);
 		int limit = 10;
 		CboardService cservice = new CboardService();
 		int listCount = cservice.getMyListCount(memberID, local, search, keyword);

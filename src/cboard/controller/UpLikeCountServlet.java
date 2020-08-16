@@ -36,8 +36,6 @@ public class UpLikeCountServlet extends HttpServlet {
 		
 		int likeable = new ClikeService().likeable(cboardNum, memberId);
 		
-		System.out.println(cboardNum);
-		System.out.println(memberId);
 		if (likeable > 0) {
 			int result = new CboardService().upLikeCount(cboardNum);
 			response.sendRedirect("/anavada/cdetail?cnum=" + cboardNum);

@@ -37,12 +37,6 @@ public class CboardDao {
 
 		query += "order by cboard_no desc)) where rnum >= ? and rnum <= ?";
 
-		System.out.println(query);
-		System.out.println(memberID);
-		System.out.println(local);
-		System.out.println(search);
-		System.out.println(keyword);
-
 		int startRow = (currentPage - 1) * limit + 1;
 		int endRow = startRow + limit - 1;
 
@@ -112,7 +106,6 @@ public class CboardDao {
 			query += (search != null && search.equals("content") ? " where cboard_content like '%" + keyword + "%' "
 					: "");
 		}
-		System.out.println(query);
 		try {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(query);
@@ -398,7 +391,6 @@ public class CboardDao {
 			pstmt.setString(10, cboard.getCfilesRenameFilepath4());
 			pstmt.setString(11, cboard.getLocalNo());
 			pstmt.setInt(12, cboard.getCboardNo());
-			System.out.println(cboard.getLocalNo());
 
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
