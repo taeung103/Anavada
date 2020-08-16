@@ -49,7 +49,7 @@ public class AdminNoticeListServlet extends HttpServlet {
 			endPage = totalPage;
 		
 		ArrayList<Notice> list = nservice.selectAll(currentPage, countList);
-		System.out.println(list.size());
+		
 		RequestDispatcher view = null;
 		if(list.size() > -1) {
 			view = request.getRequestDispatcher("views/admin/notice/adminnotice_list.jsp");

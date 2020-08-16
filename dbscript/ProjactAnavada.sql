@@ -30,7 +30,6 @@ COMMENT ON COLUMN MEMBER.LAST_ACCESS_DATE IS '�ֱ�������';
 COMMENT ON COLUMN MEMBER.SECESSION_OK IS 'Ż�𿩺�';
 COMMENT ON COLUMN MEMBER.SECESSION_DATE IS 'Ż����';
 
-<<<<<<< HEAD
 INSERT INTO MEMBER VALUES('1', 'admin', 'YWRtaW4=', '���¿�', 'spark1048@naver.com', 'SHA1', '010-3387-7583', DEFAULT, DEFAULT, 'N', DEFAULT);
 INSERT INTO MEMBER VALUES('2', 'user01', 'dXNlcjAx', '�̼���', 'user01@naver.com', 'SHA2', '010-1111-1111', DEFAULT, DEFAULT, 'N', DEFAULT);
 INSERT INTO MEMBER VALUES('3', 'user02', 'YWRtaW4=', '���¿�', 'spark1048@naver.com', 'SHA1', '010-3387-7583', DEFAULT, DEFAULT, 'N', DEFAULT);
@@ -47,23 +46,6 @@ INSERT INTO MEMBER VALUES('12', 'user11', 'dXNlcjAz', '��ù�', 'user03@nav
 --**********************************************************************************************************************
 
 
-=======
-INSERT INTO MEMBER VALUES('1', 'admin', 'YWRtaW4=', '���¿�', 'taeung102@naver.com', 'SHA1', '010-1111-1111', DEFAULT, DEFAULT, 'N', DEFAULT);
-INSERT INTO MEMBER VALUES('2', 'user01', 'dXNlcjAx', '�̼���', 'taeung103@naver.com', 'SHA2', '010-3387-7583', DEFAULT, DEFAULT, 'N', DEFAULT);
-INSERT INTO MEMBER VALUES('3', 'user02', 'dXNlcjAy', '����', 'taeung105@naver.com', 'SHA1', '010-2222-2222', DEFAULT, DEFAULT, 'N', DEFAULT);
-INSERT INTO MEMBER VALUES('4', 'user03', 'dXNlcjAz', '��ù�', 'taeung106@naver.com', 'SHA2', '010-3333-3333', DEFAULT, DEFAULT, 'N', DEFAULT);
-INSERT INTO MEMBER VALUES('5', 'user04', 'dXNlcjAz', '����', 'taeung107@naver.com', 'SHA1', '010-4444-4444', DEFAULT, DEFAULT, 'N', DEFAULT);
-INSERT INTO MEMBER VALUES('6', 'user05', 'dXNlcjA0', '��ű�', 'taeung108@naver.com', 'SHA2', '010-5555-5555', DEFAULT, DEFAULT, 'N', DEFAULT);
-INSERT INTO MEMBER VALUES('7', 'user06', 'dXNlcjA2', '����', 'taeung109@naver.com', 'SHA1', '010-6666-6666', DEFAULT, DEFAULT, 'N', DEFAULT);
-INSERT INTO MEMBER VALUES('8', 'user07', 'dXNlcjA3', 'û��', 'taeung110@naver.com', 'SHA2', '010-7777-7777', DEFAULT, DEFAULT, 'N', DEFAULT);
-INSERT INTO MEMBER VALUES('9', 'user08', 'dXNlcjA4', '��ȣ', 'taeung111@naver.com', 'SHA3', '010-8888-8888', DEFAULT, DEFAULT, 'Y', DEFAULT);
-INSERT INTO MEMBER VALUES('10', 'user09', 'dXNlcjA5', '����', 'taeung112@naver.com', 'SHA4', '010-9999-9999', DEFAULT, DEFAULT, 'Y', DEFAULT);
-INSERT INTO MEMBER VALUES('11', 'user10', 'dXNlcjEw', '����', 'taeung113@naver.com', 'SHA4', '010-1010-1010', DEFAULT, DEFAULT, 'Y', DEFAULT);
-INSERT INTO MEMBER VALUES('12', 'user11', 'dXNlcjEx', '�⸰', 'taeung114@naver.com', 'SHA4', '010-1212-1212', DEFAULT, DEFAULT, 'Y', DEFAULT);
-
---**********************************************************************************************************************
-
->>>>>>> origin/member_home
 -- ���̺� ����
 DROP TABLE BANNER  CASCADE CONSTRAINTS;
 -- ��� ���� ���̺� ����
@@ -128,9 +110,15 @@ VALUES(3, 'bless', DEFAULT, '�̿����', 'visual.jpg', '', '1920x740', '
 COMMIT;
 
 
+<<<<<<< HEAD
 -- ������ �ִ� �������� DB����
 DROP TABLE FBOARD_COMMENT CASCADE CONSTRAINTS;    --���̺� ����
 DROP TABLE FESTIVAL_INFORMATION CASCADE CONSTRAINTS;    -- ���� ����
+=======
+-- ������ �ִ� �������� DB����
+DROP TABLE FBOARD_COMMENT CASCADE CONSTRAINTS;    --���̺� ����
+DROP TABLE FESTIVAL_INFORMATION CASCADE CONSTRAINTS;    -- ���� ����
+>>>>>>> origin/faq4
 
 -- ���� �з�
 DROP TABLE LOCATION CASCADE CONSTRAINTS;    --���̺� ����
@@ -179,11 +167,18 @@ SELECT '25', '�߶���', '37.5953795', '127.0939669' FROM DUAL;
 COMMIT;
 
 
+<<<<<<< HEAD
 -- ���� �Խ���
 DROP TABLE FBOARD CASCADE CONSTRAINTS;    -- ���̺� ����
 
 CREATE TABLE FBOARD (
 <<<<<<< HEAD
+=======
+-- ���� �Խ���
+DROP TABLE FBOARD CASCADE CONSTRAINTS;    -- ���̺� ����
+
+CREATE TABLE FBOARD (
+>>>>>>> origin/faq4
    fboard_no   VARCHAR2(30)      NOT NULL,   -- PK
     festival_title   VARCHAR2(600)      NOT NULL,
     local_no   VARCHAR2(3)      NOT NULL,
@@ -196,6 +191,7 @@ CREATE TABLE FBOARD (
     MEMBER_ID   VARCHAR2(20)   ,    -- FK : MEMBER(MEMBER_ID)
    readcount   NUMBER   DEFAULT 0    NULL,
    THUMBNAIL VARCHAR2(100 BYTE) DEFAULT 'NoImage', 
+<<<<<<< HEAD
 =======
 	fboard_no	VARCHAR2(30)		NOT NULL,   -- PK
     festival_title	VARCHAR2(600)		NOT NULL,
@@ -283,6 +279,56 @@ ALTER TABLE FBOARD ADD CONSTRAINT FK_MEMBER_ID FOREIGN KEY(MEMBER_ID) REFERENCES
 ALTER TABLE FBOARD_REPLY ADD CONSTRAINT FK_fboard_no FOREIGN KEY(fboard_no) REFERENCES FBOARD(fboard_no) ON DELETE CASCADE;   -- FBOARD(fboard_no),  ���� �Խ��� ���� �� ��۵� ����
 
 --oracle sessions �� �ø���
+=======
+    CONSTRAINT PK_fboard_no PRIMARY KEY (fboard_no)
+);
+
+COMMENT ON COLUMN FBOARD.fboard_no IS '�����Խ��� ��ȣ';
+COMMENT ON COLUMN FBOARD.festival_title IS '���� �̸�';
+COMMENT ON COLUMN FBOARD.local_no IS '���� ��ȣ';
+COMMENT ON COLUMN FBOARD.festival_startdate IS '���� ������';
+COMMENT ON COLUMN FBOARD.festival_enddate IS '���� ������';
+COMMENT ON COLUMN FBOARD.festival_modifieddate IS '���� ������';
+COMMENT ON COLUMN FBOARD.map_y IS '���� ����';
+COMMENT ON COLUMN FBOARD.map_x IS '���� �浵';
+COMMENT ON COLUMN FBOARD.bmodify_date IS '�����Խ��� ������';
+COMMENT ON COLUMN FBOARD.MEMBER_ID IS '�ۼ���';
+COMMENT ON COLUMN FBOARD.readcount IS '��ȸ��';
+COMMENT ON COLUMN FBOARD.Thumbnail IS '�����';
+
+
+-- ���� �Խ��� ���
+DROP TABLE FBOARD_REPLY CASCADE CONSTRAINTS;    -- ���̺� ����
+
+CREATE TABLE FBOARD_REPLY (
+   fboardReply_no    NUMBER   NOT NULL,   -- PK
+   fboard_no   VARCHAR2(30)      NOT NULL,   -- FK : FBOARD(fboard_no), �Խù� ��ȣ
+   MEMBER_ID   VARCHAR2(20),   --�ۼ��� ���̵�
+    fboardReply_content VARCHAR2(4000) NOT NULL, --��� ����
+    fboardReply_lev NUMBER NOT NULL,    -- ��� (1), ���� (2)
+    fboardReply_ref NUMBER,    -- ���� ��� ��ȣ ����� 1�϶��� �ڱ��ȣ
+    fboardReply_creatdate   VARCHAR2(40)    NOT NULL,   --��� �ۼ���¥
+    CONSTRAINT PK_fboardReply_no PRIMARY KEY (fboardReply_no)
+);
+
+COMMENT ON COLUMN FBOARD_REPLY.fboardReply_no IS '��� ��ȣ';
+COMMENT ON COLUMN FBOARD_REPLY.fboard_no IS '�Խ��� ��ȣ';
+COMMENT ON COLUMN FBOARD_REPLY.MEMBER_ID IS '�ۼ��� id';
+COMMENT ON COLUMN FBOARD_REPLY.fboardReply_content IS '��� ����';
+COMMENT ON COLUMN FBOARD_REPLY.fboardReply_lev IS '�۷���';
+COMMENT ON COLUMN FBOARD_REPLY.fboardReply_ref IS '�θ� ��۹�ȣ';
+COMMENT ON COLUMN FBOARD_REPLY.fboardReply_creatdate IS '��� �ۼ���¥';
+
+-- fboardReply_no ���� ������ ����
+CREATE SEQUENCE FBREPLY_SEQ INCREMENT BY 1 START WITH 1;
+
+-- FK����
+ALTER TABLE FBOARD ADD CONSTRAINT FK_local_no FOREIGN KEY(local_no) REFERENCES LOCATION(local_no);    -- LOCATION(local_no);
+ALTER TABLE FBOARD ADD CONSTRAINT FK_MEMBER_ID FOREIGN KEY(MEMBER_ID) REFERENCES MEMBER(MEMBER_ID); -- MEMBER(MEMBER_ID); 
+ALTER TABLE FBOARD_REPLY ADD CONSTRAINT FK_fboard_no FOREIGN KEY(fboard_no) REFERENCES FBOARD(fboard_no) ON DELETE CASCADE;   -- FBOARD(fboard_no),  ���� �Խ��� ���� �� ��۵� ����
+
+--oracle sessions �� �ø���
+>>>>>>> origin/faq4
 --show parameter processes;
 --alter system set processes=300 scope=spfile;
 
@@ -331,6 +377,7 @@ CREATE TABLE CBOARD (
 	"CFILES_RENAME_FILEPATH4"	VARCHAR2(50)		NULL
 );
 
+<<<<<<< HEAD
 COMMENT ON COLUMN "CBOARD"."CBOARD_NO" IS '�۹�ȣ';
 COMMENT ON COLUMN "CBOARD"."MEMBER_ID" IS 'ȸ�� ���̵�';
 COMMENT ON COLUMN "CBOARD"."CBOARD_TITLE" IS '������';
@@ -354,6 +401,26 @@ COMMENT ON COLUMN "CBOARD"."CFILES_ORIGINAL_FILEPATH3" IS '�������
 COMMENT ON COLUMN "CBOARD"."CFILES_RENAME_FILEPATH3" IS '�������ϸ�3';
 COMMENT ON COLUMN "CBOARD"."CFILES_ORIGINAL_FILEPATH4" IS '�������ϸ�4';
 COMMENT ON COLUMN "CBOARD"."CFILES_RENAME_FILEPATH4" IS '�������ϸ�4';
+=======
+COMMENT ON COLUMN "CBOARD"."CBOARD_NO" IS '�۹�ȣ';
+COMMENT ON COLUMN "CBOARD"."MEMBER_ID" IS 'ȸ�� ���̵�';
+COMMENT ON COLUMN "CBOARD"."CBOARD_TITLE" IS '������';
+COMMENT ON COLUMN "CBOARD"."CBOARD_CONTENT" IS '�۳���';
+COMMENT ON COLUMN "CBOARD"."CBOARD_DATE" IS '�ۼ���';
+COMMENT ON COLUMN "CBOARD"."CBOARD_LASTMODIFIED" IS '������������';
+COMMENT ON COLUMN "CBOARD"."CBOARD_VIEWCOUNT" IS '��ȸ��';
+COMMENT ON COLUMN "CBOARD"."CBOARD_REPLYCOUNT" IS '��ۼ�';
+COMMENT ON COLUMN "CBOARD"."CBOARD_LIKECOUNT" IS '���ƿ��';
+COMMENT ON COLUMN "CBOARD"."LOCAL_NO" IS '������ȣ';
+COMMENT ON COLUMN "CBOARD"."CFILES_ORIGINAL_FILEPATH1" IS '�������ϸ�1';
+COMMENT ON COLUMN "CBOARD"."CFILES_RENAME_FILEPATH1" IS '�������ϸ�1';
+COMMENT ON COLUMN "CBOARD"."CFILES_ORIGINAL_FILEPATH2" IS '�������ϸ�2';
+COMMENT ON COLUMN "CBOARD"."CFILES_RENAME_FILEPATH2" IS '�������ϸ�2';
+COMMENT ON COLUMN "CBOARD"."CFILES_ORIGINAL_FILEPATH3" IS '�������ϸ�3';
+COMMENT ON COLUMN "CBOARD"."CFILES_RENAME_FILEPATH3" IS '�������ϸ�3';
+COMMENT ON COLUMN "CBOARD"."CFILES_ORIGINAL_FILEPATH4" IS '�������ϸ�4';
+COMMENT ON COLUMN "CBOARD"."CFILES_RENAME_FILEPATH4" IS '�������ϸ�4';
+>>>>>>> origin/faq4
 
 CREATE TABLE CREPLY (
 	"CREPLY_NO"	NUMBER		NOT NULL,
@@ -365,6 +432,7 @@ CREATE TABLE CREPLY (
 	"CREPLY_DEPTH"	NUMBER	DEFAULT 1	NOT NULL
 );
 
+<<<<<<< HEAD
 COMMENT ON COLUMN "CREPLY"."CREPLY_NO" IS '��۹�ȣ';
 COMMENT ON COLUMN "CREPLY"."CBOARD_NO" IS '�۹�ȣ';
 COMMENT ON COLUMN "CREPLY"."MEMBER_ID" IS 'ȸ�� ���̵�';
@@ -376,6 +444,15 @@ COMMENT ON COLUMN "CREPLY"."PARANT_REPLY" IS '�θ��۹�ȣ';
 COMMENT ON COLUMN "CREPLY"."CREPLY_ORDER" IS '��ۼ���';
 >>>>>>> origin/member_home
 COMMENT ON COLUMN "CREPLY"."CREPLY_DEPTH" IS '��۱���';
+=======
+COMMENT ON COLUMN "CREPLY"."CREPLY_NO" IS '��۹�ȣ';
+COMMENT ON COLUMN "CREPLY"."CBOARD_NO" IS '�۹�ȣ';
+COMMENT ON COLUMN "CREPLY"."MEMBER_ID" IS 'ȸ�� ���̵�';
+COMMENT ON COLUMN "CREPLY"."CREPLY_DATE" IS '�ۼ���';
+COMMENT ON COLUMN "CREPLY"."CREPLY_CONTENT" IS '��۳���';
+COMMENT ON COLUMN "CREPLY"."PARANT_REPLY" IS '�θ��۹�ȣ';
+COMMENT ON COLUMN "CREPLY"."CREPLY_DEPTH" IS '��۱���';
+>>>>>>> origin/faq4
 
 ALTER TABLE CBOARD ADD CONSTRAINT PK_CBOARD PRIMARY KEY (CBOARD_NO);
 ALTER TABLE CREPLY ADD CONSTRAINT PK_CREPLY PRIMARY KEY (CREPLY_NO);
@@ -405,6 +482,7 @@ INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DA
 VALUES(CBOARD_SEQ.NEXTVAL, 'user02', '�ټ���° �Խñ�', '�ټ���° ����', DEFAULT, 5);
 
 INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DATE, LOCAL_NO) 
+<<<<<<< HEAD
 <<<<<<< HEAD
 VALUES(CBOARD_SEQ.NEXTVAL, 'user03', 'ù��° �Խñ�', '������° ����', DEFAULT, 1);
 
@@ -481,90 +559,101 @@ INSERT INTO CREPLY(CREPLY_NO, CBOARD_NO, MEMBER_ID, CREPLY_DATE, CREPLY_CONTENT,
 VALUES(CREPLY_SEQ.NEXTVAL, 10, 'user01', DEFAULT, 'ù��° ����', DEFAULT);
 =======
 VALUES(CBOARD_SEQ.NEXTVAL, 'user03', '������° �Խñ�', '������° ����', DEFAULT, 6);
+=======
+VALUES(CBOARD_SEQ.NEXTVAL, 'user03', 'ù��° �Խñ�', '������° ����', DEFAULT, 1);
+>>>>>>> origin/faq4
 
 INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DATE, LOCAL_NO) 
-VALUES(CBOARD_SEQ.NEXTVAL, 'user01', '�ϰ���° �Խñ�', '�ϰ���° ����', DEFAULT, 7);
+VALUES(CBOARD_SEQ.NEXTVAL, 'user01', '�ι�° �Խñ�', '�ϰ���° ����', DEFAULT, 2);
 
 INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DATE, LOCAL_NO) 
-VALUES(CBOARD_SEQ.NEXTVAL, 'user02', '������° �Խñ�', '������° ����', DEFAULT, 8);
+VALUES(CBOARD_SEQ.NEXTVAL, 'user02', '����° �Խñ�', '������° ����', DEFAULT, 3);
 
 INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DATE, LOCAL_NO) 
-VALUES(CBOARD_SEQ.NEXTVAL, 'user03', '��ȩ��° �Խñ�', '��ȩ��° ����', DEFAULT, 9);
+VALUES(CBOARD_SEQ.NEXTVAL, 'user03', '�׹�° �Խñ�', '��ȩ��° ����', DEFAULT, 4);
 
 INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DATE, LOCAL_NO) 
-VALUES(CBOARD_SEQ.NEXTVAL, 'user01', '����° �Խñ�', '����° ����', DEFAULT, 10);
+VALUES(CBOARD_SEQ.NEXTVAL, 'user01', '�ټ���° �Խñ�', '����° ����', DEFAULT, 5);
 
 INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DATE, LOCAL_NO) 
-VALUES(CBOARD_SEQ.NEXTVAL, 'user02', '���ѹ�° �Խñ�', 'ù��° ����', DEFAULT, 1);
+VALUES(CBOARD_SEQ.NEXTVAL, 'user02', 'ù��° �Խñ�', 'ù��° ����', DEFAULT, 1);
 
 INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DATE, LOCAL_NO) 
-VALUES(CBOARD_SEQ.NEXTVAL, 'user03', '���ι�° �Խñ�', '�ι�° ����', DEFAULT, 2);
+VALUES(CBOARD_SEQ.NEXTVAL, 'user03', '�ι�° �Խñ�', '�ι�° ����', DEFAULT, 2);
 
 INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DATE, LOCAL_NO) 
-VALUES(CBOARD_SEQ.NEXTVAL, 'user01', '������° �Խñ�', '����° ����', DEFAULT, 3);
+VALUES(CBOARD_SEQ.NEXTVAL, 'user01', '����° �Խñ�', '����° ����', DEFAULT, 3);
 
 INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DATE, LOCAL_NO) 
-VALUES(CBOARD_SEQ.NEXTVAL, 'user02', '���׹�° �Խñ�', '�׹�° ����', DEFAULT, 4);
+VALUES(CBOARD_SEQ.NEXTVAL, 'user02', '�׹�° �Խñ�', '�׹�° ����', DEFAULT, 4);
 
 INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DATE, LOCAL_NO) 
-VALUES(CBOARD_SEQ.NEXTVAL, 'user03', '���ټ���° �Խñ�', '�ټ���° ����', DEFAULT, 5);
+VALUES(CBOARD_SEQ.NEXTVAL, 'user03', '�ټ���° �Խñ�', '�ټ���° ����', DEFAULT, 5);
 
 INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DATE, LOCAL_NO) 
-VALUES(CBOARD_SEQ.NEXTVAL, 'user01', '��������° �Խñ�', '������° ����', DEFAULT, 6);
+VALUES(CBOARD_SEQ.NEXTVAL, 'user01', 'ù��° �Խñ�', '������° ����', DEFAULT, 1);
 
 INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DATE, LOCAL_NO) 
-VALUES(CBOARD_SEQ.NEXTVAL, 'user02', '���ϰ���° �Խñ�', '�ϰ���° ����', DEFAULT, 7);
+VALUES(CBOARD_SEQ.NEXTVAL, 'user02', '�ι�° �Խñ�', '�ϰ���° ����', DEFAULT, 2);
 
 INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DATE, LOCAL_NO) 
-VALUES(CBOARD_SEQ.NEXTVAL, 'user03', '��������° �Խñ�', '������° ����', DEFAULT, 8);
+VALUES(CBOARD_SEQ.NEXTVAL, 'user03', '����° �Խñ�', '������° ����', DEFAULT, 3);
 
 INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DATE, LOCAL_NO) 
-VALUES(CBOARD_SEQ.NEXTVAL, 'user01', '����ȩ��° �Խñ�', '��ȩ��° ����', DEFAULT, 9);
+VALUES(CBOARD_SEQ.NEXTVAL, 'user01', '�׹�° �Խñ�', '��ȩ��° ����', DEFAULT, 4);
 
 INSERT INTO CBOARD(CBOARD_NO, MEMBER_ID, CBOARD_TITLE, CBOARD_CONTENT, CBOARD_DATE, LOCAL_NO) 
-VALUES(CBOARD_SEQ.NEXTVAL, 'user02', '������° �Խñ�', '����° ����', DEFAULT, 10);
+VALUES(CBOARD_SEQ.NEXTVAL, 'user02', '����° �Խñ�', '����° ����', DEFAULT, 5);
 -- sample data
-INSERT INTO CREPLY(CREPLY_NO, CBOARD_NO, MEMBER_ID, CREPLY_DATE, CREPLY_CONTENT) 
-VALUES(CREPLY_SEQ.NEXTVAL, 1, 'user01', DEFAULT, 'ù��° ����');
+INSERT INTO CREPLY(CREPLY_NO, CBOARD_NO, MEMBER_ID, CREPLY_DATE, CREPLY_CONTENT, CREPLY_DEPTH) 
+VALUES(CREPLY_SEQ.NEXTVAL, 1, 'user01', DEFAULT, 'ù��° ����', DEFAULT);
 
 INSERT INTO CREPLY(CREPLY_NO, CBOARD_NO, MEMBER_ID, CREPLY_DATE, CREPLY_CONTENT, CREPLY_DEPTH) 
-VALUES(CREPLY_SEQ.NEXTVAL, 1, 'user01', DEFAULT, '�ι�° ����', DEFAULT);
+VALUES(CREPLY_SEQ.NEXTVAL, 2, 'user02', DEFAULT, 'ù��° ����', DEFAULT);
 
 INSERT INTO CREPLY(CREPLY_NO, CBOARD_NO, MEMBER_ID, CREPLY_DATE, CREPLY_CONTENT, CREPLY_DEPTH) 
-VALUES(CREPLY_SEQ.NEXTVAL, 1, 'user01', DEFAULT, '����° ����', DEFAULT);
+VALUES(CREPLY_SEQ.NEXTVAL, 3, 'user03', DEFAULT, 'ù��° ����', DEFAULT);
 
 INSERT INTO CREPLY(CREPLY_NO, CBOARD_NO, MEMBER_ID, CREPLY_DATE, CREPLY_CONTENT, CREPLY_DEPTH) 
-VALUES(CREPLY_SEQ.NEXTVAL, 1, 'user01', DEFAULT, '�׹�° ����', DEFAULT);
-
-INSERT INTO CREPLY(CREPLY_NO, CBOARD_NO, MEMBER_ID, CREPLY_DATE, CREPLY_CONTENT, CREPLY_DEPTH) 
-VALUES(CREPLY_SEQ.NEXTVAL, 1, 'user01', DEFAULT, '�ټ���° ����', DEFAULT);
+VALUES(CREPLY_SEQ.NEXTVAL, 4, 'user01', DEFAULT, 'ù��° ����', DEFAULT);
 
 INSERT INTO CREPLY(CREPLY_NO, CBOARD_NO, MEMBER_ID, CREPLY_DATE, CREPLY_CONTENT, CREPLY_DEPTH) 
 VALUES(CREPLY_SEQ.NEXTVAL, 5, 'user02', DEFAULT, 'ù��° ����', DEFAULT);
 
 INSERT INTO CREPLY(CREPLY_NO, CBOARD_NO, MEMBER_ID, CREPLY_DATE, CREPLY_CONTENT, CREPLY_DEPTH) 
-VALUES(CREPLY_SEQ.NEXTVAL, 5, 'user02', DEFAULT, '�ι�° ����', DEFAULT);
+VALUES(CREPLY_SEQ.NEXTVAL, 6, 'user03', DEFAULT, 'ù��° ����', DEFAULT);
 
 INSERT INTO CREPLY(CREPLY_NO, CBOARD_NO, MEMBER_ID, CREPLY_DATE, CREPLY_CONTENT, CREPLY_DEPTH) 
-VALUES(CREPLY_SEQ.NEXTVAL, 5, 'user02', DEFAULT, '����° ����', DEFAULT);
+VALUES(CREPLY_SEQ.NEXTVAL, 7, 'user01', DEFAULT, 'ù��° ����', DEFAULT);
 
 INSERT INTO CREPLY(CREPLY_NO, CBOARD_NO, MEMBER_ID, CREPLY_DATE, CREPLY_CONTENT, CREPLY_DEPTH) 
-VALUES(CREPLY_SEQ.NEXTVAL, 5, 'user02', DEFAULT, '�׹�° ����', DEFAULT);
+VALUES(CREPLY_SEQ.NEXTVAL, 8, 'user02', DEFAULT, 'ù��° ����', DEFAULT);
 
 INSERT INTO CREPLY(CREPLY_NO, CBOARD_NO, MEMBER_ID, CREPLY_DATE, CREPLY_CONTENT, CREPLY_DEPTH) 
+VALUES(CREPLY_SEQ.NEXTVAL, 9, 'user03', DEFAULT, 'ù��° ����', DEFAULT);
+
+INSERT INTO CREPLY(CREPLY_NO, CBOARD_NO, MEMBER_ID, CREPLY_DATE, CREPLY_CONTENT, CREPLY_DEPTH) 
+<<<<<<< HEAD
 VALUES(CREPLY_SEQ.NEXTVAL, 5, 'user02', DEFAULT, '�ټ���° ����', DEFAULT);
 >>>>>>> origin/member_home
+=======
+VALUES(CREPLY_SEQ.NEXTVAL, 10, 'user01', DEFAULT, 'ù��° ����', DEFAULT);
+>>>>>>> origin/faq4
 
 commit;
 
 --**********************************************************************************************************************
 
+<<<<<<< HEAD
 --�߰��ŷ���Ʈ
 <<<<<<< HEAD
 =======
 DROP TABLE JBOARD_COMMENT CASCADE CONSTRAINTS;
 DROP TABLE JBOARD CASCADE CONSTRAINTS;
 >>>>>>> origin/member_home
+=======
+--�߰��ŷ���Ʈ
+>>>>>>> origin/faq4
 
 DROP TABLE JBOARD CASCADE CONSTRAINTS;
 DROP TABLE JBOARD_COMMENT CASCADE CONSTRAINTS;
@@ -623,6 +712,7 @@ ALTER TABLE JBOARD ADD CONSTRAINT FK_LOCATION_TO_JBOARD_1 FOREIGN KEY (local_no)
 REFERENCES LOCATION (local_no);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_NO IS '��۹�ȣ';
 COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_ID IS '����ۼ���';
@@ -646,6 +736,8 @@ NOCACHE;
 
 COMMIT;
 >>>>>>> origin/member_home
+=======
+>>>>>>> origin/faq4
 INSERT INTO JBOARD VALUES
 (SEQ_JBOARD_NO.nextval,'��������1','���ǳ���',14000,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
 NULL,NULL,NULL,NULL,NULL,NULL,NULL,DEFAULT,DEFAULT,DEFAULT,'admin01', 1);
@@ -694,35 +786,45 @@ INSERT INTO JBOARD VALUES
 (SEQ_JBOARD_NO.nextval,'��ǰ�� ����11','��ǰ ���� 11',133000,SYSDATE,SYSDATE,DEFAULT,DEFAULT,NULL,
 NULL,NULL,NULL,NULL,NULL,NULL,NULL,DEFAULT,DEFAULT,DEFAULT,'admin01', 1);
 
--- �߰��ŷ����
-INSERT INTO JBOARD_COMMENT VALUES
-(1,'admin01',SYSDATE,'�̰��� ���',1,SYSDATE,1,1,1,1,1,1,1);
-INSERT INTO JBOARD_COMMENT VALUES
-(2,'admin01',SYSDATE,'�̰��� ���',2,SYSDATE,2,1,1,1,1,1,1);
-INSERT INTO JBOARD_COMMENT VALUES
-(3,'admin01',SYSDATE,'�̰��� ���',3,SYSDATE,3,1,1,1,1,1,1);
-INSERT INTO JBOARD_COMMENT VALUES
-(4,'admin01',SYSDATE,'�̰��� ���',4,SYSDATE,4,1,1,1,1,1,1);
-INSERT INTO JBOARD_COMMENT VALUES
-(5,'admin01',SYSDATE,'�̰��� ���',5,SYSDATE,5,1,1,1,1,1,1);
-INSERT INTO JBOARD_COMMENT VALUES
-(6,'admin01',SYSDATE,'�̰��� ���',6,SYSDATE,6,1,1,1,1,1,1);
-INSERT INTO JBOARD_COMMENT VALUES
-(7,'admin01',SYSDATE,'�̰��� ���',7,SYSDATE,7,1,1,1,1,1,1);
-INSERT INTO JBOARD_COMMENT VALUES
-(8,'admin01',SYSDATE,'�̰��� ���',8,SYSDATE,8,1,1,1,1,1,1);
-INSERT INTO JBOARD_COMMENT VALUES
-(9,'admin01',SYSDATE,'�̰��� ���',9,SYSDATE,9,1,1,1,1,1,1);
-INSERT INTO JBOARD_COMMENT VALUES
-(10,'admin01',SYSDATE,'�̰��� ���',1,SYSDATE,10,1,1,1,1,1,1);
-INSERT INTO JBOARD_COMMENT VALUES
-(11,'admin01',SYSDATE,'�̰��� ���',11,SYSDATE,11,1,1,1,1,1,1);
+COMMIT;
 
-DROP TABLE NOTICE CASCADE CONSTRAINTS;
-DROP TABLE FAQ CASCADE CONSTRAINTS;
-DROP TABLE IQTYPE CASCADE CONSTRAINTS;
-DROP TABLE INQUIRY CASCADE CONSTRAINTS;
-DROP TABLE ANSWER CASCADE CONSTRAINTS;
+CREATE TABLE JBOARD_COMMENT (
+   COMMENT_NO   NUMBER      NOT NULL,
+   COMMENT_ID   VARCHAR2(20)      NOT NULL,
+   COMMENT_CONTENT   VARCHAR2(1000)      NOT NULL,
+    COMMENT_DATE   DATE   DEFAULT SYSDATE   NOT NULL,
+   COMMENT_LASTMODIFIED   DATE   DEFAULT SYSDATE   NULL,
+   JBOARD_NO   NUMBER      NOT NULL,
+    COMMENT_REF NUMBER,
+    COMMENT_REPLY_REF NUMBER,
+    COMMENT_LEVEL NUMBER DEFAULT 0,
+    COMMENT_REPLY_SEQ NUMBER DEFAULT 0
+);
+ALTER TABLE JBOARD_COMMENT ADD CONSTRAINT PK_BOARD_COMMENT PRIMARY KEY (COMMENT_NO);
+ALTER TABLE JBOARD_COMMENT ADD CONSTRAINT FK_MEMBER_TO_JCOMMNET_1 FOREIGN KEY (COMMENT_ID)
+REFERENCES MEMBER (MEMBER_ID) ON DELETE CASCADE ;
+
+COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_NO IS '��۹�ȣ';
+COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_ID IS '�ۼ���ID';
+COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_DATE IS '��۳���';
+COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_CONTENT IS '��۵������';
+COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_LASTMODIFIED IS '��ۼ�������';
+COMMENT ON COLUMN JBOARD_COMMENT.JBOARD_NO IS '���۹�ȣ';
+COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_LEVEL IS '��۷���';
+COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_REF IS '�����ġ';
+COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_REPLY_REF IS '��۱���';
+COMMENT ON COLUMN JBOARD_COMMENT.COMMENT_REPLY_SEQ IS '��ۼ���';
+
+
+CREATE SEQUENCE JBOARD_COMMENT_SEQ
+INCREMENT BY 1
+START WITH 1
+MINVALUE 1
+NOMAXVALUE
+NOCYCLE
+NOCACHE;
+
+commit;
 
 --****************************************************************************************************
 
@@ -935,7 +1037,17 @@ VALUES(4, user02,'�Ű��մϴ�.', DEFAULT, '�߰��ŷ� �Ű�', '�
 INSERT INTO declare_board
 VALUES(5, user10,'���۾��̵�Ű�.', DEFAULT, '�߰��ŷ� �Ű�', '���������۾��̵𿡿�.','','','�߰��ŷ�URL', NULL, DEFAULT );
 INSERT INTO declare_board
+<<<<<<< HEAD
+VALUES(3, user01,'�����մϴ�.', DEFAULT, 'Ŀ�´�Ƽ �Ű�', '���ؿ�.','','',Ŀ�´�ƼURL', NULL, DEFAULT );
+INSERT INTO declare_board
+VALUES(4, user02,'�Ű��մϴ�.', DEFAULT, '�߰��ŷ� �Ű�', '������¥��ǰ���ΰŷ����մϴ�.','','','�߰��ŷ�URL', NULL, DEFAULT );
+INSERT INTO declare_board
+VALUES(5, user10,'���۾��̵�Ű�.', DEFAULT, '�߰��ŷ� �Ű�', '���������۾��̵𿡿�.','','','�߰��ŷ�URL', NULL, DEFAULT );
+INSERT INTO declare_board
 VALUES(6, user08,'�����մϴ�.', DEFAULT, 'Ŀ�´�Ƽ �Ű�', '���ؿ�.','','','Ŀ�´�ƼURL', NULL, DEFAULT );
+=======
+VALUES(6, user08,'�����մϴ�.', DEFAULT, 'Ŀ�´�Ƽ �Ű�', '���ؿ�.','','','Ŀ�´�ƼURL', NULL, DEFAULT );
+>>>>>>> origin/faq4
 
 
 
