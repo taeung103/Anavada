@@ -76,7 +76,7 @@ public class AdminCboardListServlet extends HttpServlet {
 			request.setAttribute("keyword", keyword);
 			view.forward(request, response);
 		} else {
-			view = request.getRequestDispatcher("views/admin/cboard/communityAdminListError.jsp");
+			view = request.getRequestDispatcher("views/admin/cboard/communityAdminList.jsp");
 			request.setAttribute("list", list);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("maxPage", maxPage);

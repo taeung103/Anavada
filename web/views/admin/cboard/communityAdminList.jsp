@@ -196,6 +196,18 @@
 
 						</tbody>
 					</table>
+
+					<% if(listCount == 0) { %>
+					<div class="list-no">
+
+						<p>
+							<img src="/anavada/resources/images/btnIcn/icn_big_listNo.png" alt="" title="" />
+						</p>
+						<h1>목록이 없습니다.</h1>
+
+					</div>
+					<% } %>
+
 					<p class="warning_text">*삭제한 글은 복구가 불가능하니 신중하게 선택하세요.</p>
 					<!-- //게시판 -->
 
