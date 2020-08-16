@@ -110,15 +110,9 @@ VALUES(3, 'bless', DEFAULT, '�̿����', 'visual.jpg', '', '1920x740', '
 COMMIT;
 
 
-<<<<<<< HEAD
 -- ������ �ִ� �������� DB����
 DROP TABLE FBOARD_COMMENT CASCADE CONSTRAINTS;    --���̺� ����
 DROP TABLE FESTIVAL_INFORMATION CASCADE CONSTRAINTS;    -- ���� ����
-=======
--- ������ �ִ� �������� DB����
-DROP TABLE FBOARD_COMMENT CASCADE CONSTRAINTS;    --���̺� ����
-DROP TABLE FESTIVAL_INFORMATION CASCADE CONSTRAINTS;    -- ���� ����
->>>>>>> origin/faq4
 
 -- ���� �з�
 DROP TABLE LOCATION CASCADE CONSTRAINTS;    --���̺� ����
