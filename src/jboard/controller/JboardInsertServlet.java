@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
@@ -48,15 +49,38 @@ public class JboardInsertServlet extends HttpServlet {
 			request.setAttribute("message", "form 의 enctype='multipart/form-data' 속성 누락됨");
 			view.forward(request, response);
 		}
+		
 
+		
 		int maxSize = 1024 * 1024 * 10; //용량 5메가로 제한
 
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/jboardfiles");
 
 		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8",
 				new DefaultFileRenamePolicy());
-
-
+		String MemberIp = request.getHeader("X-FORWARDED-FOR"); 
+	    if (MemberIp == null || MemberIp.length() == 0) {
+	    	MemberIp = request.getHeader("Proxy-Client-IP");
+	    }
+	    if (MemberIp == null || MemberIp.length() == 0) {
+	    	MemberIp = request.getHeader("WL-Proxy-Client-IP");
+	    }
+	    if (MemberIp == null || MemberIp.length() == 0) {
+	    	MemberIp = request.getRemoteAddr() ;
+	    }
+		JboardService jbservice = new JboardService();
+		String memberId = mrequest.getParameter("memberid");
+		int listcount=jbservice.getOneDayLimitCount(memberId);
+		System.out.println(listcount +" 하루 게시글 수");
+		if (listcount >= 6) {
+				response.setContentType("text/html); charset=UTF-8");
+				PrintWriter script = response.getWriter();
+				script.println("<script>");
+				script.println("alert('게시글은 하루에 5개를 초과 할 수 없습니다.');");
+				script.println("location.href='anavada/jblist';");
+				script.println("</script>");
+				script.close();
+		}
 		Jboard jboard = new Jboard();
 		jboard.setJboardPost(mrequest.getParameter("post"));
 		jboard.setJboardMeet(mrequest.getParameter("meet"));
@@ -65,7 +89,7 @@ public class JboardInsertServlet extends HttpServlet {
 		jboard.setJboardPrice(Integer.parseInt(mrequest.getParameter("price")));
 		jboard.setJboardContent(mrequest.getParameter("content"));
 		jboard.setMemberId(mrequest.getParameter("memberid"));
-	
+		jboard.setMemberIp(MemberIp);
 		
 		
 		for ( int i=1 ; i<5;i++) {
@@ -115,9 +139,19 @@ public class JboardInsertServlet extends HttpServlet {
 		if (result > 0) {
 			response.sendRedirect("jblist?page=1");
 		} else {
-			view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("message", "새 게시원글 등록 실패!");
-			view.forward(request, response);
+			response.setContentType("text/html); charset=UTF-8");
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('게시글 등록에 실패 했습니다.');");
+			script.println("location.href='anavada/jblist';");
+			script.println("</script>");
+			script.close();
+			
+			
+			
+			//view = request.getRequestDispatcher("views/common/error.jsp");
+			//request.setAttribute("message", "새 게시원글 등록 실패!");
+			//view.forward(request, response);
 		}
 	}
 	

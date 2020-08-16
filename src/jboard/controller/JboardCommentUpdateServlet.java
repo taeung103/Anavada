@@ -31,15 +31,24 @@ public class JboardCommentUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		String MemberIp = request.getHeader("X-FORWARDED-FOR"); 
+	    if (MemberIp == null || MemberIp.length() == 0) {
+	    	MemberIp = request.getHeader("Proxy-Client-IP");
+	    }
+	    if (MemberIp == null || MemberIp.length() == 0) {
+	    	MemberIp = request.getHeader("WL-Proxy-Client-IP");
+	    }
+	    if (MemberIp == null || MemberIp.length() == 0) {
+	    	MemberIp = request.getRemoteAddr() ;
+	    }
 		
 		int jboardNo = Integer.parseInt(request.getParameter("jboardno"));
 		Comment reply = new Comment();
 		reply.setCommentNo(Integer.parseInt(request.getParameter("commentno")));
 		reply.setCommentContent(request.getParameter("content"));
-		
+		reply.setMemberIp(MemberIp);
 		int result = new CommentService().updateComment(reply);
-		System.out.println("테스트");
+		
 		if (result > 0) {
 				response.sendRedirect("/anavada/jbdetail?jboardno=" + jboardNo);
 		}else {

@@ -15,9 +15,6 @@
 	String local = request.getParameter("local"); 
     String listSearch = request.getParameter("listsearch");
 	String[] localArr = { "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구" };
-
-	
-	
 %>
 
 
@@ -138,7 +135,7 @@
 				</div>
                 <% if (loginMember != null){ %>
                 <div class="write-btn">
-                    <a href="views/jboard/product_write.jsp" class="write_btn">글쓰기</a>
+                    <a href="views/jboard/product_write.jsp?memberid=<%=loginMember.getMemberId()%>" class="write_btn">글쓰기</a>
                   </div>
                  <% }else{ %>
                   <div class="write-btn">
@@ -151,7 +148,7 @@
             <!--  페이징 처리 -->
             <dl class="list-paging pb80">
                 <dd>
-                	<% if (currentPage <= 1){ %>
+                	<% if (currentPage < 1){ %>
               		<a><i class= "glyphicon glyphicon-backward"></i></a>
               		<%}else {%>
               		<a href="/anavada/jblist?page=1&local=<%=local%>&listsearch=<%=listSearch%>&titlesearch=<%=titleSearch%>"><i class= "glyphicon glyphicon-backward"></i></a>
@@ -167,7 +164,7 @@
                     <a href="/anavada/jblist?page=<%=p%>&local=<%=local%>&listsearch=<%=listSearch%>&titlesearch=<%=titleSearch%>"><%=p %></a>
                     <%}} %>
                     <!--  다음 그룹으로 이동처리 -->
-                    <% if (endPage +10 <= maxPage){ %>
+                    <% if (endPage +1 <= maxPage){ %>
                     <a href="/anavada/jblist?page=<%= endPage +1%>&local=<%=local%>&listsearch=<%=listSearch%>&titlesearch=<%=titleSearch%>"><i class="glyphicon glyphicon-menu-right"></i></a>
                     <%} %>
                     

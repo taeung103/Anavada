@@ -49,8 +49,16 @@ public class JboardUpdateServlet extends HttpServlet {
 			request.setAttribute("message", "form 의 enctype='multipart/form-data' 속성 누락됨");
 			view.forward(request, response);
 		}
-		
-		
+		String MemberIp = request.getHeader("X-FORWARDED-FOR"); 
+	    if (MemberIp == null || MemberIp.length() == 0) {
+	    	MemberIp = request.getHeader("Proxy-Client-IP");
+	    }
+	    if (MemberIp == null || MemberIp.length() == 0) {
+	    	MemberIp = request.getHeader("WL-Proxy-Client-IP");
+	    }
+	    if (MemberIp == null || MemberIp.length() == 0) {
+	    	MemberIp = request.getRemoteAddr() ;
+	    }
 		int maxSize = 1024 * 1024 * 10;
 
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/jboardfiles");
@@ -58,6 +66,9 @@ public class JboardUpdateServlet extends HttpServlet {
 				new DefaultFileRenamePolicy());
 
 		Jboard jboard = new Jboard();
+		int currentPage = Integer.parseInt(mrequest.getParameter("page"));
+		int jboardNo = Integer.parseInt(mrequest.getParameter("jboardno"));
+		jboard.setJboardNo(jboardNo);
 		jboard.setJboardPost(mrequest.getParameter("post"));
 		jboard.setJboardMeet(mrequest.getParameter("meet"));
 		jboard.setLocalNo(mrequest.getParameter("local"));
@@ -65,10 +76,9 @@ public class JboardUpdateServlet extends HttpServlet {
 		jboard.setJboardPrice(Integer.parseInt(mrequest.getParameter("price")));
 		jboard.setJboardContent(mrequest.getParameter("content"));
 		jboard.setMemberId(mrequest.getParameter("memberid"));
+		jboard.setMemberIp(MemberIp);
 		
-		int currentPage = Integer.parseInt(mrequest.getParameter("page"));
-		int jboardNo = Integer.parseInt(mrequest.getParameter("jboardno"));
-		jboard.setJboardNo(jboardNo);
+	
 		
 		File newOriginFile = null;
 		File originFile = null;

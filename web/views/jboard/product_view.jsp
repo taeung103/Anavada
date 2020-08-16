@@ -5,6 +5,7 @@
  	import="jboard.model.vo.Jboard , java.util.ArrayList, java.sql.Date, jboard.model.vo.Comment, java.text.SimpleDateFormat" %>
 <%
 	ArrayList<Comment> list = (ArrayList<Comment>) request.getAttribute("list");
+	ArrayList<Jboard> likemember = (ArrayList<Jboard>)request.getAttribute("likememberlist");
 	//SimpleDateFormat lastUpdate =new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
 	Jboard jboard = (Jboard)(request.getAttribute("jboardno"));
 	String post = String.valueOf(request.getAttribute("post"));
@@ -21,7 +22,7 @@
 <head>
 
     <%@ include file="../include/head.jsp" %>
-    
+    <!-- 대댓글 버튼 눌렀을 시 숨겨져 있던 입력창 출력 -->
         <script type="text/javascript">
         $(function (){
             $(".Subcmt_btn").click(function () {
@@ -217,7 +218,20 @@ font{
                            </dd>
                         </dl>
                         <div>
-                            <i class="good_i glyphicon glyphicon-heart-empty">좋아요<span>&nbsp;<%=jboard.getJboardLike() %> &nbsp;  <% if (meet.equals("Y"))  { %>직거래상품<% } %> <% if (post.equals("Y"))  { %>우편거래상품<% } %></span></i>
+                            <i class="good_i glyphicon glyphicon-heart-empty">
+                            <%if (loginMember != null){ %>
+                            <a href="/anavada/jblike?jboardno=<%=jboard.getJboardNo()%>&memberid=<%=loginMember.getMemberId()%>">좋아요</a>
+                            <%}else{ %>
+                            좋아요
+                            <%} %>
+                        	 <span>&nbsp;<%=jboard.getJboardLike() %> &nbsp;  <% if (meet.equals("Y"))  { %>직거래상품<% } %>
+                             <% if (post.equals("Y"))  { %>우편거래상품<% } %></span></i><br>
+                            <% for (Jboard lmember : likemember ){ %>
+                               <%=lmember.getMemberId() %>
+                               <%} %>
+                               <% if (jboard.getJboardLike() >0) {%>
+                            	   님이 좋아합니다.
+                               <% }%>
                             <h2 class="product_name"><b>상품명 : </b><span><%=jboard.getJboardTitle() %></span></h2>
                             <h3 class="product_price"><b>판매가격 : </b><span><%=jboard.getJboardPrice() %></span>원</h3>
                             <p class="view-ctn">
@@ -225,19 +239,20 @@ font{
                             </p>
                             <div>
                                 <b>판매자 아이디 : <%= jboard.getMemberId()%> &nbsp; &nbsp; / &nbsp; &nbsp; 조회수 : <%=jboard.getJboardCount()%></b><br/>
-                                <b>등록일자 : </b><%= jboard.getJboardDate()%> &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;<b>최종수정일자 : </b><%=jboard.getJboardUpdate() %>
+                                <b>등록일자 : </b><%= jboard.getJboardDate()%> &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;<b>최종수정일자 : </b><%=jboard.getJboardUpdate() %><br>
+                                <b>판매자 IP :</b> <%= jboard.getMemberIp()%>
                             </div>
                         </div>
                     </dd>
                 </dl>
                 <div class="view-btn">
                    
-                 	<% if (loginMember != null){%>
+                 	
                  	<%	if(loginMember.getMemberId().equals(jboard.getMemberId())){ %>
                  	<a href="/anavada/jbupview?jboardno=<%=jboard.getJboardNo() %>&page=<%=currentPage %>" class="btn btn-list">수정</a>
                  	<a href="/anavada/jbdelete?jboardno=<%=jboard.getJboardNo() %>&page=<%=currentPage %>&rfile1=<%=jboard.getJboardRenameFilePath1() %> 
                  	&file2=<%=jboard.getJboardRenameFilePath2() %>&file3=<%=jboard.getJboardRenameFilePath3() %>&file4=<%=jboard.getJboardRenameFilePath4() %>" class="btn btn-list">삭제</a>
-                 	<%}} %>
+                 	<%} %>
                     <a href="javascript:history.go(-1);" class="btn btn-list">목록</a>
                 </div>
                 
@@ -250,7 +265,7 @@ font{
                                 <h4 class="cmt_head">전체 댓글 수 :<%=commentListCount %></h4>
                                 <% if(loginMember != null) { %>
                                 <input type= "hidden" name="jboardno" value = "<%=jboard.getJboardNo() %>">
-                                <input type= "hidden" name= "commentid"  value= "<%=jboard.getMemberId()%>">
+                                <input type= "hidden" name= "commentid"  value= "<%=loginMember.getMemberId()%>">
                                 <div class="cmt_body">
 <textarea name="commentcontent" style="resize: none; width:100%; min-height:100px; max-height:100px;" onfocus="this.value='';">비방글은 작성하실 수 없습니다.</textarea>
                                     <div class="cmt_ok">
@@ -267,7 +282,7 @@ font{
                       <ul class="cmt_con">
                         <li> 
                             <div>
-                                <h4><%=comment.getCommentId() %></h4><span>마지막 수정일<%=comment.getCommentLastModified() %></span>
+                                <h4><%=comment.getCommentId() %></h4><span>마지막 수정일<%=comment.getCommentLastModified() %> &nbsp; &nbsp; 작성자 IP :<%=comment.getMemberIp() %></span>
                             </div>
                             <p><%=comment.getCommentContent().replace("\r\n","<br>") %></p>
                              <% if(loginMember != null&& comment.getCommentLevel()<2) { %>
@@ -297,7 +312,7 @@ font{
                                 <form action="/anavada/jbcrinsert.ss" method="post">
                                <input type= "hidden" name="commentno" value = "<%=comment.getCommentNo() %>">
                                 <input type= "hidden" name="jboardno" value = "<%=jboard.getJboardNo() %>">
-                                <input type= "hidden" name="writer" value= "<%=jboard.getMemberId()%>">
+                                <input type= "hidden" name="writer" value= "<%=loginMember.getMemberId()%>">
                                     <fieldset>
                                         <div class="cmt_form">
                                             <div class="cmt_body">
