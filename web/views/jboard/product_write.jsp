@@ -89,7 +89,7 @@
                             <tr>
                                 <td>상품 이미지</td>
                                 <td>
-                                    <input type="file" name="ofile1" style="margin-bottom:10px;" accept="image/gif,image/jpeg,image/png"/>
+                                    <input type="file" name="ofile1" required="required" style="margin-bottom:10px;" accept="image/gif,image/jpeg,image/png"/>
                                     <input type="file" name="ofile2" style="margin-bottom:10px;"accept="image/gif,image/jpeg,image/png"/>
                                     <input type="file" name="ofile3" style="margin-bottom:10px;"accept="image/gif,image/jpeg,image/png"/>
                                     <input type="file" name="ofile4" style="margin-bottom:10px;"accept="image/gif,image/jpeg,image/png"/>

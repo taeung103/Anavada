@@ -109,10 +109,10 @@
                                 <td>
                                     <% if (jboard.getJboardOrignalFilePath1() != null){ %>
                                     		<%= jboard.getJboardOrignalFilePath1() %> &nbsp;
-                                    		<input type = "checkbox" name= "delflag1" value="yes"> 1번째파일삭제
+                                    		<input type = "checkbox" name= "delflag1" value="yes" > 1번째파일삭제
                                     		<br>
                                     		<%} %>
-                                    <input type="file" name="upfile1" style="margin-bottom:10px;" accept="image/gif,image/jpeg,image/png"/>
+                                    <input type="file" name="upfile1" style="margin-bottom:10px;" required="required" accept="image/gif,image/jpeg,image/png"/>
                                     <% if (jboard.getJboardOrignalFilePath2() != null){ %>
                                     		<%= jboard.getJboardOrignalFilePath2() %> &nbsp;
                                     		<input type = "checkbox" name= "delflag2" value="yes"> 2번째파일삭제

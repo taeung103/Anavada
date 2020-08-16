@@ -164,22 +164,22 @@ font{
                              <%if (jboard.getJboardRenameFilePath1() !=null){ %>
                                 <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath1()%>"/></li>
                                 <%}else{ %>
-                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/테스트.jpg"/></li>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/test.jpg"/></li>
                                 <%} %>
                                <%if (jboard.getJboardRenameFilePath2() !=null){ %>
                                 <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath2()%>"/></li>
                                 <%}else{ %>
-                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/테스트.jpg"/></li>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/test.jpg"/></li>
                                 <%} %>
                                  <%if (jboard.getJboardRenameFilePath3() !=null){ %>
                                 <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath3()%>"/></li>
                                 <%}else{ %>
-                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/테스트.jpg"/></li>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/test.jpg"/></li>
                                 <%} %>
                                  <%if (jboard.getJboardRenameFilePath4() !=null){ %>
                                 <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath4()%>"/></li>
                                 <%}else{ %>
-                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/테스트.jpg"/></li>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/test.jpg"/></li>
                                 <%} %>
                             </ol>
                         </div>
