@@ -64,7 +64,10 @@ public class AdminCboardListServlet extends HttpServlet {
         if (maxPage < endPage) {
             endPage = maxPage;
         }
-
+        if (endPage == 0) {
+        	endPage = 1;
+        }
+        
         RequestDispatcher view = null;
         if (list.size() > 0) {
             view = request.getRequestDispatcher(
