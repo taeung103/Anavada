@@ -46,7 +46,7 @@
                                 <tbody>
                                     <tr>
                                         <td><span>제목 : </span></td>
-                                        <td><input type="text" name="title" title="" class="form-control w100p" placeholder="<%= banner.getBannerTitle() %>"  value="<%= banner.getBannerTitle() %>"/>
+                                        <td><input type="text" name="title" title="" class="form-control w100p" placeholder="<%= banner.getBannerTitle() %>"  value="<%= banner.getBannerTitle() %>" required="required"/>
                                         </td>
                                     </tr>
                                     <tr>
@@ -67,7 +67,7 @@
                                     <tr>
                                         <td>설명</td>
                                         <td><textarea name="content" rows="" cols="" class="form-control" 
-                                        style="resize: none; width:100%; min-height:200px; max-height:200px;" placeholder="<%= banner.getBannerContent() %>" ></textarea></td>
+                                        style="resize: none; width:100%; min-height:200px; max-height:200px;" placeholder="" required="required" ><%= banner.getBannerContent() %></textarea></td>
                                     </tr>
                                     <tr>
                                         <td>배너파일등록</td>
@@ -82,11 +82,11 @@
                                     </tr>
 									<tr>
 										<td>배경사이즈</td>
-										<td><input type="text" name="size" title="" class="form-control w100p" placeholder="<%= banner.getBannerSize() %>" /></td>
+										<td><input type="text" name="size" title="" class="form-control w100p" placeholder="" required="required" value="<%= banner.getBannerSize() %>"/></td>
 									</tr>
 									<tr>
 										<td>URL등록</td>
-										<td><input type="text" name="url" title="" class="form-control w100p" placeholder="<%= banner.getBannerUrl() %>" /></td>
+										<td><input type="text" name="url" title="" class="form-control w100p" placeholder="" required="required" value="<%= banner.getBannerUrl() %>"/></td>
 									</tr>
 								</tbody>
                             </table>
