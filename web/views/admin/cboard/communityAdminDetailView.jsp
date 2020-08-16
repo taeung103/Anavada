@@ -88,31 +88,27 @@ font {
 					<li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%=cboard.getLikeCount()%></span></i></li>
 				</ul>
 				<%
-					if ((cboard.getCfilesOriginalFilepath1() != null) || (cboard.getCfilesOriginalFilepath2() != null)
-							|| (cboard.getCfilesOriginalFilepath3() != null) || (cboard.getCfilesOriginalFilepath4() != null)) {
+					if ((cboard.getCfilesOriginalFilepath1() != null) || (cboard.getCfilesOriginalFilepath2() != null) || (cboard.getCfilesOriginalFilepath3() != null)
+							|| (cboard.getCfilesOriginalFilepath4() != null)) {
 				%>
 				<ul>
 					<%
 						for (int i = 0; i < 4; i++) {
 					%>
 					<%
-						if (i == 0 && (cboard.getCfilesOriginalFilepath1() != null
-										&& !cboard.getCfilesOriginalFilepath1().equals("null"))) {
+						if (i == 0 && (cboard.getCfilesOriginalFilepath1() != null && !cboard.getCfilesOriginalFilepath1().equals("null"))) {
 					%>
 					<li><span>첨부파일#1 : </span> <a href="/anavada/cfdown?ofile=<%=cboard.getCfilesOriginalFilepath1()%>&rfile=<%=cboard.getCfilesRenameFilepath1()%>"> <%=cboard.getCfilesOriginalFilepath1()%></a></li>
 					<%
-						} else if (i == 1 && cboard.getCfilesOriginalFilepath2() != null
-										&& !cboard.getCfilesOriginalFilepath2().equals("null")) {
+						} else if (i == 1 && cboard.getCfilesOriginalFilepath2() != null && !cboard.getCfilesOriginalFilepath2().equals("null")) {
 					%>
 					<li><span>첨부파일#2 : </span> <a href="/anavada/cfdown?ofile=<%=cboard.getCfilesOriginalFilepath2()%>&rfile=<%=cboard.getCfilesRenameFilepath2()%>"><%=cboard.getCfilesOriginalFilepath2()%></a></li>
 					<%
-						} else if (i == 2 && cboard.getCfilesOriginalFilepath3() != null
-										&& !cboard.getCfilesOriginalFilepath3().equals("null")) {
+						} else if (i == 2 && cboard.getCfilesOriginalFilepath3() != null && !cboard.getCfilesOriginalFilepath3().equals("null")) {
 					%>
 					<li><span>첨부파일#3 : </span> <a href="/anavada/cfdown?ofile=<%=cboard.getCfilesOriginalFilepath3()%>&rfile=<%=cboard.getCfilesRenameFilepath3()%>"><%=cboard.getCfilesOriginalFilepath3()%></a></li>
 					<%
-						} else if (i == 3 && cboard.getCfilesOriginalFilepath4() != null
-										&& !cboard.getCfilesOriginalFilepath4().equals("null")) {
+						} else if (i == 3 && cboard.getCfilesOriginalFilepath4() != null && !cboard.getCfilesOriginalFilepath4().equals("null")) {
 					%>
 					<li><span>첨부파일#4 : </span> <a href="/anavada/cfdown?ofile=<%=cboard.getCfilesOriginalFilepath4()%>&rfile=<%=cboard.getCfilesRenameFilepath4()%>"><%=cboard.getCfilesOriginalFilepath4()%></a></li>
 					<%

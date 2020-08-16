@@ -106,8 +106,7 @@
 									첨부파일<%=i + 1%></td>
 								<td>
 									<%
-										if (i == 0 && (cboard.getCfilesOriginalFilepath1() != null)
-													&& !cboard.getCfilesOriginalFilepath1().equals("null")) {
+										if (i == 0 && (cboard.getCfilesOriginalFilepath1() != null) && !cboard.getCfilesOriginalFilepath1().equals("null")) {
 									%>
 									<%=cboard.getCfilesOriginalFilepath1()%>
 									&nbsp; &nbsp; &nbsp;
@@ -117,8 +116,7 @@
 										}
 									%>
 									<%
-										if (i == 1 && (cboard.getCfilesOriginalFilepath2() != null)
-													&& !cboard.getCfilesOriginalFilepath2().equals("null")) {
+										if (i == 1 && (cboard.getCfilesOriginalFilepath2() != null) && !cboard.getCfilesOriginalFilepath2().equals("null")) {
 									%>
 									<%=cboard.getCfilesOriginalFilepath2()%>
 									&nbsp; &nbsp; &nbsp;
@@ -128,8 +126,7 @@
 										}
 									%>
 									<%
-										if (i == 2 && (cboard.getCfilesOriginalFilepath3() != null)
-													&& !cboard.getCfilesOriginalFilepath3().equals("null")) {
+										if (i == 2 && (cboard.getCfilesOriginalFilepath3() != null) && !cboard.getCfilesOriginalFilepath3().equals("null")) {
 									%>
 									<%=cboard.getCfilesOriginalFilepath3()%>
 									&nbsp; &nbsp; &nbsp;
@@ -139,8 +136,7 @@
 										}
 									%>
 									<%
-										if (i == 3 && (cboard.getCfilesOriginalFilepath4() != null)
-													&& !cboard.getCfilesOriginalFilepath4().equals("null")) {
+										if (i == 3 && (cboard.getCfilesOriginalFilepath4() != null) && !cboard.getCfilesOriginalFilepath4().equals("null")) {
 									%>
 									<%=cboard.getCfilesOriginalFilepath4()%>
 									&nbsp; &nbsp; &nbsp;

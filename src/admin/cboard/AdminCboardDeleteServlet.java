@@ -17,43 +17,43 @@ import cboard.model.service.CboardService;
  */
 @WebServlet("/adcdelete.ad")
 public class AdminCboardDeleteServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AdminCboardDeleteServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public AdminCboardDeleteServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-    /**
+	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-        String check = request.getParameter("checkarr");
-        String[] splitCheck = check.split(",");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String check = request.getParameter("checkarr");
+		String[] splitCheck = check.split(",");
 
-        int successCount = 0;
+		int successCount = 0;
 
-        CboardService cservice = new CboardService();
-        for (String checkstr : splitCheck) { // 반복1
-            if (cservice.deleteCboard(Integer.parseInt(checkstr)) > 0) {
-                successCount++;
-            }
-        }
+		CboardService cservice = new CboardService();
+		for (String checkstr : splitCheck) { // 반복1
+			if (cservice.deleteCboard(Integer.parseInt(checkstr)) > 0) {
+				successCount++;
+			}
+		}
 
-        PrintWriter writer = response.getWriter();
-        writer.print(successCount + "/" + splitCheck.length);
-        writer.close();
-    }
+		PrintWriter writer = response.getWriter();
+		writer.print(successCount + "/" + splitCheck.length);
+		writer.close();
+	}
 
-    /**
+	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-        // TODO Auto-generated method stub
-        doGet(request, response);
-    }
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
 
 }

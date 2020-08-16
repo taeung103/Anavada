@@ -19,14 +19,14 @@ import creply.model.vo.Creply;
 @WebServlet("/crdelete")
 public class CreplyDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CreplyDeleteServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public CreplyDeleteServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -35,17 +35,17 @@ public class CreplyDeleteServlet extends HttpServlet {
 		int creplyNum = Integer.parseInt(request.getParameter("crnum"));
 		int cboardNum = Integer.parseInt(request.getParameter("cnum"));
 		int depth = Integer.parseInt(request.getParameter("depth"));
-		
+
 		CreplyService crservice = new CreplyService();
 		int result = crservice.deleteCreply(creplyNum, depth);
-		
+
 		if (result > 0) {
 			response.sendRedirect("/anavada/cdetail?cnum=" + cboardNum);
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
-            PrintWriter writer = response.getWriter();
-            writer.println("<script>alert('댓글 삭제 실패.');location.href='/anavada/cdetail?cnum=" + cboardNum + "';</script>");
-            writer.close();
+			PrintWriter writer = response.getWriter();
+			writer.println("<script>alert('댓글 삭제 실패.');location.href='/anavada/cdetail?cnum=" + cboardNum + "';</script>");
+			writer.close();
 		}
 	}
 

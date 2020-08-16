@@ -117,12 +117,12 @@
 
 				</div>
 
-			<% if(loginMember != null) { %>
+				<% if(loginMember != null) { %>
 				<div class="write-btn">
 					<a href="views/cboard/community_write.jsp">글쓰기</a>
 				</div>
-			<%} %>
-				
+				<%} %>
+
 				<div class="view-btn">
 					<a href="/anavada/clistview?page=1&local=0" class="btn btn-list">목록</a>
 				</div>
@@ -135,75 +135,75 @@
 
 			<!-- 페이지넘버 -->
 			<dl class="list-paging">
-						<dd>
-							<%
+				<dd>
+					<%
 								if (currentPage <= 1) {
 							%>
-							<a><i class="glyphicon glyphicon-backward"></i></a>
-							<%
+					<a><i class="glyphicon glyphicon-backward"></i></a>
+					<%
 								} else {
 							%>
-							<a href="/anavada/adclistview.ad?local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"><i class="glyphicon glyphicon-backward"></i></a>
-							<%
+					<a href="/anavada/adclistview.ad?local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"><i class="glyphicon glyphicon-backward"></i></a>
+					<%
 								}
 							%>
-							<%
+					<%
 								if (startPage <= 1) {
 							%>
-							<a><i class="glyphicon glyphicon-menu-left"></i></a>
-							<%
+					<a><i class="glyphicon glyphicon-menu-left"></i></a>
+					<%
 								} else {
 							%>
-							<a href="/anavada/adclistview.ad?page=<%=startPage - 10%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"> <i class="glyphicon glyphicon-menu-left"></i>
-							</a>
-							<%
+					<a href="/anavada/adclistview.ad?page=<%=startPage - 10%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"> <i class="glyphicon glyphicon-menu-left"></i>
+					</a>
+					<%
 								}
 							%>
-							<%
+					<%
 								for (int p = startPage; p <= endPage; p++) {
 							%>
-							<%
+					<%
 								if (currentPage == p) {
 							%>
-							<a href="/anavada/adclistview.ad?page=<%=p%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>" class="active"><%=p%></a>
-							<%
+					<a href="/anavada/adclistview.ad?page=<%=p%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>" class="active"><%=p%></a>
+					<%
 								} else {
 							%>
-							<a href="/anavada/adclistview.ad?page=<%=p%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"><%=p%></a>
-							<%
+					<a href="/anavada/adclistview.ad?page=<%=p%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"><%=p%></a>
+					<%
 								}
 							%>
-							<%
+					<%
 								}
 							%>
-							<%
+					<%
 								if (endPage >= maxPage) {
 							%>
-							<a><i class="glyphicon glyphicon-menu-right"></i></a>
-							<%
+					<a><i class="glyphicon glyphicon-menu-right"></i></a>
+					<%
 								} else {
 							%>
-							<a href="/anavada/adclistview.ad?page=<%=endPage + 1%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"><i class="glyphicon glyphicon-menu-right"></i></a>
-							<%
+					<a href="/anavada/adclistview.ad?page=<%=endPage + 1%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"><i class="glyphicon glyphicon-menu-right"></i></a>
+					<%
 								}
 							%>
-							<%
+					<%
 								if (currentPage >= maxPage) {
 							%>
-							<a><i class="glyphicon glyphicon-forward"></i></a>
-							<%
+					<a><i class="glyphicon glyphicon-forward"></i></a>
+					<%
 								} else {
 							%>
-							<a href="/anavada/adclistview.ad?page=<%=maxPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"><i class="glyphicon glyphicon-forward"></i></a>
-							<%
+					<a href="/anavada/adclistview.ad?page=<%=maxPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>"><i class="glyphicon glyphicon-forward"></i></a>
+					<%
 								}
 							%>
-						</dd>
-					</dl>
-					<!-- //페이징 -->
+				</dd>
+			</dl>
+			<!-- //페이징 -->
 
-				</div>
-			<!-- 페이지넘버 끝 -->
+		</div>
+		<!-- 페이지넘버 끝 -->
 
 		<!-- 컨텐츠 끝 -->
 
