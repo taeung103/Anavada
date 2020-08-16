@@ -127,18 +127,17 @@
 				<!-- 검색영역 끝 -->
 				<form>
 					<input type="hidden" name="vals" value="$()">
-					<table class="cboardTable" style="width: inherit;" co>
+					<table class="cboardTable">
 						<colgroup>
+							<col width="6%">
+							<col width="6%">
 							<col width="10%">
 							<col width="10%">
+							<col width="*">
+							<col width="8%">
+							<col width="8%">
 							<col width="10%">
 							<col width="10%">
-							<col width="15%">
-							<col width="*%">
-							<col width="15%">
-							<col width="15%">
-							<col width="15%">
-							<col width="15%">
 						</colgroup>
 						<tbody>
 							<tr>

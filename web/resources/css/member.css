@@ -97,13 +97,14 @@
 .MBlogin > div .join_btn a:last-child {
     float: right;
 }
-.MBlogin > div a.login_btn {
+.MBlogin > div .login_btn {
     line-height: 40px;
     width: 100%;
     font-size: 16px;
     color: #fff;
     display: inline-block;
     background-color: #FF8A3D;
+    border: none;
     border-radius: 5px;
     text-align: center;
 }
@@ -129,14 +130,14 @@
     padding: 0 10px;
     color: #777;
 }
-.MBidpw > div a.idpw_btn {
-    margin-top: 20px;
-    padding: 3% 0;
+.MBidpw > div .idpw_btn {
+    margin: 20px 0 0 0;
     width: 100%;
     font-size: 16px;
     color: #fff;
     display: inline-block;
     background-color: #FF8A3D;
+    border: none;
     border-radius: 5px;
     text-align: center;
 }
@@ -298,29 +299,30 @@
 .MBjoin_input_btn {
     text-align: center;
 }
-.MBjoin_input_btn a {
+.MBjoin_input_btn input {
     display: inline-block;
     border-radius: 5px;
     padding: 10px 0;
-    width: 200px;
-    font-size: 15px;
+    width: 120px;
+    font-size: 14px;
     margin-right:10px;
+    border: none;
 }
-.MBjoin_input_btn a:first-child {
+.MBjoin_input_btn input:first-child {
     background-color:#fff;
     color: #777;
     border: 1px solid #999;
 }
-.MBjoin_input_btn a:last-child {
+.MBjoin_input_btn input:last-child {
     background-color:#FF8A3D;
     color: #fff;
     margin-right:0;
 }
-.MBjoin_input_btn a:hover:first-child {
+.MBjoin_input_btn input:hover:first-child {
     color: #FF8A3D;
     border: 1px solid #FF8A3D;
 }
-.MBjoin_input_btn a:hover:last-child {
+.MBjoin_input_btn input:hover:last-child {
     background-color:#FF8A3D;
 }
 

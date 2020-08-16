@@ -115,7 +115,7 @@
                 <dl class="list-paging">
                     <dd>
                    	<% if(currentPage <= 1){ %>
-                    	<a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
+                    	<a href="#none"><i class="glyphicon glyphicon-backward"></i></a>
                    	<% } else { %>
                    		<a href="/anavada/mlist.ad?secessionOK=N&page=<%= startPage %>"><i class="glyphicon glyphicon-menu-left"></i></a>
                     <% } %>
@@ -140,7 +140,7 @@
                         <a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
 					<% } %>
 					<% if(currentPage >= maxPage){ %>
-                        <a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
+                        <a href="#none"><i class="glyphicon glyphicon-forward"></i></a>
 					<% } else { %>
                         <a href="/anavada/mlist.ad?secessionOK=N&page=<%= maxPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
 					<% } %>					

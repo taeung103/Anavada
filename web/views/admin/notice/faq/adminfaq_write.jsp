@@ -40,6 +40,12 @@
                         </colgroup>
                         <tbody>
                             <tr>
+                                <td>카테고리</td>
+                                <td><input type="radio" name="checkCate" value="1" required> 회원정보 &nbsp; &nbsp;<input type="radio" name="checkCate" value="2"> 중고거래 &nbsp; &nbsp;
+                                	<input type="radio" name="checkCate" value="3"> 커뮤니티 &nbsp; &nbsp;<input type="radio" name="checkCate" value="4"> 지역축제 &nbsp; &nbsp;
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>제목</td>
                                 <td><input type="text" name="title" title="" class="form-control w100p" placeholder="제목" required></td>
                             </tr>
@@ -47,12 +53,7 @@
                                 <td>내용</td>
                                 <td><textarea name="content"  class="form-control" style="resize: none; width:100%; min-height:300px; max-height:300px;" required></textarea></td>
                             </tr>
-                            <tr>
-                                <td>카테고리</td>
-                                <td><input type="radio" name="checkCate" value="1" required> 회원정보 &nbsp; &nbsp;<input type="radio" name="checkCate" value="2"> 중고거래 &nbsp; &nbsp;
-                                	<input type="radio" name="checkCate" value="3"> 커뮤니티 &nbsp; &nbsp;<input type="radio" name="checkCate" value="4"> 지역축제 &nbsp; &nbsp;
-                                </td>
-                            </tr>
+
                         </tbody>
                     </table>
 

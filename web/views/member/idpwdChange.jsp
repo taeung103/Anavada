@@ -37,7 +37,7 @@
 			        <div>
 			            <input type="text" name="AuthenticationUser" id="AuthenticationUser" title="인증번호" class="form-control w100p" placeholder="발급 인증번호 입력"/>
 			            <input type="text" name="memberId" title="아이디" class="form-control w100p" placeholder="아이디" maxlength="12"/>
-			            <input type="password" name="memberPwd" title="새 비밀번호" class="form-control w100p" placeholder="'새 비밀번호 입력(4자이상 12자이내)" maxlength="12"/>
+			            <input type="password" name="memberPwd" title="새 비밀번호" class="form-control w100p" placeholder="새 비밀번호 입력(4자이상 12자이내)" maxlength="12"/>
 			            <input type="password" name="memberPwd2" title="새 비밀번호 재입력" class="form-control w100p" placeholder="새 비밀번호 재입력" maxlength="12"/>
 			            <input type="submit" value="비밀번호 변경하기"class="idpw_btn" >
 			        </div>
