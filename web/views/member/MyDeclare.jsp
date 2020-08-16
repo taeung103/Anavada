@@ -40,7 +40,7 @@
                 <ul>
                     <li><a href="mypage.ss">정보수정</a></li>
                     <li><a href="/anavada/myjblist?memberid=<%=loginMember.getMemberId()%>">중고거래조회</a></li>
-                    <li><a href="MyCmnt.jsp">커뮤니티조회</a></li>
+                    <li><a href="/anavada/mycmnt?memberID=<%=loginMember.getMemberId()%>">커뮤니티조회</a></li>
                     <li><a href="MyInquiry.jsp">문의하기조회</a></li>
                     <li class="active"><a href="/anavada/dbomylist.ss">신고하기조회</a></li>
                 </ul>
