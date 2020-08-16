@@ -186,14 +186,14 @@ font {
 				</div>
 				<div class="view-btn">
 					<%
-						if (loginMember != null && loginMember.getMemberId().equals(cboard.getMemberId())) {
+						if (loginMember != null && (loginMember.getMemberId().equals(cboard.getMemberId()) || loginMember.getMemberId().equals("admin"))) {
 					%>
 					<a href="/anavada/cupdateview.ss?cnum=<%=cboard.getCboardNo()%>&local=<%=cboard.getLocalNo()%>" class="btn btn-list">수정</a>
 					<%
 						}
 					%>
 					<%
-						if (loginMember != null && loginMember.getMemberId().equals(cboard.getMemberId())) {
+					if (loginMember != null && (loginMember.getMemberId().equals(cboard.getMemberId()) || loginMember.getMemberId().equals("admin"))) {
 					%>
 					<a href="/anavada/cdelete?cnum=<%=cboard.getCboardNo()%>&rfile1=<%=cboard.getCfilesRenameFilepath1()%>
 						&rfile2=<%=cboard.getCfilesRenameFilepath2()%>&rfile3=<%=cboard.getCfilesRenameFilepath3()%>&rfile4=<%=cboard.getCfilesRenameFilepath4()%>" class="btn btn-list">삭제</a>
