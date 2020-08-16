@@ -85,10 +85,18 @@ public class JboardListViewServlet extends HttpServlet {
 				view.forward(request, response);
 				
 		}else {
-				view = request.getRequestDispatcher("views/common/error.jsp");
-				request.setAttribute("message",  currentPage + " 페이지에 대한 목록 조회 실패!");
-				view.forward(request, response);
-		}
+				view = request.getRequestDispatcher("views/jboard/product_list.jsp");
+				request.setAttribute("list", list);
+				request.setAttribute("currentPage", currentPage);
+				request.setAttribute("maxPage", maxPage);
+				request.setAttribute("startPage", startPage);
+				request.setAttribute("endPage", endPage);
+				request.setAttribute("listCount", listCount);
+				request.setAttribute("local" , local);
+				request.setAttribute("listsearch", listSearch);
+				request.setAttribute("titlesearch", titleSearch);
+				request.setAttribute("page", currentPage);
+				view.forward(request, response);		}
 	
 }
 
