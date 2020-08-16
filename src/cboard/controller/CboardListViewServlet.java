@@ -76,7 +76,7 @@ public class CboardListViewServlet extends HttpServlet {
 			request.setAttribute("keyword", keyword);
 			view.forward(request, response);
 		} else {
-			view = request.getRequestDispatcher("views/cboard/cboardListError.jsp");
+			view = request.getRequestDispatcher("views/cboard/community_list.jsp");
 			request.setAttribute("list", list);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("maxPage", maxPage);

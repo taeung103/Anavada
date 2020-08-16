@@ -146,6 +146,16 @@
 					</tbody>
 				</table>
 
+				<% if(listCount == 0) { %>
+				<div class="list-no">
+
+					<p>
+						<img src="/anavada/resources/images/btnIcn/icn_big_listNo.png" alt="" title="" />
+					</p>
+					<h1>목록이 없습니다.</h1>
+
+				</div>
+				<% } %>
 
 				<%
 					if (loginMember != null) {
