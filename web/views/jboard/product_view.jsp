@@ -282,7 +282,7 @@ font{
                       <ul class="cmt_con">
                         <li> 
                             <div>
-                                <h4><%=comment.getCommentId() %></h4><span>마지막 수정일<%=comment.getCommentLastModified() %> &nbsp; &nbsp; 작성자 IP :<%=comment.getMemberIp() %></span>
+                                <h4><%=comment.getCommentId() %></h4><span>마지막 수정일 : <%=comment.getCommentLastModified() %> &nbsp; &nbsp; 작성자 IP :<%=comment.getMemberIp() %></span>
                             </div>
                             <p><%=comment.getCommentContent().replace("\r\n","<br>") %></p>
                              <% if(loginMember != null&& comment.getCommentLevel()<2) { %>
