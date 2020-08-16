@@ -323,7 +323,6 @@ public class CboardDao {
 
 		String query = "insert into cboard values(cboard_seq.nextval, ?, ?, ?, sysdate, null, default,"
 				+ " default, default, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		System.out.println(cboard.getLocalNo());
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, cboard.getMemberId());
