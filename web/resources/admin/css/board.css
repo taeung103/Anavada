@@ -146,6 +146,10 @@
     width: 18px;
     height: 18px;
 }
+.list-area table tbody tr th input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+}
 .list-area table tbody tr td.number {
     font-size: 16px;
     color: #333;

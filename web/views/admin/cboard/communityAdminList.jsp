@@ -19,6 +19,16 @@
 <%@ include file="../include/admin_head.jsp"%>
 <script type="text/javascript">
 	$(function () {
+
+		$("#checkAll").click(function(){
+	        if($("#checkAll").prop("checked")){
+	            $("input[name=check]").prop("checked",true);
+	            //클릭이 안되있으면
+	        }else{
+	            $("input[name=check]").prop("checked",false);
+	        }
+	    });
+		
 	    $("#delete_btn").click(function() {
 		    var checkarr = []
 			$("input[name=check]:checked").each(function() {
@@ -46,7 +56,11 @@
 		            console.log("jqXHR : " +jqXHR +"textStatus : " + textStatus + "errorThrown : " + errorThrown);
 		        }
 		    });
+		    location.reload();
 		});
+	    
+
+
 	    
 	});
 	</script>
@@ -142,7 +156,7 @@
 						</colgroup>
 						<tbody>
 							<tr>
-								<th>선택</th>
+								<th><input id="checkAll" type="checkbox"></th>
 								<th>글번호</th>
 								<th>아이디</th>
 								<th>지역명</th>
