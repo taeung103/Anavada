@@ -29,11 +29,9 @@ public class MyCmntServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int currentPage = 1;
 		if (request.getParameter("page") != null) {
 			currentPage = Integer.parseInt(request.getParameter("page"));
@@ -45,11 +43,6 @@ public class MyCmntServlet extends HttpServlet {
 		String memberID = request.getParameter("memberID");
 		String search = request.getParameter("search");
 		String keyword = request.getParameter("keyword");
-		System.out.println("memberID : " + memberID);
-		System.out.println("page : " + currentPage);
-		System.out.println("local : " + local);
-		System.out.println("search : " + search);
-		System.out.println("keyword : " + keyword);
 		int limit = 10;
 		CboardService cservice = new CboardService();
 		int listCount = cservice.getMyListCount(memberID, local, search, keyword);
@@ -97,11 +90,9 @@ public class MyCmntServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

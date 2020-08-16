@@ -95,8 +95,7 @@
 									첨부파일<%=i + 1%></td>
 								<td>
 									<%
-										if (i == 0 && (cboard.getCfilesOriginalFilepath1() != null)
-													&& !cboard.getCfilesOriginalFilepath1().equals("null")) {
+										if (i == 0 && (cboard.getCfilesOriginalFilepath1() != null) && !cboard.getCfilesOriginalFilepath1().equals("null")) {
 									%>
 									<%=cboard.getCfilesOriginalFilepath1()%>
 									&nbsp; &nbsp; &nbsp;
@@ -106,8 +105,7 @@
 										}
 									%>
 									<%
-										if (i == 1 && (cboard.getCfilesOriginalFilepath2() != null)
-													&& !cboard.getCfilesOriginalFilepath2().equals("null")) {
+										if (i == 1 && (cboard.getCfilesOriginalFilepath2() != null) && !cboard.getCfilesOriginalFilepath2().equals("null")) {
 									%>
 									<%=cboard.getCfilesOriginalFilepath2()%>
 									&nbsp; &nbsp; &nbsp;
@@ -117,8 +115,7 @@
 										}
 									%>
 									<%
-										if (i == 2 && (cboard.getCfilesOriginalFilepath3() != null)
-													&& !cboard.getCfilesOriginalFilepath3().equals("null")) {
+										if (i == 2 && (cboard.getCfilesOriginalFilepath3() != null) && !cboard.getCfilesOriginalFilepath3().equals("null")) {
 									%>
 									<%=cboard.getCfilesOriginalFilepath3()%>
 									&nbsp; &nbsp; &nbsp;
@@ -128,8 +125,7 @@
 										}
 									%>
 									<%
-										if (i == 3 && (cboard.getCfilesOriginalFilepath4() != null)
-													&& !cboard.getCfilesOriginalFilepath4().equals("null")) {
+										if (i == 3 && (cboard.getCfilesOriginalFilepath4() != null) && !cboard.getCfilesOriginalFilepath4().equals("null")) {
 									%>
 									<%=cboard.getCfilesOriginalFilepath4()%>
 									&nbsp; &nbsp; &nbsp;
@@ -147,7 +143,7 @@
 						</tbody>
 					</table>
 					<div class="write-btn">
-						<a href="/anavada/adclistview.ad?page=1&local=0" class="btn btn-list">목록</a>
+						<a class="btn btn_list" href="/anavada/adclistview.ad?page=1&local=0" class="btn btn-list">목록</a>
 						<button class="btn btn-success" onclick="location.href=/anavada/adcupdate.ad">수정하기</button>
 					</div>
 				</form>

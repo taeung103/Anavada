@@ -16,8 +16,8 @@
 				<div class="vsv-copy sub-title">
 					<div>
 						<ul class="navi">
-							<li><a href="#none">홈</a></li>
-							<li><a href="#none">고객센터</a></li>
+							<li><a href="views/main/main.jsp">홈</a></li>
+							<li><a href="/anavada/nlist">고객센터</a></li>
 							<li class="glyphicon glyphicon-menu-right"><a href="#none">커뮤니티</a></li>
 						</ul>
 					</div>
@@ -33,7 +33,7 @@
 			<div class="write-area">
 				<h2>커뮤니티 작성</h2>
 				<form action="/anavada/cinsert" method="post" enctype="multipart/form-data">
-					<input type="hidden" name="writer" value="<%= loginMember.getMemberId() %>">
+					<input type="hidden" name="writer" value="<%=loginMember.getMemberId()%>">
 					<table>
 						<colgroup>
 							<col width="20%">
@@ -85,15 +85,19 @@
 									<textarea name="content" rows="10" cols="1000" class="form-control" style="resize: none; width: 100%; min-height: 300px; max-height: 300px;" required="required"></textarea>
 								</td>
 							</tr>
-							<% for(int i = 0; i < 4; i++) { %>
+							<%
+								for (int i = 0; i < 4; i++) {
+							%>
 							<tr>
 								<td>
-									첨부파일<%=i +1 %></td>
+									첨부파일<%=i + 1%></td>
 								<td>
-									<input type="file" name="ofile<%=i + 1 %>">
+									<input type="file" name="ofile<%=i + 1%>">
 								</td>
 							</tr>
-							<% } %>
+							<%
+								}
+							%>
 						</tbody>
 					</table>
 					<div class="write-btn">

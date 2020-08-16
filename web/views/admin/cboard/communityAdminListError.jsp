@@ -9,8 +9,8 @@
 	int endPage = ((Integer) request.getAttribute("endPage")).intValue();
 	int maxPage = ((Integer) request.getAttribute("maxPage")).intValue();
 	int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
-	String[] localArr = { "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구",
-			"마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구" };
+	String[] localArr = { "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구",
+			"중구", "중랑구" };
 %>
 <!DOCTYPE html>
 <html>
@@ -38,7 +38,10 @@
 
 				<!-- 검색영역 -->
 				<div class="sort-area">
-					<h4>전체 150개</h4>
+					<h4>
+						전체
+						<%=listCount%>개
+					</h4>
 					<div>
 						<div>
 							<form action="/anavada/adclistview.ad" method="get" style="display: inline-block;">
@@ -124,7 +127,7 @@
 					</dl>
 					<p class="warning_text">*삭제한 글은 복구가 불가능하니 신중하게 선택하세요.</p>
 					<div class="btn_wrap">
-						<a href="/anavada/adcdelete.ad" class="btn-left btn_gray">선택삭제</a> <a href="/anavada/adcdelete.ad" class="btn-right btn_white">등록</a>
+						<a href="/anavada/adcdelete.ad" class="btn-right btn_white">등록</a>
 					</div>
 					<!-- 버튼 -->
 

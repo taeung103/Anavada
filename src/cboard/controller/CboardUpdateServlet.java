@@ -39,11 +39,9 @@ public class CboardUpdateServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 
 		RequestDispatcher view = null;
@@ -57,8 +55,7 @@ public class CboardUpdateServlet extends HttpServlet {
 
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/cboardfiles");
 
-		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8",
-				new DefaultFileRenamePolicy());
+		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
 
 		Cboard cboard = new Cboard();
 
@@ -79,7 +76,6 @@ public class CboardUpdateServlet extends HttpServlet {
 			originFilePath = mrequest.getParameter("ofile" + (i + 1));
 			renameFilePath = mrequest.getParameter("rfile" + (i + 1));
 			originalFileName = mrequest.getFilesystemName("upfile" + (i + 1));
-			System.out.println(originFilePath);
 			switch (i + 1) {
 			case 1:
 				newOriginFile = new File(savePath + "/" + originalFileName);
@@ -174,9 +170,8 @@ public class CboardUpdateServlet extends HttpServlet {
 					break;
 				}
 				originFile.delete();
-			} else if (originFilePath != null && (originalFileName == null
-					|| originFilePath.equals(originalFileName) && originFilePath.contentEquals(originalFileName)
-							&& newOriginFile.length() == originFile.length())) {
+			} else if (originFilePath != null
+					&& (originalFileName == null || originFilePath.equals(originalFileName) && originFilePath.contentEquals(originalFileName) && newOriginFile.length() == originFile.length())) {
 				switch (i + 1) {
 				case 1:
 					cboard.setCfilesOriginalFilepath1(originFilePath);
@@ -204,19 +199,16 @@ public class CboardUpdateServlet extends HttpServlet {
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('글수정 실패');location.href='/anavada/cdetail?cnum=" + cboard.getCboardNo()
-					+ "';</script>");
+			writer.println("<script>alert('글수정 실패');location.href='/anavada/cdetail?cnum=" + cboard.getCboardNo() + "';</script>");
 			writer.close();
 		}
 
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

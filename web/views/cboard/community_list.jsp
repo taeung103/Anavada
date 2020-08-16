@@ -10,8 +10,8 @@
 	int endPage = ((Integer) request.getAttribute("endPage")).intValue();
 	int maxPage = ((Integer) request.getAttribute("maxPage")).intValue();
 	int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
-	String[] localArr = { "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구",
-			"마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구" };
+	String[] localArr = { "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구",
+			"중구", "중랑구" };
 %>
 <!DOCTYPE html>
 <html>
@@ -28,8 +28,8 @@
 				<div class="vsv-copy sub-title">
 					<div>
 						<ul class="navi">
-							<li><a href="#none">홈</a></li>
-							<li><a href="#none">고객센터</a></li>
+							<li><a href="views/main/main.jsp">홈</a></li>
+							<li><a href="/anavada/nlist">고객센터</a></li>
 							<li class="glyphicon glyphicon-menu-right"><a href="#none">커뮤니티</a></li>
 						</ul>
 					</div>
@@ -52,7 +52,11 @@
 					<%
 						if (loginMember != null) {
 					%>
-					<a href="views/cboard/community_write.jsp" class="write_btn">글쓰기</a>
+						<a href="views/cboard/community_write.jsp" class="write_btn">글쓰기</a>
+					<%
+						} else {
+					%>
+						<a class="write_btn" onclick="alert('로그인 후 이용해주세요');location.href='/anavada/views/member/login.jsp';">글쓰기</a>
 					<%
 						}
 					%>
@@ -142,29 +146,23 @@
 					</tbody>
 				</table>
 
-					<%
-						if (currentPage + 1 > maxPage) {
-					%>
-				<div class="list-no">
-					<p>
-						<img src="/anavada/resources/images/btnIcn/icn_big_listNo.png" alt="" title="" />
-					</p>
-					<h1>목록이 없습니다.</h1>
-				</div>
-					<%
-						}
-					%>
 
-					<%
-						if (loginMember != null) {
-					%>
+				<%
+					if (loginMember != null) {
+				%>
 				<div class="write-btn">
 					<a href="views/cboard/community_write.jsp">글쓰기</a>
 				</div>
-					<%
-						}
-					%>
+				<%
+					} else {
+				%>
+				<div class="write-btn">
+					<a onclick="alert('로그인 후 이용해주세요');location.href='/anavada/views/member/login.jsp';">글쓰기</a>
 				</div>
+				<%
+					}
+				%>
+			</div>
 
 
 
