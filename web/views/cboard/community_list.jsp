@@ -52,7 +52,11 @@
 					<%
 						if (loginMember != null) {
 					%>
-					<a href="views/cboard/community_write.jsp" class="write_btn">글쓰기</a>
+						<a href="views/cboard/community_write.jsp" class="write_btn">글쓰기</a>
+					<%
+						} else {
+					%>
+						<a class="write_btn" onclick="alert('로그인 후 이용해주세요');location.href='/anavada/views/member/login.jsp';">글쓰기</a>
 					<%
 						}
 					%>
@@ -148,6 +152,12 @@
 				%>
 				<div class="write-btn">
 					<a href="views/cboard/community_write.jsp">글쓰기</a>
+				</div>
+				<%
+					} else {
+				%>
+				<div class="write-btn">
+					<a onclick="alert('로그인 후 이용해주세요');location.href='/anavada/views/member/login.jsp';">글쓰기</a>
 				</div>
 				<%
 					}
