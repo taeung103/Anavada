@@ -117,11 +117,12 @@
 
 				</div>
 
+			<% if(loginMember != null) { %>
 				<div class="write-btn">
-
 					<a href="views/cboard/community_write.jsp">글쓰기</a>
-
 				</div>
+			<%} %>
+				
 				<div class="view-btn">
 					<a href="/anavada/clistview?page=1&local=0" class="btn btn-list">목록</a>
 				</div>
