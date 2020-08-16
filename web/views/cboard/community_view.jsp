@@ -69,7 +69,7 @@ font {
 				<div class="vsv-copy sub-title">
 					<div>
 						<ul class="navi">
-							<li><a href="#views/main/main.jsp">홈</a></li>
+							<li><a href="views/main/main.jsp">홈</a></li>
 							<li><a href="/anavada/nlist">고객센터</a></li>
 							<li class="glyphicon glyphicon-menu-right"><a href="#none">커뮤니티</a></li>
 						</ul>
@@ -135,7 +135,7 @@ font {
 						if (loginMember != null) {
 					%>
 					<div style="display: inline-block;">
-						<button onclick="location.href='/anavada/uplike?cnum=<%=cboard.getCboardNo()%>'" class="like">
+						<button onclick="location.href='/anavada/uplike?cnum=<%=cboard.getCboardNo()%>&memberId=<%=loginMember.getMemberId() %>'" class="like">
 							<i class="xi-heart" style="font-size: 300%;"></i>
 						</button>
 						<br> <font><%=cboard.getLikeCount()%></font>
