@@ -88,13 +88,14 @@ function loginCheck(data, data1, no, page, selected, keyword){
                                     	<li>작성자 : <%= i.getIqId() %></li>
                                     	<li>작성일 : <%= i.getIqDate() %></li>
                                 	</ul>
-                            	</td>
-                            	<td class="fileDown">
+                                </td>
+                                <td class="xeicon"><i class="xi-lock-o"></i></td>
                             	<% if(i.getIqOriginal() != null || i.getIqOriginal2() != null || i.getIqOriginal3() != null) { %>
-                            	<i class="glyphicon glyphicon-floppy-saved"></i><% } %></td>
+                            	<td class="fileDown">
+                            	<i class="glyphicon glyphicon-floppy-saved"></i></td><% } %>
                             	
                             <% if(i.getIqAnswer().equals("Y")) { %>
-                            	<td class="declare_btn"><span><i class="glyphicon glyphicon-bell"></i>처리완료</span></td>
+                            	<td class="inquiryOK"><span><i class="glyphicon glyphicon-bell"></i>처리완료</span></td>
                             <% }else { %><td></td><% } %>
                             
                         	</tr>

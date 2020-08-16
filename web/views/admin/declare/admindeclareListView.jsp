@@ -14,7 +14,85 @@
 <head>
 <meta charset="UTF-8">
 <title>신고자관리</title>
- <%@ include file="/views/admin/include/admin_head.jsp"%> 
+ <%@ include file="/views/admin/include/admin_head.jsp"%>
+ <script type="text/javascript">
+	/* $(document).ready(function(){
+			$("#all").on("click", function(){
+				if($('input:checkbox[id="all"]').is(":checked")==ture){
+					$('input:checkbox[name="no"]').each(function(){
+						this.checked = true;		
+					});
+				}else{
+					$('input:checkbox[name="no"]').each(function){
+						this.checked = false;	
+					});
+				}
+			})
+		$("#del").on("click",function(){
+			paramdata=""
+			$('input:checkbox[name="no"]').each(function() {
+				if(this.checked){
+					//alert($(this).closest("td").next().children('input:text[name="id"]').val())
+					paramdata=paramdata+"id="+
+						$(this).closest("td").next().children('input:text[name="no"]').val()+"&"
+				}
+			})
+			location.href="/kimsaemERP/admin/passmodify.do?"
+								+paramdata.substr(0, paramdata.length-1)
+		})
+	}) */
+	function deleteAction(){
+		var checkRow = "";
+		$("input[name='checkDel']:checked").each(function(){
+			checkRow = checkRow + $(this).val()+",";
+		});
+		checkRow = checkRow.substring(0, checkRow.lastIndexOf(","));
+		
+		if(checkRow == ""){
+			alert("삭제할 대상을 선택하세요.");
+			return false;
+		}
+		console.log("### checkRow => {"+checkRow+"}");
+		
+		if(confirm("삭제 하시겠습니까?"))
+			location.href = "/anavada/ddelete.ad?checkRow="+checkRow;
+	}
+	$(function(){
+		$("#all").on("click", function(){
+			if($('input:checkbox[id="all"]').is(":checked")==true){
+				$('input:checkbox[name="checkDel"]').each(function(){
+					this.checked = true;
+				});
+			}else{
+				$('input:checkbox[name="checkDel"]').each(function(){
+					this.checked = false;
+				});
+			}
+		});
+	})
+	function datasend(dno){ 
+		//클릭할때 실행할 내용을 정의하는 부분
+		$.ajax({
+			type: "get",
+			url : "/anavada/dcountup",
+			data : {"ddno" : dno}, 
+			dataType:"text", 
+			success: function(data){
+			console.log("success :" + data);
+				//$("#dcount").html($("#dcount").text()+"<br>"+ data);
+				alert("성공!")
+				$("#dcount"+dno).text(data);
+				
+			},
+			error: function(jqXHR, testStatus, errorThrown){
+				alert("실패...");
+				console.log("error: " + jqXHR + "," + testStatus + "," + errorThrown);
+				
+			}
+			
+		}) 
+	}
+	</script> 
 </head>
 <body oncontextmenu="return false" onselectstart="return false"
 	ondragstart="return false">
@@ -53,92 +131,11 @@
 		                        </form>  -->
 						</div>
 					</div>
-<script type="text/javascript" src="/anavada/resources/js/jquery-3.5.1.min.js"></script>
-<script type="text/javascript">
-/* $(document).ready(function(){
-		$("#all").on("click", function(){
-			if($('input:checkbox[id="all"]').is(":checked")==ture){
-				$('input:checkbox[name="no"]').each(function(){
-					this.checked = true;		
-				});
-			}else{
-				$('input:checkbox[name="no"]').each(function){
-					this.checked = false;	
-				});
-			}
-		})
-	$("#del").on("click",function(){
-		paramdata=""
-		$('input:checkbox[name="no"]').each(function() {
-			if(this.checked){
-				//alert($(this).closest("td").next().children('input:text[name="id"]').val())
-				paramdata=paramdata+"id="+
-					$(this).closest("td").next().children('input:text[name="no"]').val()+"&"
-			}
-		})
-		location.href="/kimsaemERP/admin/passmodify.do?"
-							+paramdata.substr(0, paramdata.length-1)
-	})
-}) */
-function deleteAction(){
-	var checkRow = "";
-	$("input[name='checkDel']:checked").each(function(){
-		checkRow = checkRow + $(this).val()+",";
-	});
-	checkRow = checkRow.substring(0, checkRow.lastIndexOf(","));
-	
-	if(checkRow == ""){
-		alert("삭제할 대상을 선택하세요.");
-		return false;
-	}
-	console.log("### checkRow => {"+checkRow+"}");
-	
-	if(confirm("삭제 하시겠습니까?"))
-		location.href = "/anavada/ddelete.ad?checkRow="+checkRow;
-}
-$(function(){
-	$("#all").on("click", function(){
-		if($('input:checkbox[id="all"]').is(":checked")==true){
-			$('input:checkbox[name="checkDel"]').each(function(){
-				this.checked = true;
-			});
-		}else{
-			$('input:checkbox[name="checkDel"]').each(function(){
-				this.checked = false;
-			});
-		}
-	});
-})
-function datasend(dno){ 
-	//클릭할때 실행할 내용을 정의하는 부분
- 	$.ajax({
-		type: "get",
-		url : "/anavada/dcountup",
-		data : {"ddno" : dno}, 
- 		dataType:"text", 
-		success: function(data){
-		console.log("success :" + data);
-		 	//$("#dcount").html($("#dcount").text()+"<br>"+ data);
-		 	alert("성공!")
-		 	$("#dcount"+dno).text(data);
-	 		
-		},
-		error: function(jqXHR, testStatus, errorThrown){
-			alert("실패...");
-			console.log("error: " + jqXHR + "," + testStatus + "," + errorThrown);
-			
-		}
-		
-	}) 
-}
-
-
-	</script>
 					<form action="" id="">
-						<table>
+						<table class="memberTable">
 							<tbody>
 								<tr>
-								    <th> <!-- <input type="checkbox" id="all"> --></th>
+								    <th><input type="checkbox" id="all" class="btn-left btn_gray"></th>
 									<th>번호</th>
 									<th>신고회원</th>
 									<th>신고횟수</th>
@@ -167,7 +164,6 @@ function datasend(dno){
 						</div> -->
 				<!-- 버튼 -->
 					<div class="btn_wrap">
-						<input type="checkbox" id="all" class="btn-left btn_gray"> 전체 선택
                 	    <a onclick="deleteAction();" class="btn-left btn_gray">선택삭제</a>
               		</div>
                 <!-- //버튼 -->
@@ -217,14 +213,14 @@ function datasend(dno){
 					<form action="/anavada/dinsert.ad" method="post"
 						class="form-inline" onesubmit="return validate();">
 						<fieldset>
-							<div class="admin-library-write">
-
-								<h2>블랙회원 등록</h2>
-
+							<div class="sort-area">
+								<h4>블랙회원 등록</h4>
+							</div>
+							<div class="write-area" style="margin:0; padding:0; width: 100%;">
 								<table>
 									<colgroup>
-										<col width="20%">
-										<col width="80%">
+										<col width="40%">
+										<col width="60%">
 									</colgroup>
 									<tbody>
 										<tr>
@@ -263,11 +259,10 @@ function datasend(dno){
 				</div>
 
 			</div>
+
+			<%@ include file="../include/admin_footer.jsp"%>
 		</div>
 		<!-- 컨텐츠 끝 -->
-
-		<%@ include file="../include/admin_footer.jsp"%>
 	</div>
-
 </body>
 </html>

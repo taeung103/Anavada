@@ -72,10 +72,11 @@
 				</div><br><br>
 
 				<% }else { %>
-				<table>
+                <table class="memberTable">
                     <tbody>
-                    <% if(selected != null && keyword != null) {%>
-                    <% for(Inquiry i : listInquiry) { %>
+                        <tr><th colspan="4">제목</th></tr>
+                        <% if(selected != null && keyword != null) {%>
+                        <% for(Inquiry i : listInquiry) { %>
                         <tr>
                             <td class="number" onclick="location.href='/anavada/aidetail?page=<%= currentPage %>&no=<%= i.getIqNo() %>&selected=<%= selected %>&keyword=<%= keyword %>'"><%= i.getIqNo() %></td>
                             <td class="title" onclick="location.href='/anavada/aidetail?page=<%= currentPage %>&no=<%= i.getIqNo() %>&selected=<%= selected %>&keyword=<%= keyword %>'">
@@ -95,8 +96,8 @@
                             <td class="declare_btn"><span><i class="glyphicon glyphicon-bell"></i>처리완료</span></td>
                             <% }else { %><td></td><% } %>
                         </tr>
-                     <% } }else { %>
-                     <% for(Inquiry i : listInquiry) { %>
+                        <% } }else { %>
+                        <% for(Inquiry i : listInquiry) { %>
                         <tr>
                             <td class="number" onclick="location.href='/anavada/aidetail?page=<%= currentPage %>&no=<%= i.getIqNo() %>'"><%= i.getIqNo() %></td>
                             <td class="title" onclick="location.href='/anavada/aidetail?page=<%= currentPage %>&no=<%= i.getIqNo() %>'">

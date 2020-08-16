@@ -32,8 +32,8 @@
                 <div class="sort-area">  
                     <h4>전체 탈퇴회원 <%= slistCount %>명</h4>
                     <div>
-                        <form action="/anavada/msearch.ad" method="get" id="">
-                        	<input type="hidden" value="Y" name="secessionOK">
+                        <form action="/anavada/mlist.ad" method="get" id="">
+                        	<input type="hidden" value="N" name="secessionOK">
                            	 목록 분류 : <select name="search" class="ListSelect">
                                     <!--option value="분류 선택" selected="selected">분류 선택</option-->
                                     <option value="userId" elected="selected">아이디</option>
@@ -101,7 +101,7 @@
                 <dl class="list-paging">
                     <dd>
                    	<% if(currentPage <= 1){ %>
-                    	<a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
+                    	<a href="#none"><i class="glyphicon glyphicon-backward"></i></a>
                    	<% } else { %>
                    		<a href="/anavada/mlist.ad?secessionOK=Y&page=<%= startPage %>"><i class="glyphicon glyphicon-menu-left"></i></a>
                     <% } %>
@@ -120,13 +120,13 @@
                     	<% } %>
                     <% } %>
                     
-					<% if(currentPage <= maxPage){ %>
+					<% if(currentPage < maxPage){ %>
                         <a href="/anavada/mlist.ad?secessionOK=Y&page=<%= currentPage + 1 %>"><i class="glyphicon glyphicon-menu-right"></i></a>
 					<% } else { %>
                         <a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
 					<% } %>
-					<% if(currentPage > maxPage){ %>
-                        <a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
+					<% if(currentPage >= maxPage){ %>
+                        <a href="#none"><i class="glyphicon glyphicon-forward"></i></a>
 					<% } else { %>
                         <a href="/anavada/mlist.ad?secessionOK=Y&page=<%= endPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
 					<% } %>					

@@ -19,7 +19,6 @@
 <html>
 <head>
     <%@ include file="../include/admin_head.jsp" %>
-<script type="text/javascript" src="/anavada/resources/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 function checkAll(){
 	if($("input[name=checkAll]").is(":checked")){
@@ -90,20 +89,23 @@ function deleteAction(){
 				<!-- 검색영역 끝 -->
 				
 				<% if(totalList == 0) { %>
-				<br><br>
 				<div class="list-no" align="center">
 					<p>
 						<img src="/anavada/resources/images/btnIcn/icn_big_listNo.png"
 							alt="" title="" />
 					</p>
 					<h1>목록이 없습니다.</h1>
-				</div><br><br>
+				</div>
 
 				<% }else { %>
-				<table>
+				<table class="memberTable">
                     <tbody>
-                    <% if(selected != null && keyword != null) {%>
-                    <% for(Notice n : listNotice) { %>
+                        <tr>
+                            <th><input type="checkBox" name="checkAll" onclick="checkAll();" class="checkBox"></th>
+                            <th colspan="3">제목</th>
+                        </tr>
+                        <% if(selected != null && keyword != null) {%>
+                        <% for(Notice n : listNotice) { %>
                         <tr>
                             <td class="checkBox"><input type="checkbox" name="checkDel" value="<%= n.getNoNo() %>"></td>
                             <td class="number" onclick="location.href='/anavada/andetail?page=<%= currentPage %>&no=<%= n.getNoNo() %>&selected=<%= selected %>&keyword=<%= keyword %>'"><%= n.getNoNo() %></td>
@@ -121,8 +123,8 @@ function deleteAction(){
                             <% } %>
                             </td>
                         </tr>
-                     <% } }else { %>
-                     <% for(Notice n : listNotice) { %>
+                        <% } }else { %>
+                        <% for(Notice n : listNotice) { %>
                         <tr>
                             <td class="checkBox"><input type="checkbox" name="checkDel" value="<%= n.getNoNo() %>"></td>
                             <td class="number" onclick="location.href='/anavada/andetail?page=<%= currentPage %>&no=<%= n.getNoNo() %>'"><%= n.getNoNo() %></td>
@@ -149,8 +151,6 @@ function deleteAction(){
                     *삭제한 게시글은 복구가 불가능 하오니 신중하게 선택하시기 바랍니다.
                 </p>
                 <!-- //게시판 -->
-                
-					<input type="checkBox" name="checkAll" onclick="checkAll();" class="checkBox"> 전체 선택
                 <!-- 버튼 -->
                 <div class="btn_wrap">
                     <a onclick="deleteAction();" class="btn-left btn_gray">선택삭제</a>

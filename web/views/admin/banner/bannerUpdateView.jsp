@@ -34,7 +34,7 @@
 					 <input type="hidden" name="rfile" value=<%= banner.getBannerRename() %>>
                		 
                     <fieldset>
-                        <div class="admin-library-write">
+                        <div class="write-area">
 
                             <h2>배너 등록 수정</h2>
 
@@ -97,18 +97,17 @@
                     <!-- <a href="#none" class="btn btn-prev">이전글</a> -->
                     
                     <!-- <a href="#none" class="btn btn-next">다음글</a> -->
-                    <input type="submit" class="btn btn-list" value="상태수정하기">
-                    <%-- <a href="/anavada/dboupmove.ad?dboNo=<%= banner.getBannerNo() %>" class="btn btn-list">상태 수정하기</a> &nbsp; --%>
                     <a href="/anavada/blist.ad" class="btn btn-list">목록</a>
-                    <a href="/anavada/bdelete.ad?bannerNo=<%= banner.getBannerNo()%>&rfile=<%= banner.getBannerRename() %>"  class="btn btn-list"> 삭제하기 </a>
+                    <%-- <a href="/anavada/dboupmove.ad?dboNo=<%= banner.getBannerNo() %>" class="btn btn-success">상태 수정하기</a> &nbsp; --%>
+                    <input type="submit" class="btn btn-success" value="상태수정하기">
+                    <a href="/anavada/bdelete.ad?bannerNo=<%= banner.getBannerNo()%>&rfile=<%= banner.getBannerRename() %>"  class="btn btn-delete"> 삭제하기 </a>
                 </div>
             </div>
             <!-- 상세 끝 -->
 		 </form>
+         <%@ include file="../include/admin_footer.jsp" %> 
         </div>
         <!-- 컨텐츠 끝 -->
-
-       <%@ include file="../include/admin_footer.jsp" %> 
     </div>
 </body>
 </html>

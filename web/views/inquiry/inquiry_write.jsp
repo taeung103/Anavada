@@ -59,8 +59,11 @@
                             </tr>
                             <tr>
                                 <td>첨부파일</td>
-                                <td><input type="file" name="ofile1"><input type="file" name="ofile2"><input type="file" name="ofile3"></td>
-                                
+                                <td>
+                                    <input type="file" name="ofile1" class="mb5">
+                                    <input type="file" name="ofile2" class="mb5">
+                                    <input type="file" name="ofile3">
+                                </td>
                             </tr>
                         </tbody>
                     </table>

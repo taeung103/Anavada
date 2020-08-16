@@ -49,11 +49,11 @@
                     <a href="/anavada/views/declare/declare_write.jsp" class="write_btn">글쓰기</a>
                     <div>
                       <form action="/anavada/dbosearch?page=1" method="post" id="">
-                                               유형 선택 : <select name="selected" class="ListSelect">
-                                    <option value="none" selected disabled>유형선택</option>
-                                    <option value="jboard">중고거래</option>
-                                    <option value="cboard">커뮤니티</option>
-                         		    </select>
+                            유형 선택 : <select name="selected" class="ListSelect">
+                            <option value="none" selected disabled>유형선택</option>
+                            <option value="jboard">중고거래</option>
+                            <option value="cboard">커뮤니티</option>
+                            </select>
                             
                             <input type="text" name="keyword" placeholder="검색어를 입력해주세요.">
                             <button class="top-search"><i class="xi-search"></i></button>

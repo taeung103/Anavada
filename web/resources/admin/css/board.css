@@ -40,8 +40,8 @@
 .sort-area > div form button {
     vertical-align: middle;
     margin-left: -7px;
-    background-color: #FF8A3D;
-    border: 1px solid #FF8A3D ;
+    background-color: #344fa0;
+    border: 1px solid #344fa0 ;
     line-height: 30px;
     font-size: 0;
 }
@@ -52,17 +52,17 @@
 }
 .sort-area .write_btn {
     float: right;
-    border: 1px solid #FF8A3D;
+    border: 1px solid #344fa0;
     line-height: 30px;
     margin: 10px 0 10px 20px;
     padding: 0 30px;
     font-size: 15px;
     border-radius: 5px;
-    color: #FF8A3D;
+    color: #344fa0;
 }
 .sort-area .write_btn:hover {
     color: #fff;
-    background-color: #FF8A3D;
+    background-color: #344fa0;
 }
 
 /*회원 리스트*/
@@ -75,9 +75,13 @@
 .memberTable tr th {
     text-align: center;
     padding: 10px 0;
-    font-size: 13px;
+    font-size: 14px;
     background-color: #333;
     color: #fff;
+}
+.memberTable tr th input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
 }
 .memberTable tr td {
     text-align: center;
@@ -117,6 +121,7 @@
     width:1100px;
     margin-left: 50px;
     min-height: 400px;
+    overflow: hidden;
 }
 .list-area table {
     width:100%;
@@ -170,7 +175,7 @@
 .list-area table tbody tr td.title > h2 span {
     display: inline-block;
     border-radius: 5px;
-    background-color: #FF8A3D;
+    background-color: #344fa0;
     color: #fff;
     font-size: 15px;
     padding: 0 20px;
@@ -342,7 +347,7 @@
     background-color: #777;
 }
 .admin-board-view > h3.Request span {
-    background-color: #ff6a19;
+    background-color: #344fa0;
 }
 .admin-board-view > h2 {
     font-size: 32px;
@@ -445,7 +450,7 @@
     color: #222;
     padding-bottom: 15px;
     font-weight: 500;
-    background-image: url(../../images/common/Answer_icon.png);
+    background-image: url(/anavada/resources/images/common/Answer_icon.png);
     background-repeat: no-repeat;
     background-size: 26px 18px;
     background-position: left 6px top 1px;
@@ -487,7 +492,7 @@
     width: 120px;
     border-radius: 5px;
     display: inline-block;
-    font-size: 15px;
+    font-size: 14px;
     padding: 6px 0;
 }
 .btn_wrap a.btn-left {
@@ -557,21 +562,35 @@
 }
 .view-btn a {
     display:inline-block;
-    font-size: 15px;
+    font-size: 14px;
 }
 .view-btn .btn-list {
     color: #333;
-    padding: 10px 0;
+    padding: 8px 0;
     border-radius: 5px;
-    width: 140px;
+    width: 120px;
     margin: 0 6px;
+}
+.view-btn .btn-success {
+    color: #fff;
+    padding: 8px 0;
+    border-radius: 5px;
+    width: 120px;
+    background-color: #344e9f;
+    border: 1px solid #344e9f;
+    margin: 0 6px;
+}
+.view-btn .btn-success:hover {
+    color: #fff;
+    background-color: #0a267b;
 }
 .view-btn .btn-delete {
     color: #fff;
     padding: 8px 0;
     border-radius: 5px;
-    width: 140px;
+    width: 120px;
     background-color: #c10204;
+    border: 1px solid #c10204;
     margin: 0 6px;
 }
 .view-btn .btn-delete:hover {
@@ -582,8 +601,9 @@
     color: #fff;
     padding: 8px 0;
     border-radius: 5px;
-    width: 140px;
+    width: 120px;
     background-color: #344e9f;
+    border: 1px solid #344e9f;
     margin: 0 6px;
 }
 .view-btn .btn-modified:hover {
@@ -594,8 +614,9 @@
     color: #fff;
     padding: 8px 0;
     border-radius: 5px;
-    width: 140px;
+    width: 120px;
     background-color: #344e9f;
+    border: 1px solid #344e9f;
     margin: 0 6px;
 }
 .view-btn .btn-write:hover {
@@ -606,7 +627,7 @@
     color: #555;
     float: left;
     line-height: 38px;
-    background-image: url(../../images/common/library_left.png);
+    background-image: url(/anavada/resources/images/content/library_left.png);
     background-repeat: no-repeat;
     background-position: left 0 top 15px;
     background-size: 23px 15px;
@@ -616,7 +637,7 @@
     color: #555;
     float: right;
     line-height: 38px;
-    background-image: url(../../images/common/library_right.png);
+    background-image: url(/anavada/resources/images/content/library_right.png);
     background-repeat: no-repeat;
     background-position: right 0 top 15px;
     background-size: 23px 15px;
@@ -629,29 +650,31 @@
 }
 .write-btn a {
     display:inline-block;
-    font-size: 15px;
+    font-size: 14px;
 }
 .write-btn .btn-list {
     color: #333;
     padding: 10px 0;
     border-radius: 5px;
-    width: 140px;
+    width: 120px;
     margin: 0 6px;
     border:1px solid #777;
+    background-color: #fff;
 }
 .write-btn .btn-cancel {
     color: #333;
     padding: 10px 0;
     border-radius: 5px;
-    width: 140px;
+    width: 120px;
     margin: 0 6px;
     border:1px solid #777;
+    background-color: #fff;
 }
 .write-btn .btn-success {
     color: #fff;
-    padding: 8px 0;
+    padding: 10px 0;
     border-radius: 5px;
-    width: 140px;
+    width: 120px;
     background-color: #344e9f;
     border:1px solid #344e9f;
     margin: 0 6px;
@@ -675,28 +698,22 @@
 }
 .list-paging a {
     display:inline-block;
-    padding:9px 12px;
-    line-height:12px;
+    width: 34px;
+    line-height: 34px;
+    height: 34px;
+    font-size: 14px;
     border:1px solid #ccc;
     vertical-align: top;
     background-color:#fff;
 }
-.list-paging a:first-child {
-    padding:8px 9px;
-    background-color:#fff;
-}
-.list-paging a:last-child {
-    padding:8px 9px;
-    background-color:#fff;
-}
 .list-paging a:hover {
-    border: 1px solid #FF8A3D;
-    background-color:#FF8A3D;
+    border: 1px solid #344fa0;
+    background-color:#344fa0;
     color:#fff;
 }
 .list-paging a.active {
-    border:1px solid #FF8A3D;
-    background-color:#FF8A3D;
+    border:1px solid #344fa0;
+    background-color:#344fa0;
     color:#fff;
 }
 /* 페이징 끝 */
@@ -712,7 +729,7 @@
     border-bottom:1px solid #000 !important;
 }
 .homeBtn:hover a, .logoutBtn:hover a {
-    background-color:#FF8A3D !important;
+    background-color:#344fa0 !important;
 }
 
 
@@ -721,7 +738,7 @@
     width:1100px;
     margin:0 auto;
     overflow: hidden;
-    padding: 60px 0 100px;
+    padding: 60px 0 40px;
 }
 .write-area h2 {
     color: #333;
@@ -832,66 +849,6 @@
     text-align: center;
     padding: 60px 0;
 }
-.write-btn {
-    width: 100%;
-    overflow: hidden;
-    text-align: center;
-    font-size: 0;
-    padding-top: 60px;
-}
-.list-table .write-btn {
-    text-align: right;
-}
-.write-btn a {
-    display: inline-block;
-    border: 1px solid #FF8A3D;
-    line-height: 36px;
-    padding: 0;
-    width: 140px;
-    height: 38px;
-    font-size: 15px;
-    border-radius: 5px;
-    color: #FF8A3D;
-    margin: 0 15px;
-}
-.write-area .write-btn a.btn-success {
-    color: #fff;
-}
-.write-btn a:hover {
-    color: #fff;
-    background-color: #FF8A3D;
-}
-.write-btn .btn-list {
-    color: #FF8A3D;
-}
-.write-btn > input {
-    display: inline-block;
-    border: 1px solid #FF8A3D;
-    line-height: 30px;
-    padding: 0;
-    width: 120px;
-    font-size: 15px;
-    border-radius: 5px;
-    color: #FF8A3D;
-    margin: 0 15px;
-    background-color:#fff;
-    vertical-align: inherit;
-}
-.write-btn > input.btn-success {
-    color: #fff;
-    background-color:#FF8A3D;
-}
-.write-btn > input:hover {
-    color: #fff;
-    background-color: #FF8A3D;
-}
-.write-btn > input.btn-list {
-    color: #FF8A3D;
-}
-.write-btn > input.btn-list:hover {
-    color: #fff;
-    background-color: #FF8A3D;
-}
 /* 공지사항-상세 */
 .view-area {
     overflow: hidden;
@@ -958,50 +915,9 @@
     color: #666;
     line-height: 24px;
     border-bottom: 1px solid #333;
+    min-height: 500px;
 }
-.view-btn {
-    text-align: center;
-    overflow: hidden;
-    padding: 60px 0 0;
-}
-.view-btn a {
-    display:inline-block;
-}
-.view-btn .btn-list {
-    font-size: 15px;
-    color: #fff;
-    line-height: 30px;
-    padding: 0 30px;
-    border-radius: 5px;
-    background-color: #FF8A3D;
-    border: 1px solid #FF8A3D;
-}
-.view-btn .btn-list:hover {
-    background-color: #ff6b08;
-    border: 1px solid #ff6b08;
-}
-.view-btn .btn-prev {
-    font-size: 15px;
-    color: #555;
-    float: left;
-    line-height: 30px;
-    background-image: url(../../images/content/library_left.png);
-    background-repeat: no-repeat;
-    background-position: left 0 top 7px;
-    background-size: 23px 15px;
-    padding: 0 10px 0 30px;
-}
-.view-btn .btn-next {
-    font-size: 15px;
-    color: #555;
-    float: right;
-    line-height: 30px;
-    background-image: url(../../images/content/library_right.png);
-    background-repeat: no-repeat;
-    background-position: right 0 top 7px;
-    background-size: 23px 15px;
-    padding: 0 30px 0 10px;
-}
+
 .view-area .inquiry {
     color: #3d47ff !important;
 }
@@ -1152,4 +1068,76 @@
 }
 .cmnt_view h2 span {
     color: #003dc7 !important;
+}
+/*Q&A*/
+.faqTap {
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.faqTap a {
+    display: inline-block;
+    line-height: 40px;
+    padding: 0 20px;
+    border: 1px solid #999;
+    font-size: 15px;
+    font-weight: 500;
+}
+.faqTap a.active {
+    background-color: #FF8A3D;
+    border: 1px solid #FF8A3D;
+    color: #fff;
+}
+.faqTap a:hover {
+    background-color: #FF8A3D;
+    border: 1px solid #FF8A3D;
+    color: #fff;
+}
+
+.Comparisondiv {
+    padding: 30px 0 100px;
+    width: 100%;
+    overflow: hidden;
+}
+.Comparisondiv > div.apidiv {
+    width: 48%;
+    float: left;
+}
+.Comparisondiv > div.fboarddiv {
+    width: 48%;
+    float: right;
+}
+.Comparisondiv > div > h2 {
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+    background-color: #333;
+    color: #fff;
+    font-weight: 500;
+    font-family : 'Montserrat', "NotoSansKR", 'Malgun Gothic', '맑은 고딕', '돋움', sans-serif;
+}
+.Comparisondiv > div > table {
+    width: 100%;
+    word-break: break-word;
+}
+.Comparisondiv > div > table tr td {
+    font-size: 14px;
+}
+.Comparisondiv > div > table tr td:first-child {
+    width: 20%;
+}
+.Comparisondiv > div > table tr td:first-child img {
+    width: 100%;
+    height:auto;
+}
+.Comparisondiv > div > table tr td:nth-child(2) {
+    width: 12%;
+}
+.Comparisondiv > div > table tr td:nth-child(4) {
+    width: 12%;
+}
+.Comparisondiv > div > table tr td:nth-child(5) {
+    width: 12%;
 }

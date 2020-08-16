@@ -3162,13 +3162,13 @@ fieldset[disabled] .btn-primary.focus {
   background-color: #fff;
 }
 .btn-list {
-  color: #FF8A3D;
-  border-color: #FF8A3D;
+  color: #333;
+  border-color: #333;
 }
 .btn-list:focus,
 .btn-list.focus {
-  color: #FF8A3D;
-  border-color: #FF8A3D;
+  color: #333;
+  border-color: #333;
 }
 .btn-list:hover {
   color: #fff;

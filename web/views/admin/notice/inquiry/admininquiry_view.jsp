@@ -56,19 +56,14 @@
 
                 <div class="view-ctn"><%= inquiry.getIqContent().replace("\r\n", "<br>") %></div>
 				
-				<p class="warning_text" align="right" style="color:red;">
+				<p class="warning_text" style="color:red;">
                     *삭제한 게시글은 복구가 불가능 하오니 신중하게 선택하시기 바랍니다.
                 </p>
-                
-				<div align="right">
-				<br>
-				<a href="/anavada/aidelete?no=<%= inquiry.getIqNo() %>&rfile=<%= inquiry.getIqRename() %>&rfile2=<%= inquiry.getIqRename2() %>&rfile3=<%= inquiry.getIqRename3() %>" class="btn btn-list" style="background-color:white; border-color:white; color:red;">삭제</a>
-				</div>
-				
 				
 				<% if(selected == null && keyword == null) { %>
                 <div class="view-btn">
                     <a href="/anavada/ailist.ss?page=<%= currentPage %>" class="btn btn-list">목록</a>
+                    <a href="/anavada/aidelete?no=<%= inquiry.getIqNo() %>&rfile=<%= inquiry.getIqRename() %>&rfile2=<%= inquiry.getIqRename2() %>&rfile3=<%= inquiry.getIqRename3() %>" class="btn btn-delete">삭제</a>
                 </div>
                 <% }else { %>
                 <div class="view-btn">

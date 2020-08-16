@@ -18,7 +18,7 @@ public class MemberDao {
       PreparedStatement pstmt = null;
       ResultSet rset = null;
       
-      String query = "select * from member where member_id = ? and member_pwd = ?";
+      String query = "select MEMBER_ID, MEMBER_PWD, SECESSION_OK from member where member_id = ? and member_pwd = ? and SECESSION_OK = 'N'";
       
       try {
          pstmt = conn.prepareStatement(query);

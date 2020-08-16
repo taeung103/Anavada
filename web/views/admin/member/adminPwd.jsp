@@ -72,7 +72,7 @@
                         </table>
                     </div>
 	                <div class="write-btn" style="border:none;">
-	                    <input class="btn btn-list" type="reset" value="수정취소">
+	                    <input class="btn btn-cancel" type="reset" value="수정취소">
 	                    <input class="btn btn-success" type="submit" value="수정하기" onclick="action='/anavada/mupdate.cp'">
 	                </div>
                 </div>

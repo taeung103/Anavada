@@ -21,11 +21,9 @@
                 })            
             }
         });
-    $(function(){
-        $(".ctn").hide();
-    });
-    </script>
-    <script type="text/javascript">
+        $(function(){
+            $(".ctn").hide();
+        });
         $(function(){
             $('.faqTap a').click(function(){
                 var tab_data = $(this).attr('data-tab');

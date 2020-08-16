@@ -597,18 +597,12 @@
 }
 .list-paging a {
     display:inline-block;
-    padding:9px 12px;
-    line-height:12px;
+    width: 34px;
+    line-height: 34px;
+    height: 34px;
+    font-size: 14px;
     border:1px solid #ccc;
     vertical-align: top;
-    background-color:#fff;
-}
-.list-paging a:first-child {
-    padding:8px 9px;
-    background-color:#fff;
-}
-.list-paging a:last-child {
-    padding:8px 9px;
     background-color:#fff;
 }
 .list-paging a:hover {
@@ -874,6 +868,15 @@
     text-align: center;
     width: 100px;
 }
+.list-area table tbody tr td.xeicon {
+    font-size: 30px;
+    color: #333;
+    text-align: center;
+    width: 100px;
+}
+.list-area table tbody tr td.inquiryOK {
+    width: 120px;
+}
 .list-area .inquiry {
     background-color: #3d47ff !important;
 }
@@ -881,21 +884,23 @@
     background-color: #ff3d4a !important;
 }
 
-.declare_btn, .declare_btn2 {
+.declare_btn, .declare_btn2, .inquiryOK {
     text-align: center;
 }
 .declare_btn span, .declare_btn2 span {
+    width: 200px;
+}
+.declare_btn span, .declare_btn2 span, .inquiryOK span {
     border-radius: 5px;
     line-height: 26px;
-    width: 200px;
     width: 80px;
     display: inline-block;
     color: #fff;
 }
-.declare_btn span {
+.declare_btn span, .inquiryOK span {
     background-color: #ff3d4a;
 }
-.declare_btn2 span {
+.declare_btn2 span, .inquiryOK2 span {
     background-color: #3d47ff ;
 }
 
@@ -970,6 +975,7 @@
     color: #666;
     line-height: 24px;
     border-bottom: 1px solid #333;
+    min-height: 500px;
 }
 .view-btn {
     text-align: center;
@@ -978,6 +984,7 @@
 }
 .view-btn a {
     display:inline-block;
+    margin: 0 5px;
 }
 .view-btn .btn-list {
     font-size: 15px;
@@ -992,12 +999,51 @@
     background-color: #ff6b08;
     border: 1px solid #ff6b08;
 }
+.view-btn .btn-delete {
+    font-size: 15px;
+    color: #fff;
+    line-height: 30px;
+    padding: 0 30px;
+    border-radius: 5px;
+    background-color: #c10204;
+    border: 1px solid #c10204;
+}
+.view-btn .btn-delete:hover {
+    color: #fff;
+    background-color: #820001;
+}
+.view-btn .btn-modified {
+    font-size: 15px;
+    color: #fff;
+    line-height: 30px;
+    padding: 0 30px;
+    border-radius: 5px;
+    background-color: #344e9f;
+    border: 1px solid #344e9f;
+}
+.view-btn .btn-modified:hover {
+    background-color: #0a267b;
+    color: #fff;
+}
+.view-btn .btn-write {
+    font-size: 15px;
+    color: #fff;
+    line-height: 30px;
+    padding: 0 30px;
+    border-radius: 5px;
+    background-color: #344e9f;
+    border: 1px solid #344e9f;
+}
+.view-btn .btn-write:hover {
+    background-color: #0a267b;
+    color: #fff;
+}
 .view-btn .btn-prev {
     font-size: 15px;
     color: #555;
     float: left;
     line-height: 30px;
-    background-image: url(../../images/content/library_left.png);
+    background-image: url(/anavada/resources/images/content/library_left.png);
     background-repeat: no-repeat;
     background-position: left 0 top 7px;
     background-size: 23px 15px;
@@ -1008,7 +1054,7 @@
     color: #555;
     float: right;
     line-height: 30px;
-    background-image: url(../../images/content/library_right.png);
+    background-image: url(/anavada/resources/images/content/library_right.png);
     background-repeat: no-repeat;
     background-position: right 0 top 7px;
     background-size: 23px 15px;
@@ -1151,22 +1197,23 @@
     text-align: center;
     font-size: 0;
     padding-top: 60px;
+    vertical-align: top;
 }
 .list-table .write-btn {
     text-align: right;
 }
-.write-btn a {
+.write-btn a, .write-btn button {
     display: inline-block;
     border: 1px solid #FF8A3D;
     line-height: 30px;
     padding: 0;
     width: 120px;
-    font-size: 15px;
+    font-size: 14px;
     border-radius: 5px;
     color: #FF8A3D;
     margin: 0 15px;
 }
-.write-area .write-btn a.btn-success {
+.write-area .write-btn .btn-success {
     color: #fff;
 }
 .write-btn a:hover {
@@ -1204,4 +1251,9 @@
     color: #fff;
     background-color: #FF8A3D;
 }
-
+.warning_text {
+    color: #ff3d4a ;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 10px;
+}

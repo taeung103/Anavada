@@ -26,7 +26,7 @@
                 <!-- 글쓰기 -->
                 <form action="/anavada/binsert.ad"  method="post" enctype="multipart/form-data" class="form-inline" onesubmit="return validate();">
                     <fieldset>
-                        <div class="admin-library-write">
+                        <div class="write-area">
 
                             <h2>배너 등록</h2>
 

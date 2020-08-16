@@ -176,25 +176,10 @@ font {
 					<%
 						}
 					%>
-					<%
-						if (cboard.getCboardNo() < allListCount) {
-					%>
-					<a href="/anavada/cdetail?cnum=<%=cboard.getCboardNo() + 1%>&page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>" class="btn btn-next">다음글</a>
-					<%
-						}
-					%>
-				</div>
-				<div class="view-btn">
-					<%
-						if (loginMember != null && (loginMember.getMemberId().equals(cboard.getMemberId()) || loginMember.getMemberId().equals("admin"))) {
-					%>
-					<a href="/anavada/cupdateview.ss?cnum=<%=cboard.getCboardNo()%>&local=<%=cboard.getLocalNo()%>" class="btn btn-list">수정</a>
-					<%
-						}
-					%>
-					<%
-					if (loginMember != null && (loginMember.getMemberId().equals(cboard.getMemberId()) || loginMember.getMemberId().equals("admin"))) {
-					%>
+					<% if(loginMember != null && loginMember.getMemberId().equals(cboard.getMemberId())) { %>
+					<a href="/anavada/cupdateview.ss?cnum=<%= cboard.getCboardNo() %>&local=<%= cboard.getLocalNo() %>" class="btn btn-list">수정</a>
+					<% } %>
+					<% if(loginMember != null && loginMember.getMemberId().equals(cboard.getMemberId())) { %>
 					<a href="/anavada/cdelete?cnum=<%=cboard.getCboardNo()%>&rfile1=<%=cboard.getCfilesRenameFilepath1()%>
 						&rfile2=<%=cboard.getCfilesRenameFilepath2()%>&rfile3=<%=cboard.getCfilesRenameFilepath3()%>&rfile4=<%=cboard.getCfilesRenameFilepath4()%>" class="btn btn-list">삭제</a>
 					<%
@@ -202,6 +187,14 @@ font {
 					%>
 
 					<a href="/anavada/clistview?page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>" class="btn btn-list">목록</a>
+				
+					<%
+						if (cboard.getCboardNo() < allListCount) {
+					%>
+					<a href="/anavada/cdetail?cnum=<%=cboard.getCboardNo() + 1%>&page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>" class="btn btn-next">다음글</a>
+					<%
+						}
+					%>
 				</div>
 				<div class="cmt_wrap">
 					<h4 class="cmt_head">
