@@ -135,7 +135,7 @@ font {
 						if (loginMember != null) {
 					%>
 					<div style="display: inline-block;">
-						<button onclick="location.href='/anavada/uplike?cnum=<%=cboard.getCboardNo()%>&memberId=<%=loginMember.getMemberId() %>'" class="like">
+						<button onclick="location.href='/anavada/uplike?cnum=<%=cboard.getCboardNo()%>&memberId=<%=loginMember.getMemberId()%>'" class="like">
 							<i class="xi-heart" style="font-size: 300%;"></i>
 						</button>
 						<br> <font><%=cboard.getLikeCount()%></font>
@@ -176,10 +176,16 @@ font {
 					<%
 						}
 					%>
-					<% if(loginMember != null && loginMember.getMemberId().equals(cboard.getMemberId())) { %>
-					<a href="/anavada/cupdateview.ss?cnum=<%= cboard.getCboardNo() %>&local=<%= cboard.getLocalNo() %>" class="btn btn-list">수정</a>
-					<% } %>
-					<% if(loginMember != null && loginMember.getMemberId().equals(cboard.getMemberId())) { %>
+					<%
+						if (loginMember != null && loginMember.getMemberId().equals(cboard.getMemberId())) {
+					%>
+					<a href="/anavada/cupdateview.ss?cnum=<%=cboard.getCboardNo()%>&local=<%=cboard.getLocalNo()%>" class="btn btn-list">수정</a>
+					<%
+						}
+					%>
+					<%
+						if (loginMember != null && loginMember.getMemberId().equals(cboard.getMemberId())) {
+					%>
 					<a href="/anavada/cdelete?cnum=<%=cboard.getCboardNo()%>&rfile1=<%=cboard.getCfilesRenameFilepath1()%>
 						&rfile2=<%=cboard.getCfilesRenameFilepath2()%>&rfile3=<%=cboard.getCfilesRenameFilepath3()%>&rfile4=<%=cboard.getCfilesRenameFilepath4()%>" class="btn btn-list">삭제</a>
 					<%
@@ -187,7 +193,7 @@ font {
 					%>
 
 					<a href="/anavada/clistview?page=<%=currentPage%>&local=<%=local%>&search=<%=search%>&keyword=<%=keyword%>" class="btn btn-list">목록</a>
-				
+
 					<%
 						if (cboard.getCboardNo() < allListCount) {
 					%>
@@ -318,9 +324,6 @@ font {
 							}
 						%>
 					</ul>
-					<button class="cmt_in">
-						댓글 더보기 <i class="glyphicon glyphicon-menu-right"></i>
-					</button>
 				</div>
 			</div>
 			<!-- 상세 끝 -->

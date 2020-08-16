@@ -303,9 +303,6 @@ font {
 								}
 							%>
 						</ul>
-						<button class="cmt_in">
-							댓글 더보기 <i class="glyphicon glyphicon-menu-right"></i>
-						</button>
 					</div>
 				</div>
 			</div>
