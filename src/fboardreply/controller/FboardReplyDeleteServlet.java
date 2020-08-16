@@ -38,7 +38,8 @@ public class FboardReplyDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	// 댓글 삭제하기
+		// 댓글 삭제하기
+//		System.out.println("FboardReplyDeleteServlet");
 		
 		int fboardReplyNo = Integer.parseInt(request.getParameter("fboardReplyno"));
 		
@@ -46,7 +47,7 @@ public class FboardReplyDeleteServlet extends HttpServlet {
 		
 		int result = new FboardReplyService().deleteFboardReply(fboardReplyNo, memberId);
 		
-		System.out.println("전송 온 값 : " + fboardReplyNo + ", " + memberId + "댓글 삭제 결과 : " + result);
+//		System.out.println("전송 온 값 : " + fboardReplyNo + ", " + memberId + "댓글 삭제 결과 : " + result);
 		
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();

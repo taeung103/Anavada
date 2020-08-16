@@ -30,10 +30,11 @@ public class FboardAdminDeleteAllServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 축제게시판 전부 삭제하기
 		
-				System.out.println("FboardAdminAllDeleteServlet 서블릿");
-				new FboardService().deleteAllFboard();
+		//System.out.println("FboardAdminAllDeleteServlet 서블릿");
+		
+		new FboardService().deleteAllFboard();
 				
-				response.sendRedirect("/anavada/views/admin/fboard/adminfboardList.jsp");
+		response.sendRedirect("/anavada/views/admin/fboard/adminfboardList.jsp");
 	}
 
 	/**

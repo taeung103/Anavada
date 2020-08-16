@@ -37,7 +37,7 @@ public class FboardKListServlet extends HttpServlet {
 	
 		//축제 게시판 가지고 오기
 		ArrayList<Fboard> list = fbservice.selectKList();
-		System.out.println(list.size());
+//		System.out.println(list.size());
 		
 		RequestDispatcher view = null;
 		if(list.size() > 0) {
@@ -50,7 +50,6 @@ public class FboardKListServlet extends HttpServlet {
 	         view.forward(request, response);
 	      }
 
-		
 		System.out.println(list);
 	}
 

@@ -18,7 +18,7 @@ public class Fboard implements java.io.Serializable{
 	private int readcount;
 	private String thumbnail;
 	private String localName;	//지역명
-	private int replycount = 0;	//댓글 수, 나중에 DB합치면 수정
+	private int replycount = 0;	//댓글 수
 	
 	public Fboard() {}
 
@@ -155,10 +155,10 @@ public class Fboard implements java.io.Serializable{
 	public String getLocalName() {
 		return localName;
 	}
+	
 	public void setLocalName(String localName) {
 		this.localName = localName;
 	}
-
 
 	public int getReplycount() {
 		return replycount;
@@ -178,15 +178,15 @@ public class Fboard implements java.io.Serializable{
 
 }
 
-//FBOARD_NO	VARCHAR2(30 BYTE)
-//FESTIVAL_TITLE	VARCHAR2(600 BYTE)
-//LOCAL_NO	VARCHAR2(3 BYTE)
-//FESTIVAL_STARTDATE	VARCHAR2(8 BYTE)
-//FESTIVAL_ENDDATE	VARCHAR2(8 BYTE)
-//FESTIVAL_MODIFIEDDATE	VARCHAR2(15 BYTE)
-//MAP_Y	VARCHAR2(30 BYTE)
-//MAP_X	VARCHAR2(30 BYTE)
-//BMODIFY_DATE	DATE
-//MEMBER_ID	VARCHAR2(20 BYTE)
-//READCOUNT	NUMBER
-//THUMBNAIL	VARCHAR2(100 BYTE)
+//FBOARD_NO	VARCHAR2(30 BYTE)	No		1	축제게시판 번호
+//FESTIVAL_TITLE	VARCHAR2(600 BYTE)	No		2	축제 이름
+//LOCAL_NO	VARCHAR2(3 BYTE)	No		3	지역 번호
+//FESTIVAL_STARTDATE	VARCHAR2(8 BYTE)	Yes		4	축제 시작일
+//FESTIVAL_ENDDATE	VARCHAR2(8 BYTE)	Yes		5	축제 종료일
+//FESTIVAL_MODIFIEDDATE	VARCHAR2(20 BYTE)	Yes		6	축제 수정일
+//MAP_Y	VARCHAR2(30 BYTE)	Yes		7	축제 위도
+//MAP_X	VARCHAR2(30 BYTE)	Yes		8	축제 경도
+//BMODIFY_DATE	DATE	Yes	SYSDATE   	9	축제게시판 수정일
+//MEMBER_ID	VARCHAR2(20 BYTE)	Yes		10	작성자
+//READCOUNT	NUMBER	Yes	0    	11	조회수
+//THUMBNAIL	VARCHAR2(100 BYTE)	Yes	'NoImage'	12	썸네일

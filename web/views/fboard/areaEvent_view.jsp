@@ -115,9 +115,7 @@
                    <!--  <a href="#none" class="btn btn-next">다음글</a> -->
                 </div>
                 
-                
                <div class="cmt_wrap">
-                
                     
                     <!-- 댓글 작성 폼 -->
                        <form name="replysubmit" method="post" action="">
@@ -164,18 +162,9 @@
 								for(var i in json.list) {
 								values += '<li><div>' +
                                 '<h4>user : ' + json.list[i].memberId + '</h4><span>' + json.list[i].fboardReplyCreatDate + '</span>' +
-                                '</div><p>' + decodeURIComponent(json.list[i].fboardReplyContent).replace(/\+/gi, " ") + '</p>' + 
-                                '<div class="cmt_delete" style="float: right;"><input type="button" value="삭제" onclick="Replydelete(' + json.list[i].fboardReplyNo + ');"></div>' +
-                                '<button onclick="">대댓글</button>'
-                                
-                                /* '<div class="Subcmt_form">' +
-                                '<form name="replysubmit" method="post" action="/testjosn/fbreplyinsert.ss?fboardReplyLev=2&fboardReplyPNo=' + json.list[i].fboardReplyNo + '">' +
-                                    '<fieldset><div class="cmt_form"><div class="cmt_body"><textarea id="replycontent" style="resize: none; width:100%; min-height:100px; max-height:100px;">비방글은 작성하실 수 없습니다.</textarea>' +
-                                            '<div class="cmt_ok"><input type="submit" value="등록" onclick="ReplySubmit()"></div>' +
-                                            '</div>' +
-                                        '</div>' +
-                                    '</fieldset></form></div>' +
-                          		'</li>' */
+                                '</div><pre>' + decodeURIComponent(json.list[i].fboardReplyContent).replace(/\+/gi, " ") + '</pre>' + 
+                                '<div class="cmt_delete" style="float: right;"><input type="button" value="삭제" onclick="Replydelete(' + json.list[i].fboardReplyNo + ');"></div>' 
+                                 +'<button onclick="">대댓글</button>' + '</li>'
 								}	//for in
 								
 								 $("#fbreply").empty();
@@ -195,27 +184,26 @@
                           if (document.getElementById("replyContent").value == "") {
                               alert("내용을 입력해주세요");
                               return false;
-                    }else
-                  	  $.ajax({
-                  		url : "/anavada/fbreplyinsert.ss",
-                	        type:'POST',
-                	        data : {replyContent : $('#replyContent').val(), memberid : $('#memberid').val(), boardno : $('#boardno').val()},
-                	        success : function(data){
-                	          	if(data == 1) {
-                  	        	 	alert("댓글이 등록되었습니다."); 
-                  	        	} else {
-                  	        		alert("댓글 등록을 실패했습니다."); 
-                  	        	}
-                	        		 $("#replyContent").val("");
-                 	                getCommentList();
-                	               
-                	        },
-                	        error:function(request,status,error){
-                	        	alert("로그인후 이용해주세요.");
-                	        	console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown);
-                	       }
-                	    });
-                    }
+                    	}else
+                  	 		 $.ajax({
+                  				url : "/anavada/fbreplyinsert.ss",
+                	        	type:'POST',
+                	        	data : {replyContent : $('#replyContent').val(), memberid : $('#memberid').val(), boardno : $('#boardno').val()},
+                	        	success : function(data){
+                	          		if(data == 1) {
+                  	        		 	alert("댓글이 등록되었습니다."); 
+                  	        		} else {
+                  	        			alert("댓글 등록을 실패했습니다."); 
+                  	        		}
+                	        			 $("#replyContent").val("");
+                 	            	    getCommentList();
+	                	        },
+    	            	        error:function(request,status,error){
+        	        	        	alert("로그인후 이용해주세요.");
+            	    	        	console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown);
+                		       }
+                		    });
+                    	}
                     
                       // 댓글 삭제
                     function Replydelete(fboardReplyNo, memberId) {
@@ -243,7 +231,6 @@
                     
                     <ul id="fbreply" class="cmt_con">
                     </ul>
-                    
                    <!--  <button class="cmt_in">댓글 더보기 <i class="glyphicon glyphicon-menu-right"></i></button> -->
              	 </div>
             </div>

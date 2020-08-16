@@ -22,27 +22,29 @@ import fboard.model.vo.Fboard;
 @WebServlet("/fbinsert.ad")
 public class FboardAdminInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public FboardAdminInsertServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public FboardAdminInsertServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 축제 id로 제공되는 축제 id랑 축제 게시판 번호 비교후 없으면 insert
-		System.out.println("FboardAdminInsertServlet");
 		
+		//System.out.println("FboardAdminInsertServlet");
+
 		Fboard fboard = new Fboard();
 		FboardService fbService = new FboardService();
 		int totalInsert = 0;
 		JSONArray jsonArray = FestivalInformation.festival();
-		
+
 		for (int i = 0; i < jsonArray.size(); i++) {
 			JSONObject data = (JSONObject) (JSONObject) jsonArray.get(i);
 
@@ -51,8 +53,7 @@ public class FboardAdminInsertServlet extends HttpServlet {
 			System.out.println("select : " + fboardNo + " 결과(1:유 0:무) : " + selectResult);
 
 			if (selectResult == 0) {
-
-				fboard.setFboardNo(fboardNo);				
+				fboard.setFboardNo(fboardNo);
 				fboard.setFestivalTitle(data.get("title").toString());
 				fboard.setLocalNo(data.get("sigungucode").toString());
 				fboard.setFestivalStartDate(data.get("eventstartdate").toString());
@@ -77,13 +78,14 @@ public class FboardAdminInsertServlet extends HttpServlet {
 		}
 
 		System.out.println("insert한 개수 : " + totalInsert);
-		
+
 		response.sendRedirect("/anavada/views/admin/fboard/adminfboardList.jsp");
 
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub

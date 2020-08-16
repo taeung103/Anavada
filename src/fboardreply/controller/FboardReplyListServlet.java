@@ -39,12 +39,9 @@ public class FboardReplyListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 댓글 가지고오기
-		
-		System.out.println("FboardReplyListServlet");
+//		System.out.println("FboardReplyListServlet");
 
 		int fboardNo = Integer.parseInt(request.getParameter("fboardno"));
-		
-		
 		
 		ArrayList<FboardReply> list = new FboardReplyService().selectList(fboardNo);
 		System.out.println("List : " + list.size());
@@ -74,7 +71,7 @@ public class FboardReplyListServlet extends HttpServlet {
 		out.flush();
 		out.close();
 		
-		System.out.println("댓글 : " + sendJSON);
+//		System.out.println("댓글 : " + sendJSON);
 		
 	}
 

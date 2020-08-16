@@ -40,7 +40,7 @@ public class FboardReplyInsertServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 댓글 등록하기
-		System.out.println("FboardReplyInsertServlet");
+//		System.out.println("FboardReplyInsertServlet");
 		
 		//1. 인코딩
 		request.setCharacterEncoding("utf-8");
@@ -52,25 +52,20 @@ public class FboardReplyInsertServlet extends HttpServlet {
 		
 		FboardReply reply = new FboardReply();
 		 
-		 reply.setFboardNo(boardNo); reply.setFboardReplyContent(replyContent);
-		 reply.setMemberId(memberId); reply.setFboardReplyLev(1);
-		 reply.setFboardReplyRef(Integer.parseInt(boardNo)); //댓글은 게스글 번호, 대댓글은 부모댓글 번호
+		reply.setFboardNo(boardNo); reply.setFboardReplyContent(replyContent);
+		reply.setMemberId(memberId); reply.setFboardReplyLev(1);
+		reply.setFboardReplyRef(Integer.parseInt(boardNo)); //댓글은 게스글 번호, 대댓글은 부모댓글 번호
 		
-		 int result = new FboardReplyService().insertFboardReply(reply);
+		int result = new FboardReplyService().insertFboardReply(reply);
 		  
-		 System.out.println("전송 온 값 : " + boardNo + ", " + memberId + ", " + replyContent + "댓글 입력 결과: " + result);
+//		System.out.println("전송 온 값 : " + boardNo + ", " + memberId + ", " + replyContent + "댓글 입력 결과: " + result);
 			
-			response.setContentType("text/html; charset=utf-8");
-			PrintWriter out = response.getWriter();
-			out.append(Integer.toString(result));	//result = 0  입력 X, 1 = 입력 O
-			out.flush();
-			out.close();
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(Integer.toString(result));	//result = 0  입력 X, 1 = 입력 O
+		out.flush();
+		out.close();
 		 
-		 
-		/*
-		 * response.setContentType("application/text; charset=utf-8"); PrintWriter out =
-		 * response.getWriter(); out.write(result);
-		 */
 	}
 
 }

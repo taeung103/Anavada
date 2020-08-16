@@ -93,7 +93,7 @@ public class FboardDao {
 					result = rset.getInt(1);
 					System.out.println("축제 변경 없음");
 				} else {
-					result = 100;
+					result = rset.getInt(1);
 					System.out.println("축제 변경 있음");
 				}
 
