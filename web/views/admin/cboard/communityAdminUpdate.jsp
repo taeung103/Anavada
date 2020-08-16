@@ -143,7 +143,7 @@
 						</tbody>
 					</table>
 					<div class="write-btn">
-						<a href="/anavada/adclistview.ad?page=1&local=0" class="btn btn-list">목록</a>
+						<a class="btn btn_list" href="/anavada/adclistview.ad?page=1&local=0" class="btn btn-list">목록</a>
 						<button class="btn btn-success" onclick="location.href=/anavada/adcupdate.ad">수정하기</button>
 					</div>
 				</form>
