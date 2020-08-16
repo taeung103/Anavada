@@ -1,5 +1,6 @@
 package admin.cboard;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cboard.model.service.CboardService;
+import cboard.model.vo.Cboard;
 
 /**
  * Servlet implementation class AdminCboardDeleteServlet
@@ -33,12 +35,23 @@ public class AdminCboardDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String check = request.getParameter("checkarr");
 		String[] splitCheck = check.split(",");
-
 		int successCount = 0;
 
 		CboardService cservice = new CboardService();
 		for (String checkstr : splitCheck) { // 반복1
+			Cboard cboard = cservice.selectCboard(Integer.parseInt(checkstr));
+			String rfile1 = cboard.getCfilesRenameFilepath1();
+			String rfile2 = cboard.getCfilesRenameFilepath2();
+			String rfile3 = cboard.getCfilesRenameFilepath3();
+			String rfile4 = cboard.getCfilesRenameFilepath4();
+			String[] rfiles = {rfile1, rfile2, rfile3, rfile4}; 
 			if (cservice.deleteCboard(Integer.parseInt(checkstr)) > 0) {
+				for (String rfile : rfiles) {
+					if (rfile != null) {
+						String savePath = request.getSession().getServletContext().getRealPath("resources/cboardfiles");
+						new File(savePath + "\\" + rfile).delete();
+					}
+				}
 				successCount++;
 			}
 		}
