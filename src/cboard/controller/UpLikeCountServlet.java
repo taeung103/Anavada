@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cboard.model.service.CboardService;
+import clike.model.service.ClikeService;
 
 /**
  * Servlet implementation class UpLikeCountServlet
@@ -31,15 +32,19 @@ public class UpLikeCountServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int cboardNum = Integer.parseInt(request.getParameter("cnum"));
-
-		int result = new CboardService().upLikeCount(cboardNum);
-
-		if (result > 0) {
+		String memberId = request.getParameter("memberId");
+		
+		int likeable = new ClikeService().likeable(cboardNum, memberId);
+		
+		System.out.println(cboardNum);
+		System.out.println(memberId);
+		if (likeable > 0) {
+			int result = new CboardService().upLikeCount(cboardNum);
 			response.sendRedirect("/anavada/cdetail?cnum=" + cboardNum);
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('좋아요 실패.');location.href='/anavada/cdetail?cnum=" + cboardNum + "';</script>");
+			writer.println("<script>alert('이미 좋아한 게시글입니다.');location.href='/anavada/cdetail?cnum=" + cboardNum + "';</script>");
 			writer.close();
 		}
 
