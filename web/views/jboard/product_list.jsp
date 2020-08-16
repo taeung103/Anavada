@@ -128,7 +128,7 @@
                         </p>
                     </li>
                     <%} %>
-                    <%if (currentPage + 1 > maxPage) {%>
+                    <%if (listCount < 1) {%>
 					<p><img src="/anavada/resources/images/btnIcn/icn_big_listNo.png" alt="" title="" /></p>
 					<h1>목록이 없습니다.</h1>
 					<%}%>

@@ -107,25 +107,25 @@
                             <tr>
                                 <td>상품 이미지</td>
                                 <td>
-                                    <% if (jboard.getJboardOrignalFilePath1() != null){ %>
+                                    <% if (jboard.getJboardOrignalFilePath1() != null && !jboard.getJboardOrignalFilePath1().equals("null")){ %>
                                     		<%= jboard.getJboardOrignalFilePath1() %> &nbsp;
-                                    		<input type = "checkbox" name= "delflag1" value="yes"> 1번째파일삭제
+                                    		<input type = "checkbox" name= "delflag1" value="yes" > 1번째파일삭제
                                     		<br>
                                     		<%} %>
-                                    <input type="file" name="upfile1" style="margin-bottom:10px;" accept="image/gif,image/jpeg,image/png"/>
-                                    <% if (jboard.getJboardOrignalFilePath2() != null){ %>
+                                    <input type="file" name="upfile1" style="margin-bottom:10px;" required="required" accept="image/gif,image/jpeg,image/png"/>
+                                    <% if (jboard.getJboardOrignalFilePath2() != null && !jboard.getJboardOrignalFilePath2().equals("null")){ %>
                                     		<%= jboard.getJboardOrignalFilePath2() %> &nbsp;
                                     		<input type = "checkbox" name= "delflag2" value="yes"> 2번째파일삭제
                                     		<br>
                                     		<%} %>
                                     <input type="file" name="upfile2" style="margin-bottom:10px;"accept="image/gif,image/jpeg,image/png"/>
-                                    <% if (jboard.getJboardOrignalFilePath3() != null){ %>
+                                    <% if (jboard.getJboardOrignalFilePath3() != null && !jboard.getJboardOrignalFilePath3().equals("null")){ %>
                                     		<%= jboard.getJboardOrignalFilePath3() %> &nbsp;
                                     		<input type = "checkbox" name= "delflag3" value="yes"> 3번째파일삭제
                                     		<br>
                                     		<%} %>
                                     <input type="file" name="upfile3" style="margin-bottom:10px;"accept="image/gif,image/jpeg,image/png"/>
-                                    <% if (jboard.getJboardOrignalFilePath4() != null){ %>
+                                    <% if (jboard.getJboardOrignalFilePath4() != null && !jboard.getJboardOrignalFilePath4().equals("null")){ %>
                                     		<%= jboard.getJboardOrignalFilePath4() %> &nbsp;
                                     		<input type = "checkbox" name= "delflag4" value="yes"> 4번째파일삭제
                                     		<br>
@@ -141,7 +141,7 @@
                             </tr>
                             <tr>
                                 <td>판매희망가격</td>
-                                <td><input type="text" name="price"class="form-control w50p" minlength="3"  placeholder="판매가"  
+                                <td><input type="text" name="price"class="form-control w50p" minlength="3"  placeholder="판매가"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
                                 		value ="<%=jboard.getJboardPrice() %>" style="float:left; margin-right: 20px;"/> 원</td>
                             </tr>
                             <tr>

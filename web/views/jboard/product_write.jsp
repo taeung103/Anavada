@@ -89,7 +89,7 @@
                             <tr>
                                 <td>상품 이미지</td>
                                 <td>
-                                    <input type="file" name="ofile1" style="margin-bottom:10px;" accept="image/gif,image/jpeg,image/png"/>
+                                    <input type="file" name="ofile1" required="required" style="margin-bottom:10px;" accept="image/gif,image/jpeg,image/png"/>
                                     <input type="file" name="ofile2" style="margin-bottom:10px;"accept="image/gif,image/jpeg,image/png"/>
                                     <input type="file" name="ofile3" style="margin-bottom:10px;"accept="image/gif,image/jpeg,image/png"/>
                                     <input type="file" name="ofile4" style="margin-bottom:10px;"accept="image/gif,image/jpeg,image/png"/>
@@ -103,7 +103,7 @@
                             </tr>
                             <tr>
                                 <td>판매희망가격</td>
-                                <td><input type="text" name="price"class="form-control w50p" placeholder="판매가"  style="float:left; margin-right: 20px;"/> 원</td>
+                                <td><input type="text" name="price"class="form-control w50p" placeholder="판매가" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="float:left; margin-right: 20px;"/> 원</td>
                             </tr>
                             <tr>
                                 <td>상품설명</td>

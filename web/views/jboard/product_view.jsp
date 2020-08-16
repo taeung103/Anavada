@@ -164,22 +164,22 @@ font{
                              <%if (jboard.getJboardRenameFilePath1() !=null){ %>
                                 <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath1()%>"/></li>
                                 <%}else{ %>
-                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/테스트.jpg"/></li>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/test.jpg"/></li>
                                 <%} %>
                                <%if (jboard.getJboardRenameFilePath2() !=null){ %>
                                 <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath2()%>"/></li>
                                 <%}else{ %>
-                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/테스트.jpg"/></li>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/test.jpg"/></li>
                                 <%} %>
                                  <%if (jboard.getJboardRenameFilePath3() !=null){ %>
                                 <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath3()%>"/></li>
                                 <%}else{ %>
-                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/테스트.jpg"/></li>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/test.jpg"/></li>
                                 <%} %>
                                  <%if (jboard.getJboardRenameFilePath4() !=null){ %>
                                 <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/<%=jboard.getJboardRenameFilePath4()%>"/></li>
                                 <%}else{ %>
-                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/테스트.jpg"/></li>
+                                <li class="swiper-slide"><img src="/anavada/resources/jboardfiles/test.jpg"/></li>
                                 <%} %>
                             </ol>
                         </div>
@@ -282,7 +282,7 @@ font{
                       <ul class="cmt_con">
                         <li> 
                             <div>
-                                <h4><%=comment.getCommentId() %></h4><span>마지막 수정일<%=comment.getCommentLastModified() %> &nbsp; &nbsp; 작성자 IP :<%=comment.getMemberIp() %></span>
+                                <h4><%=comment.getCommentId() %></h4><span>마지막 수정일 : <%=comment.getCommentLastModified() %> &nbsp; &nbsp; 작성자 IP :<%=comment.getMemberIp() %></span>
                             </div>
                             <p><%=comment.getCommentContent().replace("\r\n","<br>") %></p>
                              <% if(loginMember != null&& comment.getCommentLevel()<2) { %>
