@@ -57,9 +57,6 @@ public class MyCmntServlet extends HttpServlet {
 			endPage = maxPage;
 		}
 
-		for (Cboard cboard : list) {
-			System.out.println(cboard);
-		}
 
 		RequestDispatcher view = null;
 		if (list.size() > 0) {
