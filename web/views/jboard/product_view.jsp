@@ -219,7 +219,11 @@ font{
                         </dl>
                         <div>
                             <i class="good_i glyphicon glyphicon-heart-empty">
+                            <%if (loginMember != null){ %>
                             <a href="/anavada/jblike?jboardno=<%=jboard.getJboardNo()%>&memberid=<%=loginMember.getMemberId()%>">좋아요</a>
+                            <%}else{ %>
+                            좋아요
+                            <%} %>
                         	 <span>&nbsp;<%=jboard.getJboardLike() %> &nbsp;  <% if (meet.equals("Y"))  { %>직거래상품<% } %>
                              <% if (post.equals("Y"))  { %>우편거래상품<% } %></span></i><br>
                             <% for (Jboard lmember : likemember ){ %>
@@ -243,12 +247,12 @@ font{
                 </dl>
                 <div class="view-btn">
                    
-                 	<% if (loginMember != null){%>
+                 	
                  	<%	if(loginMember.getMemberId().equals(jboard.getMemberId())){ %>
                  	<a href="/anavada/jbupview?jboardno=<%=jboard.getJboardNo() %>&page=<%=currentPage %>" class="btn btn-list">수정</a>
                  	<a href="/anavada/jbdelete?jboardno=<%=jboard.getJboardNo() %>&page=<%=currentPage %>&rfile1=<%=jboard.getJboardRenameFilePath1() %> 
                  	&file2=<%=jboard.getJboardRenameFilePath2() %>&file3=<%=jboard.getJboardRenameFilePath3() %>&file4=<%=jboard.getJboardRenameFilePath4() %>" class="btn btn-list">삭제</a>
-                 	<%}} %>
+                 	<%} %>
                     <a href="javascript:history.go(-1);" class="btn btn-list">목록</a>
                 </div>
                 

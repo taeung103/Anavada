@@ -36,7 +36,6 @@ public class JboardLikeServlet extends HttpServlet {
 		
 		int jboardNo =Integer.parseInt(request.getParameter("jboardno"));
 		String memberId = request.getParameter("memberid");
-		System.out.println(memberId + "loginMember");
 	    JboardService jbservice = new JboardService();
 		Jboard jboard = new Jboard();
 		
@@ -57,7 +56,6 @@ public class JboardLikeServlet extends HttpServlet {
 	    		script.println("</script>");
 	    		script.close();
 	    }else {
-	    	
 	            response.setContentType("text/html; charset=UTF-8");
 	            PrintWriter script = response.getWriter();
 	            script.println("<script>");

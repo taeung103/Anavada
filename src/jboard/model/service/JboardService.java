@@ -152,6 +152,21 @@ public class JboardService {
 			
 		}
 
+		public int getMyListCount(String local, String titleSearch, String memberId) {
+			Connection conn = getConnection();
+			int listCount = bdao.getMyListCount(conn,local, titleSearch , memberId);
+			close(conn);
+			return listCount;
+		}
+
+		public ArrayList<Jboard> selectMyList(int currentPage, int limit, String local, String listSearch,
+				String titleSearch, String memberId) {
+			Connection conn = getConnection();
+			ArrayList<Jboard> list = bdao.selectMyList(conn,currentPage, limit, local, listSearch, titleSearch, memberId);
+			close(conn);
+			return list;
+		}
+
 		
 		
 	}

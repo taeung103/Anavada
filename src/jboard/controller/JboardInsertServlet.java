@@ -50,19 +50,7 @@ public class JboardInsertServlet extends HttpServlet {
 			view.forward(request, response);
 		}
 		
-		JboardService jbservice = new JboardService();
-		String memberId = request.getParameter("memberid");
-		System.out.println(memberId);
-		int listcount=jbservice.getOneDayLimitCount(memberId);
-		System.out.println(listcount +" 하루 게시글 수");
-		if (listcount >= 6) {
-				response.setContentType("text/html); charset=UTF-8");
-				PrintWriter script = response.getWriter();
-				script.println("<script>");
-				script.println("alert('게시글은 하루에 5개를 초과 할 수 없습니다.');");
-				script.println("location.href='anavada/jblist';");
-;				script.println("</script>");
-		}
+
 		
 		int maxSize = 1024 * 1024 * 10; //용량 5메가로 제한
 
@@ -80,6 +68,19 @@ public class JboardInsertServlet extends HttpServlet {
 	    if (MemberIp == null || MemberIp.length() == 0) {
 	    	MemberIp = request.getRemoteAddr() ;
 	    }
+		JboardService jbservice = new JboardService();
+		String memberId = mrequest.getParameter("memberid");
+		int listcount=jbservice.getOneDayLimitCount(memberId);
+		System.out.println(listcount +" 하루 게시글 수");
+		if (listcount >= 6) {
+				response.setContentType("text/html); charset=UTF-8");
+				PrintWriter script = response.getWriter();
+				script.println("<script>");
+				script.println("alert('게시글은 하루에 5개를 초과 할 수 없습니다.');");
+				script.println("location.href='anavada/jblist';");
+				script.println("</script>");
+				script.close();
+		}
 		Jboard jboard = new Jboard();
 		jboard.setJboardPost(mrequest.getParameter("post"));
 		jboard.setJboardMeet(mrequest.getParameter("meet"));
@@ -138,9 +139,19 @@ public class JboardInsertServlet extends HttpServlet {
 		if (result > 0) {
 			response.sendRedirect("jblist?page=1");
 		} else {
-			view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("message", "새 게시원글 등록 실패!");
-			view.forward(request, response);
+			response.setContentType("text/html); charset=UTF-8");
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('게시글 등록에 실패 했습니다.');");
+			script.println("location.href='anavada/jblist';");
+			script.println("</script>");
+			script.close();
+			
+			
+			
+			//view = request.getRequestDispatcher("views/common/error.jsp");
+			//request.setAttribute("message", "새 게시원글 등록 실패!");
+			//view.forward(request, response);
 		}
 	}
 	
