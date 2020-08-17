@@ -70,7 +70,6 @@ font {
 					<div>
 						<ul class="navi">
 							<li><a href="views/main/main.jsp">홈</a></li>
-							<li><a href="/anavada/nlist">고객센터</a></li>
 							<li class="glyphicon glyphicon-menu-right"><a href="#none">커뮤니티</a></li>
 						</ul>
 					</div>

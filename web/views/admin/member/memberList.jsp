@@ -85,7 +85,7 @@
                             <td class="lastAccessDate"><%= m.getLastAccessDate() %></td>
                             <td class="declareOK"><%= m.getDeclareOK() %></td>
                         </tr>
-                        <% } else { %>
+                        <% } else if(listCount > 0) { %>
                         <tr>
                             <td class="checkBox"><input type="checkbox" name="leaveChk" id="leaveChk" value="<%= m.getMemberId()%>"></td>
                             <td class="number"><%= m.getmNumber() %></td>
@@ -97,8 +97,14 @@
                             <td class="lastAccessDate"><%= m.getLastAccessDate() %></td>
                             <td class="declareOK"><%= m.getDeclareOK() %></td>
                         </tr>
-                        <% } %>
-                        <% } %>
+                        <% } else { %>
+						<tr class="list-no">
+							<td colspan="9">
+								<p><img src="/anavada/resources/images/btnIcn/icn_big_listNo.png" alt="" title="" /></p>
+								<h1>목록이 없습니다.</h1>
+							</td>
+						</tr>
+                        <% }} %>
 
                     </tbody>
                 </table>
@@ -117,7 +123,7 @@
                    	<% if(currentPage <= 1){ %>
                     	<a href="#none"><i class="glyphicon glyphicon-backward"></i></a>
                    	<% } else { %>
-                   		<a href="/anavada/mlist.ad?secessionOK=N&page=<%= startPage %>"><i class="glyphicon glyphicon-menu-left"></i></a>
+                   		<a href="/anavada/mlist.ad?secessionOK=N&page=<%= startPage %>"><i class="glyphicon glyphicon-backward"></i></a>
                     <% } %>
                     
                    	<% if(1 < currentPage){ %>
@@ -142,7 +148,7 @@
 					<% if(currentPage >= maxPage){ %>
                         <a href="#none"><i class="glyphicon glyphicon-forward"></i></a>
 					<% } else { %>
-                        <a href="/anavada/mlist.ad?secessionOK=N&page=<%= maxPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+                        <a href="/anavada/mlist.ad?secessionOK=N&page=<%= maxPage %>"><i class="glyphicon glyphicon-forward"></i></a>
 					<% } %>					
                     </dd>
                 </dl>

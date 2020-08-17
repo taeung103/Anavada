@@ -59,9 +59,8 @@ public class AdminMemberAllListServlet extends HttpServlet {
 		} else {
 			
 		}
-		
 		RequestDispatcher view = null;
-		if(list.size() > 0 && secessionOK.equals("N")) { //전체 회원 조회 성공시
+		if(secessionOK.equals("N")) { //전체 회원 조회 성공시
 			view = request.getRequestDispatcher("views/admin/member/memberList.jsp");
 			request.setAttribute("list", list);
 			request.setAttribute("currentPage", currentPage);
@@ -73,7 +72,7 @@ public class AdminMemberAllListServlet extends HttpServlet {
 	         request.setAttribute("keyword", keyword);
 	         request.setAttribute("secessionOK", secessionOK);
 			view.forward(request, response);
-		} else if(list.size() > 0 && secessionOK.equals("Y")) { //전체 탈퇴회원 조회 성공시
+		} else if(secessionOK.equals("Y")) { //전체 탈퇴회원 조회 성공시
 			view = request.getRequestDispatcher("views/admin/member/memberSecession.jsp");
 			request.setAttribute("list", list);
 			request.setAttribute("currentPage", currentPage);
@@ -86,7 +85,7 @@ public class AdminMemberAllListServlet extends HttpServlet {
 	         request.setAttribute("secessionOK", secessionOK);
 			view.forward(request, response);
 		} else { //전체 조회 실패시
-			view = request.getRequestDispatcher("view/common/error.jsp");
+			view = request.getRequestDispatcher("views/common/error.jsp");
 			request.setAttribute("list", list);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("maxPage", maxPage);

@@ -18,7 +18,7 @@ $(function () {
 				console.log("컨트롤러에서 받은 MSG : " + data);
 				var dataSplit = data.split('/');
 				if (dataSplit.length === 2) {
-				alert(/*dataSplit[1] + */dataSplit[0] + '명의 회원이 탈퇴되었습니다.');
+					alert(/*dataSplit[1] + */dataSplit[0] + '명의 회원이 탈퇴되었습니다.');
 				location.reload();
 				}
 			},

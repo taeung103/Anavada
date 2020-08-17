@@ -51,7 +51,8 @@ function joinEmailCheck() {
 				alert("이메일 인증번호가 이메일로 발송되었습니다.\n확인해주세요.");
 				$("#emailAuth").focus();
 			} else {
-
+				alert("잘못된 이메일입니다.\n다시 입력해주세요.");
+				$("#memberEmail").focus();
 			}
 		},
 		error : function(jqXHR, textstatus, errorthrown) { // jqXHR, textstatus, errorthrown : 에러표시 함수가 있음.

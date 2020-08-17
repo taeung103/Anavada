@@ -25,12 +25,6 @@
 	font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
 	line-height: 1.5;
 }
-
-.wrap * {
-	padding: 0;
-	margin: 0;
-}
-
 .wrap .info {
 	width: 286px;
 	height: 120px;
@@ -139,7 +133,6 @@
 					<div>
 						<ul class="navi">
 							<li><a href="#none">홈</a></li>
-							<li><a href="#none">고객센터</a></li>
 							<li class="glyphicon glyphicon-menu-right"><a href="#none">지역축제</a></li>
 						</ul>
 					</div>
@@ -156,7 +149,7 @@
 			  
 			    <!-- 맵 리스트 -->
                 <div class="areaEvent_map">
-                    <div id="map" style="width: 100%; height: 500px;"></div>
+                    <div id="map" style="width: 100%; height: 350px;"></div>
                     <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=53d444db7d449eb66c0229426868cf97"></script>
                     <script>
                         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -221,7 +214,8 @@
  						<h4 id="totalcount">전체 150개</h4>
 						<!-- <a href="areaEvent_write.jsp" class="write_btn">글쓰기</a> -->
 						<div> 
-							<input type="checkbox" id="lastList">지난 축제 보기
+						    <form action="" name="" method="">
+							<label><input type="checkbox" id="lastList">지난 축제 보기</label>&nbsp;&nbsp;/&nbsp;&nbsp; 
 								지역 분류 : <select name="" id="locationSelect" class="LocationSelect">
 									<option value="0" selected="selected">지역 선택</option>	<!-- 서울시 전체 고정  -->
 									<option value="1">강남구</option>
@@ -250,13 +244,14 @@
 									<option value="24">중구</option>
 									<option value="25">중랑구</option>
 								</select> 
-								<select id="sortSelect" class="ListSelect">
+								<select id="sortSelect" class="ListSelect" style="margin-right: 20px;">
 									<option value="enddateAsc" selected="selected">종료일 최신순</option>	<!-- 고정  -->
 									<option value="readcountDesc">조회수 높은순</option>
 									<option value="replyDesc">댓글 많은순</option>
 								</select>
-								축제 명 : <input type="text" id=title onkeyup="searchFboard()" placeholder="축제명을 입력하세요">	<!-- placeholder 처리가 안됨 -->
+								축제명 검색 : <input type="text" id=title onkeyup="searchFboard()" placeholder="축제명을 입력하세요">	<!-- placeholder 처리가 안됨 -->
 							<!--  <button class="top-search"><i class="xi-search"></i></button>  -->	<!-- ajax로 바로 처리하기때문에 버튼 필요없음 -->
+							</form>
 						</div>
 					</div>
 					<!-- 검색 리스트 끝 -->

@@ -1,8 +1,5 @@
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
- <%@  page 
- 	import="jboard.model.vo.Jboard , java.util.ArrayList, java.sql.Date, jboard.model.vo.Comment, java.text.SimpleDateFormat" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@  page import="jboard.model.vo.Jboard , java.util.ArrayList, java.sql.Date, jboard.model.vo.Comment, java.text.SimpleDateFormat" %>
 <%
 	ArrayList<Comment> list = (ArrayList<Comment>) request.getAttribute("list");
 	ArrayList<Jboard> likemember = (ArrayList<Jboard>)request.getAttribute("likememberlist");
@@ -23,87 +20,20 @@
 
     <%@ include file="../include/head.jsp" %>
     <!-- 대댓글 버튼 눌렀을 시 숨겨져 있던 입력창 출력 -->
-        <script type="text/javascript">
-        $(function (){
-            $(".Subcmt_btn").click(function () {
-               $(this).siblings(".Subcmt").toggle(200);
-            });
-            $(".Subcmt_update_btn").click(function () {
-               $(this).siblings(".Subcmt_update").toggle(200);
-            });
-            $(".Cmt_update_btn").click(function () {
-               $(this).siblings(".Cmt_update").toggle(200);
-            });
-         });
-</script>
-<style>
-.like {
-   width: 50px;
-   height: 50px;
-   padding: 1px;
-   border-radius:50%;
-   border: 0px;
-   margin-right: 15px;
-}
-.report{
-   width: 50px;
-   height: 50px;
-   padding: 1px;
-   border-radius:50%;
-   border: 0px;
-   margin-right: 15px;
-}
-font{
-   font-size: 20px;
-   margin-right: 15px;
-}
-    .swiper-container {
-        width: 100%;
-        height: 300px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .swiper-slide {
-        background-size: cover;
-        background-position: center;
-    }
-    .gallery-top {
-        height: 80%;
-        width: 100%;
-    }
-    .gallery-thumbs {
-        height: 20%;
-        box-sizing: border-box;
-        padding: 10px 0;
-    }
-    .gallery-thumbs .swiper-slide {
-        width: 25%;
-        height: 100%;
-        opacity: 0.4;
-    }
-    .gallery-thumbs .swiper-slide-thumb-active {
-        opacity: 1;
-    }
-</style>
-<script>
-    var galleryThumbs = new Swiper('.gallery-thumbs', {
-        spaceBetween: 10,
-        slidesPerView: 4,
-        freeMode: true,
-        watchSlidesVisibility: true,
-        watchSlidesProgress: true,
+    <script type="text/javascript">
+    $(function (){
+        $(".Subcmt_btn").click(function () {
+           $(this).siblings(".Subcmt").toggle(200);
+        });
+        $(".Subcmt_update_btn").click(function () {
+           $(this).siblings(".Subcmt_update").toggle(200);
+        });
+        $(".Cmt_update_btn").click(function () {
+           $(this).siblings(".Cmt_update").toggle(200);
+        });
     });
-    var galleryTop = new Swiper('.gallery-top', {
-        spaceBetween: 10,
-        navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-        thumbs: {
-        swiper: galleryThumbs
-        }
-    });
-</script>
+    </script>
+
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrap">
@@ -213,31 +143,40 @@ font{
                         <dl>
                            <dt><%=localArr[Integer.parseInt(jboard.getLocalNo())-1] %></dt>
                            <dd>
-                               <button type="button" onclick="" class="lookup_btn">사기조회</button>
-                              <button onclick="location.href='/anavada/views/declare/declare_write.jsp'" class="lookup_btn">신고하기</button>
+                                <!--button type="button" onclick="" class="lookup_btn">사기조회</button-->
+                                <button onclick="location.href='/anavada/views/declare/declare_write.jsp'" class="lookup_btn">신고하기</button>
                            </dd>
                         </dl>
                         <div>
-                            <i class="good_i glyphicon glyphicon-heart-empty">
-                            <%if (loginMember != null){ %>
-                            <a href="/anavada/jblike?jboardno=<%=jboard.getJboardNo()%>&memberid=<%=loginMember.getMemberId()%>">좋아요</a>
-                            <%}else{ %>
-                            좋아요
-                            <%} %>
-                        	 <span>&nbsp;<%=jboard.getJboardLike() %> &nbsp;  <% if (meet.equals("Y"))  { %>직거래상품<% } %>
-                             <% if (post.equals("Y"))  { %>우편거래상품<% } %></span></i><br>
-                            <% for (Jboard lmember : likemember ){ %>
+                            <ul>
+                                <li>
+                                    <i class="good_i glyphicon glyphicon-heart-empty">
+                                    <%if (loginMember != null){ %>
+                                    <a href="/anavada/jblike?jboardno=<%=jboard.getJboardNo()%>&memberid=<%=loginMember.getMemberId()%>">좋아요<%=jboard.getJboardLike() %></a>
+                                    <%}else{ %>
+                                    좋아요<%=jboard.getJboardLike() %>
+                                    <%} %>
+                                    </i>
+                                </li>
+                                <li>
+                                <% for (Jboard lmember : likemember ){ %>
                                <%=lmember.getMemberId() %>
                                <%} %>
                                <% if (jboard.getJboardLike() >0) {%>
-                            	   님이 좋아합니다.
+                                  님이 좋아합니다.
                                <% }%>
+                                </li>
+                            </ul>                            
                             <h2 class="product_name"><b>상품명 : </b><span><%=jboard.getJboardTitle() %></span></h2>
                             <h3 class="product_price"><b>판매가격 : </b><span><%=jboard.getJboardPrice() %></span>원</h3>
                             <p class="view-ctn">
                                 <%= jboard.getJboardContent().replace("\r\n","<br>") %>
                             </p>
                             <div>
+                                <div>
+                                    <button type="button"><% if (meet.equals("Y"))  { %>직거래상품<% } %></button>
+                                    <button type="button"><% if (post.equals("Y"))  { %>우편거래상품<% } %></button>
+                                </div>
                                 <b>판매자 아이디 : <%= jboard.getMemberId()%> &nbsp; &nbsp; / &nbsp; &nbsp; 조회수 : <%=jboard.getJboardCount()%></b><br/>
                                 <b>등록일자 : </b><%= jboard.getJboardDate()%> &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;<b>최종수정일자 : </b><%=jboard.getJboardUpdate() %><br>
                                 <b>판매자 IP :</b> <%= jboard.getMemberIp()%>

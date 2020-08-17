@@ -44,7 +44,7 @@ function loginCheck(data, data1, no, page, selected, keyword){
                    <div>
                         <ul class="navi">
                             <li><a href="#none">홈</a></li>
-                            <li><a href="#none">고객센터</a></li>
+                            <li class="glyphicon glyphicon-menu-right"><a href="#none">고객센터</a></li>
                             <li class="glyphicon glyphicon-menu-right"><a href="#none">문의하기</a></li>
                         </ul>
                     </div>
