@@ -70,17 +70,8 @@ public class JboardInsertServlet extends HttpServlet {
 	    }
 		JboardService jbservice = new JboardService();
 		String memberId = mrequest.getParameter("memberid");
-		int listcount=jbservice.getOneDayLimitCount(memberId);
-		System.out.println(listcount +" 하루 게시글 수");
-		if (listcount >= 6) {
-				response.setContentType("text/html); charset=UTF-8");
-				PrintWriter script = response.getWriter();
-				script.println("<script>");
-				script.println("alert('게시글은 하루에 5개를 초과 할 수 없습니다.');");
-				script.println("location.href='anavada/jblist';");
-				script.println("</script>");
-				script.close();
-		}
+		int listCount=jbservice.getOneDayLimitCount(memberId);
+		System.out.println(listCount);
 		Jboard jboard = new Jboard();
 		jboard.setJboardPost(mrequest.getParameter("post"));
 		jboard.setJboardMeet(mrequest.getParameter("meet"));
@@ -134,24 +125,25 @@ public class JboardInsertServlet extends HttpServlet {
 			
 		}
 		}
-		int result = new JboardService().insertJboard(jboard);
-		
+		int result = 0;
+		if (listCount <6) {
+			result = new JboardService().insertJboard(jboard);
+		}
 		if (result > 0) {
+			
 			response.sendRedirect("jblist?page=1");
 		} else {
-			response.setContentType("text/html); charset=UTF-8");
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('게시글 등록에 실패 했습니다.');");
-			script.println("location.href='anavada/jblist';");
-			script.println("</script>");
-			script.close();
+			if (listCount >5) {
+	    		response.setContentType("text/html; charset=UTF-8");
+	    		PrintWriter script = response.getWriter();
+	    		script.println("<script>");
+	    		script.println("alert('하루 게시글은 5개를 초과할 수 없습니다.');");
+	    		script.println("location.href='/anavada/jblist';");
+	    		script.println("</script>");
+	    		script.close();
+		}
 			
-			
-			
-			//view = request.getRequestDispatcher("views/common/error.jsp");
-			//request.setAttribute("message", "새 게시원글 등록 실패!");
-			//view.forward(request, response);
+		
 		}
 	}
 	
