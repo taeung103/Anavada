@@ -50,7 +50,7 @@
                    <div>
                         <ul class="navi">
                             <li><a href="#none">홈</a></li>
-                            <li><a href="#none">고객센터</a></li>
+                            <li class="glyphicon glyphicon-menu-right"><a href="#none">고객센터</a></li>
                             <li class="glyphicon glyphicon-menu-right"><a href="#none">FAQ</a></li>
                         </ul>
                     </div>

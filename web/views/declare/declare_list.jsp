@@ -30,7 +30,7 @@
                    <div>
                         <ul class="navi">
                             <li><a href="#none">홈</a></li>
-                            <li><a href="#none">고객센터</a></li>
+                            <li class="glyphicon glyphicon-menu-right"><a href="#none">고객센터</a></li>
                             <li class="glyphicon glyphicon-menu-right"><a href="#none">신고하기</a></li>
                         </ul>
                     </div>
@@ -74,6 +74,7 @@ $(function(){
                 <table>
                 <tbody>
                 <%for(DBo d : list) { System.out.println(d);%>
+                <% if(listCount > 0) {%>
                 <tr id="click" onclick="location.href='/anavada/dbolist';" >
                     <td class="number"><%= d.getDboNo() %></td>
                     <td class="title">
@@ -86,26 +87,25 @@ $(function(){
                         </ul>
                     </td>
                     <td class="declare_btn">
-                    	<% if(d.getDboChe().equals("Y")){ %>
-                    	<span><i class="glyphicon glyphicon-bell"></i>처리완료</span>
-                    	<% }else{// 처리완료된건%>
-            		    <span><i class="glyphicon glyphicon-bell"></i>처리중</span>
-            		    <% }  %></td> 
+                        <% if(d.getDboChe().equals("Y")){ %>
+                        <span><i class="glyphicon glyphicon-bell"></i>처리완료</span>
+                        <% }else{// 처리완료된건%>
+                        <span><i class="glyphicon glyphicon-bell"></i>처리중</span>
+                        <% }  %></td> 
                     </td>
                  </tr>
-
+                <%}else{ %>
+                <tr>
+                    <td>
+                    <div class="list-no">
+                        <p><img src="/anavada/resources/images/btnIcn/icn_big_listNo.png" alt="" title="" /></p>
+                        <h1>목록이 없습니다.</h1>
+                    </div>
+                    </td>
+                </tr>
+                <%} %>
                 <% } %>
                 </table>
-
-                <div class="list-no">
-                 <% if(listCount > 0) {%>
-                    <a href="/anavada/dbolist">목록</a>
-                 <%}else{ %>
-                    <p><img src="/anavada/resources/images/btnIcn/icn_big_listNo.png" alt="" title="" /></p>
-                    <h1>목록이 없습니다.</h1>
-                 <%} %>
-                </div>
-
               </form> 
 
             </div>

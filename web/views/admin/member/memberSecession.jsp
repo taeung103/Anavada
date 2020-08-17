@@ -72,7 +72,8 @@
                             <th>탈퇴일</th>
                             <th>탈퇴여부</th>
                         </tr>
-                        <% for(Member m : list){ %>
+                       	<% if(slistCount > 0){ %>
+                       	<% for(Member m : list){ %>
                         <tr>
                             <td class="checkBox"><input type="checkbox" name="leaveChk" id="leaveChk" value="<%= m.getMemberId()%>"></td>
                             <td class="number"><%= m.getmNumber() %></td>
@@ -84,6 +85,14 @@
                             <td class="SecessionDate"><%= m.getSecessionDate() %></td>
                             <td class="SecessionOK"><%= m.getSecessionOK() %></td>
                         </tr>
+                       	<% } %>
+                      	<% } else { %>
+						<tr class="list-no">
+							<td colspan="9">
+								<p><img src="/anavada/resources/images/btnIcn/icn_big_listNo.png" alt="" title="" /></p>
+								<h1>목록이 없습니다.</h1>
+							</td>
+						</tr>
                         <% } %>
                     </tbody>
                 </table>
@@ -128,7 +137,7 @@
 					<% if(currentPage >= maxPage){ %>
                         <a href="#none"><i class="glyphicon glyphicon-forward"></i></a>
 					<% } else { %>
-                        <a href="/anavada/mlist.ad?secessionOK=Y&page=<%= endPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+                        <a href="/anavada/mlist.ad?secessionOK=Y&page=<%= endPage %>"><i class="glyphicon glyphicon-forward"></i></a>
 					<% } %>					
                     </dd>
                 </dl>

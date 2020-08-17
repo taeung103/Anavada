@@ -38,7 +38,6 @@
                    <div>
                         <ul class="navi">
                             <li><a href="#none">홈</a></li>
-                            <li><a href="#none">고객센터</a></li>
                             <li class="glyphicon glyphicon-menu-right"><a href="#none">지역축제</a></li>
                         </ul>
                     </div>
@@ -93,7 +92,7 @@
                 </ul>
                  <!-- 상세 table -->
                 <div class="areaEvent_info">
-                   <div><img id="firstimage" src="" width="500px" height="333px"></div>
+                   <div><img id="firstimage" src=""></div>
                     <table id="fbdetail">
                         <colgroup>
                             <col width="15%">

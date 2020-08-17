@@ -52,13 +52,14 @@ public class MemberEmailServlet extends HttpServlet {
 	
 	    String memberEmail = request.getParameter("memberEmail");
 	    
+	    System.out.println("memberEmail " + memberEmail);
 		
 		String returnValue = null;
 
-		if(memberEmail != null) {
+		if(memberEmail != null && memberEmail.getBytes().length > 0) {
 			returnValue = "ok";
 		} else {
-
+			returnValue = "not";
 		}
 		
 		//출력스트림 만들고 값 내보내기

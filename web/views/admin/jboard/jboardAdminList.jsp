@@ -127,18 +127,17 @@
 				<!-- 검색영역 끝 -->
 				<form>
 					<input type="hidden" name="vals" value="$()">
-					<table class="jboardTable" style="width: inherit;" co>
+					<table class="jboardTable memberTable">
 						<colgroup>
-							<col width="10%">
-							<col width="10%">
-							<col width="10%">
-							<col width="10%">
-							<col width="15%">
-							<col width="*%">
-							<col width="15%">
-							<col width="15%">
-							<col width="15%">
-							<col width="15%">
+                            <col width="5%">
+                            <col width="8%">
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="*">
+                            <col width="5%">
+                            <col width="5%">
+                            <col width="10%">
+                            <col width="10%">
 						</colgroup>
 						<tbody>
 							<tr>

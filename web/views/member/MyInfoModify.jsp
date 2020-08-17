@@ -30,10 +30,10 @@
             <!--서브 카테고리-->
             <div class="MyTap">
                 <ul>
-                    <li class="active"><a href="mypage.ss">정보수정</a></li>
+                    <li class="active"><a href="/anavada/mypage.cp?memberId=<%= loginMember.getMemberId() %>">정보수정</a></li>
                     <li><a href="/anavada/myjblist?memberid=<%=loginMember.getMemberId()%>">중고거래조회</a></li>
                     <li><a href="/anavada/mycmnt?memberID=<%=loginMember.getMemberId()%>">커뮤니티조회</a></li>
-                    <li><a href="MyInquiry.jsp">문의하기조회</a></li>
+                    <li><a href="/anavada/miq?member=<%= loginMember.getMemberId() %>">문의하기조회</a></li>
                     <li><a href="/anavada/dbomylist.ss?member=<%= loginMember.getMemberId()%>">신고하기조회</a></li>
                 </ul>
             </div>
@@ -43,7 +43,7 @@
             <!--마이페이지컨텐츠-->
             <div class="mypage_area" style="margin-bottom: 100px;">
                
-                <h2 class="mypage_title">정보수정</h2>
+                <h2 class="mypage_title">나의 정보수정</h2>
 
                 <!-- 프로필 -->
 				<dl class="profile">

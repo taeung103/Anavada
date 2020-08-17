@@ -45,8 +45,6 @@ public class MemberPwdChangeServlet extends HttpServlet {
         String AuthenticationUser = request.getParameter("AuthenticationUser");
 
         if(!AuthenticationKey.equals(AuthenticationUser)){
-            System.out.println("인증번호 일치하지 않음");
-
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
 			writer.println("<script>alert('인증번호 또는 비밀번호가 일치하지 않습니다.\\n다시 입력해주세요.'); location.href='views/member/idpwdChange.jsp';</script>");
@@ -59,8 +57,6 @@ public class MemberPwdChangeServlet extends HttpServlet {
 			
 			int result = new MemberService().userPwdUpdate(member);
 	        
-			System.out.println(result);
-			
     		if(result > 0) {
     		    String newPwd = request.getParameter("memberPwd");
     			String newPwd2 = request.getParameter("memberPwd2");

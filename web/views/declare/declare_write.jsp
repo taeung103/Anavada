@@ -18,7 +18,7 @@
                    <div>
                         <ul class="navi">
                             <li><a href="#none">홈</a></li>
-                            <li><a href="#none">고객센터</a></li>
+                            <li class="glyphicon glyphicon-menu-right"><a href="#none">고객센터</a></li>
                             <li class="glyphicon glyphicon-menu-right"><a href="#none">신고하기</a></li>
                         </ul>
                     </div>
@@ -77,7 +77,7 @@
                         <!-- <a href="declare_list.jsp" class="btn btn-list">목록</a> -->
                         <!-- <input type="reset" value="작성취소"> &nbsp; -->
                         <a href="javascript:history.go(-1);">작성취소</a>
-                        <input type="submit" value="신고등록하기">
+                        <input type="submit" class="btn btn-success" value="신고등록하기">
                         <!-- <a href="/anavada/">신고 등록하기</a> -->
                         
                          <%  %>
