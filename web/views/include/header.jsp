@@ -30,7 +30,7 @@
             <ul class="util">
                 <li>
                     <form action="/anavada/jblist" method="post">
-                        <input type="text" name="titlesearch" placeholder="검색어를 입력해주세요.">
+                        <input type="text" name="titlesearch" placeholder="중고거래 상품을 입력해주세요">
                         <button class="top-search"><i class="xi-search"></i></button>
                     </form>
                 </li>
