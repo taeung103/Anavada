@@ -40,10 +40,10 @@ public class AdminCboardDeleteServlet extends HttpServlet {
 		CboardService cservice = new CboardService();
 		for (String checkstr : splitCheck) { // 반복1
 			Cboard cboard = cservice.selectCboard(Integer.parseInt(checkstr));
-			String rfile1 = cboard.getCfilesRenameFilepath1();
-			String rfile2 = cboard.getCfilesRenameFilepath2();
-			String rfile3 = cboard.getCfilesRenameFilepath3();
-			String rfile4 = cboard.getCfilesRenameFilepath4();
+			String rfile1 = (cboard.getCfilesRenameFilepath1() != null ? cboard.getCfilesRenameFilepath1() : null);
+			String rfile2 = (cboard.getCfilesRenameFilepath2() != null ? cboard.getCfilesRenameFilepath2() : null);
+			String rfile3 = (cboard.getCfilesRenameFilepath3() != null ? cboard.getCfilesRenameFilepath3() : null);
+			String rfile4 = (cboard.getCfilesRenameFilepath4() != null ? cboard.getCfilesRenameFilepath4() : null);
 			String[] rfiles = {rfile1, rfile2, rfile3, rfile4}; 
 			if (cservice.deleteCboard(Integer.parseInt(checkstr)) > 0) {
 				for (String rfile : rfiles) {

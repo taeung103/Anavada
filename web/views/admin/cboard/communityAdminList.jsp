@@ -35,6 +35,7 @@
 					$("input[name=check]:checked").each(function() {
 						checkarr.push($(this).val());
 						console.log(checkarr);
+						
 					});
 
 					$.ajax({
@@ -51,6 +52,7 @@
 								alert(dataSplit[1] + '개 중 ' + dataSplit[0]
 										+ '개가 삭제되었습니다.');
 							}
+							refresh();
 						},
 
 						//Ajax 실패시 호출
@@ -58,12 +60,15 @@
 							console.log("jqXHR : " + jqXHR + "textStatus : "
 									+ textStatus + "errorThrown : "
 									+ errorThrown);
+							refresh();
 						}
 					});
-					location.reload();
 				});
-
 	});
+	
+	function refresh() {
+		location.reload();
+	}
 </script>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
@@ -140,7 +145,6 @@
 					</div>
 				</div>
 				<!-- 검색영역 끝 -->
-				<form>
 					<input type="hidden" name="vals" value="$()">
 					<table class="cboardTable">
 						<colgroup>
@@ -217,7 +221,6 @@
 						<button id="delete_btn" class="btn-left btn_gray">선택삭제</button>
 						<a href="/anavada/views/admin/cboard/communityAdminWrite.jsp" class="btn-right btn_white">등록</a>
 					</div>
-				</form>
 
 
 
