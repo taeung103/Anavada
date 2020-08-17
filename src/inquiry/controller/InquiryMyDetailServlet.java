@@ -40,6 +40,13 @@ public class InquiryMyDetailServlet extends HttpServlet {
 		if(request.getParameter("page") != null)
 			currentPage = Integer.parseInt(request.getParameter("page"));
 		
+		String selected = null;
+		String keyword = null;
+		if(request.getParameter("selected") != null && request.getParameter("keyword") != null) {
+			selected = request.getParameter("selected");
+			keyword = request.getParameter("keyword");
+		}
+		
 		Answer answer = null;
 		if(inquiry.getIqAnswer().equals("Y"))
 			answer = new AnswerService().selectOne(inquiry.getIqNo());
@@ -48,6 +55,8 @@ public class InquiryMyDetailServlet extends HttpServlet {
 			RequestDispatcher view = request.getRequestDispatcher("views/inquiry/myinquiry_view.jsp");
 			request.setAttribute("inquiry", inquiry);
 			request.setAttribute("page", currentPage);
+			request.setAttribute("selected", selected);
+			request.setAttribute("keyword", keyword);
 			request.setAttribute("answer", answer);
 			view.forward(request, response);
 		}
