@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -137,11 +137,12 @@ function movePage(num){
             </ol>
 
             <div class="carousel-inner" role="listbox">
-                <div class="item active">
+                <!-- <div class="item active" style="background-image: url(/anavada/resources/images/main/main_visual01.jpg);" > -->
+                <div class="item active" style="background-image: url(/anavada/resources/bannerfiles/20200817093704.jpg);" >
                
                     <div class="main_vText">
                         <h2>도심 속 우리의 연결고리</h2>
-                        <p>'Anavada'와 함께하는 이웃거래와 지역축제의 활성화</p>
+                        <p>'Anavada'와 함께하는 지역축제의 활성화</p>
                         <a class="btn-primary" href="#none" role="button">자세히보기</a>
                     </div>
                 </div>

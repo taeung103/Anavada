@@ -89,4 +89,16 @@ public class DeclareService {
 	}
 
 
+	public int selectMember(String memberid) {
+		Connection conn = getConnection();
+		int result = ddao.selectMember(conn, memberid);
+		if(result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		return result;
+	}
+
+
 }
