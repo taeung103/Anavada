@@ -84,7 +84,7 @@
                     <fieldset>
                         <div class="admin-library-write">
                         
-                        <a href="/anavada/fbinsert.ad">[축제 DB에 insert]</a> &nbsp;&nbsp;
+                        <a href="/anavada/fbinsert.ad?memberid=<%= loginMember.getMemberId()%>">[축제 DB에 insert]</a> &nbsp;&nbsp;
 						<a href="/anavada/fbupdate.ad">[축제 DB에 update]</a> &nbsp;&nbsp;
 						<a href="/anavada/fbdelete.ad">[이전 축제 DB에서 삭제하기]</a> &nbsp;&nbsp;
 						<a href="/anavada/fbdeleteall.ad">[축제 DB에서 전부 삭제하기]</a> &nbsp;&nbsp;

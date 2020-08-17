@@ -37,9 +37,11 @@ public class FboardAdminInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 축제 id로 제공되는 축제 id랑 축제 게시판 번호 비교후 없으면 insert
-		
 		//System.out.println("FboardAdminInsertServlet");
 
+		String memberId =request.getParameter("memberid");
+//		System.out.println(memberId);
+		
 		Fboard fboard = new Fboard();
 		FboardService fbService = new FboardService();
 		int totalInsert = 0;
@@ -61,6 +63,7 @@ public class FboardAdminInsertServlet extends HttpServlet {
 				fboard.setFesivalModifiedDate(data.get("modifiedtime").toString());
 				fboard.setMapX(data.get("mapx").toString());
 				fboard.setMapY(data.get("mapy").toString());
+				fboard.setMemberId(memberId);
 
 				String thumbnail;
 				if (data.get("firstimage2") == null) {
