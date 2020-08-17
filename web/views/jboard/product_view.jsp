@@ -4,7 +4,8 @@
 	ArrayList<Comment> list = (ArrayList<Comment>) request.getAttribute("list");
 	ArrayList<Jboard> likemember = (ArrayList<Jboard>)request.getAttribute("likememberlist");
 	//SimpleDateFormat lastUpdate =new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
-	Jboard jboard = (Jboard)(request.getAttribute("jboardno"));
+	int jboardNo = (Integer)(request.getAttribute("jboardno"));
+	Jboard jboard = (Jboard)(request.getAttribute("jboard"));
 	String post = String.valueOf(request.getAttribute("post"));
 	String meet = String.valueOf(request.getAttribute("meet"));
 	String titleSearch = String.valueOf(request.getParameter("titlesearch"));
@@ -47,8 +48,8 @@
                 <div class="vsv-copy sub-title">
                    <div>
                         <ul class="navi">
-                            <li><a href="#none">홈</a></li>
-                            <li class="glyphicon glyphicon-menu-right"><a href="#none">중고거래</a></li>
+                            <li><a href="/anavada/views/main/main.jsp">홈</a></li>
+                            <li class="glyphicon glyphicon-menu-right"><a href="/anavada/jblist">중고거래</a></li>
                         </ul>
                     </div>
                     <h2><span>중고거래</span></h2>
@@ -143,8 +144,8 @@
                         <dl>
                            <dt><%=localArr[Integer.parseInt(jboard.getLocalNo())-1] %></dt>
                            <dd>
-                                <!--button type="button" onclick="" class="lookup_btn">사기조회</button-->
-                                <button onclick="location.href='/anavada/views/declare/declare_write.jsp'" class="lookup_btn">신고하기</button>
+                               <!--  <button type="button" onclick="" class="lookup_btn">사기조회</button>-->
+                              <button onclick="location.href='/anavada/views/declare/declare_write.jsp'" class="lookup_btn">신고하기</button>
                            </dd>
                         </dl>
                         <div>
@@ -187,7 +188,7 @@
                 <div class="view-btn">
                    
                  	
-                 	<%	if(loginMember.getMemberId().equals(jboard.getMemberId())){ %>
+                 	<%	if(loginMember != null && loginMember.getMemberId().equals(jboard.getMemberId())){ %>
                  	<a href="/anavada/jbupview?jboardno=<%=jboard.getJboardNo() %>&page=<%=currentPage %>" class="btn btn-list">수정</a>
                  	<a href="/anavada/jbdelete?jboardno=<%=jboard.getJboardNo() %>&page=<%=currentPage %>&rfile1=<%=jboard.getJboardRenameFilePath1() %> 
                  	&file2=<%=jboard.getJboardRenameFilePath2() %>&file3=<%=jboard.getJboardRenameFilePath3() %>&file4=<%=jboard.getJboardRenameFilePath4() %>" class="btn btn-list">삭제</a>
@@ -249,9 +250,11 @@
                             <%} %>
                             <div style="display:none" class="Subcmt" id="commentReply">
                                 <form action="/anavada/jbcrinsert.ss" method="post">
+                                <% if (loginMember != null){%>
                                <input type= "hidden" name="commentno" value = "<%=comment.getCommentNo() %>">
                                 <input type= "hidden" name="jboardno" value = "<%=jboard.getJboardNo() %>">
                                 <input type= "hidden" name="writer" value= "<%=loginMember.getMemberId()%>">
+                                <%} %>
                                     <fieldset>
                                         <div class="cmt_form">
                                             <div class="cmt_body">

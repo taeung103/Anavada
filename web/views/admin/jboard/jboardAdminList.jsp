@@ -18,6 +18,15 @@
 <%@ include file="../include/admin_head.jsp"%>
 <script type="text/javascript">
 	$(function () {
+		
+		$("#checkAll").click(function() {
+			if ($("#checkAll").prop("checked")) {
+				$("input[name=check]").prop("checked", true);
+			} else {
+				$("input[name=check]").prop("checked", false);
+			}
+		});
+		
 	    $("#delete_btn").click(function() {
 		    var checkarr = []
 			$("input[name=check]:checked").each(function() {
@@ -45,6 +54,7 @@
 		            console.log("jqXHR : " +jqXHR +"textStatus : " + textStatus + "errorThrown : " + errorThrown);
 		        }
 		    });
+		    location.reload();
 		});
 	    
 	});
@@ -110,7 +120,7 @@
 						<form action="/anavada/adjlistview.ad" method="post" style="display: inline-block;">
 							<input type="hidden" name="local" value="<%=local%>">
 							목록 분류 :
-						           목록 분류 : <select name="listsearch" class="ListSelect" onchange=this.form.submit()>
+						           <select name="listsearch" class="ListSelect" onchange=this.form.submit()>
                                     <option value="latestposts" ${param.listsearch eq"latestposts"?"selected" :"" }>최신등록순</option>
                                     <option value="highprice"${param.listsearch eq"highprice"?"selected" :"" }>가격높은순</option>
                                     <option value="lowprice"${param.listsearch eq"lowprice"?"selected" :"" }>가격낮은순</option>
@@ -141,7 +151,7 @@
 						</colgroup>
 						<tbody>
 							<tr>
-								<th>선택</th>
+								<th><input id="checkAll" type="checkbox"></th>
 								<th>글번호</th>
 								<th>아이디</th>
 								<th>지역명</th>
@@ -174,7 +184,18 @@
 						%>
 
 						</tbody>
-					</table>
+						</table>
+						<% if (listCount == 0){ %>
+						<div class="list-no">
+
+						<p>
+							<img src="/anavada/resources/images/btnIcn/icn_big_listNo.png" alt="" title="" />
+						</p>
+						<h1>목록이 없습니다.</h1>
+
+					</div>
+					<% } %>
+					
 					<p class="warning_text">*삭제한 글은 복구가 불가능하니 신중하게 선택하세요.</p>
 					<!-- //게시판 -->
 

@@ -30,8 +30,8 @@
                 <div class="vsv-copy sub-title">
                    <div>
                         <ul class="navi">
-                            <li><a href="#none">홈</a></li>
-                            <li class="glyphicon glyphicon-menu-right"><a href="#none">중고거래</a></li>
+                            <li><a href="/anavada/views/main/main.jsp">홈</a></li>
+                            <li class="glyphicon glyphicon-menu-right"><a href="/anavada/jblist">중고거래</a></li>
                         </ul>
                     </div>
                     <h2><span>중고거래</span></h2>
@@ -147,7 +147,7 @@
                             <tr>
                                 <td>상품설명</td>
                                 <td>
-										<textarea name="content" class="form-control"
+										<textarea name="content" class="form-control" minlength="20" 
 										style="resize: none; width: 100%; min-height: 600px; max-height: 600px;"><%=jboard.getJboardContent() %></textarea>
 								</td>
                             </tr>

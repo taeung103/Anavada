@@ -1,6 +1,7 @@
 package jboard.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -69,9 +70,13 @@ public class JboardCommentInsertServlet extends HttpServlet {
 		if (result > 0 ) {
 			response.sendRedirect("/anavada/jbdetail?jboardno=" + jboardNo);
 		}else {
-			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("message", jboardNo + "번 댓글 등록 실패 !");
-			view.forward(request, response);
+			response.setContentType("text/html; charset=UTF-8");
+    		PrintWriter script = response.getWriter();
+    		script.println("<script>");
+    		script.println("alert('댓글 작성 실패.');");
+    		script.println("location.href='/anavada/jbdetail?jboardno="+jboardNo+"';");
+    		script.println("</script>");
+    		script.close();
 		}
 	}
 
