@@ -90,13 +90,17 @@ function loginCheck(data, data1, no, page, selected, keyword){
                                 	</ul>
                                 </td>
                                 <td class="xeicon"><i class="xi-lock-o"></i></td>
-                            	<% if(i.getIqOriginal() != null || i.getIqOriginal2() != null || i.getIqOriginal3() != null) { %>
                             	<td class="fileDown">
-                            	<i class="glyphicon glyphicon-floppy-saved"></i></td><% } %>
+                            	<% if(i.getIqOriginal() != null || i.getIqOriginal2() != null || i.getIqOriginal3() != null) { %>
+                            	<i class="glyphicon glyphicon-floppy-saved"></i></td>
+                            	<% } %>
                             	
-                            <% if(i.getIqAnswer().equals("Y")) { %>
-                            	<td class="inquiryOK"><span><i class="glyphicon glyphicon-bell"></i>처리완료</span></td>
-                            <% }else { %><td></td><% } %>
+                            	<td class="declare_btn"><span>
+                            	<% if(i.getIqAnswer().equals("Y")) { %>
+                            	<i class="glyphicon glyphicon-bell"></i>처리완료
+                            	<% }else { %>
+                            	<% } %>
+                            	</span></td>
                             
                         	</tr>
                         	<% } %>
@@ -117,12 +121,15 @@ function loginCheck(data, data1, no, page, selected, keyword){
                             	</td>
                             	<td class="fileDown">
                             	<% if(i.getIqOriginal() != null || i.getIqOriginal2() != null || i.getIqOriginal3() != null) { %>
-                            	<i class="glyphicon glyphicon-floppy-saved"></i><% } %></td>
+                            	<i class="glyphicon glyphicon-floppy-saved"></i><% } %>
+                            	</td>
                             	
-                            <% if(i.getIqAnswer().equals("Y")) { %>
-                            	<td class="declare_btn"><span><i class="glyphicon glyphicon-bell"></i>처리완료</span></td>
-                            <% }else { %><td></td><% } %>
-                            
+                            	<td class="declare_btn"><span>
+                            	<% if(i.getIqAnswer().equals("Y")) { %>
+                            	<i class="glyphicon glyphicon-bell"></i>처리완료
+                            	<% }else { %>
+                            	<% } %>
+                            	</span></td>
                         	</tr>
                         	<% } %>
                     	</tbody>
