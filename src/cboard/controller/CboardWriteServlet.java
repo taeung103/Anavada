@@ -131,7 +131,7 @@ public class CboardWriteServlet extends HttpServlet {
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('글작성 실패');location.href='/anavada/clistview?page=1&local=0';</sc" + "ript>");
+			writer.println("<script>alert('글작성 실패');location.href='/anavada/clistview?page=1&local=0';</script>");
 			writer.close();
 		}
 	}
