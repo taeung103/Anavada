@@ -36,6 +36,8 @@ public class DBoDao {
 				dbo.setDboUrl(rset.getString("declare_url"));
 				dbo.setDboBId(rset.getString("declare_id"));
 				dbo.setDboChe(rset.getString("declareche"));
+				dbo.setDboCount(rset.getInt("declare_count"));
+				
 
 				list.add(dbo);
 			}
@@ -73,6 +75,7 @@ public class DBoDao {
 				dbo.setDboUrl(rset.getString("declare_url"));
 				dbo.setDboBId(rset.getString("declare_id"));
 				dbo.setDboChe(rset.getString("declareche"));
+				dbo.setDboCount(rset.getInt("declare_count"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -87,7 +90,7 @@ public class DBoDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		String query = "insert into declare_board values ((select max(declare_no)+1 from declare_board), ?, ?, sysdate, ?, ?, ?, ?, ?, ?, default)";
+		String query = "insert into declare_board values ((select max(declare_no)+1 from declare_board), ?, ?, sysdate, ?, ?, ?, ?, ?, ?, default, default)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, dbo.getDboMid());
@@ -174,6 +177,7 @@ public class DBoDao {
 				dbo.setDboUrl(rset.getString("declare_url"));
 				dbo.setDboBId(rset.getString("declare_id"));
 				dbo.setDboChe(rset.getString("declareche"));
+				dbo.setDboCount(rset.getInt("declare_count"));
 
 				list.add(dbo);
 			}
@@ -218,7 +222,7 @@ public class DBoDao {
 		
 		String query ="select * " + 
 				"from (select rank() over(order by declare_no desc) rnum, declare_no, member_id, declare_title, declare_date, declare_type, "+
-				"declare_content, declare_original, declare_rename, declare_url, declare_id, declareche " + 
+				"declare_content, declare_original, declare_rename, declare_url, declare_id, declareche, declare_count" + 
 				" from  declare_board)  where rnum >= ? and rnum <= ?";
 
 		int startRow = (currentPage -1) * limit + 1;
@@ -241,6 +245,7 @@ public class DBoDao {
 				dbo.setDboUrl(rset.getString("declare_url"));
 				dbo.setDboBId(rset.getString("declare_id"));
 				dbo.setDboChe(rset.getString("declareche"));
+				dbo.setDboCount(rset.getInt("declare_count"));
 
 				list.add(dbo);
 			}
@@ -259,27 +264,20 @@ public class DBoDao {
 		ResultSet rset = null;
 		
 		String query = "select * from (select rank() over (order by declare_no desc) rnum, declare_no, member_id, declare_title, declare_date, declare_type, "
-				+ "declare_content, declare_original, declare_rename, declare_url, declare_id, declareche from declare_board ";
+				+ "declare_content, declare_original, declare_rename, declare_url, declare_id, declareche, declare_count from declare_board ";
 		
-		if(column.equals("jboard"))
-			query += " where declare_type like ? and declare_title like ?) where rnum >= ? and rnum <= ?";
-		else query += " where declare_type like ? and declare_title like ?) where rnum >= ? and rnum <= ?";
+		if(column.equals("title"))
+			query += " where declare_title like ?) where rnum >= ? and rnum <= ?";
+		else query += " where declare_content like ?) where rnum >= ? and rnum <= ?";
 		
 		int startRow = (currentPage - 1) * limit +1;
 		int endRow = startRow + limit - 1;
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			if(column.equals("jboard")) {
-				pstmt.setString(1, "%중고%");
-				pstmt.setString(2, "%" + keyword + "%");
-			}else {
-				pstmt.setString(1, "%커뮤니티%");
-				pstmt.setString(2, "%" + keyword + "%");
-			}
-			
-			pstmt.setInt(3, startRow);
-			pstmt.setInt(4, endRow);
+			pstmt.setString(1, "%" + keyword + "%");
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			rset = pstmt.executeQuery();
 			
 			while (rset.next()) {
@@ -295,6 +293,7 @@ public class DBoDao {
 				dbo.setDboUrl(rset.getString("declare_url"));
 				dbo.setDboBId(rset.getString("declare_id"));
 				dbo.setDboChe(rset.getString("declareche"));
+				dbo.setDboCount(rset.getInt("declare_count"));
 
 				list.add(dbo);
 			}
@@ -314,20 +313,13 @@ public class DBoDao {
 		
 		String query = "select count(*) from declare_board ";
 		
-		if(column.equals("jboard"))
-			query += "where declare_type like ? and declare_title like ?";
-		else query += "where declare_type like ? and declare_title like ?";
+		if(column.equals("title"))
+			query += " where declare_title like ? ";
+		else query += " where declare_content like ? ";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			if(column.equals("jboard")) {
-				pstmt.setString(1, "%중고%");
-				pstmt.setString(2, "%" + keyword + "%");
-			}else {
-				pstmt.setString(1, "%커뮤니티%");
-				pstmt.setString(2, "%" + keyword + "%");
-			}
-			
+			pstmt.setString(1, "%" + keyword + "%");
 			rset = pstmt.executeQuery();
 			
 			if(rset.next())
@@ -374,7 +366,7 @@ public class DBoDao {
 		ResultSet rset = null;
 		
 		String query ="select * from (select rank() over(order by declare_no desc) rnum, declare_no, member_id, declare_title, declare_date, declare_type, "+
-				"declare_content, declare_original, declare_rename, declare_url, declare_id, declareche " + 
+				"declare_content, declare_original, declare_rename, declare_url, declare_id, declareche, declare_count " + 
 				" from  declare_board) where member_id = ? and rnum >= ? and rnum <= ? ";
 
 		int startRow = (currentPage -1) * limit + 1;
@@ -398,6 +390,7 @@ public class DBoDao {
 				dbo.setDboUrl(rset.getString("declare_url"));
 				dbo.setDboBId(rset.getString("declare_id"));
 				dbo.setDboChe(rset.getString("declareche"));
+				dbo.setDboCount(rset.getInt("declare_count"));
 
 				list.add(dbo);
 			}

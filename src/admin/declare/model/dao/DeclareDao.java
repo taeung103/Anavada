@@ -94,11 +94,11 @@ public class DeclareDao {
 		int result =0;
 		PreparedStatement pstmt = null;
 		
-		String query = "update declare_admin set declare_count = ?, declare_ok = ? ";
+		String query = "update declare_admin set declare_ok = ? where declare_id = ? ";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, declare.getDeclareCount());
-			pstmt.setString(2, declare.getDeclareOk());
+			pstmt.setString(1, declare.getDeclareOk());
+			pstmt.setString(2, declare.getDeclareId());
 			
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -211,6 +211,25 @@ public class DeclareDao {
 		}
 	   return result;
 	}
+
+	public int selectMember(Connection conn, String memberid) {
+		PreparedStatement pstmt = null;
+	      int result = 0;
+	      
+	      String query = "select * from declare_admin where declare_id = ?";
+	      try {
+	         pstmt = conn.prepareStatement(query);
+	         pstmt.setString(1, memberid);
+	         
+	         result = pstmt.executeUpdate();
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      }finally {
+	         close(pstmt);
+	      }
+	      return result;
+	   }
+
 
 
 }

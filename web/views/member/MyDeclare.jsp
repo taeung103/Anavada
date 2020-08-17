@@ -24,9 +24,9 @@
                 <div class="vsv-copy sub-title">
                    <div>
                         <ul class="navi">
-                            <li><a href="#none">홈</a></li>
-                            <li><a href="#none">MYPAGE</a></li>
-                            <li class="glyphicon glyphicon-menu-right"><a href="#none">신고하기조회</a></li>
+                            <li><a href="/anavada">홈</a></li>
+                            <li><a href="/anavada/mypage.cp?memberId=<%= loginMember.getMemberId() %>">MYPAGE</a></li>
+                            <li class="glyphicon glyphicon-menu-right"><a href="/anavada/dbomylist.ss?member=<%= loginMember.getMemberId()%>">신고하기조회</a></li>
                         </ul>
                     </div>
                     <h2><span>MYPAGE</span></h2>
