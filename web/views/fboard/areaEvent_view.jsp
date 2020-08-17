@@ -37,7 +37,7 @@
                 <div class="vsv-copy sub-title">
                    <div>
                         <ul class="navi">
-                            <li><a href="#none">홈</a></li>
+                            <li><a href="/anavada/views/main/main.jsp">홈</a></li>
                             <li class="glyphicon glyphicon-menu-right"><a href="#none">지역축제</a></li>
                         </ul>
                     </div>
@@ -84,7 +84,7 @@
 
             <!-- 상세 div -->
             <div class="view-area areaEvent_view">
-                 <h2 id="title"><span id="localname">서울시 </span>중구</h2>
+                 <h2 id="title"><span id="localname"> </span></h2>
                 <ul>
                     <li><span>작성자 : </span>관리자</li>
                     <li id="createdd"></li>
