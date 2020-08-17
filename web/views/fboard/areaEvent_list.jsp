@@ -132,7 +132,7 @@
 				<div class="vsv-copy sub-title">
 					<div>
 						<ul class="navi">
-							<li><a href="#none">홈</a></li>
+							<li><a href="views/main/main.jsp">홈</a></li>
 							<li class="glyphicon glyphicon-menu-right"><a href="#none">지역축제</a></li>
 						</ul>
 					</div>
@@ -211,8 +211,7 @@
 			
 					<!--검색 리스트-->
 					<div class="sort-area">
- 						<h4 id="totalcount">전체 150개</h4>
-						<!-- <a href="areaEvent_write.jsp" class="write_btn">글쓰기</a> -->
+ 						<h4 id="totalcount"></h4>
 						<div> 
 						    <form action="" name="" method="">
 							<label><input type="checkbox" id="lastList">지난 축제 보기</label>&nbsp;&nbsp;/&nbsp;&nbsp; 

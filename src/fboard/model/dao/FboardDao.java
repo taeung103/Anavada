@@ -51,7 +51,7 @@ public class FboardDao {
 		public int insertFboard(Connection conn, Fboard fboard) {
 			int result = 0;
 			PreparedStatement pstmt = null;
-			String query = "insert into fboard values(?, ?, ?, ?, ?, ?, ?, ?, default, 'admin', default, ?)";
+			String query = "insert into fboard values(?, ?, ?, ?, ?, ?, ?, ?, default, ?, default, ?)";
 
 			try {
 				pstmt = conn.prepareStatement(query);
@@ -63,7 +63,8 @@ public class FboardDao {
 				pstmt.setString(6, fboard.getFesivalModifiedDate());
 				pstmt.setString(7, fboard.getMapX());
 				pstmt.setString(8, fboard.getMapY());
-				pstmt.setString(9, fboard.getThumbnail());
+				pstmt.setString(9, fboard.getMemberId());
+				pstmt.setString(10, fboard.getThumbnail());
 
 				result = pstmt.executeUpdate();
 			} catch (Exception e) {

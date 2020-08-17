@@ -142,8 +142,8 @@ function movePage(num){
                
                     <div class="main_vText">
                         <h2>도심 속 우리의 연결고리</h2>
-                        <p>'Anavada'와 함께하는 지역축제의 활성화</p>
-                        <a class="btn-primary" href="#none" role="button">자세히보기</a>
+                        <p>'Anavada'와 함께하는 이웃거래와 지역축제의 활성화</p>
+                        <a class="btn-primary" href="/anavada/fbklist" role="button">자세히보기</a>
                     </div>
                 </div>
 
