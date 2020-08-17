@@ -16,7 +16,7 @@
                         <a href="/anavada/flist">FAQ</a>
                         <a href="/anavada/ilist">문의하기</a>
                         <% if(loginMember != null && loginMember.getMemberId().equals("admin")){ %>
-                        <a href="/anavada//dbolist.ad">신고하기</a>
+                        <a href="/anavada/dbolist.ad">신고하기</a>
                         <% }else{ %>
                         <a href="/anavada/dbolist">신고하기</a>
                         <% } %>
