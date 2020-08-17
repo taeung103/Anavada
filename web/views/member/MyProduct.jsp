@@ -33,9 +33,9 @@
                 <div class="vsv-copy sub-title">
                    <div>
                         <ul class="navi">
-                            <li><a href="#none">홈</a></li>
-                            <li><a href="#none">MYPAGE</a></li>
-                            <li class="glyphicon glyphicon-menu-right"><a href="#none">중고거래조회</a></li>
+                            <li><a href="views/main/main.jsp">홈</a></li>
+                            <li><a href="/anavada/mypage.cp?memberId=<%= loginMember.getMemberId() %>">MYPAGE</a></li>
+                            <li class="glyphicon glyphicon-menu-right"><a href="/anavada/myjblist?memberID=<%=loginMember.getMemberId()%>">중고거래조회</a></li>
                         </ul>
                     </div>
                     <h2><span>MYPAGE</span></h2>
@@ -47,11 +47,11 @@
             <!--서브 카테고리-->
             <div class="MyTap">
                 <ul>
-                    <li><a href="MyInfoModify.jsp">정보수정</a></li>
+                    <li><a href="/anavada/mypage.cp?memberid=<%=loginMember.getMemberId()%>">정보수정</a></li>
                     <li class="active"><a href="/anavada/myjblist?memberid=<%=loginMember.getMemberId()%>">중고거래조회</a></li>
                     <li><a href="/anavada/mycmnt?memberID=<%=loginMember.getMemberId()%>">커뮤니티조회</a></li>
                     <li><a href="MyInquiry.jsp">문의하기조회</a></li>
-                    <li><a href="MyDeclare.jsp">신고하기조회</a></li>
+                    <li><a href="/anavada/dbomylist.ss?member=<%= loginMember.getMemberId()%>">신고하기조회</a></li>
                 </ul>
             </div>
             <!--서브 카테고리 끝-->

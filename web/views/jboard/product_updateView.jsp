@@ -30,8 +30,8 @@
                 <div class="vsv-copy sub-title">
                    <div>
                         <ul class="navi">
-                            <li><a href="#none">홈</a></li>
-                            <li class="glyphicon glyphicon-menu-right"><a href="#none">중고거래</a></li>
+                            <li><a href="/anavada/views/main/main.jsp">홈</a></li>
+                            <li class="glyphicon glyphicon-menu-right"><a href="/anavada/jblist">중고거래</a></li>
                         </ul>
                     </div>
                     <h2><span>중고거래</span></h2>
