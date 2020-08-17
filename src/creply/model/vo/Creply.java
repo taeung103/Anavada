@@ -11,13 +11,11 @@ public class Creply implements Serializable{
 	private Date creplyDate;
 	private String creplyContent;
 	private int parantReply;
-	private int creplyOrder;
 	private int creplyDepth;
 	
 	public Creply() {}
 
-	public Creply(int creplyNo, int cbaordNo, String memberId, Date creplyDate, String creplyContent, int parantReply,
-			int creplyOrder, int creplyDepth) {
+	public Creply(int creplyNo, int cbaordNo, String memberId, Date creplyDate, String creplyContent, int parantReply, int creplyDepth) {
 		super();
 		this.creplyNo = creplyNo;
 		this.cbaordNo = cbaordNo;
@@ -25,7 +23,6 @@ public class Creply implements Serializable{
 		this.creplyDate = creplyDate;
 		this.creplyContent = creplyContent;
 		this.parantReply = parantReply;
-		this.creplyOrder = creplyOrder;
 		this.creplyDepth = creplyDepth;
 	}
 
@@ -77,14 +74,6 @@ public class Creply implements Serializable{
 		this.parantReply = parantReply;
 	}
 
-	public int getCreplyOrder() {
-		return creplyOrder;
-	}
-
-	public void setCreplyOrder(int creplyOrder) {
-		this.creplyOrder = creplyOrder;
-	}
-
 	public int getCreplyDepth() {
 		return creplyDepth;
 	}
@@ -95,10 +84,8 @@ public class Creply implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Creply [creplyNo=" + creplyNo + ", cbaordNo=" + cbaordNo + ", memberId=" + memberId + ", creplyDate="
-				+ creplyDate + ", creplyContent=" + creplyContent + ", parantReply=" + parantReply + ", creplyOrder="
-				+ creplyOrder + ", creplyDepth=" + creplyDepth + "]";
+		return "Creply [creplyNo=" + creplyNo + ", cbaordNo=" + cbaordNo + ", memberId=" + memberId + ", creplyDate=" + creplyDate + ", creplyContent=" + creplyContent + ", parantReply=" + parantReply
+				+ ", creplyDepth=" + creplyDepth + "]";
 	}
-	
 	
 }
