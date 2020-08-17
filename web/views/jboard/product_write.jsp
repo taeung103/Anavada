@@ -108,7 +108,7 @@
                             <tr>
                                 <td>상품설명</td>
                                 <td>
-										<textarea name="content" class="form-control"
+										<textarea name="content" class="form-control"  minlength="20" 
 										style="resize: none; width: 100%; min-height: 600px; max-height: 600px;">
 상품 설명을 상세하게 적어주세요.
 설명되지 않은 하자나 문제 발생시 책임은 판매자에게 있습니다.

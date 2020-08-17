@@ -1,6 +1,7 @@
 package jboard.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,9 +37,13 @@ public class JboardCommentDeleteServlet extends HttpServlet {
 			if(new CommentService().commentDelete(commentNo) > 0) {
 				response.sendRedirect("/anavada/jbdetail?jboardno="+jboardNo);
 			}else {
-				RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
-				request.setAttribute("message", jboardNo + "번 글 삭제 실패!");
-				view.forward(request, response);
+				response.setContentType("text/html; charset=UTF-8");
+	    		PrintWriter script = response.getWriter();
+	    		script.println("<script>");
+	    		script.println("alert('삭제에 실패 했습니다..');");
+	    		script.println("location.href='/anavada/jbdetail?jboardno="+jboardNo+"';");
+	    		script.println("</script>");
+	    		script.close();
 			}
 	}
 

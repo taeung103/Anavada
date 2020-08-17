@@ -147,7 +147,7 @@
                             <tr>
                                 <td>상품설명</td>
                                 <td>
-										<textarea name="content" class="form-control"
+										<textarea name="content" class="form-control" minlength="20" 
 										style="resize: none; width: 100%; min-height: 600px; max-height: 600px;"><%=jboard.getJboardContent() %></textarea>
 								</td>
                             </tr>
