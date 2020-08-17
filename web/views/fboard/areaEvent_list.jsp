@@ -221,7 +221,7 @@
  						<h4 id="totalcount">전체 150개</h4>
 						<!-- <a href="areaEvent_write.jsp" class="write_btn">글쓰기</a> -->
 						<div> 
-							<input type="checkbox" id="lastList">지난 축제 보기
+							지난 축제 보기 <input type="checkbox" id="lastList"> &nbsp;
 								지역 분류 : <select name="" id="locationSelect" class="LocationSelect">
 									<option value="0" selected="selected">지역 선택</option>	<!-- 서울시 전체 고정  -->
 									<option value="1">강남구</option>

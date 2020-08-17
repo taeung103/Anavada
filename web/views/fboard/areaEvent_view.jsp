@@ -163,8 +163,8 @@
 								values += '<li><div>' +
                                 '<h4>user : ' + json.list[i].memberId + '</h4><span>' + json.list[i].fboardReplyCreatDate + '</span>' +
                                 '</div><pre>' + decodeURIComponent(json.list[i].fboardReplyContent).replace(/\+/gi, " ") + '</pre>' + 
-                                '<div class="cmt_delete" style="float: right;"><input type="button" value="삭제" onclick="Replydelete(' + json.list[i].fboardReplyNo + ');"></div>' 
-                                 +'<button onclick="">대댓글</button>' + '</li>'
+                                '<div class="cmt_delete" style="float: right;"><input type="button" value="삭제" onclick="Replydelete(' + json.list[i].fboardReplyNo + ');">' + 
+                             	'</div><br></li>'
 								}	//for in
 								
 								 $("#fbreply").empty();
