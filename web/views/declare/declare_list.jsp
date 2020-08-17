@@ -29,9 +29,9 @@
                 <div class="vsv-copy sub-title">
                    <div>
                         <ul class="navi">
-                            <li><a href="#none">홈</a></li>
-                            <li><a href="#none">고객센터</a></li>
-                            <li class="glyphicon glyphicon-menu-right"><a href="#none">신고하기</a></li>
+                            <li><a href="/anavada">홈</a></li>
+                            <li><a href="/anavada/nlist">고객센터</a></li>
+                            <li class="glyphicon glyphicon-menu-right"><a href="/anavada/dbolist">신고하기</a></li>
                         </ul>
                     </div>
                     <h2><span>신고하기</span></h2>
@@ -47,7 +47,7 @@
                 <div class="sort-area">  
                     <h4>전체 <%= listCount %> 개</h4>
                     <a href="/anavada/views/declare/declare_write.jsp" class="write_btn">글쓰기</a>
-                    <div>
+                    <!-- <div>
                     <form action="/anavada/dbosearch?page=1" method="post" id="">
                                                유형 선택 : <select name="selected" class="ListSelect">
                                     <option value="none" selected>유형선택</option>
@@ -58,7 +58,7 @@
                             <input type="text" placeholder="검색어를 입력해주세요.">
                             <button class="top-search"><i class="xi-search"></i></button>
                         </form> 
-                    </div>
+                    </div> -->
                 </div>
                 
 <script type="text/javascript">
@@ -81,7 +81,6 @@ $(function(){
                         <ul>
                             <li>작성자 : <%= d.getDboMid() %></li>
                             <li>작성일 : <%= d.getDboDate() %></li>
-                            <li>조회수 : 30 <!-- 나중에 --></li>
                             <li>유형 : <%= d.getDboType() %></li>
                         </ul>
                     </td>
