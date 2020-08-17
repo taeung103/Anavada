@@ -1,4 +1,4 @@
-package admin.notice.noticeController;
+package inquiry.controller;
 
 import java.io.IOException;
 
@@ -9,20 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import notice.model.service.NoticeService;
-import notice.model.vo.Notice;
+import admin.notice.answer.model.service.AnswerService;
+import admin.notice.answer.model.vo.Answer;
+import inquiry.model.service.InquiryService;
+import inquiry.model.vo.Inquiry;
 
 /**
- * Servlet implementation class AdminNoticeDetailServlet
+ * Servlet implementation class InquiryDetailServlet
  */
-@WebServlet("/andetail")
-public class AdminNoticeDetailServlet extends HttpServlet {
+@WebServlet("/imdetail.ss")
+public class InquiryMyDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminNoticeDetailServlet() {
+    public InquiryMyDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,26 +34,30 @@ public class AdminNoticeDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Notice notice = new NoticeService().selectOne(Integer.parseInt(request.getParameter("no")));
+		Inquiry inquiry = new InquiryService().selectOne(Integer.parseInt(request.getParameter("no")));
 		
 		int currentPage = 1;
 		if(request.getParameter("page") != null)
 			currentPage = Integer.parseInt(request.getParameter("page"));
+		
 		String selected = null;
 		String keyword = null;
 		if(request.getParameter("selected") != null && request.getParameter("keyword") != null) {
 			selected = request.getParameter("selected");
 			keyword = request.getParameter("keyword");
 		}
-		int listCount = new NoticeService().getListCount();
 		
-		if(notice != null) {
-			RequestDispatcher view = request.getRequestDispatcher("views/admin/notice/adminnotice_view.jsp");
-			request.setAttribute("notice", notice);
-			request.setAttribute("currentPage", currentPage);
+		Answer answer = null;
+		if(inquiry.getIqAnswer().equals("Y"))
+			answer = new AnswerService().selectOne(inquiry.getIqNo());
+		
+		if(inquiry != null) {
+			RequestDispatcher view = request.getRequestDispatcher("views/inquiry/myinquiry_view.jsp");
+			request.setAttribute("inquiry", inquiry);
+			request.setAttribute("page", currentPage);
 			request.setAttribute("selected", selected);
 			request.setAttribute("keyword", keyword);
-			request.setAttribute("totalList", listCount);
+			request.setAttribute("answer", answer);
 			view.forward(request, response);
 		}
 		

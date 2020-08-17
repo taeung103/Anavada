@@ -3,12 +3,6 @@
 <%
 	Inquiry inquiry = (Inquiry)request.getAttribute("inquiry");
 	int currentPage = ((Integer)request.getAttribute("page")).intValue();
-	String selected = null;
-	String keyword = null;
-	if(request.getAttribute("selected") != null && request.getAttribute("keyword") != null) {
-		selected = (String)request.getAttribute("selected");
-		keyword = (String)request.getAttribute("keyword");
-	}
 	Answer answer = (Answer)request.getAttribute("answer");
 %>
 <!DOCTYPE html>
@@ -41,7 +35,7 @@
 
             <!-- 상세 -->
             <div class="view-area">
-                <h2><span class="inquiry">문의</span> <%= inquiry.getIqTitle() %></h2>
+                <h2><span class="inquiry">나의 문의</span> <%= inquiry.getIqTitle() %></h2>
                 <ul>
                     <li><span>작성자 : </span><%= inquiry.getIqId() %></li>
                     <li><span>등록일 : </span><%= inquiry.getIqDate() %></li>
@@ -55,19 +49,18 @@
                     <% } %>
                 </ul>
 
-                <div class="view-ctn"><%= inquiry.getIqContent().replace("\r\n","<br>") %></div>	
+                <div class="view-ctn"><%= inquiry.getIqContent().replace("\r\n","<br>") %></div>
 				
-				<% if(selected == null && keyword == null) { %>
+				<div align="right">
+				<br>
+				<a href="/anavada/iupdateview?no=<%= inquiry.getIqNo() %>&page=<%= currentPage %>" class="btn btn-list" style="background-color:white; border-color:white; color:black;">수정</a>
+				<a href="/anavada/idelete?no=<%= inquiry.getIqNo() %>&rfile=<%= inquiry.getIqRename() %>&rfile2=<%= inquiry.getIqRename2() %>&rfile3=<%= inquiry.getIqRename3() %>" class="btn btn-list" style="background-color:white; border-color:white; color:red;">삭제</a>
+				</div>
+				
+				
                 <div class="view-btn">
-                    <a href="/anavada/ilist?page=<%= currentPage %>" class="btn btn-list" style="background-color: #fff; color:#FF8A3D;">목록</a>
-                    <a href="/anavada/idelete?no=<%= inquiry.getIqNo() %>&rfile=<%= inquiry.getIqRename() %>&rfile2=<%= inquiry.getIqRename2() %>&rfile3=<%= inquiry.getIqRename3() %>" class="btn btn-list" style="background-color: #fff; color:#FF8A3D;">삭제</a>
-                    <a href="/anavada/iupdateview?no=<%= inquiry.getIqNo() %>&page=<%= currentPage %>" class="btn btn-list">수정</a>
+                    <a onclick="javascript=history.go(-1);" class="btn btn-list">목록</a>
                 </div>
-                <% }else { %>
-                <div class="view-btn">
-                    <a href="/anavada/isearch?page=<%= currentPage %>&selected=<%= selected %>&keyword=<%= keyword %>" class="btn btn-list">목록</a>
-                </div>
-                <% } %>
                 
                 
                 <% if(answer != null) { %>

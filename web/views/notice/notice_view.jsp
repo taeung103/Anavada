@@ -45,9 +45,9 @@
                 <div class="vsv-copy sub-title">
                    <div>
                         <ul class="navi">
-                            <li><a href="#none">홈</a></li>
-                            <li class="glyphicon glyphicon-menu-right"><a href="#none">고객센터</a></li>
-                            <li class="glyphicon glyphicon-menu-right"><a href="#none">공지사항</a></li>
+                            <li><a href="/anavada/">홈</a></li>
+                            <li><a href="/anavada/nlist">고객센터</a></li>
+                            <li class="glyphicon glyphicon-menu-right"><a href="/anavada/nlist">공지사항</a></li>
                         </ul>
                     </div>
                     <h2><span>공지사항</span></h2>

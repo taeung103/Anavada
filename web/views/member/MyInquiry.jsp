@@ -24,9 +24,9 @@
                 <div class="vsv-copy sub-title">
                    <div>
                         <ul class="navi">
-                            <li><a href="#none">홈</a></li>
-                            <li><a href="#none">MYPAGE</a></li>
-                            <li class="glyphicon glyphicon-menu-right"><a href="#none">문의하기조회</a></li>
+                            <li><a href="/anavada">홈</a></li>
+                            <li><a href="/anavada/mypage.cp?memberId=<%= loginMember.getMemberId() %>">MYPAGE</a></li>
+                            <li class="glyphicon glyphicon-menu-right"><a href="/anavada/miq?member=<%= loginMember.getMemberId() %>">문의하기조회</a></li>
                         </ul>
                     </div>
                     <h2><span>MYPAGE</span></h2>
@@ -60,7 +60,7 @@
                 	<table>
                     	<tbody>
                     	<% for(Inquiry i : list) { %>
-                        	<tr onclick="javascript:location.href='/anavada/idetail.ss?no=<%= i.getIqNo() %>&page=<%= currentPage %>';">
+                        	<tr onclick="javascript:location.href='/anavada/imdetail.ss?no=<%= i.getIqNo() %>&page=<%= currentPage %>';">
                             	<td class="number"><%= i.getIqNo() %></td>
                             	<td class="title">
                                 	<h2><span class="inquiry">문의</span><%= i.getIqTitle() %></h2>

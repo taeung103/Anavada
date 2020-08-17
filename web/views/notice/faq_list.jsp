@@ -49,9 +49,9 @@
                 <div class="vsv-copy sub-title">
                    <div>
                         <ul class="navi">
-                            <li><a href="#none">홈</a></li>
-                            <li class="glyphicon glyphicon-menu-right"><a href="#none">고객센터</a></li>
-                            <li class="glyphicon glyphicon-menu-right"><a href="#none">FAQ</a></li>
+                            <li><a href="/anavada">홈</a></li>
+                            <li><a href="/anavada/nlist">고객센터</a></li>
+                            <li class="glyphicon glyphicon-menu-right"><a href="/anavada/flist">FAQ</a></li>
                         </ul>
                     </div>
                     <h2><span>FAQ</span></h2>
@@ -234,5 +234,20 @@
 
         <%@ include file="../include/footer.jsp" %>
     </div>
+<div id="frogue-container" class="position-right-bottom"
+      data-chatbot="d666fc76-7aef-4b3b-84ac-83d1b295844d"
+      data-user="사용자ID"
+      data-init-key="value"
+      ></div>
+<!-- data-init-식별키=값 으로 셋팅하면 챗플로우에 파라미터와 연동가능. 식별키는 소문자만 가능 -->
+<script>
+(function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "https:\/\/danbee.ai/js/plugins/frogue-embed/frogue-embed.min.js";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'frogue-embed'));
+</script>
 </body>
 </html>
