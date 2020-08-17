@@ -47,7 +47,7 @@ public class CboardTop2Servlet extends HttpServlet {
 			JSONObject job = new JSONObject();
 
 			job.put("cnum", cboard.getCboardNo());
-			job.put("local", localArr[Integer.parseInt(cboard.getLocalNo()) + 1]);
+			job.put("local", localArr[Integer.parseInt(cboard.getLocalNo()) - 1]);
 			job.put("ctitle", URLEncoder.encode(cboard.getCboardTitle(), "utf-8"));
 			job.put("ccontent", cboard.getCboardContent());
 			job.put("clike", cboard.getLikeCount());
