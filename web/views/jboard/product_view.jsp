@@ -7,7 +7,8 @@
 	ArrayList<Comment> list = (ArrayList<Comment>) request.getAttribute("list");
 	ArrayList<Jboard> likemember = (ArrayList<Jboard>)request.getAttribute("likememberlist");
 	//SimpleDateFormat lastUpdate =new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
-	Jboard jboard = (Jboard)(request.getAttribute("jboardno"));
+	int jboardNo = (Integer)(request.getAttribute("jboardno"));
+	Jboard jboard = (Jboard)(request.getAttribute("jboard"));
 	String post = String.valueOf(request.getAttribute("post"));
 	String meet = String.valueOf(request.getAttribute("meet"));
 	String titleSearch = String.valueOf(request.getParameter("titlesearch"));
@@ -248,7 +249,7 @@ font{
                 <div class="view-btn">
                    
                  	
-                 	<%	if(loginMember.getMemberId().equals(jboard.getMemberId())){ %>
+                 	<%	if(loginMember != null && loginMember.getMemberId().equals(jboard.getMemberId())){ %>
                  	<a href="/anavada/jbupview?jboardno=<%=jboard.getJboardNo() %>&page=<%=currentPage %>" class="btn btn-list">수정</a>
                  	<a href="/anavada/jbdelete?jboardno=<%=jboard.getJboardNo() %>&page=<%=currentPage %>&rfile1=<%=jboard.getJboardRenameFilePath1() %> 
                  	&file2=<%=jboard.getJboardRenameFilePath2() %>&file3=<%=jboard.getJboardRenameFilePath3() %>&file4=<%=jboard.getJboardRenameFilePath4() %>" class="btn btn-list">삭제</a>
@@ -310,9 +311,11 @@ font{
                             <%} %>
                             <div style="display:none" class="Subcmt" id="commentReply">
                                 <form action="/anavada/jbcrinsert.ss" method="post">
+                                <% if (loginMember != null){%>
                                <input type= "hidden" name="commentno" value = "<%=comment.getCommentNo() %>">
                                 <input type= "hidden" name="jboardno" value = "<%=jboard.getJboardNo() %>">
                                 <input type= "hidden" name="writer" value= "<%=loginMember.getMemberId()%>">
+                                <%} %>
                                     <fieldset>
                                         <div class="cmt_form">
                                             <div class="cmt_body">

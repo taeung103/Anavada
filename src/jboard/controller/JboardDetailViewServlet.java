@@ -37,7 +37,7 @@ public class JboardDetailViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 				
-				int jboardno = Integer.parseInt(request.getParameter("jboardno"));
+				int jboardNo = Integer.parseInt(request.getParameter("jboardno"));
 				
 				int currentPage = 1;
 				if (request.getParameter("page") != null) {
@@ -45,22 +45,22 @@ public class JboardDetailViewServlet extends HttpServlet {
 				}
 				
 				
-				Jboard jboard = new JboardService().selectJboard(jboardno);
+				Jboard jboard = new JboardService().selectJboard(jboardNo);
 				JboardService jbservice = new JboardService();
-				jbservice.addReadCount(jboardno);
+				jbservice.addReadCount(jboardNo);
 				
 				String post = jboard.getJboardPost();
 				String meet = jboard.getJboardMeet();
 				
 				CommentService jbcservice = new CommentService();
-				ArrayList<Comment> list = jbcservice.CommentList(jboardno);
-				int commentListCount = jbcservice.getCommentCount(jboardno);
-				ArrayList<Jboard> likeMemberList = jbservice.getLikeMemberList(jboardno);
-
+				ArrayList<Comment> list = jbcservice.CommentList(jboardNo);
+				int commentListCount = jbcservice.getCommentCount(jboardNo);
+				ArrayList<Jboard> likeMemberList = jbservice.getLikeMemberList(jboardNo);
 				RequestDispatcher view = null;
 				if(jboard != null) {
 					view = request.getRequestDispatcher("views/jboard/product_view.jsp");
-					request.setAttribute("jboardno", jboard);
+					request.setAttribute("jboardno", jboardNo);
+					request.setAttribute("jboard", jboard);
 					request.setAttribute("list", list);
 					request.setAttribute("commentlistcount", commentListCount);
 					request.setAttribute("page", currentPage);
@@ -70,7 +70,7 @@ public class JboardDetailViewServlet extends HttpServlet {
 					view.forward(request, response);
 				}else {
 					view = request.getRequestDispatcher("views/common/error.jsp");
-					request.setAttribute("message", jboardno + "번 글에 대한 상세보기 요청 실패!");
+					request.setAttribute("message", jboardNo + "번 글에 대한 상세보기 요청 실패!");
 					view.forward(request, response);
 		}
 	}
