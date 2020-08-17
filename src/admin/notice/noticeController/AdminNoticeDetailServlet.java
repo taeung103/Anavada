@@ -48,9 +48,9 @@ public class AdminNoticeDetailServlet extends HttpServlet {
 		if(notice != null) {
 			RequestDispatcher view = request.getRequestDispatcher("views/admin/notice/adminnotice_view.jsp");
 			request.setAttribute("notice", notice);
-			request.setAttribute("currentPage", Integer.parseInt(request.getParameter("page")));
-			request.setAttribute("selected", request.getParameter("selected"));
-			request.setAttribute("keyword", request.getParameter("keyword"));
+			request.setAttribute("currentPage", currentPage);
+			request.setAttribute("selected", selected);
+			request.setAttribute("keyword", keyword);
 			request.setAttribute("totalList", listCount);
 			view.forward(request, response);
 		}

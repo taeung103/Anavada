@@ -20,14 +20,14 @@
     	if(no == 1)
     		alert("이전글이 없습니다.");
     	else
-    		location.href = "/anavada/nprenex?no="+no+"&value="+1;
+    		location.href = "/anavada/anprenex?no="+no+"&value="+1;
     	
     }
     function next(num, no) {
     	if(no == num)
     		alert("다음글이 없습니다.");
     	else
-    		location.href = "/anavada/nprenex?no="+no+"&value="+2;
+    		location.href = "/anavada/anprenex?no="+no+"&value="+2;
     	
     }
     </script>
