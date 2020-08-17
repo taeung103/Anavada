@@ -60,6 +60,7 @@
 							console.log("jqXHR : " + jqXHR + "textStatus : "
 									+ textStatus + "errorThrown : "
 									+ errorThrown);
+							refresh();
 						}
 					});
 				});
