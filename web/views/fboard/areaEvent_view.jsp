@@ -93,7 +93,7 @@
                 </ul>
                  <!-- 상세 table -->
                 <div class="areaEvent_info">
-                   <div><img id="firstimage" src="" width="500px" height="333px"></div>
+                   <div><img id="firstimage" src=""></div>
                     <table id="fbdetail">
                         <colgroup>
                             <col width="15%">
