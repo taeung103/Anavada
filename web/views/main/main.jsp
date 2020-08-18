@@ -137,7 +137,7 @@ function movePage(num){
             </ol>
 
             <div class="carousel-inner" role="listbox">
-                <div class="item active" style="background-image: url(/anavada/resources/images/main/main_visual01.jpg);" >
+                <div class="item active" style="background-image: url(/anavada/resources/images/main/main_visual01.jpg);" > 
                 <!-- <div class="item active" style="background-image: url(/anavada/resources/bannerfiles/20200817093704.jpg);" > -->
                
                     <div class="main_vText">

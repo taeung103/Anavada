@@ -216,7 +216,7 @@
 						    <form action="" name="" method="">
 							<label><input type="checkbox" id="lastList">지난 축제 보기</label>&nbsp;&nbsp;/&nbsp;&nbsp; 
 								지역 분류 : <select name="" id="locationSelect" class="LocationSelect">
-									<option value="0" selected="selected">서울 특별시</option>	<!-- 서울시 전체 고정  -->
+									<option value="0" selected="selected">전체 보기</option>	<!-- 서울시 전체 고정  -->
 									<option value="1">강남구</option>
 									<option value="2">강동구</option>
 									<option value="3">강북구</option>

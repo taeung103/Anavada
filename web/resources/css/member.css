@@ -299,7 +299,7 @@
 .MBjoin_input_btn {
     text-align: center;
 }
-.MBjoin_input_btn input {
+.MBjoin_input_btn input, .MBjoin_input_btn a {
     display: inline-block;
     border-radius: 5px;
     padding: 10px 0;
@@ -308,21 +308,21 @@
     margin-right:10px;
     border: none;
 }
-.MBjoin_input_btn input:first-child {
+.MBjoin_input_btn input:first-child, .MBjoin_input_btn a:first-child {
     background-color:#fff;
     color: #777;
     border: 1px solid #999;
 }
-.MBjoin_input_btn input:last-child {
+.MBjoin_input_btn input:last-child, .MBjoin_input_btn a:last-child {
     background-color:#FF8A3D;
     color: #fff;
     margin-right:0;
 }
-.MBjoin_input_btn input:hover:first-child {
+.MBjoin_input_btn input:hover:first-child, .MBjoin_input_btn a:hover:first-child {
     color: #FF8A3D;
     border: 1px solid #FF8A3D;
 }
-.MBjoin_input_btn input:hover:last-child {
+.MBjoin_input_btn input:hover:last-child, .MBjoin_input_btn a:hover:last-child {
     background-color:#FF8A3D;
 }
 
