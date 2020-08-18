@@ -137,7 +137,7 @@
                             </tr>
                             <tr>
                                 <td>제목</td>
-                                <td><input type="text" name="title" class="form-control w100p"  minlength="10" placeholder="제목" value= <%=jboard.getJboardTitle() %>></td>
+                                <td><input type="text" name="title" class="form-control w100p"   minlength="8"   maxlength="20" placeholder="제목" value= <%=jboard.getJboardTitle() %>></td>
                             </tr>
                             <tr>
                                 <td>판매희망가격</td>

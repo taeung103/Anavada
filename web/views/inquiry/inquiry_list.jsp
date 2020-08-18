@@ -1,18 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList, inquiry.model.vo.Inquiry"%>
 <%
-	ArrayList<Inquiry> list = (ArrayList<Inquiry>)request.getAttribute("list");
-	int currentPage = (Integer)request.getAttribute("page");
-	int startPage = (Integer)request.getAttribute("startPage");
-	int endPage = (Integer)request.getAttribute("endPage");
-	int totalList = (Integer)request.getAttribute("totalList");
-	int totalPage = (Integer)request.getAttribute("totalPage");
-	String selected = null;
-	String keyword = null;
-	if(request.getAttribute("selected") != null && request.getAttribute("keyword") != null){
-		selected = (String)request.getAttribute("selected");
-		keyword = (String)request.getAttribute("keyword");
-	}
+   ArrayList<Inquiry> list = (ArrayList<Inquiry>)request.getAttribute("list");
+   int currentPage = (Integer)request.getAttribute("page");
+   int startPage = (Integer)request.getAttribute("startPage");
+   int endPage = (Integer)request.getAttribute("endPage");
+   int totalList = (Integer)request.getAttribute("totalList");
+   int totalPage = (Integer)request.getAttribute("totalPage");
+   String selected = null;
+   String keyword = null;
+   if(request.getAttribute("selected") != null && request.getAttribute("keyword") != null){
+      selected = (String)request.getAttribute("selected");
+      keyword = (String)request.getAttribute("keyword");
+   }
 %>
 <!DOCTYPE html>
 <html>
@@ -20,13 +20,13 @@
     <%@ include file="../include/head.jsp" %> 
 <script type="text/javascript">
 function loginCheck(data, data1, no, page, selected, keyword){
-	
-	if(data1 == data && selected == null && keyword == null)
-		location.href = "/anavada/idetail.ss?no="+no+"&page="+page;
-	else if(data1 == data && selected != null && keyword != null)
-		location.href = "/anavada/idetail.ss?no="+no+"&page="+page+"&selected="+selected+"&keyword="+keyword;
-	else
-		alert("회원님이 작성한 게시물이 아닙니다.");
+   
+   if(data1 == data && selected == null && keyword == null)
+      location.href = "/anavada/idetail.ss?no="+no+"&page="+page;
+   else if(data1 == data && selected != null && keyword != null)
+      location.href = "/anavada/idetail.ss?no="+no+"&page="+page+"&selected="+selected+"&keyword="+keyword;
+   else
+      alert("회원님이 작성한 게시물이 아닙니다.");
 }
 
 </script>
@@ -76,64 +76,71 @@ function loginCheck(data, data1, no, page, selected, keyword){
                 </div>
               
                 <% if(totalList > 0) { %>
-                	<% if(selected == null && keyword == null) { %>
-                	<table>
-                    	<tbody>
-                    	<% for(Inquiry i : list) { %>
-                        	<tr onclick="loginCheck('<%= i.getIqId() %>','<%= loginMember.getMemberId() %>','<%= i.getIqNo() %>','<%= currentPage %>',null, null);">
-                            	<td class="number"><%= i.getIqNo() %></td>
-                            	<td class="title">
-                                	<h2><span class="inquiry">문의</span><%= i.getIqTitle() %></h2>
-                                	<ul>
-                                    	<li>작성자 : <%= i.getIqId() %></li>
-                                    	<li>작성일 : <%= i.getIqDate() %></li>
-                                	</ul>
+                   <% if(selected == null && keyword == null) { %>
+                   <table>
+                       <tbody>
+                       <% for(Inquiry i : list) { %>
+                           <tr onclick="loginCheck('<%= i.getIqId() %>','<%= loginMember.getMemberId() %>','<%= i.getIqNo() %>','<%= currentPage %>',null, null);">
+                               <td class="number"><%= i.getIqNo() %></td>
+                               <td class="title">
+                                   <h2><span class="inquiry">문의</span><%= i.getIqTitle() %></h2>
+                                   <ul>
+                                       <li>작성자 : <%= i.getIqId() %></li>
+                                       <li>작성일 : <%= i.getIqDate() %></li>
+                                   </ul>
                                 </td>
                                 <td class="xeicon"><i class="xi-lock-o"></i></td>
-                            	<% if(i.getIqOriginal() != null || i.getIqOriginal2() != null || i.getIqOriginal3() != null) { %>
-                            	<td class="fileDown">
-                            	<i class="glyphicon glyphicon-floppy-saved"></i></td><% } %>
-                            	
-                            <% if(i.getIqAnswer().equals("Y")) { %>
-                            	<td class="inquiryOK"><span><i class="glyphicon glyphicon-bell"></i>처리완료</span></td>
-                            <% }else { %><td></td><% } %>
+                               <td class="fileDown">
+                               <% if(i.getIqOriginal() != null || i.getIqOriginal2() != null || i.getIqOriginal3() != null) { %>
+                               <i class="glyphicon glyphicon-floppy-saved"></i>
+                               <% } %></td>
+                               
+                               <td class="declare_btn"><span>
+                               <% if(i.getIqAnswer().equals("Y")) { %>
+                               <i class="glyphicon glyphicon-bell"></i>처리완료
+                               <% }else { %>
+                               <% } %>
+                               </span></td>
                             
-                        	</tr>
-                        	<% } %>
-                    	</tbody>
-                	</table>
-                	<% }else { %>
-                	<table>
-                    	<tbody>
-                    	<% for(Inquiry i : list) { %>
-                        	<tr onclick="loginCheck('<%= i.getIqId() %>','<%= loginMember.getMemberId() %>','<%= i.getIqNo() %>','<%= currentPage %>','<%= selected %>', '<%= keyword %>');">
-                            	<td class="number"><%= i.getIqNo() %></td>
-                            	<td class="title">
-                                	<h2><span class="inquiry">문의</span><%= i.getIqTitle() %></h2>
-                                	<ul>
-                                    	<li>작성자 : <%= i.getIqId() %></li>
-                                    	<li>작성일 : <%= i.getIqDate() %></li>
-                                	</ul>
-                            	</td>
-                            	<td class="fileDown">
-                            	<% if(i.getIqOriginal() != null || i.getIqOriginal2() != null || i.getIqOriginal3() != null) { %>
-                            	<i class="glyphicon glyphicon-floppy-saved"></i><% } %></td>
-                            	
-                            <% if(i.getIqAnswer().equals("Y")) { %>
-                            	<td class="declare_btn"><span><i class="glyphicon glyphicon-bell"></i>처리완료</span></td>
-                            <% }else { %><td></td><% } %>
-                            
-                        	</tr>
-                        	<% } %>
-                    	</tbody>
-                	</table>
-                	
-				<%} }else { %>
+                           </tr>
+                           <% } %>
+                       </tbody>
+                   </table>
+                   <% }else { %>
+                   <table>
+                       <tbody>
+                       <% for(Inquiry i : list) { %>
+                           <tr onclick="loginCheck('<%= i.getIqId() %>','<%= loginMember.getMemberId() %>','<%= i.getIqNo() %>','<%= currentPage %>','<%= selected %>', '<%= keyword %>');">
+                               <td class="number"><%= i.getIqNo() %></td>
+                               <td class="title">
+                                   <h2><span class="inquiry">문의</span><%= i.getIqTitle() %></h2>
+                                   <ul>
+                                       <li>작성자 : <%= i.getIqId() %></li>
+                                       <li>작성일 : <%= i.getIqDate() %></li>
+                                   </ul>
+                               </td>
+                               <td class="fileDown">
+                               <% if(i.getIqOriginal() != null || i.getIqOriginal2() != null || i.getIqOriginal3() != null) { %>
+                               <i class="glyphicon glyphicon-floppy-saved"></i><% } %>
+                               </td>
+                               
+                               <td class="declare_btn"><span>
+                               <% if(i.getIqAnswer().equals("Y")) { %>
+                               <i class="glyphicon glyphicon-bell"></i>처리완료
+                               <% }else { %>
+                               <% } %>
+                               </span></td>
+                           </tr>
+                           <% } %>
+                       </tbody>
+                   </table>
+                   
+            <%} }else { %>
                 <div class="list-no">
                     <p><img src="/anavada/resources/images/btnIcn/icn_big_listNo.png" alt="" title="" /></p>
                     <h1>목록이 없습니다.</h1>
                 </div>
-				<% } %>
+            <% } %>
 
                 <div class="write-btn">
                     <a href="/anavada/views/inquiry/inquiry_write.jsp">글쓰기</a>
@@ -142,56 +149,56 @@ function loginCheck(data, data1, no, page, selected, keyword){
             </div>
             <!-- 리스트 끝 -->
 
-			
+         
             <!-- 페이지넘버 -->
             <% if(totalList > 0) { %>
             <dl class="list-paging pb80">
                 <dd>
                 <% if(selected == null && keyword == null) { %>
-                	<% if(currentPage == 1) { %>
-                    	<a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
+                   <% if(currentPage == 1) { %>
+                       <a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
                     <% }else { %>
-                    	<a href="/anavada/ilist?page=1"><i class="glyphicon glyphicon-menu-left"></i></a>
+                       <a href="/anavada/ilist?page=1"><i class="glyphicon glyphicon-menu-left"></i></a>
                     <% } %>
                     
                     <% for(int p=startPage; p<=endPage; p++) { %>
-                    	<% if(p == currentPage) { %>
-                    	<a href="#none" class="active"><%= p %></a>
-                    	<% }else { %>
-                    	<a href="/anavada/ilist?page=<%= p %>"><%= p %></a>
+                       <% if(p == currentPage) { %>
+                       <a href="#none" class="active"><%= p %></a>
+                       <% }else { %>
+                       <a href="/anavada/ilist?page=<%= p %>"><%= p %></a>
                     <% } } %>
                     
                     <% if(currentPage == totalPage) { %>
-                    	<a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
+                       <a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
                     <% }else { %>
-                    	<a href="/anavada/ilist?page=<%= totalPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+                       <a href="/anavada/ilist?page=<%= totalPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
                     <% } %>
                     
                  <% }else { %>
-                 	<% if(currentPage == 1) { %>
-                    	<a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
+                    <% if(currentPage == 1) { %>
+                       <a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
                     <% }else { %>
-                    	<a href="/anavada/isearch?page=1&selected=<%= selected %>&keyword=<%= keyword %>"><i class="glyphicon glyphicon-menu-left"></i></a>
+                       <a href="/anavada/isearch?page=1&selected=<%= selected %>&keyword=<%= keyword %>"><i class="glyphicon glyphicon-menu-left"></i></a>
                     <% } %>
                     
                     <% for(int p=startPage; p<=endPage; p++) { %>
-                    	<% if(p == currentPage) { %>
-                    	<a href="#none" class="active"><%= p %></a>
-                    	<% }else { %>
-                    	<a href="/anavada/isearch?page=<%= p %>&selected=<%= selected %>&keyword=<%= keyword %>"><%= p %></a>
+                       <% if(p == currentPage) { %>
+                       <a href="#none" class="active"><%= p %></a>
+                       <% }else { %>
+                       <a href="/anavada/isearch?page=<%= p %>&selected=<%= selected %>&keyword=<%= keyword %>"><%= p %></a>
                     <% } } %>
                     
                     <% if(currentPage == totalPage) { %>
-                    	<a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
+                       <a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
                     <% }else { %>
-                    	<a href="/anavada/isearch?page=<%= totalPage %>&selected=<%= selected %>&keyword=<%= keyword %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+                       <a href="/anavada/isearch?page=<%= totalPage %>&selected=<%= selected %>&keyword=<%= keyword %>"><i class="glyphicon glyphicon-menu-right"></i></a>
                     <% } %>
                  <% } %>
                 </dd>
             </dl>
             <% } %>
             <!-- 페이지넘버 끝 -->
-			
+         
         </div>
         <!-- 컨텐츠 끝 -->
 

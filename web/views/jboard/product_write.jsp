@@ -99,16 +99,16 @@
                             </tr>
                             <tr>
                                 <td>제목</td>
-                                <td><input type="text" name="title" class="form-control w100p"  minlength="10"  placeholder="제목" /></td>
+                                <td><input type="text" name="title" class="form-control w100p"  minlength="8"   maxlength="20" placeholder="제목" /></td>
                             </tr>
                             <tr>
                                 <td>판매희망가격</td>
-                                <td><input type="text" name="price"class="form-control w50p" minlength="3" placeholder="판매가" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="float:left; margin-right: 20px;"/> 원</td>
+                                <td><input type="text" name="price"class="form-control w50p" minlength="3"  placeholder="판매가" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="float:left; margin-right: 20px;"/> 원</td>
                             </tr>
                             <tr>
                                 <td>상품설명</td>
                                 <td>
-										<textarea name="content" class="form-control"  minlength="20" 
+										<textarea name="content" class="form-control"  minlength="15"  
 										style="resize: none; width: 100%; min-height: 600px; max-height: 600px;">
 상품 설명을 상세하게 적어주세요.
 설명되지 않은 하자나 문제 발생시 책임은 판매자에게 있습니다.
