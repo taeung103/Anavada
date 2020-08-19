@@ -231,9 +231,9 @@ font{
                    
                  	<% if (loginMember != null){%>
                  	<%	if(loginMember.getMemberId().equals(jboard.getMemberId())){ %>
-                 	<a href="/anavada/jbupview?jboardno=<%=jboard.getJboardNo() %>&page=<%=currentPage %>" class="btn btn-list">수정</a>
+                 	<a href="/anavada/jbupview?jboardno=<%=jboard.getJboardNo() %>&page=<%=currentPage %>" class="btn btn-modified">수정</a>
                  	<a href="/anavada/jbdelete?jboardno=<%=jboard.getJboardNo() %>&page=<%=currentPage %>&rfile1=<%=jboard.getJboardRenameFilePath1() %> 
-                 	&file2=<%=jboard.getJboardRenameFilePath2() %>&file3=<%=jboard.getJboardRenameFilePath3() %>&file4=<%=jboard.getJboardRenameFilePath4() %>" class="btn btn-list">삭제</a>
+                 	&file2=<%=jboard.getJboardRenameFilePath2() %>&file3=<%=jboard.getJboardRenameFilePath3() %>&file4=<%=jboard.getJboardRenameFilePath4() %>" class="btn btn-delete">삭제</a>
                  	<%}} %>
                     <a href="javascript:history.go(-1);" class="btn btn-list">목록</a>
                 </div>

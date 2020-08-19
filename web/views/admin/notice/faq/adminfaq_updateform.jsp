@@ -26,7 +26,7 @@
                    <div>
                         <ul class="navi">
                             <li><a href="#none">홈</a></li>
-                            <li><a href="#none">고객센터</a></li>
+                            <li class="glyphicon glyphicon-menu-right"><a href="#none">고객센터</a></li>
                             <li class="glyphicon glyphicon-menu-right"><a href="#none">공지사항</a></li>
                         </ul>
                     </div>
@@ -59,10 +59,10 @@
                             <tr>
                                 <td>카테고리</td>
                                 <td>
-                                <input type="radio" name="checkCate" value="1" <%= checked[0] %>> 회원정보 &nbsp; &nbsp;
-                                <input type="radio" name="checkCate" value="2" <%= checked[1] %>> 중고거래 &nbsp; &nbsp;
-                                <input type="radio" name="checkCate" value="3" <%= checked[2] %>> 커뮤니티 &nbsp; &nbsp;
-                                <input type="radio" name="checkCate" value="4" <%= checked[3] %>> 지역축제 &nbsp; &nbsp;
+                                    <label><input type="radio" name="checkCate" value="1" <%= checked[0] %>> 회원정보</label>
+                                    <label><input type="radio" name="checkCate" value="2" <%= checked[1] %>> 중고거래</label>
+                                    <label><input type="radio" name="checkCate" value="3" <%= checked[2] %>> 커뮤니티</label>
+                                    <label><input type="radio" name="checkCate" value="4" <%= checked[3] %>> 지역축제</label>
                                 </td>
                             </tr>
                         </tbody>

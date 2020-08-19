@@ -40,7 +40,7 @@ public class AdminMemberAllListServlet extends HttpServlet {
 	    String secessionOK = request.getParameter("secessionOK"); 
 		String search = request.getParameter("search");
 		String keyword = request.getParameter("keyword");
-		
+
 		int limit = 10;
 		MemberService mservice = new MemberService();
 		int listCount = mservice.getListCount(search, keyword);
@@ -68,9 +68,9 @@ public class AdminMemberAllListServlet extends HttpServlet {
 			request.setAttribute("startPage", startPage);
 			request.setAttribute("endPage", endPage);
 			request.setAttribute("listCount", listCount);
-	         request.setAttribute("search", search);
-	         request.setAttribute("keyword", keyword);
-	         request.setAttribute("secessionOK", secessionOK);
+			request.setAttribute("search", search);
+			request.setAttribute("keyword", keyword);
+			request.setAttribute("secessionOK", secessionOK);
 			view.forward(request, response);
 		} else if(secessionOK.equals("Y")) { //전체 탈퇴회원 조회 성공시
 			view = request.getRequestDispatcher("views/admin/member/memberSecession.jsp");
@@ -80,9 +80,9 @@ public class AdminMemberAllListServlet extends HttpServlet {
 			request.setAttribute("startPage", startPage);
 			request.setAttribute("endPage", endPage);
 			request.setAttribute("slistCount", slistCount);
-	         request.setAttribute("search", search);
-	         request.setAttribute("keyword", keyword);
-	         request.setAttribute("secessionOK", secessionOK);
+			request.setAttribute("search", search);
+			request.setAttribute("keyword", keyword);
+			request.setAttribute("secessionOK", secessionOK);
 			view.forward(request, response);
 		} else { //전체 조회 실패시
 			view = request.getRequestDispatcher("views/common/error.jsp");
@@ -93,9 +93,9 @@ public class AdminMemberAllListServlet extends HttpServlet {
 			request.setAttribute("endPage", endPage);
 			request.setAttribute("listCount", listCount);
 			request.setAttribute("slistCount", slistCount);
-	         request.setAttribute("search", search);
-	         request.setAttribute("keyword", keyword);
-	         request.setAttribute("secessionOK", secessionOK);
+			request.setAttribute("search", search);
+			request.setAttribute("keyword", keyword);
+			request.setAttribute("secessionOK", secessionOK);
 			view.forward(request, response);
 		}
 	}

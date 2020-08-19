@@ -60,9 +60,9 @@
                 <div class="sort-area">  
                     <h4>전체 <%=listCount%>개</h4>
                      <% if (loginMember != null){ %>
-                    <a><button onclick="showWriteForm();" class="write_btn">글쓰기</button></a>
+                    <button onclick="showWriteForm();" class="write_btn">글쓰기</button>
                 	 <% }else{ %>
-                    <a><button onclick="alert('로그인 후 이용해주세요');location.href='/anavada/views/member/login.jsp';" class="write_btn">글쓰기</button></a>
+                    <button onclick="alert('로그인 후 이용해주세요');location.href='/anavada/views/member/login.jsp';" class="write_btn">글쓰기</button>
                     <%} %>
                     <div>
                         <form action="/anavada/jblist" method="post" id="sel" name="form1">

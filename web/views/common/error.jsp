@@ -7,7 +7,7 @@
 <title>anavada error page</title>
 </head>
 <body style="text-align:center;">
-<h1>휴면.. 이것이 당신의 한계입니까?<br/>에러페이지입니다.</h1>
+<h1><br/><br/>에러페이지입니다.</h1>
 <%= request.getAttribute("message") %>
 </body>
 </html>

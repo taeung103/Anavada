@@ -19,6 +19,7 @@
 						<ul class="navi">
 							<li><a href="#none">홈</a></li>
 							<li class="glyphicon glyphicon-menu-right"><a href="#none">MEMBER</a></li>
+                            <li class="glyphicon glyphicon-menu-right"><a href="#none">회원가입</a></li>
 						</ul>
 					</div>
 					<h2>

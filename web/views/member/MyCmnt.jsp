@@ -31,7 +31,7 @@
                    <div>
                         <ul class="navi">
                             <li><a href="views/main/main.jsp">홈</a></li>
-                            <li><a href="/anavada/mypage.cp?memberId=<%= loginMember.getMemberId() %>">MYPAGE</a></li>
+                            <li class="glyphicon glyphicon-menu-right"><a href="/anavada/mypage.cp?memberId=<%= loginMember.getMemberId() %>">MYPAGE</a></li>
                             <li class="glyphicon glyphicon-menu-right"><a href="/anavada/mycmnt?memberID=<%=loginMember.getMemberId()%>">커뮤니티조회</a></li>
                         </ul>
                     </div>

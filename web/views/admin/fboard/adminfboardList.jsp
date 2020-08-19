@@ -82,7 +82,7 @@
                 <!-- 글쓰기 -->
                 <form action="/anavada/binsert.ad"  method="post" enctype="multipart/form-data" class="form-inline" onesubmit="return validate();">
                     <fieldset>
-                        <div class="admin-library-write">
+                        <div class="faqTap">
 							<a href="/anavada/fbinsert.ad?memberid=<%= loginMember.getMemberId()%>">[축제 DB에 insert]</a>
 							<a href="/anavada/fbupdate.ad">[축제 DB에 update]</a>
 							<a href="/anavada/fbdelete.ad">[이전 축제 DB에서 삭제하기]</a>
