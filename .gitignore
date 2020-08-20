@@ -5,3 +5,4 @@
 *.class
 /jspwork/*
 web/WEB-INF/jspwork/
+*.tern-project
