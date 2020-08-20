@@ -32,7 +32,7 @@
                 <div class="sort-area">  
                     <h4>전체 회원 <%= listCount %>명</h4>
                     <div>
-                        <form action="/anavada/mlist.ad" method="get" id="">
+                        <form action="/anavada/mlist.ad?secessionOK=Y" method="get" id="">
                         	<input type="hidden" value="N" name="secessionOK">
                            	 목록 분류 : <select name="search" class="ListSelect">
                                     <!--option value="분류 선택" selected="selected">분류 선택</option-->

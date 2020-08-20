@@ -36,9 +36,9 @@
             <div class="view-area">
                 <h3 class="declare_btn2"><span><i class="glyphicon glyphicon-bell"></i>
                 										<td><%if(dbo.getDboChe().equals("Y")){%>
-                												<h3><span >처리완료</span></h3>
+                												처리완료
                 												<% }else{%>
-                												<h3><span >처리중</span></h3>
+                												처리중
                 												<% } %></td></span></h3>
                 <h2><span class="declare">신고</span><td><%= dbo.getDboTitle() %></td></h2>
                 <ul>
@@ -50,7 +50,7 @@
                     					<%}else{ %>
                     					&nbsp;
                     					<% } %>
-                    					</td><br/><br/>
+                    					</td>
                     <li><span>링크 : </span><td><%= dbo.getDboUrl() %></td></li>
                     
                 </ul>

@@ -18,7 +18,7 @@
                    <div>
                         <ul class="navi">
                             <li><a href="#none">홈</a></li>
-                            <li><a href="#none">고객센터</a></li>
+                            <li class="glyphicon glyphicon-menu-right"><a href="#none">고객센터</a></li>
                             <li class="glyphicon glyphicon-menu-right"><a href="#none">문의하기</a></li>
                         </ul>
                     </div>
@@ -41,8 +41,11 @@
                         <tbody>
                             <tr>
                                 <td>카테고리</td>
-                                <td><input type="radio" name="checkCate" value="1" required> 회원정보 &nbsp; &nbsp;<input type="radio" name="checkCate" value="2"> 중고거래 &nbsp; &nbsp;
-                                	<input type="radio" name="checkCate" value="3"> 커뮤니티 &nbsp; &nbsp;<input type="radio" name="checkCate" value="4"> 지역축제 &nbsp; &nbsp;
+                                <td>
+                                    <label><input type="radio" name="checkCate" value="1" required> 회원정보</label>
+                                    <label><input type="radio" name="checkCate" value="2"> 중고거래</label>
+                                    <label><input type="radio" name="checkCate" value="3"> 커뮤니티</label>
+                                    <label><input type="radio" name="checkCate" value="4"> 지역축제</label>
                                 </td>
                             </tr>
                             <tr>

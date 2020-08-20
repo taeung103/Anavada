@@ -32,8 +32,8 @@
                 <div class="sort-area">  
                     <h4>전체 탈퇴회원 <%= slistCount %>명</h4>
                     <div>
-                        <form action="/anavada/mlist.ad" method="get" id="">
-                        	<input type="hidden" value="N" name="secessionOK">
+                        <form action="/anavada/mlist.ad?secessionOK=N" method="get" id="">
+                        	<input type="hidden" value="Y" name="secessionOK">
                            	 목록 분류 : <select name="search" class="ListSelect">
                                     <!--option value="분류 선택" selected="selected">분류 선택</option-->
                                     <option value="userId" elected="selected">아이디</option>

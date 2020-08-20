@@ -35,7 +35,7 @@
                    <div>
                         <ul class="navi">
                             <li><a href="#none">홈</a></li>
-                            <li><a href="#none">고객센터</a></li>
+                            <li class="glyphicon glyphicon-menu-right"><a href="#none">고객센터</a></li>
                             <li class="glyphicon glyphicon-menu-right"><a href="#none">공지사항</a></li>
                         </ul>
                     </div>
@@ -67,7 +67,6 @@
                     <a href="/anavada/afupdateview?no=<%= faq.getFaqNo() %>&page=<%= currentPage %>" class="btn btn-list">수정</a>
                     <a href="/anavada/aflist.ss?page=<%= currentPage %>" class="btn btn-list">목록</a>
                     <% } %>
-                    
                 </div>
             </div>
             <!-- 상세 끝 -->

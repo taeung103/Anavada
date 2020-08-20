@@ -17,7 +17,7 @@
                    <div>
                         <ul class="navi">
                             <li><a href="#none">홈</a></li>
-                            <li><a href="#none">MYPAGE</a></li>
+                            <li class="glyphicon glyphicon-menu-right"><a href="#none">MYPAGE</a></li>
                             <li class="glyphicon glyphicon-menu-right"><a href="#none">정보수정</a></li>
                         </ul>
                     </div>

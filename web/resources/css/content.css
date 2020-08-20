@@ -150,6 +150,7 @@
     font-size: 15px;
     border-radius: 5px;
     color: #FF8A3D;
+    background-color: #fff;
 }
 .sort-area .write_btn:hover {
     color: #fff;
@@ -950,15 +951,18 @@
     font-size: 22px;
     color: #333;
     text-align: center;
-    width: 100px;
+    width: 60px;
 }
 .list-area table tbody tr td.xeicon {
     font-size: 30px;
     color: #333;
     text-align: center;
-    width: 100px;
+    width: 60px;
 }
 .list-area table tbody tr td.inquiryOK {
+    width: 120px;
+}
+.list-area table tbody tr td.declare_btn {
     width: 120px;
 }
 .list-area .inquiry {
@@ -1066,16 +1070,16 @@
     overflow: hidden;
     padding: 60px 0 0;
 }
-.view-btn a {
+.view-btn a, .view-btn input {
     display:inline-block;
     margin: 0 5px;
-}
-.view-btn .btn-list {
     font-size: 15px;
-    color: #fff;
-    line-height: 30px;
+    line-height: 40px;
     padding: 0 30px;
     border-radius: 5px;
+}
+.view-btn .btn-list {
+    color: #fff;
     background-color: #FF8A3D;
     border: 1px solid #FF8A3D;
 }
@@ -1084,11 +1088,7 @@
     border: 1px solid #ff6b08;
 }
 .view-btn .btn-delete {
-    font-size: 15px;
     color: #fff;
-    line-height: 30px;
-    padding: 0 30px;
-    border-radius: 5px;
     background-color: #c10204;
     border: 1px solid #c10204;
 }
@@ -1097,11 +1097,7 @@
     background-color: #820001;
 }
 .view-btn .btn-modified {
-    font-size: 15px;
     color: #fff;
-    line-height: 30px;
-    padding: 0 30px;
-    border-radius: 5px;
     background-color: #344e9f;
     border: 1px solid #344e9f;
 }
@@ -1110,11 +1106,7 @@
     color: #fff;
 }
 .view-btn .btn-write {
-    font-size: 15px;
     color: #fff;
-    line-height: 30px;
-    padding: 0 30px;
-    border-radius: 5px;
     background-color: #344e9f;
     border: 1px solid #344e9f;
 }
@@ -1123,24 +1115,20 @@
     color: #fff;
 }
 .view-btn .btn-prev {
-    font-size: 15px;
     color: #555;
     float: left;
-    line-height: 30px;
     background-image: url(/anavada/resources/images/content/library_left.png);
     background-repeat: no-repeat;
-    background-position: left 0 top 7px;
+    background-position: left 0 top 50%;
     background-size: 23px 15px;
     padding: 0 10px 0 30px;
 }
 .view-btn .btn-next {
-    font-size: 15px;
     color: #555;
     float: right;
-    line-height: 30px;
     background-image: url(/anavada/resources/images/content/library_right.png);
     background-repeat: no-repeat;
-    background-position: right 0 top 7px;
+    background-position: right 0 top 50%;
     background-size: 23px 15px;
     padding: 0 30px 0 10px;
 }
@@ -1155,7 +1143,7 @@
 }
 .view-area .declare_btn2 span {
     font-size: 20px;
-    width: 140px;
+    width: 120px;
     line-height: 40px;
 }
 
@@ -1228,9 +1216,10 @@
     margin-right:15px;
 }
 .write-area table tbody tr td label input[type="radio"] {
-    margin-right: 5px;
-    margin-top: 0;
-    width: 16px;
+    margin: 0;
+    width: 18px;
+    height: 18px;
+    vertical-align: unset;
 }
 .write-area table tbody tr td label input[type="checkbox"] {
     width: 18px;
@@ -1291,16 +1280,18 @@
 .list-table .write-btn {
     text-align: right;
 }
-.write-btn a, .write-btn button {
+.write-btn a, .write-btn button, .write-btn input {
     display: inline-block;
     border: 1px solid #FF8A3D;
-    line-height: 30px;
+    line-height: 40px;
     padding: 0;
     width: 120px;
     font-size: 14px;
     border-radius: 5px;
     color: #FF8A3D;
     margin: 0 15px;
+    background-color:#fff;
+    vertical-align: inherit;
 }
 .write-area .write-btn .btn-success {
     color: #fff;
@@ -1312,31 +1303,18 @@
 .write-btn .btn-list {
     color: #FF8A3D;
 }
-.write-btn > input {
-    display: inline-block;
-    border: 1px solid #FF8A3D;
-    line-height: 30px;
-    padding: 0;
-    width: 120px;
-    font-size: 15px;
-    border-radius: 5px;
-    color: #FF8A3D;
-    margin: 0 15px;
-    background-color:#fff;
-    vertical-align: inherit;
-}
-.write-btn > input.btn-success {
+.write-btn .btn-success {
     color: #fff;
     background-color:#FF8A3D;
 }
-.write-btn > input:hover {
+.write-btn .btn-success:hover {
     color: #fff;
     background-color: #FF8A3D;
 }
-.write-btn > input.btn-list {
+.write-btn .btn-list {
     color: #FF8A3D;
 }
-.write-btn > input.btn-list:hover {
+.write-btn .btn-list:hover {
     color: #fff;
     background-color: #FF8A3D;
 }

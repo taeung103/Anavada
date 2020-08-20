@@ -42,7 +42,6 @@ public class SesstionCheckFilter implements Filter {
 		// 로그인 상태를 확인함
 		// 로그인 안 한 상태이면 error.jsp 를 내보냄
 		// 로그인 한 상태이면 요청한 서블릿으로 넘어감
-		
 		HttpServletRequest hrequest = (HttpServletRequest)request;
 		
 		Member loginMember = (Member)hrequest.getSession(false).getAttribute("loginMember");

@@ -87,7 +87,7 @@ font {
 						<li><span>작성자 : </span><%=cboard.getMemberId()%></li>
 						<li><span>등록일 : </span><%=cboard.getDate()%></li>
 						<li><span>조회수 : </span><%=cboard.getCboardViewCount()%></li>
-						<li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%=cboard.getLikeCount()%></span></i></li>
+						<li><i class="good_i glyphicon glyphicon-heart-empty">좋아요<%=cboard.getLikeCount()%></i></li>
 					</ul>
 					<%
 						if ((cboard.getCfilesOriginalFilepath1() != null) || (cboard.getCfilesOriginalFilepath2() != null)
