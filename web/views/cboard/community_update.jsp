@@ -7,11 +7,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="../include/head.jsp"%>
+<%@ include file="../include/head.jsp" %>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
 	<div id="wrap">
-		<%@ include file="../include/header.jsp"%>
+		<%@ include file="../include/header.jsp" %>
 
 		<!-- 컨텐츠 -->
 		<div id="content">
