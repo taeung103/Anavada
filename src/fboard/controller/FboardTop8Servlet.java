@@ -19,14 +19,14 @@ import fboard.model.vo.Fboard;
 /**
  * Servlet implementation class FboardTop6Servlet
  */
-@WebServlet("/fbtop6")
-public class FboardTop6Servlet extends HttpServlet {
+@WebServlet("/fbtop8")
+public class FboardTop8Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FboardTop6Servlet() {
+    public FboardTop8Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,8 +43,8 @@ public class FboardTop6Servlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 축제 종료일 기준 top6
-		ArrayList<Fboard> list = new FboardService().selectTop6();
+		// 축제 종료일 기준 top8
+		ArrayList<Fboard> list = new FboardService().selectTop8();
 		//System.out.println(list.size());
 		
 		JSONObject sendJSON = new JSONObject();

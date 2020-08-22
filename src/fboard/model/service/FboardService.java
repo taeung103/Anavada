@@ -129,10 +129,10 @@ public class FboardService {
 		return list;
 	}
 
-	// 축제 종료일 기준 top6
-	public ArrayList<Fboard> selectTop6() {
+	// 축제 종료일 기준 top8
+	public ArrayList<Fboard> selectTop8() {
 		Connection conn = getConnection();
-		ArrayList<Fboard> list = fdao.selectTop6(conn);
+		ArrayList<Fboard> list = fdao.selectTop8(conn);
 		close(conn);
 		return list;
 	}

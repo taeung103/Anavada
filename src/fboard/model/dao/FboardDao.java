@@ -386,14 +386,14 @@ public class FboardDao {
 		}
 
 
-		// 축제 종료일 기준 top6
-		public ArrayList<Fboard> selectTop6(Connection conn) {
+		// 축제 종료일 기준 top8
+		public ArrayList<Fboard> selectTop8(Connection conn) {
 			ArrayList<Fboard> list = new ArrayList<Fboard>();
 			Statement stmt = null;
 			ResultSet rset = null;
 			
 			String query = "select rownum, fboard_no, festival_title, festival_enddate, thumbnail, local_name " + 
-					"from (select * from fboard left join location using (local_no) where festival_enddate > sysdate -1 order by festival_enddate asc) where rownum <= 6";
+					"from (select * from fboard left join location using (local_no) where festival_enddate > sysdate -1 order by festival_enddate asc) where rownum <= 8";
 			
 			try {
 				stmt = conn.createStatement();

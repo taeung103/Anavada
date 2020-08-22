@@ -209,11 +209,11 @@ function movePage(num){
                 </div>
             </div>
 
-		<!-- 지역축제 top6 ajax -->
+		<!-- 지역축제 top8 ajax -->
 		 <script type="text/javascript">
 		$(function(){
 			$.ajax({
-				url : "/anavada/fbtop6",
+				url : "/anavada/fbtop8",
 				type : "post",
 				dataType : "json",
 				success : function(data) {
@@ -225,10 +225,10 @@ function movePage(num){
 						values += '<li><a href="/anavada/views/fboard/areaEvent_view.jsp?fboardno=' 
 						+ + json.list[i].fboardNo + '&festivalEndDate=' +json.list[i].festivalEndDate
 						+ '"><img src="' + json.list[i].thumbnail + '" width="150px" height="100px"/><h3>' + decodeURIComponent(json.list[i].festivalTitle).replace(/\+/gi, " ")
-						+ '</h3></a></li>&nbsp;&nbsp;&nbsp';
+						+ '</h3></a></li>&nbsp;&nbsp;';
 					} // for in
 					
-					$("#fbtop6list").html(values);
+					$("#fbtop8list").html(values);
 				},
 				error : function(jqXHR, textstatus, errorthrown) {
 					console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown);
@@ -236,13 +236,13 @@ function movePage(num){
 			});
 		});
     </script>
-	<!-- 지역축제 top6 ajax 끝 -->
+	<!-- 지역축제 top8 ajax 끝 -->
                        
        <div class="mainEvent">
                 <h2>함께 즐기는 지역축제</h2>
                 <p>남녀노소 모두와 나누는 우리 지역만의 축제로!</p>
-                <ul id="fbtop6list">
-                    <!-- 지역축제 top6 들어갈 자리 -->
+                <ul id="fbtop8list">
+                    <!-- 지역축제 top8 들어갈 자리 -->
                 </ul>    
             </div>            
         </div>
