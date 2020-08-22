@@ -281,6 +281,12 @@
 							var values = "";
 							$("#totalcount").text( '전체 : ' + totalcount);
 							
+							if (totalcount > 0) {
+								$("#listNo").empty();
+							} else {
+								$("#listNo").html('<p><img src="/anavada/resources/images/btnIcn/icn_big_listNo.png"alt="" title="" /></p><h1>목록이 없습니다.</h1>');
+							}
+							
 							for(var i in json.list) {
 								values += "<tr onclick='moveDetailPage(" + json.list[i].fboardNo + ", " + json.list[i].festivalEndDate + ");'>" +
 								"<td class='number'>" + json.list[i].fboardNo + "</td>" +
@@ -344,14 +350,8 @@
 					</table>
 					<!-- 축제 목록 table 끝 -->
 					
-
 					<!-- 목록이 없음 표시  -->
-					<div class="list-no">
-						<p>
-							<img src="/anavada/resources/images/btnIcn/icn_big_listNo.png"
-								alt="" title="" />
-						</p>
-						<h1>목록이 없습니다.</h1>
+					<div class="list-no" id="listNo">
 					</div>
 					
 				</div>
