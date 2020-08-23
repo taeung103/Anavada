@@ -27,32 +27,22 @@
             $("input[name=checkDel]").prop("checked", false);
         }
     }
-    function deleteAction(){
-        var checkRow = "";
-        $("input[name='checkDel']:checked").each(function(){
-            checkRow = checkRow + $(this).val()+",";
-        });
-        checkRow = checkRow.substring(0, checkRow.lastIndexOf(","));
+    
+	function deleteAction() {
+		var checkRow = "";
+		$("input[name='checkDel']:checked").each(function() {
+			checkRow = checkRow + $(this).val() + ",";
+		});
+		checkRow = checkRow.substring(0, checkRow.lastIndexOf(","));
 
-        if(checkRow == ""){
-        alert("삭제할 대상을 선택하세요.");
-        return false;
-    }
-    console.log("### checkRow => {"+checkRow+"}");
-    if(confirm("삭제 하시겠습니까?"))
-        location.href = "/anavada/afdelete?checkRow="+checkRow;
-    }
-    $(function(){
-        $('.faqTap a').click(function(){
-            var tab_data = $(this).attr('data-tab');
-            
-            $('.faqTap a').removeClass('active');
-            $('.qna_list').removeClass('on');
-            
-            $(this).addClass('active');
-            $("#" + tab_data).addClass('on');
-        })
-    });
+		if (checkRow == "") {
+			alert("삭제할 대상을 선택하세요.");
+			return false;
+		}
+		console.log("### checkRow => {" + checkRow + "}");
+		if (confirm("삭제 하시겠습니까?"))
+			location.href = "/anavada/afdelete?checkRow=" + checkRow;
+	}
 </script>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
@@ -72,14 +62,26 @@
             </div>
             <!-- //상단 타이틀 -->
 			
-            <!-- 본문내용 -->
+            <!-- 본문내용 class="active" -->
             <div class="list-area">
                 <div class="faqTap">
+                	<% if(keyword == null) { %>
                     <a href="#none" class="active" data-tab="tab01" onclick="javascript:location.href='/anavada/aflist.ss'">전체</a>
-                    <a href="#none" data-tab="tab02" onclick="javascript:location.href='/anavada/afsearch?selected=cate&keyword=1'">회원가입</a>
-                    <a href="#none" data-tab="tab03" onclick="javascript:location.href='/anavada/afsearch?selected=cate&keyword=2'">중고거래</a>
-                    <a href="#none" data-tab="tab04" onclick="javascript:location.href='/anavada/afsearch?selected=cate&keyword=3'">커뮤니티</a>
-                    <a href="#none" data-tab="tab05" onclick="javascript:location.href='/anavada/afsearch?selected=cate&keyword=4'">지역축제</a> 
+                    <% }else { %><a href="#none" data-tab="tab01" onclick="javascript:location.href='/anavada/aflist.ss'">전체</a><% } %>
+                    
+                    <% if(keyword != null && keyword.equals("1")) { %>
+                    <a href="#none" class="active" data-tab="tab02" onclick="javascript:location.href='/anavada/afsearch?selected=cate&keyword=1'">회원가입</a>
+                    <% }else { %><a href="#none" data-tab="tab02" onclick="javascript:location.href='/anavada/afsearch?selected=cate&keyword=1'">회원가입</a><% } %>
+                    <% if(keyword != null && keyword.equals("2")) { %>
+                    <a href="#none" class="active" data-tab="tab03" onclick="javascript:location.href='/anavada/afsearch?selected=cate&keyword=2'">중고거래</a>
+                    <% }else { %><a href="#none" data-tab="tab03" onclick="javascript:location.href='/anavada/afsearch?selected=cate&keyword=2'">중고거래</a><% } %>
+                    <% if(keyword != null && keyword.equals("3")) { %>
+                    <a href="#none" class="active" data-tab="tab04" onclick="javascript:location.href='/anavada/afsearch?selected=cate&keyword=3'">커뮤니티</a>
+                    <% }else { %><a href="#none" data-tab="tab04" onclick="javascript:location.href='/anavada/afsearch?selected=cate&keyword=3'">커뮤니티</a><% } %>
+                    <% if(keyword != null && keyword.equals("4")) { %>
+                    <a href="#none" class="active" data-tab="tab05" onclick="javascript:location.href='/anavada/afsearch?selected=cate&keyword=4'">지역축제</a>
+                    <% }else { %><a href="#none" data-tab="tab05" onclick="javascript:location.href='/anavada/afsearch?selected=cate&keyword=4'">지역축제</a><% } %>
+                    
                 </div>
             
                 <!-- 검색영역 -->
@@ -125,7 +127,14 @@
                             <td class="checkBox"><input type="checkbox" name="checkDel" value="<%= f.getFaqNo() %>"></td>
                             <td class="number" onclick="location.href='/anavada/afdetail?page=<%= currentPage %>&no=<%= f.getFaqNo() %>&selected=<%= selected %>&keyword=<%= keyword %>'"><%= f.getFaqNo() %></td>
                             <td class="title" onclick="location.href='/anavada/afdetail?page=<%= currentPage %>&no=<%= f.getFaqNo() %>&selected=<%= selected %>&keyword=<%= keyword %>'">
-                                <h2><span>공지</span><%= f.getFaqTitle() %></h2>
+                                <h2><span>
+                                <% switch(f.getFaqCategory()) {
+                                	case 1 : %>회원<% ; break;
+                                	case 2 : %>중고<% ; break;
+                                	case 3 : %>커뮤<% ; break;
+                                	case 4 : %>축제<% ; break;
+                                } %>
+                               	</span><%= f.getFaqTitle() %></h2>
                                 <ul>
                                     <li>작성자 : <%= f.getFaqId() %></li>
                                     <li>작성일 : <%= f.getFaqDate() %></li>
@@ -138,7 +147,14 @@
                             <td class="checkBox"><input type="checkbox" name="checkDel" value="<%= f.getFaqNo() %>"></td>
                             <td class="number" onclick="location.href='/anavada/afdetail?page=<%= currentPage %>&no=<%= f.getFaqNo() %>'"><%= f.getFaqNo() %></td>
                             <td class="title" onclick="location.href='/anavada/afdetail?page=<%= currentPage %>&no=<%= f.getFaqNo() %>'">
-                                <h2><span>공지</span><%= f.getFaqTitle() %></h2>
+                                <h2><span>
+                                <% switch(f.getFaqCategory()) {
+                                	case 1 : %>회원<% ; break;
+                                	case 2 : %>중고<% ; break;
+                                	case 3 : %>커뮤<% ; break;
+                                	case 4 : %>축제<% ; break;
+                                } %>
+                               	</span><%= f.getFaqTitle() %></h2>
                                 <ul>
                                     <li>작성자 : <%= f.getFaqId() %></li>
                                     <li>작성일 : <%= f.getFaqDate() %></li>
@@ -160,7 +176,7 @@
                 <!-- //버튼 -->
 
                 <!-- 페이징 -->
-                <% if(totalList > 0) { %>
+                <% if(totalPage > 1) { %>
                 <dl class="list-paging">
                     <dd>
                     <% if(selected != null && keyword != null) { %>
@@ -199,7 +215,7 @@
                      <% } %>
                     </dd>
                 </dl>
-                <% } %>
+                <% }else { %><br><br><br><br><% } %>
                 <!-- //페이징 -->
 
             </div>
