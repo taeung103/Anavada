@@ -80,7 +80,7 @@
                         <tr>
                             <td class="number" onclick="location.href='/anavada/aidetail?page=<%= currentPage %>&no=<%= i.getIqNo() %>&selected=<%= selected %>&keyword=<%= keyword %>'"><%= i.getIqNo() %></td>
                             <td class="title" onclick="location.href='/anavada/aidetail?page=<%= currentPage %>&no=<%= i.getIqNo() %>&selected=<%= selected %>&keyword=<%= keyword %>'">
-                                <h2><span>공지</span><%= i.getIqTitle() %></h2>
+                                <h2><span>문의</span><%= i.getIqTitle() %></h2>
                                 <ul>
                                     <li>작성자 : <%= i.getIqId() %></li>
                                     <li>작성일 : <%= i.getIqDate() %></li>
@@ -101,7 +101,7 @@
                         <tr>
                             <td class="number" onclick="location.href='/anavada/aidetail?page=<%= currentPage %>&no=<%= i.getIqNo() %>'"><%= i.getIqNo() %></td>
                             <td class="title" onclick="location.href='/anavada/aidetail?page=<%= currentPage %>&no=<%= i.getIqNo() %>'">
-                                <h2><span>공지</span><%= i.getIqTitle() %></h2>
+                                <h2><span>문의</span><%= i.getIqTitle() %></h2>
                                 <ul>
                                     <li>작성자 : <%= i.getIqId() %></li>
                                     <li>작성일 : <%= i.getIqDate() %></li>
