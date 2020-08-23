@@ -5,7 +5,13 @@
 	int startPage = (Integer) request.getAttribute("startPage");
 	int endPage = (Integer) request.getAttribute("endPage");
 	int totalList = (Integer) request.getAttribute("totalList");
-	int totalPage = (Integer) request.getAttribute("totalPage");
+	int totalPage = (Integer) request.getAttribute("totalPage"); System.out.println("myinquiry"+totalPage);
+	String selected = null;
+	String keyword = null;
+	if (request.getAttribute("selected") != null && request.getAttribute("keyword") != null) {
+		selected = (String) request.getAttribute("selected");
+		keyword = (String) request.getAttribute("keyword");
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -25,7 +31,7 @@
                    <div>
                         <ul class="navi">
                             <li><a href="/anavada">홈</a></li>
-                            <li class="glyphicon glyphicon-menu-right"><a href="/anavada/mypage.cp?memberId=<%= loginMember.getMemberId() %>">MYPAGE</a></li>
+                            <li><a href="/anavada/mypage.cp?memberId=<%= loginMember.getMemberId() %>">MYPAGE</a></li>
                             <li class="glyphicon glyphicon-menu-right"><a href="/anavada/miq?member=<%= loginMember.getMemberId() %>">문의하기조회</a></li>
                         </ul>
                     </div>
@@ -53,14 +59,33 @@
                <!--종류 리스트-->
                 <div class="sort-area">  
                     <h4>전체 <%= totalList %>개</h4>
-                    <a href="/anavada/views/inquiry/inquiry_write.jsp" class="write_btn">글쓰기</a>
+                    <a href="/anavada/views/inquiry/myinquiry_write.jsp" class="write_btn">글쓰기</a>
+                    <div>
+                        <form action="/anavada/isearch" method="post" id="">
+                        <input type="hidden" value="<%= loginMember.getMemberId() %>" name="member">
+                            목록 분류 : <select name="selected" class="ListSelect">
+                                    <option value="none" selected disabled>분류 선택</option>
+                                    <option value="title">제목</option>
+                                    <option value="content">내용</option>
+                            </select>
+                            
+                            <input type="text" placeholder="검색어를 입력해주세요." name="keyword">
+                            <button class="top-search"><i class="xi-search"></i></button>
+                        </form>
+                    </div>
                 </div>
               
                 <% if(totalList > 0) { %>
                 	<table>
                     	<tbody>
                     	<% for(Inquiry i : list) { %>
-                        	<tr onclick="javascript:location.href='/anavada/imdetail.ss?no=<%= i.getIqNo() %>&page=<%= currentPage %>';">
+                    	
+                    		<% if(selected == null && keyword == null) { %>
+                        	<tr onclick="javascript:location.href='/anavada/imdetail?no=<%= i.getIqNo() %>&page=<%= currentPage %>';">
+                        	<% }else { %>
+                        	<tr onclick="javascript:location.href='/anavada/imdetail?no=<%= i.getIqNo() %>&page=<%= currentPage %>&selected=<%= selected %>&keyword=<%= keyword %>';">
+                        	<% } %>
+                        	
                             	<td class="number"><%= i.getIqNo() %></td>
                             	<td class="title">
                                 	<h2><span class="inquiry">문의</span><%= i.getIqTitle() %></h2>
@@ -76,9 +101,8 @@
                             <% if(i.getIqAnswer().equals("Y")) { %>
                             	<td class="declare_btn"><span><i class="glyphicon glyphicon-bell"></i>처리완료</span></td>
                             <% }else { %><td></td><% } %>
-                            
                         	</tr>
-                        	<% } %>
+                        <% } %>
                     	</tbody>
                 	</table>
 				<% }else { %>
@@ -88,9 +112,9 @@
                 </div>
 				<% } %>
 
-                <!-- <div class="write-btn">
-                    <a href="/anavada/views/inquiry/inquiry_write.jsp">글쓰기</a>
-                </div> -->
+                <div class="write-btn">
+                    <a href="/anavada/views/inquiry/myinquiry_write.jsp">글쓰기</a>
+                </div>
 
             </div>
             <!-- 리스트 끝 -->
@@ -99,24 +123,46 @@
             <% if(totalPage > 1) { %>
             <dl class="list-paging pb80">
                 <dd>
+                <% if(selected == null && keyword == null) { %>
                 	<% if(currentPage == 1) { %>
                     	<a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
                     <% }else { %>
-                    	<a href="/anavada/ilist?page=1"><i class="glyphicon glyphicon-menu-left"></i></a>
+                    	<a href="/anavada/miq?member=<%= loginMember.getMemberId() %>&page=1"><i class="glyphicon glyphicon-menu-left"></i></a>
                     <% } %>
                     
                     <% for(int p=startPage; p<=endPage; p++) { %>
                     	<% if(p == currentPage) { %>
                     	<a href="#none" class="active"><%= p %></a>
                     	<% }else { %>
-                    	<a href="/anavada/ilist?page=<%= p %>"><%= p %></a>
+                    	<a href="/anavada/miq?member=<%= loginMember.getMemberId() %>&page=<%= p %>"><%= p %></a>
                     <% } } %>
                     
                     <% if(currentPage == totalPage) { %>
                     	<a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
                     <% }else { %>
-                    	<a href="/anavada/ilist?page=<%= totalPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+                    	<a href="/anavada/miq?member=<%= loginMember.getMemberId() %>&page=<%= totalPage %>"><i class="glyphicon glyphicon-menu-right"></i></a>
                     <% } %>
+                    
+				<% }else { %>
+                    <% if(currentPage == 1) { %>
+                       <a href="#none"><i class="glyphicon glyphicon-menu-left"></i></a>
+                    <% }else { %>
+                       <a href="/anavada/isearch?page=1&selected=<%= selected %>&keyword=<%= keyword %>&member=<%= loginMember.getMemberId() %>"><i class="glyphicon glyphicon-menu-left"></i></a>
+                    <% } %>
+                    
+                    <% for(int p=startPage; p<=endPage; p++) { %>
+                       <% if(p == currentPage) { %>
+                       <a href="#none" class="active"><%= p %></a>
+                       <% }else { %>
+                       <a href="/anavada/isearch?page=<%= p %>&selected=<%= selected %>&keyword=<%= keyword %>&member=<%= loginMember.getMemberId() %>"><%= p %></a>
+                    <% } } %>
+                    
+                    <% if(currentPage == totalPage) { %>
+                       <a href="#none"><i class="glyphicon glyphicon-menu-right"></i></a>
+                    <% }else { %>
+                       <a href="/anavada/isearch?page=<%= totalPage %>&selected=<%= selected %>&keyword=<%= keyword %>&member=<%= loginMember.getMemberId() %>"><i class="glyphicon glyphicon-menu-right"></i></a>
+                    <% } %>
+				<% } %>
                 </dd>
             </dl>
             <% } else { %><br><br><br><br><% } %>

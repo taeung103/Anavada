@@ -45,9 +45,11 @@ public class InquiryInsertServlet extends HttpServlet {
 		
 		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "utf-8", new DefaultFileRenamePolicy());
 		
+		String id = mrequest.getParameter("id");
+		
 		Inquiry inquiry = new Inquiry();
 		
-		inquiry.setIqId(mrequest.getParameter("id"));
+		inquiry.setIqId(id);
 		inquiry.setIqTitle(mrequest.getParameter("title"));
 		inquiry.setIqContent(mrequest.getParameter("content"));
 		
@@ -105,8 +107,14 @@ public class InquiryInsertServlet extends HttpServlet {
 		
 		int result = new InquiryService().insertInquiry(inquiry);
 		
+		String my = null;
+		if(request.getParameter("my") != null)
+			my = request.getParameter("my");
+		
 		if(result > 0) {
-			response.sendRedirect("ilist");
+			if(my != null)
+				response.sendRedirect("ilist");
+			else response.sendRedirect("miq?member="+id);
 		}
 		
 		

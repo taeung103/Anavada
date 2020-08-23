@@ -17,7 +17,7 @@ import inquiry.model.vo.Inquiry;
 /**
  * Servlet implementation class InquiryDetailServlet
  */
-@WebServlet("/imdetail.ss")
+@WebServlet("/imdetail")
 public class InquiryMyDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

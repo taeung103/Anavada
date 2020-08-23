@@ -34,8 +34,20 @@ public class InquiryUpdateViewServlet extends HttpServlet {
 		
 		Inquiry inquiry = new InquiryService().selectOne(Integer.parseInt(request.getParameter("no")));
 		
+		String my = null;
+		if(request.getParameter("my") != null)
+			my = request.getParameter("my");
+		
+		
 		if(inquiry != null) {
-			RequestDispatcher view = request.getRequestDispatcher("views/inquiry/inquiry_updateform.jsp");
+			
+			RequestDispatcher view = null;
+			
+			if(my == null)
+				view = request.getRequestDispatcher("views/inquiry/inquiry_updateform.jsp");
+			else
+				view = request.getRequestDispatcher("views/inquiry/myinquiry_updateform.jsp");
+			
 			request.setAttribute("inquiry", inquiry);
 			request.setAttribute("page", Integer.parseInt(request.getParameter("page")));
 			view.forward(request, response);

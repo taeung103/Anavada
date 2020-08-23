@@ -3,6 +3,12 @@
 <%
 	Inquiry inquiry = (Inquiry)request.getAttribute("inquiry");
 	int currentPage = ((Integer)request.getAttribute("page")).intValue();
+	String selected = null;
+	String keyword = null;
+	if(request.getAttribute("selected") != null && request.getAttribute("keyword") != null) {
+		selected = (String)request.getAttribute("selected");
+		keyword = (String)request.getAttribute("keyword");
+	}
 	Answer answer = (Answer)request.getAttribute("answer");
 %>
 <!DOCTYPE html>
@@ -18,20 +24,32 @@
         <div id="content">
 
             <!--서브 비주얼/타이틀-->
-            <div class="visual-sub-vagas notice-vagas">
+            <div class="visual-sub-vagas mypage-vagas">
                 <div class="vsv-copy sub-title">
                    <div>
                         <ul class="navi">
-                            <li><a href="/anavada">홈</a></li>
-                            <li><a href="/anavada/nlist">고객센터</a></li>
-                            <li class="glyphicon glyphicon-menu-right"><a href="/anavada/ilist">문의하기</a></li>
+                            <li><a href="#none">홈</a></li>
+                            <li><a href="#none">MYPAGE</a></li>
+                            <li class="glyphicon glyphicon-menu-right"><a href="#none">정보수정</a></li>
                         </ul>
                     </div>
-                    <h2><span>문의하기</span></h2>
-                    <h3>관리자에게 문의할 수 있는 공간입니다.</h3>
+                    <h2><span>MYPAGE</span></h2>
+                    <h3>'Anavada'의 내 정보를 확인할 수 있습니다..</h3>
                 </div>
             </div>
             <!--서브 비주얼/타이틀 끝-->
+			    
+            <!--서브 카테고리-->
+            <div class="MyTap">
+                <ul>
+                    <li class="active"><a href="/anavada/mypage.cp?memberId=<%= loginMember.getMemberId() %>">정보수정</a></li>
+                    <li><a href="/anavada/myjblist?memberid=<%=loginMember.getMemberId()%>">중고거래조회</a></li>
+                    <li><a href="/anavada/mycmnt?memberID=<%=loginMember.getMemberId()%>">커뮤니티조회</a></li>
+                    <li><a href="/anavada/miq?member=<%= loginMember.getMemberId() %>">문의하기조회</a></li>
+                    <li><a href="/anavada/dbomylist.ss?member=<%= loginMember.getMemberId()%>">신고하기조회</a></li>
+                </ul>
+            </div>
+            <!--서브 카테고리 끝-->
 
             <!-- 상세 -->
             <div class="view-area">
@@ -51,16 +69,20 @@
 
                 <div class="view-ctn"><%= inquiry.getIqContent().replace("\r\n","<br>") %></div>
 				
-				<div align="right">
-				<br>
-				<a href="/anavada/iupdateview?no=<%= inquiry.getIqNo() %>&page=<%= currentPage %>" class="btn btn-list" style="background-color:white; border-color:white; color:black;">수정</a>
-				<a href="/anavada/idelete?no=<%= inquiry.getIqNo() %>&rfile=<%= inquiry.getIqRename() %>&rfile2=<%= inquiry.getIqRename2() %>&rfile3=<%= inquiry.getIqRename3() %>" class="btn btn-list" style="background-color:white; border-color:white; color:red;">삭제</a>
-				</div>
 				
-				
+                <% if(selected == null && keyword == null) { %>
                 <div class="view-btn">
-                    <a onclick="javascript=history.go(-1);" class="btn btn-list">목록</a>
+                    <a href="/anavada/miq?member=<%= loginMember.getMemberId() %>&page=<%= currentPage %>" class="btn btn-list" style="background-color: #fff; color:#FF8A3D;">목록</a>
+                    <a href="/anavada/idelete?no=<%= inquiry.getIqNo() %>&rfile=<%= inquiry.getIqRename() %>&rfile2=<%= inquiry.getIqRename2() %>&rfile3=<%= inquiry.getIqRename3() %>&my=ok&member=<%= loginMember.getMemberId() %>" class="btn btn-list" style="background-color: #fff; color:#FF8A3D;">삭제</a>
+                    <a href="/anavada/iupdateview?no=<%= inquiry.getIqNo() %>&page=<%= currentPage %>&my=ok" class="btn btn-list">수정</a>
                 </div>
+                <% }else { %>
+                <div class="view-btn">
+                    <a href="/anavada/isearch?page=<%= currentPage %>&selected=<%= selected %>&keyword=<%= keyword %>&member=<%= loginMember.getMemberId() %>" class="btn btn-list">목록</a>
+                    <a href="/anavada/idelete?no=<%= inquiry.getIqNo() %>&rfile=<%= inquiry.getIqRename() %>&rfile2=<%= inquiry.getIqRename2() %>&rfile3=<%= inquiry.getIqRename3() %>&my=ok&member=<%= loginMember.getMemberId() %>" class="btn btn-list" style="background-color: #fff; color:#FF8A3D;">삭제</a>
+                    <a href="/anavada/iupdateview?no=<%= inquiry.getIqNo() %>&page=<%= currentPage %>&my=ok" class="btn btn-list">수정</a>
+                </div>
+                <% } %>
                 
                 
                 <% if(answer != null) { %>

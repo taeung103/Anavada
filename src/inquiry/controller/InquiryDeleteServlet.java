@@ -42,6 +42,9 @@ public class InquiryDeleteServlet extends HttpServlet {
 		String rfile2 = request.getParameter("rfile2");
 		String rfile3 = request.getParameter("rfile3");
 		
+		String my = null;
+		if(request.getParameter("my") != null)
+			my = request.getParameter("my");
 		
 		if(result > 0) {
 			
@@ -56,7 +59,9 @@ public class InquiryDeleteServlet extends HttpServlet {
 				new File(savePath + "\\" + rfile3).delete();
 			}
 			
-			response.sendRedirect("ilist");
+			if(my == null)
+				response.sendRedirect("ilist");
+			else response.sendRedirect("miq?member="+request.getParameter("member"));
 		}
 	}
 

@@ -67,7 +67,7 @@ public class InquiryUpdateInquiryServlet extends HttpServlet {
 		inquiry.setIqOriginal3(mrequest.getParameter("ofile3"));
 		inquiry.setIqRename3(mrequest.getParameter("rfile3"));
 		
-		System.out.println(inquiry);
+		
 		Enumeration em = mrequest.getFileNames();
 		
 		int bonusNumber = 1;
@@ -115,10 +115,21 @@ public class InquiryUpdateInquiryServlet extends HttpServlet {
 
 		InquiryService iservice = new InquiryService();
 		int result = iservice.updateInquiry(inquiry);
-
+		
+		String my = null;
+		if(request.getParameter("my") != null)
+			my = request.getParameter("my");
+		
 		if(result > 0) {
+			
 			inquiry = iservice.selectOne(no);
-			RequestDispatcher view = request.getRequestDispatcher("views/inquiry/inquiry_view.jsp");
+			RequestDispatcher view = null;
+			
+			if(my == null)
+				view = request.getRequestDispatcher("views/inquiry/inquiry_view.jsp");
+			else
+				view = request.getRequestDispatcher("views/inquiry/myinquiry_view.jsp");
+			
 			request.setAttribute("inquiry", inquiry);
 			request.setAttribute("page", Integer.parseInt(mrequest.getParameter("page")));
 			view.forward(request, response);

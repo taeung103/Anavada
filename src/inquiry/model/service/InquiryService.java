@@ -34,6 +34,13 @@ public class InquiryService {
 		return totalList;
 	}
 
+	public int getListCount(String column, String keyword, String id) {
+		Connection conn = getConnection();
+		int totalList = idao.getListCount(conn, column, keyword, id);
+		close(conn);
+		return totalList;
+	}
+
 	public ArrayList<Inquiry> selectAll(int currentPage, int limit) {
 		Connection conn = getConnection();
 		ArrayList<Inquiry> list = idao.selectAll(conn, currentPage, limit);
@@ -51,6 +58,13 @@ public class InquiryService {
 	public ArrayList<Inquiry> searchTCW(String column, String keyword, int currentPage, int limit) {
 		Connection conn = getConnection();
 		ArrayList<Inquiry> list = idao.searchTCW(conn, column, keyword, currentPage, limit);
+		close(conn);
+		return list;
+	}
+	
+	public ArrayList<Inquiry> searchUserTC(String column, String keyword, int currentPage, int limit, String id) {
+		Connection conn = getConnection();
+		ArrayList<Inquiry> list = idao.searchUserTC(conn, column, keyword, currentPage, limit, id);
 		close(conn);
 		return list;
 	}
@@ -112,8 +126,5 @@ public class InquiryService {
 			commit(conn);
 		else rollback(conn);
 	}
-
-
-	
 	
 }
