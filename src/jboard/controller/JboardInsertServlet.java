@@ -52,7 +52,7 @@ public class JboardInsertServlet extends HttpServlet {
 		
 
 		
-		int maxSize = 1024 * 1024 * 10; //용량 5메가로 제한
+		int maxSize = 1024 * 1024 * 10; //용량 10메가로 제한
 
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/jboardfiles");
 
@@ -70,8 +70,9 @@ public class JboardInsertServlet extends HttpServlet {
 	    }
 		JboardService jbservice = new JboardService();
 		String memberId = mrequest.getParameter("memberid");
-		int listCount=jbservice.getOneDayLimitCount(memberId);
-		System.out.println(listCount);
+		
+		int listCount=jbservice.getOneDayLimitCount(memberId); //하루에 작성자가 쓴 게시물 수
+		
 		Jboard jboard = new Jboard();
 		jboard.setJboardPost(mrequest.getParameter("post"));
 		jboard.setJboardMeet(mrequest.getParameter("meet"));

@@ -7,26 +7,26 @@ public class Jboard implements java.io.Serializable {
 		
 		public Jboard(){}
 		
-		private int jboardNo;
-		private String jboardTitle;
-		private String jboardContent;
-		private int jboardPrice;
-		private java.sql.Date jboardDate;
-		private java.sql.Date jboardUpdate;
-		private int jboardCount;
-		private int jboardLike;
-		private String jboardOrignalFilePath1;
-		private String jboardRenameFilePath1;
+		private int jboardNo; //게시글번호
+		private String jboardTitle; //게시글제목
+		private String jboardContent; //게시글 내용
+		private int jboardPrice; //게시글에 대한 가격
+		private java.sql.Date jboardDate; //게시글등록일자
+		private java.sql.Date jboardUpdate; //게시글 수정일자
+		private int jboardCount; //게시글조회수
+		private int jboardLike; //게시글 좋아요
+		private String jboardOrignalFilePath1; //파일의 본래 이름
+		private String jboardRenameFilePath1; //파일의 리네임
 		private String jboardOrignalFilePath2;
 		private String jboardRenameFilePath2;
 		private String jboardOrignalFilePath3;
 		private String jboardRenameFilePath3;
 		private String jboardOrignalFilePath4;
 		private String jboardRenameFilePath4;
-		private String jboardCheck;		
-		private String jboardMeet;
-		private String jboardPost;
-		private String memberId; 
+		private String jboardCheck;	//게시물을 보여줄것인지 가릴것인지 체크
+		private String jboardMeet; //직거래
+		private String jboardPost; //우편거래
+		private String memberId;  //회원의 ID
 		private String localNo; //지역번호
 		private String MemberIp; //게시글 작성자의 아이피
 

@@ -44,7 +44,6 @@ public class JboardNewTop3Servlet extends HttpServlet {
 		JSONObject sendJSON = new JSONObject();
 		
 		JSONArray jarr = new JSONArray();
-		
 
 		for(Jboard jboard : list) {
 

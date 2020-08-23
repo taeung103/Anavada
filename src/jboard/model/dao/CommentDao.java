@@ -20,8 +20,8 @@ public class CommentDao {
 		 String query = null;
 		 
 			 query = "insert into jboard_comment values ("
-						+ "JBOARD_COMMENT_SEQ.nextval , ?, ?, sysdate, "
-						+ "sysdate, ?, JBOARD_COMMENT_SEQ.nextval ,0, 0 ,0,?)";
+					+ "JBOARD_COMMENT_SEQ.nextval , ?, ?, sysdate, "
+					+ "sysdate, ?, JBOARD_COMMENT_SEQ.nextval ,0, 0 ,0,?)";
 		
 		
 		 try {
@@ -85,7 +85,7 @@ public class CommentDao {
 				pstmt.setInt(2, reply.getCommentRef());
 				pstmt.setInt(3, reply.getCommentLevel());
 				if (reply.getCommentLevel() ==2) {
-						pstmt.setInt(4, reply.getCommentReplyRef());
+					pstmt.setInt(4, reply.getCommentReplyRef());
 				}
 				
 				result = pstmt.executeUpdate();
@@ -98,11 +98,6 @@ public class CommentDao {
 		return result;
 	}
 	
-
-	public int updateReply(Connection conn, Comment reply) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	public ArrayList<Comment> CommentList(Connection conn, int jboardNo) {
 		ArrayList<Comment> list = new ArrayList <Comment>();
@@ -120,7 +115,6 @@ public class CommentDao {
 				pstmt = conn.prepareStatement(query);
 				pstmt.setInt(1, jboardNo);	
 			
-				
 				rset = pstmt.executeQuery();
 				
 				while(rset.next()) {
@@ -146,7 +140,7 @@ public class CommentDao {
 			close(pstmt);
 		}
 	return list; 
-}
+	}
 
 	public Comment selectComment(Connection conn, int commentNo) {
 		Comment comment = null;
@@ -257,14 +251,13 @@ public class CommentDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "update jboard_comment set comment_content  = ?, "
-							+ "comment_lastmodified = sysdate where comment_no = ?"
-							+ "member_ip = ?";
+		String query = "update jboard_comment set comment_content  = ?, member_ip = ?, "
+							+ "comment_lastmodified = sysdate where comment_no = ? ";
 		try {
 				pstmt = conn.prepareStatement(query);
 				pstmt.setString(1, reply.getCommentContent());
-				pstmt.setInt(2,  reply.getCommentNo());
-				pstmt.setString(3, reply.getMemberIp());
+				pstmt.setString(2, reply.getMemberIp());
+				pstmt.setInt(3,  reply.getCommentNo());
 				result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			 e.printStackTrace();
@@ -273,8 +266,8 @@ public class CommentDao {
 		}
 		
 		return result;
-}
 	}
+}
 		
 	
 

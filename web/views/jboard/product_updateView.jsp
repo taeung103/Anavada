@@ -3,12 +3,10 @@
 <%@ page import="jboard.model.vo.Jboard, java.util.ArrayList, java.sql.Date" %>
 <%
 	Jboard jboard = (Jboard)request.getAttribute("jboardno");
-	
 	int currentPage = ((Integer)request.getAttribute("page")).intValue();
 	String post = String.valueOf(request.getAttribute("post"));	
 	String meet =String.valueOf(request.getAttribute("meet"));
 	String local = String.valueOf(request.getAttribute("local"));
-	
 %>
 <!DOCTYPE html>
 <html>
@@ -101,7 +99,6 @@
                               <option value="24"<% if (local.equals("24")) { %>selected="selected"<% } %>>중구</option>
                               <option value="25"<% if (local.equals("25")) { %>selected="selected"<% } %>>중랑구</option>
                                     </select>
-                                </select>
                                 </td>
                             </tr>
                             <tr>
