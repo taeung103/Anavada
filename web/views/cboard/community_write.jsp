@@ -42,6 +42,7 @@
 							<tr>
 								<td>지역 분류</td>
 								<td>
+									<!-- 지역 선택 -->
 									<select name="local" class="LocationSelect" required="required">
 										<option selected="selected" value="">지역선택</option>
 										<option value="1">강남구</option>

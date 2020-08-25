@@ -55,6 +55,7 @@
 							<tr>
 								<td>지역 분류</td>
 								<td>
+									<!-- 지역 선택 -->
 									<select name="local" class="LocationSelect" required="required">
 										<option value="" selected="selected">지역선택</option>
 										<option value="1" <%if (local.equals("1")) {%> selected="selected" <%}%>>강남구</option>
@@ -97,6 +98,7 @@
 									<textarea name="content" rows="10" cols="1000" class="form-control" style="resize: none; width: 100%; min-height: 300px; max-height: 300px;" required="required"><%=cboard.getCboardContent()%></textarea>
 								</td>
 							</tr>
+							<!-- 파일 첨부 -->
 							<%
 								for (int i = 0; i < 4; i++) {
 							%>
@@ -146,7 +148,6 @@
 									%>
 									<input type="file" name="upfile<%=i + 1%>">
 								</td>
-
 							</tr>
 							<%
 								}

@@ -42,7 +42,6 @@
 
 			<!-- 리스트 -->
 			<div class="list-area">
-				<!-- 지역 종류 리스트-->
 				<div class="sort-area">
 					<h4>
 						전체 게시글
@@ -56,6 +55,7 @@
 					<% } %>
 
 					<div>
+						<!-- 지역 종류 리스트-->
 						<form action="/anavada/clistview" method="get" style="display: inline-block;">
 							지역 분류 :
 							<select name="local" class="LocationSelect" onchange="this.form.submit()">
@@ -145,7 +145,8 @@
 						<h1>목록이 없습니다.</h1>
 					</div>
 				<% } %>
-
+				
+				<!-- 비로그인시 로그인페이지로 이동 -->
 				<% if (loginMember != null) { %>
 					<div class="write-btn">
 						<a href="views/cboard/community_write.jsp">글쓰기</a>
@@ -157,9 +158,6 @@
 				<% } %>
 				
 			</div>
-
-
-
 			<!-- 리스트 끝 -->
 
 
