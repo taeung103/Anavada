@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@  page 
- 	import="jboard.model.vo.Jboard , java.util.ArrayList, java.sql.Date, java.awt.Image"
- %>
-
+ <%@  page import="jboard.model.vo.Jboard , java.util.ArrayList, java.sql.Date, java.awt.Image"%>
  <%
  	ArrayList<Jboard> list = (ArrayList<Jboard>) request.getAttribute("list");
    int listCount = ((Integer) request.getAttribute("listCount")).intValue();
@@ -27,7 +24,6 @@
       location.href = "/anavada/views/jboard/product_write.jsp";
    }
 </script>
-
 
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
@@ -66,7 +62,7 @@
                     <%} %>
                     <div>
                         <form action="/anavada/jblist" method="post" id="sel" name="form1">
-                        
+                        <!-- 셀렉트바 -->
                             지역선택 : <select name="local" class="LocationSelect"   onchange=this.form.submit()>
                             	
                                     <option value="0"  ${param.local eq"0"?"selected" :"" }>전체보기</option>
@@ -105,12 +101,11 @@
                             제목 검색 :
                             <input type="text" name="titlesearch" maxlength="16" minlength="2" placeholder="검색어를 입력해주세요.">
                             <button class="top-search"><i class="xi-search"></i></button>
-                            
                         </form>
-
                     </div>
                 </div>
-
+<!-- 검색 폼 끝 -->
+<!-- 게시물 출력 -->
                 <ul class="product">
                 <% for (Jboard jboard : list ){ %>
                     <li onclick="location.href='/anavada/jbdetail?jboardno=<%= jboard.getJboardNo() %>&page=<%=currentPage%>'">
@@ -124,7 +119,6 @@
                        
                         <p><i class="good_i glyphicon glyphicon-heart-empty">좋아요<span><%=jboard.getJboardLike() %></span></i>
                         <span></span>
-                        
                         </p>
                     </li>
                     <%} %>
@@ -143,7 +137,7 @@
                   <div class="write-btn">
                     <a onclick="alert('로그인 후 이용해주세요');location.href='/anavada/views/member/login.jsp';" class="write_btn">글쓰기</a>
                     </div>
-                    <%} %>
+                 <%} %>
         
 
             </div>

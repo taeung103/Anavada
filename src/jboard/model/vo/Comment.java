@@ -6,16 +6,16 @@ public class Comment implements java.io.Serializable {
 	private static final long serialVersionUID = 222L;
 		public Comment(){}
 		
-		private int commentNo;
-		private String commentId;
-		private String commentContent;
-		private java.sql.Date commentDate;
-		private java.sql.Date commentLastModified;
-		private int jboardNo;
-		private int commentRef;
-		private int commentReplyRef;
-		private int commentLevel;
-		private int commentReplySeq;
+		private int commentNo; //댓글번호
+		private String commentId; //작성자ID
+		private String commentContent; //댓글내용
+		private java.sql.Date commentDate; //댓글  등록일자
+		private java.sql.Date commentLastModified; //댓글 수정일자
+		private int jboardNo; //원글 번호
+		private int commentRef; //댓글 위치
+		private int commentReplyRef; //댓글구분
+		private int commentLevel; //댓글레벨
+		private int commentReplySeq; //댓글순번
 		private String MemberIp; //댓글 작성자의 아이피
 		public Comment(int commentNo, String commentId, String commentContent, Date commentDate,
 				Date commentLastModified, int jboardNo, int commentRef, int commentReplyRef, int commentLevel,

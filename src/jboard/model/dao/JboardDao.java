@@ -69,7 +69,6 @@ public class JboardDao {
 				query+= " AND JBOARD_TITLE LIKE '%" + titleSearch + "%'";
 			}
 			
-			
 			try {
 					stmt = conn.createStatement();
 					rset = stmt.executeQuery(query);
@@ -100,7 +99,7 @@ public class JboardDao {
 					"FROM (SELECT * FROM JBOARD " +
 					(local != null && !local.equals("0")? "WHERE LOCAL_NO =? " : "");
 					//query +=(titleSearch != null ? "AND JBOARD_TITLE LIKE ? " : "");
-					if (titleSearch != null && local==null) {
+					if (titleSearch != null && local==null) { //글제목 검색
 						query+= " WHERE JBOARD_TITLE LIKE ? ";
 					}else if(titleSearch != null&& local!=null &&!local.equals("0")) {
 						query+= " AND JBOARD_TITLE LIKE ? ";

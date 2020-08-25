@@ -67,7 +67,7 @@ public class AdminJboardDetailServlet extends HttpServlet {
 			view = request.getRequestDispatcher("views/common/error.jsp");
 			request.setAttribute("message", jboardno + "번 글에 대한 상세보기 요청 실패!");
 			view.forward(request, response);
-}
+		}
 }
 	
 

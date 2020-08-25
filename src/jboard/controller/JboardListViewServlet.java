@@ -38,7 +38,7 @@ public class JboardListViewServlet extends HttpServlet {
 		String listSearch = request.getParameter("listsearch");
 		
 		String local = request.getParameter("local");
-		if (listSearch== null|| listSearch.equals("null")) {
+		if (listSearch== null|| listSearch.equals("null")) { //문자열 null이 들어오는 상황이 발생
 			listSearch = null;
 		}
 		if (local == null || local.equals("null") ||local.equals("0")) {
