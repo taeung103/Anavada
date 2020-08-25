@@ -283,6 +283,8 @@
     display: inline-block;
     vertical-align: top;
     width: 12%;
+    max-height: 100px;
+    overflow: hidden;
 }
 .mainEvent ul li a {
 	display : block;

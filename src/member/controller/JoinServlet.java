@@ -61,8 +61,6 @@ public class JoinServlet extends HttpServlet {
 		member.setMemberPhone(request.getParameter("memberPhone"));
 		member.setMemberName(String.join(",", request.getParameterValues("memberName")));
 
-		System.out.println("member : " + member);
-
 		int result = new MemberService().insertMember(member);
 
 		if(result > 0) {			

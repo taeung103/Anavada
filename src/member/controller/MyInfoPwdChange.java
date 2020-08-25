@@ -60,9 +60,7 @@ public class MyInfoPwdChange extends HttpServlet {
 		if(originalMember.getMemberPwd().equals(memberPwd) && newPwd.equals(newPwdOK) && newPwd.getBytes().length > 1 && newPwdOK.getBytes().length > 1) {
 	        
         	int result = new MemberService().updateMemberPwd(member);
-        	
-        	System.out.println(result);
-	    
+        		    
 			if(result > 0) {
 				returnValue = "ok";
 			}

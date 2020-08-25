@@ -35,7 +35,7 @@
 }
 .sort-area > div form input {
     vertical-align: middle;
-    line-height: 28px;
+    height: 34px;
 }
 .sort-area > div form button {
     vertical-align: middle;
@@ -796,10 +796,10 @@
 }
 .write-area table tbody tr td input {
     height: 48px;
-    line-height: 48px;
 }
 .write-area table tbody tr td label {
     margin-right:15px;
+    vertical-align: middle;
 }
 .write-area table tbody tr td label input[type="radio"] {
     margin-right: 5px;

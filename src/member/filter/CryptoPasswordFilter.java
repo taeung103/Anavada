@@ -48,7 +48,6 @@ public class CryptoPasswordFilter implements Filter {
 		// 필터가 래퍼를 실행함
 		CryptoPasswordWrapper cpwrapper = new CryptoPasswordWrapper(hrequest);
 		// wrapper 처리한 결과를 필터가 받아서 서블릿으로 넘김
-		// chain.doFilter(request, response);
 		chain.doFilter(cpwrapper, response);
 	}
 

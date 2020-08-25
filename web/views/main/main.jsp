@@ -224,7 +224,7 @@ function movePage(num){
 					for (var i in json.list) {
 						values += '<li><a href="/anavada/views/fboard/areaEvent_view.jsp?fboardno=' 
 						+ + json.list[i].fboardNo + '&festivalEndDate=' +json.list[i].festivalEndDate
-						+ '"><img src="' + json.list[i].thumbnail + '" width="150px" height="100px"/><h3>' + decodeURIComponent(json.list[i].festivalTitle).replace(/\+/gi, " ")
+						+ '"><img src="' + json.list[i].thumbnail + '" /><h3>' + decodeURIComponent(json.list[i].festivalTitle).replace(/\+/gi, " ")
 						+ '</h3></a></li>&nbsp;&nbsp;';
 					} // for in
 					

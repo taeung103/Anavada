@@ -32,16 +32,14 @@ public class AdminMemberDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String Chk = request.getParameter("checkarr");
 		String[] dataChk = Chk.split(",");
-		System.out.println("Chk : " + Chk);
 		
 		int leaveCount = 0;
 		MemberService mservice = new MemberService();
 		
 		for(String checkstr : dataChk) { //반복문
-			System.out.println("checkstr : " + checkstr);
-
+			
 			int result = mservice.deleteMember(checkstr);
-			System.out.println("result : " + result);
+
 			if (result > 0) {
 				leaveCount++;
 			}

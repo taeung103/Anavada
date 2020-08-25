@@ -120,11 +120,9 @@ public class MemberFindServlet extends HttpServlet {
 			// 메일 제목
 			msg.setSubject("Anavada 회원 인증번호입니다.");
 			// 메일 내용
-			msg.setText("안녕하세요. Anavada 입니다.<br/>" + "회원님의 아이디 : " + member.getMemberId() + "회원님의 인증번호는 : " + temp
+			msg.setText("안녕하세요. Anavada 입니다. " + "회원님의 아이디 : " + member.getMemberId() + "회원님의 인증번호는 : " + temp
 					+ "입니다.");
-
 			Transport.send(msg);
-			System.out.println("인증번호 이메일 전송 완료.");
 
 		} catch (Exception e) {
 			e.printStackTrace();//

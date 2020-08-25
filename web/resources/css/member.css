@@ -170,6 +170,12 @@
     margin-top: 15px;
     font-size: 14px;
 }
+.MBjoin-agree .MBjoin-content > div > div input[type='radio'] {
+    margin:0 10px 0 0;
+    width:18px;
+    height:18px;
+    vertical-align: middle;
+}
 .MBwrap .ME-btn {
     margin-top: 45px;
     text-align: center;

@@ -51,8 +51,6 @@ public class MemberEmailServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 	    String memberEmail = request.getParameter("memberEmail");
-	    
-	    System.out.println("memberEmail " + memberEmail);
 		
 		String returnValue = null;
 
@@ -105,8 +103,6 @@ public class MemberEmailServlet extends HttpServlet {
 			}
 		}
 		String AuthenticationKey2 = temp.toString();
-		System.out.println("AuthenticationKey2 : " + AuthenticationKey2);
-		System.out.println("memberEmail : " + memberEmail);
 	
 		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -124,9 +120,7 @@ public class MemberEmailServlet extends HttpServlet {
 			msg.setSubject("Anavada 인증번호입니다.");
 			// 메일 내용
 			 msg.setText("안녕하세요. Anavada 입니다. " + "인증번호는 : " + temp + "입니다.");
-	
 			Transport.send(msg);
-			System.out.println("인증번호 이메일 전송 완료.");
 	
 		} catch (Exception e) {
 			e.printStackTrace();//

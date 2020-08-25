@@ -20,14 +20,14 @@ public class EncodingFilter implements Filter {
      * Default constructor. 
      */
     public EncodingFilter() {
-    	System.out.println("EncodingFilter 생성됨...");
+
     }
 
 	/**
 	 * @see Filter#destroy()
 	 */
 	public void destroy() {
-    	System.out.println("EncodingFilter 소멸됨...");
+
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class EncodingFilter implements Filter {
 		//전송방식이 post일때는 반드시 request 에 대해서 인코딩해야함
 		HttpServletRequest hrequest = (HttpServletRequest)request;
 		if(hrequest.getMethod().equalsIgnoreCase("post")) {
-			System.out.println("post 전송시에만 인코딩 처리됨");
+			//System.out.println("post 전송시에만 인코딩 처리됨");
 			request.setCharacterEncoding("utf-8");
 		}
 		

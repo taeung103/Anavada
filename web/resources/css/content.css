@@ -121,7 +121,7 @@
 }
 .sort-area > div form input {
     vertical-align: middle;
-    line-height: 28px;
+    height: 34px;
 }
 .sort-area > div form input[type="checkbox"] {
     width: 20px;
@@ -216,7 +216,7 @@
     width:45%;
     float: left;
 }
-.product_info > dt > div {
+.product_info > dt > div.gallery-top {
     width:100%;
     min-width: 450px;
     min-height: 450px;
@@ -1209,17 +1209,16 @@
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 .write-area table tbody tr td input {
-    height: 48px;
-    line-height: 48px;
+    height: 48px
 }
 .write-area table tbody tr td label {
     margin-right:15px;
 }
 .write-area table tbody tr td label input[type="radio"] {
-    margin: 0;
+    margin: 0 10px 0 0;
     width: 18px;
     height: 18px;
-    vertical-align: unset;
+    vertical-align: middle;
 }
 .write-area table tbody tr td label input[type="checkbox"] {
     width: 18px;
