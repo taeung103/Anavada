@@ -157,7 +157,7 @@ function deleteAction(){
                 <!-- //버튼 -->
 
                 <!-- 페이징 -->
-                <% if(totalList > 0) { %>
+                <% if(totalPage > 1) { %>
                 <dl class="list-paging">
                     <dd>
                     <% if(selected != null && keyword != null) { %>
@@ -196,7 +196,7 @@ function deleteAction(){
                      <% } %>
                     </dd>
                 </dl>
-                <% } %>
+                <% }else { %><br><br><br><br><% } %>
                 <!-- //페이징 -->
 
             </div>

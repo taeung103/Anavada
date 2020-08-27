@@ -129,7 +129,7 @@
 
 
             <!-- 페이지넘버 -->
-            <% if(listCount > 0) { %>
+            <% if(maxPage > 1) { %>
             <dl class="list-paging pb80">
                 <dd>
                 <% if(selected == null && keyword == null) { %>
@@ -172,7 +172,7 @@
                     <% } } %>
                 </dd>
             </dl>
-            <% } %>
+            <% }else { %><br><br><br><br><br><br><% } %>
             <!-- 페이지넘버 끝 -->
 
         </div>
