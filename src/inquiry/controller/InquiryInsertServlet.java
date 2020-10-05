@@ -107,17 +107,12 @@ public class InquiryInsertServlet extends HttpServlet {
 		
 		int result = new InquiryService().insertInquiry(inquiry);
 		
-		String my = null;
-		if(request.getParameter("my") != null)
-			my = request.getParameter("my");
+		String my = mrequest.getParameter("my");
 		
 		if(result > 0) {
-			if(my != null)
-				response.sendRedirect("ilist");
-			else response.sendRedirect("miq?member="+id);
+			if(my.equals("ok")) response.sendRedirect("miq?member="+id);
+			else if(my.equals("no")) response.sendRedirect("ilist");
 		}
-		
-		
 		
 	}
 

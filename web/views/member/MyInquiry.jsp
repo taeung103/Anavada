@@ -5,7 +5,7 @@
 	int startPage = (Integer) request.getAttribute("startPage");
 	int endPage = (Integer) request.getAttribute("endPage");
 	int totalList = (Integer) request.getAttribute("totalList");
-	int totalPage = (Integer) request.getAttribute("totalPage"); System.out.println("myinquiry"+totalPage);
+	int totalPage = (Integer) request.getAttribute("totalPage");
 	String selected = null;
 	String keyword = null;
 	if (request.getAttribute("selected") != null && request.getAttribute("keyword") != null) {

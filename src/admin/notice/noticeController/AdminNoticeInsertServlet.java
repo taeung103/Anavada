@@ -83,7 +83,7 @@ public class AdminNoticeInsertServlet extends HttpServlet {
 		int result = new NoticeService().insertNotice(notice);
 		
 		if(result > 0)
-			response.sendRedirect("anlist");
+			response.sendRedirect("anlist.ss");
 	}
 
 	/**

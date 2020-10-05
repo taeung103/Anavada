@@ -45,7 +45,7 @@
                 <form action="/anavada/iinsert.ss" method="post" enctype="multipart/form-data">
 				<input type="hidden" value="<%= loginMember.getMemberId() %>" name="id">
 				<input type="hidden" value="ok" name="my">
-                    <h2>문의하기 작성</h2>
+                    <h2>나의 문의하기 작성</h2>
 
                     <table>
                         <colgroup>
