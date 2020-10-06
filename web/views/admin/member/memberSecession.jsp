@@ -5,6 +5,7 @@
 	int endPage = ((Integer)request.getAttribute("endPage")).intValue();
 	int maxPage = ((Integer)request.getAttribute("maxPage")).intValue();
 	int currentPage = ((Integer)request.getAttribute("currentPage")).intValue();
+	int slistNum = ((Integer)request.getAttribute("slistNum")).intValue();
 %>
 <!DOCTYPE html>
 <html>
@@ -76,7 +77,7 @@
                        	<% for(Member m : list){ %>
                         <tr>
                             <td class="checkBox"><input type="checkbox" name="leaveChk" id="leaveChk" value="<%= m.getMemberId()%>"></td>
-                            <td class="number"><%= m.getmNumber() %></td>
+                            <td class="number"><%= slistNum %></td>
                             <td class="id"><%= m.getMemberId() %></td>
                             <td class="name"><%= m.getMemberName() %></td>
                             <td class="email"><%= m.getMemberEmail() %></td>
@@ -85,6 +86,7 @@
                             <td class="SecessionDate"><%= m.getSecessionDate() %></td>
                             <td class="SecessionOK"><%= m.getSecessionOK() %></td>
                         </tr>
+                        <% slistNum--; %>
                        	<% } %>
                       	<% } else { %>
 						<tr class="list-no">

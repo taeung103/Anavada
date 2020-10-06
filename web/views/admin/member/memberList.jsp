@@ -5,6 +5,7 @@
 	int endPage = ((Integer)request.getAttribute("endPage")).intValue();
 	int maxPage = ((Integer)request.getAttribute("maxPage")).intValue();
 	int currentPage = ((Integer)request.getAttribute("currentPage")).intValue();
+	int listNum = ((Integer)request.getAttribute("listNum")).intValue();
 %>
 <!DOCTYPE html>
 <html>
@@ -76,7 +77,7 @@
 						<% if(m.getMemberId().equals("admin")){%>
                         <tr style="background-color: #fcf8e3;">
                             <td class="checkBox"><input type="checkbox" name="leaveChk" id="leaveChk" value="<%= m.getMemberId()%>" disabled></td>
-                            <td class="number"><%= m.getmNumber() %></td>
+                            <td class="number"><%= listNum %></td>
                             <td class="id"><%= m.getMemberId() %></td>
                             <td class="name"><%= m.getMemberName() %></td>
                             <td class="email"><%= m.getMemberEmail() %></td>
@@ -88,7 +89,7 @@
                         <% } else if(listCount > 0) { %>
                         <tr>
                             <td class="checkBox"><input type="checkbox" name="leaveChk" id="leaveChk" value="<%= m.getMemberId()%>"></td>
-                            <td class="number"><%= m.getmNumber() %></td>
+                            <td class="number"><%= listNum %></td>
                             <td class="id"><%= m.getMemberId() %></td>
                             <td class="name"><%= m.getMemberName() %></td>
                             <td class="email"><%= m.getMemberEmail() %></td>
@@ -104,7 +105,9 @@
 								<h1>목록이 없습니다.</h1>
 							</td>
 						</tr>
-                        <% }} %>
+                        <% } %>
+                        <% listNum--; %>
+                        <% } %>
 
                     </tbody>
                 </table>

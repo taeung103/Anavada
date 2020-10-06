@@ -56,13 +56,16 @@ public class AdminMemberAllListServlet extends HttpServlet {
 			endPage = maxPage;
 		} else if(smaxPage < endPage && secessionOK.equals("Y")) {
 			endPage = smaxPage;
-		} else {
-			
 		}
+
+		int listNum = listCount + (1 - currentPage) * limit;
+		int slistNum = slistCount + (1 - currentPage) * limit;
+		
 		RequestDispatcher view = null;
 		if(secessionOK.equals("N")) { //전체 회원 조회 성공시
 			view = request.getRequestDispatcher("views/admin/member/memberList.jsp");
 			request.setAttribute("list", list);
+			request.setAttribute("listNum", listNum);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("maxPage", maxPage);
 			request.setAttribute("startPage", startPage);
@@ -75,6 +78,7 @@ public class AdminMemberAllListServlet extends HttpServlet {
 		} else if(secessionOK.equals("Y")) { //전체 탈퇴회원 조회 성공시
 			view = request.getRequestDispatcher("views/admin/member/memberSecession.jsp");
 			request.setAttribute("list", list);
+			request.setAttribute("slistNum", slistNum);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("maxPage", maxPage);
 			request.setAttribute("startPage", startPage);
@@ -86,16 +90,6 @@ public class AdminMemberAllListServlet extends HttpServlet {
 			view.forward(request, response);
 		} else { //전체 조회 실패시
 			view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("list", list);
-			request.setAttribute("currentPage", currentPage);
-			request.setAttribute("maxPage", maxPage);
-			request.setAttribute("startPage", startPage);
-			request.setAttribute("endPage", endPage);
-			request.setAttribute("listCount", listCount);
-			request.setAttribute("slistCount", slistCount);
-			request.setAttribute("search", search);
-			request.setAttribute("keyword", keyword);
-			request.setAttribute("secessionOK", secessionOK);
 			view.forward(request, response);
 		}
 	}

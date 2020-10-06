@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="member.model.vo.Member"%>
   <header id="admin_header">
    
-    <h1 class="logo">Anavada</h1>  
+    <h1 class="logo" onclick="location.href='./'">Anavada</h1>  
     
     <!-- gnb -->
     <div class="admin_gnb">
