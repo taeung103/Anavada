@@ -6,3 +6,4 @@
 /jspwork/*
 web/WEB-INF/jspwork/
 *.tern-project
+.metadata/
