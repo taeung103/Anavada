@@ -45,8 +45,8 @@
 
 
 # 개발환경
-* Java | JSP
-* HTML | CSS | JavaScript | jQery 3.5.1
-* Oracle Database 11g | SQL
-* Git | SourceTree
-* apache-tomcat-8.5.57
+* 💻 Java | JSP | Spring 3.9.13
+* 🌐 HTML | CSS | JavaScript | jQuery 3.5.1
+* 🛢 Oracle Database 11g Release 11.2.0.2.0 | Sql
+* 🔧 Git | SourceTree
+* 📫 apache-tomcat-8.5.57
