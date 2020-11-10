@@ -18,10 +18,10 @@
 * 리스트 페이징
 * 관리자 정보변경
 
-* [Anavada/src/member](https://github.com/taeung103/Anavada/src/member)
-* [Anavada/src/admin/member/controller](#src/admin/member/controller)
-* [Anavada/web/views/member](Anavada/web/views/member)
-* [Anavada/web/views/admin/member](Anavada/web/views/admin/member)
+* [Anavada/src/member](https://github.com/taeung103/Anavada/tree/master/src/member)
+* [Anavada/src/admin/member/controller](https://github.com/taeung103/Anavada/tree/master/src/admin/member/controller)
+* [Anavada/web/views/member](https://github.com/taeung103/Anavada/tree/master/web/views/member)
+* [Anavada/web/views/admin/member](https://github.com/taeung103/Anavada/tree/master/web/views/admin/member)
 
 
 # 상세기능 설명
