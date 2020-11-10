@@ -18,7 +18,7 @@
 * 리스트 페이징
 * 관리자 정보변경
 
-* Anavada/src/member/
+* Anavada/src/member
 * Anavada/src/admin/member/controller/
 * Anavada/web/views/member/
 * Anavada/web/views/admin/member/
