@@ -18,10 +18,10 @@
 * 리스트 페이징
 * 관리자 정보변경
 
-* Anavada/src/member
-* Anavada/src/admin/member/controller/
-* Anavada/web/views/member/
-* Anavada/web/views/admin/member/
+Anavada/src/member
+Anavada/src/admin/member/controller
+Anavada/web/views/member
+Anavada/web/views/admin/member
 
 
 # 상세기능 설명
@@ -45,8 +45,8 @@
 
 
 # 개발환경
-💻 Java | JSP
-🌐 HTML | CSS | JavaScript | jQery 3.5.1
-🛢 Oracle Database 11g | SQL
-🔧 Git | SourceTree
-📫 apache-tomcat-8.5.57
+* Java | JSP
+* HTML | CSS | JavaScript | jQery 3.5.1
+* Oracle Database 11g | SQL
+* Git | SourceTree
+* apache-tomcat-8.5.57
