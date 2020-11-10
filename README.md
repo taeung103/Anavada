@@ -1,8 +1,8 @@
-# Anavada
+## Anavada
 중고물품 거래와 지역축제 공유로 소규모 지역 활성화를 목적으로 제작한 팀 프로젝트입니다.
 
 
-# 구현 기능
+## 구현 기능
 <사용자>
 * 사용자 / 관리자 로그인
 * 회원가입
@@ -24,7 +24,7 @@
 * [Anavada/web/views/admin/member](https://github.com/taeung103/Anavada/tree/master/web/views/admin/member)
 
 
-# 상세기능 설명
+## 상세기능 설명
 <사용자>
 * 로그인 / 로그인 제한 여부
 * 회원가입
@@ -44,7 +44,7 @@
 * 사용자가 서비스를 이용할 때 발생할 수 있는 오류 문구 alert창 출력
 
 
-# 개발환경
+## 개발환경
 * 💻 Java | JSP
 * 🌐 HTML | CSS | JavaScript | jQuery 3.5.1
 * 🛢 Oracle Database 11g | Sql
